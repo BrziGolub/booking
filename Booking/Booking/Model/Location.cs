@@ -7,7 +7,7 @@ using Booking.Serializer;
 
 namespace Booking.Model
 {
-	internal class Location : ISerializable
+	public class Location : ISerializable
 	{
 		public int Id { get; set; }
 		public string State { get; set; }
