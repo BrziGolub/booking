@@ -55,7 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Accomodation.cs" />
+    <Compile Include="Model\Accommodation.cs" />
+    <Compile Include="Model\Enum\AccommodationType.cs" />
+    <Compile Include="Model\Images\AccommodationImage.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Tour.cs" />
     <Compile Include="Model\User.cs" />

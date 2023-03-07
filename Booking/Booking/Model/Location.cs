@@ -13,6 +13,7 @@ namespace Booking.Model
 		public string State { get; set; }
 		public string City { get; set; }
 
+
 		public Location() { }
 
 		public Location(string state, string city)

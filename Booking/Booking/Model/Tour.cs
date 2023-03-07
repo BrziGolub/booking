@@ -17,40 +17,40 @@ namespace Booking.Model
 
 		public string Description { get; set; }
 
-		public string Language { get; set; } // enum
+		public string Language { get; set; } 
 
-		public int MaxNumberOfGuests { get; set; }
+		public int MaxGuestsNumber { get; set; }
 
-		public List<string> destinations { get; set; }
+		public List<Location> Destinations { get; set; }
 
-		public DateTime DateTime { get; set; } // rename
+		public DateTime StartTime { get; set; } 
 
-		public int Duration { get; set; } // rename
+		public double Duration { get; set; } 
 
-		public List<string> pictures { get; set; }
+		public List<string> pictures { get; set; }	//izmeni
 
 		public Tour() 
 		{
-			destinations = new List<string>();
+            Destinations = new List<Location>();
 			pictures = new List<string>();
 		}
 
-		public Tour( string name, Location location, string desc, string lang, int maxNum, DateTime dt, int duration)
+		public Tour( string name, Location location, string desc, string lang, int maxNum, DateTime dt, double duration)
 		{
 			Name = name;
 			Location = location;
 			Description = desc;
 			Language = lang;
-			MaxNumberOfGuests = maxNum;
-			DateTime = dt;
+            MaxGuestsNumber = maxNum;
+            StartTime = dt;
 			Duration = duration;
-			destinations = new List<string>();
+            Destinations = new List<Location>();
 			pictures = new List<string>();
 		}
 
 		public string[] ToCSV()
 		{
-			string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Description, Language, MaxNumberOfGuests.ToString(), DateTime.ToString(), Duration.ToString()};
+			string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Description, Language, MaxGuestsNumber.ToString(), StartTime.ToString(), Duration.ToString()};
 			return csvValues;
 		}
 
@@ -61,9 +61,9 @@ namespace Booking.Model
 			Location.Id = Convert.ToInt32(values[2]);
 			Description = values[3];
 			Language = values[4];
-			MaxNumberOfGuests = Convert.ToInt32(values[5]);
+            MaxGuestsNumber = Convert.ToInt32(values[5]);
 			//DateTime = 
-			Duration = Convert.ToInt32(values[7]);
+			Duration = Convert.ToDouble(values[7]);
 		}
 	}
 }
