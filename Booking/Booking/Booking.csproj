@@ -61,6 +61,7 @@
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Tour.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Repository\TourRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
     <Compile Include="Serializer\Serializer.cs" />
@@ -69,6 +70,12 @@
     </Compile>
     <Compile Include="View\GuideHomePage.xaml.cs">
       <DependentUpon>GuideHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SecondGuestHomePage.xaml.cs">
+      <DependentUpon>SecondGuestHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SecondGuestSearch.xaml.cs">
+      <DependentUpon>SecondGuestSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
@@ -90,6 +97,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GuideHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SecondGuestHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SecondGuestSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,7 +7,7 @@ using Booking.Serializer;
 
 namespace Booking.Model
 {
-	internal class Tour : ISerializable
+	public class Tour : ISerializable
 	{
 		public int Id { get; set; }
 
