@@ -55,7 +55,6 @@ namespace Booking.View
 			_repository = new UserRepository();
 
 			comboBox.ItemsSource = new List<string>() { "Owner", "Guest1", "Guest2", "Guide" };
-			comboBox.SelectedIndex = 1;
 		}
 		private void SignIn(object sender, RoutedEventArgs e)
 		{
@@ -66,9 +65,30 @@ namespace Booking.View
 				{
 					//MessageBox.Show(UserType);
 					//stavio da uvek otvara vodica po defaultu treba napraviti zastitu da se zna ko se loguje (sef,gost,vodic)
-					GuideHomePage guideHomePage = new GuideHomePage();
-					guideHomePage.Show();
-                    Close();
+					if (comboBox.SelectedIndex == 0)
+					{
+						//otvara prozor za Ownera
+					}
+					else if (comboBox.SelectedIndex == 1)
+					{
+						//otvara prozor za Guest1
+					}
+					else if (comboBox.SelectedIndex == 2)
+					{
+						//otvara prozor za Guest2
+					}
+					else if (comboBox.SelectedIndex == 3)
+					{
+						GuideHomePage guideHomePage = new GuideHomePage();
+						guideHomePage.Show();
+						Close();
+					}
+					else 
+					{
+						MessageBox.Show("Choose option!");
+					}
+					
+
                 }
                 else
 				{

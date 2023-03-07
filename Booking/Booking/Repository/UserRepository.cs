@@ -21,7 +21,7 @@ namespace Booking.Repository
 			_serializer = new Serializer<User>();
 			_users = _serializer.FromCSV(FilePath);
 		}
-
+		//Load i Save napraviti 
 		public User GetByUsername(string username)
 		{
 			_users = _serializer.FromCSV(FilePath);
