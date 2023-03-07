@@ -1,0 +1,24 @@
+﻿<Window x:Class="Booking.View.GuideCreateTour"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Booking.View"
+        mc:Ignorable="d"
+        Title="GuideCreateTour" Height="600" Width="400">
+    <Grid>
+        <Label Content="Name*" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox HorizontalAlignment="Left" Margin="140,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15"/>
+
+        
+        <Label Content="City*" HorizontalAlignment="Left" Margin="30,60,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox HorizontalAlignment="Left" Margin="140,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15"/>
+
+        <Label Content="Country*" HorizontalAlignment="Left" Margin="30,100,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox HorizontalAlignment="Left" Margin="140,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15"/>
+
+        <Label Content="Description*" HorizontalAlignment="Left" Margin="30,140,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox HorizontalAlignment="Left" Margin="140,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Height="120"/>
+
+    </Grid>
+</Window>

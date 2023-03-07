@@ -55,6 +55,7 @@ namespace Booking.View
 			_repository = new UserRepository();
 
 			comboBox.ItemsSource = new List<string>() { "Owner", "Guest1", "Guest2", "Guide" };
+			comboBox.SelectedIndex = 1;
 		}
 		private void SignIn(object sender, RoutedEventArgs e)
 		{
@@ -64,12 +65,25 @@ namespace Booking.View
 				if (user.Password == txtPassword.Password)
 				{
 					//MessageBox.Show(UserType);
-					Close();
-				}
-				else
+					//stavio da uvek otvara vodica po defaultu treba napraviti zastitu da se zna ko se loguje (sef,gost,vodic)
+					GuideHomePage guideHomePage = new GuideHomePage();
+					guideHomePage.Show();
+                    Close();
+                }
+                else
 				{
 					MessageBox.Show("Wrong password!");
 				}
+					/*
+					 if( comboBox.SelectedIndex == 1 ) 
+					{
+					MessageBox.Show("SEF");
+					}	
+					else if (comboBox.SelectedIndex == 2)
+					{
+                    MessageBox.Show("GUEST1");
+					}	
+					*/
 			}
 			else
 			{
