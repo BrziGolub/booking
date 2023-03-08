@@ -28,13 +28,13 @@ namespace Booking.Model
 
 		public double Duration { get; set; } 
 
-		public List<string> pictures { get; set; }	//izmeni
+		public List<string> Pictures { get; set; }	//izmeni
 
 		public Tour() 
 		{
 			Location = new Location();
             Destinations = new List<Location>();
-			pictures = new List<string>();
+			Pictures = new List<string>();
 		}
 
 		public Tour( string name, Location location, string desc, string lang, int maxNum, DateTime dt, double duration)

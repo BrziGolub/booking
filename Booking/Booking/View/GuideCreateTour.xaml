@@ -5,20 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="GuideCreateTour" Height="600" Width="400">
+        Title="GuideCreateTour" Height="645" Width="420" ResizeMode="NoResize" >
     <Grid>
-        <Label Content="Name*" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox HorizontalAlignment="Left" Margin="140,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15"/>
 
-        
-        <Label Content="City*" HorizontalAlignment="Left" Margin="30,60,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox HorizontalAlignment="Left" Margin="140,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15"/>
 
-        <Label Content="Country*" HorizontalAlignment="Left" Margin="30,100,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox HorizontalAlignment="Left" Margin="140,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15"/>
+        <Label Content="Name*" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15"/>
 
-        <Label Content="Description*" HorizontalAlignment="Left" Margin="30,140,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox HorizontalAlignment="Left" Margin="140,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Height="120"/>
+
+        <Label Content="City*" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+
+        <Label Content="Country*" HorizontalAlignment="Left" Margin="40,100,0,0" VerticalAlignment="Top" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+
+        <Label Content="Description*" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox HorizontalAlignment="Left" Margin="170,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Height="120" />
+
+        <Label Content="Language*" HorizontalAlignment="Left" Margin="40,280,0,0" VerticalAlignment="Top" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+
+        <Label Content="Max guests*" HorizontalAlignment="Left" Margin="40,320,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox HorizontalAlignment="Left" Margin="170,325,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+
+        <Label Content="Key points*" HorizontalAlignment="Left" Margin="40,360,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox HorizontalAlignment="Left" Margin="170,365,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+
+        <Label Content="Tour start date*" HorizontalAlignment="Left" Margin="40,400,0,0" VerticalAlignment="Top" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,405,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+
+        <Label Content="Duration*" HorizontalAlignment="Left" Margin="40,440,0,0" VerticalAlignment="Top" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,445,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+
+        <Label Content="Pictures*" HorizontalAlignment="Left" Margin="40,480,0,0" VerticalAlignment="Top" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,485,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+
+        <WrapPanel FlowDirection="LeftToRight" Margin="0,528,0,31">
+            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click_1" >CREATE</Button>
+            <Button Margin="10 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click" >CLOSE</Button>
+        </WrapPanel>
+
 
     </Grid>
+
+
 </Window>
