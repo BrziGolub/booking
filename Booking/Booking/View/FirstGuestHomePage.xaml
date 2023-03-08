@@ -20,15 +20,15 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="2" Grid.Column="1">
-            <DataGrid AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
+            <DataGrid Name="AccommodationDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Width="80" />
-                    <DataGridTextColumn Header="City" Width="80"/>
-                    <DataGridTextColumn Header="Country" Width="80"/>
-                    <DataGridTextColumn Header="Type" Width="80"/>
-                    <DataGridTextColumn Header="Capacity" Width="80" />
-                    <DataGridTextColumn Header="Advance reservation restrictions"/>
-                    <DataGridTextColumn Header="CancelationPeriod"/>
+                    <DataGridTextColumn Header="Name" Width="80" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="City" Width="80" Binding="{Binding Location.City}"/>
+                    <DataGridTextColumn Header="Country" Width="80" Binding="{Binding Location.State}"/>
+                    <DataGridTextColumn Header="Type" Width="80"  Binding="{Binding Type}"/>
+                    <DataGridTextColumn Header="Capacity" Width="80"  Binding="{Binding Capacity}" />
+                    <DataGridTextColumn Header="Advance reservation restrictions" Binding="{Binding MinNumberOfDays}"/>
+                    <DataGridTextColumn Header="CancelationPeriod" Binding="{Binding CancelationPeriod}"/>
 
                 </DataGrid.Columns>
             </DataGrid>

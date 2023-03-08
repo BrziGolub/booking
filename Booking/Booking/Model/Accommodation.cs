@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Booking.Serializer;
-using Booking.Model.Enum;
+using Booking.Model.Enums;
 using Booking.Model.Images;
 
 namespace Booking.Model
@@ -27,11 +27,11 @@ namespace Booking.Model
 
 		public List<AccommodationImage> Images { get; set; } 
 		
-
 		//kako povezati slike?
 
 		public Accommodation() 
 		{
+			Location = new Location();
             Images = new List<AccommodationImage>();
 		}
 
@@ -48,7 +48,8 @@ namespace Booking.Model
 
 		public string[] ToCSV()
 		{
-			string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Type.ToString(), Capacity.ToString(), MinNumberOfDays.ToString(), CancelationPeriod.ToString() };
+			string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Type.ToString(),
+				Capacity.ToString(), MinNumberOfDays.ToString(), CancelationPeriod.ToString() };
 			return csvValues;
 		}
 
@@ -57,7 +58,16 @@ namespace Booking.Model
 			Id = Convert.ToInt32(values[0]);
 			Name = values[1];
 			Location.Id = Convert.ToInt32(values[2]);
-			Type = (AccommodationType)Convert.ToInt32(values[3]); //proveri 
+			AccommodationType accommodationType;
+            if (Enum.TryParse<AccommodationType>(values[3], out accommodationType))
+            {
+                Type = accommodationType;
+            }
+            else
+            {
+                Type = AccommodationType.APARTMENT;
+                System.Console.WriteLine("Doslo je do greske prilikom ucitavanja tipa smestaja");
+            }
             Capacity = Convert.ToInt32(values[4]);
 			MinNumberOfDays = Convert.ToInt32(values[5]);
 			CancelationPeriod = Convert.ToInt32(values[6]);

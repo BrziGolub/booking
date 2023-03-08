@@ -19,9 +19,12 @@ namespace Booking.View
     /// </summary>
     public partial class FirstGuestSearch : Window
     {
+
         public FirstGuestSearch()
         {
             InitializeComponent();
+           
+
         }
     }
 }

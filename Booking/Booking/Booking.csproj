@@ -62,7 +62,7 @@
     <Compile Include="Model\Accommodation.cs" />
     <Compile Include="Model\DAO\LocationDAO.cs" />
     <Compile Include="Model\DAO\TourDAO.cs" />
-    <Compile Include="Model\Enum\AccommodationType.cs" />
+    <Compile Include="Model\Enums\AccommodationType.cs" />
     <Compile Include="Model\Images\AccommodationImage.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Tour.cs" />
@@ -159,6 +159,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Data\accommodations.csv" />
     <None Include="Resources\Data\locations.csv" />
     <None Include="Resources\Data\tours.csv" />
     <None Include="Resources\Data\users.csv" />
