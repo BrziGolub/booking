@@ -25,7 +25,10 @@ namespace Booking.Model
 
 		public int CancelationPeriod { get; set; } 
 
-		public List<AccommodationImage> Images { get; set; }
+		public List<AccommodationImage> Images { get; set; } 
+		
+
+		//kako povezati slike?
 
 		public Accommodation() 
 		{

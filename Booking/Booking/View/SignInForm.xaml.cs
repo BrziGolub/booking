@@ -71,8 +71,9 @@ namespace Booking.View
 					}
 					else if (comboBox.SelectedIndex == 1)
 					{
-						//otvara prozor za Guest1
-					}
+						FirstGuestHomePage fisrtGuestHomePage = new FirstGuestHomePage();
+                        fisrtGuestHomePage.Show();
+                    }
 					else if (comboBox.SelectedIndex == 2)
 					{
 						SecondGuestHomePage secondGuestHomePage = new SecondGuestHomePage();

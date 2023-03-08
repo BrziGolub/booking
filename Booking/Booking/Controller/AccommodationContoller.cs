@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Model.Enum
+namespace Booking.Controller
 {
-    public enum AccommodationType
+    public class AccommodationContoller
     {
-        APARTMENT,
-        HOUSE,
-        COTTAGE 
+
+
     }
 }
