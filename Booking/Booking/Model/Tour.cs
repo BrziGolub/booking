@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Booking.Serializer;
+using Booking.Conversion;
 
 namespace Booking.Model
 {
-	internal class Tour : ISerializable
+	public class Tour : ISerializable
 	{
 		public int Id { get; set; }
 
@@ -31,6 +32,7 @@ namespace Booking.Model
 
 		public Tour() 
 		{
+			Location = new Location();
             Destinations = new List<Location>();
 			pictures = new List<string>();
 		}
@@ -50,7 +52,7 @@ namespace Booking.Model
 
 		public string[] ToCSV()
 		{
-			string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Description, Language, MaxGuestsNumber.ToString(), StartTime.ToString(), Duration.ToString()};
+			string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Description, Language, MaxGuestsNumber.ToString(), DateConversion.DateToString(StartTime), Duration.ToString()};
 			return csvValues;
 		}
 
@@ -62,7 +64,7 @@ namespace Booking.Model
 			Description = values[3];
 			Language = values[4];
             MaxGuestsNumber = Convert.ToInt32(values[5]);
-			//DateTime = 
+			DateConversion.StringToDate(values[6]);
 			Duration = Convert.ToDouble(values[7]);
 		}
 	}
