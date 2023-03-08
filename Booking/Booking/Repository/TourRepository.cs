@@ -14,12 +14,9 @@ namespace Booking.Repository
 
 		private readonly Serializer<Tour> _serializer;
 
-		private List<Tour> _tours;
-
 		public TourRepository()
 		{
 			_serializer = new Serializer<Tour>();
-			_tours = Load();
 		}
 
 		public List<Tour> Load()

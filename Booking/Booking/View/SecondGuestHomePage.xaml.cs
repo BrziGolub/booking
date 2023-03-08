@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Booking.Controller;
+using Booking.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,15 +17,21 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-	/// <summary>
-	/// Interaction logic for SecondGuestHomePage.xaml
-	/// </summary>
 	public partial class SecondGuestHomePage : Window
 	{
+		private ObservableCollection<Tour> tours;
+		private TourController controller;
+
 		public SecondGuestHomePage()
 		{
 			InitializeComponent();
 			DataContext = this;
+
+			controller = new TourController();
+
+			tours = new ObservableCollection<Tour>(controller.GetAll());
+
+			TourDataGrid.ItemsSource = tours;
 		}
 
 		private void buttonSearch_Click(object sender, RoutedEventArgs e)
