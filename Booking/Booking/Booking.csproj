@@ -55,12 +55,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\TourController.cs" />
+    <Compile Include="Conversion\DateConversion.cs" />
     <Compile Include="Model\Accommodation.cs" />
+    <Compile Include="Model\DAO\LocationDAO.cs" />
+    <Compile Include="Model\DAO\TourDAO.cs" />
     <Compile Include="Model\Enum\AccommodationType.cs" />
     <Compile Include="Model\Images\AccommodationImage.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Tour.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Observer\IObserver.cs" />
+    <Compile Include="Observer\ISubject.cs" />
+    <Compile Include="Repository\LocationRepository.cs" />
+    <Compile Include="Repository\TourRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
     <Compile Include="Serializer\Serializer.cs" />
@@ -69,6 +77,12 @@
     </Compile>
     <Compile Include="View\GuideHomePage.xaml.cs">
       <DependentUpon>GuideHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SecondGuestHomePage.xaml.cs">
+      <DependentUpon>SecondGuestHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SecondGuestSearch.xaml.cs">
+      <DependentUpon>SecondGuestSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
@@ -90,6 +104,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GuideHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SecondGuestHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SecondGuestSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,14 +142,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Data\locations.csv" />
+    <None Include="Resources\Data\tours.csv" />
     <None Include="Resources\Data\users.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-    <Folder Include="Model\DAO\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
