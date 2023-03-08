@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +47,53 @@ namespace Booking.Model.DAO
 		public List<Tour> GetAll()
 		{
 			return tours;
+		}
+
+		public void Search(ObservableCollection<Tour> observe, string state, string city, string duration, string language, string passengers)
+		{
+			observe.Clear();
+
+			foreach (Tour tour in tours)
+			{
+				if ((tour.Location.State.ToLower().Contains(state.ToLower()) || state.Equals("")) && (tour.Location.City.ToLower().Contains(city.ToLower()) || city.Equals("")) && (tour.Language.ToLower().Contains(language.ToLower()) || language.Equals("")))
+				{
+					if (duration.Equals("") && passengers.Equals(""))
+					{
+						observe.Add(tour);
+					}
+					else if (duration.Equals("") && !passengers.Equals(""))
+					{
+						if (tour.MaxGuestsNumber >= Convert.ToInt32(passengers))
+						{
+							observe.Add(tour);
+						}
+					}
+					else if (!duration.Equals("") && passengers.Equals(""))
+					{
+						if (tour.Duration == Convert.ToDouble(duration))
+						{
+							observe.Add(tour);
+						}
+					}
+					else
+					{
+						if (tour.MaxGuestsNumber >= Convert.ToInt32(passengers) && tour.Duration == Convert.ToDouble(duration))
+						{
+							observe.Add(tour);
+						}
+					}
+				}
+			}
+		}
+
+		public void CancelSearch(ObservableCollection<Tour> observe)
+		{
+			observe.Clear();
+
+			foreach (Tour tour in tours)
+			{
+				observe.Add(tour);
+			}
 		}
 
 		public void NotifyObservers()

@@ -22,6 +22,16 @@ namespace Booking.View
 		private ObservableCollection<Tour> tours;
 		private TourController controller;
 
+		public string SearchState { get; set; } = string.Empty;
+
+		public string SearchCity { get; set; } = string.Empty;
+
+		public string SearchDuration { get; set; } = string.Empty;
+
+		public string SearchLanguage { get; set; } = string.Empty;
+
+		public string SearchGuestNumber { get; set; } = string.Empty;
+
 		public SecondGuestHomePage()
 		{
 			InitializeComponent();
@@ -36,8 +46,12 @@ namespace Booking.View
 
 		private void buttonSearch_Click(object sender, RoutedEventArgs e)
 		{
-			SecondGuestSearch secondGuestSearch = new SecondGuestSearch();
-			secondGuestSearch.Show();
+			controller.Search(tours, SearchState, SearchCity, SearchDuration, SearchLanguage, SearchGuestNumber);
+		}
+
+		private void ButtonCancelSearch_Click(object sender, RoutedEventArgs e)
+		{
+			controller.CancelSearch(tours);
 		}
 	}
 }
