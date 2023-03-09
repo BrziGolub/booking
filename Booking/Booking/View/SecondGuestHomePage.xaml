@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
+		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+		xmlns:behaviors="clr-namespace:Booking.View"
         mc:Ignorable="d"
         Title="SecondGuestHomePage" Height="450" Width="800"
 		WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
@@ -15,20 +17,33 @@
 		
 		<Grid.RowDefinitions>
 			<RowDefinition Height="44"/>
+			<RowDefinition Height="44"/>
 			<RowDefinition Height="*"/>
+			<RowDefinition Height="44"/>
 		</Grid.RowDefinitions>
 
-		<StackPanel Grid.Row="0" Orientation="Horizontal" Margin="12 12 12 0">
+		<DockPanel Grid.Row="0" Margin="12 8 12 0" HorizontalAlignment="Left">
+			<Label Content="State:" Width="100" Margin="4" VerticalContentAlignment="Center"/>
+			<Label Content="City:" Width="100" Margin="4" VerticalContentAlignment="Center"/>
+			<Label Content="Duration:" Width="100" Margin="4" VerticalContentAlignment="Center"/>
+			<Label Content="Language:" Width="100" Margin="4" VerticalContentAlignment="Center"/>
+			<Label Content="Passengers:" Width="100" Margin="4" VerticalContentAlignment="Center"/>
+		</DockPanel>
+		
+		<DockPanel Grid.Row="1" Margin="12 8 12 0">
+			<TextBox Text="{Binding Path=SearchState}" VerticalContentAlignment="Center" Margin="4" Width="100">
+				
+			</TextBox>
+			<TextBox Text="{Binding Path=SearchCity}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
+			<TextBox Text="{Binding Path=SearchDuration}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
+			<TextBox Text="{Binding Path=SearchLanguage}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
+			<TextBox Text="{Binding Path=SearchGuestNumber}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
 
-			<Button Content="Reserve" Margin="4"/>
+			<Button x:Name="buttonSearch" Content="Search" Width="80" Margin="4" Click="buttonSearch_Click" HorizontalAlignment="Right"/>
+			<Button x:Name="ButtonCancelSearch" Content="Cancel Search" Width="100" Margin="4" Click="ButtonCancelSearch_Click" HorizontalAlignment="Right"/>
+		</DockPanel>
 
-			<Button x:Name="buttonSearch" Content="Search" Margin="4" Click="buttonSearch_Click"/>
-
-			<Button Content="Cancel Search" Margin="4"/>
-
-		</StackPanel>
-
-		<Grid Grid.Row="1">
+		<Grid Grid.Row="2">
 			
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
@@ -38,7 +53,7 @@
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 
-			<DataGrid Margin="16 12 16 16"
+			<DataGrid Margin="16 16 16 16"
 					  Name="TourDataGrid"
 					  AutoGenerateColumns="False"
 					  SelectionMode="Single"
@@ -60,6 +75,12 @@
 			</DataGrid>
 			
 		</Grid>
-		
-    </Grid>
+
+		<StackPanel Grid.Row="3" Orientation="Horizontal" Margin="12 0 12 12">
+
+			<Button Content="Reserve" Margin="4"/>
+
+		</StackPanel>
+
+	</Grid>
 </Window>
