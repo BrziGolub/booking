@@ -65,5 +65,26 @@ namespace Booking.Model.DAO
 		{
 			observers.Remove(observer);
 		}
+
+        public int NextId()
+        {
+            if (tours.Count == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return tours.Max(t => t.Id) + 1;
+            }
+        }
+        public Tour addTour(Tour tour)
+		{
+			tour.Id = NextId();
+			tours.Add(tour);
+			repository.Save(tours);
+			NotifyObservers();
+			return tour;
+		}
+
 	}
 }

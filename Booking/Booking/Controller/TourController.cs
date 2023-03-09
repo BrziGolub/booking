@@ -27,5 +27,10 @@ namespace Booking.Controller
 		{
 			tourDAO.Subscribe(observer);
 		}
+
+		public void Create(Tour tour)
+		{
+			tourDAO.addTour(tour);
+		}
 	}
 }

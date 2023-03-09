@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\LocationController.cs" />
     <Compile Include="Controller\TourController.cs" />
     <Compile Include="Conversion\DateConversion.cs" />
     <Compile Include="Model\Accommodation.cs" />

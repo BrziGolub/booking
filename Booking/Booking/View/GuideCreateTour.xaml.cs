@@ -1,4 +1,5 @@
 ﻿using Booking.Controller;
+using Booking.Conversion;
 using Booking.Model;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Booking.View
     public partial class GuideCreateTour : Window
     {
         public TourController tourController;
-        public LocationController locationController;
+        public LocationController locationController { get; set; }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -142,8 +143,8 @@ namespace Booking.View
             }
         }
 
-        public DateTime _startTime;
-        public DateTime StartTime
+        public string _startTime;
+        public string StartTime
         {
             get => _startTime;
             set
@@ -193,17 +194,84 @@ namespace Booking.View
         {
             Tour tour = new Tour();
             tour.Name = Name;
-            tour.Location.City = City;
-            tour.Location.State = Country;
-            
+            //---------LOCATION----------//
+
+            Location location = new Location
+            {
+                City = City,
+                State = Country
+            };
+            locationController.Create(location);
+
+            //tour.idLocation = location.Id;
+            tour.Location.Id = location.Id;
+            tour.Location = location;       
+            //-------------------------------
+
             tour.Description = Description;
             tour.Language = Language;
             tour.MaxGuestsNumber = MaxGuestNumber;
             tour.Destinations = Destinations;
-            tour.StartTime = StartTime;
+            tour.StartTime = DateConversion.StringToDate(StartTime);
             tour.Duration = Duration;
             tour.Pictures = Pictures;
 
+
+            if(tour.Name == null) 
+            {
+                MessageBox.Show("'NAME' not entered");
+            }
+            else if (tour.Location.City == null)
+            {
+                MessageBox.Show("'CITY' not entered");
+            }
+            else if (tour.Location.State == null)
+            {
+                MessageBox.Show("'COUNTRY' not entered");
+            }
+            else if (tour.Description == null)
+            {
+                MessageBox.Show("'DESCRIPTION' not entered");
+            }
+            else if (tour.Language == null)
+            {
+                MessageBox.Show("'LANGUAGE' not entered");
+            }
+            else if (tour.MaxGuestsNumber == null)
+            {
+                MessageBox.Show("'MAX GUESTS NUMBER' not entered");
+            }
+            else if(tour.MaxGuestsNumber < 0)
+            {
+                MessageBox.Show("'MAX GUESTS NUMBER' should be greater than 0");
+            }
+            else if (tour.Destinations == null)
+            {
+                MessageBox.Show("'KEY POINTS' not entered");
+            }
+            else if (tour.StartTime == null)
+            {
+                MessageBox.Show("'TOUR START DATE' not entered");
+            }
+            else if (tour.Duration == null)
+            {
+                MessageBox.Show("'DURATION' not entered");
+            }
+            else if (tour.Duration < 0)
+            {
+                MessageBox.Show("'DURATION' should be greater than 0");
+            }
+            else if (tour.Pictures == null)
+            {
+                MessageBox.Show("'PICTURES URL' not entered");
+            }
+
+            else 
+            {
+                tourController.Create(tour);
+            }
+
+            this.Close();
         }
     }
 }

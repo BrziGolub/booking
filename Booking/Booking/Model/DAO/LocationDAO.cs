@@ -1,4 +1,5 @@
-﻿using Booking.Repository;
+﻿using Booking.Observer;
+using Booking.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,13 @@ namespace Booking.Model.DAO
 	{
 		private readonly LocationRepository repository;
 		private List<Location> locations;
+        private readonly List<IObserver> observers;
 
-		public LocationDAO()
+        public LocationDAO()
 		{
 			repository = new LocationRepository();
 			locations = new List<Location>();
+			observers = new List<IObserver>();
 			Load();
 		}
 
@@ -33,5 +36,42 @@ namespace Booking.Model.DAO
 		{
 			return locations.Find(v => v.Id == id);
 		}
-	}
+
+		public Location addLocation(Location location) 
+		{
+			location.Id = NextId();
+			locations.Add(location);
+			repository.Save(locations);
+			NotifyObservers();
+			return location;
+		}
+
+        public int NextId()
+        {
+            if (locations.Count == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return locations.Max(l => l.Id) + 1;
+            }
+        }
+		public void Subscribe(IObserver observer)
+		{
+            observers.Add(observer);
+        }
+        public void Unsubscribe(IObserver observer)
+        {
+			observers.Remove(observer);
+        }
+        public void NotifyObservers()
+        {
+            foreach (var observer in observers)
+            {
+                observer.Update();
+            }
+        }
+
+    }
 }
