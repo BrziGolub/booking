@@ -10,7 +10,7 @@ namespace Booking.Repository
 {
     public class AccommodationRepository
     {
-        private const string FilePath = "../../Resources/Data/accommodation.csv";
+        private const string FilePath = "../../Resources/Data/accommodations.csv";
 
         private readonly Serializer<Accommodation> _serializer;
 
@@ -27,9 +27,9 @@ namespace Booking.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public void Save(List<Accommodation> accommodation)
+        public void Save(List<Accommodation> accommodations)
         {
-            _serializer.ToCSV(FilePath, accommodation);
+            _serializer.ToCSV(FilePath, accommodations);
         }
     }
 }
