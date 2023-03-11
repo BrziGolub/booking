@@ -10,35 +10,35 @@
 
 
         <Label Content="Name*" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox HorizontalAlignment="Left" Margin="170,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15"/>
+        <TextBox HorizontalAlignment="Left" Margin="170,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"  />
 
 
         <Label Content="City*" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox HorizontalAlignment="Left" Margin="170,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Content="Country*" HorizontalAlignment="Left" Margin="40,100,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox HorizontalAlignment="Left" Margin="170,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Description*" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox HorizontalAlignment="Left" Margin="170,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Height="120" />
+        <TextBox HorizontalAlignment="Left" Margin="170,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Height="120" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Language*" HorizontalAlignment="Left" Margin="40,280,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox HorizontalAlignment="Left" Margin="170,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Max guests*" HorizontalAlignment="Left" Margin="40,320,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox HorizontalAlignment="Left" Margin="170,325,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,325,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=MaxGuestNumber, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Key points*" HorizontalAlignment="Left" Margin="40,360,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox HorizontalAlignment="Left" Margin="170,365,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,365,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Destinations, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Tour start date*" HorizontalAlignment="Left" Margin="40,400,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox HorizontalAlignment="Left" Margin="170,405,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,405,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=StartTime, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Duration*" HorizontalAlignment="Left" Margin="40,440,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox HorizontalAlignment="Left" Margin="170,445,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,445,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Pictures*" HorizontalAlignment="Left" Margin="40,480,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox HorizontalAlignment="Left" Margin="170,485,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,485,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Pictures, UpdateSourceTrigger=PropertyChanged}"/>
 
         <WrapPanel FlowDirection="LeftToRight" Margin="0,528,0,31">
             <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click_1" >CREATE</Button>

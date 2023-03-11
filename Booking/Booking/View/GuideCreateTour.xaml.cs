@@ -35,6 +35,7 @@ namespace Booking.View
             this.DataContext = this;
             var app = Application.Current as App;
             tourController = app.TourController;
+
             locationController = app.LocationController;
             
         }
@@ -198,12 +199,12 @@ namespace Booking.View
 
             Location location = new Location
             {
-                City = City,
-                State = Country
+               
+                State = Country,
+                City = City
             };
             locationController.Create(location);
-
-            //tour.idLocation = location.Id;
+           
             tour.Location.Id = location.Id;
             tour.Location = location;       
             //-------------------------------

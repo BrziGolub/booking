@@ -21,18 +21,21 @@ namespace Booking.Model.DAO
 		{
 			repository = new TourRepository();
 			observers = new List<IObserver>();
-			tours = new List<Tour>();
-			locationDAO = new LocationDAO();
-			Load();
+			tours = repository.Load();
+			//locationDAO = new LocationDAO();
+			//Load();
 		}
 
+		/*
 		public void Load()
 		{
 			tours = repository.Load();
 
 			AppendLocations();
 		}
+		*/
 
+		/*
 		public void AppendLocations() 
 		{
 			locationDAO.Load();
@@ -42,7 +45,7 @@ namespace Booking.Model.DAO
 				tour.Location = locationDAO.FindById(tour.Id);
 			}
 		}
-
+		*/
 		public List<Tour> GetAll()
 		{
 			return tours;

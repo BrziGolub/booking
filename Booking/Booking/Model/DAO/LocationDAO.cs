@@ -5,29 +5,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Booking.Model;
 
 namespace Booking.Model.DAO
 {
-	internal class LocationDAO
+	public class LocationDAO : ISubject
 	{
 		private readonly LocationRepository repository;
-		private List<Location> locations;
+		private  List<Location> locations;
         private readonly List<IObserver> observers;
 
         public LocationDAO()
 		{
 			repository = new LocationRepository();
-			locations = new List<Location>();
-			observers = new List<IObserver>();
-			Load();
-		}
-
-		public void Load()
-		{
 			locations = repository.Load();
+			observers = new List<IObserver>();			
 		}
 
-		public List<Location> GetAll()
+        /*
+        public void Load()
+        {
+            locations = repository.Load();
+        }
+        */
+
+        public List<Location> GetAll()
 		{
 			return locations;
 		}
@@ -39,7 +41,7 @@ namespace Booking.Model.DAO
 
 		public Location addLocation(Location location) 
 		{
-			location.Id = NextId();
+		    location.Id = NextId();
 			locations.Add(location);
 			repository.Save(locations);
 			NotifyObservers();
