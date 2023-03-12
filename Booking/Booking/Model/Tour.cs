@@ -52,22 +52,21 @@ namespace Booking.Model
 			Pictures = new List<string>();
 		}
 
-		public string[] ToCSV()
-		{
-			string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Description, Language, MaxGuestsNumber.ToString(), DateConversion.DateToString(StartTime), Duration.ToString()};
-			return csvValues;
-		}
-
-		public void FromCSV(string[] values)
-		{
-			Id = Convert.ToInt32(values[0]);
-			Name = values[1];
-			Location.Id = Convert.ToInt32(values[2]);
-			Description = values[3];
-			Language = values[4];
+        public string[] ToCSV()
+        {
+            string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Description, Language, MaxGuestsNumber.ToString(), DateConversion.DateToString(StartTime), Duration.ToString() };
+            return csvValues;
+        }
+        public void FromCSV(string[] values)
+        {
+            Id = Convert.ToInt32(values[0]);
+            Name = values[1];
+            Location.Id = Convert.ToInt32(values[2]);
+            Description = values[3];
+            Language = values[4];
             MaxGuestsNumber = Convert.ToInt32(values[5]);
-			DateConversion.StringToDate(values[6]);
-			Duration = Convert.ToDouble(values[7]);
-		}
-	}
+            DateConversion.StringToDate(values[6]);
+            Duration = Convert.ToDouble(values[7]);
+        }
+    }
 }

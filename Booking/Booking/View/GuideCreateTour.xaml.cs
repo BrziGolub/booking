@@ -1,9 +1,11 @@
 ﻿using Booking.Controller;
 using Booking.Conversion;
 using Booking.Model;
+using Booking.Model.DAO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -37,7 +39,26 @@ namespace Booking.View
             tourController = app.TourController;
 
             locationController = app.LocationController;
+
+            //**********************FILL COMBOBOX*****************************************
             
+            List<string> items = new List<string>();
+
+            using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string[] fields = reader.ReadLine().Split(',');
+                    items.Add(fields[0]); // assuming the first field contains the item name
+                }
+            }
+
+            comboBox.ItemsSource = items;
+
+            //*************************************************************************
+
+
+
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -47,7 +68,7 @@ namespace Booking.View
 
         private string _name;
 
-        public string Name
+        public string TourName
         {
             get => _name;
             set
@@ -103,7 +124,7 @@ namespace Booking.View
         }
 
         public string _language;
-        public string Language
+        public string TourLanguage
         {
             get => _language;
             set
@@ -143,6 +164,7 @@ namespace Booking.View
                 }
             }
         }
+
 
         public string _startTime;
         public string StartTime
@@ -194,12 +216,11 @@ namespace Booking.View
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Tour tour = new Tour();
-            tour.Name = Name;
+            tour.Name = TourName;
             //---------LOCATION----------//
 
             Location location = new Location
             {
-               
                 State = Country,
                 City = City
             };
@@ -210,14 +231,15 @@ namespace Booking.View
             //-------------------------------
 
             tour.Description = Description;
-            tour.Language = Language;
+            tour.Language = TourLanguage;
             tour.MaxGuestsNumber = MaxGuestNumber;
-            tour.Destinations = Destinations;
+            tour.Destinations = Destinations; // problem ?
             tour.StartTime = DateConversion.StringToDate(StartTime);
             tour.Duration = Duration;
-            tour.Pictures = Pictures;
+            tour.Pictures = Pictures; // problem ?
 
 
+            //------------PROTECTIONS------------------
             if(tour.Name == null) 
             {
                 MessageBox.Show("'NAME' not entered");
@@ -238,7 +260,7 @@ namespace Booking.View
             {
                 MessageBox.Show("'LANGUAGE' not entered");
             }
-            else if (tour.MaxGuestsNumber == null)
+            else if (tour.MaxGuestsNumber == 0)
             {
                 MessageBox.Show("'MAX GUESTS NUMBER' not entered");
             }
@@ -254,7 +276,7 @@ namespace Booking.View
             {
                 MessageBox.Show("'TOUR START DATE' not entered");
             }
-            else if (tour.Duration == null)
+            else if (tour.Duration == 0)
             {
                 MessageBox.Show("'DURATION' not entered");
             }
@@ -266,13 +288,49 @@ namespace Booking.View
             {
                 MessageBox.Show("'PICTURES URL' not entered");
             }
+            //------------------------------------------
 
-            else 
+            else
             {
                 tourController.Create(tour);
+                MessageBox.Show("Tour successfully created");
+                this.Close();
             }
 
-            this.Close();
+            
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+             if(comboBox.SelectedItem != null)
+             {
+                LocationDAO locationDAO = new LocationDAO();
+                
+                //izvlacim samo prvi deo iz stringa comboboxa tj. izvlacim ID(sve pre prve '|')
+                string pom = comboBox.SelectedItem.ToString();
+                string[] substring = pom.Split('|');
+                string sid = substring[0];
+                int id = Convert.ToInt32(sid);
+                //trazim tu lokaciju od koje je id
+                Location location = locationDAO.FindById(id);
+
+                //ovo sam dodao jer mi je pucao program kao i govorio mi da je Destinations null
+                GuideCreateTour tour = new GuideCreateTour();
+                if(tour.Destinations == null)
+                {
+                    tour.Destinations = new List<Location>();
+                }
+                //i samo lokaciju koju sam gore nasao dodam u listu destinationsa
+                tour.Destinations.Add(location);
+
+                MessageBox.Show(tour.Destinations.ToString()); // samo proba ispisa da vidim sta je u listi DESTINATIONS
+             }
+
+            comboBox.SelectedIndex = -1;
+
+
+
         }
     }
 }

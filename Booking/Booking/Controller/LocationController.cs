@@ -34,5 +34,10 @@ namespace Booking.Controller
             locationDAO.Subscribe(observer);
         }
 
+        public List<Location> getAllLocations()
+        {
+            return locationDAO.getAllLocations();
+        }
+
     }
 }

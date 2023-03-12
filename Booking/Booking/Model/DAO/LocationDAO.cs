@@ -59,7 +59,17 @@ namespace Booking.Model.DAO
                 return locations.Max(l => l.Id) + 1;
             }
         }
-		public void Subscribe(IObserver observer)
+
+        public List<Location> getAllLocations()
+        {
+            return locations;
+        }
+        public Location GetLocationById(int id)
+        {
+            return locations.Find(l => l.Id == id);
+        }
+
+        public void Subscribe(IObserver observer)
 		{
             observers.Add(observer);
         }

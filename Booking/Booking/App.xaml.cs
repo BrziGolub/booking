@@ -1,4 +1,5 @@
 ﻿using Booking.Controller;
+using Booking.Model.DAO;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,5 +17,11 @@ namespace Booking
     {
         public TourController TourController { get; set; }
         public LocationController LocationController { get; set; }
+        public App()
+        {
+            LocationDAO locationDAO = new LocationDAO();
+            LocationController = new LocationController(locationDAO);
+        }
+
     }
 }
