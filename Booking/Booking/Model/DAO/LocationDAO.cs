@@ -22,12 +22,12 @@ namespace Booking.Model.DAO
 			observers = new List<IObserver>();			
 		}
 
-        /*
+        
         public void Load()
         {
             locations = repository.Load();
         }
-        */
+        
 
         public List<Location> GetAll()
 		{

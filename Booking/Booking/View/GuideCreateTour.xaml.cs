@@ -28,7 +28,7 @@ namespace Booking.View
     {
         public TourController tourController;
         public LocationController locationController { get; set; }
-
+        public Tour tour = new Tour();
 
         public event PropertyChangedEventHandler PropertyChanged;
         public GuideCreateTour()
@@ -215,7 +215,6 @@ namespace Booking.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Tour tour = new Tour();
             tour.Name = TourName;
             //---------LOCATION----------//
 
@@ -232,13 +231,10 @@ namespace Booking.View
 
             tour.Description = Description;
             tour.Language = TourLanguage;
-            tour.MaxGuestsNumber = MaxGuestNumber;
-            tour.Destinations = Destinations; // problem ?
+            tour.MaxGuestsNumber = MaxGuestNumber;           
             tour.StartTime = DateConversion.StringToDate(StartTime);
             tour.Duration = Duration;
-            tour.Pictures = Pictures; // problem ?
-
-
+           
             //------------PROTECTIONS------------------
             if(tour.Name == null) 
             {
@@ -303,10 +299,10 @@ namespace Booking.View
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
 
-             if(comboBox.SelectedItem != null)
-             {
+            if (comboBox.SelectedItem != null)
+            {
                 LocationDAO locationDAO = new LocationDAO();
-                
+
                 //izvlacim samo prvi deo iz stringa comboboxa tj. izvlacim ID(sve pre prve '|')
                 string pom = comboBox.SelectedItem.ToString();
                 string[] substring = pom.Split('|');
@@ -314,22 +310,12 @@ namespace Booking.View
                 int id = Convert.ToInt32(sid);
                 //trazim tu lokaciju od koje je id
                 Location location = locationDAO.FindById(id);
-
-                //ovo sam dodao jer mi je pucao program kao i govorio mi da je Destinations null
-                GuideCreateTour tour = new GuideCreateTour();
-                if(tour.Destinations == null)
-                {
-                    tour.Destinations = new List<Location>();
-                }
                 //i samo lokaciju koju sam gore nasao dodam u listu destinationsa
                 tour.Destinations.Add(location);
-
-                MessageBox.Show(tour.Destinations.ToString()); // samo proba ispisa da vidim sta je u listi DESTINATIONS
-             }
+  
+            }
 
             comboBox.SelectedIndex = -1;
-
-
 
         }
 
@@ -337,18 +323,12 @@ namespace Booking.View
         {
             if (tbPictures.Text != null)
             {
-                GuideCreateTour tour = new GuideCreateTour();
-
-                if (tour.Pictures == null)
-                {
-                    tour.Pictures = new List<string>();
-                }
                 string space = " ";
                 string input = tbPictures.Text.ToString();
                 tour.Pictures.Add(input);
                 tour.Pictures.Add(space);
             }
-            
+
             tbPictures.Text = string.Empty;
         }
     }

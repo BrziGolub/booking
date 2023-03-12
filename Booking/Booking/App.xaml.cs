@@ -21,7 +21,11 @@ namespace Booking
         {
             LocationDAO locationDAO = new LocationDAO();
             LocationController = new LocationController(locationDAO);
+            TourDAO tourDAO = new TourDAO();
+            TourController = new TourController(tourDAO);
         }
+
+        
 
     }
 }

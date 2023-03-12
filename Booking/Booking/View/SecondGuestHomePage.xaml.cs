@@ -26,11 +26,9 @@ namespace Booking.View
 		{
 			InitializeComponent();
 			DataContext = this;
-
-			controller = new TourController();
-
-			tours = new ObservableCollection<Tour>(controller.GetAll());
-
+            var app = Application.Current as App;
+            controller = app.TourController;
+            tours = new ObservableCollection<Tour>(controller.GetAll());
 			TourDataGrid.ItemsSource = tours;
 		}
 
