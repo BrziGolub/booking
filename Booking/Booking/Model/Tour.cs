@@ -41,7 +41,6 @@ namespace Booking.Model
 		public Tour( string name,Location location, string desc, string lang, int maxNum, DateTime dt, double duration)
 		{
 			Name = name;
-            //idLocation = idLocation;
 			Location = location;
 			Description = desc;
 			Language = lang;
@@ -52,9 +51,21 @@ namespace Booking.Model
 			Pictures = new List<string>();
 		}
 
+
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Description, Language, MaxGuestsNumber.ToString(), DateConversion.DateToString(StartTime), Duration.ToString() };
+            string[] csvValues = 
+				{ 
+				Id.ToString(), 
+				Name, 
+				Location.Id.ToString(), 
+				Description, 
+				Language, 
+				MaxGuestsNumber.ToString(),
+				Destinations.ToString(),
+				DateConversion.DateToString(StartTime), 
+				Duration.ToString() 
+			};
             return csvValues;
         }
         public void FromCSV(string[] values)

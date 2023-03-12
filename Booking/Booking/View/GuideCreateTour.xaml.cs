@@ -332,5 +332,24 @@ namespace Booking.View
 
 
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            if (tbPictures.Text != null)
+            {
+                GuideCreateTour tour = new GuideCreateTour();
+
+                if (tour.Pictures == null)
+                {
+                    tour.Pictures = new List<string>();
+                }
+                string space = " ";
+                string input = tbPictures.Text.ToString();
+                tour.Pictures.Add(input);
+                tour.Pictures.Add(space);
+            }
+            
+            tbPictures.Text = string.Empty;
+        }
     }
 }
