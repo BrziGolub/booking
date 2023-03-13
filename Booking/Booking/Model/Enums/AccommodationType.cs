@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Model.Enum
+namespace Booking.Model.Enums
 {
     public enum AccommodationType
     {
-        APARTMAN,
-        KUCA,
-        KOLIBA 
+        APARTMENT,
+        HOUSE,
+        COTTAGE 
     }
 }

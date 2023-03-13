@@ -12,7 +12,6 @@ namespace Booking.Model.Images
         public string Url { get; set; }
         public Accommodation Accomodation { get; set; } //moze id 
 
-
         public AccommodationImage()
         {
             Accomodation = new Accommodation();
