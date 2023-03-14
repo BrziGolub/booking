@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\AccommodationContoller.cs" />
+    <Compile Include="Model\AccommodationReservation.cs" />
     <Compile Include="Model\DAO\AccommodationDAO.cs" />
     <Compile Include="Controller\TourController.cs" />
     <Compile Include="Conversion\DateConversion.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Tour.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Repository\AccommodationImagesRepository.cs" />
     <Compile Include="Repository\AccommodationRepository.cs" />
     <Compile Include="Observer\IObserver.cs" />
     <Compile Include="Observer\ISubject.cs" />
@@ -75,11 +77,11 @@
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
     <Compile Include="Serializer\Serializer.cs" />
+    <Compile Include="View\AccommodationReservation.xaml.cs">
+      <DependentUpon>AccommodationReservation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FirstGuestHomePage.xaml.cs">
       <DependentUpon>FirstGuestHomePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\FirstGuestSearch.xaml.cs">
-      <DependentUpon>FirstGuestSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GuideCreateTour.xaml.cs">
       <DependentUpon>GuideCreateTour.xaml</DependentUpon>
@@ -108,11 +110,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\FirstGuestHomePage.xaml">
+    <Page Include="View\AccommodationReservation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FirstGuestSearch.xaml">
+    <Page Include="View\FirstGuestHomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +161,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Data\accommodationImages.csv" />
     <None Include="Resources\Data\accommodations.csv" />
     <None Include="Resources\Data\locations.csv" />
     <None Include="Resources\Data\tours.csv" />
