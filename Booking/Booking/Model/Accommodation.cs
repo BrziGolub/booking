@@ -27,7 +27,7 @@ namespace Booking.Model
 
 		public List<AccommodationImage> Images { get; set; } 
 		
-		//kako povezati slike?
+	
 
 		public Accommodation() 
 		{

@@ -10,6 +10,6 @@ namespace Booking.Model.Enums
     {
         APARTMENT,
         HOUSE,
-        COTTAGE 
+        COTTAGE
     }
 }
