@@ -231,7 +231,7 @@ namespace Booking.View
 
             tour.Description = Description;
             tour.Language = TourLanguage;
-            tour.MaxGuestsNumber = MaxGuestNumber;           
+            tour.MaxGuestsNumber = MaxGuestNumber;
             tour.StartTime = DateConversion.StringToDate(StartTime);
             tour.Duration = Duration;
            

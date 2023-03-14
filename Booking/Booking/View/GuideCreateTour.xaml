@@ -38,7 +38,11 @@
 
 
         <Label  Content="Tour start date*" HorizontalAlignment="Left" Margin="40,400,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox  HorizontalAlignment="Left" Margin="170,405,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=StartTime, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <StackPanel  Margin="0,0,-105,0">
+            <DatePicker Margin="10,405,0,0" Width="180"  Text="{Binding Path=StartTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+            
+        </StackPanel>
 
         <Label Content="Duration*" HorizontalAlignment="Left" Margin="40,440,0,0" VerticalAlignment="Top" FontSize="15" />
         <TextBox HorizontalAlignment="Left" Margin="170,445,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}"/>
@@ -48,6 +52,7 @@
 
         <StackPanel Margin="0,0,-192,2">
             <Button Panel.ZIndex="1" Margin="173,486,32,122"  Content="+" Height="21" Width="22" FontSize="14" FontWeight="Bold" Click="Button_Click_3" />
+           
         </StackPanel>
         
         <WrapPanel FlowDirection="LeftToRight" Margin="0,528,0,31">
