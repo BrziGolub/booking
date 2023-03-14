@@ -92,6 +92,12 @@
     <Compile Include="View\GuideHomePage.xaml.cs">
       <DependentUpon>GuideHomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\OwnerHomePage.xaml.cs">
+      <DependentUpon>OwnerHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OwnerRegisterAccommodation.xaml.cs">
+      <DependentUpon>OwnerRegisterAccommodation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SecondGuestHomePage.xaml.cs">
       <DependentUpon>SecondGuestHomePage.xaml</DependentUpon>
     </Compile>
@@ -126,6 +132,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GuideHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OwnerHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OwnerRegisterAccommodation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

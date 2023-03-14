@@ -13,16 +13,15 @@ namespace Booking.Model.DAO
 {
     public class AccommodationDAO : ISubject
     {
-        private readonly AccommodationRepository _accommodationRepository;
-
-        private List<Accommodation> accommodations;
+        //Add observer?
 
         private readonly List<IObserver> observers;
+        private readonly AccommodationRepository _accommodationRepository;
+        private List<Accommodation> accommodations;
 
         private LocationDAO locationDAO;
 
         private AccommodationImagesRepository _accommodationImagesRepository;
-
 
         public AccommodationDAO()
         {
@@ -50,7 +49,6 @@ namespace Booking.Model.DAO
         {
             return accommodations;
         }
-
 
         public  void BindLocationToAccommodaton()
         {

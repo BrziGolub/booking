@@ -1,0 +1,42 @@
+﻿<Window x:Class="Booking.View.OwnerRegisterAccommodation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Booking.View"
+        mc:Ignorable="d"
+        Title="OwnerRegisterAccommodation" Height="445" Width="420" ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Name*" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"  />
+
+
+        <Label Content="City*" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Label Content="Country*" HorizontalAlignment="Left" Margin="40,100,0,0" VerticalAlignment="Top" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Type*" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox HorizontalAlignment="Left" Margin="170,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Max guests*" HorizontalAlignment="Left" Margin="40,175,0,0" VerticalAlignment="Top" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Language, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Min days*" HorizontalAlignment="Left" Margin="40,205,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox HorizontalAlignment="Left" Margin="170,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=MaxGuestNumber, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Cancelation days*" HorizontalAlignment="Left" Margin="40,240,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <TextBox HorizontalAlignment="Left" Margin="170,245,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Destinations, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Content="Pictures*" HorizontalAlignment="Left" Margin="40,275,0,0" VerticalAlignment="Top" FontSize="15" />
+        <TextBox HorizontalAlignment="Left" Margin="170,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=StartTime, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <WrapPanel FlowDirection="LeftToRight" Margin="0,328,0,31">
+            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click_1" >CREATE</Button>
+            <Button Margin="10 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click" >CLOSE</Button>
+        </WrapPanel>
+
+
+    </Grid>
+</Window>
