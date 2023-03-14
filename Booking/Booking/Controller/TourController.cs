@@ -14,12 +14,12 @@ namespace Booking.Controller
 	{
 		private readonly TourDAO tourDAO;
 
-		public TourController()
-		{
-			tourDAO = new TourDAO();
-		}
+        public TourController(TourDAO tour)
+        {
+            tourDAO = tour;
+        }
 
-		public List<Tour> GetAll()
+        public List<Tour> GetAll()
 		{
 			return tourDAO.GetAll();
 		}
@@ -37,6 +37,11 @@ namespace Booking.Controller
 		public void Subscribe(IObserver observer)
 		{
 			tourDAO.Subscribe(observer);
+		}
+
+		public void Create(Tour tour)
+		{
+			tourDAO.addTour(tour);
 		}
 	}
 }
