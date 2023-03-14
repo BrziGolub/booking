@@ -14,6 +14,7 @@ namespace Booking.Model
 
 		public string Name { get; set; }
 
+		//public int idLocation { get; set; }
 		public Location Location { get; set; }
 
 		public string Description { get; set; }
@@ -28,16 +29,16 @@ namespace Booking.Model
 
 		public double Duration { get; set; } 
 
-		public List<string> pictures { get; set; }	//izmeni
+		public List<string> Pictures { get; set; }	//izmeni
 
 		public Tour() 
 		{
 			Location = new Location();
             Destinations = new List<Location>();
-			pictures = new List<string>();
+			Pictures = new List<string>();
 		}
 
-		public Tour( string name, Location location, string desc, string lang, int maxNum, DateTime dt, double duration)
+		public Tour( string name,Location location, string desc, string lang, int maxNum, DateTime dt, double duration)
 		{
 			Name = name;
 			Location = location;
@@ -47,25 +48,37 @@ namespace Booking.Model
             StartTime = dt;
 			Duration = duration;
             Destinations = new List<Location>();
-			pictures = new List<string>();
+			Pictures = new List<string>();
 		}
 
-		public string[] ToCSV()
-		{
-			string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Description, Language, MaxGuestsNumber.ToString(), DateConversion.DateToString(StartTime), Duration.ToString()};
-			return csvValues;
-		}
 
-		public void FromCSV(string[] values)
-		{
-			Id = Convert.ToInt32(values[0]);
-			Name = values[1];
-			Location.Id = Convert.ToInt32(values[2]);
-			Description = values[3];
-			Language = values[4];
+        public string[] ToCSV()
+        {
+            string[] csvValues = 
+				{ 
+				Id.ToString(), 
+				Name, 
+				Location.Id.ToString(), 
+				Description, 
+				Language, 
+				MaxGuestsNumber.ToString(),
+				Destinations.ToString(),
+				DateConversion.DateToString(StartTime), 
+				Duration.ToString() 
+			};
+            return csvValues;
+        }
+        public void FromCSV(string[] values)
+        {
+            Id = Convert.ToInt32(values[0]);
+            Name = values[1];
+            Location.Id = Convert.ToInt32(values[2]);
+            Description = values[3];
+            Language = values[4];
             MaxGuestsNumber = Convert.ToInt32(values[5]);
-			DateConversion.StringToDate(values[6]);
-			Duration = Convert.ToDouble(values[7]);
-		}
-	}
+			//Destinations = values[6]
+			StartTime = DateConversion.StringToDate(values[7]);
+			Duration = Convert.ToDouble(values[8]);
+        }
+    }
 }

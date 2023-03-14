@@ -22,22 +22,34 @@ namespace Booking.View
 		private ObservableCollection<Tour> tours;
 		private TourController controller;
 
+		public string SearchState { get; set; } = string.Empty;
+
+		public string SearchCity { get; set; } = string.Empty;
+
+		public string SearchDuration { get; set; } = string.Empty;
+
+		public string SearchLanguage { get; set; } = string.Empty;
+
+		public string SearchGuestNumber { get; set; } = string.Empty;
+
 		public SecondGuestHomePage()
 		{
 			InitializeComponent();
 			DataContext = this;
-
-			controller = new TourController();
-
-			tours = new ObservableCollection<Tour>(controller.GetAll());
-
+            var app = Application.Current as App;
+            controller = app.TourController;
+            tours = new ObservableCollection<Tour>(controller.GetAll());
 			TourDataGrid.ItemsSource = tours;
 		}
 
 		private void buttonSearch_Click(object sender, RoutedEventArgs e)
 		{
-			SecondGuestSearch secondGuestSearch = new SecondGuestSearch();
-			secondGuestSearch.Show();
+			controller.Search(tours, SearchState, SearchCity, SearchDuration, SearchLanguage, SearchGuestNumber);
+		}
+
+		private void ButtonCancelSearch_Click(object sender, RoutedEventArgs e)
+		{
+			controller.CancelSearch(tours);
 		}
 	}
 }

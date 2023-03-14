@@ -5,48 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="GuestHomePage" Height="450" Width="800">
+        Title="GuestBOOKING" Height="500" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="760"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="2" Grid.Column="1">
-            <DataGrid AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
+        <StackPanel Grid.Row="2" Margin="0,46,0,0" >
+            <DataGrid x:Name="AccommodationDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Height="226" HeadersVisibility="Column" FontSize="13" Width="1129" RenderTransformOrigin="0.503,0.552" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Width="80" />
-                    <DataGridTextColumn Header="City" Width="80"/>
-                    <DataGridTextColumn Header="Country" Width="80"/>
-                    <DataGridTextColumn Header="Type" Width="80"/>
-                    <DataGridTextColumn Header="Capacity" Width="80" />
-                    <DataGridTextColumn Header="Advance reservation restrictions"/>
-                    <DataGridTextColumn Header="CancelationPeriod"/>
+                    <DataGridTextColumn Header="Name" Width="120" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="State" Width="100" Binding="{Binding Location.State}"/>
+                    <DataGridTextColumn Header="City" Width="100" Binding="{Binding Location.City}"/>
+                    <DataGridTextColumn Header="Type" Width="80"  Binding="{Binding Type}"/>
+                    <DataGridTextColumn Header="Capacity" Width="80"  Binding="{Binding Capacity}" />
+                    <DataGridTextColumn Header="Advance reservation restrictions" Binding="{Binding MinNumberOfDays}"/>
+                    <DataGridTextColumn Header="CancelationPeriod" Binding="{Binding CancelationPeriod}"/>
+                    <DataGridTemplateColumn Header="Images" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Images}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding Url}" Width="80" Height="80" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
 
-        <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
-            <Button Click ="Button_Click_Search" >
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Height="40" VerticalAlignment="Bottom">
+            <Label Width="140" Margin="4">Accommodation Name:</Label>
+            <Label Width="60" Margin="4">State:</Label>
+            <Label Width="60" Margin="4">City:</Label>
+            <Label Width="80" Margin="4">Type:</Label>
+            <Label Width="110" Margin="4">Number of guests:</Label>
+            <Label Width="200" Margin="4">Number of the days for reservation:</Label>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0,20,15,259" Grid.RowSpan="3">
+            <TextBox Width="140" Height="20"  Margin="4" Text="{Binding Path=SearchName}"></TextBox>
+            <TextBox Width="60" Height="20" Margin="4" Text="{Binding Path=SearchState}"></TextBox>
+            <TextBox Width="60" Height="20" Margin="4" Text="{Binding Path=SearchCity}" ></TextBox>
+            <StackPanel Orientation="Vertical" Margin="4" VerticalAlignment="Bottom" Height="57">
+                <CheckBox IsChecked="{Binding Path=IsCheckedApartment}">APARTMNET</CheckBox>
+                <CheckBox IsChecked="{Binding Path=IsCheckedCottage}">COTTAGE</CheckBox>
+                <CheckBox IsChecked="{Binding Path=IsCheckedHouse}">HOUSE</CheckBox>
+            </StackPanel>
+            <TextBox Width="110" Height="20" Margin="4" Text="{Binding Path=SerachGuests}"></TextBox>
+            <TextBox Width="200" Height="20" Margin="4" Text="{Binding Path=SearchReservationDays}"></TextBox>
+
+            <Button Click ="Button_Click_Search" Width ="80" Height="30" Margin="4">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Search" FontSize="14" VerticalAlignment="Center"  />
+                    <TextBlock Text="Search" FontSize="14" VerticalAlignment="Center"  HorizontalAlignment="Right"/>
                 </StackPanel>
             </Button>
-            <Separator/>
-            <Button>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Reservation" FontSize="14" VerticalAlignment="Center"  />
-                </StackPanel>
-            </Button>
-            <Separator></Separator>
-        </ToolBar>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">
+            <Button HorizontalAlignment="Left" Width="60" Height="25" Margin="6" Click="Button_Click_Book">Book</Button>
+            <Button Width="60" Height="25" Margin="6" Click="Button_Click_ShowAll">Show all</Button>
+        </StackPanel>
     </Grid>
 </Window>

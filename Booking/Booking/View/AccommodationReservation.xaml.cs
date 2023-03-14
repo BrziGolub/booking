@@ -15,13 +15,17 @@ using System.Windows.Shapes;
 namespace Booking.View
 {
     /// <summary>
-    /// Interaction logic for FirstGuestSearch.xaml
+    /// Interaction logic for AccommodationReservation.xaml
     /// </summary>
-    public partial class FirstGuestSearch : Window
+    public partial class AccommodationReservation : Window
     {
-        public FirstGuestSearch()
+
+        public AccommodationReservation()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
+
+      
     }
 }
