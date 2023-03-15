@@ -4,6 +4,7 @@ using Booking.Model;
 using Booking.Model.DAO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace Booking.View
         public TourController tourController;
         public LocationController locationController { get; set; }
         public Tour tour = new Tour();
+        public ObservableCollection<string> CityCollection { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public GuideCreateTour()
@@ -40,8 +42,31 @@ namespace Booking.View
 
             locationController = app.LocationController;
 
-            //**********************FILL COMBOBOX*****************************************
-            
+            //**********************FILL COMBOBOX COUNTRY***************************************
+            List<string> items1 = new List<string>();
+
+            using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+
+                    string[] fields = reader.ReadLine().Split(',');
+                    foreach (var field in fields)
+                    {
+                        string[] Countries = field.Split('|');
+                        items1.Add(Countries[1]);
+                    }
+                }
+            }
+            var distinctItems = items1.Distinct().ToList();
+            comboBox1.ItemsSource = distinctItems;
+
+            //**********************FILL COMBOBOX CITY*************************************
+
+            CityCollection = new ObservableCollection<string>();
+
+            //**********************FILL COMBOBOX KEYPOINTS*************************************
+
             List<string> items = new List<string>();
 
             using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
@@ -57,10 +82,29 @@ namespace Booking.View
 
             //*************************************************************************
 
+            if(comboBox1.SelectedItem == null)
+            {
+                comboBox2.IsEnabled = false;
+            }
+
+                
 
 
         }
 
+        public void FillCity()
+        {
+            CityCollection.Clear();
+
+            var locations = locationController.getAllLocations().Where(l => l.State.Equals(Country));
+
+            foreach (Location c in locations)
+            {
+                CityCollection.Add(c.City);
+            }
+            comboBox2.IsEnabled = true;
+
+        }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -104,6 +148,7 @@ namespace Booking.View
                 if (_country != value)
                 {
                     _country = value;
+                    FillCity();
                     OnPropertyChanged();
                 }
             }
@@ -223,7 +268,7 @@ namespace Booking.View
                 State = Country,
                 City = City
             };
-            locationController.Create(location);
+            //locationController.Create(location);
            
             tour.Location.Id = location.Id;
             tour.Location = location;       

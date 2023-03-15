@@ -10,12 +10,12 @@ namespace Booking.Conversion
 	{
 		public static string DateToString(DateTime date)
 		{
-			return date.ToString("dd.MM.yyyy.");
+			return date.ToString("dd/MM/yyyy");
 		}
 
 		public static DateTime StringToDate(string date)
 		{
-			return DateTime.ParseExact(date, "dd.MM.yyyy.", null);
+			return DateTime.ParseExact(date, "dd/MM/yyyy", null);
 		}
 	}
 }
