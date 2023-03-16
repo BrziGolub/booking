@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Booking.Model;
+using System.Windows;
 
 namespace Booking.Model.DAO
 {
@@ -51,7 +52,36 @@ namespace Booking.Model.DAO
 			return locations.Find(v => v.Id == id);
 		}
 
-		public Location addLocation(Location location) 
+        public Location FindByCountryAndCity( string Name)
+        {
+            string[] pom = Name.Split(',');
+            pom[1] = pom[1].Trim();    
+            foreach (Location loc in locations) 
+            {
+                
+                if (loc.City == pom[1])
+                {
+                    //MessageBox.Show("if");       
+                    return loc;
+                }
+            }
+
+            return null; 
+        }
+
+        public int FindIdByCountryAndCity(string Country, string City)
+        {
+            foreach (var location in locations)
+            {
+                if (location.City.Equals(City) && location.State.Equals(Country))
+                {
+                    return location.Id;
+                }
+            }
+            return -1;
+        }
+
+        public Location addLocation(Location location) 
 		{
 		    location.Id = NextId();
 			locations.Add(location);
@@ -72,13 +102,9 @@ namespace Booking.Model.DAO
             }
         }
 
-        public List<Location> getAllLocations()
+        public List<Location> FindAllLocations()
         {
             return locations;
-        }
-        public Location GetLocationById(int id)
-        {
-            return locations.Find(l => l.Id == id);
         }
 
         public void Subscribe(IObserver observer)

@@ -2,8 +2,10 @@
 using Booking.Conversion;
 using Booking.Model;
 using Booking.Model.DAO;
+using Booking.Model.Images;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -26,11 +28,13 @@ namespace Booking.View
     /// </summary>
     public partial class GuideCreateTour : Window
     {
-        public TourController tourController;
+        public TourController tourController { get; set; }
         public LocationController locationController { get; set; }
         public Tour tour = new Tour();
+        public ObservableCollection<string> CityCollection { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        LocationDAO locationDAO = new LocationDAO();
         public GuideCreateTour()
         {
             InitializeComponent();
@@ -40,8 +44,31 @@ namespace Booking.View
 
             locationController = app.LocationController;
 
-            //**********************FILL COMBOBOX*****************************************
-            
+            //**********************FILL COMBOBOX COUNTRY***************************************
+            List<string> items1 = new List<string>();
+
+            using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+
+                    string[] fields = reader.ReadLine().Split(',');
+                    foreach (var field in fields)
+                    {
+                        string[] Countries = field.Split('|');
+                        items1.Add(Countries[1]);
+                    }
+                }
+            }
+            var distinctItems = items1.Distinct().ToList();
+            comboBox1.ItemsSource = distinctItems;
+
+            //**********************FILL COMBOBOX CITY*************************************
+
+            CityCollection = new ObservableCollection<string>();
+
+            //**********************FILL COMBOBOX KEYPOINTS*************************************
+
             List<string> items = new List<string>();
 
             using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
@@ -49,7 +76,11 @@ namespace Booking.View
                 while (!reader.EndOfStream)
                 {
                     string[] fields = reader.ReadLine().Split(',');
-                    items.Add(fields[0]); // assuming the first field contains the item name
+                    foreach (var field in fields)
+                    {
+                        string[] pom = field.Split('|');
+                        items.Add(pom[1] + ", " + pom[2]);
+                    }
                 }
             }
 
@@ -57,8 +88,27 @@ namespace Booking.View
 
             //*************************************************************************
 
+            if(comboBox1.SelectedItem == null)
+            {
+                comboBox2.IsEnabled = false;
+            }
+
+                
 
 
+        }
+
+        public void FillCity(object sender, SelectionChangedEventArgs e)
+        {
+            CityCollection.Clear();
+
+            var locations = locationController.findAllLocations().Where(l => l.State.Equals(Country));
+
+            foreach (Location c in locations)
+            {
+                CityCollection.Add(c.City);
+            }
+            comboBox2.IsEnabled = true;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -215,7 +265,11 @@ namespace Booking.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            tour.Name = TourName;
+            if (tbName.Text == "")
+            {
+                MessageBox.Show("'NAME' not entered");
+            }
+            else { tour.Name = TourName; }
             //---------LOCATION----------//
 
             Location location = new Location
@@ -223,66 +277,71 @@ namespace Booking.View
                 State = Country,
                 City = City
             };
-            locationController.Create(location);
-           
-            tour.Location.Id = location.Id;
-            tour.Location = location;       
-            //-------------------------------
 
-            tour.Description = Description;
-            tour.Language = TourLanguage;
-            tour.MaxGuestsNumber = MaxGuestNumber;
-            tour.StartTime = DateConversion.StringToDate(StartTime);
-            tour.Duration = Duration;
-           
-            //------------PROTECTIONS------------------
-            if(tour.Name == null) 
+            if (comboBox1.Text == "" || comboBox2.Text == "")
             {
-                MessageBox.Show("'NAME' not entered");
+                MessageBox.Show("'COUNTRY' AND 'CITY' should be entered");
+            }
+            else
+            {
+                int LocationID = locationController.FindIdByCountryAndCity(Country, City);
+                tour.Location.Id = LocationID;
+                tour.Location = locationController.FindById(LocationID);
+            }
+            //-------------------------------
+            if (tbDescription.Text == "")
+            {
+                MessageBox.Show("'DESCRIPTION' not entered");
+            }
+            else 
+            { tour.Description = Description; }
+           
+            if (tbLanguage.Text == "")
+            { MessageBox.Show("'LANGUAGE' not entered"); }
+            else 
+            { tour.Language = TourLanguage; }
+
+            if (tbMaxGuests.Text == "")
+            { MessageBox.Show("'MAX GUESTS NUMBER' not entered"); }
+            else 
+            { tour.MaxGuestsNumber = MaxGuestNumber; }
+            
+            if (datePicker.Text == "")
+            { MessageBox.Show("'TOUR START DATE' not entered"); }
+            else
+            { tour.StartTime = DateConversion.StringToDate(StartTime); }
+
+            if (tbDuration.Text == "")
+            { 
+               MessageBox.Show("'DURATION' not entered");
+            }
+            else { tour.Duration = Duration; }
+
+
+            //------------EXTRA PROTECTIONS---------------
+            if (tour.Destinations.Count < 2)
+            {
+                MessageBox.Show("Tour need to have 2 'KEY POINTS' at least");
+            }
+            else if(tour.Images.Count == 0) // maybe not?
+            {
+                MessageBox.Show("Tour need to have 1 'PICTURE' at least");
+            }
+            else if (comboBox1.Text == "") //tour.Location.State == null
+            {
+                MessageBox.Show("'COUNTRY' not entered");
             }
             else if (tour.Location.City == null)
             {
                 MessageBox.Show("'CITY' not entered");
             }
-            else if (tour.Location.State == null)
-            {
-                MessageBox.Show("'COUNTRY' not entered");
-            }
-            else if (tour.Description == null)
-            {
-                MessageBox.Show("'DESCRIPTION' not entered");
-            }
-            else if (tour.Language == null)
-            {
-                MessageBox.Show("'LANGUAGE' not entered");
-            }
-            else if (tour.MaxGuestsNumber == 0)
-            {
-                MessageBox.Show("'MAX GUESTS NUMBER' not entered");
-            }
-            else if(tour.MaxGuestsNumber < 0)
+            else if (tour.MaxGuestsNumber < 0)
             {
                 MessageBox.Show("'MAX GUESTS NUMBER' should be greater than 0");
-            }
-            else if (tour.Destinations == null)
-            {
-                MessageBox.Show("'KEY POINTS' not entered");
-            }
-            else if (tour.StartTime == null)
-            {
-                MessageBox.Show("'TOUR START DATE' not entered");
-            }
-            else if (tour.Duration == 0)
-            {
-                MessageBox.Show("'DURATION' not entered");
             }
             else if (tour.Duration < 0)
             {
                 MessageBox.Show("'DURATION' should be greater than 0");
-            }
-            else if (tour.Pictures == null)
-            {
-                MessageBox.Show("'PICTURES URL' not entered");
             }
             //------------------------------------------
 
@@ -301,32 +360,32 @@ namespace Booking.View
 
             if (comboBox.SelectedItem != null)
             {
-                LocationDAO locationDAO = new LocationDAO();
-
-                //izvlacim samo prvi deo iz stringa comboboxa tj. izvlacim ID(sve pre prve '|')
                 string pom = comboBox.SelectedItem.ToString();
-                string[] substring = pom.Split('|');
-                string sid = substring[0];
-                int id = Convert.ToInt32(sid);
-                //trazim tu lokaciju od koje je id
-                Location location = locationDAO.FindById(id);
-                //i samo lokaciju koju sam gore nasao dodam u listu destinationsa
-                tour.Destinations.Add(location);
-  
+                string[] CountryCity = pom.Split(',');
+                string Country = CountryCity[0];
+                string City = CountryCity[1].Trim(); 
+
+                int locationId= locationController.FindIdByCountryAndCity(Country, City);        
+                Location location = locationController.FindById(locationId);
+
+                TourKeyPoints tourKeyPoints = new TourKeyPoints();
+                tourKeyPoints.Location = location;
+                tour.Destinations.Add(tourKeyPoints);
             }
-
             comboBox.SelectedIndex = -1;
-
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            if (tbPictures.Text != null)
+            if (tbPictures.Text != "")
             {
-                string space = " ";
-                string input = tbPictures.Text.ToString();
-                tour.Pictures.Add(input);
-                tour.Pictures.Add(space);
+              TourImage Images = new TourImage();
+              Images.Url = tbPictures.Text;
+              tour.Images.Add(Images);
+            }
+            else
+            {
+                MessageBox.Show("Photo URL can't be empty!");
             }
 
             tbPictures.Text = string.Empty;

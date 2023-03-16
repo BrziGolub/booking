@@ -43,9 +43,19 @@ namespace Booking.Controller
             locationDAO.Subscribe(observer);
         }
 
-        public List<Location> getAllLocations()
+        public List<Location> findAllLocations()
         {
-            return locationDAO.getAllLocations();
+            return locationDAO.FindAllLocations();
+        }
+
+        public int FindIdByCountryAndCity(string Country, string City)
+        {
+            return locationDAO.FindIdByCountryAndCity(Country, City);
+        }
+
+        public Location FindById(int id)
+        {
+            return locationDAO.FindById(id);
         }
 
     }
