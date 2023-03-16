@@ -65,6 +65,7 @@
     <Compile Include="Model\DAO\TourDAO.cs" />
     <Compile Include="Model\Enums\AccommodationType.cs" />
     <Compile Include="Model\Images\AccommodationImage.cs" />
+    <Compile Include="Model\Images\TourImage.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Tour.cs" />
     <Compile Include="Model\User.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Observer\IObserver.cs" />
     <Compile Include="Observer\ISubject.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
+    <Compile Include="Repository\TourImagesRepository.cs" />
     <Compile Include="Repository\TourRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
@@ -162,6 +164,7 @@
     </None>
     <None Include="Resources\Data\accommodations.csv" />
     <None Include="Resources\Data\locations.csv" />
+    <None Include="Resources\Data\tourImages.csv" />
     <None Include="Resources\Data\tours.csv" />
     <None Include="Resources\Data\users.csv" />
   </ItemGroup>

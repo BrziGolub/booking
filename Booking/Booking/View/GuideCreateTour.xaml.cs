@@ -2,6 +2,7 @@
 using Booking.Conversion;
 using Booking.Model;
 using Booking.Model.DAO;
+using Booking.Model.Images;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,12 +28,13 @@ namespace Booking.View
     /// </summary>
     public partial class GuideCreateTour : Window
     {
-        public TourController tourController;
+        public TourController tourController { get; set; }
         public LocationController locationController { get; set; }
         public Tour tour = new Tour();
         public ObservableCollection<string> CityCollection { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        LocationDAO locationDAO = new LocationDAO();
         public GuideCreateTour()
         {
             InitializeComponent();
@@ -74,7 +76,11 @@ namespace Booking.View
                 while (!reader.EndOfStream)
                 {
                     string[] fields = reader.ReadLine().Split(',');
-                    items.Add(fields[0]); // assuming the first field contains the item name
+                    foreach (var field in fields)
+                    {
+                        string[] pom = field.Split('|');
+                        items.Add(pom[1] + ", " + pom[2]);
+                    }
                 }
             }
 
@@ -96,7 +102,7 @@ namespace Booking.View
         {
             CityCollection.Clear();
 
-            var locations = locationController.getAllLocations().Where(l => l.State.Equals(Country));
+            var locations = locationController.findAllLocations().Where(l => l.State.Equals(Country));
 
             foreach (Location c in locations)
             {
@@ -276,7 +282,7 @@ namespace Booking.View
 
             tour.Description = Description;
             tour.Language = TourLanguage;
-            tour.MaxGuestsNumber = MaxGuestNumber;           
+            tour.MaxGuestsNumber = MaxGuestNumber;   
             tour.StartTime = DateConversion.StringToDate(StartTime);
             tour.Duration = Duration;
            
@@ -309,10 +315,6 @@ namespace Booking.View
             {
                 MessageBox.Show("'MAX GUESTS NUMBER' should be greater than 0");
             }
-            else if (tour.Destinations == null)
-            {
-                MessageBox.Show("'KEY POINTS' not entered");
-            }
             else if (tour.StartTime == null)
             {
                 MessageBox.Show("'TOUR START DATE' not entered");
@@ -325,7 +327,7 @@ namespace Booking.View
             {
                 MessageBox.Show("'DURATION' should be greater than 0");
             }
-            else if (tour.Pictures == null)
+            else if (tour.Images == null)
             {
                 MessageBox.Show("'PICTURES URL' not entered");
             }
@@ -346,32 +348,31 @@ namespace Booking.View
 
             if (comboBox.SelectedItem != null)
             {
-                LocationDAO locationDAO = new LocationDAO();
-
-                //izvlacim samo prvi deo iz stringa comboboxa tj. izvlacim ID(sve pre prve '|')
                 string pom = comboBox.SelectedItem.ToString();
-                string[] substring = pom.Split('|');
-                string sid = substring[0];
-                int id = Convert.ToInt32(sid);
-                //trazim tu lokaciju od koje je id
-                Location location = locationDAO.FindById(id);
-                //i samo lokaciju koju sam gore nasao dodam u listu destinationsa
-                tour.Destinations.Add(location);
+                string[] CountryCity = pom.Split(',');
+                string Country = CountryCity[0];
+                string City = CountryCity[1].Trim(); // ?
+
+                   
+                
+                //Location location = locationDAO.FindByCountryAndCity(pom);
   
+                int locationId= locationController.FindIdByCountryAndCity(Country, City);
+                
+                Location location = locationController.FindById(locationId);
+
+                tour.Destinations.Add(location);
             }
-
             comboBox.SelectedIndex = -1;
-
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             if (tbPictures.Text != null)
             {
-                string space = " ";
-                string input = tbPictures.Text.ToString();
-                tour.Pictures.Add(input);
-                tour.Pictures.Add(space);
+              TourImage Images = new TourImage();
+              Images.Url = tbPictures.Text;
+              tour.Images.Add(Images);
             }
 
             tbPictures.Text = string.Empty;

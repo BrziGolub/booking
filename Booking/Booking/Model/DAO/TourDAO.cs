@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Automation.Peers;
+using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Repository;
 
@@ -15,6 +16,8 @@ namespace Booking.Model.DAO
 		private readonly List<IObserver> observers;
 		private readonly TourRepository repository;
 		private List<Tour> tours;
+		private List<TourImage> tourImages;
+		private TourImagesRepository _tourImagesRepository;
 
 		private LocationDAO locationDAO;
 
@@ -24,6 +27,8 @@ namespace Booking.Model.DAO
 			observers = new List<IObserver>();
 			tours = repository.Load();
 			locationDAO = new LocationDAO();
+			_tourImagesRepository = new TourImagesRepository();
+			tourImages = new List<TourImage>();
 			Load();
 		}
 
@@ -31,7 +36,7 @@ namespace Booking.Model.DAO
 		public void Load()
 		{
 			tours = repository.Load();
-
+			tourImages = _tourImagesRepository.Load();
 			AppendLocations();
 		}
 		
@@ -128,11 +133,30 @@ namespace Booking.Model.DAO
                 return tours.Max(t => t.Id) + 1;
             }
         }
+
+       public int ImageNextId()
+        {
+            if (tourImages.Count == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return tourImages.Max(t => t.Id) + 1;
+            }
+        }
         public Tour addTour(Tour tour)
 		{
 			tour.Id = NextId();
+			foreach(var picture in tour.Images)
+			{
+				picture.Id = ImageNextId();
+				picture.Tour = tour; 
+				tourImages.Add(picture);
+			}
 			tours.Add(tour);
 			repository.Save(tours);
+			_tourImagesRepository.Save(tourImages);
 			NotifyObservers();
 			return tour;
 		}
