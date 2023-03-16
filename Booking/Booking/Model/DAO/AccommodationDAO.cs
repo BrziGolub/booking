@@ -13,16 +13,16 @@ namespace Booking.Model.DAO
 {
     public class AccommodationDAO : ISubject
     {
-        private readonly AccommodationRepository _accommodationRepository;
-
-        private List<Accommodation> accommodations;
+        //Add observer?
 
         private readonly List<IObserver> observers;
+        private readonly AccommodationRepository _accommodationRepository;
+        private List<Accommodation> accommodations;
+        private List<AccommodationImage> accommodationImages;
 
         private LocationDAO locationDAO;
 
         private AccommodationImagesRepository _accommodationImagesRepository;
-
 
         public AccommodationDAO()
         {
@@ -31,12 +31,14 @@ namespace Booking.Model.DAO
             locationDAO = new LocationDAO();
             _accommodationImagesRepository = new AccommodationImagesRepository();
             accommodations = new List<Accommodation>();
+            accommodationImages = new List<AccommodationImage>();
             Load();
         }
 
         public void Load()
         {
             accommodations = _accommodationRepository.Load();
+            accommodationImages = _accommodationImagesRepository.Load();
             BindLocationToAccommodaton();
             BindImagesToAccommodaton();
         }
@@ -50,7 +52,6 @@ namespace Booking.Model.DAO
         {
             return accommodations;
         }
-
 
         public  void BindLocationToAccommodaton()
         {
@@ -144,6 +145,46 @@ namespace Booking.Model.DAO
             {
                 observer.Update();
             }
+        }
+
+        public int NextId()
+        {
+            if (accommodations.Count == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return accommodations.Max(t => t.Id) + 1;
+            }
+        }
+
+        public int ImageNextId()
+        {
+            if (accommodationImages.Count == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return accommodationImages.Max(t => t.Id) + 1;
+            }
+        }
+
+        public Accommodation addAccommodation(Accommodation accommodation)
+        {
+            accommodation.Id = NextId();
+            foreach (var picture in accommodation.Images) 
+            {
+                picture.Id = ImageNextId();
+                picture.Accomodation = accommodation;
+                accommodationImages.Add(picture);
+            }
+            accommodations.Add(accommodation);
+            _accommodationRepository.Save(accommodations);
+            _accommodationImagesRepository.Save(accommodationImages);
+            NotifyObservers();
+            return accommodation;
         }
     }
 }

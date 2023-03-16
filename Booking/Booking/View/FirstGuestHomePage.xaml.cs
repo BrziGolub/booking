@@ -48,7 +48,8 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
 
-            accommodationContoller = new AccommodationContoller();
+            var app = Application.Current as App;
+            accommodationContoller = app.AccommodationController;
             accommodations = new ObservableCollection<Accommodation>(accommodationContoller.GetAll());
 
             accommodationTypes = new List<string>();

@@ -70,8 +70,10 @@
     <Compile Include="Model\DAO\TourDAO.cs" />
     <Compile Include="Model\Enums\AccommodationType.cs" />
     <Compile Include="Model\Images\AccommodationImage.cs" />
+    <Compile Include="Model\Images\TourImage.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Tour.cs" />
+    <Compile Include="Model\TourKeyPoints.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Repository\AccommodationImagesRepository.cs" />
     <Compile Include="Repository\AccommodationRepository.cs" />
@@ -79,6 +81,8 @@
     <Compile Include="Observer\ISubject.cs" />
     <Compile Include="Repository\AccommodationResevationRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
+    <Compile Include="Repository\TourImagesRepository.cs" />
+    <Compile Include="Repository\TourKeyPointsRepository.cs" />
     <Compile Include="Repository\TourRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
@@ -94,6 +98,12 @@
     </Compile>
     <Compile Include="View\GuideHomePage.xaml.cs">
       <DependentUpon>GuideHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OwnerHomePage.xaml.cs">
+      <DependentUpon>OwnerHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OwnerRegisterAccommodation.xaml.cs">
+      <DependentUpon>OwnerRegisterAccommodation.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SecondGuestHomePage.xaml.cs">
       <DependentUpon>SecondGuestHomePage.xaml</DependentUpon>
@@ -129,6 +139,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GuideHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OwnerHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OwnerRegisterAccommodation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,6 +189,8 @@
     <None Include="Resources\Data\accommodations.csv" />
     <None Include="Resources\Data\accommodationsReservations.csv" />
     <None Include="Resources\Data\locations.csv" />
+    <None Include="Resources\Data\tourImages.csv" />
+    <None Include="Resources\Data\tourKeyPoints.csv" />
     <None Include="Resources\Data\tours.csv" />
     <None Include="Resources\Data\users.csv" />
   </ItemGroup>

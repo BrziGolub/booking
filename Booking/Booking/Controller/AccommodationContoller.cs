@@ -1,6 +1,7 @@
 ﻿using Booking.Model;
 using Booking.Model.DAO;
 using Booking.Model.Enums;
+using Booking.Observer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,9 +17,9 @@ namespace Booking.Controller
 
         private readonly AccommodationDAO accommodationDAO;
 
-        public AccommodationContoller()
+        public AccommodationContoller(AccommodationDAO accommodation)
         {
-            accommodationDAO =  new AccommodationDAO();
+            accommodationDAO = accommodation;
         }
 
         public List<Accommodation> GetAll()
@@ -34,6 +35,20 @@ namespace Booking.Controller
         public void ShowAll(ObservableCollection<Accommodation> accommodations)
         {
             accommodationDAO.ShowAll(accommodations);
+        }
+        public void Subscribe(IObserver observer)
+        {
+            accommodationDAO.Subscribe(observer);
+        }
+
+        public void Create(Accommodation accommodation)
+        {
+            accommodationDAO.addAccommodation(accommodation);
+        }
+
+        public int NextId() 
+        {
+            return accommodationDAO.NextId();
         }
 
     }

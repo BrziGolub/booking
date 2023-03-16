@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Automation.Peers;
+using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Repository;
 
@@ -15,8 +16,12 @@ namespace Booking.Model.DAO
 		private readonly List<IObserver> observers;
 		private readonly TourRepository repository;
 		private List<Tour> tours;
+		private List<TourImage> tourImages;
+		private TourImagesRepository _tourImagesRepository;
+        private List<TourKeyPoints> tourKeyPoints;
+        private TourKeyPointsRepository _tourKeyPointsRepository;
 
-		private LocationDAO locationDAO;
+        private LocationDAO locationDAO;
 
 		public TourDAO()
 		{
@@ -24,6 +29,10 @@ namespace Booking.Model.DAO
 			observers = new List<IObserver>();
 			tours = repository.Load();
 			locationDAO = new LocationDAO();
+			_tourImagesRepository = new TourImagesRepository();
+			tourImages = new List<TourImage>();
+			_tourKeyPointsRepository = new TourKeyPointsRepository();
+			tourKeyPoints = new List<TourKeyPoints>();
 			Load();
 		}
 
@@ -31,7 +40,8 @@ namespace Booking.Model.DAO
 		public void Load()
 		{
 			tours = repository.Load();
-
+			tourImages = _tourImagesRepository.Load();
+			tourKeyPoints = _tourKeyPointsRepository.Load();
 			AppendLocations();
 		}
 		
@@ -128,11 +138,52 @@ namespace Booking.Model.DAO
                 return tours.Max(t => t.Id) + 1;
             }
         }
+
+       public int ImageNextId()
+        {
+            if (tourImages.Count == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return tourImages.Max(t => t.Id) + 1;
+            }
+        }
+
+        public int KeyPointsNextId()
+        {
+            if (tourKeyPoints.Count == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return tourKeyPoints.Max(t => t.Id) + 1;
+            }
+        }
+
         public Tour addTour(Tour tour)
 		{
 			tour.Id = NextId();
+			foreach(var destination in tour.Destinations)
+			{
+				destination.Id = KeyPointsNextId();
+				destination.Tour = tour;
+				tourKeyPoints.Add(destination);
+			}
+
+			foreach (var picture in tour.Images)
+			{
+				picture.Id = ImageNextId();
+				picture.Tour = tour;
+				tourImages.Add(picture);
+			}
 			tours.Add(tour);
 			repository.Save(tours);
+			_tourImagesRepository.Save(tourImages);
+			_tourKeyPointsRepository.Save(tourKeyPoints);
+
 			NotifyObservers();
 			return tour;
 		}

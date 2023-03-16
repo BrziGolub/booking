@@ -67,7 +67,9 @@ namespace Booking.View
 					//stavio da uvek otvara vodica po defaultu treba napraviti zastitu da se zna ko se loguje (sef,gost,vodic)
 					if (comboBox.SelectedIndex == 0)
 					{
-						//otvara prozor za Ownera
+						OwnerHomePage ownerHomePage = new OwnerHomePage();
+						ownerHomePage.Show();
+						Close();
 					}
 					else if (comboBox.SelectedIndex == 1)
 					{

@@ -73,7 +73,6 @@ namespace Booking.View
 
             accommodationReservationContoller = new AccommodationReservationController();
         }
-
         private void Button_Click_Reserve(object sender, RoutedEventArgs e)
         {
              
@@ -96,5 +95,6 @@ namespace Booking.View
                 //NOVI PROZOR SA DATA GRID ako hoce ponovo da rezervise 
             }
         }
+
     }
 }

@@ -29,14 +29,33 @@ namespace Booking.Controller
             return locationDAO.NextId();
         }
 
+        public int GetIdByCountryAndCity(string Country, string City) 
+        {
+            return locationDAO.GetIdByCountryAndCity(Country, City);
+        }
+
+        public Location FindById(int id)
+        {
+            return locationDAO.FindById(id);
+        }
         public void Subscribe(IObserver observer)
         {
             locationDAO.Subscribe(observer);
         }
 
-        public List<Location> getAllLocations()
+        public List<Location> findAllLocations()
         {
-            return locationDAO.getAllLocations();
+            return locationDAO.FindAllLocations();
+        }
+
+        public int FindIdByCountryAndCity(string Country, string City)
+        {
+            return locationDAO.FindIdByCountryAndCity(Country, City);
+        }
+
+        public Location FindById(int id)
+        {
+            return locationDAO.FindById(id);
         }
 
     }
