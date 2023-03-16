@@ -34,6 +34,16 @@ namespace Booking.Controller
 			tourDAO.CancelSearch(observe);
 		}
 
+		public List<string> GetAllStates() 
+		{ 
+			return tourDAO.GetAllStates();
+		}
+
+		public ObservableCollection<string> GetAllCitiesByState(ObservableCollection<string> observe, string state)
+		{
+			return tourDAO.GetAllCitiesByState(observe, state);
+		}
+
 		public void Subscribe(IObserver observer)
 		{
 			tourDAO.Subscribe(observer);

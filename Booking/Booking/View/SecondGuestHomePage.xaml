@@ -7,7 +7,7 @@
 		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 		xmlns:behaviors="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="SecondGuestHomePage" Height="450" Width="800"
+        Title="SecondGuestHomePage" Height="800" Width="1200"
 		WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
 
@@ -19,7 +19,6 @@
 			<RowDefinition Height="44"/>
 			<RowDefinition Height="44"/>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="44"/>
 		</Grid.RowDefinitions>
 
 		<DockPanel Grid.Row="0" Margin="12 8 12 0" HorizontalAlignment="Left">
@@ -31,20 +30,30 @@
 		</DockPanel>
 		
 		<DockPanel Grid.Row="1" Margin="12 8 12 0">
-			<TextBox Text="{Binding Path=SearchState}" VerticalContentAlignment="Center" Margin="4" Width="100">
-				
-			</TextBox>
-			<TextBox Text="{Binding Path=SearchCity}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
+			<ComboBox x:Name="ComboBoxState" ItemsSource="{Binding Path=SearchState}" SelectedItem="{Binding Path=SelectedState}" VerticalContentAlignment="Center" Margin="4" Width="100" SelectionChanged="ComboBoxStateSelectionChanged"/>
+			<ComboBox x:Name="ComboBoxCity" ItemsSource="{Binding Path=SearchCity}" SelectedItem="{Binding Path=SelectedCity}" VerticalContentAlignment="Center" Margin="4" Width="100">
+				<ComboBox.Style>
+					<Style TargetType="{x:Type ComboBox}">
+						<Setter Property="IsEnabled" Value="True"/>
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding ElementName=ComboBoxState, Path=SelectedIndex}" Value="0">
+								<Setter Property="IsEnabled" Value="False"/>
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</ComboBox.Style>
+			</ComboBox>
 			<TextBox Text="{Binding Path=SearchDuration}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
 			<TextBox Text="{Binding Path=SearchLanguage}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
 			<TextBox Text="{Binding Path=SearchGuestNumber}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
 
-			<Button x:Name="buttonSearch" Content="Search" Width="80" Margin="4" Click="buttonSearch_Click" HorizontalAlignment="Right"/>
-			<Button x:Name="ButtonCancelSearch" Content="Cancel Search" Width="100" Margin="4" Click="ButtonCancelSearch_Click" HorizontalAlignment="Right"/>
+			<Button x:Name="buttonSearch" Content="Search" Width="80" Margin="4" Click="ButtonSearch_Click" HorizontalAlignment="Left"/>
+			<Button x:Name="ButtonCancelSearch" Content="Show all" Width="80" Margin="4" Click="ButtonCancelSearch_Click" HorizontalAlignment="Left"/>
+			<Button x:Name="ButtonSignOff" Content="Sign off" Width="100" Margin="4" Click="ButtonSignOff_Click" HorizontalAlignment="Right"/>
 		</DockPanel>
 
 		<Grid Grid.Row="2">
-			
+
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
@@ -57,30 +66,45 @@
 					  Name="TourDataGrid"
 					  AutoGenerateColumns="False"
 					  SelectionMode="Single"
-					  IsReadOnly="True">
+					  IsReadOnly="True"
+					  SelectedItem="{Binding Path=SelectedTour}"
+					  RowHeight="50">
 
 				<DataGrid.Columns>
 
 					<DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
-					<DataGridTextColumn Header="State" Width="*" Binding="{Binding Location.State}"/>
-					<DataGridTextColumn Header="City" Width="*" Binding="{Binding Location.City}"/>
-					<DataGridTextColumn Header="Language" Width="*" Binding="{Binding Language}"/>
-					<DataGridTextColumn Header="Max No. of Passengers" Width="140" Binding="{Binding MaxGuestsNumber}"/>
-					<DataGridTextColumn Header="Departure Date" Width="110" Binding="{Binding StartTime}"/>
-					<DataGridTextColumn Header="Duration" Width="*" Binding="{Binding Duration}"/>
-					<DataGridTextColumn Header="Description" Width="170" Binding="{Binding Description}"/>
+					<DataGridTextColumn Header="State" Width="120" Binding="{Binding Location.State}"/>
+					<DataGridTextColumn Header="City" Width="120" Binding="{Binding Location.City}"/>
+					<DataGridTextColumn Header="Language" Width="100" Binding="{Binding Language}"/>
+					<DataGridTextColumn Header="Max No. of Passengers" Width="*" Binding="{Binding MaxGuestsNumber}"/>
+					<DataGridTextColumn Header="Departure Date" Width="100" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}"/>
+					<DataGridTextColumn Header="Duration" Width="80" Binding="{Binding Duration}"/>
+					<DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}">
+						<DataGridTextColumn.ElementStyle>
+							<Style>
+								<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+							</Style>
+						</DataGridTextColumn.ElementStyle>
+					</DataGridTextColumn>
+					<DataGridTemplateColumn Header="Images" Width="80">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<Button Content="Show"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+					<DataGridTemplateColumn Width="80">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<Button Content="Reserve" Click="ReserveTour" FontWeight="Bold"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
 
 				</DataGrid.Columns>
-				
+
 			</DataGrid>
-			
+
 		</Grid>
-
-		<StackPanel Grid.Row="3" Orientation="Horizontal" Margin="12 0 12 12">
-
-			<Button Content="Reserve" Margin="4"/>
-
-		</StackPanel>
-
 	</Grid>
 </Window>

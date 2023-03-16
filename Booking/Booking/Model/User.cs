@@ -12,6 +12,7 @@ namespace Booking.Model
 		public int Id { get; set; }
 		public string Username { get; set; }
 		public string Password { get; set; }
+		public int Role { get; set; }
 
 		public User() { }
 
@@ -23,7 +24,10 @@ namespace Booking.Model
 
 		public string[] ToCSV()
 		{
-			string[] csvValues = { Id.ToString(), Username, Password };
+			string[] csvValues = { Id.ToString(),
+				Username,
+				Password
+			};
 			return csvValues;
 		}
 

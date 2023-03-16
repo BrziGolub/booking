@@ -52,7 +52,14 @@ namespace Booking.Model
 
 		public string[] ToCSV()
 		{
-			string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Description, Language, MaxGuestsNumber.ToString(), DateConversion.DateToString(StartTime), Duration.ToString()};
+			string[] csvValues = { Id.ToString(),
+				Name, Location.Id.ToString(),
+				Description,
+				Language,
+				MaxGuestsNumber.ToString(),
+				StartTime.ToString(),
+				Duration.ToString()
+			};
 			return csvValues;
 		}
 
@@ -64,7 +71,7 @@ namespace Booking.Model
 			Description = values[3];
 			Language = values[4];
             MaxGuestsNumber = Convert.ToInt32(values[5]);
-			DateConversion.StringToDate(values[6]);
+			StartTime = DateTime.Parse(values[6]);
 			Duration = Convert.ToDouble(values[7]);
 		}
 	}

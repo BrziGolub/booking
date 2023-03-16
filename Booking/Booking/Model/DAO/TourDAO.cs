@@ -49,13 +49,18 @@ namespace Booking.Model.DAO
 			return tours;
 		}
 
+		public Tour FindById(int id)
+		{
+			return tours.Find(v => v.Id == id);
+		}
+
 		public void Search(ObservableCollection<Tour> observe, string state, string city, string duration, string language, string passengers)
 		{
 			observe.Clear();
 
 			foreach (Tour tour in tours)
 			{
-				if ((tour.Location.State.ToLower().Contains(state.ToLower()) || state.Equals("")) && (tour.Location.City.ToLower().Contains(city.ToLower()) || city.Equals("")) && (tour.Language.ToLower().Contains(language.ToLower()) || language.Equals("")))
+				if ((tour.Location.State.Equals(state) || state.Equals("All")) && (tour.Location.City.Equals(city) || city.Equals("All")) && (tour.Language.ToLower().Contains(language.ToLower()) || language.Equals("")))
 				{
 					if (duration.Equals("") && passengers.Equals(""))
 					{
@@ -94,6 +99,16 @@ namespace Booking.Model.DAO
 			{
 				observe.Add(tour);
 			}
+		}
+
+		public List<string> GetAllStates()
+		{
+			return locationDAO.GetAllStates();
+		}
+
+		public ObservableCollection<string> GetAllCitiesByState(ObservableCollection<string> observe, string state)
+		{
+			return locationDAO.GetAllCitiesByState(observe, state);
 		}
 
 		public void NotifyObservers()
