@@ -36,7 +36,6 @@ namespace Booking.Controller
         {
             accommodationDAO.ShowAll(accommodations);
         }
-
         public void Subscribe(IObserver observer)
         {
             accommodationDAO.Subscribe(observer);
@@ -51,5 +50,6 @@ namespace Booking.Controller
         {
             return accommodationDAO.NextId();
         }
+
     }
 }
