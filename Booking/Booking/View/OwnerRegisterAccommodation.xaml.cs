@@ -283,11 +283,15 @@ namespace Booking.View
 
         private void AddPicture(object sender, RoutedEventArgs e)
         {
-            if (tbPictures.Text != null)
+            if (tbPictures.Text != "")
             {
                 AccommodationImage Pictures = new AccommodationImage();
-                Pictures.Url=tbPictures.Text;   
+                Pictures.Url = tbPictures.Text;
                 accommodation.Images.Add(Pictures);
+            }
+            else 
+            {
+                MessageBox.Show("Photo url can not be empty");
             }
 
             tbPictures.Text = string.Empty;
