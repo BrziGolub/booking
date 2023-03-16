@@ -24,9 +24,7 @@ namespace Booking.Model
 
         public int MaxGuestsNumber { get; set; }
 
-        public List<Location> Destinations { get; set; }
-
-        public List<int> LocationID { get; set; }
+        public List<TourKeyPoints> Destinations { get; set; }
 
         public DateTime StartTime { get; set; }
 
@@ -37,7 +35,7 @@ namespace Booking.Model
         public Tour()
         {
             Location = new Location();
-            Destinations = new List<Location>();
+            Destinations = new List<TourKeyPoints>();
             Images = new List<TourImage>();
         }
 
@@ -50,44 +48,30 @@ namespace Booking.Model
             MaxGuestsNumber = maxNum;
             StartTime = dt;
             Duration = duration;
-            Destinations = new List<Location>();
+            Destinations = new List<TourKeyPoints>();
             Images = new List<TourImage>();
         }
 
 
         public string[] ToCSV()
         {
-            string pom = "";
-            foreach (Location location in Destinations)
-            {
-                string pom1 = location.Id.ToString();
-                pom += pom1 + ",";
-            }
+            
 
             string[] csvValues =
                 {
-                Id.ToString(),
-                Name,
-                Location.Id.ToString(),
-                Description,
-                Language,
-                MaxGuestsNumber.ToString(),
-                pom,
-                DateConversion.DateToString(StartTime),
-                Duration.ToString()
+                Id.ToString(),                          //0
+                Name,                                   //1
+                Location.Id.ToString(),                 //2
+                Description,                            //3
+                Language,                               //4
+                MaxGuestsNumber.ToString(),             //5
+                DateConversion.DateToString(StartTime), //6
+                Duration.ToString()                     //7
             };
             return csvValues;
         }
         public void FromCSV(string[] values)
         {
-
-            List<int> listId = new List<int>();
-            foreach(String stringId in values[6].Split(','))
-            {
-                listId.Add(int.Parse(stringId));
-            }
-                // treba uraditi fromCSV, treba resiti da ne upisuje , na kraju toCSV-a , u fromu splitujem prvo po zarezu i onda 
-            
 
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
@@ -95,9 +79,8 @@ namespace Booking.Model
             Description = values[3];
             Language = values[4];
             MaxGuestsNumber = Convert.ToInt32(values[5]);
-            //Destinations = values[6];
-            StartTime = DateConversion.StringToDate(values[7]);
-            Duration = Convert.ToDouble(values[8]);
+            StartTime = DateConversion.StringToDate(values[6]);
+            Duration = Convert.ToDouble(values[7]);
         }
     }
 }

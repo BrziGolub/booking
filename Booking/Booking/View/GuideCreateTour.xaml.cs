@@ -98,7 +98,7 @@ namespace Booking.View
 
         }
 
-        public void FillCity()
+        public void FillCity(object sender, SelectionChangedEventArgs e)
         {
             CityCollection.Clear();
 
@@ -109,8 +109,8 @@ namespace Booking.View
                 CityCollection.Add(c.City);
             }
             comboBox2.IsEnabled = true;
-
         }
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -154,7 +154,6 @@ namespace Booking.View
                 if (_country != value)
                 {
                     _country = value;
-                    FillCity();
                     OnPropertyChanged();
                 }
             }
@@ -266,7 +265,11 @@ namespace Booking.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            tour.Name = TourName;
+            if (tbName.Text == "")
+            {
+                MessageBox.Show("'NAME' not entered");
+            }
+            else { tour.Name = TourName; }
             //---------LOCATION----------//
 
             Location location = new Location
@@ -274,62 +277,70 @@ namespace Booking.View
                 State = Country,
                 City = City
             };
-            //locationController.Create(location);
-           
-            tour.Location.Id = location.Id;
-            tour.Location = location;       
-            //-------------------------------
-
-            tour.Description = Description;
-            tour.Language = TourLanguage;
-            tour.MaxGuestsNumber = MaxGuestNumber;   
-            tour.StartTime = DateConversion.StringToDate(StartTime);
-            tour.Duration = Duration;
-           
-            //------------PROTECTIONS------------------
-            if(tour.Name == null) 
+            if (comboBox1.Text == "" || comboBox2.Text == "")
             {
-                MessageBox.Show("'NAME' not entered");
+                MessageBox.Show("'COUNTRY' AND 'CITY' should be entered");
+            }
+            else
+            {
+                int LocationID = locationController.FindIdByCountryAndCity(Country, City);
+                tour.Location.Id = LocationID;
+                tour.Location = locationController.FindById(LocationID);
+            }
+            //-------------------------------
+            if (tbDescription.Text == "")
+            {
+                MessageBox.Show("'DESCRIPTION' not entered");
+            }
+            else 
+            { tour.Description = Description; }
+           
+            if (tbLanguage.Text == "")
+            { MessageBox.Show("'LANGUAGE' not entered"); }
+            else 
+            { tour.Language = TourLanguage; }
+
+            if (tbMaxGuests.Text == "")
+            { MessageBox.Show("'MAX GUESTS NUMBER' not entered"); }
+            else 
+            { tour.MaxGuestsNumber = MaxGuestNumber; }
+            
+            if (datePicker.Text == "")
+            { MessageBox.Show("'TOUR START DATE' not entered"); }
+            else
+            { tour.StartTime = DateConversion.StringToDate(StartTime); }
+
+            if (tbDuration.Text == "")
+            { 
+               MessageBox.Show("'DURATION' not entered");
+            }
+            else { tour.Duration = Duration; }
+
+
+            //------------EXTRA PROTECTIONS---------------
+            if (tour.Destinations.Count < 2)
+            {
+                MessageBox.Show("Tour need to have 2 'KEY POINTS' at least");
+            }
+            else if(tour.Images.Count == 0) // maybe not?
+            {
+                MessageBox.Show("Tour need to have 1 'PICTURE' at least");
+            }
+            else if (comboBox1.Text == "") //tour.Location.State == null
+            {
+                MessageBox.Show("'COUNTRY' not entered");
             }
             else if (tour.Location.City == null)
             {
                 MessageBox.Show("'CITY' not entered");
             }
-            else if (tour.Location.State == null)
-            {
-                MessageBox.Show("'COUNTRY' not entered");
-            }
-            else if (tour.Description == null)
-            {
-                MessageBox.Show("'DESCRIPTION' not entered");
-            }
-            else if (tour.Language == null)
-            {
-                MessageBox.Show("'LANGUAGE' not entered");
-            }
-            else if (tour.MaxGuestsNumber == 0)
-            {
-                MessageBox.Show("'MAX GUESTS NUMBER' not entered");
-            }
-            else if(tour.MaxGuestsNumber < 0)
+            else if (tour.MaxGuestsNumber < 0)
             {
                 MessageBox.Show("'MAX GUESTS NUMBER' should be greater than 0");
-            }
-            else if (tour.StartTime == null)
-            {
-                MessageBox.Show("'TOUR START DATE' not entered");
-            }
-            else if (tour.Duration == 0)
-            {
-                MessageBox.Show("'DURATION' not entered");
             }
             else if (tour.Duration < 0)
             {
                 MessageBox.Show("'DURATION' should be greater than 0");
-            }
-            else if (tour.Images == null)
-            {
-                MessageBox.Show("'PICTURES URL' not entered");
             }
             //------------------------------------------
 
@@ -351,28 +362,29 @@ namespace Booking.View
                 string pom = comboBox.SelectedItem.ToString();
                 string[] CountryCity = pom.Split(',');
                 string Country = CountryCity[0];
-                string City = CountryCity[1].Trim(); // ?
+                string City = CountryCity[1].Trim(); 
 
-                   
-                
-                //Location location = locationDAO.FindByCountryAndCity(pom);
-  
-                int locationId= locationController.FindIdByCountryAndCity(Country, City);
-                
+                int locationId= locationController.FindIdByCountryAndCity(Country, City);        
                 Location location = locationController.FindById(locationId);
 
-                tour.Destinations.Add(location);
+                TourKeyPoints tourKeyPoints = new TourKeyPoints();
+                tourKeyPoints.Location = location;
+                tour.Destinations.Add(tourKeyPoints);
             }
             comboBox.SelectedIndex = -1;
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            if (tbPictures.Text != null)
+            if (tbPictures.Text != "")
             {
               TourImage Images = new TourImage();
               Images.Url = tbPictures.Text;
               tour.Images.Add(Images);
+            }
+            else
+            {
+                MessageBox.Show("Photo URL can't be empty!");
             }
 
             tbPictures.Text = string.Empty;
