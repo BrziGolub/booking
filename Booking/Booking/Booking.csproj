@@ -61,6 +61,7 @@
     <Compile Include="Controller\AccommodationContoller.cs" />
     <Compile Include="Controller\AccommodationReservationController.cs" />
     <Compile Include="Model\AccommodationReservation.cs" />
+    <Compile Include="Controller\TourReservationController.cs" />
     <Compile Include="Model\DAO\AccommodationDAO.cs" />
     <Compile Include="Controller\TourController.cs" />
     <Compile Include="Conversion\DateConversion.cs" />
@@ -68,12 +69,14 @@
     <Compile Include="Model\DAO\AccommodationReservationDAO.cs" />
     <Compile Include="Model\DAO\LocationDAO.cs" />
     <Compile Include="Model\DAO\TourDAO.cs" />
-    <Compile Include="Model\Enums\AccommodationType.cs" />
+    <Compile Include="Model\DAO\TourReservationDAO.cs" />
+    <Compile Include="Model\Enum\AccommodationType.cs" />
     <Compile Include="Model\Images\AccommodationImage.cs" />
     <Compile Include="Model\Images\TourImage.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Tour.cs" />
     <Compile Include="Model\TourKeyPoints.cs" />
+    <Compile Include="Model\TourReservation.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Repository\AccommodationImagesRepository.cs" />
     <Compile Include="Repository\AccommodationRepository.cs" />
@@ -84,12 +87,16 @@
     <Compile Include="Repository\TourImagesRepository.cs" />
     <Compile Include="Repository\TourKeyPointsRepository.cs" />
     <Compile Include="Repository\TourRepository.cs" />
+    <Compile Include="Repository\TourReservationRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
     <Compile Include="Serializer\Serializer.cs" />
     <Compile Include="View\AccommodationReservation.xaml.cs">
       <DependentUpon>AccommodationReservation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Service\LocationService.cs" />
+    <Compile Include="Service\TourReservationService.cs" />
+    <Compile Include="Service\TourService.cs" />
     <Compile Include="View\FirstGuestHomePage.xaml.cs">
       <DependentUpon>FirstGuestHomePage.xaml</DependentUpon>
     </Compile>
@@ -98,6 +105,9 @@
     </Compile>
     <Compile Include="View\GuideHomePage.xaml.cs">
       <DependentUpon>GuideHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReserveTour.xaml.cs">
+      <DependentUpon>ReserveTour.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OwnerHomePage.xaml.cs">
       <DependentUpon>OwnerHomePage.xaml</DependentUpon>
@@ -150,6 +160,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ReserveTour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SecondGuestHomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,6 +205,7 @@
     <None Include="Resources\Data\locations.csv" />
     <None Include="Resources\Data\tourImages.csv" />
     <None Include="Resources\Data\tourKeyPoints.csv" />
+    <None Include="Resources\Data\tourReservations.csv" />
     <None Include="Resources\Data\tours.csv" />
     <None Include="Resources\Data\users.csv" />
   </ItemGroup>

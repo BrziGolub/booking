@@ -22,7 +22,7 @@ namespace Booking.Model
 
         public string Language { get; set; }
 
-        public int MaxGuestsNumber { get; set; }
+		public int MaxVisitors { get; set; }
 
         public List<TourKeyPoints> Destinations { get; set; }
 
@@ -39,13 +39,13 @@ namespace Booking.Model
             Images = new List<TourImage>();
         }
 
-        public Tour(string name, Location location, string desc, string lang, int maxNum, DateTime dt, double duration)
-        {
-            Name = name;
-            Location = location;
-            Description = desc;
-            Language = lang;
-            MaxGuestsNumber = maxNum;
+		public Tour( string name, Location location, string desc, string lang, int maxVisitors, DateTime dt, double duration)
+		{
+			Name = name;
+			Location = location;
+			Description = desc;
+			Language = lang;
+            MaxVisitors = maxVisitors;
             StartTime = dt;
             Duration = duration;
             Destinations = new List<TourKeyPoints>();
@@ -64,8 +64,8 @@ namespace Booking.Model
                 Location.Id.ToString(),                 //2
                 Description,                            //3
                 Language,                               //4
-                MaxGuestsNumber.ToString(),             //5
-                DateConversion.DateToString(StartTime), //6
+                MaxVisitors.ToString(),                 //5
+                StartTime.ToString(),                   //6
                 Duration.ToString()                     //7
             };
             return csvValues;
@@ -78,9 +78,9 @@ namespace Booking.Model
             Location.Id = Convert.ToInt32(values[2]);
             Description = values[3];
             Language = values[4];
-            MaxGuestsNumber = Convert.ToInt32(values[5]);
+			MaxVisitors = Convert.ToInt32(values[5]);
 
-            StartTime = DateConversion.StringToDate(values[6]);
+            StartTime = DateTime.Parse(values[6]);
             Duration = Convert.ToDouble(values[7]);
 
         }
