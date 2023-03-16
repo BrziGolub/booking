@@ -22,28 +22,31 @@ namespace Booking.Model.DAO
 		{
 			repository = new TourRepository();
 			observers = new List<IObserver>();
-			tours = new List<Tour>();
+			tours = repository.Load();
 			locationDAO = new LocationDAO();
 			Load();
 		}
 
+		
 		public void Load()
 		{
 			tours = repository.Load();
 
 			AppendLocations();
 		}
+		
 
+		
 		public void AppendLocations() 
 		{
 			locationDAO.Load();
 
 			foreach (Tour tour in tours)
 			{
-				tour.Location = locationDAO.FindById(tour.Id);
+				tour.Location = locationDAO.FindById(tour.Location.Id);
 			}
 		}
-
+		
 		public List<Tour> GetAll()
 		{
 			return tours;
@@ -113,5 +116,26 @@ namespace Booking.Model.DAO
 		{
 			observers.Remove(observer);
 		}
+
+        public int NextId()
+        {
+            if (tours.Count == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return tours.Max(t => t.Id) + 1;
+            }
+        }
+        public Tour addTour(Tour tour)
+		{
+			tour.Id = NextId();
+			tours.Add(tour);
+			repository.Save(tours);
+			NotifyObservers();
+			return tour;
+		}
+
 	}
 }
