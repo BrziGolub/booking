@@ -27,6 +27,18 @@ namespace Booking.Model.DAO
         {
             locations = repository.Load();
         }
+
+        public int GetIdByCountryAndCity(string Country, string City) 
+        {
+            foreach (var location in locations) 
+            {
+                if (location.City.Equals(City) && location.State.Equals(Country)) 
+                {
+                    return location.Id;
+                }
+            }
+            return -1;
+        }
         
 
         public List<Location> GetAll()
