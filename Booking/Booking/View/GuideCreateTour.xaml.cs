@@ -277,6 +277,7 @@ namespace Booking.View
                 State = Country,
                 City = City
             };
+
             if (comboBox1.Text == "" || comboBox2.Text == "")
             {
                 MessageBox.Show("'COUNTRY' AND 'CITY' should be entered");

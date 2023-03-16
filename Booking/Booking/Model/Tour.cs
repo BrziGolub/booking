@@ -79,8 +79,10 @@ namespace Booking.Model
             Description = values[3];
             Language = values[4];
             MaxGuestsNumber = Convert.ToInt32(values[5]);
+
             StartTime = DateConversion.StringToDate(values[6]);
             Duration = Convert.ToDouble(values[7]);
+
         }
     }
 }

@@ -15,26 +15,19 @@ using System.Windows.Shapes;
 namespace Booking.View
 {
     /// <summary>
-    /// Interaction logic for FirstGuestSearch.xaml
+    /// Interaction logic for OwnerHomePage.xaml
     /// </summary>
-    public partial class FirstGuestSearch : Window
+    public partial class OwnerHomePage : Window
     {
-
-        public FirstGuestSearch()
+        public OwnerHomePage()
         {
             InitializeComponent();
-           
-
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void RegisterAccomodation(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
+            OwnerRegisterAccommodation ownerRegisterAccommodation = new OwnerRegisterAccommodation();
+            ownerRegisterAccommodation.Show();
         }
     }
 }
