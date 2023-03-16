@@ -20,7 +20,7 @@ namespace Booking.Model
 
 		public string Language { get; set; } 
 
-		public int MaxGuestsNumber { get; set; }
+		public int MaxVisitors { get; set; }
 
 		public List<Location> Destinations { get; set; }
 
@@ -37,13 +37,13 @@ namespace Booking.Model
 			pictures = new List<string>();
 		}
 
-		public Tour( string name, Location location, string desc, string lang, int maxNum, DateTime dt, double duration)
+		public Tour( string name, Location location, string desc, string lang, int maxVisitors, DateTime dt, double duration)
 		{
 			Name = name;
 			Location = location;
 			Description = desc;
 			Language = lang;
-            MaxGuestsNumber = maxNum;
+            MaxVisitors = maxVisitors;
             StartTime = dt;
 			Duration = duration;
             Destinations = new List<Location>();
@@ -56,7 +56,7 @@ namespace Booking.Model
 				Name, Location.Id.ToString(),
 				Description,
 				Language,
-				MaxGuestsNumber.ToString(),
+				MaxVisitors.ToString(),
 				StartTime.ToString(),
 				Duration.ToString()
 			};
@@ -70,7 +70,7 @@ namespace Booking.Model
 			Location.Id = Convert.ToInt32(values[2]);
 			Description = values[3];
 			Language = values[4];
-            MaxGuestsNumber = Convert.ToInt32(values[5]);
+            MaxVisitors = Convert.ToInt32(values[5]);
 			StartTime = DateTime.Parse(values[6]);
 			Duration = Convert.ToDouble(values[7]);
 		}

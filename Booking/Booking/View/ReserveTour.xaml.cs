@@ -14,12 +14,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Booking.Model;
+using Booking.Service;
 
 namespace Booking.View
 {
 	public partial class ReserveTour : Window
 	{
-		private TourReservationController _tourReservationController;
+		private TourReservationService _tourReservationService;
 
 		public int NumberOfPassengers { get; set; }
 		public Tour Tour { get; set; }
@@ -29,25 +30,26 @@ namespace Booking.View
 			InitializeComponent();
 			DataContext = this;
 
-			_tourReservationController = new TourReservationController();
+			_tourReservationService = new TourReservationService();
 
 			Tour = tour;
 		}
 
 		private void Reserve(object sender, RoutedEventArgs e)
 		{
-			int availability = _tourReservationController.CheckAvailability(Tour.Id);
+			int availability = _tourReservationService.CheckAvailability(Tour.Id);
 			if (NumberOfPassengers > 0)
 			{
 				if (availability >= NumberOfPassengers)
 				{
-					_tourReservationController.CreateTourReservation(Tour, NumberOfPassengers);
+					_tourReservationService.CreateTourReservation(Tour, NumberOfPassengers);
 					MessageBox.Show("Tour created");
 					Close();
 				}
 				else if (availability < NumberOfPassengers && availability > 0)
 				{
-					MessageBox.Show("Not enough available seats, please choose another option or tour");
+					MessageBox.Show("Not enough available space, please choose another option or tour");
+					LabelRemainingSpace.Content = "Available space left: " + availability.ToString();
 				}
 				else
 				{
@@ -57,6 +59,11 @@ namespace Booking.View
 					Close();
 				}
 			}
+		}
+
+		private void Cancel(object sender, RoutedEventArgs e)
+		{
+			Close();
 		}
 	}
 }

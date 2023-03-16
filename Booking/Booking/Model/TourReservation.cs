@@ -20,7 +20,7 @@ namespace Booking.Model
 
 		//public Guide Guide { get; set; }
 
-		public int NumberOfPassengers { get; set; }
+		public int NumberOfVisitors { get; set; }
 
         public TourReservation()
         {
@@ -32,7 +32,7 @@ namespace Booking.Model
         {
 			User = new User();
 			Tour = tour;
-			NumberOfPassengers = passengers;
+			NumberOfVisitors = passengers;
 		}
 
 		public string[] ToCSV()
@@ -41,7 +41,7 @@ namespace Booking.Model
 				Id.ToString(),
 				User.Id.ToString(),
 				Tour.Id.ToString(),
-				NumberOfPassengers.ToString()
+				NumberOfVisitors.ToString()
 			};
 			return csvValues;
 		}
@@ -51,7 +51,7 @@ namespace Booking.Model
 			Id = Convert.ToInt32(values[0]);
 			User.Id = Convert.ToInt32(values[1]);
 			Tour.Id = Convert.ToInt32(values[2]);
-			NumberOfPassengers = Convert.ToInt32(values[3]);
+			NumberOfVisitors = Convert.ToInt32(values[3]);
 		}
 	}
 }

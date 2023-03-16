@@ -26,12 +26,12 @@
 			<Label Content="City:" Width="100" Margin="4" VerticalContentAlignment="Center"/>
 			<Label Content="Duration:" Width="100" Margin="4" VerticalContentAlignment="Center"/>
 			<Label Content="Language:" Width="100" Margin="4" VerticalContentAlignment="Center"/>
-			<Label Content="Passengers:" Width="100" Margin="4" VerticalContentAlignment="Center"/>
+			<Label Content="Visitors:" Width="100" Margin="4" VerticalContentAlignment="Center"/>
 		</DockPanel>
 		
 		<DockPanel Grid.Row="1" Margin="12 8 12 0">
-			<ComboBox x:Name="ComboBoxState" ItemsSource="{Binding Path=SearchState}" SelectedItem="{Binding Path=SelectedState}" VerticalContentAlignment="Center" Margin="4" Width="100" SelectionChanged="ComboBoxStateSelectionChanged"/>
-			<ComboBox x:Name="ComboBoxCity" ItemsSource="{Binding Path=SearchCity}" SelectedItem="{Binding Path=SelectedCity}" VerticalContentAlignment="Center" Margin="4" Width="100">
+			<ComboBox x:Name="ComboBoxState" ItemsSource="{Binding SearchState}" SelectedItem="{Binding SelectedState}" VerticalContentAlignment="Center" Margin="4" Width="100" SelectionChanged="ComboBoxStateSelectionChanged"/>
+			<ComboBox x:Name="ComboBoxCity" ItemsSource="{Binding SearchCity}" SelectedItem="{Binding SelectedCity}" VerticalContentAlignment="Center" Margin="4" Width="100">
 				<ComboBox.Style>
 					<Style TargetType="{x:Type ComboBox}">
 						<Setter Property="IsEnabled" Value="True"/>
@@ -43,9 +43,9 @@
 					</Style>
 				</ComboBox.Style>
 			</ComboBox>
-			<TextBox Text="{Binding Path=SearchDuration}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
-			<TextBox Text="{Binding Path=SearchLanguage}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
-			<TextBox Text="{Binding Path=SearchGuestNumber}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
+			<TextBox Text="{Binding SearchDuration}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
+			<TextBox Text="{Binding SearchLanguage}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
+			<TextBox Text="{Binding SearchVisitors}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
 
 			<Button x:Name="buttonSearch" Content="Search" Width="80" Margin="4" Click="ButtonSearch_Click" HorizontalAlignment="Left"/>
 			<Button x:Name="ButtonCancelSearch" Content="Show all" Width="80" Margin="4" Click="ButtonCancelSearch_Click" HorizontalAlignment="Left"/>
@@ -67,7 +67,7 @@
 					  AutoGenerateColumns="False"
 					  SelectionMode="Single"
 					  IsReadOnly="True"
-					  SelectedItem="{Binding Path=SelectedTour}"
+					  SelectedItem="{Binding SelectedTour}"
 					  RowHeight="50">
 
 				<DataGrid.Columns>
@@ -76,7 +76,7 @@
 					<DataGridTextColumn Header="State" Width="120" Binding="{Binding Location.State}"/>
 					<DataGridTextColumn Header="City" Width="120" Binding="{Binding Location.City}"/>
 					<DataGridTextColumn Header="Language" Width="100" Binding="{Binding Language}"/>
-					<DataGridTextColumn Header="Max No. of Passengers" Width="*" Binding="{Binding MaxGuestsNumber}"/>
+					<DataGridTextColumn Header="Max Visitors" Width="100" Binding="{Binding MaxVisitors}"/>
 					<DataGridTextColumn Header="Departure Date" Width="100" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}"/>
 					<DataGridTextColumn Header="Duration" Width="80" Binding="{Binding Duration}"/>
 					<DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}">

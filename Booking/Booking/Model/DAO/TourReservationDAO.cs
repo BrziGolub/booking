@@ -49,7 +49,7 @@ namespace Booking.Model.DAO
 
             reservation.Id = GenerateId();
             reservation.Tour = tour;
-            reservation.NumberOfPassengers = passengers;
+            reservation.NumberOfVisitors = passengers;
 
 			_reservations.Add(reservation);
 
@@ -58,7 +58,7 @@ namespace Booking.Model.DAO
 
         public int CheckAvailability(int id)
         {
-            int availability = _tourDAO.FindById(id).MaxGuestsNumber;
+            int availability = _tourDAO.FindById(id).MaxVisitors;
             int busyness = 0;
 
 
@@ -66,7 +66,7 @@ namespace Booking.Model.DAO
             {
                 if (res.Tour.Id == id)
                 {
-                    busyness += res.NumberOfPassengers;
+                    busyness += res.NumberOfVisitors;
                 }
             }
 

@@ -79,6 +79,9 @@
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
     <Compile Include="Serializer\Serializer.cs" />
+    <Compile Include="Service\LocationService.cs" />
+    <Compile Include="Service\TourReservationService.cs" />
+    <Compile Include="Service\TourService.cs" />
     <Compile Include="View\FirstGuestHomePage.xaml.cs">
       <DependentUpon>FirstGuestHomePage.xaml</DependentUpon>
     </Compile>

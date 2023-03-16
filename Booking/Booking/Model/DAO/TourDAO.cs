@@ -68,7 +68,7 @@ namespace Booking.Model.DAO
 					}
 					else if (duration.Equals("") && !passengers.Equals(""))
 					{
-						if (tour.MaxGuestsNumber >= Convert.ToInt32(passengers))
+						if (tour.MaxVisitors >= Convert.ToInt32(passengers))
 						{
 							observe.Add(tour);
 						}
@@ -82,7 +82,7 @@ namespace Booking.Model.DAO
 					}
 					else
 					{
-						if (tour.MaxGuestsNumber >= Convert.ToInt32(passengers) && tour.Duration == Convert.ToDouble(duration))
+						if (tour.MaxVisitors >= Convert.ToInt32(passengers) && tour.Duration == Convert.ToDouble(duration))
 						{
 							observe.Add(tour);
 						}
