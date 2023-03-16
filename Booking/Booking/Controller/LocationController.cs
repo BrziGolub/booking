@@ -29,6 +29,15 @@ namespace Booking.Controller
             return locationDAO.NextId();
         }
 
+        public int GetIdByCountryAndCity(string Country, string City) 
+        {
+            return locationDAO.GetIdByCountryAndCity(Country, City);
+        }
+
+        public Location FindById(int id)
+        {
+            return locationDAO.FindById(id);
+        }
         public void Subscribe(IObserver observer)
         {
             locationDAO.Subscribe(observer);
