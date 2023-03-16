@@ -35,5 +35,6 @@ namespace Booking.Controller
         {
             accommodationDAO.ShowAll(accommodations);
         }
+
     }
 }

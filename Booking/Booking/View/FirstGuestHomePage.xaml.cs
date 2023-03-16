@@ -29,8 +29,6 @@ namespace Booking.View
 
         private AccommodationContoller accommodationContoller;
 
-        //public ObservableCollection<AccommodationType> AccommodationTypes { get; set; }
-
         public Boolean IsCheckedApartment { get; set; } = false;
         public Boolean IsCheckedCottage { get; set; } = false;
         public Boolean IsCheckedHouse { get; set; } = false;
@@ -40,11 +38,10 @@ namespace Booking.View
         public string SearchName { get; set; } = string.Empty;
         public string SearchState { get; set; } = string.Empty;
         public string SearchCity { get; set; } = string.Empty;
-       // public AccommodationType SearchType { get; set; } 
         public string SerachGuests { get; set; } = string.Empty;
         public string SearchReservationDays { get; set; } = string.Empty;
 
-
+        public Accommodation SelectedAccommodation { get; set; }
 
         public FirstGuestHomePage()
         {
@@ -56,15 +53,14 @@ namespace Booking.View
 
             accommodationTypes = new List<string>();
 
-           // var types = Enum.GetValues(typeof(AccommodationType)).Cast<AccommodationType>();
-           // AccommodationTypes = new ObservableCollection<AccommodationType>(types);
-
-            //AccommodationTypesComboBox.ItemsSource = AccommodationTypes; //ovo nije dobro ne radi
             AccommodationDataGrid.ItemsSource = accommodations;
         }
 
         private void Button_Click_Search(object sender, RoutedEventArgs e)
         {
+            //svaki put kad ponovo ide na search isprazni prethodnu listu i dodaj noci Accommodation type !!
+            accommodationTypes.Clear(); 
+
             if (IsCheckedApartment)
             {
                 accommodationTypes.Add("APARTMENT");
@@ -83,13 +79,32 @@ namespace Booking.View
 
         private void Button_Click_ShowAll(object sender, RoutedEventArgs e)
         {
+            //resetuj sve ako klikne na show all
+            SearchName = string.Empty;
+            SearchState = string.Empty;
+            SearchCity = string.Empty;
+            SerachGuests = string.Empty;
+            SearchReservationDays = string.Empty;
+
+            IsCheckedApartment = false;
+            IsCheckedCottage = false;
+            IsCheckedHouse = false;
+
+            accommodationTypes.Clear();
+           
+
             accommodationContoller.ShowAll(accommodations);
             
         }
 
         private void Button_Click_Book(object sender, RoutedEventArgs e)
         {
-            AccommodationReservation ar = new AccommodationReservation();
+            if(SelectedAccommodation == null)
+            {
+                MessageBox.Show("You have to select accommodation that you want to reserve! ");
+                return;
+            }
+            AccommodationReservation ar = new AccommodationReservation(SelectedAccommodation);
             ar.Show();
         }
     }

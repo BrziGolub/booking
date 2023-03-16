@@ -56,11 +56,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\AccommodationContoller.cs" />
+    <Compile Include="Controller\AccommodationReservationController.cs" />
     <Compile Include="Model\AccommodationReservation.cs" />
     <Compile Include="Model\DAO\AccommodationDAO.cs" />
     <Compile Include="Controller\TourController.cs" />
     <Compile Include="Conversion\DateConversion.cs" />
     <Compile Include="Model\Accommodation.cs" />
+    <Compile Include="Model\DAO\AccommodationReservationDAO.cs" />
     <Compile Include="Model\DAO\LocationDAO.cs" />
     <Compile Include="Model\DAO\TourDAO.cs" />
     <Compile Include="Model\Enums\AccommodationType.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Repository\AccommodationRepository.cs" />
     <Compile Include="Observer\IObserver.cs" />
     <Compile Include="Observer\ISubject.cs" />
+    <Compile Include="Repository\AccommodationResevationRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
     <Compile Include="Repository\TourRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
@@ -163,6 +166,7 @@
     </None>
     <None Include="Resources\Data\accommodationImages.csv" />
     <None Include="Resources\Data\accommodations.csv" />
+    <None Include="Resources\Data\accommodationsReservations.csv" />
     <None Include="Resources\Data\locations.csv" />
     <None Include="Resources\Data\tours.csv" />
     <None Include="Resources\Data\users.csv" />
