@@ -89,7 +89,7 @@
 					<DataGridTemplateColumn Header="Images" Width="80">
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
-								<Button Content="Show"/>
+								<Button Content="Show" Click="ShowImages"/>
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>

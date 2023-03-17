@@ -51,7 +51,7 @@ namespace Booking.Service
 
 			foreach (Tour tour in _tours)
 			{
-				tour.Location = _locationService.GetById(tour.Id);
+				tour.Location = _locationService.GetById(tour.Location.Id);
 			}
 		}
 
