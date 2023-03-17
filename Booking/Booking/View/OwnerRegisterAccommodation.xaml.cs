@@ -41,7 +41,7 @@ namespace Booking.View
         {
             CityCollection.Clear();
 
-            var locations = locationController.getAllLocations().Where(l => l.State.Equals(Country));
+            var locations = locationController.findAllLocations().Where(l => l.State.Equals(Country));
 
             foreach (Location c in locations)
             {

@@ -1,5 +1,6 @@
 ﻿using Booking.Controller;
 using Booking.Model;
+using Booking.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,36 +21,72 @@ namespace Booking.View
 	public partial class SecondGuestHomePage : Window
 	{
 		private ObservableCollection<Tour> tours;
-		private TourController controller;
+		private TourService _tourService;
 
-		public string SearchState { get; set; } = string.Empty;
-
-		public string SearchCity { get; set; } = string.Empty;
+		public List<string> SearchState { get; set; }
+		public ObservableCollection<string> SearchCity { get; set; }
 
 		public string SearchDuration { get; set; } = string.Empty;
-
 		public string SearchLanguage { get; set; } = string.Empty;
+		public string SearchVisitors { get; set; } = string.Empty;
 
-		public string SearchGuestNumber { get; set; } = string.Empty;
+		public Tour SelectedTour { get; set; }
+		public string SelectedState { get; set; }
+		public string SelectedCity { get; set; }
 
 		public SecondGuestHomePage()
 		{
 			InitializeComponent();
 			DataContext = this;
-            var app = Application.Current as App;
-            controller = app.TourController;
-            tours = new ObservableCollection<Tour>(controller.GetAll());
+
+			_tourService = new TourService();
+
+			tours = new ObservableCollection<Tour>(_tourService.GetAll());
+
 			TourDataGrid.ItemsSource = tours;
+
+			SearchState = _tourService.GetAllStates();
+			ComboBoxState.SelectedIndex = 0;
+			SearchCity = new ObservableCollection<string>();
+			ComboBoxCity.SelectedIndex = 0;
+
+			SelectedState = "All";
+			SelectedCity = "All";
 		}
 
-		private void buttonSearch_Click(object sender, RoutedEventArgs e)
+		private void ButtonSearch_Click(object sender, RoutedEventArgs e)
 		{
-			controller.Search(tours, SearchState, SearchCity, SearchDuration, SearchLanguage, SearchGuestNumber);
+			TourSearch(SelectedState, SelectedCity, SearchDuration, SearchLanguage, SearchVisitors);
+		}
+
+		public void TourSearch(string state, string city, string duration, string lang, string passengers)
+		{
+			tours = _tourService.Search(tours, state, city, duration, lang, passengers);
 		}
 
 		private void ButtonCancelSearch_Click(object sender, RoutedEventArgs e)
 		{
-			controller.CancelSearch(tours);
+			tours = _tourService.CancelSearch(tours);
+		}
+
+		private void ReserveTour(object sender, RoutedEventArgs e)
+		{
+			ReserveTour view = new ReserveTour(SelectedTour);
+			view.Owner = this;
+			view.ShowDialog();
+		}
+
+		private void ComboBoxStateSelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			SearchCity = _tourService.GetAllCitiesByState(SearchCity, SelectedState);
+			ComboBoxCity.SelectedIndex = 0;
+		}
+
+		private void ButtonSignOff_Click(object sender, RoutedEventArgs e)
+		{
+			SignInForm signInForm = new SignInForm();
+			signInForm.Show();
+			Close();
 		}
 	}
 }

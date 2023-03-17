@@ -16,7 +16,6 @@ namespace Booking.Conversion
 
 		public static DateTime StringToDate(string date)
 		{
-
 			return DateTime.ParseExact(date, "dd/MM/yyyy", null);
 		}
 	}

@@ -18,7 +18,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="2" Margin="0,46,0,0" >
-            <DataGrid x:Name="AccommodationDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Height="226" HeadersVisibility="Column" FontSize="13" Width="1129" RenderTransformOrigin="0.503,0.552" >
+            <DataGrid x:Name="AccommodationDataGrid" 
+                      SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
+                      IsReadOnly="True" AutoGenerateColumns="False" Height="226" HeadersVisibility="Column" FontSize="13" Width="1129" RenderTransformOrigin="0.503,0.552" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Width="120" Binding="{Binding Name}" />
                     <DataGridTextColumn Header="State" Width="100" Binding="{Binding Location.State}"/>
