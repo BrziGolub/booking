@@ -1,7 +1,13 @@
-﻿using Booking.Model.Images;
-using Booking.Serializer;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Booking.Serializer;
+using Booking.Conversion;
+using System.Windows;
+using Booking.Model.Images;
+
 
 namespace Booking.Model
 {
@@ -26,15 +32,6 @@ namespace Booking.Model
 		public double Duration { get; set; }
 
 		public List<TourImage> Images { get; set; }
-
-
-        public Tour()
-        {
-            Location = new Location();
-            Destinations = new List<TourKeyPoints>();
-            Images = new List<TourImage>();
-        }
-
 		public bool isStarted { get; set; }
 
 		public Tour()
@@ -69,9 +66,9 @@ namespace Booking.Model
                 Location.Id.ToString(),                 //2
                 Description,                            //3
                 Language,                               //4
-                MaxGuestsNumber.ToString(),             //5
+                MaxVisitors.ToString(),					//5
                 DateConversion.DateToString(StartTime), //6
-                Duration.ToString()                     //7
+                Duration.ToString(),                    //7
 				isStarted.ToString()					//8
             };
             return csvValues;
