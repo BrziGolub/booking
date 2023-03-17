@@ -24,6 +24,10 @@ namespace Booking.Controller
 			return tourDAO.GetAll();
 		}
 
+		public List<Tour> GetTodayTours()
+		{
+			return tourDAO.GetTodayTours();
+		}
 		public void Search(ObservableCollection<Tour> observe, string state, string city, string duration, string language, string passengers) 
 		{
 			tourDAO.Search(observe, state, city, duration, language, passengers);
@@ -34,6 +38,24 @@ namespace Booking.Controller
 			tourDAO.CancelSearch(observe);
 		}
 
+<<<<<<< Updated upstream
+=======
+		public List<string> GetAllStates() 
+		{ 
+			return tourDAO.GetAllStates();
+		}
+
+		public ObservableCollection<string> GetAllCitiesByState(ObservableCollection<string> observe, string state)
+		{
+			return tourDAO.GetAllCitiesByState(observe, state);
+		}
+
+		public void UpdateTour(Tour tour)
+		{
+			tourDAO.UpdateTour(tour);
+		}
+
+>>>>>>> Stashed changes
 		public void Subscribe(IObserver observer)
 		{
 			tourDAO.Subscribe(observer);

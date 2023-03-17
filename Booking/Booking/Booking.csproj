@@ -93,9 +93,21 @@
     <Compile Include="View\GuideCreateTour.xaml.cs">
       <DependentUpon>GuideCreateTour.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GuideFollowTourLive.xaml.cs">
+      <DependentUpon>GuideFollowTourLive.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GuideHomePage.xaml.cs">
       <DependentUpon>GuideHomePage.xaml</DependentUpon>
     </Compile>
+<<<<<<< Updated upstream
+=======
+    <Compile Include="View\GuideKeyPointsCheck.xaml.cs">
+      <DependentUpon>GuideKeyPointsCheck.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReserveTour.xaml.cs">
+      <DependentUpon>ReserveTour.xaml</DependentUpon>
+    </Compile>
+>>>>>>> Stashed changes
     <Compile Include="View\OwnerHomePage.xaml.cs">
       <DependentUpon>OwnerHomePage.xaml</DependentUpon>
     </Compile>
@@ -135,7 +147,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\GuideFollowTourLive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\GuideHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GuideKeyPointsCheck.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

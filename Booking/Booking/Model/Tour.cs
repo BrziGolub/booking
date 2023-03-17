@@ -32,12 +32,23 @@ namespace Booking.Model
 
         public List<TourImage> Images { get; set; }
 
+<<<<<<< Updated upstream
         public Tour()
         {
             Location = new Location();
             Destinations = new List<TourKeyPoints>();
             Images = new List<TourImage>();
         }
+=======
+		public bool isStarted { get; set; }
+		public Tour()
+		{
+			Location = new Location();
+			Destinations = new List<TourKeyPoints>();
+			Images = new List<TourImage>();
+			isStarted = false;
+		}
+>>>>>>> Stashed changes
 
         public Tour(string name, Location location, string desc, string lang, int maxNum, DateTime dt, double duration)
         {
@@ -64,6 +75,7 @@ namespace Booking.Model
                 Location.Id.ToString(),                 //2
                 Description,                            //3
                 Language,                               //4
+<<<<<<< Updated upstream
                 MaxGuestsNumber.ToString(),             //5
                 DateConversion.DateToString(StartTime), //6
                 Duration.ToString()                     //7
@@ -85,4 +97,28 @@ namespace Booking.Model
 
         }
     }
+=======
+                MaxVisitors.ToString(),                 //5
+                //
+                StartTime.ToString("dd.MM.yyyy"),       //6
+                Duration.ToString() ,                   //7
+				isStarted.ToString()					//8
+            };
+			return csvValues;
+		}
+		public void FromCSV(string[] values)
+		{
+			Id = Convert.ToInt32(values[0]);
+			Name = values[1];
+			Location.Id = Convert.ToInt32(values[2]);
+			Description = values[3];
+			Language = values[4];
+			MaxVisitors = Convert.ToInt32(values[5]);
+			//
+			StartTime = DateTime.Parse(values[6]);
+			Duration = Convert.ToDouble(values[7]);
+			isStarted = Convert.ToBoolean(values[8]);
+		}
+	}
+>>>>>>> Stashed changes
 }

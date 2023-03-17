@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Automation.Peers;
 using Booking.Model.Images;
 using Booking.Observer;
@@ -62,6 +63,27 @@ namespace Booking.Model.DAO
 			return tours;
 		}
 
+<<<<<<< Updated upstream
+=======
+		public List<Tour> GetTodayTours()
+		{
+            List<Tour> list = new List<Tour>();
+			foreach (var tour in tours)
+			{
+				if (tour.StartTime == DateTime.Today)
+				{
+					list.Add(tour);		
+				}
+			}	
+			return list;
+		}
+
+		public Tour FindById(int id)
+		{
+			return tours.Find(v => v.Id == id);
+		}
+
+>>>>>>> Stashed changes
 		public void Search(ObservableCollection<Tour> observe, string state, string city, string duration, string language, string passengers)
 		{
 			observe.Clear();
@@ -109,6 +131,39 @@ namespace Booking.Model.DAO
 			}
 		}
 
+<<<<<<< Updated upstream
+=======
+		public List<string> GetAllStates()
+		{
+			return locationDAO.GetAllStates();
+		}
+
+		public ObservableCollection<string> GetAllCitiesByState(ObservableCollection<string> observe, string state)
+		{
+			return locationDAO.GetAllCitiesByState(observe, state);
+		}
+
+		public Tour UpdateTour(Tour tour)
+		{
+			Tour oldTour = FindById(tour.Id);
+			if(oldTour == null) return null;
+
+			oldTour.Name = tour.Name;
+			oldTour.Location.Id = tour.Location.Id;
+			oldTour.Description = tour.Description;
+			oldTour.Language = tour.Language;
+			oldTour.MaxVisitors = tour.MaxVisitors;
+			oldTour.StartTime = tour.StartTime;
+			oldTour.Duration = tour.Duration;
+			oldTour.isStarted = tour.isStarted;
+
+			repository.Save(tours);
+			NotifyObservers();
+
+			return oldTour;
+		}
+
+>>>>>>> Stashed changes
 		public void NotifyObservers()
 		{
 			foreach (var observer in observers)

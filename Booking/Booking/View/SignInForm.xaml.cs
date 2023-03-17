@@ -117,5 +117,9 @@ namespace Booking.View
 
 		}
 
-	}
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Autors of the project: \n \tKristina Zelić RA4/2020 \n \tPetar Kovačević RA25/2020  \n \tAleksandar Milović RA67/2020 \n \tMiljan Lazić RA212/2020");
+        }
+    }
 }

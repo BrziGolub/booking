@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="GuideCreateTour" Height="645" Width="420" ResizeMode="NoResize" >
+        Title="GuideCreateTour" Height="645" Width="420" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Grid>
 
 
