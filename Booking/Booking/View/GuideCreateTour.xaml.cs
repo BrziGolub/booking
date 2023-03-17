@@ -304,7 +304,7 @@ namespace Booking.View
             if (tbMaxGuests.Text == "")
             { MessageBox.Show("'MAX GUESTS NUMBER' not entered"); }
             else 
-            { tour.MaxGuestsNumber = MaxGuestNumber; }
+            { tour.MaxVisitors = MaxGuestNumber; }
             
             if (datePicker.Text == "")
             { MessageBox.Show("'TOUR START DATE' not entered"); }
@@ -335,7 +335,7 @@ namespace Booking.View
             {
                 MessageBox.Show("'CITY' not entered");
             }
-            else if (tour.MaxGuestsNumber < 0)
+            else if (tour.MaxVisitors < 0)
             {
                 MessageBox.Show("'MAX GUESTS NUMBER' should be greater than 0");
             }

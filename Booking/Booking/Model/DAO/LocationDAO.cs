@@ -124,7 +124,7 @@ namespace Booking.Model.DAO
             }
         }
 
-    }
+    
 
 		public List<string> GetAllStates()
 		{

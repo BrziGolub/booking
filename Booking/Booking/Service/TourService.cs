@@ -1,14 +1,8 @@
 ﻿using Booking.Model;
-using Booking.Model.DAO;
-using Booking.Observer;
 using Booking.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Booking.Service
 {

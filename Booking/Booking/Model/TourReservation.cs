@@ -1,12 +1,5 @@
-﻿using Booking.Conversion;
-using Booking.Serializer;
+﻿using Booking.Serializer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Xml.Linq;
 
 namespace Booking.Model
 {
@@ -22,14 +15,14 @@ namespace Booking.Model
 
 		public int NumberOfVisitors { get; set; }
 
-        public TourReservation()
-        {
+		public TourReservation()
+		{
 			User = new User();
 			Tour = new Tour();
-        }
+		}
 
-        public TourReservation(Tour tour, int passengers)
-        {
+		public TourReservation(Tour tour, int passengers)
+		{
 			User = new User();
 			Tour = tour;
 			NumberOfVisitors = passengers;

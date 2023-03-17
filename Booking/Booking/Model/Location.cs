@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Booking.Serializer;
+﻿using Booking.Serializer;
+using System;
 
 namespace Booking.Model
 {
@@ -22,7 +18,11 @@ namespace Booking.Model
 
 		public string[] ToCSV()
 		{
-			string[] csvValues = { Id.ToString(), State, City};
+			string[] csvValues = {
+				Id.ToString(),
+				State,
+				City
+			};
 			return csvValues;
 		}
 

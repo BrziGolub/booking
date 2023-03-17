@@ -28,7 +28,7 @@
         <TextBox x:Name="tbLanguage" HorizontalAlignment="Left" Margin="170,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=TourLanguage, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Max guests*" HorizontalAlignment="Left" Margin="40,320,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox x:Name="tbMaxGuests" HorizontalAlignment="Left" Margin="170,325,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=MaxGuestNumber, UpdateSourceTrigger=PropertyChanged}"/>
+		<TextBox x:Name="tbMaxGuests" HorizontalAlignment="Left" Margin="170,325,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=MaxGuestNumber, UpdateSourceTrigger=PropertyChanged}"/>
 
 
         <Label Content="Key points*" HorizontalAlignment="Left" Margin="40,360,0,0"  VerticalAlignment="Top" FontSize="15"/>
