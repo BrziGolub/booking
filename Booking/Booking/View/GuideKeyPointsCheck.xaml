@@ -6,10 +6,29 @@
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
-        Title="GuideKeyPointsCheck" Height="250" Width="400">
+        Title="GuideKeyPointsCheck" Height="290" Width="400">
     <Grid>
-        <Label Content="TREBA DA IZLISTAM SVE KLJUCNE TACKE POKRENUTE TURE I"/>
-        <Label Content=" OMOGUCIM OZNACAVANJE KADA SE STIGNE DO NEKE TACKE" Margin="15"></Label>
+        <DataGrid 
+        Margin="10 10 10 40"
+        
+        IsReadOnly="True" 
+        AutoGenerateColumns="False"
+        SelectionMode="Single"
+        CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" 
+        SelectedItem="{Binding SelectedTourKeyPoint}"
+        ItemsSource="{Binding Path=KeyPoints, UpdateSourceTrigger=PropertyChanged}"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Achieved" Binding="{Binding Achieved}"></DataGridTextColumn>
+            </DataGrid.Columns>            
+        </DataGrid>
+
+        <WrapPanel FlowDirection="LeftToRight" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="60" Margin="185 215 0 0" Panel.ZIndex="1">
+            <Button Content="Achieve"  Width="50" Height="30" Click="Button_Click"  FontSize="10" Margin ="0 0 0 0" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center"  />
+           
+        </WrapPanel>
 
     </Grid>
 </Window>

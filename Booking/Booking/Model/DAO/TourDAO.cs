@@ -17,24 +17,36 @@ namespace Booking.Model.DAO
 		private readonly List<IObserver> observers;
 		private readonly TourRepository repository;
 		private List<Tour> tours;
+		//--------------------------------------------------------
 		private List<TourImage> tourImages;
 		private TourImagesRepository _tourImagesRepository;
+        //--------------------------------------------------------
         private List<TourKeyPoints> tourKeyPoints;
         private TourKeyPointsRepository _tourKeyPointsRepository;
-
+        //--------------------------------------------------------
+        private List<Location> locations;	
+		private LocationRepository _locationRepository; 
         private LocationDAO locationDAO;
+        //--------------------------------------------------------
 
-		public TourDAO()
+
+        public TourDAO()
 		{
 			repository = new TourRepository();
 			observers = new List<IObserver>();
 			tours = repository.Load();
 			locationDAO = new LocationDAO();
-			_tourImagesRepository = new TourImagesRepository();
+            //--------------------------------------------------------
+            _tourImagesRepository = new TourImagesRepository();
 			tourImages = new List<TourImage>();
-			_tourKeyPointsRepository = new TourKeyPointsRepository();
+            //--------------------------------------------------------
+            _tourKeyPointsRepository = new TourKeyPointsRepository();
 			tourKeyPoints = new List<TourKeyPoints>();
-			Load();
+            //--------------------------------------------------------
+            _locationRepository = new LocationRepository();
+            locations = new List<Location>();		
+            //--------------------------------------------------------
+            Load();
 		}
 
 		
@@ -43,6 +55,7 @@ namespace Booking.Model.DAO
 			tours = repository.Load();
 			tourImages = _tourImagesRepository.Load();
 			tourKeyPoints = _tourKeyPointsRepository.Load();
+			locations = _locationRepository.Load();	
 			AppendLocations();
 		}
 		
@@ -80,6 +93,11 @@ namespace Booking.Model.DAO
 		public Tour FindById(int id)
 		{
 			return tours.Find(v => v.Id == id);
+		}
+
+		public TourKeyPoints findKeyPointById(int id)
+		{
+			return tourKeyPoints.Find(t => t.Id == id);
 		}
 
 
@@ -162,6 +180,20 @@ namespace Booking.Model.DAO
 			return oldTour;
 		}
 
+		public TourKeyPoints UpdateKeyPoint(TourKeyPoints tourKeyPoint)
+		{
+			TourKeyPoints oldTourKeyPoint = findKeyPointById(tourKeyPoint.Id);
+
+			oldTourKeyPoint.Tour = tourKeyPoint.Tour;
+			oldTourKeyPoint.Location = tourKeyPoint.Location;
+			oldTourKeyPoint.Achieved = tourKeyPoint.Achieved;
+
+			_tourKeyPointsRepository.Save(tourKeyPoints);
+			NotifyObservers();
+
+			return oldTourKeyPoint;
+		}
+
 		public void NotifyObservers()
 		{
 			foreach (var observer in observers)
@@ -214,6 +246,40 @@ namespace Booking.Model.DAO
             {
                 return tourKeyPoints.Max(t => t.Id) + 1;
             }
+        }
+
+		public List<Location> getKeyPoints(int idTour)
+		{
+			List<Location> listKeyPoints = new List<Location>();
+
+			foreach (var tour in tours) 
+			{ 
+				if(tour.Id == idTour) 
+				{
+					foreach(var location in locations) 
+					{
+						foreach(var tourkeypoint in tourKeyPoints) 
+						{
+                            if (location.Id == tourkeypoint.Location.Id && tourkeypoint.Tour.Id == idTour) 
+                            {
+                                listKeyPoints.Add(location);
+                            }
+                        }					
+					}
+				}
+			}			
+			return listKeyPoints;
+        }
+
+		public List<TourKeyPoints> getAllKeyPoints()
+		{
+            List<TourKeyPoints> tourKeyPoints = new List<TourKeyPoints>();
+
+			foreach(var keypoint in tourKeyPoints)
+			{
+				tourKeyPoints.Add(keypoint);
+			}
+			return tourKeyPoints;
         }
 
         public Tour addTour(Tour tour)

@@ -14,10 +14,12 @@ namespace Booking.Model
         public int Id { get; set; }
         public Tour Tour { get; set; }
         public Location Location { get; set; }
+        public bool Achieved { get; set; }
         public TourKeyPoints() 
         {
             Tour = new Tour();
             Location = new Location();
+            Achieved = false;
         }
 
         public void FromCSV(string[] values)
@@ -25,6 +27,7 @@ namespace Booking.Model
             Id = int.Parse(values[0]);
             Tour.Id = int.Parse(values[1]);
             Location.Id = int.Parse(values[2]);
+            Achieved = Convert.ToBoolean(values[3]);
         }
 
         public string[] ToCSV()
@@ -34,6 +37,7 @@ namespace Booking.Model
                 Id.ToString(),
                 Tour.Id.ToString(),   
                 Location.Id.ToString(),
+                Achieved.ToString()
             };
             return csvValues;
        

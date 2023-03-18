@@ -26,8 +26,7 @@ namespace Booking.View
         public ObservableCollection<Tour> Tours { get; set; }
         public TourController _tourController { get; set; }
         public Tour SelectedTour { get; set; }
-        
-        
+        GuideKeyPointsCheck guideKeyPointsCheck { get; set; }
 
         public GuideFollowTourLive()
         {
@@ -40,8 +39,6 @@ namespace Booking.View
             _tourController.Subscribe(this);
 
             Tours = new ObservableCollection<Tour>(_tourController.GetTodayTours());
-
-
 
         }
 
@@ -60,12 +57,13 @@ namespace Booking.View
             {
                 if (SelectedTour != null )
                 {
+                    GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(SelectedTour.Id);
                     SelectedTour.isStarted = true;
+
                     MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
                     _tourController.UpdateTour(SelectedTour);
-
-                    GuideKeyPointsCheck GuideKeyPointsCheck = new GuideKeyPointsCheck();
-                    GuideKeyPointsCheck.ShowDialog();
+      
+                    guideKeyPointsCheck.ShowDialog();
                 }
                 else
                 {

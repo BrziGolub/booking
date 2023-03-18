@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Booking.Model;
 using System.Windows;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Booking.Model.DAO
 {
@@ -21,7 +22,7 @@ namespace Booking.Model.DAO
 		{
 			repository = new LocationRepository();
 			locations = repository.Load();
-			observers = new List<IObserver>();			
+			observers = new List<IObserver>();		
 		}
 
         
@@ -61,8 +62,7 @@ namespace Booking.Model.DAO
             {
                 
                 if (loc.City == pom[1])
-                {
-                    //MessageBox.Show("if");       
+                { 
                     return loc;
                 }
             }
@@ -107,7 +107,6 @@ namespace Booking.Model.DAO
         {
             return locations;
         }
-
         public void Subscribe(IObserver observer)
 		{
             observers.Add(observer);
