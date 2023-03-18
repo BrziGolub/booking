@@ -267,6 +267,11 @@ namespace Booking.Model.DAO
 			{
 					if (keypoint.Tour.Id == idTour )
 					{
+					/*if(lista.Count < 1)
+					{
+						keypoint.Achieved = true;
+						
+					}*/
 						lista.Add(keypoint);
 					}			
 			}

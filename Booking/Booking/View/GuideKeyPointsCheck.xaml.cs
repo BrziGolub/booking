@@ -42,7 +42,12 @@ namespace Booking.View
             _tourController.Subscribe(this);
             
             SelectedTour = _tourController.GetTourById(idTour);
-            KeyPoints = new ObservableCollection<TourKeyPoints>(_tourController.GetSelectedTourKeyPoints(SelectedTour.Id));       
+            
+            
+            KeyPoints = new ObservableCollection<TourKeyPoints>(_tourController.GetSelectedTourKeyPoints(SelectedTour.Id));
+          
+            KeyPoints[0].Achieved = true;
+            
         }
 
         public void Update()
@@ -56,8 +61,16 @@ namespace Booking.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           
-
+            if (SelectedTourKeyPoint != null)
+            {
+                SelectedTourKeyPoint.Achieved = true;
+                MessageBox.Show(SelectedTourKeyPoint.Location.State.ToString() + " " + SelectedTourKeyPoint.Location.City.ToString() + " is achieved!");
+                _tourController.UpdateKeyPoint(SelectedTourKeyPoint);
+            }
+            else 
+            {
+                MessageBox.Show("You must first mark the keypoint that has been achieved!");
+            }
         }
     }
 }

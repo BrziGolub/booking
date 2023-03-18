@@ -77,6 +77,10 @@ namespace Booking.Controller
 			tourDAO.UpdateTour(tour);
 		}
 
+		public void UpdateKeyPoint(TourKeyPoints keyPoint)
+		{
+			tourDAO.UpdateKeyPoint(keyPoint);
+		}
 
 		public void Subscribe(IObserver observer)
 		{
