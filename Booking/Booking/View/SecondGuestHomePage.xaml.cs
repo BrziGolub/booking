@@ -59,6 +59,12 @@ namespace Booking.View
 			TourSearch(SelectedState, SelectedCity, SearchDuration, SearchLanguage, SearchVisitors);
 		}
 
+		public void ReserveTourSearch(string state, string city, int id)
+		{
+			TourSearch(state, city, "", "", "");
+			tours.Remove(tours.Where(s => s.Id == id).Single());
+		}
+
 		public void TourSearch(string state, string city, string duration, string lang, string passengers)
 		{
 			tours = _tourService.Search(tours, state, city, duration, lang, passengers);
@@ -87,6 +93,12 @@ namespace Booking.View
 			SignInForm signInForm = new SignInForm();
 			signInForm.Show();
 			Close();
+		}
+
+		private void ShowImages(object sender, RoutedEventArgs e)
+		{
+			ShowTourImages view = new ShowTourImages(SelectedTour.Images);
+			view.ShowDialog();
 		}
 	}
 }

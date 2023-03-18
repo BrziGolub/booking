@@ -18,7 +18,7 @@ namespace Booking.Model.DAO
 		private readonly TourRepository repository;
 		private List<Tour> tours;
 		private List<TourImage> tourImages;
-		private TourImagesRepository _tourImagesRepository;
+		private TourImageRepository _tourImagesRepository;
         private List<TourKeyPoints> tourKeyPoints;
         private TourKeyPointsRepository _tourKeyPointsRepository;
 
@@ -30,7 +30,7 @@ namespace Booking.Model.DAO
 			observers = new List<IObserver>();
 			tours = repository.Load();
 			locationDAO = new LocationDAO();
-			_tourImagesRepository = new TourImagesRepository();
+			_tourImagesRepository = new TourImageRepository();
 			tourImages = new List<TourImage>();
 			_tourKeyPointsRepository = new TourKeyPointsRepository();
 			tourKeyPoints = new List<TourKeyPoints>();

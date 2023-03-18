@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Repository
 {
-    public class TourImagesRepository
+    public class TourImageRepository
     {
         private const string FilePath = "../../Resources/Data/tourImages.csv";
 
@@ -17,7 +17,7 @@ namespace Booking.Repository
 
         public List<TourImage> _tourImages;
 
-        public TourImagesRepository()
+        public TourImageRepository()
         {
             _serializer = new Serializer<TourImage>();
             _tourImages = Load();

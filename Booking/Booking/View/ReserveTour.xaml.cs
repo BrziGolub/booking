@@ -55,7 +55,7 @@ namespace Booking.View
 				{
 					MessageBox.Show("Tour is already full");
 					// Function call: calls method from parent window
-					((SecondGuestHomePage)this.Owner).TourSearch(Tour.Location.State, Tour.Location.City, "", "", "");
+					((SecondGuestHomePage)this.Owner).ReserveTourSearch(Tour.Location.State, Tour.Location.City, Tour.Id);
 					Close();
 				}
 			}
