@@ -84,13 +84,14 @@
     <Compile Include="Observer\ISubject.cs" />
     <Compile Include="Repository\AccommodationResevationRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
-    <Compile Include="Repository\TourImagesRepository.cs" />
+    <Compile Include="Repository\TourImageRepository.cs" />
     <Compile Include="Repository\TourKeyPointsRepository.cs" />
     <Compile Include="Repository\TourRepository.cs" />
     <Compile Include="Repository\TourReservationRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
     <Compile Include="Serializer\Serializer.cs" />
+    <Compile Include="Service\TourImageService.cs" />
     <Compile Include="View\AccommodationReservation.xaml.cs">
       <DependentUpon>AccommodationReservation.xaml</DependentUpon>
     </Compile>
@@ -212,6 +213,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\Images\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

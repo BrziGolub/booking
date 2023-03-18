@@ -1,4 +1,5 @@
 ﻿using Booking.Model;
+using Booking.Model.Images;
 using Booking.Repository;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Booking.Service
 		private List<Tour> _tours;
 
 		private LocationService _locationService;
+		private TourImageService _tourImageService;
 
 		public TourService()
 		{
@@ -19,8 +21,10 @@ namespace Booking.Service
 			_tours = new List<Tour>();
 
 			_locationService = new LocationService();
+			_tourImageService = new TourImageService();
 
 			Load();
+			LoadImages();
 		}
 
 		public void Load()
@@ -52,6 +56,20 @@ namespace Booking.Service
 			foreach (Tour tour in _tours)
 			{
 				tour.Location = _locationService.GetById(tour.Location.Id);
+			}
+		}
+
+		public void LoadImages()
+		{
+			_tourImageService.Load();
+
+			foreach(Tour tour in _tours)
+			{
+				List<TourImage> images = _tourImageService.GetImagesByTourId(tour.Id);
+				foreach (TourImage image in images)
+				{
+                    tour.Images.Add(image);
+                }
 			}
 		}
 
