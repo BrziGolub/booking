@@ -1,12 +1,9 @@
-0|Ime|0|opis ture|jezik|5|12.11.1234|8
-1|Toure around Prague|1|Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit lacus id risus elementum tempor. Curabitur condimentum fringilla tortor, ac imperdiet urna auctor feugiat.|English|6|24.04.2023|8
-2|Toure de France|2|Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit lacus id risus elementum tempor. Curabitur condimentum fringilla tortor, ac imperdiet urna auctor feugiat.|English|12|21.04.2023|14
-3|Toure to Vienna|3|Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit lacus id risus elementum tempor. Curabitur condimentum fringilla tortor, ac imperdiet urna auctor feugiat.|German|21|28.04.2023|6
-4|Tour 1|4|Tour through Serbia|Serbian|100|18.03.2023|5
-5|Tour 2|1|Tour through Czech Republic|Czech|80|01.04.2023|4
-6|Tour 3|14|Tour through Italy|Italian|90|19.05.2023|10
-7|Zuriosm|5|Ja sam Zivkovic Slobodan|Serbian|123|31.03.2023|12
-8|asd|5|dsa|asd|5|18.03.2023|5
-9|aaa|5|sds|asd|5|26.03.2023|4
-10|a1|5|s|s|3|18.03.2023|3
-11|a2|5|a|a|2|25.03.2023|3
+0|Ime|0|opis ture|jezik|5|12/11/1234|8|False
+1|Toure around Prague|1|Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit lacus id risus elementum tempor. Curabitur condimentum fringilla tortor, ac imperdiet urna auctor feugiat.|English|6|24/04/2023|8|False
+2|Toure de France|2|Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit lacus id risus elementum tempor. Curabitur condimentum fringilla tortor, ac imperdiet urna auctor feugiat.|English|12|21/04/2023|14|False
+3|Toure to Vienna|3|Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit lacus id risus elementum tempor. Curabitur condimentum fringilla tortor, ac imperdiet urna auctor feugiat.|German|21|28/04/2023|6|False
+4|Tour 1|4|Tour through Serbia|Serbian|100|17/03/2023|5|False
+5|Tour 2|1|Tour through Czech Republic|Czech|80|17/03/2023|4|False
+6|Tour 3|14|Tour through Italy|Italian|90|17/03/2023|10|False
+7|Zuriosm|5|Ja sam Zivkovic Slobodan|Serbian|123|31/03/2023|12|False
+8|Tour 4|9|Description of tour 4|Serbian|110|17/03/2023|200|False
