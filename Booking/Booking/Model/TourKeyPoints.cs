@@ -26,7 +26,7 @@ namespace Booking.Model
         {
             Id = int.Parse(values[0]);
             Tour.Id = int.Parse(values[1]);
-            Location.Id = int.Parse(values[2]);
+            Location.Id = Convert.ToInt32(values[2]);
             Achieved = Convert.ToBoolean(values[3]);
         }
 

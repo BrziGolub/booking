@@ -20,48 +20,49 @@ namespace Booking.Model.DAO
 		//--------------------------------------------------------
 		private List<TourImage> tourImages;
 		private TourImagesRepository _tourImagesRepository;
-        //--------------------------------------------------------
-        private List<TourKeyPoints> tourKeyPoints;
-        private TourKeyPointsRepository _tourKeyPointsRepository;
-        //--------------------------------------------------------
-        private List<Location> locations;	
-		private LocationRepository _locationRepository; 
-        private LocationDAO locationDAO;
-        //--------------------------------------------------------
+		//--------------------------------------------------------
+		private List<TourKeyPoints> tourKeyPoints;
+		private TourKeyPointsRepository _tourKeyPointsRepository;
+		//--------------------------------------------------------
+		private List<Location> locations;
+		private LocationRepository _locationRepository;
+		private LocationDAO locationDAO;
+		//--------------------------------------------------------
 
 
-        public TourDAO()
+		public TourDAO()
 		{
 			repository = new TourRepository();
 			observers = new List<IObserver>();
 			tours = repository.Load();
 			locationDAO = new LocationDAO();
-            //--------------------------------------------------------
-            _tourImagesRepository = new TourImagesRepository();
+			//--------------------------------------------------------
+			_tourImagesRepository = new TourImagesRepository();
 			tourImages = new List<TourImage>();
-            //--------------------------------------------------------
-            _tourKeyPointsRepository = new TourKeyPointsRepository();
+			//--------------------------------------------------------
+			_tourKeyPointsRepository = new TourKeyPointsRepository();
 			tourKeyPoints = new List<TourKeyPoints>();
-            //--------------------------------------------------------
-            _locationRepository = new LocationRepository();
-            locations = new List<Location>();		
-            //--------------------------------------------------------
-            Load();
+			//--------------------------------------------------------
+			_locationRepository = new LocationRepository();
+			locations = new List<Location>();
+			//--------------------------------------------------------
+			Load();
 		}
 
-		
+
 		public void Load()
 		{
 			tours = repository.Load();
 			tourImages = _tourImagesRepository.Load();
 			tourKeyPoints = _tourKeyPointsRepository.Load();
-			locations = _locationRepository.Load();	
+			locations = _locationRepository.Load();
 			AppendLocations();
+			AppendLocationsForKeyPoints();
 		}
-		
 
-		
-		public void AppendLocations() 
+
+
+		public void AppendLocations()
 		{
 			locationDAO.Load();
 
@@ -70,7 +71,17 @@ namespace Booking.Model.DAO
 				tour.Location = locationDAO.FindById(tour.Location.Id);
 			}
 		}
-		
+
+		public void AppendLocationsForKeyPoints()
+		{
+			locationDAO.Load();
+
+			foreach (TourKeyPoints keypoint in tourKeyPoints)
+			{
+				keypoint.Location = locationDAO.FindById(keypoint.Location.Id);
+			}
+		}
+
 		public List<Tour> GetAll()
 		{
 			return tours;
@@ -78,14 +89,14 @@ namespace Booking.Model.DAO
 
 		public List<Tour> GetTodayTours()
 		{
-            List<Tour> list = new List<Tour>();
+			List<Tour> list = new List<Tour>();
 			foreach (var tour in tours)
 			{
 				if (tour.StartTime == DateTime.Today)
 				{
-					list.Add(tour);		
+					list.Add(tour);
 				}
-			}	
+			}
 			return list;
 		}
 
@@ -163,7 +174,7 @@ namespace Booking.Model.DAO
 		public Tour UpdateTour(Tour tour)
 		{
 			Tour oldTour = FindById(tour.Id);
-			if(oldTour == null) return null;
+			if (oldTour == null) return null;
 
 			oldTour.Name = tour.Name;
 			oldTour.Location.Id = tour.Location.Id;
@@ -212,74 +223,68 @@ namespace Booking.Model.DAO
 			observers.Remove(observer);
 		}
 
-        public int NextId()
-        {
-            if (tours.Count == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return tours.Max(t => t.Id) + 1;
-            }
-        }
-
-       public int ImageNextId()
-        {
-            if (tourImages.Count == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return tourImages.Max(t => t.Id) + 1;
-            }
-        }
-
-        public int KeyPointsNextId()
-        {
-            if (tourKeyPoints.Count == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return tourKeyPoints.Max(t => t.Id) + 1;
-            }
-        }
-
-		public List<Location> getKeyPoints(int idTour)
+		public int NextId()
 		{
-			List<Location> listKeyPoints = new List<Location>();
+			if (tours.Count == 0)
+			{
+				return 1;
+			}
+			else
+			{
+				return tours.Max(t => t.Id) + 1;
+			}
+		}
 
-			foreach (var tour in tours) 
-			{ 
-				if(tour.Id == idTour) 
-				{
-					foreach(var location in locations) 
-					{
-						foreach(var tourkeypoint in tourKeyPoints) 
-						{
-                            if (location.Id == tourkeypoint.Location.Id && tourkeypoint.Tour.Id == idTour) 
-                            {
-                                listKeyPoints.Add(location);
-                            }
-                        }					
-					}
-				}
-			}			
-			return listKeyPoints;
-        }
-
-		public List<TourKeyPoints> getAllKeyPoints()
+		public int ImageNextId()
 		{
-            List<TourKeyPoints> tourKeyPoints = new List<TourKeyPoints>();
+			if (tourImages.Count == 0)
+			{
+				return 1;
+			}
+			else
+			{
+				return tourImages.Max(t => t.Id) + 1;
+			}
+		}
+
+		public int KeyPointsNextId()
+		{
+			if (tourKeyPoints.Count == 0)
+			{
+				return 1;
+			}
+			else
+			{
+				return tourKeyPoints.Max(t => t.Id) + 1;
+			}
+		}
+
+		public List<TourKeyPoints> getSelectedTourKeyPoints(int idTour)
+		{
+			List<TourKeyPoints> lista = new List<TourKeyPoints>();
 
 			foreach(var keypoint in tourKeyPoints)
 			{
-				tourKeyPoints.Add(keypoint);
+					if (keypoint.Tour.Id == idTour )
+					{
+						lista.Add(keypoint);
+					}			
 			}
-			return tourKeyPoints;
+
+			return lista;
+		}
+
+    
+
+		public List<TourKeyPoints> getAllKeyPoints()
+		{
+            List<TourKeyPoints> lista = new List<TourKeyPoints>();
+
+			foreach(var keypoint in tourKeyPoints)
+			{
+				lista.Add(keypoint);
+			}
+			return lista;
         }
 
         public Tour addTour(Tour tour)

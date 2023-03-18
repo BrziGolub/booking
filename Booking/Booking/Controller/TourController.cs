@@ -29,10 +29,11 @@ namespace Booking.Controller
 			return tourDAO.GetTodayTours();
 		}
 
-		public List<Location> GetKeyPoints(int id)
+        public List<TourKeyPoints> GetSelectedTourKeyPoints(int idTour)
 		{
-			return tourDAO.getKeyPoints(id);
+			return tourDAO.getSelectedTourKeyPoints(idTour);
 		}
+       
 
 		public List<TourKeyPoints> GetAllKeyPoints()
 		{
