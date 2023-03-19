@@ -63,6 +63,12 @@ namespace Booking.View
 		{
 			TourSearch(state, city, "", "", "");
 			tours.Remove(tours.Where(s => s.Id == id).Single());
+
+			if(tours.Count() == 0)
+			{
+				MessageBox.Show("All tours at same location are full!");
+				ShowAll();
+			}
 		}
 
 		public void TourSearch(string state, string city, string duration, string lang, string passengers)
@@ -70,10 +76,15 @@ namespace Booking.View
 			tours = _tourService.Search(tours, state, city, duration, lang, passengers);
 		}
 
-		private void ButtonCancelSearch_Click(object sender, RoutedEventArgs e)
+		private void ButtonShowAll(object sender, RoutedEventArgs e)
 		{
-			tours = _tourService.CancelSearch(tours);
+			ShowAll();
 		}
+
+		public void ShowAll()
+		{
+            tours = _tourService.CancelSearch(tours);
+        }
 
 		private void ReserveTour(object sender, RoutedEventArgs e)
 		{

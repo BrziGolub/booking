@@ -48,7 +48,7 @@
 			<TextBox Text="{Binding SearchVisitors}" VerticalContentAlignment="Center" Margin="4" Width="100"/>
 
 			<Button x:Name="buttonSearch" Content="Search" Width="80" Margin="4" Click="ButtonSearch_Click" HorizontalAlignment="Left"/>
-			<Button x:Name="ButtonCancelSearch" Content="Show all" Width="80" Margin="4" Click="ButtonCancelSearch_Click" HorizontalAlignment="Left"/>
+            <Button x:Name="ButtonCancelSearch" Content="Show all" Width="80" Margin="4" Click="ButtonShowAll" HorizontalAlignment="Left"/>
 			<Button x:Name="ButtonSignOff" Content="Sign off" Width="100" Margin="4" Click="ButtonSignOff_Click" HorizontalAlignment="Right"/>
 		</DockPanel>
 

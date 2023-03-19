@@ -30,9 +30,10 @@ namespace Booking.View
         guideCreateTour.Show();
         }
 
-        private void CreateTour()
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            GuideFollowTourLive guideFollowTourLive = new GuideFollowTourLive();
+            guideFollowTourLive.Show();
         }
     }
 }
