@@ -7,16 +7,17 @@ using System.Linq;
 
 namespace Booking.Service
 {
-	public class LocationService
+	public class LocationService : ISubject
 	{
 		private readonly LocationRepository _repository;
 		private List<Location> _locations;
+		private readonly List<IObserver> _observers;
 
 		public LocationService()
 		{
 			_repository = new LocationRepository();
 			_locations = new List<Location>();
-
+			_observers = new List<IObserver>();
 			Load();
 		}
 
@@ -107,6 +108,21 @@ namespace Booking.Service
 			else
 			{
 				return _locations.Max(l => l.Id) + 1;
+			}
+		}
+		public void Subscribe(IObserver observer)
+		{
+			_observers.Add(observer);
+		}
+		public void Unsubscribe(IObserver observer)
+		{
+			_observers.Remove(observer);
+		}
+		public void NotifyObservers()
+		{
+			foreach (var observer in _observers)
+			{
+				observer.Update();
 			}
 		}
 	}

@@ -1,5 +1,4 @@
-﻿using Booking.Controller;
-using Booking.Model.DAO;
+﻿using Booking.Model;
 using Booking.Service;
 using System;
 using System.Collections.Generic;
@@ -13,22 +12,19 @@ namespace Booking
 {
     public partial class App : Application
     {
-        public LocationController LocationController { get; set; }
-        public AccommodationContoller AccommodationController { get; set; }
-        public AccommodationGradeController AccommodationGradeController { get; set; }
-        public AccommodationReservationController AccommodationReservationController { get; set; }
-
+        
+        public LocationService LocationService { get; set; }
+        public AccommodationService AccommodationService { get; set; }
+        public AccommodationGradeService AccommodationGradeService { get; set; }
+        public AccommodationReservationService AccommodationReservationService { get; set; }
         public TourService TourService { get; set; }
 
         public App()
         {
-            AccommodationDAO accommodationDAO = new AccommodationDAO();
-            AccommodationController = new AccommodationContoller(accommodationDAO);
-            AccommodationGradeDAO accommodationGradeDAO = new AccommodationGradeDAO();
-            AccommodationGradeController = new AccommodationGradeController(accommodationGradeDAO);
-            AccommodationReservationDAO accommodationReservationDAO = new AccommodationReservationDAO();
-            AccommodationReservationController = new AccommodationReservationController(accommodationReservationDAO);
-
+            LocationService = new LocationService();
+            AccommodationService = new AccommodationService();
+            AccommodationGradeService = new AccommodationGradeService();
+            AccommodationReservationService = new AccommodationReservationService();
             TourService = new TourService();
         }
     }

@@ -57,18 +57,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controller\AccommodationGradeController.cs" />
-    <Compile Include="Controller\LocationController.cs" />
-    <Compile Include="Controller\AccommodationContoller.cs" />
-    <Compile Include="Controller\AccommodationReservationController.cs" />
     <Compile Include="Model\AccommodationGrade.cs" />
     <Compile Include="Model\AccommodationReservation.cs" />
-    <Compile Include="Model\DAO\AccommodationDAO.cs" />
     <Compile Include="Conversion\DateConversion.cs" />
     <Compile Include="Model\Accommodation.cs" />
-    <Compile Include="Model\DAO\AccommodationGradeDAO.cs" />
-    <Compile Include="Model\DAO\AccommodationReservationDAO.cs" />
-    <Compile Include="Model\DAO\LocationDAO.cs" />
     <Compile Include="Model\Enum\AccommodationType.cs" />
     <Compile Include="Model\Images\AccommodationImage.cs" />
     <Compile Include="Model\Images\TourImage.cs" />
@@ -91,6 +83,9 @@
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
     <Compile Include="Serializer\Serializer.cs" />
+    <Compile Include="Service\AccommodationGradeService.cs" />
+    <Compile Include="Service\AccommodationReservationService.cs" />
+    <Compile Include="Service\AccommodationService.cs" />
     <Compile Include="Service\TourImageService.cs" />
     <Compile Include="Service\TourKeyPointService.cs" />
     <Compile Include="View\AccommodationReservationView.xaml.cs">

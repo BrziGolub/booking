@@ -1,7 +1,5 @@
-﻿using Booking.Controller;
-using Booking.Conversion;
+﻿using Booking.Conversion;
 using Booking.Model;
-using Booking.Model.DAO;
 using Booking.Model.Images;
 using Booking.Service;
 using System;

@@ -1,6 +1,6 @@
-﻿using Booking.Controller;
-using Booking.Conversion;
+﻿using Booking.Conversion;
 using Booking.Model;
+using Booking.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,8 +21,8 @@ namespace Booking.View
 {
     public partial class AccommodationReservationView : Window
     {
-        private AccommodationReservationController accommodationReservationContoller;
-
+        //private AccommodationReservationController accommodationReservationContoller;
+        public AccommodationReservationService AccommodationReservationService { get; set; }
         private Accommodation SelectedAccommodation;
 
 
@@ -83,8 +83,11 @@ namespace Booking.View
             SelectedAccommodation = selectedAccommodation;
             DepartureDay = DateTime.Now;
             ArrivalDay = DateTime.Now;
+            var app = Application.Current as App;
 
-            accommodationReservationContoller = new AccommodationReservationController();
+            AccommodationReservationService = app.AccommodationReservationService;
+
+            //AccommodationReservationService = new AccommodationReservationService();
         }
 
         private void ShowAvailableDatesDialog(List<(DateTime, DateTime)> suggestedDateRanges, Accommodation selectedAccommodation)
@@ -106,13 +109,13 @@ namespace Booking.View
                 MessageBox.Show("Requirements for the minimal number of days for the reservation are not accomplished");
 
             }
-            else if (int.Parse(NumberOfGuests) > SelectedAccommodation.Capacity || NumberOfGuests == null)
+            else if (NumberOfGuests.Equals("") || int.Parse(NumberOfGuests) > SelectedAccommodation.Capacity)
             {
                 MessageBox.Show("Number of guests is not valid!");
             }
             else
             {
-                bool IsReserved = accommodationReservationContoller.Reserve(ArrivalDay, DepartureDay, SelectedAccommodation);
+                bool IsReserved = AccommodationReservationService.Reserve(ArrivalDay, DepartureDay, SelectedAccommodation);
 
                 if (IsReserved)
                 {
@@ -122,7 +125,7 @@ namespace Booking.View
                 {
                     MessageBox.Show("There are no available reservations for the seleceted dates!");
 
-                    List<(DateTime, DateTime)> suggestedDateRanges = accommodationReservationContoller.SuggestOtherDates(ArrivalDay, DepartureDay, SelectedAccommodation);
+                    List<(DateTime, DateTime)> suggestedDateRanges = AccommodationReservationService.SuggestOtherDates(ArrivalDay, DepartureDay, SelectedAccommodation);
 
                     ShowAvailableDatesDialog(suggestedDateRanges, SelectedAccommodation);
                 }

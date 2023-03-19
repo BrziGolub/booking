@@ -1,5 +1,5 @@
-﻿using Booking.Controller;
-using Booking.Model;
+﻿using Booking.Model;
+using Booking.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,11 +24,13 @@ namespace Booking.View
     public partial class GradingWindow : Window
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public AccommodationReservationController reservationController;
-        public AccommodationGradeController gradeController;
+        //public AccommodationReservationController reservationController;
+        //public AccommodationGradeController gradeController;
+        public AccommodationReservationService AccommodationReservationService { get; set; }
+        public AccommodationGradeService AccommodationGradeService { get; set; }
         public AccommodationGrade accommodationGrade = new AccommodationGrade();
         int accommodationReservationId;
-        private OwnerGradingGuests ownerGradingGuests;
+        private OwnerGradingGuests OwnerGradingGuests;
 
         public GradingWindow(int ReservationId, OwnerGradingGuests ownerGradingGuests)
         {
@@ -36,13 +38,13 @@ namespace Booking.View
             accommodationReservationId = ReservationId;
             this.DataContext = this;
             var app = Application.Current as App;
-            reservationController = app.AccommodationReservationController;
-            gradeController = app.AccommodationGradeController;
+            AccommodationReservationService = app.AccommodationReservationService;
+            AccommodationGradeService = app.AccommodationGradeService;
             comboBoxCleanliness.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
             comboBoxRuleFollowing.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
             comboBoxCommunication.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
             comboBoxLateness.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
-            this.ownerGradingGuests = ownerGradingGuests;
+            this.OwnerGradingGuests = ownerGradingGuests;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -132,7 +134,7 @@ namespace Booking.View
             accommodationGrade.Comment = Comment;
             accommodationGrade.Communication = Communication;
             accommodationGrade.Lateness = Lateness;
-            accommodationGrade.Accommodation = reservationController.GetByID(accommodationReservationId);
+            accommodationGrade.Accommodation = AccommodationReservationService.GetByID(accommodationReservationId);
             if (accommodationGrade.Cleanliness == -1)
             {
                 MessageBox.Show("'CLEANLINESS' not entered");
@@ -155,9 +157,9 @@ namespace Booking.View
             }
             else
             {
-                gradeController.Create(accommodationGrade);
+                AccommodationGradeService.Create(accommodationGrade);
                 MessageBox.Show("Grade successfully created");
-                ownerGradingGuests.RefreshWindow();
+                OwnerGradingGuests.RefreshWindow();
                 this.Close();
             }
         }

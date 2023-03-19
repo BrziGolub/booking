@@ -1,6 +1,4 @@
-﻿using Booking.Controller;
-using Booking.Model;
-using Booking.Model.DAO;
+﻿using Booking.Model;
 using Booking.Observer;
 using Booking.Service;
 using System;

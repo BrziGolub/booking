@@ -1,6 +1,6 @@
-﻿using Booking.Controller;
-using Booking.Model;
+﻿using Booking.Model;
 using Booking.Model.Enums;
+using Booking.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,11 +26,13 @@ namespace Booking.View
     /// </summary>
     public partial class FirstGuestHomePage : Window
     {
-        private ObservableCollection<Accommodation> accommodations;
+        private ObservableCollection<Accommodation> _accommodations;
 
-        private AccommodationContoller accommodationContoller { get; set; }
+        //private AccommodationContoller accommodationContoller { get; set; }
 
-        private LocationController locationController { get; set; }
+        //private LocationController locationController { get; set; }
+        public AccommodationService AccommodationService { get; set; }
+        public LocationService LocationService { get; set; }
 
         public Boolean IsCheckedApartment { get; set; } = false;
         public Boolean IsCheckedCottage { get; set; } = false;
@@ -52,7 +54,7 @@ namespace Booking.View
         {
             CityCollection.Clear();
 
-            var locations = locationController.findAllLocations().Where(l => l.State.Equals(SearchState));
+            var locations = LocationService.GetAll().Where(l => l.State.Equals(SearchState));
 
             foreach (Location c in locations)
             {
@@ -68,18 +70,15 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
             var app = Application.Current as App;
-            locationController = app.LocationController;
-            //povezi accommodationContoller iz APP
-
-            //DA LI TREBA POVEZIT NESTO SA APP?? SERVICE ?
-            accommodationContoller = new AccommodationContoller();
-            accommodations = new ObservableCollection<Accommodation>(accommodationContoller.GetAll());
+            LocationService = app.LocationService;
+            AccommodationService = app.AccommodationService;
+            _accommodations = new ObservableCollection<Accommodation>(AccommodationService.GetAll());
 
             CityCollection = new ObservableCollection<string>();
 
             accommodationTypes = new List<string>();
 
-            AccommodationDataGrid.ItemsSource = accommodations;
+            AccommodationDataGrid.ItemsSource = _accommodations;
             FillComboBox();
         }
 
@@ -128,13 +127,13 @@ namespace Booking.View
                 accommodationTypes.Add("HOUSE");
             }
 
-            accommodationContoller.Search(accommodations, SearchName, SearchCity, SearchState, accommodationTypes, SerachGuests, SearchReservationDays);
+            AccommodationService.Search(_accommodations, SearchName, SearchCity, SearchState, accommodationTypes, SerachGuests, SearchReservationDays);
         }
 
         private void Button_Click_ShowAll(object sender, RoutedEventArgs e)
         {
 
-            accommodationContoller.ShowAll(accommodations);
+            AccommodationService.ShowAll(_accommodations);
 
         }
 

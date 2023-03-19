@@ -1,5 +1,5 @@
-﻿using Booking.Controller;
-using Booking.Model;
+﻿using Booking.Model;
+using Booking.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,8 +30,8 @@ namespace Booking.View
 
         public Accommodation SelectedAccommodation { get; set; }
 
-        private AccommodationReservationController accommodationReservationController;
-
+        //private AccommodationReservationController accommodationReservationController;
+        public AccommodationReservationService AccommodationReservationService { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string _numberOfGuests;
@@ -62,8 +62,9 @@ namespace Booking.View
 
             Ranges = new ObservableCollection<Range>(ranges.Select(r => new Range { StartDate = r.Item1, EndDate = r.Item2 }).ToList());
             SelectedAccommodation = selectedAccommodation;
-
-            accommodationReservationController = new AccommodationReservationController(); //Ovo povezi sa app
+            var app = Application.Current as App;
+            AccommodationReservationService = app.AccommodationReservationService;
+            //accommodationReservationController = new AccommodationReservationController(); //Ovo povezi sa app
         }
 
         private void Button_Click_Cancle(object sender, RoutedEventArgs e)
@@ -88,7 +89,7 @@ namespace Booking.View
                 //ovo promeni ime, milovic je promenio resi konflikte
                 Booking.Model.AccommodationReservation newReservation = new Booking.Model.AccommodationReservation(SelectedAccommodation, SelectedDates.StartDate, SelectedDates.EndDate);
 
-                accommodationReservationController.SaveReservation(newReservation);
+                AccommodationReservationService.SaveReservation(newReservation);
 
                 MessageBox.Show("You succesfuly reserve your accommodation for: " + SelectedDates.StartDate.ToString("dd/MM/yyyy") + " - " + SelectedDates.EndDate.ToString("dd/MM/yyyy") + " !");
             }

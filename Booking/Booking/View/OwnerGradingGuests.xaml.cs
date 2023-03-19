@@ -1,5 +1,5 @@
-﻿using Booking.Controller;
-using Booking.Model;
+﻿using Booking.Model;
+using Booking.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,7 +22,8 @@ namespace Booking.View
     /// </summary>
     public partial class OwnerGradingGuests : Window
     {
-        public AccommodationReservationController accommodationReservationController;
+        //public AccommodationReservationController accommodationReservationController;
+        public AccommodationReservationService AccommodationReservationService { get; set; }
         public ObservableCollection<AccommodationReservation> reservations { get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
         public OwnerGradingGuests()
@@ -30,8 +31,8 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
             var app = Application.Current as App;
-            accommodationReservationController = app.AccommodationReservationController;
-            reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationController.GetAllUngradedReservations());
+            AccommodationReservationService = app.AccommodationReservationService;
+            reservations = new ObservableCollection<AccommodationReservation>(AccommodationReservationService.GetAllUngradedReservations());
         }
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
@@ -46,7 +47,7 @@ namespace Booking.View
 
         public void RefreshWindow()
         {
-            List<AccommodationReservation> accomodationReservations = accommodationReservationController.GetAllUngradedReservations();
+            List<AccommodationReservation> accomodationReservations = AccommodationReservationService.GetAllUngradedReservations();
             reservations.Clear();
             foreach (AccommodationReservation accommodationReservation in accomodationReservations)
             {
