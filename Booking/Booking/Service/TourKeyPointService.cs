@@ -67,5 +67,30 @@ namespace Booking.Service
 
             return keyPoints;
         }
-    }
+
+		public int NextId()
+		{
+			if (_tourKeyPoints.Count == 0)
+			{
+				return 1;
+			}
+			else
+			{
+				return _tourKeyPoints.Max(t => t.Id) + 1;
+			}
+		}
+
+		public TourKeyPoint UpdateKeyPoint(TourKeyPoint tourKeyPoint)
+		{
+			TourKeyPoint oldTourKeyPoint = GetById(tourKeyPoint.Id);
+
+			oldTourKeyPoint.Tour = tourKeyPoint.Tour;
+			oldTourKeyPoint.Location = tourKeyPoint.Location;
+			oldTourKeyPoint.Achieved = tourKeyPoint.Achieved;
+
+			Save();
+
+			return oldTourKeyPoint;
+		}
+	}
 }

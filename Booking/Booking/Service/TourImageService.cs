@@ -54,5 +54,17 @@ namespace Booking.Service
 
             return images;
         }
-    }
+
+		public int NextId()
+		{
+			if (_tourImages.Count == 0)
+			{
+				return 1;
+			}
+			else
+			{
+				return _tourImages.Max(t => t.Id) + 1;
+			}
+		}
+	}
 }

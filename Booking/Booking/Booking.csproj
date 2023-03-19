@@ -61,15 +61,11 @@
     <Compile Include="Controller\AccommodationContoller.cs" />
     <Compile Include="Controller\AccommodationReservationController.cs" />
     <Compile Include="Model\AccommodationReservation.cs" />
-    <Compile Include="Controller\TourReservationController.cs" />
     <Compile Include="Model\DAO\AccommodationDAO.cs" />
-    <Compile Include="Controller\TourController.cs" />
     <Compile Include="Conversion\DateConversion.cs" />
     <Compile Include="Model\Accommodation.cs" />
     <Compile Include="Model\DAO\AccommodationReservationDAO.cs" />
     <Compile Include="Model\DAO\LocationDAO.cs" />
-    <Compile Include="Model\DAO\TourDAO.cs" />
-    <Compile Include="Model\DAO\TourReservationDAO.cs" />
     <Compile Include="Model\Enum\AccommodationType.cs" />
     <Compile Include="Model\Images\AccommodationImage.cs" />
     <Compile Include="Model\Images\TourImage.cs" />
