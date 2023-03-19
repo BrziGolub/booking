@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace Booking.Model
 {
-    public class TourKeyPoints : ISerializable
+    public class TourKeyPoint : ISerializable
     {
         public int Id { get; set; }
         public Tour Tour { get; set; }
         public Location Location { get; set; }
-        public TourKeyPoints() 
+
+        public TourKeyPoint() 
         {
             Tour = new Tour();
             Location = new Location();
@@ -36,7 +37,6 @@ namespace Booking.Model
                 Location.Id.ToString(),
             };
             return csvValues;
-       
         }
     }
 }

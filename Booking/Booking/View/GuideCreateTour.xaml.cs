@@ -309,7 +309,7 @@ namespace Booking.View
             if (datePicker.Text == "")
             { MessageBox.Show("'TOUR START DATE' not entered"); }
             else
-            { tour.StartTime = DateConversion.StringToDate(StartTime); }
+            { tour.StartTime = DateTime.Parse(StartTime); }
 
             if (tbDuration.Text == "")
             { 
@@ -368,7 +368,7 @@ namespace Booking.View
                 int locationId= locationController.FindIdByCountryAndCity(Country, City);        
                 Location location = locationController.FindById(locationId);
 
-                TourKeyPoints tourKeyPoints = new TourKeyPoints();
+                TourKeyPoint tourKeyPoints = new TourKeyPoint();
                 tourKeyPoints.Location = location;
                 tour.Destinations.Add(tourKeyPoints);
             }

@@ -9,24 +9,24 @@ using System.Threading.Tasks;
 
 namespace Booking.Repository
 {
-    public class TourKeyPointsRepository
+    public class TourKeyPointRepository
     {
         private const string FilePath = "../../Resources/Data/tourKeyPoints.csv";
 
-        private readonly Serializer<TourKeyPoints> _serializer;
+        private readonly Serializer<TourKeyPoint> _serializer;
 
-        public List<TourKeyPoints> _tourKeyPoints;
+        public List<TourKeyPoint> _tourKeyPoints;
 
-        public TourKeyPointsRepository()
+        public TourKeyPointRepository()
         {
-            _serializer = new Serializer<TourKeyPoints>();
+            _serializer = new Serializer<TourKeyPoint>();
             _tourKeyPoints = Load();
         }
-        public List<TourKeyPoints> Load()
+        public List<TourKeyPoint> Load()
         {
             return _serializer.FromCSV(FilePath);
         }
-        public void Save(List<TourKeyPoints> tourKeyPoints)
+        public void Save(List<TourKeyPoint> tourKeyPoints)
         {
             _serializer.ToCSV(FilePath, tourKeyPoints);
         }
