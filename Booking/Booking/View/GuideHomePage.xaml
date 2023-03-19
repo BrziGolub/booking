@@ -33,9 +33,32 @@
             <!--    <Menu BorderBrush="Black" BorderThickness="3" Width="200"> 
                 <MenuItem Header="proba"></MenuItem>
                 </Menu>     endregion-->
-
-
-
         </StackPanel>
+
+        <StackPanel Margin="163,0,0,0">
+            <DataGrid            
+            SelectionMode="Single"
+            IsReadOnly="True" 
+            Margin="10 10 10 10" 
+            RowHeight="35"
+            AutoGenerateColumns="False"             
+            CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserReorderColumns="False"
+            ItemsSource="{Binding Path=Tours, UpdateSourceTrigger=PropertyChanged}">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="93" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="Language" Binding="{Binding Language}"/>
+                    <DataGridTextColumn Header="Max Visitors" Width="75" Binding="{Binding MaxVisitors}"/>
+                    <DataGridTextColumn Width="93" Header="Departure Date" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}" ></DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="Duration" Binding="{Binding Duration}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="78" Header="Description" Binding="{Binding Description}"></DataGridTextColumn>
+                </DataGrid.Columns>
+                
+
+            </DataGrid>
+        </StackPanel>
+        
     </Grid>
 </Window>

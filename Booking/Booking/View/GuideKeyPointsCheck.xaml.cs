@@ -2,6 +2,7 @@
 using Booking.Model;
 using Booking.Model.DAO;
 using Booking.Observer;
+using Booking.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,7 +27,9 @@ namespace Booking.View
     {
 
         public ObservableCollection<TourKeyPoints> KeyPoints { get; set; }
-        public TourController _tourController { get; set; }
+
+        public TourService TourService { get; set; }
+       // public TourController _tourController { get; set; }
         public TourKeyPoints SelectedTourKeyPoint { get; set; }
         public Tour SelectedTour { get; set; }
 
@@ -38,25 +41,25 @@ namespace Booking.View
             
             var app = Application.Current as App;
 
-            _tourController = app.TourController;
-            _tourController.Subscribe(this);
+            TourService = app.TourService;
+            TourService.Subscribe(this);
             
-            SelectedTour = _tourController.GetTourById(idTour);
+            SelectedTour = TourService.GetById(idTour);
 
             idt = idTour;
 
             
 
-            KeyPoints = new ObservableCollection<TourKeyPoints>(_tourController.GetSelectedTourKeyPoints(SelectedTour.Id));
+            KeyPoints = new ObservableCollection<TourKeyPoints>(TourService.GetSelectedTourKeyPoints(SelectedTour.Id));
           
             KeyPoints[0].Achieved = true;
-
+            
         }
 
         public void Update()
         {
             KeyPoints.Clear();
-            foreach (TourKeyPoints keyPoint in _tourController.GetSelectedTourKeyPoints(SelectedTour.Id)) 
+            foreach (TourKeyPoints keyPoint in TourService.GetSelectedTourKeyPoints(SelectedTour.Id)) 
             {
                 KeyPoints.Add(keyPoint);
             }
@@ -68,7 +71,7 @@ namespace Booking.View
             {
                 SelectedTourKeyPoint.Achieved = true;
                 MessageBox.Show(SelectedTourKeyPoint.Location.State.ToString() + " " + SelectedTourKeyPoint.Location.City.ToString() + " is achieved!");
-                _tourController.UpdateKeyPoint(SelectedTourKeyPoint);
+                TourService.UpdateKeyPoint(SelectedTourKeyPoint);
 
                 if (KeyPoints[KeyPoints.Count() - 1].Achieved == true)
                 {

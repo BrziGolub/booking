@@ -1,5 +1,6 @@
 ﻿using Booking.Controller;
 using Booking.Model.DAO;
+using Booking.Service;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,6 +19,10 @@ namespace Booking
         public TourController TourController { get; set; }
         public LocationController LocationController { get; set; }
         public AccommodationContoller AccommodationController { get; set; }
+
+        public TourService TourService { get; set; }
+        public LocationService LocationService { get; set; }
+
         public App()
         {
             LocationDAO locationDAO = new LocationDAO();
@@ -26,6 +31,9 @@ namespace Booking
             TourController = new TourController(tourDAO);
             AccommodationDAO accommodationDAO = new AccommodationDAO();
             AccommodationController = new AccommodationContoller(accommodationDAO);
+
+            TourService =  new TourService();
+            LocationService = new LocationService();
         }
 
         
