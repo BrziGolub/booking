@@ -27,7 +27,7 @@
             RowHeight="50"
             AutoGenerateColumns="False"
             SelectionMode="Single"
-            CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" 
+            CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserReorderColumns="False"
             SelectedItem="{Binding SelectedTour}"
             ItemsSource="{Binding Path=Tours, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>

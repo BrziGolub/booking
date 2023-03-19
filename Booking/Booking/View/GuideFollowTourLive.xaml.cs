@@ -138,8 +138,6 @@ namespace Booking.View
 
             pomid = pomid1;
 
-
-
             Tour tour = TourService.GetById(pomid);
                 if (tour != null)
                 {
