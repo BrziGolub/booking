@@ -14,6 +14,7 @@ namespace Booking.Service
 
 		private LocationService _locationService;
 		private TourImageService _tourImageService;
+		private TourKeyPointService _tourKeyPointService;
 
 		public TourService()
 		{
@@ -22,9 +23,9 @@ namespace Booking.Service
 
 			_locationService = new LocationService();
 			_tourImageService = new TourImageService();
+            _tourKeyPointService = new TourKeyPointService();
 
-			Load();
-			LoadImages();
+            Load();
 		}
 
 		public void Load()
@@ -32,7 +33,9 @@ namespace Booking.Service
 			_tours = _repository.Load();
 
 			LoadLocations();
-		}
+            LoadImages();
+			LoadKeyPoints();
+        }
 
 		public void Save()
 		{
@@ -63,13 +66,27 @@ namespace Booking.Service
 		{
 			_tourImageService.Load();
 
-			foreach(Tour tour in _tours)
+			foreach (Tour tour in _tours)
 			{
 				List<TourImage> images = _tourImageService.GetImagesByTourId(tour.Id);
 				foreach (TourImage image in images)
 				{
                     tour.Images.Add(image);
                 }
+			}
+		}
+
+		public void LoadKeyPoints()
+		{
+			_tourKeyPointService.Load();
+
+			foreach (Tour tour in _tours)
+			{
+				List<TourKeyPoint> keyPoints = _tourKeyPointService.GetKeyPointsByTourId(tour.Id);
+				foreach (TourKeyPoint keyPoint in keyPoints)
+				{
+					tour.Destinations.Add(keyPoint);
+				}
 			}
 		}
 

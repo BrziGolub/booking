@@ -86,7 +86,14 @@
 							</Style>
 						</DataGridTextColumn.ElementStyle>
 					</DataGridTextColumn>
-					<DataGridTemplateColumn Header="Images" Width="80">
+                    <DataGridTemplateColumn Header="Destinations" Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Show" Click="ShowDestinations"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Images" Width="80">
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
 								<Button Content="Show" Click="ShowImages"/>

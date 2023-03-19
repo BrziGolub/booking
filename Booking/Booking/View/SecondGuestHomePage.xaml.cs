@@ -100,5 +100,11 @@ namespace Booking.View
 			ShowTourImages view = new ShowTourImages(SelectedTour.Images);
 			view.ShowDialog();
 		}
-	}
+
+        private void ShowDestinations(object sender, RoutedEventArgs e)
+        {
+			ShowTourDestinations view = new ShowTourDestinations(SelectedTour.Destinations);
+			view.ShowDialog();
+        }
+    }
 }

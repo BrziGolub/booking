@@ -19,7 +19,7 @@ namespace Booking.Model
 
 		public int MaxVisitors { get; set; }
 
-		public List<TourKeyPoints> Destinations { get; set; }
+		public List<TourKeyPoint> Destinations { get; set; }
 
 		public DateTime StartTime { get; set; }
 
@@ -30,7 +30,7 @@ namespace Booking.Model
 		public Tour()
 		{
 			Location = new Location();
-			Destinations = new List<TourKeyPoints>();
+			Destinations = new List<TourKeyPoint>();
 			Images = new List<TourImage>();
 		}
 
@@ -43,7 +43,7 @@ namespace Booking.Model
 			MaxVisitors = maxVisitors;
 			StartTime = dt;
 			Duration = duration;
-			Destinations = new List<TourKeyPoints>();
+			Destinations = new List<TourKeyPoint>();
 			Images = new List<TourImage>();
 		}
 
@@ -58,7 +58,7 @@ namespace Booking.Model
                 Language,                               //4
                 MaxVisitors.ToString(),                 //5
                 //
-                StartTime.ToString("dd.MM.yyyy"),       //6
+                StartTime.ToString("dd/MM/yyyy"),       //6
                 Duration.ToString()                     //7
             };
 			return csvValues;
