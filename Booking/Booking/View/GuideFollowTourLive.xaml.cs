@@ -129,7 +129,7 @@ namespace Booking.View
             int pomid1 = -1;
                 foreach (var t in Tours)
                 {
-                if (t.isStarted == true)
+                if (t.IsStarted == true)
                     pomid1 = t.Id;
                 else pomid = -1;
                 }
