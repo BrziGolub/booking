@@ -1,6 +1,8 @@
 ﻿using Booking.Controller;
 using Booking.Model;
+using Booking.Model.Images;
 using Booking.Observer;
+using Booking.Repository;
 using Booking.Service;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,8 @@ namespace Booking.View
         
         public TourService TourService { get; set; }
 
+        public TourImagesRepository _tourImageRepository { get; set; }
+
         public Tour SelectedTour { get; set; }
         GuideKeyPointsCheck guideKeyPointsCheck { get; set; }
         int pomid { get; set; }
@@ -47,6 +51,8 @@ namespace Booking.View
             pomid = -1;
             Tours = new ObservableCollection<Tour>(TourService.GetTodayTours());
         }
+
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

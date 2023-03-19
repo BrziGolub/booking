@@ -59,7 +59,9 @@ namespace Booking.Service
 
 			LoadLocationsForKeyPoints();
             LoadLocations();
-		}
+            BindImagesToTour();
+
+        }
 
 		public void Save()
 		{
@@ -303,6 +305,21 @@ namespace Booking.Service
 
             NotifyObservers();
             return tour;
+        }
+
+        public void BindImagesToTour()
+        {
+            foreach (Tour tour in _tours)
+            {
+                foreach (TourImage tourImage in _tourImagesRepository.Load())
+                {
+                    if (tourImage.Tour.Id == tour.Id)
+                    {
+                        tour.Images.Add(tourImage);
+                    }
+                }
+            }
+
         }
 
         public void Create(Tour tour)
