@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -27,7 +28,9 @@ namespace Booking.View
     {
         private ObservableCollection<Accommodation> accommodations;
 
-        private AccommodationContoller accommodationContoller;
+        private AccommodationContoller accommodationContoller { get; set; }
+
+        private LocationController locationController { get; set; }
 
         public Boolean IsCheckedApartment { get; set; } = false;
         public Boolean IsCheckedCottage { get; set; } = false;
@@ -43,24 +46,74 @@ namespace Booking.View
 
         public Accommodation SelectedAccommodation { get; set; }
 
+        public ObservableCollection<string> CityCollection { get; set; }
+
+        public void FillCity(object sender, SelectionChangedEventArgs e)
+        {
+            CityCollection.Clear();
+
+            var locations = locationController.findAllLocations().Where(l => l.State.Equals(SearchState));
+
+            foreach (Location c in locations)
+            {
+                CityCollection.Add(c.City);
+            }
+
+            CitycomboBox.IsEnabled = true;
+
+        }
+
         public FirstGuestHomePage()
         {
             InitializeComponent();
             this.DataContext = this;
-
             var app = Application.Current as App;
-            accommodationContoller = app.AccommodationController;
+            locationController = app.LocationController;
+            //povezi accommodationContoller iz APP
+
+            //DA LI TREBA POVEZIT NESTO SA APP?? SERVICE ?
+            accommodationContoller = new AccommodationContoller();
             accommodations = new ObservableCollection<Accommodation>(accommodationContoller.GetAll());
+
+            CityCollection = new ObservableCollection<string>();
 
             accommodationTypes = new List<string>();
 
             AccommodationDataGrid.ItemsSource = accommodations;
+            FillComboBox();
+        }
+
+        public void FillComboBox()
+        {
+            List<string> items = new List<string>();
+
+            using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+
+                    string[] fields = reader.ReadLine().Split(',');
+                    foreach (var field in fields)
+                    {
+                        string[] Countries = field.Split('|');
+                        items.Add(Countries[1]);
+                    }
+                }
+            }
+            var distinctItems = items.Distinct().ToList();
+
+            CountrycomboBox.ItemsSource = distinctItems;
+
+            if (CountrycomboBox.SelectedItem == null)
+            {
+                CitycomboBox.IsEnabled = false;
+            }
+
         }
 
         private void Button_Click_Search(object sender, RoutedEventArgs e)
         {
-            //svaki put kad ponovo ide na search isprazni prethodnu listu i dodaj noci Accommodation type !!
-            accommodationTypes.Clear(); 
+            accommodationTypes.Clear();
 
             if (IsCheckedApartment)
             {
@@ -80,33 +133,26 @@ namespace Booking.View
 
         private void Button_Click_ShowAll(object sender, RoutedEventArgs e)
         {
-            //resetuj sve ako klikne na show all
-            SearchName = string.Empty;
-            SearchState = string.Empty;
-            SearchCity = string.Empty;
-            SerachGuests = string.Empty;
-            SearchReservationDays = string.Empty;
-
-            IsCheckedApartment = false;
-            IsCheckedCottage = false;
-            IsCheckedHouse = false;
-
-            accommodationTypes.Clear();
-           
 
             accommodationContoller.ShowAll(accommodations);
-            
+
+        }
+
+        public void BookAccommodation(Accommodation selectedAccommodation)
+        {
+            AccommodationReservation dialog = new AccommodationReservation(selectedAccommodation);
+            dialog.Show();
         }
 
         private void Button_Click_Book(object sender, RoutedEventArgs e)
         {
-            if(SelectedAccommodation == null)
+            if (SelectedAccommodation == null)
             {
-                MessageBox.Show("You have to select accommodation that you want to reserve! ");
+                MessageBox.Show("Please select an accommodation to reserve.");
                 return;
             }
-            AccommodationReservation ar = new AccommodationReservation(SelectedAccommodation);
-            ar.Show();
+
+            BookAccommodation(SelectedAccommodation);
         }
     }
 }

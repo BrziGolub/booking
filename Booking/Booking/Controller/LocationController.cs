@@ -53,10 +53,7 @@ namespace Booking.Controller
             return locationDAO.FindIdByCountryAndCity(Country, City);
         }
 
-        public Location FindById(int id)
-        {
-            return locationDAO.FindById(id);
-        }
 
+      
     }
 }

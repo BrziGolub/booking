@@ -27,10 +27,15 @@ namespace Booking.Controller
             return accommodationReservationDAO.Reserve(ArrivalDay, DepartureDay, SelectedAccommodation);
         }
 
-        public List<(DateTime, DateTime)> SuggestOtherDates(DateTime ArrivalDay,DateTime DepartureDay, Accommodation SelectedAccommodation)
+        public List<(DateTime, DateTime)> SuggestOtherDates(DateTime ArrivalDay, DateTime DepartureDay, Accommodation SelectedAccommodation)
         {
             return accommodationReservationDAO.SuggestOtherDates(ArrivalDay, DepartureDay, SelectedAccommodation);
         }
-    
+
+        public void SaveReservation(AccommodationReservation newReservation)
+        {
+            accommodationReservationDAO.SaveReservation(newReservation);
+        }
+
     }
 }
