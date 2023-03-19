@@ -50,6 +50,7 @@ namespace Booking.View
 
             pomid = -1;
             Tours = new ObservableCollection<Tour>(TourService.GetTodayTours());
+
         }
 
 
@@ -127,9 +128,19 @@ namespace Booking.View
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            int pomid1 = -1;
+                foreach (var t in Tours)
+                {
+                if (t.isStarted == true)
+                    pomid1 = t.Id;
+                else pomid = -1;
+                }
+
+            pomid = pomid1;
 
 
-                Tour tour = TourService.GetById(pomid);
+
+            Tour tour = TourService.GetById(pomid);
                 if (tour != null)
                 {
                     GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(tour.Id);
