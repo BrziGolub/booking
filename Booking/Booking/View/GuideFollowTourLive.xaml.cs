@@ -4,6 +4,7 @@ using Booking.Observer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,9 +28,13 @@ namespace Booking.View
         public TourController _tourController { get; set; }
         public Tour SelectedTour { get; set; }
         GuideKeyPointsCheck guideKeyPointsCheck { get; set; }
+        int pomid { get; set; }
+        
 
         public GuideFollowTourLive()
         {
+            
+
             InitializeComponent();
             this.DataContext = this;
 
@@ -46,6 +51,7 @@ namespace Booking.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
             int startedTours = 0;
             foreach (var tour in Tours)
             {
@@ -57,13 +63,23 @@ namespace Booking.View
             {
                 if (SelectedTour != null )
                 {
+                    Tour pomTour = SelectedTour;
                     GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(SelectedTour.Id);
+                    pomid = SelectedTour.Id;
                     SelectedTour.isStarted = true;
+
 
                     MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
                     _tourController.UpdateTour(SelectedTour);
-      
+
                     guideKeyPointsCheck.ShowDialog();
+
+                    _tourController.UpdateTour(pomTour);
+
+                    if (SelectedTour != null)
+                        pomid = SelectedTour.Id;
+                    else
+                        pomid = -1;
                 }
                 else
                 {
@@ -97,6 +113,37 @@ namespace Booking.View
             {
                 MessageBox.Show("In order to end the tour, you first need to select started tour!");
             }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+
+            /*foreach (Tour tour in Tours)
+            {
+                 if (tour.isStarted == true)
+                 {
+                     GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(tour.Id);
+                     guideKeyPointsCheck.ShowDialog();
+                 }
+                 else
+                 { MessageBox.Show("You don't have ongoing tour!"); }
+                */
+
+
+                Tour tour = _tourController.GetTourById(pomid);
+            if (tour != null)
+            {
+                GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(tour.Id);
+                guideKeyPointsCheck.ShowDialog();
+            } 
+            else
+            {
+                MessageBox.Show("You don't have ongoing tour!");
+            }
+            
+              
+            
         }
     }
 }

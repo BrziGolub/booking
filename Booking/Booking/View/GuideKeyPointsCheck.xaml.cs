@@ -30,24 +30,27 @@ namespace Booking.View
         public TourKeyPoints SelectedTourKeyPoint { get; set; }
         public Tour SelectedTour { get; set; }
 
+        int idt;
         public GuideKeyPointsCheck(int idTour)
         {
             InitializeComponent();
             this.DataContext = this;
-
-
+            
             var app = Application.Current as App;
 
             _tourController = app.TourController;
             _tourController.Subscribe(this);
             
             SelectedTour = _tourController.GetTourById(idTour);
+
+            idt = idTour;
+
             
-            
+
             KeyPoints = new ObservableCollection<TourKeyPoints>(_tourController.GetSelectedTourKeyPoints(SelectedTour.Id));
           
             KeyPoints[0].Achieved = true;
-            
+
         }
 
         public void Update()
@@ -66,6 +69,13 @@ namespace Booking.View
                 SelectedTourKeyPoint.Achieved = true;
                 MessageBox.Show(SelectedTourKeyPoint.Location.State.ToString() + " " + SelectedTourKeyPoint.Location.City.ToString() + " is achieved!");
                 _tourController.UpdateKeyPoint(SelectedTourKeyPoint);
+
+                if (KeyPoints[KeyPoints.Count() - 1].Achieved == true)
+                {
+                    SelectedTour.isStarted = false;
+                    MessageBox.Show("Tour ended, you achieved last keypoint!"); 
+                    this.Close();
+                }
             }
             else 
             {
