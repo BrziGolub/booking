@@ -73,7 +73,7 @@ namespace Booking.Service
             }
 
         }
-        public Boolean isEnumTrue(Accommodation accommodation, List<String> accommodationTypes)
+        public Boolean IsEnumTrue(Accommodation accommodation, List<String> accommodationTypes)
         {
             Boolean info = false;
 
@@ -98,8 +98,8 @@ namespace Booking.Service
             foreach (Accommodation accommodation in _accommodations)
             {
                 bool isNameValid = string.IsNullOrEmpty(name) || accommodation.Name.ToLower().Contains(name.ToLower());
-                bool isStateValid = string.IsNullOrEmpty(state) || accommodation.Location.State.ToLower().Contains(state.ToLower());
-                bool isAccommodationTypeValid = isEnumTrue(accommodation, accommodationTypes);
+                bool isStateValid = string.IsNullOrEmpty(state) || state.Equals("All") || accommodation.Location.State.ToLower().Contains(state.ToLower());
+                bool isAccommodationTypeValid = IsEnumTrue(accommodation, accommodationTypes);
                 bool isCityValid = string.IsNullOrEmpty(city) || accommodation.Location.City.ToLower().Contains(city.ToLower());
                 bool isCapacityValid = string.IsNullOrEmpty(numberOfGuests) || int.Parse(numberOfGuests) <= accommodation.Capacity;
                 bool isMinNumberOfDaysValid = string.IsNullOrEmpty(minNumDaysOfReservation) || int.Parse(minNumDaysOfReservation) >= accommodation.MinNumberOfDays;

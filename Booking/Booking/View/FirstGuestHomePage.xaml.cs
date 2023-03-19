@@ -63,7 +63,12 @@ namespace Booking.View
 
             CitycomboBox.IsEnabled = true;
 
-        }
+            if (SearchState.Equals("All"))
+            {
+                CitycomboBox.IsEnabled = false;
+            }
+
+		}
 
         public FirstGuestHomePage()
         {
@@ -84,7 +89,7 @@ namespace Booking.View
 
         public void FillComboBox()
         {
-            List<string> items = new List<string>();
+            List<string> items = new List<string>() { "All" };
 
             using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
             {
