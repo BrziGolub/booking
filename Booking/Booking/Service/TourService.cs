@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace Booking.Service
 {
-    public class TourService : ISubject
+    public class TourService
     {
         private readonly TourRepository _repository;
         private List<Tour> _tours;

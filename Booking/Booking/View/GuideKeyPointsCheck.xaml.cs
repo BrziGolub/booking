@@ -40,8 +40,10 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
 
-            TourService = new TourService();
-            TourService.Subscribe(this);
+			var app = Application.Current as App;
+
+			TourService = app.TourService;
+			TourService.Subscribe(this);
             
             SelectedTour = TourService.GetById(idTour);
 

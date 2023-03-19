@@ -34,8 +34,8 @@ namespace Booking.View
         public TourImageRepository _tourImageRepository { get; set; }
 
         public Tour SelectedTour { get; set; }
-        GuideKeyPointsCheck guideKeyPointsCheck { get; set; }
-        int pomid { get; set; }
+
+        int Pomid { get; set; }
 
 
         public GuideFollowTourLive()
@@ -43,15 +43,15 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
 
-            TourService = new TourService();
+            var app = Application.Current as App;
+
+            TourService = app.TourService;
             TourService.Subscribe(this);
 
-            pomid = -1;
+            Pomid = -1;
             Tours = new ObservableCollection<Tour>(TourService.GetTodayTours());
 
         }
-
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -62,7 +62,7 @@ namespace Booking.View
                 if (tour.IsStarted == true)
                 {
                     startedTours++;
-                    pomid = tour.Id;
+                    Pomid = tour.Id;
                 }
 
             }
@@ -73,7 +73,7 @@ namespace Booking.View
                 {
                     Tour pomTour = SelectedTour;
                     GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(SelectedTour.Id);
-                    pomid = SelectedTour.Id;
+                    Pomid = SelectedTour.Id;
                     SelectedTour.IsStarted = true;
 
                     MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
@@ -131,12 +131,12 @@ namespace Booking.View
                 {
                 if (t.IsStarted == true)
                     pomid1 = t.Id;
-                else pomid = -1;
+                else Pomid = -1;
                 }
 
-            pomid = pomid1;
+            Pomid = pomid1;
 
-            Tour tour = TourService.GetById(pomid);
+            Tour tour = TourService.GetById(Pomid);
                 if (tour != null)
                 {
                     GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(tour.Id);

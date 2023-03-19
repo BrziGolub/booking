@@ -16,10 +16,14 @@ namespace Booking
         public LocationController LocationController { get; set; }
         public AccommodationContoller AccommodationController { get; set; }
 
+        public TourService TourService { get; set; }
+
         public App()
         {
             AccommodationDAO accommodationDAO = new AccommodationDAO();
             AccommodationController = new AccommodationContoller(accommodationDAO);
+
+            TourService = new TourService();
         }
     }
 }
