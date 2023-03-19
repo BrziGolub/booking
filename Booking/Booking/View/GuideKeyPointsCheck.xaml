@@ -1,0 +1,34 @@
+﻿<Window x:Class="Booking.View.GuideKeyPointsCheck"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Booking.View"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Title="GuideKeyPointsCheck" Height="290" Width="400">
+    <Grid>
+        <DataGrid 
+        Margin="10 10 10 40"
+        
+        IsReadOnly="True" 
+        AutoGenerateColumns="False"
+        SelectionMode="Single"
+        CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" 
+        SelectedItem="{Binding SelectedTourKeyPoint}"
+        ItemsSource="{Binding Path=KeyPoints, UpdateSourceTrigger=PropertyChanged}"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Achieved" Binding="{Binding Achieved}"></DataGridTextColumn>
+            </DataGrid.Columns>            
+        </DataGrid>
+
+        <WrapPanel FlowDirection="LeftToRight" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="60" Margin="185 215 0 0" Panel.ZIndex="1">
+            <Button Content="Achieve"  Width="50" Height="30" Click="Button_Click"  FontSize="10" Margin ="0 0 0 0" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center"  />
+           
+        </WrapPanel>
+
+    </Grid>
+</Window>
