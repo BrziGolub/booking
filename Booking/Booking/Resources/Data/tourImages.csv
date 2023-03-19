@@ -1,7 +1,7 @@
-1|1|url1
-2|1|url2
-3|2|url3
-4|2|url4
+1|1|../../Resources/Images/prague.jpg
+2|1|../../Resources/Images/prague.jpg
+3|2|../../Resources/Images/paris.jpg
+4|2|../../Resources/Images/paris.jpg
 5|3|url5
 6|3|url6
 7|3|url7
@@ -18,3 +18,4 @@
 18|0|https://cdn.dribbble.com/users/2766124/screenshots/15053245/media/5d6bf27dd95c1c78e2c5916d236a4f18.jpg?compress=1&resize=400x300&vertical=top
 19|12|../../Resources/Images/sreckoMrk.jpg
 20|12|b
+21|5|../../Resources/Images/prague.jpg

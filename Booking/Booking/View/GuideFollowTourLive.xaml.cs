@@ -52,7 +52,7 @@ namespace Booking.View
             int startedTours = 0;
             foreach (var tour in Tours)
             {
-                if (tour.isStarted == true)
+                if (tour.IsStarted == true)
                 { startedTours++; }
             }
 
@@ -60,7 +60,7 @@ namespace Booking.View
             {
                 if (SelectedTour != null )
                 {
-                    SelectedTour.isStarted = true;
+                    SelectedTour.IsStarted = true;
                     MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
                     _tourController.UpdateTour(SelectedTour);
 
@@ -89,9 +89,9 @@ namespace Booking.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (SelectedTour != null && SelectedTour.isStarted == true)
+            if (SelectedTour != null && SelectedTour.IsStarted == true)
             {
-                SelectedTour.isStarted = false;
+                SelectedTour.IsStarted = false;
                 MessageBox.Show(SelectedTour.Name.ToString() + " is ended!");
                 _tourController.UpdateTour(SelectedTour);
             }
