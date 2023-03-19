@@ -1,7 +1,9 @@
 ﻿using Booking.Model;
+using Booking.Observer;
 using Booking.Repository;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Booking.Service
 {
@@ -14,6 +16,7 @@ namespace Booking.Service
 		{
 			_repository = new LocationRepository();
 			_locations = new List<Location>();
+
 			Load();
 		}
 
@@ -58,6 +61,53 @@ namespace Booking.Service
 					observe.Add(location.City);
 			}
 			return observe;
+		}
+
+		public int GetIdByCountryAndCity(string Country, string City)
+		{
+			foreach (var location in _locations)
+			{
+				if (location.City.Equals(City) && location.State.Equals(Country))
+				{
+					return location.Id;
+				}
+			}
+			return -1;
+		}
+
+		public Location GetByCountryAndCity(string Name)
+		{
+			string[] pom = Name.Split(',');
+			pom[1] = pom[1].Trim();
+			foreach (Location loc in _locations)
+			{
+
+				if (loc.City == pom[1])
+				{
+					return loc;
+				}
+			}
+			return null;
+		}
+
+		public Location AddLocation(Location location)
+		{
+			location.Id = NextId();
+			_locations.Add(location);
+			Save();
+			return location;
+		}
+
+		public int NextId()
+		{
+			if (_locations.Count == 0)
+			{
+				return 1;
+			}
+			else
+			{
+				return _locations.Max(l => l.Id) + 1;
+			}
 		}
 	}
 }

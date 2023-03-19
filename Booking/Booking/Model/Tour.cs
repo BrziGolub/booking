@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Booking.Model.Images;
 using Booking.Serializer;
-using Booking.Conversion;
-using System.Windows;
-using Booking.Model.Images;
+using System;
+using System.Collections.Generic;
 
 
 namespace Booking.Model
@@ -32,17 +27,16 @@ namespace Booking.Model
 		public double Duration { get; set; }
 
 		public List<TourImage> Images { get; set; }
-		public bool isStarted { get; set; }
+
+		public bool IsStarted { get; set; }
 
 		public Tour()
 		{
 			Location = new Location();
 			Destinations = new List<TourKeyPoint>();
 			Images = new List<TourImage>();
-			isStarted = false;
+			IsStarted = false;
 		}
-
-
 
 		public Tour(string name, Location location, string desc, string lang, int maxVisitors, DateTime dt, double duration)
 		{
@@ -57,7 +51,6 @@ namespace Booking.Model
 			Images = new List<TourImage>();
 		}
 
-
 		public string[] ToCSV()
 		{
 			string[] csvValues = {
@@ -69,13 +62,11 @@ namespace Booking.Model
                 MaxVisitors.ToString(),					//5
                 StartTime.ToString("dd/MM/yyyy"),		//6
                 Duration.ToString(),                    //7
-				isStarted.ToString()					//8
+				IsStarted.ToString()					//8
             };
-            return csvValues;
-        }
+			return csvValues;
+		}
 
-		
-		
 		public void FromCSV(string[] values)
 		{
 			Id = Convert.ToInt32(values[0]);
@@ -86,10 +77,7 @@ namespace Booking.Model
 			MaxVisitors = Convert.ToInt32(values[5]);
 			StartTime = DateTime.Parse(values[6]);
 			Duration = Convert.ToDouble(values[7]);
-			isStarted = Convert.ToBoolean(values[8]);
+			IsStarted = Convert.ToBoolean(values[8]);
 		}
 	}
-
-	}
-	
-
+}

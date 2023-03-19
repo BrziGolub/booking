@@ -3,6 +3,7 @@ using Booking.Conversion;
 using Booking.Model;
 using Booking.Model.DAO;
 using Booking.Model.Images;
+using Booking.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,21 +29,23 @@ namespace Booking.View
     /// </summary>
     public partial class GuideCreateTour : Window
     {
-        public TourController tourController { get; set; }
-        public LocationController locationController { get; set; }
+        public TourService tourService { get; set; }
+        public LocationService locationService { get; set; }
+       // public TourController tourController { get; set; }
+       // public LocationController locationController { get; set; }
+
         public Tour tour = new Tour();
         public ObservableCollection<string> CityCollection { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        LocationDAO locationDAO = new LocationDAO();
+    //    LocationDAO locationDAO = new LocationDAO();
         public GuideCreateTour()
         {
             InitializeComponent();
             this.DataContext = this;
-            var app = Application.Current as App;
-            tourController = app.TourController;
+            tourService = new TourService();
 
-            locationController = app.LocationController;
+            locationService = new LocationService();
 
             //**********************FILL COMBOBOX COUNTRY***************************************
             List<string> items1 = new List<string>();
@@ -102,7 +105,7 @@ namespace Booking.View
         {
             CityCollection.Clear();
 
-            var locations = locationController.findAllLocations().Where(l => l.State.Equals(Country));
+            var locations = locationService.GetAll().Where(l => l.State.Equals(Country));
 
             foreach (Location c in locations)
             {
@@ -284,9 +287,9 @@ namespace Booking.View
             }
             else
             {
-                int LocationID = locationController.FindIdByCountryAndCity(Country, City);
+                int LocationID = locationService.GetIdByCountryAndCity(Country, City);
                 tour.Location.Id = LocationID;
-                tour.Location = locationController.FindById(LocationID);
+                tour.Location = locationService.GetById(LocationID);
             }
             //-------------------------------
             if (tbDescription.Text == "")
@@ -347,7 +350,7 @@ namespace Booking.View
 
             else
             {
-                tourController.Create(tour);
+                tourService.Create(tour);
                 MessageBox.Show("Tour successfully created");
                 this.Close();
             }
@@ -365,8 +368,8 @@ namespace Booking.View
                 string Country = CountryCity[0];
                 string City = CountryCity[1].Trim(); 
 
-                int locationId= locationController.FindIdByCountryAndCity(Country, City);        
-                Location location = locationController.FindById(locationId);
+                int locationId= locationService.GetIdByCountryAndCity(Country, City);        
+                Location location = locationService.GetById(locationId);
 
                 TourKeyPoint tourKeyPoints = new TourKeyPoint();
                 tourKeyPoints.Location = location;

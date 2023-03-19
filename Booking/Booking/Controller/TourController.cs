@@ -28,6 +28,28 @@ namespace Booking.Controller
 		{
 			return tourDAO.GetTodayTours();
 		}
+
+        public List<TourKeyPoints> GetSelectedTourKeyPoints(int idTour)
+		{
+			return tourDAO.getSelectedTourKeyPoints(idTour);
+		}
+       
+
+		public List<TourKeyPoints> GetAllKeyPoints()
+		{
+			return tourDAO.getAllKeyPoints();
+		}
+
+		public Tour GetTourById(int id)
+		{
+			return tourDAO.FindById(id);
+		}
+
+		public TourKeyPoints GetKeyPointById(int id) 
+		{
+			return tourDAO.findKeyPointById(id);
+		}
+
 		public void Search(ObservableCollection<Tour> observe, string state, string city, string duration, string language, string passengers) 
 		{
 			tourDAO.Search(observe, state, city, duration, language, passengers);
@@ -55,6 +77,10 @@ namespace Booking.Controller
 			tourDAO.UpdateTour(tour);
 		}
 
+		public void UpdateKeyPoint(TourKeyPoints keyPoint)
+		{
+			tourDAO.UpdateKeyPoint(keyPoint);
+		}
 
 		public void Subscribe(IObserver observer)
 		{
