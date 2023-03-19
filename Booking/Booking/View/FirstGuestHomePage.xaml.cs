@@ -140,7 +140,7 @@ namespace Booking.View
 
         public void BookAccommodation(Accommodation selectedAccommodation)
         {
-            AccommodationReservation dialog = new AccommodationReservation(selectedAccommodation);
+            AccommodationReservationView dialog = new AccommodationReservationView(selectedAccommodation);
             dialog.Show();
         }
 

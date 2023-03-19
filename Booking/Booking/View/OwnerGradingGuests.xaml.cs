@@ -18,35 +18,40 @@ using System.Windows.Shapes;
 namespace Booking.View
 {
     /// <summary>
-    /// Interaction logic for OwnerHomePage.xaml
+    /// Interaction logic for OwnerGradingGuests.xaml
     /// </summary>
-    public partial class OwnerHomePage : Window
+    public partial class OwnerGradingGuests : Window
     {
         public AccommodationReservationController accommodationReservationController;
         public ObservableCollection<AccommodationReservation> reservations { get; set; }
-        public OwnerHomePage()
+        public AccommodationReservation SelectedReservation { get; set; }
+        public OwnerGradingGuests()
         {
             InitializeComponent();
             this.DataContext = this;
             var app = Application.Current as App;
             accommodationReservationController = app.AccommodationReservationController;
             reservations = new ObservableCollection<AccommodationReservation>(accommodationReservationController.GetAllUngradedReservations());
-            if (reservations.Count != 0)
+        }
+        private void Button_Click_Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Click_Grade(object sender, RoutedEventArgs e)
+        {
+            GradingWindow gradingWindow = new GradingWindow(SelectedReservation.Id, this);
+            gradingWindow.Show();
+        }
+
+        public void RefreshWindow()
+        {
+            List<AccommodationReservation> accomodationReservations = accommodationReservationController.GetAllUngradedReservations();
+            reservations.Clear();
+            foreach (AccommodationReservation accommodationReservation in accomodationReservations)
             {
-                MessageBox.Show("Number of guests to grade: " + reservations.Count.ToString());
+                reservations.Add(accommodationReservation);
             }
-        }
-
-        private void RegisterAccomodation(object sender, RoutedEventArgs e)
-        {
-            OwnerRegisterAccommodation ownerRegisterAccommodation = new OwnerRegisterAccommodation();
-            ownerRegisterAccommodation.Show();
-        }
-
-        private void GradingGuests(object sender, RoutedEventArgs e)
-        {
-            OwnerGradingGuests ownerGradingGuests = new OwnerGradingGuests();
-            ownerGradingGuests.Show();
         }
     }
 }

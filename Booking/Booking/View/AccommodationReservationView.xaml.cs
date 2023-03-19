@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    public partial class AccommodationReservation : Window
+    public partial class AccommodationReservationView : Window
     {
         private AccommodationReservationController accommodationReservationContoller;
 
@@ -75,7 +75,7 @@ namespace Booking.View
 
 
 
-        public AccommodationReservation(Accommodation selectedAccommodation)
+        public AccommodationReservationView(Accommodation selectedAccommodation)
         {
             InitializeComponent();
             this.DataContext = this;

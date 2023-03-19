@@ -1,0 +1,28 @@
+﻿<Window x:Class="Booking.View.OwnerGradingGuests"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Booking.View"
+        mc:Ignorable="d"
+        Title="OwnerGradingGuests" Height="420" Width="350">
+    <Grid>
+        <DataGrid x:Name="AccommodationDataGrid" 
+                      SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding reservations}"
+                      IsReadOnly="True" AutoGenerateColumns="False" Height="226" HeadersVisibility="Column" FontSize="13" Width="322" RenderTransformOrigin="0.503,0.552" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Width="120" Binding="{Binding Accommodation.Name}" />
+                <DataGridTextColumn Header="Arrival Day" Width="100" Binding="{Binding ArrivalDay , StringFormat={}{0:dd/MM/yyyy}}" />
+                <DataGridTextColumn Header="Departure Day" Width="100" Binding="{Binding DepartureDay, StringFormat={}{0:dd/MM/yyyy}}"/>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <WrapPanel FlowDirection="LeftToRight" Margin="-30,320,0,0">
+            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click_Grade" >GRADE</Button>
+            <Button Margin="10 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click_Close" >CLOSE</Button>
+        </WrapPanel>
+    </Grid>
+</Window>

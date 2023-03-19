@@ -21,7 +21,7 @@
             <Button Content=" Accomodation stats" Width="145" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
             <Button Content=" Site proposal" Width="145" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
             <Button Content=" Handling date changes" Width="145" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
-            <Button Content=" Gradeing guests" Width="145" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
+            <Button Content=" Gradeing guests" Width="145" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" Click="GradingGuests" HorizontalContentAlignment="Left" />
             <Button Content=" View reviews" Width="145" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
             <Button Content=" Super-owner" Width="145" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
             <Button Content=" Scheduling renovations" Width="145" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />

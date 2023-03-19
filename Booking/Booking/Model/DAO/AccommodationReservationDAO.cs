@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using Booking.Controller;
+using System.Windows;
 
 namespace Booking.Model.DAO
 {
@@ -13,12 +15,22 @@ namespace Booking.Model.DAO
         private readonly AccommodationResevationRepository _accommodationResevationRepository;
 
         private List<AccommodationReservation> reservations;
+        private AccommodationGradeController _accommodationGradeController;
+        private AccommodationRepository _accommodationRepository;
+        private readonly AccommodationResevationRepository repository;
 
         public AccommodationReservationDAO()
         {
             reservations = new List<AccommodationReservation>();
             _accommodationResevationRepository = new AccommodationResevationRepository();
             Load();
+            _accommodationRepository = new AccommodationRepository();
+            repository = new AccommodationResevationRepository();
+            reservations = repository.Load();
+
+            var app = Application.Current as App;
+            _accommodationGradeController = app.AccommodationGradeController;
+            BindReservationToAccommodation();
         }
 
         public void Load()
@@ -123,7 +135,29 @@ namespace Booking.Model.DAO
             uniqueReservedDatesList.Sort();
             return uniqueReservedDatesList;
         }
+        private bool IsReservationAvailableToGrade(AccommodationReservation accommodationReservation)
+        {
+            return accommodationReservation.DepartureDay <= DateTime.Now && accommodationReservation.DepartureDay.AddDays(5) >= DateTime.Now;
 
+        }
+
+        public List<AccommodationReservation> GetAllUngradedReservations()
+        {
+            List<AccommodationReservation> reservationList = new List<AccommodationReservation>();
+            foreach (var reservation in reservations)
+            {
+                if (IsReservationAvailableToGrade(reservation) == false)
+                {
+                    continue;
+                }
+                bool flag = _accommodationGradeController.IsReservationGraded(reservation.Id);
+                if (!flag)
+                {
+                    reservationList.Add(reservation);
+                }
+            }
+            return reservationList;
+        }
         public List<(DateTime, DateTime)> GetDates(List<DateTime> reservedDates, int difference, DateTime departureDay, DateTime arrivalDay)
         {
             List<(DateTime, DateTime)> rangeOfDates = new List<(DateTime, DateTime)>();
@@ -207,6 +241,21 @@ namespace Booking.Model.DAO
 
             //return the list of ranges
             return GetDates(reservedDates, difference, DepartureDay, ArrivalDay);
+        }
+
+        public void BindReservationToAccommodation()
+        {
+            foreach (AccommodationReservation accommodationReservation in reservations)
+            {
+                foreach (Accommodation accommodation in _accommodationRepository.Load())
+                {
+                    if (accommodation.Id == accommodationReservation.Accommodation.Id)
+                    {
+                        accommodationReservation.Accommodation = accommodation;
+                    }
+                }
+            }
+
         }
     }
 }

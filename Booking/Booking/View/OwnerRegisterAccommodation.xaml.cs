@@ -267,7 +267,7 @@ namespace Booking.View
             {
                 MessageBox.Show("'CANCELATION PERIOD' should be greater or equal than 0");
             }
-            else if (accommodation.Images == null)
+            else if (accommodation.Images.Count == 0)
             {
                 MessageBox.Show("'PICTURES URL' not entered");
             }

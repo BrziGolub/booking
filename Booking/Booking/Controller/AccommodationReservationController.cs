@@ -16,10 +16,18 @@ namespace Booking.Controller
         {
             accommodationReservationDAO = new AccommodationReservationDAO();
         }
+        public AccommodationReservationController(AccommodationReservationDAO accommodationReservationGrade)
+        {
+            accommodationReservationDAO = accommodationReservationGrade;
+        }
 
         public List<AccommodationReservation> GetAll()
         {
             return accommodationReservationDAO.GetAll();
+        }
+        public AccommodationReservation GetByID(int id)
+        {
+            return accommodationReservationDAO.GetByID(id);
         }
 
         public Boolean Reserve(DateTime ArrivalDay,DateTime DepartureDay,Accommodation SelectedAccommodation)
@@ -35,6 +43,11 @@ namespace Booking.Controller
         public void SaveReservation(AccommodationReservation newReservation)
         {
             accommodationReservationDAO.SaveReservation(newReservation);
+        }
+
+        public List<AccommodationReservation> GetAllUngradedReservations()
+        {
+            return accommodationReservationDAO.GetAllUngradedReservations();
         }
 
     }
