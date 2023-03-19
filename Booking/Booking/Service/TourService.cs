@@ -208,7 +208,7 @@ namespace Booking.Service
 			oldTour.IsStarted = tour.IsStarted;
 
 			Save();
-
+			NotifyObservers();
 			return oldTour;
 		}
 
