@@ -132,6 +132,9 @@
     <Compile Include="View\ShowTourImages.xaml.cs">
       <DependentUpon>ShowTourImages.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ShowDatesAccommodationsReservations.xaml.cs">
+      <DependentUpon>ShowDatesAccommodationsReservations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
     </Compile>
@@ -192,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ShowTourImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowDatesAccommodationsReservations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

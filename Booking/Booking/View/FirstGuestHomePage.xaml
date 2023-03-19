@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
         Title="GuestBOOKING" Height="500" Width="1200">
-    <Grid>
+    <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -49,8 +49,8 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Height="40" VerticalAlignment="Bottom">
             <Label Width="140" Margin="4">Accommodation Name:</Label>
-            <Label Width="60" Margin="4">State:</Label>
-            <Label Width="60" Margin="4">City:</Label>
+            <Label Width="100" Margin="4">State:</Label>
+            <Label Width="100" Margin="4">City:</Label>
             <Label Width="80" Margin="4">Type:</Label>
             <Label Width="110" Margin="4">Number of guests:</Label>
             <Label Width="200" Margin="4">Number of the days for reservation:</Label>
@@ -58,8 +58,8 @@
 
         <StackPanel Orientation="Horizontal" Margin="0,20,15,259" Grid.RowSpan="3">
             <TextBox Width="140" Height="20"  Margin="4" Text="{Binding Path=SearchName}"></TextBox>
-            <TextBox Width="60" Height="20" Margin="4" Text="{Binding Path=SearchState}"></TextBox>
-            <TextBox Width="60" Height="20" Margin="4" Text="{Binding Path=SearchCity}" ></TextBox>
+            <ComboBox x:Name="CountrycomboBox" Width="100" Height="20" Margin="4" SelectionChanged="FillCity"  SelectedItem="{Binding Path=SearchState,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+            <ComboBox x:Name="CitycomboBox"  Width="100" Height="20" Margin="4"  ItemsSource="{Binding Path=CityCollection}" SelectedItem="{Binding Path=SearchCity, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
             <StackPanel Orientation="Vertical" Margin="4" VerticalAlignment="Bottom" Height="57">
                 <CheckBox IsChecked="{Binding Path=IsCheckedApartment}">APARTMNET</CheckBox>
                 <CheckBox IsChecked="{Binding Path=IsCheckedCottage}">COTTAGE</CheckBox>

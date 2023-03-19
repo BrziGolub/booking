@@ -29,6 +29,13 @@ namespace Booking.Model
             Accommodation = new Accommodation();
         }
 
+        public AccommodationReservation(Accommodation accommodation, DateTime arrivalDay, DateTime departureDay)
+        {
+            this.Accommodation = accommodation;
+            this.ArrivalDay = arrivalDay;
+            this.DepartureDay = departureDay;
+        }
+
 
         public void FromCSV(string[] values)
         {

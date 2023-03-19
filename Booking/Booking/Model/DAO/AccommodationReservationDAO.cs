@@ -51,60 +51,57 @@ namespace Booking.Model.DAO
             _accommodationResevationRepository.Save(reservations);
         }
 
-        public Boolean IsAvailableReservation(AccommodationReservation entered, AccommodationReservation existed)
+        public List<DateTime> makeListOfReservedDates(DateTime initialDate, DateTime endDate)
         {
-            if(entered.ArrivalDay >= existed.ArrivalDay && entered.ArrivalDay <= existed.DepartureDay)
+            List<DateTime> reservedDates = new List<DateTime>();
+            for (DateTime date = initialDate; date <= endDate; date = date.AddDays(1))
             {
-                return false;
+                reservedDates.Add(date);
             }
-            else if(entered.DepartureDay > existed.ArrivalDay && entered.DepartureDay <= existed.DepartureDay)
+            return reservedDates;
+        }
+
+        public bool IsDatesMatche(List<DateTime> reservedDatesEntered, List<DateTime> reservedDates)
+        {
+            foreach (DateTime date in reservedDates)
             {
-                return false;
+                foreach (DateTime dateEntered in reservedDatesEntered)
+                {
+                    if (dateEntered == date)
+                    {
+                        return false;
+                    }
+                }
             }
             return true;
         }
 
-
-        public Boolean Reserve(DateTime ArrivalDay,DateTime DepartureDay,Accommodation SelectedAccommodation)
+        public bool Reserve(DateTime arrivalDay, DateTime departureDay, Accommodation selectedAccommodation)
         {
-            AccommodationReservation reservation = new AccommodationReservation();
-            reservation.ArrivalDay = ArrivalDay;
-            reservation.DepartureDay = DepartureDay;
-            reservation.Accommodation = SelectedAccommodation;
 
-            int difference = (DepartureDay- ArrivalDay).Days;
+            List<DateTime> reservedDatesEntered = makeListOfReservedDates(arrivalDay, departureDay);
 
-            if (difference <= SelectedAccommodation.MinNumberOfDays || DepartureDay < ArrivalDay)
+            foreach (AccommodationReservation reservation in reservations)
             {
-                return false;
-            }
-
-            int helper = 0;
-
-            foreach(AccommodationReservation r in reservations)
-            {
-                if(r.Accommodation.Id == SelectedAccommodation.Id)
+                if (reservation.Accommodation.Id == selectedAccommodation.Id)
                 {
-                    if (IsAvailableReservation(r, reservation) == false)
+                    List<DateTime> reservedDates = makeListOfReservedDates(reservation.ArrivalDay, reservation.DepartureDay);
+
+                    if (IsDatesMatche(reservedDatesEntered, reservedDates) == false)
                     {
-                        helper++;
+                        //unsuccessful reservation
+                        return false;
                     }
                 }
             }
+            AccommodationReservation newReservation = new AccommodationReservation(selectedAccommodation, arrivalDay, departureDay);
 
-            if(helper == 0)
-            {
-                SaveReservation(reservation); //write reservation to file 
-                return true;
-            }
-            else
-            {
-                //unsuccessful reservation
-                return false;
-            }
+            //successful reservation
+            SaveReservation(newReservation);
+            return true;
         }
 
-        public List<DateTime> setReservedDates(DateTime ArrivalDay, DateTime DepartureDay,Accommodation selected)
+        public List<DateTime> setReservedDates(DateTime ArrivalDay, DateTime DepartureDay, Accommodation selected)
         {
             //this is list od reserved days
             List<DateTime> reservedDates = new List<DateTime>();
@@ -113,10 +110,10 @@ namespace Booking.Model.DAO
             {
                 if (r.Accommodation.Id == selected.Id)
                 {
-                       for(DateTime date = r.ArrivalDay; date <= r.DepartureDay; date = date.AddDays(1))
-                       {
-                            reservedDates.Add(date);
-                       }
+                    for (DateTime date = r.ArrivalDay; date <= r.DepartureDay; date = date.AddDays(1))
+                    {
+                        reservedDates.Add(date);
+                    }
                 }
             }
             //throw out duplicates
@@ -127,66 +124,90 @@ namespace Booking.Model.DAO
             return uniqueReservedDatesList;
         }
 
-        public List<(DateTime, DateTime)> GetDates(List<DateTime> reservedDates,int difference)
+        public List<(DateTime, DateTime)> GetDates(List<DateTime> reservedDates, int difference, DateTime departureDay, DateTime arrivalDay)
         {
             List<(DateTime, DateTime)> rangeOfDates = new List<(DateTime, DateTime)>();
 
-            //add range after lastDate from list 
-            DateTime lastDate = reservedDates[reservedDates.Count - 1];
-            rangeOfDates.Add((lastDate, lastDate.AddDays(difference)));
+            DateTime end = departureDay;
+            bool flag = true;
 
-            //add range before firstDate from list
-            DateTime firstDate = reservedDates[0];
-            DateTime beforeFirst = firstDate.AddDays(-difference);
-
-            if (beforeFirst > DateTime.Now)
+            while (flag)
             {
-                rangeOfDates.Add((firstDate.AddDays(-difference), firstDate));
-            }
+                bool flag2 = false;
 
-            //find other ranges
-            for(int i = 0; i < reservedDates.Count - 1; i++)
-            {
-                int find_difference = (reservedDates[i + 1] - reservedDates[i]).Days;
-
-                if (difference <= find_difference)
-                {   
-                    
-                    if (difference == find_difference)
+                for (int i = 1; i <= difference; i++)
+                {
+                    foreach (var ReservedDay in reservedDates)
                     {
-                        //if there is exactly the number of days we need 
-                        rangeOfDates.Add((reservedDates[i], reservedDates[i + 1]));
-                    }
-                    else
-                    {
-                        int help = Math.Abs(difference - find_difference);
-                        
-                        if(help == difference)
+                        DateTime kt = end;
+                        if (kt.AddDays(-i) == ReservedDay || kt.AddDays(-i) == DateTime.Now)
                         {
+                            flag2 = true;
+                            if (end.AddDays(-i) == DateTime.Now)
+                            {
+                                flag = false;
+                                break;
+                            }
+                        }
+                    }
+                }
 
-                            //if this is 10 - 5 = 5 equal to the difference, one more range can be made
-                            rangeOfDates.Add((reservedDates[i].AddDays(difference), reservedDates[i + 1]));
-                        }
-                        else
-                        {
-                            rangeOfDates.Add((reservedDates[i], reservedDates[i + 1].AddDays(-help)));
-                        }
-                        
-                    }
-                    
+                if (flag2 == false)
+                {
+                    rangeOfDates.Add((end.AddDays(-difference), end));
+                    flag = false;
+
+                }
+                else
+                {
+                    end = end.AddDays(-1);
                 }
             }
+
+            flag = true;
+            DateTime start = arrivalDay;
+
+            while (flag)
+            {
+                bool flag2 = false;
+
+                for (int i = 1; i <= difference; i++)
+                {
+                    foreach (var ReservedDay in reservedDates)
+                    {
+                        DateTime pv = start;
+                        if (pv.AddDays(i) == ReservedDay)
+                        {
+                            flag2 = true;
+                        }
+                    }
+                }
+
+                if (flag2 == false)
+                {
+                    rangeOfDates.Add((start, start.AddDays(difference)));
+                    flag = false;
+
+                }
+                else
+                {
+                    start = start.AddDays(1);
+                }
+            }
+
             return rangeOfDates;
         }
 
-        public List<(DateTime, DateTime)> SuggestOtherDates(DateTime ArrivalDay, DateTime DepartureDay,Accommodation SelectedAccommodation)
+        public List<(DateTime, DateTime)> SuggestOtherDates(DateTime ArrivalDay, DateTime DepartureDay, Accommodation SelectedAccommodation)
         {
             int difference = (DepartureDay - ArrivalDay).Days;
 
-            List<DateTime> reservedDates= new List<DateTime>();
-            reservedDates = setReservedDates(ArrivalDay,DepartureDay, SelectedAccommodation);
+            List<DateTime> reservedDates = new List<DateTime>();
+            reservedDates = setReservedDates(ArrivalDay, DepartureDay, SelectedAccommodation);
 
-            return GetDates(reservedDates,difference); //return the list of ranges
+            //return the list of ranges
+            return GetDates(reservedDates, difference, DepartureDay, ArrivalDay);
         }
     }
 }
+

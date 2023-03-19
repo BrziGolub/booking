@@ -24,9 +24,26 @@ namespace Booking.View
         private AccommodationReservationController accommodationReservationContoller;
 
         private Accommodation SelectedAccommodation;
-   
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public string _numberOfGuests;
+        public string NumberOfGuests
+        {
+            get => _numberOfGuests;
+            set
+            {
+                if (_numberOfGuests != value)
+                {
+                    _numberOfGuests = value;
+                    OnPropertyChanged();
+                }
+            }
+
+        }
+
 
         public DateTime _arrivalDay;
         public DateTime ArrivalDay
@@ -42,25 +59,21 @@ namespace Booking.View
             }
         }
 
-
-          public DateTime _departureDay;
-          public DateTime DepartureDay
-          {
-              get => _departureDay;
-              set
-              {
-                  if (_departureDay != value)
-                  {
-                      _departureDay = value;
-                      OnPropertyChanged();
-                  }
-              }
-          }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public DateTime _departureDay;
+        public DateTime DepartureDay
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get => _departureDay;
+            set
+            {
+                if (_departureDay != value)
+                {
+                    _departureDay = value;
+                    OnPropertyChanged();
+                }
+            }
         }
+
+
 
         public AccommodationReservation(Accommodation selectedAccommodation)
         {
@@ -73,28 +86,57 @@ namespace Booking.View
 
             accommodationReservationContoller = new AccommodationReservationController();
         }
+
+        private void ShowAvailableDatesDialog(List<(DateTime, DateTime)> suggestedDateRanges, Accommodation selectedAccommodation)
+        {
+            ShowDatesAccommodationsReservations dialog = new ShowDatesAccommodationsReservations(suggestedDateRanges, selectedAccommodation);
+            dialog.Show();
+        }
+
+
         private void Button_Click_Reserve(object sender, RoutedEventArgs e)
         {
-             
-            Boolean IsReserved = accommodationReservationContoller.Reserve(ArrivalDay, DepartureDay, SelectedAccommodation);
-
-            if(IsReserved)
+            if (ArrivalDay > DepartureDay)
             {
-                MessageBox.Show("You succesfuly reserve your accommodation for:  " + ArrivalDay.ToString("dd/MM/yyyy") + " - " + DepartureDay.ToString("dd/MM/yyyy") + " !");
+                MessageBox.Show("Your arrival day is after departure day!");
+
+            }
+            else if ((DepartureDay - ArrivalDay).Days < SelectedAccommodation.MinNumberOfDays)
+            {
+                MessageBox.Show("Requirements for the minimal number of days for the reservation are not accomplished");
+
+            }
+            else if (int.Parse(NumberOfGuests) > SelectedAccommodation.Capacity || NumberOfGuests == null)
+            {
+                MessageBox.Show("Number of guests is not valid!");
             }
             else
             {
-                MessageBox.Show("There are no available reservations for the seleceted dates!");
+                bool IsReserved = accommodationReservationContoller.Reserve(ArrivalDay, DepartureDay, SelectedAccommodation);
 
-              
-                //prikaze listu svih mogucih datuma za SELEKOTVANI SMESTAJ 
+                if (IsReserved)
+                {
+                    MessageBox.Show("You succesfuly reserve your accommodation for: " + ArrivalDay.ToString("dd/MM/yyyy") + " - " + DepartureDay.ToString("dd/MM/yyyy") + " !");
+                }
+                else
+                {
+                    MessageBox.Show("There are no available reservations for the seleceted dates!");
 
-                List<(DateTime,DateTime)> ranges = accommodationReservationContoller.SuggestOtherDates(ArrivalDay, DepartureDay, SelectedAccommodation);
+                    List<(DateTime, DateTime)> suggestedDateRanges = accommodationReservationContoller.SuggestOtherDates(ArrivalDay, DepartureDay, SelectedAccommodation);
 
-                //OVO TREBA U WPF U DATA GRID prikazati nemam pojma kako  
-                //NOVI PROZOR SA DATA GRID ako hoce ponovo da rezervise 
+                    ShowAvailableDatesDialog(suggestedDateRanges, SelectedAccommodation);
+                }
             }
         }
 
+        private void Button_Click_Cancle(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
