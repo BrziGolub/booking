@@ -138,6 +138,7 @@
             </TextBlock>
 
             <Separator Margin="8 0 0 0" Width="717" HorizontalAlignment="Left" />
+            <ScrollViewer MaxHeight="390">
             <DataGrid        
                 BorderBrush="Black"
             SelectionMode="Single"
@@ -178,6 +179,7 @@
                 </DataGrid.RowStyle>
 
             </DataGrid>
+            </ScrollViewer>
         </StackPanel>
         
     </Grid>
