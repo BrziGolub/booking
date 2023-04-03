@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Resources;
 
 namespace Booking.View
 {
@@ -57,6 +58,18 @@ namespace Booking.View
             {
                 Tours.Add(t);
             }
+        }
+
+        private void CancelTour(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            this.Close();
         }
     }
 }
