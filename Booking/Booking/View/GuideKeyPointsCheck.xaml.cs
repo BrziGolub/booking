@@ -1,6 +1,4 @@
-﻿using Booking.Controller;
-using Booking.Model;
-using Booking.Model.DAO;
+﻿using Booking.Model;
 using Booking.Observer;
 using Booking.Service;
 using System;
@@ -26,23 +24,24 @@ namespace Booking.View
     public partial class GuideKeyPointsCheck : Window, IObserver
     {
 
-        public ObservableCollection<TourKeyPoints> KeyPoints { get; set; }
+        public ObservableCollection<TourKeyPoint> KeyPoints { get; set; }
 
         public TourService TourService { get; set; }
        // public TourController _tourController { get; set; }
-        public TourKeyPoints SelectedTourKeyPoint { get; set; }
+        public TourKeyPoint SelectedTourKeyPoint { get; set; }
         public Tour SelectedTour { get; set; }
 
         int idt;
+
         public GuideKeyPointsCheck(int idTour)
         {
             InitializeComponent();
             this.DataContext = this;
-            
-            var app = Application.Current as App;
 
-            TourService = app.TourService;
-            TourService.Subscribe(this);
+			var app = Application.Current as App;
+
+			TourService = app.TourService;
+			TourService.Subscribe(this);
             
             SelectedTour = TourService.GetById(idTour);
 
@@ -50,7 +49,7 @@ namespace Booking.View
 
             
 
-            KeyPoints = new ObservableCollection<TourKeyPoints>(TourService.GetSelectedTourKeyPoints(SelectedTour.Id));
+            KeyPoints = new ObservableCollection<TourKeyPoint>(TourService.GetSelectedTourKeyPoints(SelectedTour.Id));
           
             KeyPoints[0].Achieved = true;
             
@@ -59,7 +58,7 @@ namespace Booking.View
         public void Update()
         {
             KeyPoints.Clear();
-            foreach (TourKeyPoints keyPoint in TourService.GetSelectedTourKeyPoints(SelectedTour.Id)) 
+            foreach (TourKeyPoint keyPoint in TourService.GetSelectedTourKeyPoints(SelectedTour.Id)) 
             {
                 KeyPoints.Add(keyPoint);
             }
@@ -75,7 +74,7 @@ namespace Booking.View
 
                 if (KeyPoints[KeyPoints.Count() - 1].Achieved == true)
                 {
-                    SelectedTour.isStarted = false;
+                    SelectedTour.IsStarted = false;
                     MessageBox.Show("Tour ended, you achieved last keypoint!"); 
                     this.Close();
                 }

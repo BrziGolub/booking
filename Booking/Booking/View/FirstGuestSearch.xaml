@@ -1,0 +1,50 @@
+﻿<Window x:Class="Booking.View.FirstGuestSearch"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Booking.View"
+        mc:Ignorable="d"
+        Title="Search" Height="450" Width="600">
+    <Grid>
+        <Grid.RowDefinitions >
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+                <RowDefinition  Height="100"/>
+            </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="300" Width="550" Margin="20,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Height="30" HorizontalAlignment="Left">Accommodation name:</Label>
+                <Label Grid.Row="1" Grid.Column="0" Height="30" HorizontalAlignment="Left">Country:</Label>
+                <Label Grid.Row="2" Grid.Column="0" Height="30" HorizontalAlignment="Left">City:</Label>
+            <Label Grid.Row="3" Grid.Column="0" Height="30" HorizontalAlignment="Left">Advance reservation restrictions:</Label>
+                <Label Grid.Row="4" Grid.Column="0" Height="30" HorizontalAlignment="Left">Accommodation type:</Label>
+            <Label Grid.Row="5" Grid.Column="0" Height="30" HorizontalAlignment="Left">Cancelation period:</Label>
+
+                <TextBox Grid.Row="0" Grid.Column="1" Height="30" Width="200" HorizontalAlignment="Left"></TextBox>
+                <TextBox Grid.Row="1" Grid.Column="1" Height="30" Width="200" HorizontalAlignment="Left"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="1" Height="30" Width="200" HorizontalAlignment="Left"></TextBox>
+                <TextBox Grid.Row="3" Grid.Column="1" Height="30" Width="200" HorizontalAlignment="Left"></TextBox>
+                <ComboBox Grid.Row="4" Grid.Column="1" Height="30" Width="200" HorizontalAlignment="Left" ></ComboBox>
+                <TextBox Grid.Row="5" Grid.Column="1" Height="30" Width="200" HorizontalAlignment="Left"></TextBox>
+            </Grid>
+
+        <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Width="100" Height="35" HorizontalAlignment="Left">Find</Button>
+            <Button Width="100" Height="35" HorizontalAlignment="Left" Margin="220,0,0,0">Cancel</Button>
+        </Grid>
+    </Grid>
+</Window>

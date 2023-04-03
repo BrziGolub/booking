@@ -1,5 +1,4 @@
-﻿using Booking.Controller;
-using Booking.Model;
+﻿using Booking.Model;
 using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Repository;
@@ -31,11 +30,11 @@ namespace Booking.View
         
         public TourService TourService { get; set; }
 
-        public TourImagesRepository _tourImageRepository { get; set; }
+        public TourImageRepository _tourImageRepository { get; set; }
 
         public Tour SelectedTour { get; set; }
-        GuideKeyPointsCheck guideKeyPointsCheck { get; set; }
-        int pomid { get; set; }
+
+        int Pomid { get; set; }
 
 
         public GuideFollowTourLive()
@@ -48,12 +47,10 @@ namespace Booking.View
             TourService = app.TourService;
             TourService.Subscribe(this);
 
-            pomid = -1;
+            Pomid = -1;
             Tours = new ObservableCollection<Tour>(TourService.GetTodayTours());
 
         }
-
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -61,10 +58,10 @@ namespace Booking.View
              int startedTours = 0;
             foreach (var tour in Tours)
             {
-                if (tour.isStarted == true)
+                if (tour.IsStarted == true)
                 {
                     startedTours++;
-                    pomid = tour.Id;
+                    Pomid = tour.Id;
                 }
 
             }
@@ -75,8 +72,8 @@ namespace Booking.View
                 {
                     Tour pomTour = SelectedTour;
                     GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(SelectedTour.Id);
-                    pomid = SelectedTour.Id;
-                    SelectedTour.isStarted = true;
+                    Pomid = SelectedTour.Id;
+                    SelectedTour.IsStarted = true;
 
                     MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
                     TourService.UpdateTour(SelectedTour);
@@ -114,9 +111,9 @@ namespace Booking.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (SelectedTour != null && SelectedTour.isStarted == true)
+            if (SelectedTour != null && SelectedTour.IsStarted == true)
             {
-                SelectedTour.isStarted = false;
+                SelectedTour.IsStarted = false;
                 MessageBox.Show(SelectedTour.Name.ToString() + " is ended!");
                 TourService.UpdateTour(SelectedTour);
             }
@@ -131,14 +128,14 @@ namespace Booking.View
             int pomid1 = -1;
                 foreach (var t in Tours)
                 {
-                if (t.isStarted == true)
+                if (t.IsStarted == true)
                     pomid1 = t.Id;
-                else pomid = -1;
+                else Pomid = -1;
                 }
 
-            pomid = pomid1;
+            Pomid = pomid1;
 
-            Tour tour = TourService.GetById(pomid);
+            Tour tour = TourService.GetById(Pomid);
                 if (tour != null)
                 {
                     GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(tour.Id);

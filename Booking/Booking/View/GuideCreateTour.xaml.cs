@@ -1,7 +1,5 @@
-﻿using Booking.Controller;
-using Booking.Conversion;
+﻿using Booking.Conversion;
 using Booking.Model;
-using Booking.Model.DAO;
 using Booking.Model.Images;
 using Booking.Service;
 using System;
@@ -43,10 +41,9 @@ namespace Booking.View
         {
             InitializeComponent();
             this.DataContext = this;
-            var app = Application.Current as App;
-            tourService = app.TourService;
+            tourService = new TourService();
 
-            locationService = app.LocationService;
+            locationService = new LocationService();
 
             //**********************FILL COMBOBOX COUNTRY***************************************
             List<string> items1 = new List<string>();
@@ -313,7 +310,7 @@ namespace Booking.View
             if (datePicker.Text == "")
             { MessageBox.Show("'TOUR START DATE' not entered"); }
             else
-            { tour.StartTime = DateConversion.StringToDate(StartTime); }
+            { tour.StartTime = DateTime.Parse(StartTime); }
 
             if (tbDuration.Text == "")
             { 
@@ -372,7 +369,7 @@ namespace Booking.View
                 int locationId= locationService.GetIdByCountryAndCity(Country, City);        
                 Location location = locationService.GetById(locationId);
 
-                TourKeyPoints tourKeyPoints = new TourKeyPoints();
+                TourKeyPoint tourKeyPoints = new TourKeyPoint();
                 tourKeyPoints.Location = location;
                 tour.Destinations.Add(tourKeyPoints);
             }

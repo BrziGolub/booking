@@ -38,7 +38,7 @@
                 <DataGridTextColumn Header="Max Visitors" Width="100" Binding="{Binding MaxVisitors}"/>
                 <DataGridTextColumn Width="100" Header="Departure Date" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}" ></DataGridTextColumn>
                 <DataGridTextColumn Width="80" Header="Duration" Binding="{Binding Duration}"></DataGridTextColumn>
-                <DataGridTextColumn Width="70" Header="Is Started?" Binding="{Binding isStarted}"></DataGridTextColumn>
+                <DataGridTextColumn Width="70" Header="Is Started?" Binding="{Binding IsStarted}"></DataGridTextColumn>
                 <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"></DataGridTextColumn>
 
                 <DataGridTemplateColumn Header="Images" Width="*">

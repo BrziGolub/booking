@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -57,48 +57,48 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controller\LocationController.cs" />
-    <Compile Include="Controller\AccommodationContoller.cs" />
-    <Compile Include="Controller\AccommodationReservationController.cs" />
+    <Compile Include="Model\AccommodationGrade.cs" />
     <Compile Include="Model\AccommodationReservation.cs" />
-    <Compile Include="Controller\TourReservationController.cs" />
-    <Compile Include="Model\DAO\AccommodationDAO.cs" />
-    <Compile Include="Controller\TourController.cs" />
     <Compile Include="Conversion\DateConversion.cs" />
     <Compile Include="Model\Accommodation.cs" />
-    <Compile Include="Model\DAO\AccommodationReservationDAO.cs" />
-    <Compile Include="Model\DAO\LocationDAO.cs" />
-    <Compile Include="Model\DAO\TourDAO.cs" />
-    <Compile Include="Model\DAO\TourReservationDAO.cs" />
     <Compile Include="Model\Enum\AccommodationType.cs" />
     <Compile Include="Model\Images\AccommodationImage.cs" />
     <Compile Include="Model\Images\TourImage.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Tour.cs" />
-    <Compile Include="Model\TourKeyPoints.cs" />
+    <Compile Include="Model\TourKeyPoint.cs" />
     <Compile Include="Model\TourReservation.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Repository\AccommodationGradeRepository.cs" />
     <Compile Include="Repository\AccommodationImagesRepository.cs" />
     <Compile Include="Repository\AccommodationRepository.cs" />
     <Compile Include="Observer\IObserver.cs" />
     <Compile Include="Observer\ISubject.cs" />
     <Compile Include="Repository\AccommodationResevationRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
-    <Compile Include="Repository\TourImagesRepository.cs" />
-    <Compile Include="Repository\TourKeyPointsRepository.cs" />
+    <Compile Include="Repository\TourImageRepository.cs" />
+    <Compile Include="Repository\TourKeyPointRepository.cs" />
     <Compile Include="Repository\TourRepository.cs" />
     <Compile Include="Repository\TourReservationRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
     <Compile Include="Serializer\Serializer.cs" />
-    <Compile Include="View\AccommodationReservation.xaml.cs">
-      <DependentUpon>AccommodationReservation.xaml</DependentUpon>
+    <Compile Include="Service\AccommodationGradeService.cs" />
+    <Compile Include="Service\AccommodationReservationService.cs" />
+    <Compile Include="Service\AccommodationService.cs" />
+    <Compile Include="Service\TourImageService.cs" />
+    <Compile Include="Service\TourKeyPointService.cs" />
+    <Compile Include="View\AccommodationReservationView.xaml.cs">
+      <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service\LocationService.cs" />
     <Compile Include="Service\TourReservationService.cs" />
     <Compile Include="Service\TourService.cs" />
     <Compile Include="View\FirstGuestHomePage.xaml.cs">
       <DependentUpon>FirstGuestHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GradingWindow.xaml.cs">
+      <DependentUpon>GradingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GuideCreateTour.xaml.cs">
       <DependentUpon>GuideCreateTour.xaml</DependentUpon>
@@ -112,6 +112,9 @@
     <Compile Include="View\GuideKeyPointsCheck.xaml.cs">
       <DependentUpon>GuideKeyPointsCheck.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\OwnerGradingGuests.xaml.cs">
+      <DependentUpon>OwnerGradingGuests.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ReserveTour.xaml.cs">
       <DependentUpon>ReserveTour.xaml</DependentUpon>
     </Compile>
@@ -123,6 +126,15 @@
     </Compile>
     <Compile Include="View\SecondGuestHomePage.xaml.cs">
       <DependentUpon>SecondGuestHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShowTourDestinations.xaml.cs">
+      <DependentUpon>ShowTourDestinations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShowTourImages.xaml.cs">
+      <DependentUpon>ShowTourImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShowDatesAccommodationsReservations.xaml.cs">
+      <DependentUpon>ShowDatesAccommodationsReservations.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
@@ -139,11 +151,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AccommodationReservation.xaml">
+    <Page Include="View\AccommodationReservationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FirstGuestHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GradingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,6 +179,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\OwnerGradingGuests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\OwnerHomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +196,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SecondGuestHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowTourDestinations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowTourImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowDatesAccommodationsReservations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,6 +238,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Data\AccommodationGrades.csv" />
     <None Include="Resources\Data\accommodationImages.csv" />
     <None Include="Resources\Data\accommodations.csv" />
     <None Include="Resources\Data\accommodationsReservations.csv" />
@@ -230,6 +263,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\logout.png" />
+    <Resource Include="Resources\Images\paris.jpg" />
+    <Resource Include="Resources\Images\prague.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\sreckoMrk.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

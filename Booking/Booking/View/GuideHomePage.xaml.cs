@@ -1,5 +1,4 @@
-﻿using Booking.Controller;
-using Booking.Model;
+﻿using Booking.Model;
 using Booking.Observer;
 using Booking.Service;
 using System;
@@ -32,8 +31,7 @@ namespace Booking.View
         {
             InitializeComponent();            
             this.DataContext = this;
-            var app = Application.Current as App;
-            _tourService = app.TourService;
+            _tourService = new TourService();
             _tourService.Subscribe(this);
 
             Tours = new ObservableCollection<Tour>(_tourService.GetAll());

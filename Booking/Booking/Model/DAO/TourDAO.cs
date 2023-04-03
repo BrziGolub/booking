@@ -183,7 +183,7 @@ namespace Booking.Model.DAO
 			oldTour.MaxVisitors = tour.MaxVisitors;
 			oldTour.StartTime = tour.StartTime;
 			oldTour.Duration = tour.Duration;
-			oldTour.isStarted = tour.isStarted;
+			oldTour.IsStarted = tour.IsStarted;
 
 			repository.Save(tours);
 			NotifyObservers();

@@ -5,65 +5,55 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using Booking.Controller;
 using System.Windows;
+using Booking.Model;
 
-namespace Booking.Model.DAO
+namespace Booking.Service
 {
-    public class AccommodationReservationDAO
+    public class AccommodationReservationService
     {
         private readonly AccommodationResevationRepository _accommodationResevationRepository;
-
-        private List<AccommodationReservation> reservations;
-        private AccommodationGradeController _accommodationGradeController;
+        public AccommodationGradeService AccommodationGradeService { get; set; }
+        private List<AccommodationReservation> _reservations;
         private AccommodationRepository _accommodationRepository;
-        private readonly AccommodationResevationRepository repository;
-
-        public AccommodationReservationDAO()
+        private readonly AccommodationResevationRepository _repository;
+        public AccommodationReservationService()
         {
-            reservations = new List<AccommodationReservation>();
+            _reservations = new List<AccommodationReservation>();
             _accommodationResevationRepository = new AccommodationResevationRepository();
             Load();
             _accommodationRepository = new AccommodationRepository();
-            repository = new AccommodationResevationRepository();
-            reservations = repository.Load();
+            _repository = new AccommodationResevationRepository();
+            _reservations = _repository.Load();
 
             var app = Application.Current as App;
-            _accommodationGradeController = app.AccommodationGradeController;
+            AccommodationGradeService = app.AccommodationGradeService;
             BindReservationToAccommodation();
         }
-
         public void Load()
         {
-            reservations = _accommodationResevationRepository.Load();
+            _reservations = _accommodationResevationRepository.Load();
         }
-
         public AccommodationReservation GetByID(int id)
         {
-            return reservations.Find(reservation => reservation.Id == id);
+            return _reservations.Find(reservation => reservation.Id == id);
         }
-
         public List<AccommodationReservation> GetAll()
         {
-            return reservations;
+            return _reservations;
         }
-
-
-        public int GenerateId()
+        public int NextId()
         {
-            if (reservations.Count == 0) return 0;
-            return reservations.Max(s => s.Id) + 1;
+            if (_reservations.Count == 0) return 0;
+            return _reservations.Max(s => s.Id) + 1;
         }
-
-         
         public void SaveReservation(AccommodationReservation reservation)
         {
-            reservation.Id = GenerateId();
-            reservations.Add(reservation);
-            _accommodationResevationRepository.Save(reservations);
+            reservation.Id = NextId();
+            _reservations.Add(reservation);
+            _accommodationResevationRepository.Save(_reservations);
         }
-
-        public List<DateTime> makeListOfReservedDates(DateTime initialDate, DateTime endDate)
+        public List<DateTime> MakeListOfReservedDates(DateTime initialDate, DateTime endDate)
         {
             List<DateTime> reservedDates = new List<DateTime>();
             for (DateTime date = initialDate; date <= endDate; date = date.AddDays(1))
@@ -72,7 +62,6 @@ namespace Booking.Model.DAO
             }
             return reservedDates;
         }
-
         public bool IsDatesMatche(List<DateTime> reservedDatesEntered, List<DateTime> reservedDates)
         {
             foreach (DateTime date in reservedDates)
@@ -87,17 +76,16 @@ namespace Booking.Model.DAO
             }
             return true;
         }
-
         public bool Reserve(DateTime arrivalDay, DateTime departureDay, Accommodation selectedAccommodation)
         {
 
-            List<DateTime> reservedDatesEntered = makeListOfReservedDates(arrivalDay, departureDay);
+            List<DateTime> reservedDatesEntered = MakeListOfReservedDates(arrivalDay, departureDay);
 
-            foreach (AccommodationReservation reservation in reservations)
+            foreach (AccommodationReservation reservation in _reservations)
             {
                 if (reservation.Accommodation.Id == selectedAccommodation.Id)
                 {
-                    List<DateTime> reservedDates = makeListOfReservedDates(reservation.ArrivalDay, reservation.DepartureDay);
+                    List<DateTime> reservedDates = MakeListOfReservedDates(reservation.ArrivalDay, reservation.DepartureDay);
 
                     if (IsDatesMatche(reservedDatesEntered, reservedDates) == false)
                     {
@@ -112,13 +100,12 @@ namespace Booking.Model.DAO
             SaveReservation(newReservation);
             return true;
         }
-
-        public List<DateTime> setReservedDates(DateTime ArrivalDay, DateTime DepartureDay, Accommodation selected)
+        public List<DateTime> SetReservedDates(DateTime arrivalDay, DateTime departureDay, Accommodation selected)
         {
             //this is list od reserved days
             List<DateTime> reservedDates = new List<DateTime>();
 
-            foreach (AccommodationReservation r in reservations)
+            foreach (AccommodationReservation r in _reservations)
             {
                 if (r.Accommodation.Id == selected.Id)
                 {
@@ -140,17 +127,16 @@ namespace Booking.Model.DAO
             return accommodationReservation.DepartureDay <= DateTime.Now && accommodationReservation.DepartureDay.AddDays(5) >= DateTime.Now;
 
         }
-
         public List<AccommodationReservation> GetAllUngradedReservations()
         {
             List<AccommodationReservation> reservationList = new List<AccommodationReservation>();
-            foreach (var reservation in reservations)
+            foreach (var reservation in _reservations)
             {
                 if (IsReservationAvailableToGrade(reservation) == false)
                 {
                     continue;
                 }
-                bool flag = _accommodationGradeController.IsReservationGraded(reservation.Id);
+                bool flag = AccommodationGradeService.IsReservationGraded(reservation.Id);
                 if (!flag)
                 {
                     reservationList.Add(reservation);
@@ -162,90 +148,93 @@ namespace Booking.Model.DAO
         {
             List<(DateTime, DateTime)> rangeOfDates = new List<(DateTime, DateTime)>();
 
-            DateTime end = departureDay;
-            bool flag = true;
+            //find date before
 
-            while (flag)
+            DateTime endDate = departureDay;
+            bool endFlag = true;
+
+            while (endFlag)
             {
-                bool flag2 = false;
+                bool isEndValid = false;
 
                 for (int i = 1; i <= difference; i++)
                 {
                     foreach (var ReservedDay in reservedDates)
                     {
-                        DateTime kt = end;
-                        if (kt.AddDays(-i) == ReservedDay || kt.AddDays(-i) == DateTime.Now)
+                        DateTime final_moment = endDate;
+
+                        if (final_moment.AddDays(-i) == ReservedDay || final_moment.AddDays(-i) == DateTime.Now)
                         {
-                            flag2 = true;
-                            if (end.AddDays(-i) == DateTime.Now)
+                            isEndValid = true;
+                            if (endDate.AddDays(-i) == DateTime.Now)
                             {
-                                flag = false;
+                                endFlag = false;
                                 break;
                             }
                         }
                     }
                 }
 
-                if (flag2 == false)
+                if (isEndValid == false)
                 {
-                    rangeOfDates.Add((end.AddDays(-difference), end));
-                    flag = false;
+                    rangeOfDates.Add((endDate.AddDays(-difference), endDate));
+                    endFlag = false;
 
                 }
                 else
                 {
-                    end = end.AddDays(-1);
+                    endDate = endDate.AddDays(-1);
                 }
             }
 
-            flag = true;
-            DateTime start = arrivalDay;
+            //find date after
 
-            while (flag)
+            endFlag = true;
+            DateTime startDate = arrivalDay;
+
+            while (endFlag)
             {
-                bool flag2 = false;
+                bool isEndValid = false;
 
                 for (int i = 1; i <= difference; i++)
                 {
                     foreach (var ReservedDay in reservedDates)
                     {
-                        DateTime pv = start;
-                        if (pv.AddDays(i) == ReservedDay)
+                        DateTime initial_moment = startDate;
+                        if (initial_moment.AddDays(i) == ReservedDay)
                         {
-                            flag2 = true;
+                            isEndValid = true;
                         }
                     }
                 }
 
-                if (flag2 == false)
+                if (isEndValid == false)
                 {
-                    rangeOfDates.Add((start, start.AddDays(difference)));
-                    flag = false;
+                    rangeOfDates.Add((startDate, startDate.AddDays(difference)));
+                    endFlag = false;
 
                 }
                 else
                 {
-                    start = start.AddDays(1);
+                    startDate = startDate.AddDays(1);
                 }
             }
 
             return rangeOfDates;
         }
-
-        public List<(DateTime, DateTime)> SuggestOtherDates(DateTime ArrivalDay, DateTime DepartureDay, Accommodation SelectedAccommodation)
+        public List<(DateTime, DateTime)> SuggestOtherDates(DateTime arrivalDay, DateTime departureDay, Accommodation selectedAccommodation)
         {
-            int difference = (DepartureDay - ArrivalDay).Days;
+            int difference = (departureDay - arrivalDay).Days;
 
             List<DateTime> reservedDates = new List<DateTime>();
-            reservedDates = setReservedDates(ArrivalDay, DepartureDay, SelectedAccommodation);
+            reservedDates = SetReservedDates(arrivalDay, departureDay, selectedAccommodation);
 
             //return the list of ranges
-            return GetDates(reservedDates, difference, DepartureDay, ArrivalDay);
+            return GetDates(reservedDates, difference, departureDay, arrivalDay);
         }
-
         public void BindReservationToAccommodation()
         {
-            foreach (AccommodationReservation accommodationReservation in reservations)
+            foreach (AccommodationReservation accommodationReservation in _reservations)
             {
                 foreach (Accommodation accommodation in _accommodationRepository.Load())
                 {
@@ -257,6 +246,7 @@ namespace Booking.Model.DAO
             }
 
         }
+
+
     }
 }
-

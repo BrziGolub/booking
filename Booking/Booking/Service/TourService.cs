@@ -1,5 +1,4 @@
 ﻿using Booking.Model;
-using Booking.Model.DAO;
 using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Repository;
@@ -11,340 +10,307 @@ using System.Windows.Input;
 
 namespace Booking.Service
 {
-	public class TourService
-	{
-		private readonly TourRepository _repository;
-		private List<Tour> _tours;
+    public class TourService
+    {
+        private readonly TourRepository _repository;
+        private List<Tour> _tours;
+
+		private readonly List<IObserver> _observers;
 
 		private LocationService _locationService;
-        private List<Location> _locations;
-        private LocationRepository _locationRepository;
-        //-------------------------------------------------------
-        private readonly List<IObserver> _observers;
-        //-------------------------------------------------------
-        private List<TourImage> _tourImages;
-        private TourImagesRepository _tourImagesRepository;
-        //-------------------------------------------------------
-        private List<TourKeyPoints> _tourKeyPoints;
-        private TourKeyPointsRepository _tourKeyPointsRepository;
-        //-------------------------------------------------------
+        private TourImageService _tourImageService;
+        private TourKeyPointService _tourKeyPointService;
 
-        public TourService()
-		{
-			_repository = new TourRepository();
-			_tours = new List<Tour>();
-			_locations = new List<Location>();
-            _observers = new List<IObserver>();
-            //--------------------------------------------
-            _locationService = new LocationService();
-            _locationRepository = new LocationRepository();
+		private List<Location> _locations;
+		private List<TourImage> _tourImages;
+		private List<TourKeyPoint> _tourKeyPoints;
+
+		private LocationRepository _locationRepository;
+		private TourImageRepository _tourImagesRepository;
+		private TourKeyPointRepository _tourKeyPointsRepository;
+
+		public TourService()
+        {
+            _repository = new TourRepository();
+            _tours = new List<Tour>();
+
+			_observers = new List<IObserver>();
+
+			_locationService = new LocationService();
+            _tourImageService = new TourImageService();
+            _tourKeyPointService = new TourKeyPointService();
+
             _locations = new List<Location>();
-            //--------------------------------------------
-            _tourKeyPointsRepository = new TourKeyPointsRepository();
-            _tourKeyPoints = new List<TourKeyPoints>();
-            //--------------------------------------------
-            _tourImagesRepository = new TourImagesRepository();
             _tourImages = new List<TourImage>();
-            //--------------------------------------------
+            _tourKeyPoints = new List<TourKeyPoint>();
 
-            Load();
-		}
+			_locationRepository = new LocationRepository();
+			_tourImagesRepository = new TourImageRepository();
+			_tourKeyPointsRepository = new TourKeyPointRepository();
 
-		public void Load()
-		{
-			_tours = _repository.Load();
-			_tourImages = _tourImagesRepository.Load();
-            _tourKeyPoints = _tourKeyPointsRepository.Load();
-            _locations = _locationRepository.Load();
-
-			LoadLocationsForKeyPoints();
-            LoadLocations();
-            BindImagesToTour();
-
+			Load();
         }
 
-		public void Save()
-		{
-			_repository.Save(_tours);
+        public void Load()
+        {
+            _tours = _repository.Load();
+			_tourImages = _tourImagesRepository.Load();
+			_tourKeyPoints = _tourKeyPointsRepository.Load();
+			_locations = _locationRepository.Load();
+
+			LoadLocations();
+            LoadImages();
+            LoadKeyPoints();
+
+			LoadLocationsForKeyPoints();
 		}
 
-		public Tour GetById(int id)
-		{
-			return _tours.Find(v => v.Id == id);
-		}
+        public void Save()
+        {
+            _repository.Save(_tours);
+        }
 
-		public List<Tour> GetAll()
-		{
-			return _tours;
-		}
+        public Tour GetById(int id)
+        {
+            return _tours.Find(v => v.Id == id);
+        }
 
-		public void LoadLocations()
-		{
-			_locationService.Load();
+        public List<Tour> GetAll()
+        {
+            return _tours;
+        }
 
-			foreach (Tour tour in _tours)
-			{
-				tour.Location = _locationService.GetById(tour.Id);
-			}
-		}
-
-        public void LoadLocationsForKeyPoints()
+        public void LoadLocations()
         {
             _locationService.Load();
 
-            foreach (TourKeyPoints keypoint in _tourKeyPoints)
-            {
-                keypoint.Location = _locationService.GetById(keypoint.Location.Id);
-            }
-        }
-
-        public ObservableCollection<Tour> Search(ObservableCollection<Tour> observe, string state, string city, string duration, string language, string passengers)
-		{
-			observe.Clear();
-
-			foreach (Tour tour in _tours)
-			{
-				if ((tour.Location.State.Equals(state) || state.Equals("All")) && (tour.Location.City.Equals(city) || city.Equals("All")) && (tour.Language.ToLower().Contains(language.ToLower()) || language.Equals("")))
-				{
-					if (duration.Equals("") && passengers.Equals(""))
-					{
-						observe.Add(tour);
-					}
-					else if (duration.Equals("") && !passengers.Equals(""))
-					{
-						if (tour.MaxVisitors >= Convert.ToInt32(passengers))
-						{
-							observe.Add(tour);
-						}
-					}
-					else if (!duration.Equals("") && passengers.Equals(""))
-					{
-						if (tour.Duration == Convert.ToDouble(duration))
-						{
-							observe.Add(tour);
-						}
-					}
-					else
-					{
-						if (tour.MaxVisitors >= Convert.ToInt32(passengers) && tour.Duration == Convert.ToDouble(duration))
-						{
-							observe.Add(tour);
-						}
-					}
-				}
-			}
-
-			return observe;
-		}
-
-		public ObservableCollection<Tour> CancelSearch(ObservableCollection<Tour> observe)
-		{
-			observe.Clear();
-
-			foreach (Tour tour in _tours)
-			{
-				observe.Add(tour);
-			}
-
-			return observe;
-		}
-
-		public List<string> GetAllStates()
-		{
-			return _locationService.GetAllStates();
-		}
-
-		public ObservableCollection<string> GetAllCitiesByState(ObservableCollection<string> observe, string state)
-		{
-			return _locationService.GetAllCitiesByState(observe, state);
-		}
-
-        public List<Tour> GetTodayTours()
-        {
-            List<Tour> _todayTours = new List<Tour>();
-            foreach (var tour in _tours)
-            {
-                if (tour.StartTime == DateTime.Today)
-                {
-                    _todayTours.Add(tour);
-                }
-            }
-            return _todayTours;
-        }
-
-        public TourKeyPoints GetKeyPointById(int id)
-        {
-            return _tourKeyPoints.Find(t => t.Id == id);
-        }
-
-        public Tour UpdateTour(Tour tour)
-        {
-            Tour oldTour = GetById(tour.Id);
-            if (oldTour == null) return null;
-
-            oldTour.Name = tour.Name;
-            oldTour.Location.Id = tour.Location.Id;
-            oldTour.Description = tour.Description;
-            oldTour.Language = tour.Language;
-            oldTour.MaxVisitors = tour.MaxVisitors;
-            oldTour.StartTime = tour.StartTime;
-            oldTour.Duration = tour.Duration;
-            oldTour.isStarted = tour.isStarted;
-
-            _repository.Save(_tours);
-            NotifyObservers();
-
-            return oldTour;
-        }
-
-        public TourKeyPoints UpdateKeyPoint(TourKeyPoints tourKeyPoint)
-        {
-            TourKeyPoints oldTourKeyPoint = GetKeyPointById(tourKeyPoint.Id);
-
-            oldTourKeyPoint.Tour = tourKeyPoint.Tour;
-            oldTourKeyPoint.Location = tourKeyPoint.Location;
-            oldTourKeyPoint.Achieved = tourKeyPoint.Achieved;
-
-            _tourKeyPointsRepository.Save(_tourKeyPoints);
-            NotifyObservers();
-
-            return oldTourKeyPoint;
-        }
-
-        /*public List<TourKeyPoints> UpdateKeyPoints(List<TourKeyPoints> tourKeyPoints)
-        {
-            List<TourKeyPoints> keyPoints = GetAllKeyPoints();
-            foreach (var tour in tourKeyPoints)
-            {
-                UpdateKeyPoint(tour); 
-            }
-            return keyPoints;
-        }*/
-
-        public int NextId()
-        {
-            if (_tours.Count == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return _tours.Max(t => t.Id) + 1;
-            }
-        }
-
-        public int ImageNextId()
-        {
-            if (_tourImages.Count == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return _tourImages.Max(t => t.Id) + 1;
-            }
-        }
-
-        public int KeyPointsNextId()
-        {
-            if (_tourKeyPoints.Count == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return _tourKeyPoints.Max(t => t.Id) + 1;
-            }
-        }
-
-        public List<TourKeyPoints> GetSelectedTourKeyPoints(int idTour)
-        {
-            List<TourKeyPoints> _selectedKeyPoints = new List<TourKeyPoints>();
-
-            foreach (var keypoint in _tourKeyPoints)
-            {
-                if (keypoint.Tour.Id == idTour)
-                {
-                    _selectedKeyPoints.Add(keypoint);
-                }
-            }
-            return _selectedKeyPoints;
-        }
-
-        public List<TourKeyPoints> GetAllKeyPoints()
-        {
-            List<TourKeyPoints> _keyPoints = new List<TourKeyPoints>();
-
-            foreach (var keypoint in _tourKeyPoints)
-            {
-                _keyPoints.Add(keypoint);
-            }
-            return _keyPoints;
-        }
-
-        public Tour addTour(Tour tour)
-        {
-            tour.Id = NextId();
-            foreach (var destination in tour.Destinations)
-            {
-                destination.Id = KeyPointsNextId();
-                destination.Tour = tour;
-                _tourKeyPoints.Add(destination);
-            }
-
-            foreach (var picture in tour.Images)
-            {
-                picture.Id = ImageNextId();
-                picture.Tour = tour;
-                _tourImages.Add(picture);
-            }
-            _tours.Add(tour);
-            _repository.Save(_tours);
-            _tourImagesRepository.Save(_tourImages);
-            _tourKeyPointsRepository.Save(_tourKeyPoints);
-
-            NotifyObservers();
-            return tour;
-        }
-
-        public void BindImagesToTour()
-        {
             foreach (Tour tour in _tours)
             {
-                foreach (TourImage tourImage in _tourImagesRepository.Load())
+                tour.Location = _locationService.GetById(tour.Location.Id);
+            }
+        }
+
+        public void LoadImages()
+        {
+            _tourImageService.Load();
+
+            foreach (Tour tour in _tours)
+            {
+                List<TourImage> images = _tourImageService.GetImagesByTourId(tour.Id);
+                foreach (TourImage image in images)
                 {
-                    if (tourImage.Tour.Id == tour.Id)
+                    tour.Images.Add(image);
+                }
+            }
+        }
+
+        public void LoadKeyPoints()
+        {
+            _tourKeyPointService.Load();
+
+            foreach (Tour tour in _tours)
+            {
+                List<TourKeyPoint> keyPoints = _tourKeyPointService.GetKeyPointsByTourId(tour.Id);
+                foreach (TourKeyPoint keyPoint in keyPoints)
+                {
+                    tour.Destinations.Add(keyPoint);
+                }
+            }
+        }
+
+        public ObservableCollection<Tour> Search(ObservableCollection<Tour> observe, string state, string city, string duration, string language, string visitors)
+        {
+            observe.Clear();
+
+            foreach (Tour tour in _tours)
+            {
+                bool isStateSearched = tour.Location.State.Equals(state) || state.Equals("All");
+                bool isCitySearche = tour.Location.City.Equals(city) || city.Equals("All");
+                bool isLanguageSearched = tour.Language.ToLower().Contains(language.ToLower()) || language.Equals("");
+
+                bool isDurationEmpty = duration.Equals("");
+                bool isVisitorsEmpty = visitors.Equals("");
+
+                if (isStateSearched && isCitySearche && isLanguageSearched)
+                {
+                    if (isDurationEmpty && isVisitorsEmpty)
                     {
-                        tour.Images.Add(tourImage);
+                        observe.Add(tour);
+                    }
+                    else if (isDurationEmpty && !isVisitorsEmpty)
+                    {
+                        if (tour.MaxVisitors >= Convert.ToInt32(visitors))
+                        {
+                            observe.Add(tour);
+                        }
+                    }
+                    else if (!isDurationEmpty && isVisitorsEmpty)
+                    {
+                        if (tour.Duration == Convert.ToDouble(duration))
+                        {
+                            observe.Add(tour);
+                        }
+                    }
+                    else if (tour.MaxVisitors >= Convert.ToInt32(visitors) && tour.Duration == Convert.ToDouble(duration))
+                    {
+                        observe.Add(tour);
                     }
                 }
             }
 
+            return observe;
         }
 
-        public void Create(Tour tour)
+        public ObservableCollection<Tour> CancelSearch(ObservableCollection<Tour> observe)
         {
-            addTour(tour);
-        }
+            observe.Clear();
 
-        public void NotifyObservers()
-        {
-            foreach (var observer in _observers)
+            foreach (Tour tour in _tours)
             {
-                observer.Update();
+                observe.Add(tour);
             }
+
+            return observe;
         }
 
-        public void Subscribe(IObserver observer)
+        public List<string> GetAllStates()
         {
-            _observers.Add(observer);
+            return _locationService.GetAllStates();
         }
 
-        public void Unsubscribe(IObserver observer)
+        public ObservableCollection<string> GetAllCitiesByState(ObservableCollection<string> observe, string state)
         {
-            _observers.Remove(observer);
+            return _locationService.GetAllCitiesByState(observe, state);
         }
 
-    }
+		public void LoadLocationsForKeyPoints()
+		{
+			_locationService.Load();
 
+			foreach (TourKeyPoint keypoint in _tourKeyPoints)
+			{
+				keypoint.Location = _locationService.GetById(keypoint.Location.Id);
+			}
+		}
+
+		public Tour UpdateTour(Tour tour)
+		{
+			Tour oldTour = GetById(tour.Id);
+			if (oldTour == null) return null;
+
+			oldTour.Name = tour.Name;
+			oldTour.Location.Id = tour.Location.Id;
+			oldTour.Description = tour.Description;
+			oldTour.Language = tour.Language;
+			oldTour.MaxVisitors = tour.MaxVisitors;
+			oldTour.StartTime = tour.StartTime;
+			oldTour.Duration = tour.Duration;
+			oldTour.IsStarted = tour.IsStarted;
+
+			Save();
+			NotifyObservers();
+			return oldTour;
+		}
+
+		public TourKeyPoint UpdateKeyPoint(TourKeyPoint tourKeyPoint)
+		{
+			TourKeyPoint oldTourKeyPoint = _tourKeyPointService.GetById(tourKeyPoint.Id);
+
+			oldTourKeyPoint.Tour = tourKeyPoint.Tour;
+			oldTourKeyPoint.Location = tourKeyPoint.Location;
+			oldTourKeyPoint.Achieved = tourKeyPoint.Achieved;
+
+			_tourKeyPointService.Save();//u save nesto ide?
+			NotifyObservers();
+
+			return oldTourKeyPoint;
+		}
+
+		public int NextId()
+		{
+			if (_tours.Count == 0)
+			{
+				return 1;
+			}
+			else
+			{
+				return _tours.Max(t => t.Id) + 1;
+			}
+		}
+
+		public Tour AddTour(Tour tour)
+		{
+			tour.Id = NextId();
+			foreach (var destination in tour.Destinations)
+			{
+				destination.Id = _tourKeyPointService.NextId();
+				destination.Tour = tour;
+				_tourKeyPoints.Add(destination);
+			}
+
+			foreach (var picture in tour.Images)
+			{
+				picture.Id = _tourImageService.NextId();
+				picture.Tour = tour;
+				_tourImages.Add(picture);
+			}
+			_tours.Add(tour);
+			Save();
+			_tourImagesRepository.Save(_tourImages);
+			_tourKeyPointsRepository.Save(_tourKeyPoints);
+
+			NotifyObservers();
+			return tour;
+		}
+
+		public void Create(Tour tour)
+		{
+			AddTour(tour);
+		}
+
+		public List<Tour> GetTodayTours()
+		{
+			List<Tour> _todayTours = new List<Tour>();
+			foreach (var tour in _tours)
+			{
+				if (tour.StartTime == DateTime.Today)
+				{
+					_todayTours.Add(tour);
+				}
+			}
+			return _todayTours;
+		}
+
+		public List<TourKeyPoint> GetSelectedTourKeyPoints(int idTour)
+		{
+			List<TourKeyPoint> _selectedKeyPoints = new List<TourKeyPoint>();
+
+			foreach (var keypoint in _tourKeyPoints)
+			{
+				if (keypoint.Tour.Id == idTour)
+				{
+					_selectedKeyPoints.Add(keypoint);
+				}
+			}
+			return _selectedKeyPoints;
+		}
+
+		public void NotifyObservers()
+		{
+			foreach (var observer in _observers)
+			{
+				observer.Update();
+			}
+		}
+
+		public void Subscribe(IObserver observer)
+		{
+			_observers.Add(observer);
+		}
+
+		public void Unsubscribe(IObserver observer)
+		{
+			_observers.Remove(observer);
+		}
+	}
 }

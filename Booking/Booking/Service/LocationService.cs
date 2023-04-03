@@ -1,7 +1,6 @@
 ﻿using Booking.Model;
 using Booking.Observer;
 using Booking.Repository;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,17 +8,17 @@ using System.Linq;
 namespace Booking.Service
 {
 	public class LocationService : ISubject
-    {
+	{
 		private readonly LocationRepository _repository;
 		private List<Location> _locations;
-        private readonly List<IObserver> _observers;
-        public LocationService()
+		private readonly List<IObserver> _observers;
+
+		public LocationService()
 		{
 			_repository = new LocationRepository();
 			_locations = new List<Location>();
-            _observers = new List<IObserver>();
-
-            Load();
+			_observers = new List<IObserver>();
+			Load();
 		}
 
 		public void Load()
@@ -37,19 +36,7 @@ namespace Booking.Service
 			return _locations.Find(v => v.Id == id);
 		}
 
-        public int GetIdByCountryAndCity(string Country, string City)
-        {
-            foreach (var location in _locations)
-            {
-                if (location.City.Equals(City) && location.State.Equals(Country))
-                {
-                    return location.Id;
-                }
-            }
-            return -1;
-        }
-
-        public List<Location> GetAll()
+		public List<Location> GetAll()
 		{
 			return _locations;
 		}
@@ -65,43 +52,7 @@ namespace Booking.Service
 			return states;
 		}
 
-        public Location GetByCountryAndCity(string Name)
-        {
-            string[] pom = Name.Split(',');
-            pom[1] = pom[1].Trim();
-            foreach (Location loc in _locations)
-            {
-
-                if (loc.City == pom[1])
-                {
-                    return loc;
-                }
-            }
-            return null;
-        }
-
-        public Location AddLocation(Location location)
-        {
-            location.Id = NextId();
-            _locations.Add(location);
-            _repository.Save(_locations);
-            NotifyObservers();
-            return location;
-        }
-
-        public int NextId()
-        {
-            if (_locations.Count == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return _locations.Max(l => l.Id) + 1;
-            }
-        }
-
-        public ObservableCollection<string> GetAllCitiesByState(ObservableCollection<string> observe, string state)
+		public ObservableCollection<string> GetAllCitiesByState(ObservableCollection<string> observe, string state)
 		{
 			observe.Clear();
 			observe.Add("All");
@@ -113,23 +64,66 @@ namespace Booking.Service
 			return observe;
 		}
 
-        public void Subscribe(IObserver observer)
-        {
-            _observers.Add(observer);
-        }
+		public int GetIdByCountryAndCity(string Country, string City)
+		{
+			foreach (var location in _locations)
+			{
+				if (location.City.Equals(City) && location.State.Equals(Country))
+				{
+					return location.Id;
+				}
+			}
+			return -1;
+		}
 
-        public void Unsubscribe(IObserver observer)
-        {
-            _observers.Remove(observer);
-        }
+		public Location GetByCountryAndCity(string Name)
+		{
+			string[] pom = Name.Split(',');
+			pom[1] = pom[1].Trim();
+			foreach (Location loc in _locations)
+			{
 
-        public void NotifyObservers()
-        {
-            foreach (var observer in _observers)
-            {
-                observer.Update();
-            }
-        }
+				if (loc.City == pom[1])
+				{
+					return loc;
+				}
+			}
+			return null;
+		}
 
-    }
+		public Location AddLocation(Location location)
+		{
+			location.Id = NextId();
+			_locations.Add(location);
+			Save();
+			return location;
+		}
+
+		public int NextId()
+		{
+			if (_locations.Count == 0)
+			{
+				return 1;
+			}
+			else
+			{
+				return _locations.Max(l => l.Id) + 1;
+			}
+		}
+		public void Subscribe(IObserver observer)
+		{
+			_observers.Add(observer);
+		}
+		public void Unsubscribe(IObserver observer)
+		{
+			_observers.Remove(observer);
+		}
+		public void NotifyObservers()
+		{
+			foreach (var observer in _observers)
+			{
+				observer.Update();
+			}
+		}
+	}
 }

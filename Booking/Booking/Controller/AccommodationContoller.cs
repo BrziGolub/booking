@@ -17,6 +17,11 @@ namespace Booking.Controller
 
         private readonly AccommodationDAO accommodationDAO;
 
+        public AccommodationContoller()
+        {
+            accommodationDAO = new AccommodationDAO();
+        }
+
         public AccommodationContoller(AccommodationDAO accommodation)
         {
             accommodationDAO = accommodation;

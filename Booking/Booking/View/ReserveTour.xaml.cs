@@ -1,6 +1,4 @@
-﻿using Booking.Model.DAO;
-using Booking.Controller;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,7 +53,7 @@ namespace Booking.View
 				{
 					MessageBox.Show("Tour is already full");
 					// Function call: calls method from parent window
-					((SecondGuestHomePage)this.Owner).TourSearch(Tour.Location.State, Tour.Location.City, "", "", "");
+					((SecondGuestHomePage)this.Owner).ReserveTourSearch(Tour.Location.State, Tour.Location.City, Tour.Id);
 					Close();
 				}
 			}
