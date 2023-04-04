@@ -163,7 +163,13 @@
                     <DataGridTemplateColumn Header="Cancel tour">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Click="CancelTour">Cancel</Button>
+                                    <Button Click="CancelTour" Content="Cancel" FontSize="12" FontStyle="Oblique">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="5"></Setter>
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
