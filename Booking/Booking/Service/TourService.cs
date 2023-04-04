@@ -29,6 +29,8 @@ namespace Booking.Service
 		private LocationRepository _locationRepository;
 		private TourImageRepository _tourImagesRepository;
 		private TourKeyPointRepository _tourKeyPointsRepository;
+		
+		public static int SignedGuideId;
 
 		public TourService()
         {
@@ -79,6 +81,21 @@ namespace Booking.Service
         public List<Tour> GetAll()
         {
             return _tours;
+        }
+
+		public List<Tour> GetGuideTours()
+		{
+            List<Tour> _guideTours = new List<Tour>();
+
+            foreach (var tour in _tours)
+            {
+                if (tour.GuideId == SignedGuideId)
+                {
+                    _guideTours.Add(tour);
+                }
+            }
+			
+            return _guideTours;
         }
 
         public void LoadLocations()
@@ -255,12 +272,15 @@ namespace Booking.Service
 				picture.Tour = tour;
 				_tourImages.Add(picture);
 			}
+			tour.GuideId = SignedGuideId;
+
 			_tours.Add(tour);
-			Save();
+            NotifyObservers();
+            Save();
 			_tourImagesRepository.Save(_tourImages);
 			_tourKeyPointsRepository.Save(_tourKeyPoints);
 
-			NotifyObservers();
+			
 			return tour;
 		}
 

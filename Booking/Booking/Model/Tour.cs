@@ -28,7 +28,10 @@ namespace Booking.Model
 
 		public List<TourImage> Images { get; set; }
 
-		public bool IsStarted { get; set; }
+		public int GuideId { get; set; }
+
+
+        public bool IsStarted { get; set; }
 
         public bool IsCancelable()
         {
@@ -44,7 +47,7 @@ namespace Booking.Model
 			IsStarted = false;
 		}
 
-		public Tour(string name, Location location, string desc, string lang, int maxVisitors, DateTime dt, double duration)
+		public Tour(string name, Location location, string desc, string lang, int maxVisitors, DateTime dt, double duration, int guideId)
 		{
 			Name = name;
 			Location = location;
@@ -55,6 +58,7 @@ namespace Booking.Model
 			Duration = duration;
 			Destinations = new List<TourKeyPoint>();
 			Images = new List<TourImage>();
+			GuideId = guideId;
 		}
 
 		public string[] ToCSV()
@@ -68,7 +72,8 @@ namespace Booking.Model
                 MaxVisitors.ToString(),					//5
                 StartTime.ToString("dd/MM/yyyy"),		//6
                 Duration.ToString(),                    //7
-				IsStarted.ToString()					//8
+				IsStarted.ToString(),					//8
+				GuideId.ToString()						//9
             };
 			return csvValues;
 		}
@@ -84,6 +89,7 @@ namespace Booking.Model
 			StartTime = DateTime.Parse(values[6]);
 			Duration = Convert.ToDouble(values[7]);
 			IsStarted = Convert.ToBoolean(values[8]);
+			GuideId = Convert.ToInt32(values[9]);
 		}
 	}
 }

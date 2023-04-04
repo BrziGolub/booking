@@ -37,20 +37,20 @@ namespace Booking.View
             this.DataContext = this;
             _tourService = new TourService();
             _tourService.Subscribe(this);
-
-            Tours = new ObservableCollection<Tour>(_tourService.GetAll());
+      
+            Tours = new ObservableCollection<Tour>(_tourService.GetGuideTours());
 
             usernameTextBlock.Text = Username;
             
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void OpenCreateTour(object sender, RoutedEventArgs e)
         {
         GuideCreateTour guideCreateTour = new GuideCreateTour();
         guideCreateTour.Show();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void OpenFollowTourLive(object sender, RoutedEventArgs e)
         {
             GuideFollowTourLive guideFollowTourLive = new GuideFollowTourLive();
             guideFollowTourLive.Show();
@@ -59,7 +59,8 @@ namespace Booking.View
         public void Update()
         {
             Tours.Clear();
-            foreach (Tour t in _tourService.GetAll())
+
+            foreach (Tour t in _tourService.GetGuideTours())
             {
                 Tours.Add(t);
             }
@@ -73,7 +74,6 @@ namespace Booking.View
 
                 if(result == MessageBoxResult.Yes)
                 {
-                    //_tourService.CancelTour(SelectedTour);
                     _tourService.removeTour(SelectedTour.Id);
                 }   
             }

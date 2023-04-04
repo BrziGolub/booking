@@ -1,5 +1,6 @@
 ﻿using Booking.Model;
 using Booking.Repository;
+using Booking.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,8 +25,9 @@ namespace Booking.View
 	public partial class SignInForm : Window
 	{
 		private readonly UserRepository _repository;
+       
 
-		private string _username;
+        private string _username;
 		public string Username
 		{
 			get => _username;
@@ -53,13 +55,17 @@ namespace Booking.View
 			InitializeComponent();
 			DataContext = this;
 			_repository = new UserRepository();
+			
+			
 		}
 		private void SignIn(object sender, RoutedEventArgs e)
-		{
-            GuideHomePage.Username = usernameTextBox.Text;
-
+		{            
             User user = _repository.GetByUsername(Username);
-			if (user != null)
+            
+			GuideHomePage.Username = usernameTextBox.Text;
+            TourService.SignedGuideId = user.Id;
+
+            if (user != null)
 			{
 				if (user.Password == txtPassword.Password)
 				{

@@ -19,7 +19,7 @@
                     <GradientStop Color="#FFF200" Offset="1"/>
                 </LinearGradientBrush>
             </StackPanel.Background>
-            <Button Content=" Create tour" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 44 10 0" Click="Button_Click" HorizontalContentAlignment="Left"  >
+            <Button Content=" Create tour" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 44 10 0" Click="OpenCreateTour" HorizontalContentAlignment="Left"  >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -47,7 +47,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content=" Follow the tour live" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Click="Button_Click_1" >
+            <Button Content=" Follow the tour live" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Click="OpenFollowTourLive" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>

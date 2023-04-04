@@ -34,7 +34,7 @@
         <Label Content="Key points*" HorizontalAlignment="Left" Margin="40,360,0,0"  VerticalAlignment="Top" FontSize="15"/>
         <StackPanel Margin="0,0,-105,0">
             <ComboBox x:Name="comboBox" Margin="79,365,70,243" Width="180" Height="21"  BorderBrush="Black" Background="Black"  />
-            <Button Panel.ZIndex="1" Margin="0 -508 -230 0" Height="21" Width="21" Content="+" FontSize="14" FontWeight="Bold" Click="Button_Click_2" />
+            <Button Panel.ZIndex="1" Margin="0 -508 -230 0" Height="21" Width="21" Content="+" FontSize="14" FontWeight="Bold" Click="AddKeyPoint" />
         </StackPanel>
 
         <Label  Content="Tour start date*" HorizontalAlignment="Left" Margin="40,400,0,0" VerticalAlignment="Top" FontSize="15" />
@@ -50,13 +50,13 @@
         <TextBox x:Name="tbPictures" HorizontalAlignment="Left" Margin="170,485,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
 
         <StackPanel Margin="0,0,-192,2">
-            <Button Panel.ZIndex="1" Margin="173,486,32,122"  Content="+" Height="21" Width="22" FontSize="14" FontWeight="Bold" Click="Button_Click_3" />
+            <Button Panel.ZIndex="1" Margin="173,486,32,122"  Content="+" Height="21" Width="22" FontSize="14" FontWeight="Bold" Click="AddPicture" />
            
         </StackPanel>
         
         <WrapPanel FlowDirection="LeftToRight" Margin="0,528,0,31">
-            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click_1" >CREATE</Button>
-            <Button Margin="10 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click" >CLOSE</Button>
+            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Create" >CREATE</Button>
+            <Button Margin="10 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Close" >CLOSE</Button>
         </WrapPanel>
 
 
