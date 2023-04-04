@@ -82,7 +82,7 @@
 
             <Image Margin="-170 11 10 10" Height="45" Width="45" Source="/View/user.png"/>
             <TextBlock Margin="-85 -85 0 0" FontSize="17" FontStyle="Italic" FontWeight="Bold" Foreground="#FF303841" Height="21" Width="50">Guide</TextBlock>
-            <TextBlock Margin="9 -45 0 0" FontSize="15" FontStyle="Italic" FontWeight="SemiBold" Foreground="#D6E6F2" Height="21" Width="144">Marc Johnes</TextBlock>
+            <TextBlock x:Name="usernameTextBlock" Margin="9 -45 0 0" FontSize="15" FontStyle="Italic" FontWeight="SemiBold" Foreground="#D6E6F2" Height="21" Width="144"></TextBlock>
 
             <Button  FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 0 10 0" HorizontalContentAlignment="Left" >
                 <Button.Content>

@@ -27,6 +27,9 @@ namespace Booking.View
         public ObservableCollection<Tour> Tours { get; set; }
         public TourService _tourService { get; set; }
         public Tour SelectedTour { get; set; }
+        public User user { get; set; }
+
+        public static string Username;
 
         public GuideHomePage()
         {
@@ -36,6 +39,9 @@ namespace Booking.View
             _tourService.Subscribe(this);
 
             Tours = new ObservableCollection<Tour>(_tourService.GetAll());
+
+            usernameTextBlock.Text = Username;
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

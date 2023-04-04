@@ -56,7 +56,9 @@ namespace Booking.View
 		}
 		private void SignIn(object sender, RoutedEventArgs e)
 		{
-			User user = _repository.GetByUsername(Username);
+            GuideHomePage.Username = usernameTextBox.Text;
+
+            User user = _repository.GetByUsername(Username);
 			if (user != null)
 			{
 				if (user.Password == txtPassword.Password)
@@ -99,7 +101,15 @@ namespace Booking.View
 
 		}
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void passwordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SignIn(sender, e);
+            }
+        }
+
+        private void AboutUs(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Autors of the project: \n \tKristina Zelić RA4/2020 \n \tPetar Kovačević RA25/2020  \n \tAleksandar Milović RA67/2020 \n \tMiljan Lazić RA212/2020");
         }

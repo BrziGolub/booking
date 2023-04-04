@@ -33,12 +33,14 @@
 
             <Label Grid.Row="0" Grid.Column="0" FontSize="15" Height="30" Foreground="#303841">Username:</Label>
             <Label Grid.Row="1" Grid.Column="0" FontSize="15" Height="30" Foreground="#303841">Password:</Label>
-            <TextBox Grid.Row="0" Text="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Height="30" Width="210" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="15" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <PasswordBox Name="txtPassword" Grid.Row="1" Grid.Column="1" Height="30" Width="210" FontSize="15" HorizontalAlignment="Left" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="usernameTextBox" Grid.Row="0" Text="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Height="30" Width="210" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="15" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <PasswordBox Name="txtPassword" Grid.Row="1" Grid.Column="1" Height="30" Width="210" FontSize="15" HorizontalAlignment="Left" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                         KeyDown="passwordBox_KeyDown"
+                         />
         </Grid>
 
         <StackPanel Margin="289,-2,0,125" Grid.RowSpan="2">
-            <Button Width="55" Content="About us" HorizontalAlignment="Right" Foreground="#303841" Background="#FFFFF980"  Click="Button_Click"></Button>
+            <Button Width="55" Content="About us" HorizontalAlignment="Right" Foreground="#303841" Background="#FFFFF980"  Click="AboutUs"></Button>
         </StackPanel>
         <Button Grid.Row="2" FontWeight="Bold" FontSize="16" Click="SignIn" Content="Sign in" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" Width="90" Margin="0,3,0,0" Foreground="#303841">
             <Button.Resources>
