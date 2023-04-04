@@ -26,7 +26,8 @@ namespace Booking.View
     {
         public ObservableCollection<Tour> Tours { get; set; }
         public TourService _tourService { get; set; }
-        
+        public Tour SelectedTour { get; set; }
+
         public GuideHomePage()
         {
             InitializeComponent();            
@@ -60,7 +61,35 @@ namespace Booking.View
 
         private void CancelTour(object sender, RoutedEventArgs e)
         {
+            if(SelectedTour != null)
+            {
+                MessageBoxResult result = ConfirmTourCancel();
 
+                if(result == MessageBoxResult.Yes)
+                {
+                    //_tourService.CancelTour(SelectedTour);
+                    _tourService.removeTour(SelectedTour.Id);
+                }   
+            }
+            else
+            {
+                MessageBox.Show("You need to select tour if you want to cancel it!");
+            }
+
+
+        }
+
+        private MessageBoxResult ConfirmTourCancel()
+        {
+            string sMessageBoxText = $"Are you sure to cancel tour\n{SelectedTour.Name}";
+            string sCaption = "Confirmation of cancellation";
+
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+            return result;
         }
 
         private void LogOut(object sender, RoutedEventArgs e)

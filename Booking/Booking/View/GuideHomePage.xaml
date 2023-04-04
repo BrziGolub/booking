@@ -148,6 +148,7 @@
             AlternationCount="2"
             AutoGenerateColumns="False"             
             CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserReorderColumns="False"
+            SelectedItem="{Binding SelectedTour}"
             ItemsSource="{Binding Path=Tours, UpdateSourceTrigger=PropertyChanged}">
 
                 <DataGrid.Columns>

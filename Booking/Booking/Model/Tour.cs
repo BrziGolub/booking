@@ -30,7 +30,13 @@ namespace Booking.Model
 
 		public bool IsStarted { get; set; }
 
-		public Tour()
+        public bool IsCancelable()
+        {
+            TimeSpan timeUntilStart = StartTime - DateTime.Now;
+            return timeUntilStart > TimeSpan.FromHours(48);
+        }
+
+        public Tour()
 		{
 			Location = new Location();
 			Destinations = new List<TourKeyPoint>();

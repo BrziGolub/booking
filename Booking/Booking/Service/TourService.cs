@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Booking.Service
@@ -295,7 +296,30 @@ namespace Booking.Service
 			return _selectedKeyPoints;
 		}
 
-		public void NotifyObservers()
+
+
+		public Tour removeTour(int idTour) 
+		{
+			Tour tour = GetById(idTour);
+			if (tour == null) return null;
+
+			if (tour.IsCancelable())
+			{
+
+				_tours.Remove(tour);
+				NotifyObservers();
+				_repository.Save(_tours);
+
+				return tour;
+			}
+			else
+			{
+				MessageBox.Show("You can cancel the tour no later than 48 hours before the start!");
+				return null;
+			}
+		}
+
+        public void NotifyObservers()
 		{
 			foreach (var observer in _observers)
 			{
