@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Booking.Service
@@ -28,6 +29,8 @@ namespace Booking.Service
 		private LocationRepository _locationRepository;
 		private TourImageRepository _tourImagesRepository;
 		private TourKeyPointRepository _tourKeyPointsRepository;
+		
+		public static int SignedGuideId;
 
 		public TourService()
         {
@@ -78,6 +81,21 @@ namespace Booking.Service
         public List<Tour> GetAll()
         {
             return _tours;
+        }
+
+		public List<Tour> GetGuideTours()
+		{
+            List<Tour> _guideTours = new List<Tour>();
+
+            foreach (var tour in _tours)
+            {
+                if (tour.GuideId == SignedGuideId)
+                {
+                    _guideTours.Add(tour);
+                }
+            }
+			
+            return _guideTours;
         }
 
         public void LoadLocations()
@@ -254,12 +272,15 @@ namespace Booking.Service
 				picture.Tour = tour;
 				_tourImages.Add(picture);
 			}
+			tour.GuideId = SignedGuideId;
+
 			_tours.Add(tour);
-			Save();
+            NotifyObservers();
+            Save();
 			_tourImagesRepository.Save(_tourImages);
 			_tourKeyPointsRepository.Save(_tourKeyPoints);
 
-			NotifyObservers();
+			
 			return tour;
 		}
 
@@ -295,7 +316,30 @@ namespace Booking.Service
 			return _selectedKeyPoints;
 		}
 
-		public void NotifyObservers()
+
+
+		public Tour removeTour(int idTour) 
+		{
+			Tour tour = GetById(idTour);
+			if (tour == null) return null;
+
+			if (tour.IsCancelable())
+			{
+
+				_tours.Remove(tour);
+				NotifyObservers();
+				_repository.Save(_tours);
+
+				return tour;
+			}
+			else
+			{
+				MessageBox.Show("You can cancel the tour no later than 48 hours before the start!");
+				return null;
+			}
+		}
+
+        public void NotifyObservers()
 		{
 			foreach (var observer in _observers)
 			{

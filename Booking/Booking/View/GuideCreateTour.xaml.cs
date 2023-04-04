@@ -22,21 +22,15 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for GuideCreateTour.xaml
-    /// </summary>
     public partial class GuideCreateTour : Window
     {
         public TourService tourService { get; set; }
         public LocationService locationService { get; set; }
-       // public TourController tourController { get; set; }
-       // public LocationController locationController { get; set; }
 
         public Tour tour = new Tour();
         public ObservableCollection<string> CityCollection { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-    //    LocationDAO locationDAO = new LocationDAO();
         public GuideCreateTour()
         {
             InitializeComponent();
@@ -45,7 +39,6 @@ namespace Booking.View
 
             locationService = new LocationService();
 
-            //**********************FILL COMBOBOX COUNTRY***************************************
             List<string> items1 = new List<string>();
 
             using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
@@ -64,11 +57,8 @@ namespace Booking.View
             var distinctItems = items1.Distinct().ToList();
             comboBox1.ItemsSource = distinctItems;
 
-            //**********************FILL COMBOBOX CITY*************************************
 
             CityCollection = new ObservableCollection<string>();
-
-            //**********************FILL COMBOBOX KEYPOINTS*************************************
 
             List<string> items = new List<string>();
 
@@ -87,7 +77,6 @@ namespace Booking.View
 
             comboBox.ItemsSource = items;
 
-            //*************************************************************************
 
             if(comboBox1.SelectedItem == null)
             {
@@ -259,19 +248,18 @@ namespace Booking.View
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Close(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Create(object sender, RoutedEventArgs e)
         {
             if (tbName.Text == "")
             {
                 MessageBox.Show("'NAME' not entered");
             }
             else { tour.Name = TourName; }
-            //---------LOCATION----------//
 
             Location location = new Location
             {
@@ -289,7 +277,7 @@ namespace Booking.View
                 tour.Location.Id = LocationID;
                 tour.Location = locationService.GetById(LocationID);
             }
-            //-------------------------------
+
             if (tbDescription.Text == "")
             {
                 MessageBox.Show("'DESCRIPTION' not entered");
@@ -319,16 +307,15 @@ namespace Booking.View
             else { tour.Duration = Duration; }
 
 
-            //------------EXTRA PROTECTIONS---------------
             if (tour.Destinations.Count < 2)
             {
                 MessageBox.Show("Tour need to have 2 'KEY POINTS' at least");
             }
-            else if(tour.Images.Count == 0) // maybe not?
+            else if(tour.Images.Count == 0)
             {
                 MessageBox.Show("Tour need to have 1 'PICTURE' at least");
             }
-            else if (comboBox1.Text == "") //tour.Location.State == null
+            else if (comboBox1.Text == "")
             {
                 MessageBox.Show("'COUNTRY' not entered");
             }
@@ -344,7 +331,7 @@ namespace Booking.View
             {
                 MessageBox.Show("'DURATION' should be greater than 0");
             }
-            //------------------------------------------
+
 
             else
             {
@@ -356,7 +343,7 @@ namespace Booking.View
             
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void AddKeyPoint(object sender, RoutedEventArgs e)
         {
 
             if (comboBox.SelectedItem != null)
@@ -376,7 +363,7 @@ namespace Booking.View
             comboBox.SelectedIndex = -1;
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void AddPicture(object sender, RoutedEventArgs e)
         {
             if (tbPictures.Text != "")
             {
