@@ -53,8 +53,6 @@ namespace Booking.View
 			InitializeComponent();
 			DataContext = this;
 			_repository = new UserRepository();
-
-			comboBox.ItemsSource = new List<string>() { "Owner", "Guest1", "Guest2", "Guide" };
 		}
 		private void SignIn(object sender, RoutedEventArgs e)
 		{
@@ -63,52 +61,36 @@ namespace Booking.View
 			{
 				if (user.Password == txtPassword.Password)
 				{
-					//MessageBox.Show(UserType);
-					//stavio da uvek otvara vodica po defaultu treba napraviti zastitu da se zna ko se loguje (sef,gost,vodic)
-					if (comboBox.SelectedIndex == 0)
+
+					if(user.Role == 1)
 					{
 						OwnerHomePage ownerHomePage = new OwnerHomePage();
 						ownerHomePage.Show();
 						Close();
 					}
-					else if (comboBox.SelectedIndex == 1)
+                    else if (user.Role == 2)
+                    {
+                        GuideHomePage guideHomePage = new GuideHomePage();
+                        guideHomePage.Show();
+                        Close();
+                    }
+                    else if(user.Role == 3)
 					{
 						FirstGuestHomePage fisrtGuestHomePage = new FirstGuestHomePage();
                         fisrtGuestHomePage.Show();
                     }
-					else if (comboBox.SelectedIndex == 2)
-					{
+                    else if (user.Role == 4)
+                    {
 						SecondGuestHomePage secondGuestHomePage = new SecondGuestHomePage();
 						secondGuestHomePage.Show();
 						Close();
 					}
-					else if (comboBox.SelectedIndex == 3)
-					{
-						GuideHomePage guideHomePage = new GuideHomePage();
-						guideHomePage.Show();
-						Close();
-					}
-					else 
-					{
-						MessageBox.Show("Choose option!");
-					}
-					
 
                 }
                 else
 				{
 					MessageBox.Show("Wrong password!");
 				}
-					/*
-					 if( comboBox.SelectedIndex == 1 ) 
-					{
-					MessageBox.Show("SEF");
-					}	
-					else if (comboBox.SelectedIndex == 2)
-					{
-                    MessageBox.Show("GUEST1");
-					}	
-					*/
 			}
 			else
 			{

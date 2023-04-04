@@ -16,17 +16,19 @@ namespace Booking.Model
 
 		public User() { }
 
-		public User(string username, string password)
+		public User(string username, string password,int role)
 		{
 			Username = username;
 			Password = password;
+			Role = role;
 		}
 
 		public string[] ToCSV()
 		{
 			string[] csvValues = { Id.ToString(),
 				Username,
-				Password
+				Password,
+				Role.ToString()
 			};
 			return csvValues;
 		}
@@ -36,6 +38,7 @@ namespace Booking.Model
 			Id = Convert.ToInt32(values[0]);
 			Username = values[1];
 			Password = values[2];
+			Role = Convert.ToInt32(values[3]);
 		}
 	}
 }
