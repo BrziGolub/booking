@@ -238,7 +238,7 @@ namespace Booking.Service
 			oldTourKeyPoint.Location = tourKeyPoint.Location;
 			oldTourKeyPoint.Achieved = tourKeyPoint.Achieved;
 
-			_tourKeyPointService.Save();//u save nesto ide?
+			_tourKeyPointService.Save();
 			NotifyObservers();
 
 			return oldTourKeyPoint;
@@ -294,7 +294,7 @@ namespace Booking.Service
 			List<Tour> _todayTours = new List<Tour>();
 			foreach (var tour in _tours)
 			{
-				if (tour.StartTime == DateTime.Today)
+				if (tour.StartTime == DateTime.Today && tour.GuideId == SignedGuideId) 
 				{
 					_todayTours.Add(tour);
 				}
@@ -339,6 +339,7 @@ namespace Booking.Service
 			}
 		}
 
+	
         public void NotifyObservers()
 		{
 			foreach (var observer in _observers)

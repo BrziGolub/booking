@@ -8,9 +8,9 @@
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Title="GuideFollowTourLive" Height="800" Width="1200">
     <Grid>
-        <WrapPanel FlowDirection="LeftToRight" HorizontalAlignment="Left" VerticalAlignment="Top" Height="87" Width="500" Margin="700 700 0 0" Panel.ZIndex="1">
-            <Button Content="Start tour"  Width="80" Height="45" Click="Button_Click"  FontSize="15" Margin ="42 0 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"  />
-            <Button Width="80" Height="45"   FontSize="11" Margin ="10 0 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click_2"  >
+        <WrapPanel FlowDirection="LeftToRight" HorizontalAlignment="Center" VerticalAlignment="Top" Height="87" Width="436" Margin="0,700,0,0" Panel.ZIndex="1">
+            <Button Content="Start tour"  Width="80" Height="45" Click="StartTour"  FontSize="15" Margin ="42 0 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+            <Button Width="80" Height="45"   FontSize="11" Margin ="10 0 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ShowOnGoingTour"  >
                 <StackPanel>
                     <TextBlock>Show</TextBlock>
                     <TextBlock>ongoing</TextBlock>
@@ -18,9 +18,10 @@
                 </StackPanel>
             </Button>
 
-            <Button Content="End tour"  Width="80" Height="45"  FontSize="15" FontWeight="Bold" Margin="10 0 0 0" Click="Button_Click_1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button Content="End tour"  Width="80" Height="45"  FontSize="15" FontWeight="Bold" Margin="10 0 0 0" Click="EndTour" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button Content="Close"  Width="80" Height="45"  FontSize="15" FontWeight="Bold" Margin="10 0 0 0" Click="Close" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </WrapPanel>
-            <DataGrid 
+        <DataGrid 
             x:Name="dataGrid" 
             IsReadOnly="True" 
             Margin="72 50 72 92" 
@@ -57,7 +58,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        
+
 
     </Grid>
 </Window>

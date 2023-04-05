@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -66,6 +66,7 @@
     <Compile Include="Model\Images\TourImage.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Tour.cs" />
+    <Compile Include="Model\TourGuests.cs" />
     <Compile Include="Model\TourKeyPoint.cs" />
     <Compile Include="Model\TourReservation.cs" />
     <Compile Include="Model\User.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Service\AccommodationService.cs" />
     <Compile Include="Service\TourImageService.cs" />
     <Compile Include="Service\TourKeyPointService.cs" />
+    <Compile Include="Service\UserService.cs" />
     <Compile Include="View\AccommodationReservationView.xaml.cs">
       <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>
@@ -243,6 +245,7 @@
     <None Include="Resources\Data\accommodations.csv" />
     <None Include="Resources\Data\accommodationsReservations.csv" />
     <None Include="Resources\Data\locations.csv" />
+    <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />
     <None Include="Resources\Data\tourKeyPoints.csv" />
     <None Include="Resources\Data\tourReservations.csv" />
