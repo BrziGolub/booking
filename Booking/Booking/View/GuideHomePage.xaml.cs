@@ -48,6 +48,7 @@ namespace Booking.View
         {
         GuideCreateTour guideCreateTour = new GuideCreateTour();
         guideCreateTour.Show();
+            this.Close();
         }
 
         private void OpenFollowTourLive(object sender, RoutedEventArgs e)

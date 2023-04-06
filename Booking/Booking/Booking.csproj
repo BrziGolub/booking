@@ -77,6 +77,7 @@
     <Compile Include="Observer\ISubject.cs" />
     <Compile Include="Repository\AccommodationResevationRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
+    <Compile Include="Repository\TourGuestsRepository.cs" />
     <Compile Include="Repository\TourImageRepository.cs" />
     <Compile Include="Repository\TourKeyPointRepository.cs" />
     <Compile Include="Repository\TourRepository.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Service\AccommodationGradeService.cs" />
     <Compile Include="Service\AccommodationReservationService.cs" />
     <Compile Include="Service\AccommodationService.cs" />
+    <Compile Include="Service\TourGuestsService.cs" />
     <Compile Include="Service\TourImageService.cs" />
     <Compile Include="Service\TourKeyPointService.cs" />
     <Compile Include="Service\UserService.cs" />

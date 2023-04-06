@@ -88,6 +88,11 @@ namespace Booking.View
 
         }
 
+        private void GuideCreateTour_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            GuideHomePage guideHomePage = new GuideHomePage();
+            guideHomePage.Show();
+        }
         public void FillCity(object sender, SelectionChangedEventArgs e)
         {
             CityCollection.Clear();

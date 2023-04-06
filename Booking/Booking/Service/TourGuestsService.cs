@@ -1,4 +1,5 @@
 ﻿using Booking.Model;
+using Booking.Observer;
 using Booking.Repository;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,15 @@ namespace Booking.Service
     {
         private readonly TourGuestsRepository _repository;
         private List<TourGuests> _tourGuests;
+        private List<IObserver> _observers;
 
         public TourGuestsService() 
         {
-        _repository = new TourGuestsRepository();
-            _tourGuests = new List<TourGuests>();
+            _repository = new TourGuestsRepository();
+            _tourGuests = new List<TourGuests>();            
+            _observers = new List<IObserver>();
 
             Load();
-        
         }
         public void Load() 
         {
@@ -31,24 +33,43 @@ namespace Booking.Service
             _repository.Save(_tourGuests);
         }
 
-        /*public TourGuests UpdateTourGuests(TourGuests tourGuests)
+        public TourGuests AddTourGuests(TourGuests tourGuests)
         {
-            TourKeyPoint oldTourKeyPoint = _tourKeyPointService.GetById(tourKeyPoint.Id);
-
-            TourGuests tourGuests = new TourGuests();
-
-            tourGuests.Tour.Id = SelectedTour.Id;
-            tourGuests.User.Id = SelectedGuest.Id;
-            tourGuests.TourKeyPoint.Id = SelectedTourKeyPoint.Id;
-
-            _tourKeyPointService.Save();
+            Load();
+            _tourGuests.Add(tourGuests);  
+            
             NotifyObservers();
+            Save();
+            
+            return tourGuests;
+        }
 
-            return oldTourKeyPoint;
-        }*/
+        public void Create(TourGuests tourGuests)
+        {
+            AddTourGuests(tourGuests);
+        }
+
         public List<TourGuests> GetAll() 
         {
         return _tourGuests;
+        }
+
+
+        public void NotifyObservers()
+        {
+            foreach (var observer in _observers)
+            {
+                observer.Update();
+            }
+        }
+        public void Subscribe(IObserver observer)
+        {
+            _observers.Add(observer);
+        }
+
+        public void Unsubscribe(IObserver observer)
+        {
+            _observers.Remove(observer);
         }
 
 

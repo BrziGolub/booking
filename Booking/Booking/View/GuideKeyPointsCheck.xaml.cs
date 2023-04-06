@@ -34,8 +34,9 @@ namespace Booking.View
         public Tour SelectedTour { get; set; }
         public User SelectedGuest { get; set; }
 
-        //int idt;
+        public TourGuests tourGuests;
 
+       
         public GuideKeyPointsCheck(int idTour)
         {
             InitializeComponent();
@@ -49,11 +50,12 @@ namespace Booking.View
             UserService = app.UserService;
             UserService.Subscribe(this);
 
-            TourGuestsService tourGuestsService = new TourGuestsService();         
+            TourGuestsService = app.TourGuestsService;
+            TourGuestsService.Subscribe(this);
+            tourGuests = new TourGuests();
+
 
             SelectedTour = TourService.GetById(idTour);
-
-            //idt = idTour;
 
             Guests = new ObservableCollection<User>(UserService.GetGuests());
             KeyPoints = new ObservableCollection<TourKeyPoint>(TourService.GetSelectedTourKeyPoints(SelectedTour.Id));
@@ -103,26 +105,24 @@ namespace Booking.View
         {
             if(SelectedGuest != null && SelectedTourKeyPoint != null) 
             {
-                TourGuests tourGuests = new TourGuests();
-
 
                 tourGuests.Tour.Id = SelectedTour.Id;
                 tourGuests.User.Id = SelectedGuest.Id;
                 tourGuests.TourKeyPoint.Id = SelectedTourKeyPoint.Id;
 
-                //TourGuestsService.Save();
+                TourGuestsService.Create(tourGuests);
 
-
-
-              //  MessageBox.Show("Guest " + SelectedGuest.Username.ToString() + " is added to keypoint " + SelectedTourKeyPoint.Location.State.ToString() + ", " + SelectedTourKeyPoint.Location.City.ToString());
+                MessageBox.Show("added");
+                //MessageBox.Show("Guest '" + SelectedGuest.Username.ToString() + "' is added to keypoint '" + SelectedTourKeyPoint.Location.State.ToString() + ", " + SelectedTourKeyPoint.Location.City.ToString() + "'");
             }
             else
             {
                 MessageBox.Show("You must first mark the guest and checkpoint who you want to add and where!");
             }
+
             //treba da ih ponistim
-             //SelectedTourKeyPoint = null;
-             //SelectedGuest = null;
+                //SelectedTourKeyPoint = null;
+                //SelectedGuest = null;
         }
 
     }

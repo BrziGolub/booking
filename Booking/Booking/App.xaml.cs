@@ -18,7 +18,7 @@ namespace Booking
         public AccommodationGradeService AccommodationGradeService { get; set; }
         public AccommodationReservationService AccommodationReservationService { get; set; }
         public TourService TourService { get; set; }
-       
+        public TourGuestsService TourGuestsService { get; set; }
 
         public App()
         {
@@ -28,7 +28,7 @@ namespace Booking
             AccommodationGradeService = new AccommodationGradeService();
             AccommodationReservationService = new AccommodationReservationService();
             TourService = new TourService();
-            
+            TourGuestsService = new TourGuestsService();
         }
     }
 }

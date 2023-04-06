@@ -16,22 +16,18 @@ namespace Booking.Repository
         private readonly Serializer<TourGuests> _serializer;
 
         public List<TourGuests> _tourGuests;
+
         public TourGuestsRepository() 
         {
         _serializer = new Serializer<TourGuests>();
-            _tourGuests = Load();
+        _tourGuests = Load();
         }
 
         public List<TourGuests> Load()
         {
             return _serializer.FromCSV(FilePath);
         }
-        /* public void Save(List<TourGuests> tourGuests)
-         {
-             _serializer.ToCSV(FilePath, tourGuests);
-         }*/
-
-         public void Save(TourGuests tourGuests)
+         public void Save(List<TourGuests> tourGuests)
         {
             _serializer.ToCSV(FilePath, tourGuests);
         }

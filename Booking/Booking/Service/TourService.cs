@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Input;
 
@@ -276,8 +277,9 @@ namespace Booking.Service
 
 			_tours.Add(tour);
             NotifyObservers();
-            Save();
-			_tourImagesRepository.Save(_tourImages);
+			Save();
+			
+            _tourImagesRepository.Save(_tourImages);
 			_tourKeyPointsRepository.Save(_tourKeyPoints);
 
 			
@@ -326,10 +328,14 @@ namespace Booking.Service
 			if (tour.IsCancelable())
 			{
 
-				_tours.Remove(tour);
-				NotifyObservers();
-				_repository.Save(_tours);
+				_tourKeyPoints.RemoveAll(TourKeyPoint => TourKeyPoint.Tour.Id == idTour);
 
+                _tours.Remove(tour);
+				
+				NotifyObservers();
+                _tourKeyPointsRepository.Save(_tourKeyPoints);
+                _repository.Save(_tours);
+				
 				return tour;
 			}
 			else
