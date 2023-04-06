@@ -84,7 +84,10 @@ namespace Booking.View
                     }
                     else if(user.Role == 3)
 					{
-						FirstGuestHomePage fisrtGuestHomePage = new FirstGuestHomePage();
+						//AccommodationService.SignedFirstGuestId = user.Id;
+						AccommodationReservationService.SignedFirstGuestId = user.Id;
+
+                        FirstGuestHomePage fisrtGuestHomePage = new FirstGuestHomePage();
                         fisrtGuestHomePage.Show();
                     }
                     else if (user.Role == 4)

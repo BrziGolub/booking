@@ -17,16 +17,16 @@ namespace Booking.Model
         
         public Accommodation Accommodation { get; set; }
 
-      //  public User User { get; set; }
-
         public DateTime ArrivalDay { get; set; }
 
         public DateTime DepartureDay { get; set; }
 
+        public User Guest { get; set; }
 
         public AccommodationReservation()
         {
             Accommodation = new Accommodation();
+            Guest = new User();
         }
 
         public AccommodationReservation(Accommodation accommodation, DateTime arrivalDay, DateTime departureDay)
@@ -34,6 +34,7 @@ namespace Booking.Model
             this.Accommodation = accommodation;
             this.ArrivalDay = arrivalDay;
             this.DepartureDay = departureDay;
+           // this.Guest = guest;
         }
 
 
@@ -41,9 +42,9 @@ namespace Booking.Model
         {
             Id = int.Parse(values[0]);
             Accommodation.Id = int.Parse(values[1]);
-            //User.Id = int.Parse(values[2]);
             ArrivalDay = DateConversion.StringToDate(values[2]);
             DepartureDay = DateConversion.StringToDate(values[3]);
+            Guest.Id = int.Parse(values[4]);
         }
 
         public string[] ToCSV()
@@ -52,10 +53,10 @@ namespace Booking.Model
             {
                 Id.ToString(),
                 Accommodation.Id.ToString(),
-                //User.Id.ToString(),
                 ArrivalDay.ToString("dd/MM/yyyy"),
-                DepartureDay.ToString("dd/MM/yyyy")
-            };
+                DepartureDay.ToString("dd/MM/yyyy"),
+                Guest.Id.ToString()
+        };
             return csvValues;
         }
     }

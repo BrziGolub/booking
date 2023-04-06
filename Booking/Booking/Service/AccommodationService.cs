@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Booking.Service
 {
@@ -20,14 +21,20 @@ namespace Booking.Service
         private List<AccommodationImage> _accommodationImages;
 
         private LocationService _locationService;
+        private UserService _userService;
 
         private AccommodationImagesRepository _accommodationImagesRepository;
+
+        //public static int SignedFirstGuestId;
 
         public AccommodationService()
         {
             _accommodationRepository = new AccommodationRepository();
             _observers = new List<IObserver>();
-            _locationService = new LocationService();
+            var app = Application.Current as App;
+            _locationService = app.LocationService;
+            // _locationService = new LocationService();
+            _userService = new UserService(); //ovo izmeni da uzmes iz app 
             _accommodationImagesRepository = new AccommodationImagesRepository();
             _accommodations = new List<Accommodation>();
             _accommodationImages = new List<AccommodationImage>();
@@ -39,6 +46,7 @@ namespace Booking.Service
             _accommodationImages = _accommodationImagesRepository.Load();
             BindLocationToAccommodaton();
             BindImagesToAccommodaton();
+            BindUserToAccommodation();
         }
         public Accommodation GetByID(int id)
         {
@@ -47,6 +55,16 @@ namespace Booking.Service
         public List<Accommodation> GetAll()
         {
             return _accommodations;
+        }
+
+        public void BindUserToAccommodation()
+        {
+            _userService.Load();
+            foreach(Accommodation accommodation in _accommodations)
+            {
+                User user = _userService.GetById(accommodation.Owner.Id);
+                accommodation.Owner = user;
+            }
         }
         public void BindLocationToAccommodaton()
         {

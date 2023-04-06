@@ -153,8 +153,6 @@ namespace Booking.View
             BookAccommodation(SelectedAccommodation);
         }
 
-       
-
-
+        
     }
 }

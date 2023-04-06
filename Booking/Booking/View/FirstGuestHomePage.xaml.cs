@@ -40,5 +40,10 @@ namespace Booking.View
             FrameHomePage.Content = new HomePageFirstGuest();
         }
 
+        private void MenuItem_Click_MyReservations(object sender, RoutedEventArgs e)
+        {
+            FrameHomePage.Content = new FirstGuestAllReservations();
+        }
+
     }
 }
