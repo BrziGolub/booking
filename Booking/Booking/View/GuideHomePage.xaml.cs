@@ -105,5 +105,11 @@ namespace Booking.View
             signInForm.Show();
             this.Close();
         }
+
+        private void OpenStatisticsAboutTour(object sender, RoutedEventArgs e)
+        {
+            GuideStatisticAboutTours statistics = new GuideStatisticAboutTours();
+            statistics.Show();
+        }
     }
 }

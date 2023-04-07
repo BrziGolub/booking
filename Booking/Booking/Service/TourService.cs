@@ -22,14 +22,17 @@ namespace Booking.Service
 		private LocationService _locationService;
         private TourImageService _tourImageService;
         private TourKeyPointService _tourKeyPointService;
+		private TourGuestsService _tourGuestsService;
 
 		private List<Location> _locations;
 		private List<TourImage> _tourImages;
 		private List<TourKeyPoint> _tourKeyPoints;
+		private List<TourGuests> _tourGuests;
 
 		private LocationRepository _locationRepository;
 		private TourImageRepository _tourImagesRepository;
 		private TourKeyPointRepository _tourKeyPointsRepository;
+		private TourGuestsRepository _tourGuestsRepository;
 		
 		public static int SignedGuideId;
 
@@ -43,14 +46,18 @@ namespace Booking.Service
 			_locationService = new LocationService();
             _tourImageService = new TourImageService();
             _tourKeyPointService = new TourKeyPointService();
+			_tourGuestsService = new TourGuestsService();
 
             _locations = new List<Location>();
             _tourImages = new List<TourImage>();
             _tourKeyPoints = new List<TourKeyPoint>();
+			_tourGuests = new List<TourGuests>();
 
 			_locationRepository = new LocationRepository();
 			_tourImagesRepository = new TourImageRepository();
 			_tourKeyPointsRepository = new TourKeyPointRepository();
+			_tourGuestsRepository = new TourGuestsRepository();
+			
 
 			Load();
         }
@@ -61,6 +68,7 @@ namespace Booking.Service
 			_tourImages = _tourImagesRepository.Load();
 			_tourKeyPoints = _tourKeyPointsRepository.Load();
 			_locations = _locationRepository.Load();
+			_tourGuests = _tourGuestsRepository.Load();
 
 			LoadLocations();
             LoadImages();
@@ -84,7 +92,35 @@ namespace Booking.Service
             return _tours;
         }
 
-		public List<Tour> GetGuideTours()
+        public List<Tour> GetMostVisitedTourGenerally()
+        {
+            List<Tour> lista = new List<Tour>();
+
+            Tour mostVisitedTour = null;
+            int mostVisitedTourID = 0;
+            int mostVisits = 0;			
+
+				foreach(TourGuests tg in _tourGuests)
+				{
+					int tourVisits = _tourGuests.Count(m => m.Tour.Id == tg.Tour.Id);
+
+					if(tourVisits > mostVisits)
+					{
+						mostVisitedTourID = tg.Tour.Id;
+						mostVisits = tourVisits;
+					}
+				}	
+			mostVisitedTour = GetById(mostVisitedTourID);
+			
+			lista.Add(mostVisitedTour);
+
+			return lista;
+        }
+        
+
+
+
+        public List<Tour> GetGuideTours()
 		{
             List<Tour> _guideTours = new List<Tour>();
 
@@ -136,6 +172,21 @@ namespace Booking.Service
                 }
             }
         }
+
+		/*public void LoadTourGuests()
+		{
+			//?
+			_tourGuestsRepository.Load();
+			
+			foreach(Tour tour in _tours)
+			{
+				List<TourGuests> tourGuests = _tourGuestsService.getTourGuestsByTourId(Tour.Id);
+				foreach(TourGuests tg in tourGuests)
+				{
+
+				}
+			}
+		}*/
 
         public ObservableCollection<Tour> Search(ObservableCollection<Tour> observe, string state, string city, string duration, string language, string visitors)
         {

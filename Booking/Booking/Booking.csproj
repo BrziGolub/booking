@@ -71,6 +71,7 @@
     <Compile Include="Model\TourKeyPoint.cs" />
     <Compile Include="Model\TourReservation.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Model\Voucher.cs" />
     <Compile Include="Repository\AccommodationAndOwnerGradeRepository.cs" />
     <Compile Include="Repository\AccommodationGradeRepository.cs" />
     <Compile Include="Repository\AccommodationImagesRepository.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Repository\TourRepository.cs" />
     <Compile Include="Repository\TourReservationRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Repository\VoucherRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
     <Compile Include="Serializer\Serializer.cs" />
     <Compile Include="Service\AccommodationAndOwnerGradeService.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Service\TourImageService.cs" />
     <Compile Include="Service\TourKeyPointService.cs" />
     <Compile Include="Service\UserService.cs" />
+    <Compile Include="Service\VoucherService.cs" />
     <Compile Include="View\AccommodationReservationView.xaml.cs">
       <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>
@@ -122,6 +125,9 @@
     </Compile>
     <Compile Include="View\GuideKeyPointsCheck.xaml.cs">
       <DependentUpon>GuideKeyPointsCheck.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GuideStatisticAboutTours.xaml.cs">
+      <DependentUpon>GuideStatisticAboutTours.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HomePageFirstGuest.xaml.cs">
       <DependentUpon>HomePageFirstGuest.xaml</DependentUpon>
@@ -200,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GuideKeyPointsCheck.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GuideStatisticAboutTours.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -286,6 +296,7 @@
     <None Include="Resources\Data\tourReservations.csv" />
     <None Include="Resources\Data\tours.csv" />
     <None Include="Resources\Data\users.csv" />
+    <None Include="Resources\Data\vouchers.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
