@@ -1,9 +1,11 @@
 ﻿using Booking.Model;
-using Booking.Repository;
 using Booking.Serializer;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using Booking.Observer;
+using Booking.Repository;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,16 +17,31 @@ namespace Booking.Service
         private readonly UserRepository _repository;
 
         private List<User> _users;
+        private readonly List<IObserver> _observers;
 
-        public UserService()
-        {
+        public UserService() {
+      
             _repository = new UserRepository();
+            _observers = new List<IObserver>();
             Load();
         }
 
         public void Load()
         {
             _users = _repository.Load();
+        }
+        public List<User> GetGuests()
+        {
+          //Load();
+            List<User> users = new List<User>();
+            foreach (var user in _users)
+            {
+                if (user.Role == 4)
+                {
+                    users.Add(user);
+                }
+            }
+            return users;
         }
 
         public void Save()
@@ -45,6 +62,26 @@ namespace Booking.Service
         public User GetByUsername(string username)
         {
             return _users.Find(u => u.Username == username);
+        
+    
+        }
+
+        public void NotifyObservers()
+        {
+            foreach (var observer in _observers)
+            {
+                observer.Update();
+            }
+        }
+
+        public void Subscribe(IObserver observer)
+        {
+            _observers.Add(observer);
+        }
+
+        public void Unsubscribe(IObserver observer)
+        {
+            _observers.Remove(observer);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Booking.View
 			}
 		}
 
-		public string UserType { get; set; }
+		public UserService UserService { get; set; }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -55,11 +55,10 @@ namespace Booking.View
 			InitializeComponent();
 			DataContext = this;
 			_repository = new UserRepository();
-			
-			
+			//_repository.Load();
 		}
 		private void SignIn(object sender, RoutedEventArgs e)
-		{            
+		{
             User user = _repository.GetByUsername(Username);
             
 			GuideHomePage.Username = usernameTextBox.Text;

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Input;
 
@@ -238,7 +239,7 @@ namespace Booking.Service
 			oldTourKeyPoint.Location = tourKeyPoint.Location;
 			oldTourKeyPoint.Achieved = tourKeyPoint.Achieved;
 
-			_tourKeyPointService.Save();//u save nesto ide?
+			_tourKeyPointService.Save();
 			NotifyObservers();
 
 			return oldTourKeyPoint;
@@ -276,8 +277,9 @@ namespace Booking.Service
 
 			_tours.Add(tour);
             NotifyObservers();
-            Save();
-			_tourImagesRepository.Save(_tourImages);
+			Save();
+			
+            _tourImagesRepository.Save(_tourImages);
 			_tourKeyPointsRepository.Save(_tourKeyPoints);
 
 			
@@ -294,7 +296,7 @@ namespace Booking.Service
 			List<Tour> _todayTours = new List<Tour>();
 			foreach (var tour in _tours)
 			{
-				if (tour.StartTime == DateTime.Today)
+				if (tour.StartTime == DateTime.Today && tour.GuideId == SignedGuideId) 
 				{
 					_todayTours.Add(tour);
 				}
@@ -326,10 +328,14 @@ namespace Booking.Service
 			if (tour.IsCancelable())
 			{
 
-				_tours.Remove(tour);
-				NotifyObservers();
-				_repository.Save(_tours);
+				_tourKeyPoints.RemoveAll(TourKeyPoint => TourKeyPoint.Tour.Id == idTour);
 
+                _tours.Remove(tour);
+				
+				NotifyObservers();
+                _tourKeyPointsRepository.Save(_tourKeyPoints);
+                _repository.Save(_tours);
+				
 				return tour;
 			}
 			else
@@ -339,6 +345,7 @@ namespace Booking.Service
 			}
 		}
 
+	
         public void NotifyObservers()
 		{
 			foreach (var observer in _observers)
