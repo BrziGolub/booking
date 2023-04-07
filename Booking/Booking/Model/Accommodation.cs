@@ -26,14 +26,16 @@ namespace Booking.Model
 		public int CancelationPeriod { get; set; } 
 
 		public List<AccommodationImage> Images { get; set; } 
-		
-	
+
+		public User Owner { get; set; }
 
 		public Accommodation() 
 		{
 			Location = new Location();
             Images = new List<AccommodationImage>();
-		}
+			Owner = new User();
+
+        }
 
 		public Accommodation(string name, Location location, AccommodationType type, int maxNum, int minNum, int cncl) 
 		{ 
@@ -49,7 +51,7 @@ namespace Booking.Model
 		public string[] ToCSV()
 		{
 			string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Type.ToString(),
-				Capacity.ToString(), MinNumberOfDays.ToString(), CancelationPeriod.ToString() };
+				Capacity.ToString(), MinNumberOfDays.ToString(), CancelationPeriod.ToString(), Owner.Id.ToString() };
 			return csvValues;
 		}
 
@@ -71,6 +73,7 @@ namespace Booking.Model
             Capacity = Convert.ToInt32(values[4]);
 			MinNumberOfDays = Convert.ToInt32(values[5]);
 			CancelationPeriod = Convert.ToInt32(values[6]);
-		}
+			Owner.Id = Convert.ToInt32(values[7]);
+        }
 	}
 }

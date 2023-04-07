@@ -21,6 +21,7 @@ namespace Booking.Repository
 			_serializer = new Serializer<User>();
 			_users = _serializer.FromCSV(FilePath);
 		}
+
 		public User GetByUsername(string username)
 		{
 			_users = _serializer.FromCSV(FilePath);
@@ -36,6 +37,8 @@ namespace Booking.Repository
         {
             _serializer.ToCSV(FilePath, users);
         }
-
     }
+
+
+
 }

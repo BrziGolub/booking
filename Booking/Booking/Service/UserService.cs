@@ -1,4 +1,7 @@
 ﻿using Booking.Model;
+using Booking.Serializer;
+using System;
+using System.ComponentModel;
 using Booking.Observer;
 using Booking.Repository;
 using System;
@@ -11,30 +14,27 @@ namespace Booking.Service
 {
     public class UserService
     {
-        private readonly UserRepository _userRepository;
-        private List<User> _users1;
+        private readonly UserRepository _repository;
 
+        private List<User> _users;
         private readonly List<IObserver> _observers;
 
-
-        public UserService() 
-        {
-            _userRepository = new UserRepository();
-            _users1 = new List<User>();
+        public UserService() {
+      
+            _repository = new UserRepository();
             _observers = new List<IObserver>();
-
             Load();
         }
 
         public void Load()
         {
-            _users1 = _userRepository.Load();
+            _users = _repository.Load();
         }
         public List<User> GetGuests()
         {
           //Load();
             List<User> users = new List<User>();
-            foreach (var user in _users1)
+            foreach (var user in _users)
             {
                 if (user.Role == 4)
                 {
@@ -46,7 +46,24 @@ namespace Booking.Service
 
         public void Save()
         {
-            _userRepository.Save(_users1);
+            _repository.Save(_users);
+        }
+
+        public User GetById(int id)
+        {
+            return _users.Find(v => v.Id == id);
+        }
+
+        public List<User> GetAll()
+        {
+            return _users;
+        }
+
+        public User GetByUsername(string username)
+        {
+            return _users.Find(u => u.Username == username);
+        
+    
         }
 
         public void NotifyObservers()
@@ -66,6 +83,5 @@ namespace Booking.Service
         {
             _observers.Remove(observer);
         }
-
     }
 }

@@ -86,10 +86,12 @@ namespace Booking.View
             }
             else
             {
-                //ovo promeni ime, milovic je promenio resi konflikte
-                Booking.Model.AccommodationReservation newReservation = new Booking.Model.AccommodationReservation(SelectedAccommodation, SelectedDates.StartDate, SelectedDates.EndDate);
 
-                AccommodationReservationService.SaveReservation(newReservation);
+                //ovde je GRESKA U KONTORKUTORU FALI JOS JEDAN PARAMETAR
+                //NIJE uvezan gost sa rezervacijom kad se pravi nova rezervacija
+               Booking.Model.AccommodationReservation newReservation = new Booking.Model.AccommodationReservation(SelectedAccommodation, SelectedDates.StartDate, SelectedDates.EndDate);
+
+               AccommodationReservationService.SaveReservation(newReservation);
 
                 MessageBox.Show("You succesfuly reserve your accommodation for: " + SelectedDates.StartDate.ToString("dd/MM/yyyy") + " - " + SelectedDates.EndDate.ToString("dd/MM/yyyy") + " !");
             }

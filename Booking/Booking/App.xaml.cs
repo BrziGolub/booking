@@ -12,6 +12,7 @@ namespace Booking
 {
     public partial class App : Application
     {
+
         public UserService UserService { get; set; }
         public LocationService LocationService { get; set; }
         public AccommodationService AccommodationService { get; set; }

@@ -5,80 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="GuestBOOKING" Height="500" Width="1200">
+        Title="GuestBOOKING" Height="500" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Grid Background="AliceBlue">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="300"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="2" Margin="0,46,0,0" >
-            <DataGrid x:Name="AccommodationDataGrid" 
-                      SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
-                      IsReadOnly="True" AutoGenerateColumns="False" Height="226" HeadersVisibility="Column" FontSize="13" Width="1129" RenderTransformOrigin="0.503,0.552" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Width="120" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="State" Width="100" Binding="{Binding Location.State}"/>
-                    <DataGridTextColumn Header="City" Width="100" Binding="{Binding Location.City}"/>
-                    <DataGridTextColumn Header="Type" Width="80"  Binding="{Binding Type}"/>
-                    <DataGridTextColumn Header="Capacity" Width="80"  Binding="{Binding Capacity}" />
-                    <DataGridTextColumn Header="Advance reservation restrictions" Binding="{Binding MinNumberOfDays}"/>
-                    <DataGridTextColumn Header="CancelationPeriod" Binding="{Binding CancelationPeriod}"/>
-                    <DataGridTemplateColumn Header="Images" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <ItemsControl ItemsSource="{Binding Images}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Image Source="{Binding Url}" Width="80" Height="80" />
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                </DataGrid.Columns>
-            </DataGrid>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Menu Height="30" Width="900" >
+                <MenuItem Header="HomePage" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage"></MenuItem>
+                <MenuItem Header="Quick search" HorizontalAlignment="Right"></MenuItem>
+                <MenuItem Header="My reservations" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"></MenuItem>
+                <MenuItem Header="Reshedule requests" HorizontalAlignment="Right"></MenuItem>
+                <MenuItem Header="Reviews" HorizontalAlignment="Right"></MenuItem>
+                <MenuItem Header="Forums" HorizontalAlignment="Right"></MenuItem>
+                <MenuItem Header="Notfications" HorizontalAlignment="Right"></MenuItem>
+                <MenuItem Header="Language" HorizontalAlignment="Right">
+                    <MenuItem Header="ENG"></MenuItem>
+                    <MenuItem Header="SRB"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Log out" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3">
+                    <MenuItem.Icon>
+                        <Image  Source="logOut.png" Width="30" Height="17" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="My Profile" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3">
+                    <MenuItem.Icon>
+                        <Image Source="User.png" Width="30" Height="17" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </Menu>
         </StackPanel>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Height="40" VerticalAlignment="Bottom">
-            <Label Width="140" Margin="4">Accommodation Name:</Label>
-            <Label Width="100" Margin="4">State:</Label>
-            <Label Width="100" Margin="4">City:</Label>
-            <Label Width="80" Margin="4">Type:</Label>
-            <Label Width="110" Margin="4">Number of guests:</Label>
-            <Label Width="200" Margin="4">Number of the days for reservation:</Label>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal" Margin="0,20,15,259" Grid.RowSpan="3">
-            <TextBox Width="140" Height="20"  Margin="4" Text="{Binding Path=SearchName}"></TextBox>
-            <ComboBox x:Name="CountrycomboBox" Width="100" Height="20" Margin="4" SelectionChanged="FillCity"  SelectedItem="{Binding Path=SearchState,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
-            <ComboBox x:Name="CitycomboBox"  Width="100" Height="20" Margin="4"  ItemsSource="{Binding Path=CityCollection}" SelectedItem="{Binding Path=SearchCity, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
-            <StackPanel Orientation="Vertical" Margin="4" VerticalAlignment="Bottom" Height="57">
-                <CheckBox IsChecked="{Binding Path=IsCheckedApartment}">APARTMNET</CheckBox>
-                <CheckBox IsChecked="{Binding Path=IsCheckedCottage}">COTTAGE</CheckBox>
-                <CheckBox IsChecked="{Binding Path=IsCheckedHouse}">HOUSE</CheckBox>
-            </StackPanel>
-            <TextBox Width="110" Height="20" Margin="4" Text="{Binding Path=SerachGuests}"></TextBox>
-            <TextBox Width="200" Height="20" Margin="4" Text="{Binding Path=SearchReservationDays}"></TextBox>
-
-            <Button Click ="Button_Click_Search" Width ="80" Height="30" Margin="4">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Search" FontSize="14" VerticalAlignment="Center"  HorizontalAlignment="Right"/>
-                </StackPanel>
-            </Button>
-
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">
-            <Button HorizontalAlignment="Left" Width="60" Height="25" Margin="6" Click="Button_Click_Book">Book</Button>
-            <Button Width="60" Height="25" Margin="6" Click="Button_Click_ShowAll">Show all</Button>
-        </StackPanel>
+        <Frame x:Name="FrameHomePage" Grid.Row="1" HorizontalAlignment="Center"></Frame>
     </Grid>
 </Window>
