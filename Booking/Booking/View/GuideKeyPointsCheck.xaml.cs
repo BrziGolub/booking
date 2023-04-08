@@ -103,27 +103,33 @@ namespace Booking.View
 
         private void AddGuest(object sender, RoutedEventArgs e)
         {
-            if(SelectedGuest != null && SelectedTourKeyPoint != null) 
+
+            if(SelectedGuest != null && SelectedTourKeyPoint != null ) 
             {
+                if (TourService.checkTourGuests(SelectedTour.Id, SelectedGuest.Id) == true)
+                {
+                    tourGuests.Tour.Id = SelectedTour.Id;
+                    tourGuests.User.Id = SelectedGuest.Id;
+                    tourGuests.TourKeyPoint.Id = SelectedTourKeyPoint.Id;
 
-                tourGuests.Tour.Id = SelectedTour.Id;
-                tourGuests.User.Id = SelectedGuest.Id;
-                tourGuests.TourKeyPoint.Id = SelectedTourKeyPoint.Id;
-
-                TourGuestsService.Create(tourGuests);
-
-                MessageBox.Show("added");
-                //MessageBox.Show("Guest '" + SelectedGuest.Username.ToString() + "' is added to keypoint '" + SelectedTourKeyPoint.Location.State.ToString() + ", " + SelectedTourKeyPoint.Location.City.ToString() + "'");
+                    MessageBox.Show("Guest '" + SelectedGuest.Username.ToString() + "' is added to keypoint '" + SelectedTourKeyPoint.Location.State.ToString() + ", " + SelectedTourKeyPoint.Location.City.ToString() + "'");
+                    TourGuestsService.Create(tourGuests);
+                    TourGuestsService.NotifyObservers();
+                }
+                else
+                {
+                    MessageBox.Show("Guest is already added to this tour");
+                }
             }
             else
             {
                 MessageBox.Show("You must first mark the guest and checkpoint who you want to add and where!");
             }
 
-            //treba da ih ponistim
-                //SelectedTourKeyPoint = null;
-                //SelectedGuest = null;
         }
+
+
+
 
     }
 }

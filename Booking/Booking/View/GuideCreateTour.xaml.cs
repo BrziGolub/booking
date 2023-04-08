@@ -39,6 +39,11 @@ namespace Booking.View
 
             locationService = new LocationService();
 
+            FillComboBoxes();
+        }
+
+        private void FillComboBoxes()
+        {
             List<string> items1 = new List<string>();
 
             using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
@@ -78,16 +83,11 @@ namespace Booking.View
             comboBox.ItemsSource = items;
 
 
-            if(comboBox1.SelectedItem == null)
+            if (comboBox1.SelectedItem == null)
             {
                 comboBox2.IsEnabled = false;
             }
-
-                
-
-
         }
-
         private void GuideCreateTour_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             GuideHomePage guideHomePage = new GuideHomePage();
