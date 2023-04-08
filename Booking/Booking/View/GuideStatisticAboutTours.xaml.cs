@@ -24,8 +24,11 @@ namespace Booking.View
     {
         public ObservableCollection<Tour> MostVisitedTourGenerraly { get; set; }
         public ObservableCollection<Tour> MostVisitedTourThisYear { get; set; }
+        public ObservableCollection<Tour> averageNumberOfGuests { get; set; }
         public TourService TourService { get; set; }
         public User user { get; set; }
+
+        int zeroToEighteen = 0;
 
         public GuideStatisticAboutTours()
         {
@@ -43,6 +46,11 @@ namespace Booking.View
             MostVisitedTourThisYear = new ObservableCollection<Tour>(TourService.GetMostVisitedTourThisYear());
 
             FillComboBoxes();
+
+            
+
+            
+            
         }
 
         private void FillComboBoxes()
@@ -111,6 +119,32 @@ namespace Booking.View
         private void Close(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+
+
+        private void ShowStatistic(object sender, RoutedEventArgs e)
+        {
+            if(comboBoxTours.Text != "") 
+            {
+                Tour turapom = TourService.GetByName(comboBoxTours.Text);
+
+                zeroToEighteenTextBlock.Text = TourService.numberOfZeroToEighteenGuests(turapom.Id).ToString();
+                EighteenToFifthyTextBlock.Text = TourService.numberOfEighteenToFiftyGuests(turapom.Id).ToString();
+                FifthyPlusTextBlock.Text = TourService.numberOfFiftyPlusGuests(turapom.Id).ToString();
+            }
+            else
+            {
+                MessageBox.Show("In order to show statistics, you first need to select some tour!");
+            }
+        }
+
+        private void ResetStatistic(object sender, RoutedEventArgs e)
+        {
+            comboBoxTours.SelectedIndex = -1;
+            zeroToEighteenTextBlock.Text = "";
+            EighteenToFifthyTextBlock.Text = "";
+            FifthyPlusTextBlock.Text = "";
         }
     }
 }

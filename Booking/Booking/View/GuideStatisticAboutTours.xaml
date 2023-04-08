@@ -74,28 +74,32 @@
             <ComboBox x:Name="comboBoxTours" Width="120" Height="20" />
         </WrapPanel>
 
-        <DataGrid Margin="-350,220,0,0"
-                  Width="200" Height="150"
-                  AutoGenerateColumns="False"             
-                  CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserReorderColumns="False"
-                  IsReadOnly="True" 
-                  ItemsSource="{Binding }"
-            >
-            <DataGrid.Columns>
+        <Label Content="0-18" Margin="125 312 0 0" FontWeight="ExtraBold"></Label>
+        <TextBlock x:Name="zeroToEighteenTextBlock"
+                   Margin="-325 113 0 0"                  
+                   FontSize="15"
+                   FontStyle="Italic"
+                   FontWeight="SemiBold"
+                   Foreground="Black"
+                   Height="21" Width="144"></TextBlock>
 
-                <DataGridTextColumn Header="0-18" Binding="{Binding }"></DataGridTextColumn>
-                <DataGridTextColumn Header="18-50" Binding="{Binding }"></DataGridTextColumn>
-                <DataGridTextColumn Header="50+" Binding="{Binding }"></DataGridTextColumn>
-            </DataGrid.Columns>
-            <DataGrid.RowHeaderTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding RowHeader}" FontWeight="Bold" />
-                </DataTemplate>
+        <Label Content="18-50" Margin="125 332 0 0" FontWeight="ExtraBold"></Label>
+        <TextBlock x:Name="EighteenToFifthyTextBlock"
+                   Margin="-325 154 0 0"                  
+                   FontSize="15"
+                   FontStyle="Italic"
+                   FontWeight="SemiBold"
+                   Foreground="Black"
+                   Height="21" Width="144"></TextBlock>
 
-            </DataGrid.RowHeaderTemplate>
-
-
-        </DataGrid>
+        <Label Content="50+" Margin="125 352 0 0" FontWeight="ExtraBold"></Label>
+        <TextBlock x:Name="FifthyPlusTextBlock"
+                   Margin="-328 198 0 0"                  
+                   FontSize="15"
+                   FontStyle="Italic"
+                   FontWeight="SemiBold"
+                   Foreground="Black"
+                   Height="21" Width="144"></TextBlock>
 
         <DataGrid Margin="350,220,0,0"
                   Width="200" Height="150"
@@ -119,8 +123,9 @@
         </DataGrid>
 
 
-        <WrapPanel Margin="0 470 0 0" Width="170" Height="50">
-            <Button Width="70" Height="40" >
+        <WrapPanel Margin="0 470 0 0" Width="250" Height="50">
+            <Button Width="70" Height="40" Content="Show" Margin="0 0 0 0" Click="ShowStatistic"></Button>
+            <Button Width="70" Height="40" Margin="20 0 0 0" Click="ResetStatistic" >
                 <StackPanel>
                     <TextBlock>Reset</TextBlock>
                     <TextBlock>statistics</TextBlock>
