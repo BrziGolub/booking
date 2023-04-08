@@ -60,16 +60,18 @@ namespace Booking.Model
 			Id = Convert.ToInt32(values[0]);
 			Name = values[1];
 			Location.Id = Convert.ToInt32(values[2]);
-			AccommodationType accommodationType;
+          
+            AccommodationType accommodationType;
+
             if (Enum.TryParse<AccommodationType>(values[3], out accommodationType))
-            {
-                Type = accommodationType;
-            }
-            else
-            {
-                Type = AccommodationType.APARTMENT;
-                System.Console.WriteLine("Doslo je do greske prilikom ucitavanja tipa smestaja");
-            }
+			{
+				Type = accommodationType;
+			}
+			else
+			{
+				Type = AccommodationType.APARTMENT;
+				System.Console.WriteLine("Doslo je do greske prilikom ucitavanja tipa smestaja");
+			}
             Capacity = Convert.ToInt32(values[4]);
 			MinNumberOfDays = Convert.ToInt32(values[5]);
 			CancelationPeriod = Convert.ToInt32(values[6]);

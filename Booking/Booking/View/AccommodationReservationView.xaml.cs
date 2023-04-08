@@ -21,11 +21,8 @@ namespace Booking.View
 {
     public partial class AccommodationReservationView : Window
     {
-        //private AccommodationReservationController accommodationReservationContoller;
         public AccommodationReservationService AccommodationReservationService { get; set; }
         private Accommodation SelectedAccommodation;
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -43,7 +40,6 @@ namespace Booking.View
             }
 
         }
-
 
         public DateTime _arrivalDay;
         public DateTime ArrivalDay

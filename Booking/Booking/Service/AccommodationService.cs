@@ -25,16 +25,13 @@ namespace Booking.Service
 
         private AccommodationImagesRepository _accommodationImagesRepository;
 
-        //public static int SignedFirstGuestId;
-
         public AccommodationService()
         {
             _accommodationRepository = new AccommodationRepository();
             _observers = new List<IObserver>();
             var app = Application.Current as App;
             _locationService = app.LocationService;
-            // _locationService = new LocationService();
-            _userService = new UserService(); //ovo izmeni da uzmes iz app 
+            _userService = new UserService(); 
             _accommodationImagesRepository = new AccommodationImagesRepository();
             _accommodations = new List<Accommodation>();
             _accommodationImages = new List<AccommodationImage>();
