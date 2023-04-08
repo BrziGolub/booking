@@ -102,22 +102,70 @@ namespace Booking.Service
 
 				foreach(TourGuests tg in _tourGuests)
 				{
+					Tour pomTour = GetById(tg.Tour.Id);
+
+					if (pomTour.GuideId == SignedGuideId)
+					{
+						int tourVisits = _tourGuests.Count(m => m.Tour.Id == tg.Tour.Id);
+
+						if (tourVisits > mostVisits)
+						{
+							mostVisitedTourID = tg.Tour.Id;
+							mostVisits = tourVisits;
+						}
+					}
+				}
+
+            mostVisitedTour = GetById(mostVisitedTourID);
+
+            if (mostVisitedTour.GuideId == SignedGuideId && mostVisits > 0)
+				{
+					lista.Add(mostVisitedTour);
+					return lista;
+				}
+			else
+			    {
+					return new List<Tour>();
+				}
+        }
+
+        public List<Tour> GetMostVisitedTourThisYear()
+		{
+            List<Tour> lista = new List<Tour>();
+
+			Tour mostVisitedTour = null;
+            int mostVisitedTourID = 0;
+            int mostVisits = 0;
+
+            foreach (TourGuests tg in _tourGuests)
+            {
+				Tour pomTour = GetById(tg.Tour.Id);
+				if(pomTour.StartTime.Year == DateTime.Now.Year && pomTour.GuideId == SignedGuideId)
+				{
 					int tourVisits = _tourGuests.Count(m => m.Tour.Id == tg.Tour.Id);
 
-					if(tourVisits > mostVisits)
+					if (tourVisits > mostVisits)
 					{
 						mostVisitedTourID = tg.Tour.Id;
 						mostVisits = tourVisits;
 					}
-				}	
+				}
+				
+            }
+
 			mostVisitedTour = GetById(mostVisitedTourID);
+
+			if (mostVisitedTour.GuideId == SignedGuideId && mostVisits>0)
+			{
+				lista.Add(mostVisitedTour);
+				return lista;
+			}
+			else
+			{        
+                return new List<Tour>();
+			}
 			
-			lista.Add(mostVisitedTour);
-
-			return lista;
         }
-        
-
 
 
         public List<Tour> GetGuideTours()
@@ -380,11 +428,14 @@ namespace Booking.Service
 			{
 
 				_tourKeyPoints.RemoveAll(TourKeyPoint => TourKeyPoint.Tour.Id == idTour);
+				_tourImages.RemoveAll(TourImage => TourImage.Tour.Id == idTour);
 
                 _tours.Remove(tour);
 				
 				NotifyObservers();
+				
                 _tourKeyPointsRepository.Save(_tourKeyPoints);
+                _tourImagesRepository.Save(_tourImages);
                 _repository.Save(_tours);
 				
 				return tour;
@@ -394,6 +445,18 @@ namespace Booking.Service
 				MessageBox.Show("You can cancel the tour no later than 48 hours before the start!");
 				return null;
 			}
+		}
+
+		public bool checkTourGuests(int tourId, int userId) //, int keyPointId
+        {
+			if(_tourGuests.Any(u=> u.Tour.Id == tourId && u.User.Id == userId )) // && u.TourKeyPoint.Id == keyPointId
+            {
+				return false;
+			}
+			else
+			{
+                return true;
+            }			
 		}
 
 	

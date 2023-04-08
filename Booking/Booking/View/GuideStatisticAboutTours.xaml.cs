@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,13 +38,32 @@ namespace Booking.View
             TourService = app.TourService;
             TourService.Subscribe(this);
 
-            buttonGenerraly.Focus();
-
             mostVisitedDataGrid.Items.Clear();
             MostVisitedTourGenerraly = new ObservableCollection<Tour>(TourService.GetMostVisitedTourGenerally()); 
-           MostVisitedTourThisYear = new ObservableCollection<Tour>(TourService.GetTodayTours()); // GetMostVisitedTourThisYear()
+            MostVisitedTourThisYear = new ObservableCollection<Tour>(TourService.GetMostVisitedTourThisYear());
+
+            FillComboBoxes();
         }
 
+        private void FillComboBoxes()
+        {
+            List<string> items1 = new List<string>();
+
+            using (StreamReader reader = new StreamReader("../../Resources/Data/tours.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string[] fields = reader.ReadLine().Split('|');
+                    if (fields[9] == TourService.SignedGuideId.ToString())
+                    {
+                        items1.Add(fields[1]);
+                    }
+                }
+            }
+            var distinctItems = items1.Distinct().ToList();
+            comboBoxTours.ItemsSource = distinctItems;
+
+        }
 
         public void Update()
         {
@@ -54,7 +74,7 @@ namespace Booking.View
             }
 
             MostVisitedTourThisYear.Clear();
-            foreach (Tour t in TourService.GetTodayTours()) // GetMostVisitedTourThisYear()
+            foreach (Tour t in TourService.GetMostVisitedTourThisYear()) 
             {
                 MostVisitedTourThisYear.Add(t);
             }
@@ -65,7 +85,12 @@ namespace Booking.View
             buttonGenerraly.Background = Brushes.LightPink;
             buttonThisYear.Background = Brushes.LightGreen;
 
-            mostVisitedDataGrid.ItemsSource = MostVisitedTourThisYear; // GetMostVisitedTourThisYear()
+            mostVisitedDataGrid.ItemsSource = MostVisitedTourThisYear; 
+
+            if(MostVisitedTourThisYear.Count() == 0)
+            {
+                MessageBox.Show("You don't have tours with guests in this year!");
+            }
 
         }
 
@@ -75,8 +100,17 @@ namespace Booking.View
             buttonThisYear.Background = Brushes.LightPink;
 
             mostVisitedDataGrid.ItemsSource = MostVisitedTourGenerraly;
-            
-            
+
+            if (MostVisitedTourGenerraly.Count() == 0)
+            {
+                MessageBox.Show("You don't have tours with guests!");
+            }
+
+        }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

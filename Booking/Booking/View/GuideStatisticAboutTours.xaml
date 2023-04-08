@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
         Background="#D6E6F2"
-        Title="GuideStatisticAboutTours" Height="575" Width="830">
+        Title="GuideStatisticAboutTours" Height="575" Width="830" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <TextBlock Margin="10,6,0,0" FontWeight="Bold" FontSize="32" Text="Statistic about tours" Foreground="#FFFFF200" >
             <TextBlock.Effect>
@@ -71,7 +71,7 @@
 
         <WrapPanel Margin="300 260 0 0">
             <Label Content="Select tour:" FontSize="13"/>
-            <ComboBox Width="120" Height="20" />
+            <ComboBox x:Name="comboBoxTours" Width="120" Height="20" />
         </WrapPanel>
 
         <DataGrid Margin="-350,220,0,0"
@@ -127,7 +127,7 @@
                 </StackPanel>
             </Button>
 
-            <Button Width="70" Height="40" Content="Close" Margin="20 0 0 0"></Button>
+            <Button Width="70" Height="40" Content="Close" Margin="20 0 0 0" Click="Close"></Button>
         </WrapPanel>
 
 
