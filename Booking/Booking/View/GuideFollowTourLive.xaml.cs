@@ -52,7 +52,7 @@ namespace Booking.View
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void StartTour(object sender, RoutedEventArgs e)
         {
             
              int startedTours = 0;
@@ -81,13 +81,6 @@ namespace Booking.View
                     guideKeyPointsCheck.ShowDialog();
 
                     TourService.UpdateTour(pomTour);
-
-                    /*if (SelectedTour != null)
-                        pomid = SelectedTour.Id;
-                      else
-                        pomid = -1;
-                    */
-
                 }
                 else
                 {
@@ -109,7 +102,7 @@ namespace Booking.View
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void EndTour(object sender, RoutedEventArgs e)
         {
             if (SelectedTour != null && SelectedTour.IsStarted == true)
             {
@@ -123,7 +116,7 @@ namespace Booking.View
             }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void ShowOnGoingTour(object sender, RoutedEventArgs e)
         {
             int pomid1 = -1;
                 foreach (var t in Tours)
@@ -145,6 +138,11 @@ namespace Booking.View
                 {
                     MessageBox.Show("You don't have ongoing tour!");
                 }         
+        }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

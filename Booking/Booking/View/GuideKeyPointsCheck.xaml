@@ -6,28 +6,82 @@
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
-        Title="GuideKeyPointsCheck" Height="290" Width="400">
+        Title="GuideKeyPointsCheck" Height="375" Width="660">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="404*"/>
+            <ColumnDefinition Width="197*"/>
+        </Grid.ColumnDefinitions>
         <DataGrid 
-        Margin="10 10 10 40"
-        
+        x:Name="GridKeyPoints"
+        Margin="25,27,132,57"
+        Width="270" Height="250"
         IsReadOnly="True" 
         AutoGenerateColumns="False"
-        SelectionMode="Single"
+        SelectionMode="Single"   
+             Focusable="False" 
         CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" 
         SelectedItem="{Binding SelectedTourKeyPoint}"
         ItemsSource="{Binding Path=KeyPoints, UpdateSourceTrigger=PropertyChanged}"
             >
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Padding" Value="5"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Background" Value="Yellow"/>
+                            <Setter Property="BorderBrush" Value="Gray"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
                 <DataGridTextColumn Width="*" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="Achieved" Binding="{Binding Achieved}"></DataGridTextColumn>
-            </DataGrid.Columns>            
+                <DataGridTextColumn Width="60" Header="Achieved" Binding="{Binding Achieved}"></DataGridTextColumn>
+            </DataGrid.Columns>
         </DataGrid>
 
-        <WrapPanel FlowDirection="LeftToRight" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="60" Margin="185 215 0 0" Panel.ZIndex="1">
-            <Button Content="Achieve"  Width="50" Height="30" Click="Button_Click"  FontSize="10" Margin ="0 0 0 0" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center"  />
-           
+        <DataGrid 
+            x:Name="GridGuest"
+        Margin="345,27,25,57"
+        Width="270" Height="250"
+        IsReadOnly="True" 
+        AutoGenerateColumns="False"
+        SelectionMode="Single"
+            Focusable="False" 
+        CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" 
+        SelectedItem="{Binding SelectedGuest}"
+        ItemsSource="{Binding Path=Guests, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"
+            >
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Padding" Value="5"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Background" Value="Yellow"/>
+                            <Setter Property="BorderBrush" Value="Gray"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Username}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Added" Binding="{Binding }"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <WrapPanel FlowDirection="LeftToRight" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="180" Margin="240,288,0,0" Panel.ZIndex="1">
+            <Button Content="Achieve"  Width="50" Height="30" Click="AchieveKeypoint"  FontSize="10" Margin ="9 0 0 0" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center"  />
+            <Button Content="AddGuestToTour"  Width="50" Height="30" Click="AddGuest"  FontSize="10" Margin ="48 0 0 0" FontWeight="Bold"  HorizontalAlignment="Right" VerticalAlignment="Center"  />
         </WrapPanel>
 
     </Grid>
