@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="GuestBOOKING" Height="500" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
+        Title="GuestBOOKING" Height="500" Width="820" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -17,7 +17,7 @@
                 <MenuItem Header="HomePage" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage"></MenuItem>
                 <MenuItem Header="Quick search" HorizontalAlignment="Right"></MenuItem>
                 <MenuItem Header="My reservations" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"></MenuItem>
-                <MenuItem Header="Reshedule requests" HorizontalAlignment="Right"></MenuItem>
+                <MenuItem Header="Reshedule requests" HorizontalAlignment="Right" ></MenuItem>
                 <MenuItem Header="Reviews" HorizontalAlignment="Right"></MenuItem>
                 <MenuItem Header="Forums" HorizontalAlignment="Right"></MenuItem>
                 <MenuItem Header="Notfications" HorizontalAlignment="Right"></MenuItem>

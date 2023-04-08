@@ -34,19 +34,19 @@
                 <RowDefinition Height="40"/>
                 <RowDefinition  Height="40"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0">Choose arrival day:</Label>
-            <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Width="200"  Height="40" SelectedDate="{Binding ArrivalDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+            <DatePicker SelectedDateFormat="Short" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Width="200"  Height="40" SelectedDate="{Binding NewArrivalDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}"/>
             <Label Grid.Row="1" Grid.Column="0">Choose departure day:</Label>
-            <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Width="200"  Height="40" SelectedDate="{Binding ArrivalDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}"/>
+            <DatePicker SelectedDateFormat="Short" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Width="200"  Height="40" SelectedDate="{Binding NewDepartureDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}"/>
 
         </Grid>
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
-            <Button FontWeight="Bold"  Margin="3">SEND REQUEST</Button>
+            <Button FontWeight="Bold"  Margin="3" Click="Button_Click_SendRequest">SEND REQUEST</Button>
         </StackPanel>
     </Grid>
 </Page>

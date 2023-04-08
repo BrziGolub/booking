@@ -62,7 +62,9 @@
     <Compile Include="Model\AccommodationReservation.cs" />
     <Compile Include="Conversion\DateConversion.cs" />
     <Compile Include="Model\Accommodation.cs" />
-    <Compile Include="Model\Enum\AccommodationType.cs" />
+    <Compile Include="Model\AccommodationReservationRequests.cs" />
+    <Compile Include="Model\Enums\AccommodationType.cs" />
+    <Compile Include="Model\Enums\RequestStatus.cs" />
     <Compile Include="Model\Images\AccommodationImage.cs" />
     <Compile Include="Model\Images\TourImage.cs" />
     <Compile Include="Model\Location.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Repository\AccommodationRepository.cs" />
     <Compile Include="Observer\IObserver.cs" />
     <Compile Include="Observer\ISubject.cs" />
+    <Compile Include="Repository\AccommodationReservationRequestsRepostiory.cs" />
     <Compile Include="Repository\AccommodationResevationRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
     <Compile Include="Repository\TourGuestsRepository.cs" />
@@ -92,6 +95,8 @@
     <Compile Include="Service\AccommodationAndOwnerGradeService.cs" />
     <Compile Include="Service\AccommodationGradeService.cs" />
     <Compile Include="Service\AccommodationImageService.cs" />
+    <Compile Include="Service\AccommodationReservationRequestRepository.cs" />
+    <Compile Include="Service\AccommodationReservationRequestService.cs" />
     <Compile Include="Service\AccommodationReservationService.cs" />
     <Compile Include="Service\AccommodationService.cs" />
     <Compile Include="Service\TourGuestsService.cs" />
@@ -289,6 +294,7 @@
     <None Include="Resources\Data\accommodationImages.csv" />
     <None Include="Resources\Data\accommodations.csv" />
     <None Include="Resources\Data\accommodationsReservations.csv" />
+    <None Include="Resources\Data\accommodationsReservationsRequests.csv" />
     <None Include="Resources\Data\locations.csv" />
     <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />

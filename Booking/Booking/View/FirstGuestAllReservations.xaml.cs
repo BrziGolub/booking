@@ -38,11 +38,25 @@ namespace Booking.View
            
             ReservationsDataGrid.ItemsSource = _reservations;
 
-            findWidthForReservationsDataGrid();
+            setWidthForReservationsDataGrid();
+
         }
 
-        //ovo je da postavi sirinu DataGrida
-        public void findWidthForReservationsDataGrid()
+        public bool IsFiveDaysRuleAcomlished(AccommodationReservation  selectedReservation)
+        {
+            if(selectedReservation == null)
+            {
+                return false;
+
+            }else if(selectedReservation.ArrivalDay <= DateTime.Now && DateTime.Now >= selectedReservation.ArrivalDay.AddDays(5))
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        public void setWidthForReservationsDataGrid()
         {
             double totalWidth = 0;
             foreach (DataGridColumn column in ReservationsDataGrid.Columns)
@@ -57,7 +71,19 @@ namespace Booking.View
 
         private void Button_Click_RateAccommodationAndOwner(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new RateAccommodationAndOwner(SelectedReservation));
+            if (IsFiveDaysRuleAcomlished(SelectedReservation))
+            {
+                MessageBox.Show("You are unable to rate you accomodation and owner");
+            }
+            else
+            {
+                NavigationService.Navigate(new RateAccommodationAndOwner(SelectedReservation));
+            }
+        }
+
+        private void Button_Click_ResheduleAccommodationReservation(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ReshaduleAccommodationReservation(SelectedReservation));
         }
     }
 }

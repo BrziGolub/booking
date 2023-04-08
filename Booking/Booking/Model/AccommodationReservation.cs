@@ -12,7 +12,6 @@ namespace Booking.Model
 {
     public class AccommodationReservation : ISerializable
     {
-
         public int Id { get; set; }
         
         public Accommodation Accommodation { get; set; }
