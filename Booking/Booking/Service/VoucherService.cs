@@ -26,6 +26,34 @@ namespace Booking.Service
 
         }
 
+        public Voucher AddVoucher(Voucher voucher)
+        {
+            Load();
+            voucher.Id = NextId();
+            _vouchers.Add(voucher);
+
+            NotifyObservers();
+            Save();
+
+            return voucher;
+        }
+
+        public int NextId()
+        {
+            if (_vouchers.Count == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return _vouchers.Max(t => t.Id) + 1;
+            }
+        }
+        public void Create(Voucher voucher)
+        {
+            AddVoucher(voucher);
+        }
+
         public void Load()
         {
             _vouchers = _repository.Load();

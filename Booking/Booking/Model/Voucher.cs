@@ -12,11 +12,11 @@ namespace Booking.Model
 
         public int Id { get; set; }
         public User User { get; set; }
-        public Tour Tour { get; set; }
+        //public Tour Tour { get; set; }
         public DateTime ValidTime { get; set; }
         public Voucher() {
             User = new User();
-            Tour = new Tour();
+            //Tour = new Tour();
         }
 
         public string[] ToCSV()
@@ -24,7 +24,7 @@ namespace Booking.Model
             string[] csvValues = {
                 Id.ToString(),
                 User.Id.ToString(),
-                Tour.Id.ToString(),
+                //Tour.Id.ToString(),
                 ValidTime.ToString("dd/MM/yyyy"),
 
             };
@@ -35,8 +35,8 @@ namespace Booking.Model
         {
             Id = Convert.ToInt32(values[0]);
             User.Id = Convert.ToInt32(values[1]);
-            Tour.Id = Convert.ToInt32(values[2]);
-            ValidTime = DateTime.Parse(values[3]);
+            //Tour.Id = Convert.ToInt32(values[2]);
+            ValidTime = DateTime.Parse(values[2]);
         }
     }
 }

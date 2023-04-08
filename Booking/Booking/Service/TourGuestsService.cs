@@ -46,20 +46,12 @@ namespace Booking.Service
 
         public void Create(TourGuests tourGuests)
         {
-            AddTourGuests(tourGuests);
-            
+            AddTourGuests(tourGuests); 
         }
 
         public List<TourGuests> GetAll() 
         {
         return _tourGuests;
-        }
-
-        public bool Check() 
-        {
-            //if(_tourGuests.Any(u=> u.User.Id ))
-
-            return true;
         }
 
         public void NotifyObservers()
