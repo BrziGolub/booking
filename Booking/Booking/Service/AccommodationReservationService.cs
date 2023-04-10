@@ -31,29 +31,18 @@ namespace Booking.Service
         public AccommodationReservationService()
         {
             _reservations = new List<AccommodationReservation>();
-<<<<<<< Updated upstream
-            _accommodationResevationRepository = new AccommodationResevationRepository();
-            _accommodationRepository = new AccommodationRepository();
             _repository = new AccommodationResevationRepository();
-=======
-             _repository = new AccommodationResevationRepository();
->>>>>>> Stashed changes
-            _reservations = _repository.Load();
 
             var app = Application.Current as App;
             
             AccommodationGradeService = app.AccommodationGradeService;
             AccommodationService = app.AccommodationService;
-<<<<<<< Updated upstream
             UserService = app.UserService;
-            Load();
-            //pitanje da li treba bind za guest i accRes
-=======
+   
             AccommodationReservationRequestService = app.AccommodationReservationRequestService;
 
             _observers = new List<IObserver>();
             Load();
->>>>>>> Stashed changes
         }
 
         public List<AccommodationReservation> GetGeustsReservatonst()
@@ -72,14 +61,10 @@ namespace Booking.Service
 
         public void Load()
         {
-<<<<<<< Updated upstream
-            _reservations = _accommodationResevationRepository.Load();
-            BindReservationToAccommodation();
-            BindReservationToGuest();
-=======
             _reservations = _repository.Load();
             BindReservationToAccommodation();
->>>>>>> Stashed changes
+            BindReservationToGuest();
+
         }
         public AccommodationReservation GetByID(int id)
         {
@@ -221,12 +206,8 @@ namespace Booking.Service
                     continue;
                 }
                 bool flag = AccommodationGradeService.IsReservationGraded(reservation.Id);
-<<<<<<< Updated upstream
-                if (!flag && reservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId)
-=======
 
-                if (!flag)
->>>>>>> Stashed changes
+                if (!flag && reservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId)
                 {
                     reservationList.Add(reservation);
                 }
@@ -331,7 +312,6 @@ namespace Booking.Service
                 reservation.Accommodation = accommodation;
             }
         }
-<<<<<<< Updated upstream
         public void BindReservationToGuest()
         {
             UserService.Load();
@@ -341,15 +321,10 @@ namespace Booking.Service
                 reservation.Guest = user;
             }
         }
-        /*
-        public void BindReservationToAccommodation()
-=======
-
-      
 
 
         /*public void BindReservationToAccommodation()
->>>>>>> Stashed changes
+
         {
             AccommodationService.Load();
             foreach (AccommodationReservation accommodationReservation in _reservations)
