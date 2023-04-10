@@ -45,6 +45,9 @@ namespace Booking.View
             FrameHomePage.Content = new FirstGuestAllReservations();
         }
 
-     
+        private void MenuItem_Click_ResheduleRequests(object sender, RoutedEventArgs e)
+        {
+            FrameHomePage.Content = new FisrtGuestAllRequests();
+        }
     }
 }

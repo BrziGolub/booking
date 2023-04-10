@@ -1,4 +1,5 @@
 ﻿using Booking.Model;
+using Booking.Observer;
 using Booking.Service;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace Booking.View
     /// <summary>
     /// Interaction logic for FirstGuestAllReservations.xaml
     /// </summary>
-    public partial class FirstGuestAllReservations : Page
+    public partial class FirstGuestAllReservations : Page, IObserver
     {
       
 
@@ -34,8 +35,9 @@ namespace Booking.View
             this.DataContext = this;
             var app = Application.Current as App;
             _accommodationReservationService = app.AccommodationReservationService;
+            
             _reservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetGeustsReservatonst());
-           
+            _accommodationReservationService.Subscribe(this);
             ReservationsDataGrid.ItemsSource = _reservations;
 
             setWidthForReservationsDataGrid();
@@ -84,6 +86,29 @@ namespace Booking.View
         private void Button_Click_ResheduleAccommodationReservation(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ReshaduleAccommodationReservation(SelectedReservation));
+        }
+
+        private void Button_Click_CancleReservation(object sender, RoutedEventArgs e)
+        {
+            bool cancle = _accommodationReservationService.IsAbleToCancleResrvation(SelectedReservation);
+            if (cancle)
+            {
+                _accommodationReservationService.Delete(SelectedReservation);
+                MessageBox.Show("Your reservation is canceled!"); 
+            }
+            else
+            {
+                MessageBox.Show("You are unable to cancle reservation!");
+            }
+        }
+
+        public void Update()
+        {
+            _reservations.Clear();
+            foreach(var reservation in _accommodationReservationService.GetGeustsReservatonst())
+            {
+                _reservations.Add(reservation);
+            }
         }
     }
 }

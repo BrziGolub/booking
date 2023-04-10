@@ -33,7 +33,8 @@ namespace Booking.View
         public AccommodationAndOwnerGrade accommodationAndOwnerGrade;
 
         public AccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
-        public AccommodationImageService AccommodationImageService { get; set; }
+       
+        public GuestsAccommodationImagesService GuestsAccommodationImagesService { get; set; }
 
         public AccommodationReservation AccommodationReservation { get; set; }
 
@@ -91,7 +92,7 @@ namespace Booking.View
             AccommodationLabel = setAccommodationLabel(accommodationReservation);
             OwnerLabel = setOwnerLabel(accommodationReservation);
             AccommodationReservation = new AccommodationReservation();
-            AccommodationImageService = new AccommodationImageService();
+            GuestsAccommodationImagesService = new GuestsAccommodationImagesService();
             AccommodationReservation = accommodationReservation;
             accommodationAndOwnerGrade = new AccommodationAndOwnerGrade();
             AccommodationAndOwnerGradeService = new AccommodationAndOwnerGradeService(); //ovo povezi iz app
@@ -130,8 +131,10 @@ namespace Booking.View
 
             Picture.Accomodation = AccommodationReservation.Accommodation;
 
-            AccommodationImageService.Create(Picture);
-            AccommodationImageService.SaveImages();
+            //ovo izmeni
+            GuestsAccommodationImagesService.Create(Picture);
+            //AccommodationImageService.CreateGuestsImages(Picture);
+            GuestsAccommodationImagesService.SaveImages();
 
             tbPictures.Text = string.Empty;
         }

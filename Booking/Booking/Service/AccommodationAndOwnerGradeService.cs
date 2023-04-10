@@ -1,4 +1,5 @@
 ﻿using Booking.Model;
+using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Repository;
 using System;
@@ -14,21 +15,36 @@ namespace Booking.Service
         private readonly AccommodationAndOwnerGradeRepository _repository;
 
         private List<AccommodationAndOwnerGrade> _accommodationAndOwnerGrades;
+<<<<<<< Updated upstream
 
         private readonly AccommodationGradeRepository _gradeRepository;
         private List<AccommodationGrade> _accommodationGrades;
         private AccommodationReservationService _accommodationReservationService;
         private readonly List<IObserver> _observers;
 
+=======
+        //private AccommodationResevationRepository _accommodationReservationRepository;
+        private AccommodationReservationService _accommodationReservationService;
+
+        private GuestsAccommodationImagesService _guestsImagesService;
+>>>>>>> Stashed changes
 
         public AccommodationAndOwnerGradeService()
         {
             _observers = new List<IObserver>();
             _repository = new AccommodationAndOwnerGradeRepository();
+<<<<<<< Updated upstream
             _accommodationAndOwnerGrades = new List<AccommodationAndOwnerGrade>();
             _accommodationReservationService = new AccommodationReservationService();
             _gradeRepository = new AccommodationGradeRepository();
             _accommodationGrades = new List<AccommodationGrade>();
+=======
+            _guestsImagesService = new GuestsAccommodationImagesService(); //ovo iz app
+            _accommodationReservationService = new AccommodationReservationService();
+            _accommodationAndOwnerGrades = new List<AccommodationAndOwnerGrade>(); 
+           // _accommodationReservationRepository = new AccommodationResevationRepository();
+            
+>>>>>>> Stashed changes
             Load(); 
         }
 
@@ -37,6 +53,7 @@ namespace Booking.Service
             _accommodationAndOwnerGrades = _repository.Load();
             _accommodationGrades = _gradeRepository.Load();
             BindGradesToReservations();
+            BindGuestsImagesToGrades();
         }
 
         public int NextId()
@@ -64,6 +81,7 @@ namespace Booking.Service
         {
             return _accommodationAndOwnerGrades.Find(v => v.Id == id);
         }
+<<<<<<< Updated upstream
         public void Subscribe(IObserver observer)
         {
             _observers.Add(observer);
@@ -99,9 +117,28 @@ namespace Booking.Service
             }
             return _seeableGrades;
         }
+=======
+
+        //proveri ovo
+        public void BindGuestsImagesToGrades()
+        {
+            foreach (AccommodationAndOwnerGrade grade in _accommodationAndOwnerGrades)
+            {
+                foreach (var image in _guestsImagesService.GetAll())
+                {
+                    if (image.Accomodation.Id == grade.Id)
+                    {
+                        grade.Images.Add(image);
+                    }
+                }
+
+            }
+        }
+        //proveri ovo 
+>>>>>>> Stashed changes
         public void BindGradesToReservations()
         { 
-            //proveri ovo 
+
             foreach (AccommodationAndOwnerGrade accommodationGrade in _accommodationAndOwnerGrades)
             {
                 foreach (AccommodationReservation accommodationReservation in _accommodationReservationService.GetAll())

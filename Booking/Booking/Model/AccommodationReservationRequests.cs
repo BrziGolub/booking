@@ -17,6 +17,7 @@ namespace Booking.Model
         public DateTime NewDeparuteDay { get; set; }
         public RequestStatus Status { get; set; }
         public String Comment { get; set; }
+
             
         public AccommodationReservationRequests(AccommodationReservation accommodationReservation, DateTime newArrivalDay, DateTime newDeparuteDay, RequestStatus status, string comment)
         {
@@ -40,7 +41,7 @@ namespace Booking.Model
             NewDeparuteDay = DateConversion.StringToDate(values[3]);
             RequestStatus status;
 
-            if (Enum.TryParse<RequestStatus>(values[3], out status))
+            if (Enum.TryParse<RequestStatus>(values[4], out status))
             {
                 Status = status;
             }
@@ -49,7 +50,7 @@ namespace Booking.Model
                 Status = RequestStatus.PENDNING;
                 System.Console.WriteLine("Doslo je do greske prilikom ucitavanja tipa smestaja");
             }
-            Comment = values[4];
+            Comment = values[5];
         }
 
         public string[] ToCSV()

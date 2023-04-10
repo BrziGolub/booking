@@ -82,6 +82,7 @@
     <Compile Include="Observer\ISubject.cs" />
     <Compile Include="Repository\AccommodationReservationRequestsRepostiory.cs" />
     <Compile Include="Repository\AccommodationResevationRepository.cs" />
+    <Compile Include="Repository\GuestsAccommodationImagesRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
     <Compile Include="Repository\TourGuestsRepository.cs" />
     <Compile Include="Repository\TourImageRepository.cs" />
@@ -95,10 +96,10 @@
     <Compile Include="Service\AccommodationAndOwnerGradeService.cs" />
     <Compile Include="Service\AccommodationGradeService.cs" />
     <Compile Include="Service\AccommodationImageService.cs" />
-    <Compile Include="Service\AccommodationReservationRequestRepository.cs" />
     <Compile Include="Service\AccommodationReservationRequestService.cs" />
     <Compile Include="Service\AccommodationReservationService.cs" />
     <Compile Include="Service\AccommodationService.cs" />
+    <Compile Include="Service\GuestsAccommodationImagesService.cs" />
     <Compile Include="Service\TourGuestsService.cs" />
     <Compile Include="Service\TourImageService.cs" />
     <Compile Include="Service\TourKeyPointService.cs" />
@@ -115,6 +116,9 @@
     </Compile>
     <Compile Include="View\FirstGuestHomePage.xaml.cs">
       <DependentUpon>FirstGuestHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FisrtGuestAllRequests.xaml.cs">
+      <DependentUpon>FisrtGuestAllRequests.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GradingWindow.xaml.cs">
       <DependentUpon>GradingWindow.xaml</DependentUpon>
@@ -194,6 +198,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FirstGuestHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FisrtGuestAllRequests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -302,6 +310,7 @@
     <None Include="Resources\Data\accommodations.csv" />
     <None Include="Resources\Data\accommodationsReservations.csv" />
     <None Include="Resources\Data\accommodationsReservationsRequests.csv" />
+    <None Include="Resources\Data\guestsAccommodationImages.csv" />
     <None Include="Resources\Data\locations.csv" />
     <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />
@@ -335,10 +344,16 @@
     <Resource Include="View\location.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\booked.png" />
+    <Resource Include="View\medal.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\medal.png" />
+    <Resource Include="View\booking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\request.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\hourglass.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

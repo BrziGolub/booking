@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Booking.Model;
+using Booking.Observer;
 using Booking.Service;
 
 namespace Booking.View
@@ -60,6 +61,20 @@ namespace Booking.View
             }
         }
 
+        public String _comment;
+        public String Comment
+        {
+            get => _comment;
+            set
+            {
+                if (_comment != value)
+                {
+                    _comment = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -92,7 +107,7 @@ namespace Booking.View
 
         private void Button_Click_SendRequest(object sender, RoutedEventArgs e)
         {
-            AccommodationReservationRequestsService.Create(AccommodationReservation, NewArrivalDay, NewDepartureDay);
+            AccommodationReservationRequestsService.Create(AccommodationReservation, NewArrivalDay, NewDepartureDay, Comment);
         }
     }
 }

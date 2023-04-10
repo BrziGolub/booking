@@ -20,7 +20,11 @@ namespace Booking
         public AccommodationReservationService AccommodationReservationService { get; set; }
         public TourService TourService { get; set; }
         public TourGuestsService TourGuestsService { get; set; }
+<<<<<<< Updated upstream
         public AccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
+=======
+        public AccommodationReservationRequestService AccommodationReservationRequestService { get; set; }
+>>>>>>> Stashed changes
 
         public App()
         {
@@ -28,10 +32,17 @@ namespace Booking
             LocationService = new LocationService();
             AccommodationService = new AccommodationService();
             AccommodationReservationService = new AccommodationReservationService();
+<<<<<<< Updated upstream
             AccommodationGradeService = new AccommodationGradeService();
             TourService = new TourService();
             TourGuestsService = new TourGuestsService();
             AccommodationAndOwnerGradeService = new AccommodationAndOwnerGradeService();
+=======
+            AccommodationReservationRequestService = new AccommodationReservationRequestService();
+            TourService = new TourService();
+            TourGuestsService = new TourGuestsService();
+            AccommodationReservationService.AccommodationReservationRequestService = AccommodationReservationRequestService;
+>>>>>>> Stashed changes
         }
     }
 }

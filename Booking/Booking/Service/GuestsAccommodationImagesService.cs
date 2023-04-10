@@ -1,25 +1,22 @@
 ﻿using Booking.Model.Images;
-using Booking.Observer;
 using Booking.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace Booking.Service
 {
-    public class AccommodationImageService
+    public class GuestsAccommodationImagesService
     {
-
-        private readonly AccommodationImagesRepository _repository;
+        private readonly GuestsAccommodationImagesRepository _repository;
 
         private List<AccommodationImage> _images;
 
-        public AccommodationImageService()
+        public GuestsAccommodationImagesService()
         {
-            _repository = new AccommodationImagesRepository();
+            _repository = new GuestsAccommodationImagesRepository();
             _images = new List<AccommodationImage>();
             Load();
         }

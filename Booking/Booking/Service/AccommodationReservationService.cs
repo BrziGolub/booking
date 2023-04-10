@@ -7,16 +7,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Booking.Model;
+using Booking.Observer;
 
 namespace Booking.Service
 {
-    public class AccommodationReservationService
+    public class AccommodationReservationService : ISubject
     {
-        private readonly AccommodationResevationRepository _accommodationResevationRepository;
+        private readonly List<IObserver> _observers;
+
         public AccommodationGradeService AccommodationGradeService { get; set; }
+
+        public AccommodationReservationRequestService AccommodationReservationRequestService { get; set; }
+
         private List<AccommodationReservation> _reservations;
-        private AccommodationRepository _accommodationRepository;
         private readonly AccommodationResevationRepository _repository;
+
         public AccommodationService AccommodationService { get; set; }
         public UserService UserService { get; set; }
 
@@ -26,17 +31,29 @@ namespace Booking.Service
         public AccommodationReservationService()
         {
             _reservations = new List<AccommodationReservation>();
+<<<<<<< Updated upstream
             _accommodationResevationRepository = new AccommodationResevationRepository();
             _accommodationRepository = new AccommodationRepository();
             _repository = new AccommodationResevationRepository();
+=======
+             _repository = new AccommodationResevationRepository();
+>>>>>>> Stashed changes
             _reservations = _repository.Load();
 
             var app = Application.Current as App;
+            
             AccommodationGradeService = app.AccommodationGradeService;
             AccommodationService = app.AccommodationService;
+<<<<<<< Updated upstream
             UserService = app.UserService;
             Load();
             //pitanje da li treba bind za guest i accRes
+=======
+            AccommodationReservationRequestService = app.AccommodationReservationRequestService;
+
+            _observers = new List<IObserver>();
+            Load();
+>>>>>>> Stashed changes
         }
 
         public List<AccommodationReservation> GetGeustsReservatonst()
@@ -55,9 +72,14 @@ namespace Booking.Service
 
         public void Load()
         {
+<<<<<<< Updated upstream
             _reservations = _accommodationResevationRepository.Load();
             BindReservationToAccommodation();
             BindReservationToGuest();
+=======
+            _reservations = _repository.Load();
+            BindReservationToAccommodation();
+>>>>>>> Stashed changes
         }
         public AccommodationReservation GetByID(int id)
         {
@@ -76,8 +98,44 @@ namespace Booking.Service
         {
             reservation.Id = NextId();
             _reservations.Add(reservation);
-            _accommodationResevationRepository.Save(_reservations);
+            _repository.Save(_reservations);
         }
+
+        public void Delete(AccommodationReservation selectedReservation)
+        {
+            _reservations.Remove(selectedReservation);
+            AccommodationReservationRequestService.DeleteRequest(selectedReservation);
+            _repository.Save(_reservations); //napravi metodu Save
+            NotifyObservers();
+        }
+
+        public bool IsAbleToCancleResrvation(AccommodationReservation selectedReservation)
+        {
+            if(DateTime.Now < selectedReservation.ArrivalDay.AddDays(-selectedReservation.Accommodation.CancelationPeriod))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void Subscribe(IObserver observer)
+        {
+            _observers.Add(observer);
+        }
+
+        public void Unsubscribe(IObserver observer)
+        {
+            _observers.Remove(observer);
+        }
+
+        public void NotifyObservers()
+        {
+            foreach (var observer in _observers)
+            {
+                observer.Update();
+            }
+        }
+
         public List<DateTime> MakeListOfReservedDates(DateTime initialDate, DateTime endDate)
         {
             List<DateTime> reservedDates = new List<DateTime>();
@@ -147,6 +205,7 @@ namespace Booking.Service
             uniqueReservedDatesList.Sort();
             return uniqueReservedDatesList;
         }
+
         private bool IsReservationAvailableToGrade(AccommodationReservation accommodationReservation)
         {
             return accommodationReservation.DepartureDay <= DateTime.Now && accommodationReservation.DepartureDay.AddDays(5) >= DateTime.Now;
@@ -162,7 +221,12 @@ namespace Booking.Service
                     continue;
                 }
                 bool flag = AccommodationGradeService.IsReservationGraded(reservation.Id);
+<<<<<<< Updated upstream
                 if (!flag && reservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId)
+=======
+
+                if (!flag)
+>>>>>>> Stashed changes
                 {
                     reservationList.Add(reservation);
                 }
@@ -267,6 +331,7 @@ namespace Booking.Service
                 reservation.Accommodation = accommodation;
             }
         }
+<<<<<<< Updated upstream
         public void BindReservationToGuest()
         {
             UserService.Load();
@@ -278,6 +343,13 @@ namespace Booking.Service
         }
         /*
         public void BindReservationToAccommodation()
+=======
+
+      
+
+
+        /*public void BindReservationToAccommodation()
+>>>>>>> Stashed changes
         {
             AccommodationService.Load();
             foreach (AccommodationReservation accommodationReservation in _reservations)

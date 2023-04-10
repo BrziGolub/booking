@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Booking.Model.Images;
 using Booking.Serializer;
 
 namespace Booking.Model
@@ -14,11 +15,12 @@ namespace Booking.Model
         public int Cleaness { get; set; }
         public int OwnersCourtesy { get; set; }
         public string Comment { get; set; }
-
+        public List<AccommodationImage> Images { get; set; }
 
         public AccommodationAndOwnerGrade()
         {
             AccommodationReservation = new AccommodationReservation();
+            Images = new List<AccommodationImage>();
         }
 
         public void FromCSV(string[] values)

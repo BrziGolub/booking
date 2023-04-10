@@ -5,39 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="GuestBOOKING" Height="500" Width="820" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
+        Title="GuestBOOKING" Height="600" Width="1100" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="35"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Menu Height="30" Width="900" >
-                <MenuItem Header="HomePage" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage"></MenuItem>
-                <MenuItem Header="Quick search" HorizontalAlignment="Right"></MenuItem>
-                <MenuItem Header="My reservations" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"></MenuItem>
-                <MenuItem Header="Reshedule requests" HorizontalAlignment="Right" ></MenuItem>
-                <MenuItem Header="Reviews" HorizontalAlignment="Right"></MenuItem>
-                <MenuItem Header="Forums" HorizontalAlignment="Right"></MenuItem>
-                <MenuItem Header="Notfications" HorizontalAlignment="Right"></MenuItem>
-                <MenuItem Header="Language" HorizontalAlignment="Right">
+            <Menu Height="30" Width="1100" Background="#FFFFF980">
+                <MenuItem Header="HomePage" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage"></MenuItem>
+                <MenuItem Header="Quick search" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
+                <MenuItem Header="My reservations" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"></MenuItem>
+                <MenuItem Header="Reshedule requests" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ResheduleRequests" ></MenuItem>
+                <MenuItem Header="Reviews" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
+                <MenuItem Header="Forums" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
+                <MenuItem Header="Notfications" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
+                <MenuItem Header="Language"  FontWeight="Bold" HorizontalAlignment="Right">
                     <MenuItem Header="ENG"></MenuItem>
                     <MenuItem Header="SRB"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="Log out" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3">
+                <MenuItem Width="240"/>
+                <MenuItem Header="Log out" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3">
                     <MenuItem.Icon>
                         <Image  Source="logOut.png" Width="30" Height="17" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="My Profile" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3">
+                <MenuItem Header="My Profile" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3">
                     <MenuItem.Icon>
-                        <Image Source="User.png" Width="30" Height="17" />
+                        <Image Source="User.png" Width="20" Height="17" />
                     </MenuItem.Icon>
                 </MenuItem>
             </Menu>
         </StackPanel>
 
-        <Frame x:Name="FrameHomePage" Grid.Row="1" HorizontalAlignment="Center"></Frame>
+        <Frame x:Name="FrameHomePage" Grid.Row="1" ></Frame>
     </Grid>
 </Window>
