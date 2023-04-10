@@ -23,17 +23,25 @@ namespace Booking.Service
         private TourImageService _tourImageService;
         private TourKeyPointService _tourKeyPointService;
 		private TourGuestsService _tourGuestsService;
+		private UserService _userService;
+		private VoucherService _voucherService;
 
 		private List<Location> _locations;
 		private List<TourImage> _tourImages;
 		private List<TourKeyPoint> _tourKeyPoints;
 		private List<TourGuests> _tourGuests;
+		private List<User> _users;
+		private List<Voucher> _vouchers;
 
 		private LocationRepository _locationRepository;
 		private TourImageRepository _tourImagesRepository;
 		private TourKeyPointRepository _tourKeyPointsRepository;
 		private TourGuestsRepository _tourGuestsRepository;
-		
+		private UserRepository _userRepository;
+		private VoucherRepository _voucherRepository;
+
+		public Voucher voucher;
+
 		public static int SignedGuideId;
 
 		public TourService()
@@ -47,19 +55,26 @@ namespace Booking.Service
             _tourImageService = new TourImageService();
             _tourKeyPointService = new TourKeyPointService();
 			_tourGuestsService = new TourGuestsService();
+			_userService = new UserService();
+			_voucherService = new VoucherService();
 
             _locations = new List<Location>();
             _tourImages = new List<TourImage>();
             _tourKeyPoints = new List<TourKeyPoint>();
 			_tourGuests = new List<TourGuests>();
+			_users = new List<User>();
+			_vouchers = new List<Voucher>();
 
 			_locationRepository = new LocationRepository();
 			_tourImagesRepository = new TourImageRepository();
 			_tourKeyPointsRepository = new TourKeyPointRepository();
 			_tourGuestsRepository = new TourGuestsRepository();
-			
+            _userRepository = new UserRepository();
+            _voucherRepository = new VoucherRepository();
 
-			Load();
+			voucher = new Voucher();
+
+            Load();
         }
 
         public void Load()
@@ -69,6 +84,8 @@ namespace Booking.Service
 			_tourKeyPoints = _tourKeyPointsRepository.Load();
 			_locations = _locationRepository.Load();
 			_tourGuests = _tourGuestsRepository.Load();
+			_users = _userRepository.Load();
+			_vouchers = _voucherRepository.Load();
 
 			LoadLocations();
             LoadImages();
@@ -86,6 +103,11 @@ namespace Booking.Service
         {
             return _tours.Find(v => v.Id == id);
         }
+
+		public Tour GetByName(string name)
+		{
+			return _tours.Find(t => t.Name == name);
+		}
 
         public List<Tour> GetAll()
         {
@@ -220,21 +242,6 @@ namespace Booking.Service
                 }
             }
         }
-
-		/*public void LoadTourGuests()
-		{
-			//?
-			_tourGuestsRepository.Load();
-			
-			foreach(Tour tour in _tours)
-			{
-				List<TourGuests> tourGuests = _tourGuestsService.getTourGuestsByTourId(Tour.Id);
-				foreach(TourGuests tg in tourGuests)
-				{
-
-				}
-			}
-		}*/
 
         public ObservableCollection<Tour> Search(ObservableCollection<Tour> observe, string state, string city, string duration, string language, string visitors)
         {
@@ -417,7 +424,11 @@ namespace Booking.Service
 			return _selectedKeyPoints;
 		}
 
+		public void GiveVoucher(int idTour) 
+		{
 
+		
+		}
 
 		public Tour removeTour(int idTour) 
 		{
@@ -427,15 +438,30 @@ namespace Booking.Service
 			if (tour.IsCancelable())
 			{
 
-				_tourKeyPoints.RemoveAll(TourKeyPoint => TourKeyPoint.Tour.Id == idTour);
+                foreach (TourGuests tg in _tourGuests)
+                {
+                    User pomGuest = _userService.GetById(tg.User.Id);
+
+                    if (tg.Tour.Id == idTour)
+                    {
+                        voucher.User.Id = pomGuest.Id;
+                        voucher.ValidTime = DateTime.Now.AddYears(1);
+                        _voucherService.Create(voucher);
+                    }
+                }
+
+                _tourKeyPoints.RemoveAll(TourKeyPoint => TourKeyPoint.Tour.Id == idTour);
 				_tourImages.RemoveAll(TourImage => TourImage.Tour.Id == idTour);
+				_tourGuests.RemoveAll(TourGuest => TourGuest.Tour.Id == idTour);
 
                 _tours.Remove(tour);
 				
 				NotifyObservers();
-				
+
+				_voucherRepository.Save(_vouchers);
                 _tourKeyPointsRepository.Save(_tourKeyPoints);
                 _tourImagesRepository.Save(_tourImages);
+				_tourGuestsRepository.Save(_tourGuests);
                 _repository.Save(_tours);
 				
 				return tour;
@@ -459,7 +485,54 @@ namespace Booking.Service
             }			
 		}
 
-	
+		public int numberOfZeroToEighteenGuests(int selectedTourID)
+		{
+			int sum = 0;
+
+			foreach(var g in _tourGuests)
+			{		
+				User pomGuest = _userService.GetById(g.User.Id);
+				
+				if(g.Tour.Id == selectedTourID && pomGuest.Years > 0 && pomGuest.Years < 18)
+				{
+					sum+=1;
+				}
+			}	
+			return sum;
+		}
+
+        public int numberOfEighteenToFiftyGuests(int selectedTourID)
+        {
+            int sum = 0;
+
+            foreach (var g in _tourGuests)
+            {
+
+                User pomGuest = _userService.GetById(g.User.Id);
+
+                if (g.Tour.Id == selectedTourID && pomGuest.Years > 17 && pomGuest.Years < 51) // >18 i <50 ???
+                {
+                    sum += 1;
+                }
+            }
+            return sum;
+        }
+
+        public int numberOfFiftyPlusGuests(int selectedTourID)
+        {
+            int sum = 0;
+
+            foreach (var g in _tourGuests)
+            {
+                User pomGuest = _userService.GetById(g.User.Id);
+
+                if (g.Tour.Id == selectedTourID && pomGuest.Years > 50)
+                {
+                    sum += 1;
+                }
+            }
+            return sum;
+        }
         public void NotifyObservers()
 		{
 			foreach (var observer in _observers)
