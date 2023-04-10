@@ -71,6 +71,7 @@ namespace Booking.View
 
 					if(user.Role == 1)
 					{
+						AccommodationService.SignedOwnerId = user.Id;
 						OwnerHomePage ownerHomePage = new OwnerHomePage();
 						ownerHomePage.Show();
 						Close();

@@ -1,0 +1,46 @@
+﻿<Window x:Class="Booking.View.OwnerViewReviews"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Booking.View"
+        mc:Ignorable="d"
+        Title="OwnerViewReviews" Height="768" Width="1024">
+    <Grid>
+        <DataGrid 
+            x:Name="dataGrid" 
+            IsReadOnly="True" 
+            Margin="72 50 72 92" 
+            RowHeight="50"
+            AutoGenerateColumns="False"
+            SelectionMode="Single"
+            CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserReorderColumns="False"
+            ItemsSource="{Binding Path=Grades, UpdateSourceTrigger=PropertyChanged}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Accommodation name" Binding="{Binding AccommodationReservation.Accommodation.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Cleanliness" Binding="{Binding Cleaness}"/>
+                <DataGridTextColumn Header="Owner courtasy" Width="*" Binding="{Binding OwnersCourtesy}"/>
+                <DataGridTextColumn Width="*" Header="Comment" Binding="{Binding Comment}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Guest" Binding="{Binding AccommodationReservation.Guest.Username}"></DataGridTextColumn>
+
+                <DataGridTemplateColumn Header="Pictures" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ItemsControl ItemsSource="{Binding Images}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Url}" Width="80" Height="80" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <WrapPanel FlowDirection="LeftToRight" Margin="500,650,0,0">
+            <Button Margin="20 0 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Click="Close" >CLOSE</Button>
+        </WrapPanel>
+    </Grid>
+</Window>

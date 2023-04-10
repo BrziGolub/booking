@@ -25,7 +25,7 @@ namespace Booking.Model
 
 		public int CancelationPeriod { get; set; } 
 
-		public List<AccommodationImage> Images { get; set; } 
+		public List<AccommodationImage> Images { get; set; }
 
 		public User Owner { get; set; }
 
@@ -37,7 +37,7 @@ namespace Booking.Model
 
         }
 
-		public Accommodation(string name, Location location, AccommodationType type, int maxNum, int minNum, int cncl) 
+		public Accommodation(string name, Location location, AccommodationType type, int maxNum, int minNum, int cncl, int ownerId) 
 		{ 
 			Name = name;
 			Location = location;
@@ -46,6 +46,7 @@ namespace Booking.Model
 			MinNumberOfDays = minNum;
 			CancelationPeriod = cncl;
             Images = new List<AccommodationImage>();
+			Owner.Id = ownerId;
 		}
 
 		public string[] ToCSV()

@@ -20,16 +20,18 @@ namespace Booking
         public AccommodationReservationService AccommodationReservationService { get; set; }
         public TourService TourService { get; set; }
         public TourGuestsService TourGuestsService { get; set; }
+        public AccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
 
         public App()
         {
             UserService = new UserService();
             LocationService = new LocationService();
             AccommodationService = new AccommodationService();
-            AccommodationGradeService = new AccommodationGradeService();
             AccommodationReservationService = new AccommodationReservationService();
+            AccommodationGradeService = new AccommodationGradeService();
             TourService = new TourService();
             TourGuestsService = new TourGuestsService();
+            AccommodationAndOwnerGradeService = new AccommodationAndOwnerGradeService();
         }
     }
 }

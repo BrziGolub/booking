@@ -14,20 +14,28 @@ namespace Booking.Service
         private readonly AccommodationAndOwnerGradeRepository _repository;
 
         private List<AccommodationAndOwnerGrade> _accommodationAndOwnerGrades;
-        private AccommodationResevationRepository _accommodationReservationRepository;
-       
+
+        private readonly AccommodationGradeRepository _gradeRepository;
+        private List<AccommodationGrade> _accommodationGrades;
+        private AccommodationReservationService _accommodationReservationService;
+        private readonly List<IObserver> _observers;
+
 
         public AccommodationAndOwnerGradeService()
         {
+            _observers = new List<IObserver>();
             _repository = new AccommodationAndOwnerGradeRepository();
-            _accommodationAndOwnerGrades = new List<AccommodationAndOwnerGrade>(); 
-            _accommodationReservationRepository = new AccommodationResevationRepository();
+            _accommodationAndOwnerGrades = new List<AccommodationAndOwnerGrade>();
+            _accommodationReservationService = new AccommodationReservationService();
+            _gradeRepository = new AccommodationGradeRepository();
+            _accommodationGrades = new List<AccommodationGrade>();
             Load(); 
         }
 
         public void Load()
         {
             _accommodationAndOwnerGrades = _repository.Load();
+            _accommodationGrades = _gradeRepository.Load();
             BindGradesToReservations();
         }
 
@@ -56,12 +64,47 @@ namespace Booking.Service
         {
             return _accommodationAndOwnerGrades.Find(v => v.Id == id);
         }
+        public void Subscribe(IObserver observer)
+        {
+            _observers.Add(observer);
+        }
+
+        public void Unsubscribe(IObserver observer)
+        {
+            _observers.Remove(observer);
+        }
+
+        public void NotifyObservers()
+        {
+            foreach (var observer in _observers)
+            {
+                observer.Update();
+            }
+        }
+        public List<AccommodationAndOwnerGrade> GetSeeableGrades() 
+        {
+            List<AccommodationAndOwnerGrade> _seeableGrades = new List<AccommodationAndOwnerGrade>();
+            foreach (var g in _accommodationAndOwnerGrades) 
+            {
+                if (g.AccommodationReservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId) 
+                {
+                    foreach (var go in _accommodationGrades) 
+                    {
+                        if (go.Accommodation.Id == g.AccommodationReservation.Id) 
+                        {
+                            _seeableGrades.Add(g);
+                        }
+                    }
+                }
+            }
+            return _seeableGrades;
+        }
         public void BindGradesToReservations()
         { 
             //proveri ovo 
             foreach (AccommodationAndOwnerGrade accommodationGrade in _accommodationAndOwnerGrades)
             {
-                foreach (AccommodationReservation accommodationReservation in _accommodationReservationRepository.Load())
+                foreach (AccommodationReservation accommodationReservation in _accommodationReservationService.GetAll())
                 {
                     if (accommodationReservation.Id == accommodationGrade.AccommodationReservation.Id)
                     {

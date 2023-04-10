@@ -18,6 +18,7 @@ namespace Booking.Service
         private AccommodationRepository _accommodationRepository;
         private readonly AccommodationResevationRepository _repository;
         public AccommodationService AccommodationService { get; set; }
+        public UserService UserService { get; set; }
 
 
         public static int SignedFirstGuestId;
@@ -26,7 +27,6 @@ namespace Booking.Service
         {
             _reservations = new List<AccommodationReservation>();
             _accommodationResevationRepository = new AccommodationResevationRepository();
-            Load();
             _accommodationRepository = new AccommodationRepository();
             _repository = new AccommodationResevationRepository();
             _reservations = _repository.Load();
@@ -34,7 +34,8 @@ namespace Booking.Service
             var app = Application.Current as App;
             AccommodationGradeService = app.AccommodationGradeService;
             AccommodationService = app.AccommodationService;
-            BindReservationToAccommodation();
+            UserService = app.UserService;
+            Load();
             //pitanje da li treba bind za guest i accRes
         }
 
@@ -55,6 +56,8 @@ namespace Booking.Service
         public void Load()
         {
             _reservations = _accommodationResevationRepository.Load();
+            BindReservationToAccommodation();
+            BindReservationToGuest();
         }
         public AccommodationReservation GetByID(int id)
         {
@@ -159,7 +162,7 @@ namespace Booking.Service
                     continue;
                 }
                 bool flag = AccommodationGradeService.IsReservationGraded(reservation.Id);
-                if (!flag)
+                if (!flag && reservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId)
                 {
                     reservationList.Add(reservation);
                 }
@@ -264,9 +267,17 @@ namespace Booking.Service
                 reservation.Accommodation = accommodation;
             }
         }
-
-
-        /*public void BindReservationToAccommodation()
+        public void BindReservationToGuest()
+        {
+            UserService.Load();
+            foreach (AccommodationReservation reservation in _reservations)
+            {
+                User user = UserService.GetById(reservation.Guest.Id);
+                reservation.Guest = user;
+            }
+        }
+        /*
+        public void BindReservationToAccommodation()
         {
             AccommodationService.Load();
             foreach (AccommodationReservation accommodationReservation in _reservations)
@@ -279,7 +290,8 @@ namespace Booking.Service
                     }
                 }
             }
-        }*/
+        }
+        */
 
 
     }

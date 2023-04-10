@@ -140,6 +140,9 @@
     <Compile Include="View\OwnerGradingGuests.xaml.cs">
       <DependentUpon>OwnerGradingGuests.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\OwnerViewReviews.xaml.cs">
+      <DependentUpon>OwnerViewReviews.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RateAccommodationAndOwner.xaml.cs">
       <DependentUpon>RateAccommodationAndOwner.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\OwnerRegisterAccommodation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OwnerViewReviews.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

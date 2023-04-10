@@ -24,7 +24,7 @@ namespace Booking.Service
         private UserService _userService;
 
         private AccommodationImagesRepository _accommodationImagesRepository;
-
+        public static int SignedOwnerId;
         public AccommodationService()
         {
             _accommodationRepository = new AccommodationRepository();
@@ -177,6 +177,7 @@ namespace Booking.Service
         public Accommodation AddAccommodation(Accommodation accommodation)
         {
             accommodation.Id = NextId();
+            accommodation.Owner.Id = SignedOwnerId;
             foreach (var picture in accommodation.Images)
             {
                 picture.Id = ImageNextId();
@@ -188,6 +189,21 @@ namespace Booking.Service
             _accommodationImagesRepository.Save(_accommodationImages);
             NotifyObservers();
             return accommodation;
+        }
+
+        public List<Accommodation> GetOwnerAccommodations()
+        {
+            List<Accommodation> _ownerAccommodations = new List<Accommodation>();
+
+            foreach (var accommodation in _accommodations)
+            {
+                if (accommodation.Owner.Id == SignedOwnerId)
+                {
+                    _ownerAccommodations.Add(accommodation);
+                }
+            }
+
+            return _ownerAccommodations;
         }
     }
 }
