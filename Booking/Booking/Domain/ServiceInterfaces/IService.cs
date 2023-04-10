@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.ServiceInterfaces
 {
-    public interface IService<T>
+    public interface IService<T> 
     {
         void Save();
-        void Update(T entity);
+        //void Update(T entity);
         List<T> GetAll();
         T GetById(int id);
     }

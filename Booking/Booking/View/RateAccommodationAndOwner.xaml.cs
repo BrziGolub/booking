@@ -1,7 +1,9 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Model.Images;
 using Booking.Repository;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,9 +34,11 @@ namespace Booking.View
 
         public AccommodationAndOwnerGrade accommodationAndOwnerGrade;
 
-        public AccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
-       
-        public GuestsAccommodationImagesService GuestsAccommodationImagesService { get; set; }
+        //public AccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
+
+        //public GuestsAccommodationImagesService GuestsAccommodationImagesService { get; set; }
+        public IAccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
+        public IGuestsAccommodationImagesService GuestsAccommodationImagesService { get; set; }
 
         public AccommodationReservation AccommodationReservation { get; set; }
 
@@ -92,10 +96,15 @@ namespace Booking.View
             AccommodationLabel = setAccommodationLabel(accommodationReservation);
             OwnerLabel = setOwnerLabel(accommodationReservation);
             AccommodationReservation = new AccommodationReservation();
-            GuestsAccommodationImagesService = new GuestsAccommodationImagesService();
+            //GuestsAccommodationImagesService = new GuestsAccommodationImagesService();
+            
+            GuestsAccommodationImagesService = InjectorService.CreateInstance<IGuestsAccommodationImagesService>();
+
             AccommodationReservation = accommodationReservation;
             accommodationAndOwnerGrade = new AccommodationAndOwnerGrade();
-            AccommodationAndOwnerGradeService = new AccommodationAndOwnerGradeService(); //ovo povezi iz app
+            //AccommodationAndOwnerGradeService = new AccommodationAndOwnerGradeService(); //ovo povezi iz app
+            AccommodationAndOwnerGradeService = InjectorService.CreateInstance<IAccommodationAndOwnerGradeService>();
+
             comboBoxCleaness.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
             comboBoxCourtesy.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
         }
@@ -134,7 +143,7 @@ namespace Booking.View
             //ovo izmeni
             GuestsAccommodationImagesService.Create(Picture);
             //AccommodationImageService.CreateGuestsImages(Picture);
-            GuestsAccommodationImagesService.SaveImages();
+            GuestsAccommodationImagesService.Save();
 
             tbPictures.Text = string.Empty;
         }

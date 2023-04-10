@@ -57,23 +57,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\AccommodationAndOwnerGrade.cs" />
-    <Compile Include="Model\AccommodationGrade.cs" />
-    <Compile Include="Model\AccommodationReservation.cs" />
+    <Compile Include="Domain\Model\AccommodationAndOwnerGrade.cs" />
+    <Compile Include="Domain\Model\AccommodationGrade.cs" />
+    <Compile Include="Domain\Model\AccommodationReservation.cs" />
     <Compile Include="Conversion\DateConversion.cs" />
-    <Compile Include="Model\Accommodation.cs" />
-    <Compile Include="Model\AccommodationReservationRequests.cs" />
-    <Compile Include="Model\Enums\AccommodationType.cs" />
-    <Compile Include="Model\Enums\RequestStatus.cs" />
-    <Compile Include="Model\Images\AccommodationImage.cs" />
-    <Compile Include="Model\Images\TourImage.cs" />
-    <Compile Include="Model\Location.cs" />
-    <Compile Include="Model\Tour.cs" />
-    <Compile Include="Model\TourGuests.cs" />
-    <Compile Include="Model\TourKeyPoint.cs" />
-    <Compile Include="Model\TourReservation.cs" />
-    <Compile Include="Model\User.cs" />
-    <Compile Include="Model\Voucher.cs" />
+    <Compile Include="Domain\Model\Accommodation.cs" />
+    <Compile Include="Domain\Model\AccommodationReservationRequests.cs" />
+    <Compile Include="Domain\Model\Enums\AccommodationType.cs" />
+    <Compile Include="Domain\Model\Enums\RequestStatus.cs" />
+    <Compile Include="Domain\Model\Images\AccommodationImage.cs" />
+    <Compile Include="Domain\Model\Images\TourImage.cs" />
+    <Compile Include="Domain\Model\Location.cs" />
+    <Compile Include="Domain\Model\Tour.cs" />
+    <Compile Include="Domain\Model\TourGuests.cs" />
+    <Compile Include="Domain\Model\TourKeyPoint.cs" />
+    <Compile Include="Domain\Model\TourReservation.cs" />
+    <Compile Include="Domain\Model\User.cs" />
+    <Compile Include="Domain\Model\Voucher.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationAndOwnerGradeService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationGradeService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationImageService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationReservationRequestService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationReservationService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IGuestsAccommodationImagesService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ILocationService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourImageService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourKeyPointsService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourReservationService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IUserService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IVoucherService.cs" />
     <Compile Include="Repository\AccommodationAndOwnerGradeRepository.cs" />
     <Compile Include="Repository\AccommodationGradeRepository.cs" />
     <Compile Include="Repository\AccommodationImagesRepository.cs" />
@@ -105,6 +121,7 @@
     <Compile Include="Service\TourKeyPointService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\VoucherService.cs" />
+    <Compile Include="Util\InjectorService.cs" />
     <Compile Include="View\AccommodationReservationView.xaml.cs">
       <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>

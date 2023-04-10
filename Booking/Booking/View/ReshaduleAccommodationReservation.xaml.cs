@@ -14,9 +14,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Observer;
 using Booking.Service;
+using Booking.Util;
 
 namespace Booking.View
 {
@@ -29,7 +31,9 @@ namespace Booking.View
         public String AccommodationLabel { get; set; } = String.Empty;
         public String ReservedDaysLabel { get; set; } = String.Empty;
         public AccommodationReservation AccommodationReservation { get; set; }
-        public AccommodationReservationRequestService AccommodationReservationRequestsService { get; set; }
+        //public AccommodationReservationRequestService AccommodationReservationRequestsService { get; set; }
+        public IAccommodationReservationRequestService AccommodationReservationRequestsService { get; set; }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -86,7 +90,9 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
             AccommodationReservation = SelectedReservation;
-            AccommodationReservationRequestsService = new AccommodationReservationRequestService();//ovo povezi sa app
+            //AccommodationReservationRequestsService = new AccommodationReservationRequestService();//ovo povezi sa app
+            AccommodationReservationRequestsService = InjectorService.CreateInstance<IAccommodationReservationRequestService>();
+
             AccommodationLabel = SetAccommodationLabel(SelectedReservation);
             ReservedDaysLabel = SetReservedDaysLabel(SelectedReservation);
             NewDepartureDay = DateTime.Now;

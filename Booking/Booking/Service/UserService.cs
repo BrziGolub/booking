@@ -4,15 +4,15 @@ using System;
 using System.ComponentModel;
 using Booking.Observer;
 using Booking.Repository;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Booking.Domain.ServiceInterfaces;
 
 namespace Booking.Service
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly UserRepository _repository;
 

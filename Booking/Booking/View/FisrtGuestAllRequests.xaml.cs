@@ -1,7 +1,9 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Observer;
 using Booking.Repository;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,14 +29,19 @@ namespace Booking.View
     {
 
         public ObservableCollection<AccommodationReservationRequests> _requests;
-        public AccommodationReservationRequestService _requestsService { get; set; }
+        //public AccommodationReservationRequestService _requestsService { get; set; }
+        public IAccommodationReservationRequestService _requestsService { get; set; }
+
 
         public FisrtGuestAllRequests()
         {
             InitializeComponent();
             this.DataContext = this;
-            var app = Application.Current as App;
-            _requestsService = app.AccommodationReservationRequestService;
+            
+            //var app = Application.Current as App;
+            //_requestsService = app.AccommodationReservationRequestService;
+            _requestsService = InjectorService.CreateInstance<IAccommodationReservationRequestService>();
+            
             _requestsService.Subscribe(this);
             _requests = new ObservableCollection<AccommodationReservationRequests>(_requestsService.GetAll());
             RequestsDataGrid.ItemsSource = _requests;

@@ -1,23 +1,27 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Repository;
+using Booking.Util;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Booking.Service
 {
-	public class TourReservationService
+	public class TourReservationService : ITourReservationService
 	{
 		private readonly TourReservationRepository _repository;
 		private List<TourReservation> _reservations;
 
-		private TourService _tourService;
+		//private TourService _tourService;
+		private readonly ITourService _tourService;
 
 		public TourReservationService()
 		{
 			_repository = new TourReservationRepository();
 			_reservations = new List<TourReservation>();
 
-			_tourService = new TourService();
+			//_tourService = new TourService();
+			_tourService = InjectorService.CreateInstance<ITourService>();
 
 			Load();
 		}

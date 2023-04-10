@@ -20,6 +20,8 @@ using Booking.Model.Enums;
 using System.IO;
 using System.Collections.ObjectModel;
 using Booking.Service;
+using Booking.Domain.ServiceInterfaces;
+using Booking.Util;
 
 namespace Booking.View
 {
@@ -28,10 +30,11 @@ namespace Booking.View
     /// </summary>
     public partial class OwnerRegisterAccommodation : Window
     {
-        //public AccommodationContoller accommodationController;
-        //public LocationController locationController { get; set; }
-        public AccommodationService AccommodationService { get; set; }
-        public LocationService LocationService { get; set; }
+        //public AccommodationService AccommodationService { get; set; }
+        //public LocationService LocationService { get; set; }
+
+        public IAccommodationService AccommodationService { get; set; }
+        public ILocationService LocationService { get; set; }
 
         public Accommodation accommodation = new Accommodation();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -57,10 +60,14 @@ namespace Booking.View
             InitializeComponent();
             TypecomboBox.ItemsSource = new List<string>() { "APARTMENT", "HOUSE", "COTTAGE" };
             this.DataContext = this;
-            var app = Application.Current as App;
-            AccommodationService = app.AccommodationService;
+            //var app = Application.Current as App;
+            //AccommodationService = app.AccommodationService;
+            AccommodationService = InjectorService.CreateInstance<IAccommodationService>();
             CityCollection = new ObservableCollection<string>();
-            LocationService = app.LocationService;
+            //LocationService = app.LocationService;
+            LocationService = InjectorService.CreateInstance<ILocationService>();
+
+
             FillComboBox();
         }
 

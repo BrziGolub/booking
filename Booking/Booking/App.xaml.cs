@@ -13,7 +13,7 @@ namespace Booking
     public partial class App : Application
     {
 
-        public UserService UserService { get; set; }
+       /* public UserService UserService { get; set; }
         public LocationService LocationService { get; set; }
         public AccommodationService AccommodationService { get; set; }
         public AccommodationGradeService AccommodationGradeService { get; set; }
@@ -22,11 +22,11 @@ namespace Booking
         public TourGuestsService TourGuestsService { get; set; }
 
         public AccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
-        public AccommodationReservationRequestService AccommodationReservationRequestService { get; set; }
+        public AccommodationReservationRequestService AccommodationReservationRequestService { get; set; }*/
 
         public App()
         {
-            UserService = new UserService();
+            /*UserService = new UserService();
             LocationService = new LocationService();
             AccommodationService = new AccommodationService();
             AccommodationReservationService = new AccommodationReservationService();
@@ -35,7 +35,7 @@ namespace Booking
             TourGuestsService = new TourGuestsService();
             AccommodationAndOwnerGradeService = new AccommodationAndOwnerGradeService();
             AccommodationReservationRequestService = new AccommodationReservationRequestService();
-            AccommodationReservationService.AccommodationReservationRequestService = AccommodationReservationRequestService;
+            //AccommodationReservationService.AccommodationReservationRequestService = AccommodationReservationRequestService;*/
         }
     }
 }

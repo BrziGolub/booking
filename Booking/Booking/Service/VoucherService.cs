@@ -1,4 +1,5 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Observer;
 using Booking.Repository;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Service
 {
-    public class VoucherService
+    public class VoucherService : IVoucherService
     {
         private readonly VoucherRepository _repository;
         private List<Voucher> _vouchers;
@@ -82,5 +83,14 @@ namespace Booking.Service
             _observers.Remove(observer);
         }
 
+        public List<Voucher> GetAll()
+        {
+            return _vouchers;
+        }
+
+        public Voucher GetById(int id)
+        {
+            return _vouchers.Find(v => v.Id == id);
+        }
     }   
 }

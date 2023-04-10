@@ -1,5 +1,7 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,10 +26,10 @@ namespace Booking.View
     public partial class GradingWindow : Window
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        //public AccommodationReservationController reservationController;
-        //public AccommodationGradeController gradeController;
-        public AccommodationReservationService AccommodationReservationService { get; set; }
-        public AccommodationGradeService AccommodationGradeService { get; set; }
+
+        public IAccommodationReservationService AccommodationReservationService { get; set; }
+        public IAccommodationGradeService AccommodationGradeService { get; set; }
+        
         public AccommodationGrade accommodationGrade = new AccommodationGrade();
         int accommodationReservationId;
         private OwnerGradingGuests OwnerGradingGuests;
@@ -37,9 +39,12 @@ namespace Booking.View
             InitializeComponent();
             accommodationReservationId = ReservationId;
             this.DataContext = this;
-            var app = Application.Current as App;
-            AccommodationReservationService = app.AccommodationReservationService;
-            AccommodationGradeService = app.AccommodationGradeService;
+            //var app = Application.Current as App;
+            //AccommodationReservationService = app.AccommodationReservationService;
+            //AccommodationGradeService = app.AccommodationGradeService;
+            AccommodationReservationService =  InjectorService.CreateInstance<IAccommodationReservationService>();
+            AccommodationGradeService = InjectorService.CreateInstance<IAccommodationGradeService>();
+
             comboBoxCleanliness.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
             comboBoxRuleFollowing.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
             comboBoxCommunication.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
@@ -134,7 +139,7 @@ namespace Booking.View
             accommodationGrade.Comment = Comment;
             accommodationGrade.Communication = Communication;
             accommodationGrade.Lateness = Lateness;
-            accommodationGrade.Accommodation = AccommodationReservationService.GetByID(accommodationReservationId);
+            accommodationGrade.Accommodation = AccommodationReservationService.GetById(accommodationReservationId);
             if (accommodationGrade.Cleanliness == -1)
             {
                 MessageBox.Show("'CLEANLINESS' not entered");

@@ -1,4 +1,5 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Observer;
 using Booking.Repository;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace Booking.Service
 {
-	public class LocationService : ISubject
+	public class LocationService : ISubject, ILocationService
 	{
 		private readonly LocationRepository _repository;
 		private List<Location> _locations;

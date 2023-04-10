@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.ServiceInterfaces
 {
-    public interface ITourKeyPointsService : IService<ITourKeyPointsService>
+    public interface ITourKeyPointsService : IService<TourKeyPoint>
     {
         void Load();
         int NextId();

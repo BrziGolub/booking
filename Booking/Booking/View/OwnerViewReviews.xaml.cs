@@ -1,6 +1,8 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Observer;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,15 +26,18 @@ namespace Booking.View
     public partial class OwnerViewReviews : Window, IObserver
     {
         public ObservableCollection<AccommodationAndOwnerGrade> Grades { get; set; }
-        public AccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
+        //public AccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
+        public IAccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
         public OwnerViewReviews()
         {
             InitializeComponent();
             this.DataContext = this;
 
-            var app = Application.Current as App;
+            //var app = Application.Current as App;
 
-            AccommodationAndOwnerGradeService = app.AccommodationAndOwnerGradeService;
+            //AccommodationAndOwnerGradeService = app.AccommodationAndOwnerGradeService;
+            AccommodationAndOwnerGradeService = InjectorService.CreateInstance<IAccommodationAndOwnerGradeService>();
+
             AccommodationAndOwnerGradeService.Subscribe(this);
             Grades = new ObservableCollection<AccommodationAndOwnerGrade>(AccommodationAndOwnerGradeService.GetSeeableGrades());
         }

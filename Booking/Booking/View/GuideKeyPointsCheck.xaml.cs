@@ -1,7 +1,9 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Observer;
 using Booking.Repository;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,10 +28,14 @@ namespace Booking.View
 
         public ObservableCollection<User> Guests { get; set; }
 
-        public TourService TourService { get; set; }
-        public UserService UserService{ get; set; } 
-        public TourGuestsService TourGuestsService { get; set; }
-      
+        ///public TourService TourService { get; set; }
+        ///public UserService UserService{ get; set; } 
+        ///public TourGuestsService TourGuestsService { get; set; }
+
+        public ITourService TourService { get; set; }
+        public IUserService UserService { get; set; }
+        public ITourGuestsService TourGuestsService { get; set; }
+
         public TourKeyPoint SelectedTourKeyPoint { get; set; }
         public Tour SelectedTour { get; set; }
         public User SelectedGuest { get; set; }
@@ -42,18 +48,20 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
 
-			var app = Application.Current as App;
+			//var app = Application.Current as App;
 
-			TourService = app.TourService;
-			TourService.Subscribe(this);
+			//TourService = app.TourService;
+			TourService = InjectorService.CreateInstance<ITourService>();
+            TourService.Subscribe(this);
             
-            UserService = app.UserService;
+            //UserService = app.UserService;
+            UserService = InjectorService.CreateInstance<IUserService>();
             UserService.Subscribe(this);
 
-            TourGuestsService = app.TourGuestsService;
+            //TourGuestsService = app.TourGuestsService;
+            TourGuestsService = InjectorService.CreateInstance<ITourGuestsService>();
             TourGuestsService.Subscribe(this);
             tourGuests = new TourGuests();
-
 
             SelectedTour = TourService.GetById(idTour);
 

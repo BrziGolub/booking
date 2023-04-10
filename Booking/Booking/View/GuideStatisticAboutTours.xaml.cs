@@ -1,6 +1,8 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Observer;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,7 +27,8 @@ namespace Booking.View
         public ObservableCollection<Tour> MostVisitedTourGenerraly { get; set; }
         public ObservableCollection<Tour> MostVisitedTourThisYear { get; set; }
         public ObservableCollection<Tour> averageNumberOfGuests { get; set; }
-        public TourService TourService { get; set; }
+        //public TourService TourService { get; set; }
+        public ITourService _tourService { get; set; }
         public User user { get; set; }
 
         int zeroToEighteen = 0;
@@ -36,14 +39,15 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
 
-            var app = Application.Current as App;
+            //var app = Application.Current as App;
 
-            TourService = app.TourService;
-            TourService.Subscribe(this);
+            //TourService = app.TourService;
+            _tourService = InjectorService.CreateInstance<ITourService>();
+            _tourService.Subscribe(this);
 
             mostVisitedDataGrid.Items.Clear();
-            MostVisitedTourGenerraly = new ObservableCollection<Tour>(TourService.GetMostVisitedTourGenerally()); 
-            MostVisitedTourThisYear = new ObservableCollection<Tour>(TourService.GetMostVisitedTourThisYear());
+            MostVisitedTourGenerraly = new ObservableCollection<Tour>(_tourService.GetMostVisitedTourGenerally()); 
+            MostVisitedTourThisYear = new ObservableCollection<Tour>(_tourService.GetMostVisitedTourThisYear());
 
             FillComboBoxes();
 
@@ -76,13 +80,13 @@ namespace Booking.View
         public void Update()
         {
             MostVisitedTourGenerraly.Clear();
-            foreach (Tour t in TourService.GetMostVisitedTourGenerally())
+            foreach (Tour t in _tourService.GetMostVisitedTourGenerally())
             {
                 MostVisitedTourGenerraly.Add(t);
             }
 
             MostVisitedTourThisYear.Clear();
-            foreach (Tour t in TourService.GetMostVisitedTourThisYear()) 
+            foreach (Tour t in _tourService.GetMostVisitedTourThisYear()) 
             {
                 MostVisitedTourThisYear.Add(t);
             }
@@ -127,11 +131,11 @@ namespace Booking.View
         {
             if(comboBoxTours.Text != "") 
             {
-                Tour turapom = TourService.GetByName(comboBoxTours.Text);
+                Tour turapom = _tourService.GetByName(comboBoxTours.Text);
 
-                zeroToEighteenTextBlock.Text = TourService.numberOfZeroToEighteenGuests(turapom.Id).ToString();
-                EighteenToFifthyTextBlock.Text = TourService.numberOfEighteenToFiftyGuests(turapom.Id).ToString();
-                FifthyPlusTextBlock.Text = TourService.numberOfFiftyPlusGuests(turapom.Id).ToString();
+                zeroToEighteenTextBlock.Text = _tourService.numberOfZeroToEighteenGuests(turapom.Id).ToString();
+                EighteenToFifthyTextBlock.Text = _tourService.numberOfEighteenToFiftyGuests(turapom.Id).ToString();
+                FifthyPlusTextBlock.Text = _tourService.numberOfFiftyPlusGuests(turapom.Id).ToString();
             }
             else
             {

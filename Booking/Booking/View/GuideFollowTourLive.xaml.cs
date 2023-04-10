@@ -1,8 +1,10 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Repository;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,8 +29,9 @@ namespace Booking.View
     public partial class GuideFollowTourLive : Window , IObserver
     {
         public ObservableCollection<Tour> Tours { get; set; }
-        
-        public TourService TourService { get; set; }
+
+        //public TourService TourService { get; set; }
+        public ITourService TourService { get; set; }
 
         public TourImageRepository _tourImageRepository { get; set; }
 
@@ -42,9 +45,11 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
 
-            var app = Application.Current as App;
+            //var app = Application.Current as App;
 
-            TourService = app.TourService;
+            //TourService = app.TourService;
+            TourService = InjectorService.CreateInstance<ITourService>();
+            
             TourService.Subscribe(this);
 
             Pomid = -1;

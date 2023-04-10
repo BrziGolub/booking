@@ -1,5 +1,7 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,16 +24,18 @@ namespace Booking.View
     /// </summary>
     public partial class OwnerGradingGuests : Window
     {
-        //public AccommodationReservationController accommodationReservationController;
-        public AccommodationReservationService AccommodationReservationService { get; set; }
+        //public AccommodationReservationService AccommodationReservationService { get; set; }
+        public IAccommodationReservationService AccommodationReservationService { get; set; }
         public ObservableCollection<AccommodationReservation> reservations { get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
         public OwnerGradingGuests()
         {
             InitializeComponent();
             this.DataContext = this;
-            var app = Application.Current as App;
-            AccommodationReservationService = app.AccommodationReservationService;
+            //var app = Application.Current as App;
+            //AccommodationReservationService = app.AccommodationReservationService;
+            AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
+
             reservations = new ObservableCollection<AccommodationReservation>(AccommodationReservationService.GetAllUngradedReservations());
         }
         private void Button_Click_Close(object sender, RoutedEventArgs e)

@@ -35,6 +35,7 @@ namespace Booking.Domain.ServiceInterfaces
         int numberOfZeroToEighteenGuests(int selectedTourID);
         int numberOfEighteenToFiftyGuests(int selectedTourID);
         int numberOfFiftyPlusGuests(int selectedTourID);
+        Tour UpdateTour(Tour tour);
         void NotifyObservers();
         void Subscribe(IObserver observer);
         void Unsubscribe(IObserver observer);

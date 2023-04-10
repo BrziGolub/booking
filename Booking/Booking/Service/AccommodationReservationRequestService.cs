@@ -1,8 +1,10 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Model.Enums;
 using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Repository;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,18 +16,22 @@ using System.Windows;
 
 namespace Booking.Service
 {
-    public class AccommodationReservationRequestService : ISubject
+    public class AccommodationReservationRequestService : ISubject, IAccommodationReservationRequestService
     {
         private readonly AccommodationReservationRequestsRepostiory _repository;
         private List<AccommodationReservationRequests> _requests;
 
-        private AccommodationReservationService _reservationService;
+        //private AccommodationReservationService _reservationService;
+        private readonly IAccommodationReservationService _reservationService;
+
         private readonly List<IObserver> _observers;
 
         public AccommodationReservationRequestService()
         {
-            var app = Application.Current as App;
-            _reservationService = app.AccommodationReservationService;
+            //var app = Application.Current as App;
+            //_reservationService = app.AccommodationReservationService;
+            _reservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
+            
             _repository = new AccommodationReservationRequestsRepostiory();
             _requests = new List<AccommodationReservationRequests>();
             _observers = new List<IObserver>();
@@ -105,7 +111,7 @@ namespace Booking.Service
             _reservationService.Load();
             foreach(var request in _requests)
             {
-                AccommodationReservation reservation = _reservationService.GetByID(request.AccommodationReservation.Id);
+                AccommodationReservation reservation = _reservationService.GetById(request.AccommodationReservation.Id);
                 request.AccommodationReservation = reservation;
             }
         }

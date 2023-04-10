@@ -8,22 +8,27 @@ using System.Threading.Tasks;
 using System.Windows;
 using Booking.Model;
 using Booking.Observer;
+using Booking.Domain.ServiceInterfaces;
+using Booking.Util;
 
 namespace Booking.Service
 {
-    public class AccommodationReservationService : ISubject
+    public class AccommodationReservationService : ISubject, IAccommodationReservationService
     {
         private readonly List<IObserver> _observers;
 
-        public AccommodationGradeService AccommodationGradeService { get; set; }
+        // public AccommodationGradeService AccommodationGradeService { get; set; }
+        // public AccommodationReservationRequestService AccommodationReservationRequestService { get; set; }
+        // public UserService UserService { get; set; }
+        // public AccommodationService AccommodationService { get; set; }
 
-        public AccommodationReservationRequestService AccommodationReservationRequestService { get; set; }
+        private readonly IAccommodationGradeService AccommodationGradeService;
+        private readonly IAccommodationReservationRequestService AccommodationReservationRequestService;
+        private readonly IUserService UserService;
+        private readonly IAccommodationService _accommodationService;
 
         private List<AccommodationReservation> _reservations;
         private readonly AccommodationResevationRepository _repository;
-
-        public AccommodationService AccommodationService { get; set; }
-        public UserService UserService { get; set; }
 
 
         public static int SignedFirstGuestId;
@@ -33,13 +38,18 @@ namespace Booking.Service
             _reservations = new List<AccommodationReservation>();
             _repository = new AccommodationResevationRepository();
 
-            var app = Application.Current as App;
-            
-            AccommodationGradeService = app.AccommodationGradeService;
-            AccommodationService = app.AccommodationService;
-            UserService = app.UserService;
-   
-            AccommodationReservationRequestService = app.AccommodationReservationRequestService;
+            //var app = Application.Current as App;
+
+            //AccommodationGradeService = app.AccommodationGradeService;
+            //AccommodationService = app.AccommodationService;
+            //UserService = app.UserService;
+
+            //AccommodationReservationRequestService = app.AccommodationReservationRequestService;
+
+            AccommodationGradeService = InjectorService.CreateInstance<IAccommodationGradeService>();
+            AccommodationReservationRequestService = InjectorService.CreateInstance<IAccommodationReservationRequestService>();
+            UserService = InjectorService.CreateInstance<IUserService>();
+            _accommodationService = InjectorService.CreateInstance<IAccommodationService>();
 
             _observers = new List<IObserver>();
             Load();
@@ -66,7 +76,7 @@ namespace Booking.Service
             BindReservationToGuest();
 
         }
-        public AccommodationReservation GetByID(int id)
+        public AccommodationReservation GetById(int id)
         {
             return _reservations.Find(reservation => reservation.Id == id);
         }
@@ -191,7 +201,7 @@ namespace Booking.Service
             return uniqueReservedDatesList;
         }
 
-        private bool IsReservationAvailableToGrade(AccommodationReservation accommodationReservation)
+        public bool IsReservationAvailableToGrade(AccommodationReservation accommodationReservation)
         {
             return accommodationReservation.DepartureDay <= DateTime.Now && accommodationReservation.DepartureDay.AddDays(5) >= DateTime.Now;
 
@@ -305,10 +315,10 @@ namespace Booking.Service
 
         public void BindReservationToAccommodation()
         {
-            AccommodationService.Load();
+            _accommodationService.Load();
             foreach (AccommodationReservation reservation in _reservations)
             {
-                Accommodation accommodation = AccommodationService.GetByID(reservation.Accommodation.Id);
+                Accommodation accommodation = _accommodationService.GetById(reservation.Accommodation.Id);
                 reservation.Accommodation = accommodation;
             }
         }
@@ -320,6 +330,11 @@ namespace Booking.Service
                 User user = UserService.GetById(reservation.Guest.Id);
                 reservation.Guest = user;
             }
+        }
+
+        public void Save()
+        {
+            _repository.Save(_reservations);
         }
 
 

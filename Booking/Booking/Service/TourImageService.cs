@@ -1,4 +1,5 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Model.Images;
 using Booking.Repository;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Service
 {
-    public class TourImageService
+    public class TourImageService : ITourImageService
     {
         private readonly TourImageRepository _repository;
         private List<TourImage> _tourImages;

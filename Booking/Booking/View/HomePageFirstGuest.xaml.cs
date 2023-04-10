@@ -1,5 +1,7 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,8 +28,11 @@ namespace Booking.View
     {
 
         private ObservableCollection<Accommodation> _accommodations;
-        public AccommodationService AccommodationService { get; set; }
-        public LocationService LocationService { get; set; }
+        //public AccommodationService AccommodationService { get; set; }
+        //public LocationService LocationService { get; set; }
+
+        public IAccommodationService AccommodationService { get; set; }
+        public ILocationService LocationService { get; set; }
 
         public Boolean IsCheckedApartment { get; set; } = false;
         public Boolean IsCheckedCottage { get; set; } = false;
@@ -68,9 +73,12 @@ namespace Booking.View
         public HomePageFirstGuest()
         {
             InitializeComponent();
-            var app = Application.Current as App;
-            LocationService = app.LocationService;
-            AccommodationService = app.AccommodationService;
+            //var app = Application.Current as App;
+            //LocationService = app.LocationService;
+            //AccommodationService = app.AccommodationService;
+            LocationService = InjectorService.CreateInstance<ILocationService>();
+            AccommodationService = InjectorService.CreateInstance < IAccommodationService>() ;
+
             _accommodations = new ObservableCollection<Accommodation>(AccommodationService.GetAll());
 
             CityCollection = new ObservableCollection<string>();

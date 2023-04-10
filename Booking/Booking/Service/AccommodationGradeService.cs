@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Booking.Model;
+using Booking.Domain.ServiceInterfaces;
 
 namespace Booking.Service
 {
-    public class AccommodationGradeService : ISubject
+    public class AccommodationGradeService : ISubject, IAccommodationGradeService
     {
         private readonly AccommodationGradeRepository _repository;
         private List<AccommodationGrade> _accommodationGrades;
@@ -26,7 +27,7 @@ namespace Booking.Service
             _accommodationReservationRepository = new AccommodationResevationRepository();
             BindGradesToReservations();
         }
-        public List<AccommodationGrade> GetAllGrades()
+        public List<AccommodationGrade> GetAll()
         {
             return _accommodationGrades;
         }
@@ -93,6 +94,11 @@ namespace Booking.Service
                 }
             }
             return false;
+        }
+
+        public void Save()
+        {
+            _repository.Save(_accommodationGrades);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Repository;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +11,21 @@ using System.Windows;
 
 namespace Booking.Service
 {
-    public class TourKeyPointService
+    public class TourKeyPointService : ITourKeyPointsService
     {
         private readonly TourKeyPointRepository _repository;
         private List<TourKeyPoint> _tourKeyPoints;
 
-        private LocationService _locationService;
+        //private LocationService _locationService;
+        private readonly ILocationService _locationService;
 
         public TourKeyPointService()
         {
             _repository = new TourKeyPointRepository();
             _tourKeyPoints = new List<TourKeyPoint>();
 
-            _locationService = new LocationService();
+            //_locationService = new LocationService();
+            _locationService = InjectorService.CreateInstance<ILocationService>();
         }
 
         public void Load()

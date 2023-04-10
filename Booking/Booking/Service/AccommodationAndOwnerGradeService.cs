@@ -1,7 +1,9 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Repository;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Service
 {
-    public class AccommodationAndOwnerGradeService 
+    public class AccommodationAndOwnerGradeService : IAccommodationAndOwnerGradeService
     {
         private readonly AccommodationAndOwnerGradeRepository _repository;
 
@@ -19,10 +21,15 @@ namespace Booking.Service
 
         private readonly AccommodationGradeRepository _gradeRepository;
         private List<AccommodationGrade> _accommodationGrades;
-        private AccommodationReservationService _accommodationReservationService;
+
+        //private AccommodationReservationService _accommodationReservationService;
+        //private GuestsAccommodationImagesService _guestsImagesService;
+        private readonly IAccommodationReservationService _accommodationReservationService;
+        private readonly IGuestsAccommodationImagesService _guestsImagesService;
+
         private readonly List<IObserver> _observers;
 
-        private GuestsAccommodationImagesService _guestsImagesService;
+        
 
         public AccommodationAndOwnerGradeService()
         {
@@ -30,12 +37,13 @@ namespace Booking.Service
             _repository = new AccommodationAndOwnerGradeRepository();
 
             _accommodationAndOwnerGrades = new List<AccommodationAndOwnerGrade>();
-            _accommodationReservationService = new AccommodationReservationService();
+            //_accommodationReservationService = new AccommodationReservationService();
+            //_guestsImagesService = new GuestsAccommodationImagesService(); //ovo iz app
+            _accommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
+            _guestsImagesService = InjectorService.CreateInstance<IGuestsAccommodationImagesService>();
+
             _gradeRepository = new AccommodationGradeRepository();
             _accommodationGrades = new List<AccommodationGrade>();
-
-            _guestsImagesService = new GuestsAccommodationImagesService(); //ovo iz app
-          
 
             Load(); 
         }
@@ -140,6 +148,16 @@ namespace Booking.Service
                     }
                 }
             }
+        }
+
+        public void Save()
+        {
+            _repository.Save(_accommodationAndOwnerGrades);
+        }
+
+        public List<AccommodationAndOwnerGrade> GetAll()
+        {
+            return _accommodationAndOwnerGrades;
         }
     }
 }

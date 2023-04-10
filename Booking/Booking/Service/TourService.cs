@@ -1,7 +1,9 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Repository;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,21 +14,32 @@ using System.Windows.Input;
 
 namespace Booking.Service
 {
-    public class TourService
+    public class TourService : ITourService
     {
         private readonly TourRepository _repository;
         private List<Tour> _tours;
-
+			
 		private readonly List<IObserver> _observers;
 
-		private LocationService _locationService;
-        private TourImageService _tourImageService;
-        private TourKeyPointService _tourKeyPointService;
-		private TourGuestsService _tourGuestsService;
-		private UserService _userService;
-		private VoucherService _voucherService;
+        //---------------------------------------------------
+        //private LocationService _locationService;
+        //private TourImageService _tourImageService;
+        //private TourKeyPointService _tourKeyPointService;
+		//private TourGuestsService _tourGuestsService;
+		//private UserService _userService;
+		//private VoucherService _voucherService;
+		
+		//---------------------------------------------------
+		private readonly ILocationService _locationService;
+        private readonly ITourImageService _tourImageService;
+		private readonly ITourKeyPointsService _tourKeyPointService;
+		private readonly ITourGuestsService _tourGuestsService;
+		private readonly IUserService _userService;
+		private readonly IVoucherService _voucherService;
+        //---------------------------------------------------
 
-		private List<Location> _locations;
+
+        private List<Location> _locations;
 		private List<TourImage> _tourImages;
 		private List<TourKeyPoint> _tourKeyPoints;
 		private List<TourGuests> _tourGuests;
@@ -51,12 +64,24 @@ namespace Booking.Service
 
 			_observers = new List<IObserver>();
 
-			_locationService = new LocationService();
-            _tourImageService = new TourImageService();
-            _tourKeyPointService = new TourKeyPointService();
-			_tourGuestsService = new TourGuestsService();
-			_userService = new UserService();
-			_voucherService = new VoucherService();
+			//_locationService = new LocationService();
+            _locationService = InjectorService.CreateInstance<ILocationService>();
+			
+			//_tourImageService = new TourImageService();
+			_tourImageService = InjectorService.CreateInstance<ITourImageService>();
+			
+			//_tourKeyPointService = new TourKeyPointService();
+			_tourKeyPointService = InjectorService.CreateInstance<ITourKeyPointsService>();
+			
+			//_tourGuestsService = new TourGuestsService();
+			_tourGuestsService = InjectorService.CreateInstance<ITourGuestsService>();
+
+			//_userService = new UserService();
+			_userService = InjectorService.CreateInstance<IUserService>();
+
+			//_voucherService = new VoucherService();
+			_voucherService = InjectorService.CreateInstance<IVoucherService>();
+
 
             _locations = new List<Location>();
             _tourImages = new List<TourImage>();

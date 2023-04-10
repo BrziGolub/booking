@@ -1,7 +1,9 @@
 ﻿using Booking.Conversion;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Model.Images;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,8 +26,11 @@ namespace Booking.View
 {
     public partial class GuideCreateTour : Window
     {
-        public TourService tourService { get; set; }
-        public LocationService locationService { get; set; }
+        //public TourService tourService { get; set; }
+        //public LocationService locationService { get; set; }
+        public ITourService tourService { get; set; }
+        public ILocationService locationService { get; set; }
+
 
         public Tour tour = new Tour();
         public ObservableCollection<string> CityCollection { get; set; }
@@ -35,9 +40,12 @@ namespace Booking.View
         {
             InitializeComponent();
             this.DataContext = this;
-            tourService = new TourService();
+            
+            //tourService = new TourService
+            //locationService = new LocationService();
 
-            locationService = new LocationService();
+            tourService = InjectorService.CreateInstance<ITourService>();
+            locationService = InjectorService.CreateInstance<ILocationService>();
 
             FillComboBoxes();
         }

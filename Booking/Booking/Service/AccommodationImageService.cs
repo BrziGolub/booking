@@ -1,4 +1,5 @@
-﻿using Booking.Model.Images;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Repository;
 using System;
@@ -10,7 +11,7 @@ using System.Windows.Controls;
 
 namespace Booking.Service
 {
-    public class AccommodationImageService
+    public class AccommodationImageService : IAccommodationImageService
     {
 
         private readonly AccommodationImagesRepository _repository;
@@ -33,7 +34,7 @@ namespace Booking.Service
         {
             return _images;
         }
-        private int GenerateId()
+        public int GenerateId()
         {
             int maxId = 0;
             foreach (AccommodationImage image in _images)
@@ -53,12 +54,12 @@ namespace Booking.Service
         }
 
 
-        public void SaveImages()
+        public void Save()
         {
             _repository.Save(_images);
         }
 
-        public AccommodationImage GetByID(int id)
+        public AccommodationImage GetById(int id)
         {
             return _images.Find(image => image.Id == id);
         }

@@ -1,6 +1,8 @@
 ﻿using Booking.Conversion;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,10 +23,14 @@ namespace Booking.View
 {
     public partial class AccommodationReservationView : Window
     {
-        public AccommodationReservationService AccommodationReservationService { get; set; }
+        //public AccommodationReservationService AccommodationReservationService { get; set; }
+
+        public IAccommodationReservationService AccommodationReservationService { get; set; }
+
         private Accommodation SelectedAccommodation;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
 
         public string _numberOfGuests;
         public string NumberOfGuests
@@ -79,11 +85,14 @@ namespace Booking.View
             SelectedAccommodation = selectedAccommodation;
             DepartureDay = DateTime.Now;
             ArrivalDay = DateTime.Now;
-            var app = Application.Current as App;
+            //var app = Application.Current as App;
 
-            AccommodationReservationService = app.AccommodationReservationService;
+            //AccommodationReservationService = app.AccommodationReservationService;
 
             //AccommodationReservationService = new AccommodationReservationService();
+
+            AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
+
         }
 
         private void ShowAvailableDatesDialog(List<(DateTime, DateTime)> suggestedDateRanges, Accommodation selectedAccommodation)

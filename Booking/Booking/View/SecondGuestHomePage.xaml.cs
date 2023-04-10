@@ -1,5 +1,7 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,9 +22,10 @@ namespace Booking.View
 	public partial class SecondGuestHomePage : Window
 	{
 		private ObservableCollection<Tour> tours;
-		private TourService _tourService;
+        //private TourService _tourService;
+        private ITourService _tourService;
 
-		public List<string> SearchState { get; set; }
+        public List<string> SearchState { get; set; }
 		public ObservableCollection<string> SearchCity { get; set; }
 
 		public string SearchDuration { get; set; } = string.Empty;
@@ -38,7 +41,8 @@ namespace Booking.View
 			InitializeComponent();
 			DataContext = this;
 
-			_tourService = new TourService();
+			//_tourService = new TourService();
+			_tourService = InjectorService.CreateInstance<ITourService>();
 
 			tours = new ObservableCollection<Tour>(_tourService.GetAll());
 

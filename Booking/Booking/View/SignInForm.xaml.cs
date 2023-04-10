@@ -1,4 +1,5 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Repository;
 using Booking.Service;
 using System;
@@ -41,9 +42,10 @@ namespace Booking.View
 			}
 		}
 
-		public UserService UserService { get; set; }
+        //public UserService UserService { get; set; }
+        public IUserService UserService { get; set; }
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{

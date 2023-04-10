@@ -1,8 +1,10 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Model.Enums;
 using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Repository;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,25 +15,32 @@ using System.Windows;
 
 namespace Booking.Service
 {
-    public class AccommodationService : ISubject
+    public class AccommodationService : ISubject, IAccommodationService
     {
         private readonly List<IObserver> _observers;
         private readonly AccommodationRepository _accommodationRepository;
         private List<Accommodation> _accommodations;
         private List<AccommodationImage> _accommodationImages;
 
-        private LocationService _locationService;
-        private UserService _userService;
+        //private LocationService _locationService;
+        //private UserService _userService;
+        private readonly ILocationService _locationService;
+        private readonly IUserService _userService;
 
         private AccommodationImagesRepository _accommodationImagesRepository;
+        
         public static int SignedOwnerId;
         public AccommodationService()
         {
             _accommodationRepository = new AccommodationRepository();
             _observers = new List<IObserver>();
-            var app = Application.Current as App;
-            _locationService = app.LocationService;
-            _userService = new UserService(); 
+            
+            //var app = Application.Current as App;
+            //_locationService = app.LocationService;
+            //_userService = new UserService(); 
+            _locationService = InjectorService.CreateInstance<LocationService>();
+            _userService = InjectorService.CreateInstance<UserService>();
+            
             _accommodationImagesRepository = new AccommodationImagesRepository();
             _accommodations = new List<Accommodation>();
             _accommodationImages = new List<AccommodationImage>();
@@ -45,7 +54,7 @@ namespace Booking.Service
             BindImagesToAccommodaton();
             BindUserToAccommodation();
         }
-        public Accommodation GetByID(int id)
+        public Accommodation GetById(int id)
         {
             return _accommodations.Find(accommodation => accommodation.Id == id);
         }
@@ -204,6 +213,11 @@ namespace Booking.Service
             }
 
             return _ownerAccommodations;
+        }
+
+        public void Save()
+        {
+            _accommodationRepository.Save(_accommodations);
         }
     }
 }

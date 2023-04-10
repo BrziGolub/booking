@@ -1,4 +1,5 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Observer;
 using Booking.Repository;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Service
 {
-    public class TourGuestsService
+    public class TourGuestsService : ITourGuestsService
     {
         private readonly TourGuestsRepository _repository;
         private List<TourGuests> _tourGuests;
@@ -71,6 +72,9 @@ namespace Booking.Service
             _observers.Remove(observer);
         }
 
-
+        public TourGuests GetById(int id)
+        {
+            return null;
+        }
     }
 }

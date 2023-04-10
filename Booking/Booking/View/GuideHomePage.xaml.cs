@@ -16,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Resources;
+using Booking.Domain.ServiceInterfaces;
+using Booking.Util;
 
 namespace Booking.View
 {
@@ -25,7 +27,9 @@ namespace Booking.View
     public partial class GuideHomePage : Window, IObserver
     {
         public ObservableCollection<Tour> Tours { get; set; }
-        public TourService _tourService { get; set; }
+        //public TourService _tourService { get; set; }
+        public ITourService _tourService { get; set; }
+
         public Tour SelectedTour { get; set; }
         public User user { get; set; }
 
@@ -35,7 +39,9 @@ namespace Booking.View
         {
             InitializeComponent();            
             this.DataContext = this;
-            _tourService = new TourService();
+            //_tourService = new TourService();
+            _tourService = InjectorService.CreateInstance<ITourService>();
+            
             _tourService.Subscribe(this);
       
             Tours = new ObservableCollection<Tour>(_tourService.GetGuideTours());
