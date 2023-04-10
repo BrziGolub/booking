@@ -28,7 +28,7 @@ namespace Booking.Service
 
         public Voucher AddVoucher(Voucher voucher)
         {
-            Load();
+            //Load();
             voucher.Id = NextId();
             _vouchers.Add(voucher);
 
@@ -36,6 +36,11 @@ namespace Booking.Service
             Save();
 
             return voucher;
+        }
+
+        public void Create(Voucher voucher)
+        {
+            AddVoucher(voucher);
         }
 
         public int NextId()
@@ -48,10 +53,6 @@ namespace Booking.Service
             {
                 return _vouchers.Max(t => t.Id) + 1;
             }
-        }
-        public void Create(Voucher voucher)
-        {
-            AddVoucher(voucher);
         }
 
         public void Load()
