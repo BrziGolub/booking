@@ -424,12 +424,6 @@ namespace Booking.Service
 			return _selectedKeyPoints;
 		}
 
-		public void GiveVoucher(int idTour) 
-		{
-
-		
-		}
-
 		public Tour removeTour(int idTour) 
 		{
 			Tour tour = GetById(idTour);
