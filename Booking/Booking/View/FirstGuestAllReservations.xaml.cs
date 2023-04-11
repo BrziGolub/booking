@@ -21,13 +21,8 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for FirstGuestAllReservations.xaml
-    /// </summary>
     public partial class FirstGuestAllReservations : Page, IObserver
     {
-      
-
         public ObservableCollection<AccommodationReservation> _reservations;
         //public AccommodationReservationService _accommodationReservationService;
         
