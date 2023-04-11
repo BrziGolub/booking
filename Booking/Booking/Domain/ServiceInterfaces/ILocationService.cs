@@ -14,5 +14,7 @@ namespace Booking.Domain.ServiceInterfaces
         List<string> GetAllStates();
         ObservableCollection<string> GetAllCitiesByState(ObservableCollection<string> observe, string state);
         int GetIdByCountryAndCity(string Country, string City);
+        List<Location> GetAll();
+        Location GetById(int id);
     }
 }

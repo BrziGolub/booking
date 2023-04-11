@@ -31,7 +31,6 @@ namespace Booking.View
         public ITourService _tourService { get; set; }
         public User user { get; set; }
 
-        int zeroToEighteen = 0;
 
         public GuideStatisticAboutTours()
         {

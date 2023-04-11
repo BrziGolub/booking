@@ -1,5 +1,6 @@
 ﻿using Booking.Model;
 using Booking.Observer;
+using Booking.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.ServiceInterfaces
 {
-    public interface ITourService : IService<Tour>
+    public interface ITourService : ISubject, IService<Tour>
     {
         Tour GetByName(string name);
+        Tour GetById(int id);
         List<Tour> GetMostVisitedTourGenerally();
         List<Tour> GetMostVisitedTourThisYear();
         List<Tour> GetGuideTours();
@@ -29,5 +31,6 @@ namespace Booking.Domain.ServiceInterfaces
         int numberOfEighteenToFiftyGuests(int selectedTourID);
         int numberOfFiftyPlusGuests(int selectedTourID);
         Tour UpdateTour(Tour tour);
+        
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.ServiceInterfaces
 {
-    public interface ITourGuestsService : IService<TourGuests>
+    public interface ITourGuestsService : ISubject,IService<TourGuests>
     {
         TourGuests AddTourGuests(TourGuests tourGuests);
         void Create(TourGuests tourGuests);

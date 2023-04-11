@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Booking.Service
 {
-	public class UserService : ISubject, IUserService
+	public class UserService : IUserService
 	{
 		private readonly IUserRepository _userRepository;
 

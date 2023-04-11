@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace Booking.Service
 {
-	public class TourService : ISubject, ITourService
+	public class TourService : ITourService
 	{
 		private readonly ITourRepository _tourRepository;
 		private readonly ILocationRepository _locationRepository;
@@ -42,7 +42,11 @@ namespace Booking.Service
 			voucher = new Voucher();
 		}
 
-		public Tour GetByName(string name)
+        public Tour GetById(int id)
+        {
+            return _tourRepository.GetById(id);
+        }
+        public Tour GetByName(string name)
 		{
 			return _tourRepository.GetByName(name);
 		}

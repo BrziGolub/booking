@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Service
 {
-    public class TourGuestsService : ISubject, ITourGuestsService
+    public class TourGuestsService : ITourGuestsService
     {
         private readonly ITourGuestsRepository _repository;
         private List<IObserver> _observers;

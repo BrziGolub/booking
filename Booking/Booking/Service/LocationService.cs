@@ -54,7 +54,17 @@ namespace Booking.Service
 			return -1;
 		}
 
-		public void Subscribe(IObserver observer)
+		public List<Location> GetAll()
+		{
+			return _locationRepository.GetAll();
+		}
+
+        public Location GetById(int id)
+        {
+            return _locationRepository.GetById(id);
+        }
+
+        public void Subscribe(IObserver observer)
 		{
 			_observers.Add(observer);
 		}

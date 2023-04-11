@@ -33,7 +33,7 @@ namespace Booking.View
         //public TourService TourService { get; set; }
         public ITourService TourService { get; set; }
 
-        public TourImageRepository _tourImageRepository { get; set; }
+        //public TourImageRepository _tourImageRepository { get; set; }
 
         public Tour SelectedTour { get; set; }
 
