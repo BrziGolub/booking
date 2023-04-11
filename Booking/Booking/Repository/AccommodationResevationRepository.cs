@@ -33,5 +33,21 @@ namespace Booking.Repository
 		{
 			return _accommodations.Find(a => a.Id == id);
 		}
-	}
+        public int NextId()
+        {
+            if (_accommodations.Count == 0) return 0;
+            return _accommodations.Max(s => s.Id) + 1;
+        }
+        public void Add(AccommodationReservation reservation)
+        {
+            reservation.Id = NextId();
+            _accommodations.Add(reservation);
+            _serializer.ToCSV(FilePath, _accommodations);
+        }
+        public void Delete(AccommodationReservation selectedReservation)
+        {
+            _accommodations.Remove(selectedReservation);
+            _serializer.ToCSV(FilePath, _accommodations);
+        }
+    }
 }
