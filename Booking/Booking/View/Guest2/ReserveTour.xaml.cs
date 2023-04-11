@@ -20,7 +20,6 @@ namespace Booking.View
 {
 	public partial class ReserveTour : Window
 	{
-        //private TourReservationService _tourReservationService;
         private ITourReservationService _tourReservationService;
 
         public int NumberOfPassengers { get; set; }
@@ -31,7 +30,6 @@ namespace Booking.View
 			InitializeComponent();
 			DataContext = this;
 
-			//_tourReservationService = new TourReservationService();
 			_tourReservationService = InjectorService.CreateInstance<ITourReservationService>();
 
 			Tour = tour;

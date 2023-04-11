@@ -1,5 +1,5 @@
-﻿using Booking.Controller;
-using Booking.Model.DAO;
+﻿using Booking.Model;
+using Booking.Service;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,25 +10,32 @@ using System.Windows;
 
 namespace Booking
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
-        public TourController TourController { get; set; }
-        public LocationController LocationController { get; set; }
-        public AccommodationContoller AccommodationController { get; set; }
+
+       /* public UserService UserService { get; set; }
+        public LocationService LocationService { get; set; }
+        public AccommodationService AccommodationService { get; set; }
+        public AccommodationGradeService AccommodationGradeService { get; set; }
+        public AccommodationReservationService AccommodationReservationService { get; set; }
+        public TourService TourService { get; set; }
+        public TourGuestsService TourGuestsService { get; set; }
+
+        public AccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
+        public AccommodationReservationRequestService AccommodationReservationRequestService { get; set; }*/
+
         public App()
         {
-            LocationDAO locationDAO = new LocationDAO();
-            LocationController = new LocationController(locationDAO);
-            TourDAO tourDAO = new TourDAO();
-            TourController = new TourController(tourDAO);
-            AccommodationDAO accommodationDAO = new AccommodationDAO();
-            AccommodationController = new AccommodationContoller(accommodationDAO);
+            /*UserService = new UserService();
+            LocationService = new LocationService();
+            AccommodationService = new AccommodationService();
+            AccommodationReservationService = new AccommodationReservationService();
+            AccommodationGradeService = new AccommodationGradeService();
+            TourService = new TourService();
+            TourGuestsService = new TourGuestsService();
+            AccommodationAndOwnerGradeService = new AccommodationAndOwnerGradeService();
+            AccommodationReservationRequestService = new AccommodationReservationRequestService();
+            //AccommodationReservationService.AccommodationReservationRequestService = AccommodationReservationRequestService;*/
         }
-
-        
-
     }
 }

@@ -1,8 +1,9 @@
-﻿using Booking.Controller;
-using Booking.Conversion;
+﻿using Booking.Conversion;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
-using Booking.Model.DAO;
 using Booking.Model.Images;
+using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,28 +24,34 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for GuideCreateTour.xaml
-    /// </summary>
     public partial class GuideCreateTour : Window
     {
-        public TourController tourController { get; set; }
-        public LocationController locationController { get; set; }
+        //public TourService tourService { get; set; }
+        //public LocationService locationService { get; set; }
+        public ITourService tourService { get; set; }
+        public ILocationService locationService { get; set; }
+
+
         public Tour tour = new Tour();
         public ObservableCollection<string> CityCollection { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        LocationDAO locationDAO = new LocationDAO();
         public GuideCreateTour()
         {
             InitializeComponent();
             this.DataContext = this;
-            var app = Application.Current as App;
-            tourController = app.TourController;
+            
+            //tourService = new TourService
+            //locationService = new LocationService();
 
-            locationController = app.LocationController;
+            tourService = InjectorService.CreateInstance<ITourService>();
+            locationService = InjectorService.CreateInstance<ILocationService>();
 
-            //**********************FILL COMBOBOX COUNTRY***************************************
+            FillComboBoxes();
+        }
+
+        private void FillComboBoxes()
+        {
             List<string> items1 = new List<string>();
 
             using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
@@ -63,11 +70,8 @@ namespace Booking.View
             var distinctItems = items1.Distinct().ToList();
             comboBox1.ItemsSource = distinctItems;
 
-            //**********************FILL COMBOBOX CITY*************************************
 
             CityCollection = new ObservableCollection<string>();
-
-            //**********************FILL COMBOBOX KEYPOINTS*************************************
 
             List<string> items = new List<string>();
 
@@ -86,23 +90,22 @@ namespace Booking.View
 
             comboBox.ItemsSource = items;
 
-            //*************************************************************************
 
-            if(comboBox1.SelectedItem == null)
+            if (comboBox1.SelectedItem == null)
             {
                 comboBox2.IsEnabled = false;
             }
-
-                
-
-
         }
-
+        private void GuideCreateTour_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            GuideHomePage guideHomePage = new GuideHomePage();
+            guideHomePage.Show();
+        }
         public void FillCity(object sender, SelectionChangedEventArgs e)
         {
             CityCollection.Clear();
 
-            var locations = locationController.findAllLocations().Where(l => l.State.Equals(Country));
+            var locations = locationService.GetAll().Where(l => l.State.Equals(Country));
 
             foreach (Location c in locations)
             {
@@ -258,19 +261,18 @@ namespace Booking.View
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Close(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Create(object sender, RoutedEventArgs e)
         {
             if (tbName.Text == "")
             {
                 MessageBox.Show("'NAME' not entered");
             }
             else { tour.Name = TourName; }
-            //---------LOCATION----------//
 
             Location location = new Location
             {
@@ -284,11 +286,11 @@ namespace Booking.View
             }
             else
             {
-                int LocationID = locationController.FindIdByCountryAndCity(Country, City);
+                int LocationID = locationService.GetIdByCountryAndCity(Country, City);
                 tour.Location.Id = LocationID;
-                tour.Location = locationController.FindById(LocationID);
+                tour.Location = locationService.GetById(LocationID);
             }
-            //-------------------------------
+
             if (tbDescription.Text == "")
             {
                 MessageBox.Show("'DESCRIPTION' not entered");
@@ -318,16 +320,15 @@ namespace Booking.View
             else { tour.Duration = Duration; }
 
 
-            //------------EXTRA PROTECTIONS---------------
             if (tour.Destinations.Count < 2)
             {
                 MessageBox.Show("Tour need to have 2 'KEY POINTS' at least");
             }
-            else if(tour.Images.Count == 0) // maybe not?
+            else if(tour.Images.Count == 0)
             {
                 MessageBox.Show("Tour need to have 1 'PICTURE' at least");
             }
-            else if (comboBox1.Text == "") //tour.Location.State == null
+            else if (comboBox1.Text == "")
             {
                 MessageBox.Show("'COUNTRY' not entered");
             }
@@ -343,11 +344,11 @@ namespace Booking.View
             {
                 MessageBox.Show("'DURATION' should be greater than 0");
             }
-            //------------------------------------------
+
 
             else
             {
-                tourController.Create(tour);
+                tourService.Create(tour);
                 MessageBox.Show("Tour successfully created");
                 this.Close();
             }
@@ -355,7 +356,7 @@ namespace Booking.View
             
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void AddKeyPoint(object sender, RoutedEventArgs e)
         {
 
             if (comboBox.SelectedItem != null)
@@ -365,8 +366,8 @@ namespace Booking.View
                 string Country = CountryCity[0];
                 string City = CountryCity[1].Trim(); 
 
-                int locationId= locationController.FindIdByCountryAndCity(Country, City);        
-                Location location = locationController.FindById(locationId);
+                int locationId= locationService.GetIdByCountryAndCity(Country, City);        
+                Location location = locationService.GetById(locationId);
 
                 TourKeyPoint tourKeyPoints = new TourKeyPoint();
                 tourKeyPoints.Location = location;
@@ -375,7 +376,7 @@ namespace Booking.View
             comboBox.SelectedIndex = -1;
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void AddPicture(object sender, RoutedEventArgs e)
         {
             if (tbPictures.Text != "")
             {

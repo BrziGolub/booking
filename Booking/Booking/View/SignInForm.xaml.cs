@@ -1,5 +1,8 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Repository;
+using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +26,8 @@ namespace Booking.View
 	/// </summary>
 	public partial class SignInForm : Window
 	{
-		private readonly UserRepository _repository;
+		public IUserService _userService { get; set; }
+		//private readonly UserRepository _repository;
 
 		private string _username;
 		public string Username
@@ -39,9 +43,10 @@ namespace Booking.View
 			}
 		}
 
-		public string UserType { get; set; }
+        //public UserService UserService { get; set; }
+        //public IUserService UserService { get; set; }
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
@@ -52,63 +57,55 @@ namespace Booking.View
 		{
 			InitializeComponent();
 			DataContext = this;
-			_repository = new UserRepository();
-
-			comboBox.ItemsSource = new List<string>() { "Owner", "Guest1", "Guest2", "Guide" };
+			_userService = InjectorService.CreateInstance<IUserService>();
+			//_repository = new UserRepository();
+			//_repository.Load();
 		}
 		private void SignIn(object sender, RoutedEventArgs e)
 		{
-			User user = _repository.GetByUsername(Username);
-			if (user != null)
+            User user = _userService.GetByUsername(Username);
+            
+			GuideHomePage.Username = usernameTextBox.Text;
+            TourService.SignedGuideId = user.Id;
+
+            if (user != null)
 			{
 				if (user.Password == txtPassword.Password)
 				{
-					//MessageBox.Show(UserType);
-					//stavio da uvek otvara vodica po defaultu treba napraviti zastitu da se zna ko se loguje (sef,gost,vodic)
-					if (comboBox.SelectedIndex == 0)
+
+					if(user.Role == 1)
 					{
+						AccommodationService.SignedOwnerId = user.Id;
 						OwnerHomePage ownerHomePage = new OwnerHomePage();
 						ownerHomePage.Show();
 						Close();
 					}
-					else if (comboBox.SelectedIndex == 1)
+                    else if (user.Role == 2)
+                    {
+                        GuideHomePage guideHomePage = new GuideHomePage();
+                        guideHomePage.Show();
+                        Close();
+                    }
+                    else if(user.Role == 3)
 					{
-						FirstGuestHomePage fisrtGuestHomePage = new FirstGuestHomePage();
+						//AccommodationService.SignedFirstGuestId = user.Id;
+						AccommodationReservationService.SignedFirstGuestId = user.Id;
+
+                        FirstGuestHomePage fisrtGuestHomePage = new FirstGuestHomePage();
                         fisrtGuestHomePage.Show();
                     }
-					else if (comboBox.SelectedIndex == 2)
-					{
+                    else if (user.Role == 4)
+                    {
 						SecondGuestHomePage secondGuestHomePage = new SecondGuestHomePage();
 						secondGuestHomePage.Show();
 						Close();
 					}
-					else if (comboBox.SelectedIndex == 3)
-					{
-						GuideHomePage guideHomePage = new GuideHomePage();
-						guideHomePage.Show();
-						Close();
-					}
-					else 
-					{
-						MessageBox.Show("Choose option!");
-					}
-					
 
                 }
                 else
 				{
 					MessageBox.Show("Wrong password!");
 				}
-					/*
-					 if( comboBox.SelectedIndex == 1 ) 
-					{
-					MessageBox.Show("SEF");
-					}	
-					else if (comboBox.SelectedIndex == 2)
-					{
-                    MessageBox.Show("GUEST1");
-					}	
-					*/
 			}
 			else
 			{
@@ -117,7 +114,15 @@ namespace Booking.View
 
 		}
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void passwordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SignIn(sender, e);
+            }
+        }
+
+        private void AboutUs(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Autors of the project: \n \tKristina Zelić RA4/2020 \n \tPetar Kovačević RA25/2020  \n \tAleksandar Milović RA67/2020 \n \tMiljan Lazić RA212/2020");
         }

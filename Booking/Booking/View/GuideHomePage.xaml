@@ -5,37 +5,189 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="GuideHomePage" Height="360" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="GuideHomePage" Height="508" Width="955" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
 
     <Grid>
 
 
 
-        <StackPanel DockPanel.Dock="Top" Margin="0,0,638,0">
+        <StackPanel DockPanel.Dock="Top" Margin="0,0,710,0">
             <StackPanel.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFD2F119" Offset="1"/>
+                    <GradientStop Color="#303841"/>
+                    <GradientStop Color="#FFF200" Offset="1"/>
                 </LinearGradientBrush>
             </StackPanel.Background>
-            <Button Content=" Create tour" Width="135" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" Click="Button_Click" HorizontalContentAlignment="Left" />
-            <Button Content=" Cancel tour" Width="135" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
-            <Button Content=" Follow the tour live" Width="135" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Click="Button_Click_1" />
-            <Button Content=" Tour statistics" Width="135" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
-            <Button Content=" Dismissal" Width="135" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
-            <Button Content=" Super - Guide" Width="135" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
-            <Button Content=" Accepting tour requests" Width="135" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
-            <Button Content=" Accepting part of tour " Width="135" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
-            <Button Content=" Statistics on requests" Width="135" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
-            <Button Content=" Statistics create" Width="135" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" />
+            <Button Content=" Create tour" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 44 10 0" Click="OpenCreateTour" HorizontalContentAlignment="Left"  >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content=" Statistics create" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content=" Tour statistics" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Click="OpenStatisticsAboutTour" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content=" Statistics on requests" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content=" Follow the tour live" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Click="OpenFollowTourLive" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
 
-            <!--    <Menu BorderBrush="Black" BorderThickness="3" Width="200"> 
-                <MenuItem Header="proba"></MenuItem>
-                </Menu>     endregion-->
 
+            <Button Content=" Super - Guide" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" >
+                
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content=" Accepting tour requests" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content=" Accepting part of tour " FontWeight="SemiBold"  Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+
+            <Image Margin="-170 11 10 10" Height="45" Width="45" Source="/View/user.png"/>
+            <TextBlock Margin="-85 -85 0 0" FontSize="17" FontStyle="Italic" FontWeight="Bold" Foreground="#FF303841" Height="21" Width="50">Guide</TextBlock>
+            <TextBlock x:Name="usernameTextBlock" Margin="9 -45 0 0" FontSize="15" FontStyle="Italic" FontWeight="SemiBold" Foreground="#D6E6F2" Height="21" Width="144"></TextBlock>
+
+            <Button  FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 0 10 0" HorizontalContentAlignment="Left" >
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image  Width="27" Height="27" Margin="0" Source="/View/dismissal.png"/>
+                        <TextBlock Text="Dismissal" Margin="5,5,0,0" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Button.Content>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+    
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button  FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" >
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image  Width="27" Height="27" Margin="0" Source="/View/demo.png"/>
+                        <TextBlock Text="Demo mode" Margin="5,5,0,0" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </Button.Content>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button  FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Click="LogOut" >
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="23" Height="23" Margin="0" Source="/View/logout.png" />
+                        <TextBlock Text="  Log out" Margin="5,5,0,0" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Button.Content>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
 
 
         </StackPanel>
+
+        <StackPanel Margin="158,0,5,0" Background="#D6E6F2">
+
+            <TextBlock Margin="8 0 0 0" FontWeight="Bold" FontSize="32" Text="All tours" Foreground="#FFFFF200" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="4" Color="#303841" BlurRadius="5" />
+                </TextBlock.Effect>
+            </TextBlock>
+
+            <Separator Margin="8 0 0 0" Width="717" HorizontalAlignment="Left" />
+            <ScrollViewer MaxHeight="390">
+            <DataGrid        
+                BorderBrush="Black"
+            SelectionMode="Single"
+            IsReadOnly="True" 
+            Margin="8 20 10 10" 
+            RowHeight="35"
+            AlternationCount="2"
+            AutoGenerateColumns="False"             
+            CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserReorderColumns="False"
+            SelectedItem="{Binding SelectedTour}"
+            ItemsSource="{Binding Path=Tours, UpdateSourceTrigger=PropertyChanged}">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="125" Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="93" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="Language" Binding="{Binding Language}"/>
+                    <DataGridTextColumn Header="Max Visitors" Width="75" Binding="{Binding MaxVisitors}"/>
+                    <DataGridTextColumn Width="93" Header="Departure Date" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}" ></DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="Duration" Binding="{Binding Duration}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="78" Header="Description" Binding="{Binding Description}"></DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Cancel tour">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                    <Button Click="CancelTour" Content="Cancel" FontSize="11" Width="65" Height="30" FontStyle="Oblique">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="5"></Setter>
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="#D6E6F2"/>
+                        <Style.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                <Setter Property="Background" Value="#F5F5F5"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+
+            </DataGrid>
+            </ScrollViewer>
+        </StackPanel>
+        
     </Grid>
 </Window>

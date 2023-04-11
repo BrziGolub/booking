@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -57,50 +57,105 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controller\LocationController.cs" />
-    <Compile Include="Controller\AccommodationContoller.cs" />
-    <Compile Include="Controller\AccommodationReservationController.cs" />
-    <Compile Include="Model\AccommodationReservation.cs" />
-    <Compile Include="Controller\TourReservationController.cs" />
-    <Compile Include="Model\DAO\AccommodationDAO.cs" />
-    <Compile Include="Controller\TourController.cs" />
+    <Compile Include="Domain\Model\AccommodationAndOwnerGrade.cs" />
+    <Compile Include="Domain\Model\AccommodationGrade.cs" />
+    <Compile Include="Domain\Model\AccommodationReservation.cs" />
     <Compile Include="Conversion\DateConversion.cs" />
-    <Compile Include="Model\Accommodation.cs" />
-    <Compile Include="Model\DAO\AccommodationReservationDAO.cs" />
-    <Compile Include="Model\DAO\LocationDAO.cs" />
-    <Compile Include="Model\DAO\TourDAO.cs" />
-    <Compile Include="Model\DAO\TourReservationDAO.cs" />
-    <Compile Include="Model\Enum\AccommodationType.cs" />
-    <Compile Include="Model\Images\AccommodationImage.cs" />
-    <Compile Include="Model\Images\TourImage.cs" />
-    <Compile Include="Model\Location.cs" />
-    <Compile Include="Model\Tour.cs" />
-    <Compile Include="Model\TourKeyPoint.cs" />
-    <Compile Include="Model\TourReservation.cs" />
-    <Compile Include="Model\User.cs" />
+    <Compile Include="Domain\Model\Accommodation.cs" />
+    <Compile Include="Domain\Model\AccommodationReservationRequests.cs" />
+    <Compile Include="Domain\Model\Enums\AccommodationType.cs" />
+    <Compile Include="Domain\Model\Enums\RequestStatus.cs" />
+    <Compile Include="Domain\Model\Images\AccommodationImage.cs" />
+    <Compile Include="Domain\Model\Images\TourImage.cs" />
+    <Compile Include="Domain\Model\Location.cs" />
+    <Compile Include="Domain\Model\Tour.cs" />
+    <Compile Include="Domain\Model\TourGuests.cs" />
+    <Compile Include="Domain\Model\TourKeyPoint.cs" />
+    <Compile Include="Domain\Model\TourReservation.cs" />
+    <Compile Include="Domain\Model\User.cs" />
+    <Compile Include="Domain\Model\Voucher.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationAndOwnerGradeRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationGradeRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationImagesRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationReservationRequestsRepostiory.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationResevationRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IGuestsAccommodationImagesRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ILocationRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourGuestsRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourImageRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourKeyPointRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourReservationRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IUserRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IVoucherRepository.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationAndOwnerGradeService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationGradeService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationImageService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationReservationRequestService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationReservationService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IGuestsAccommodationImagesService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ILocationService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourImageService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourKeyPointsService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourReservationService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IUserService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IVoucherService.cs" />
+    <Compile Include="Repository\AccommodationAndOwnerGradeRepository.cs" />
+    <Compile Include="Repository\AccommodationGradeRepository.cs" />
     <Compile Include="Repository\AccommodationImagesRepository.cs" />
     <Compile Include="Repository\AccommodationRepository.cs" />
     <Compile Include="Observer\IObserver.cs" />
     <Compile Include="Observer\ISubject.cs" />
+    <Compile Include="Repository\AccommodationReservationRequestsRepostiory.cs" />
     <Compile Include="Repository\AccommodationResevationRepository.cs" />
+    <Compile Include="Repository\GuestsAccommodationImagesRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
+    <Compile Include="Repository\TourGuestsRepository.cs" />
     <Compile Include="Repository\TourImageRepository.cs" />
     <Compile Include="Repository\TourKeyPointRepository.cs" />
     <Compile Include="Repository\TourRepository.cs" />
     <Compile Include="Repository\TourReservationRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Repository\VoucherRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
     <Compile Include="Serializer\Serializer.cs" />
+    <Compile Include="Service\AccommodationAndOwnerGradeService.cs" />
+    <Compile Include="Service\AccommodationGradeService.cs" />
+    <Compile Include="Service\AccommodationImageService.cs" />
+    <Compile Include="Service\AccommodationReservationRequestService.cs" />
+    <Compile Include="Service\AccommodationReservationService.cs" />
+    <Compile Include="Service\AccommodationService.cs" />
+    <Compile Include="Service\GuestsAccommodationImagesService.cs" />
+    <Compile Include="Service\TourGuestsService.cs" />
     <Compile Include="Service\TourImageService.cs" />
     <Compile Include="Service\TourKeyPointService.cs" />
-    <Compile Include="View\AccommodationReservation.xaml.cs">
-      <DependentUpon>AccommodationReservation.xaml</DependentUpon>
+    <Compile Include="Service\UserService.cs" />
+    <Compile Include="Service\VoucherService.cs" />
+    <Compile Include="Util\InjectorRepository.cs" />
+    <Compile Include="Util\InjectorService.cs" />
+    <Compile Include="View\AccommodationReservationView.xaml.cs">
+      <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service\LocationService.cs" />
     <Compile Include="Service\TourReservationService.cs" />
     <Compile Include="Service\TourService.cs" />
+    <Compile Include="View\FirstGuestAllReservations.xaml.cs">
+      <DependentUpon>FirstGuestAllReservations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FirstGuestHomePage.xaml.cs">
       <DependentUpon>FirstGuestHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FisrtGuestAllRequests.xaml.cs">
+      <DependentUpon>FisrtGuestAllRequests.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GradingWindow.xaml.cs">
+      <DependentUpon>GradingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GuideCreateTour.xaml.cs">
       <DependentUpon>GuideCreateTour.xaml</DependentUpon>
@@ -150,6 +205,9 @@
     <Compile Include="View\Guest2\ShowTourImages.xaml.cs">
       <DependentUpon>ShowTourImages.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ShowDatesAccommodationsReservations.xaml.cs">
+      <DependentUpon>ShowDatesAccommodationsReservations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
     </Compile>
@@ -165,11 +223,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AccommodationReservation.xaml">
+    <Page Include="View\AccommodationReservationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FirstGuestAllReservations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FirstGuestHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FisrtGuestAllRequests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GradingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,6 +256,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GuideKeyPointsCheck.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GuideStatisticAboutTours.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HomePageFirstGuest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OwnerGradingGuests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -225,6 +307,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ShowDatesAccommodationsReservations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SignInForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -252,22 +338,59 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Data\accommodationAndOwnerGrade.csv" />
+    <None Include="Resources\Data\AccommodationGrades.csv" />
     <None Include="Resources\Data\accommodationImages.csv" />
     <None Include="Resources\Data\accommodations.csv" />
     <None Include="Resources\Data\accommodationsReservations.csv" />
+    <None Include="Resources\Data\accommodationsReservationsRequests.csv" />
+    <None Include="Resources\Data\guestsAccommodationImages.csv" />
     <None Include="Resources\Data\locations.csv" />
+    <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />
     <None Include="Resources\Data\tourKeyPoints.csv" />
     <None Include="Resources\Data\tourReservations.csv" />
     <None Include="Resources\Data\tours.csv" />
     <None Include="Resources\Data\users.csv" />
+    <None Include="Resources\Data\vouchers.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="View\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\dismissal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\demo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\logout.png" />
+    <Resource Include="Resources\Images\paris.jpg" />
+    <Resource Include="Resources\Images\prague.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\sreckoMrk.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\location.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\medal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\booking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\request.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\hourglass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Application\UseCase\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

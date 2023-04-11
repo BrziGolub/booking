@@ -13,14 +13,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Booking.Controller;
 using Booking.Conversion;
 using Booking.Model;
-using Booking.Model.DAO;
 using Booking.Model.Images;
 using Booking.Model.Enums;
 using System.IO;
 using System.Collections.ObjectModel;
+using Booking.Service;
+using Booking.Domain.ServiceInterfaces;
+using Booking.Util;
 
 namespace Booking.View
 {
@@ -29,8 +30,11 @@ namespace Booking.View
     /// </summary>
     public partial class OwnerRegisterAccommodation : Window
     {
-        public AccommodationContoller accommodationController;
-        public LocationController locationController { get; set; }
+        //public AccommodationService AccommodationService { get; set; }
+        //public LocationService LocationService { get; set; }
+
+        public IAccommodationService AccommodationService { get; set; }
+        public ILocationService LocationService { get; set; }
 
         public Accommodation accommodation = new Accommodation();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -41,7 +45,7 @@ namespace Booking.View
         {
             CityCollection.Clear();
 
-            var locations = locationController.findAllLocations().Where(l => l.State.Equals(Country));
+            var locations = LocationService.GetAll().Where(l => l.State.Equals(Country));
 
             foreach (Location c in locations)
             {
@@ -56,10 +60,14 @@ namespace Booking.View
             InitializeComponent();
             TypecomboBox.ItemsSource = new List<string>() { "APARTMENT", "HOUSE", "COTTAGE" };
             this.DataContext = this;
-            var app = Application.Current as App;
-            accommodationController = app.AccommodationController;
+            //var app = Application.Current as App;
+            //AccommodationService = app.AccommodationService;
+            AccommodationService = InjectorService.CreateInstance<IAccommodationService>();
             CityCollection = new ObservableCollection<string>();
-            locationController = app.LocationController;
+            //LocationService = app.LocationService;
+            LocationService = InjectorService.CreateInstance<ILocationService>();
+
+
             FillComboBox();
         }
 
@@ -228,9 +236,9 @@ namespace Booking.View
             };
             //locationController.Create(location);
 
-            int LocationID = locationController.GetIdByCountryAndCity(Country, City);
+            int LocationID = LocationService.GetIdByCountryAndCity(Country, City);
             accommodation.Location.Id = LocationID;
-            accommodation.Location = locationController.FindById(LocationID);
+            accommodation.Location = LocationService.GetById(LocationID);
             //-------------------------------
 
             accommodation.Type = Type;
@@ -267,7 +275,7 @@ namespace Booking.View
             {
                 MessageBox.Show("'CANCELATION PERIOD' should be greater or equal than 0");
             }
-            else if (accommodation.Images == null)
+            else if (accommodation.Images.Count == 0)
             {
                 MessageBox.Show("'PICTURES URL' not entered");
             }
@@ -275,7 +283,7 @@ namespace Booking.View
 
             else
             {
-                accommodationController.Create(accommodation);
+                AccommodationService.AddAccommodation(accommodation);
                 MessageBox.Show("Accommodation successfully created");
                 this.Close();
             }
@@ -299,7 +307,7 @@ namespace Booking.View
 
         private void CountrycomboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+         
         }
     }
 }

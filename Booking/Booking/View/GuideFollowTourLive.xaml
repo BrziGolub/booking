@@ -8,18 +8,27 @@
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Title="GuideFollowTourLive" Height="800" Width="1200">
     <Grid>
-        <WrapPanel FlowDirection="LeftToRight" HorizontalAlignment="Left" VerticalAlignment="Top" Height="87" Width="300" Margin="900 700 0 0" Panel.ZIndex="1">
-            <Button Content="Start tour"  Width="80" Height="40" Click="Button_Click"  FontSize="15" Margin ="42 0 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"  />
-            <Button Content="End tour"  Width="80" Height="40"  FontSize="15" FontWeight="Bold" Margin="10 0 0 0" Click="Button_Click_1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <WrapPanel FlowDirection="LeftToRight" HorizontalAlignment="Center" VerticalAlignment="Top" Height="87" Width="436" Margin="0,700,0,0" Panel.ZIndex="1">
+            <Button Content="Start tour"  Width="80" Height="45" Click="StartTour"  FontSize="15" Margin ="42 0 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+            <Button Width="80" Height="45"   FontSize="11" Margin ="10 0 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ShowOnGoingTour"  >
+                <StackPanel>
+                    <TextBlock>Show</TextBlock>
+                    <TextBlock>ongoing</TextBlock>
+                    <TextBlock>tour</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button Content="End tour"  Width="80" Height="45"  FontSize="15" FontWeight="Bold" Margin="10 0 0 0" Click="EndTour" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button Content="Close"  Width="80" Height="45"  FontSize="15" FontWeight="Bold" Margin="10 0 0 0" Click="Close" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </WrapPanel>
-            <DataGrid 
+        <DataGrid 
             x:Name="dataGrid" 
             IsReadOnly="True" 
             Margin="72 50 72 92" 
             RowHeight="50"
             AutoGenerateColumns="False"
             SelectionMode="Single"
-            CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" 
+            CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserReorderColumns="False"
             SelectedItem="{Binding SelectedTour}"
             ItemsSource="{Binding Path=Tours, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
@@ -30,22 +39,26 @@
                 <DataGridTextColumn Header="Max Visitors" Width="100" Binding="{Binding MaxVisitors}"/>
                 <DataGridTextColumn Width="100" Header="Departure Date" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}" ></DataGridTextColumn>
                 <DataGridTextColumn Width="80" Header="Duration" Binding="{Binding Duration}"></DataGridTextColumn>
-                <DataGridTextColumn Width="70" Header="Is Started?" Binding="{Binding isStarted}"></DataGridTextColumn>
+                <DataGridTextColumn Width="70" Header="Is Started?" Binding="{Binding IsStarted}"></DataGridTextColumn>
                 <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"></DataGridTextColumn>
-                
-                <DataGridTemplateColumn Header="Images" Width="48">
+
+                <DataGridTemplateColumn Header="Images" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Show"/>
+                            <ItemsControl ItemsSource="{Binding Images}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Url}" Width="80" Height="80" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                    
                 </DataGridTemplateColumn>
-
 
             </DataGrid.Columns>
         </DataGrid>
-        
+
 
     </Grid>
 </Window>
