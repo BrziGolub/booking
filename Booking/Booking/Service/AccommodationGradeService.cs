@@ -18,7 +18,7 @@ namespace Booking.Service
         private readonly AccommodationGradeRepository _accommodationGradeRepository;
         private AccommodationResevationRepository _accommodationReservationRepository;
 
-        public AccommodationGradeService()
+		public AccommodationGradeService()
         {
             _repository = new AccommodationGradeRepository();
             _accommodationGrades = _repository.Load();

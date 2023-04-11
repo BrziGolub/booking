@@ -12,21 +12,21 @@ namespace Booking.Util
     {
         private static Dictionary<Type, object> _implementations = new Dictionary<Type, object>
         {
-            { typeof(ITourService), new TourService()},
-            { typeof(ITourGuestsService), new TourGuestsService()},
-            { typeof(ITourImageService),new TourImageService()},
-            { typeof(IAccommodationAndOwnerGradeService), new AccommodationAndOwnerGradeService()},
-            { typeof(IAccommodationService), new AccommodationService()},
-            { typeof(IAccommodationGradeService), new AccommodationGradeService()},
-            { typeof(IAccommodationReservationRequestService), new AccommodationReservationRequestService()},
-            { typeof(IAccommodationImageService), new AccommodationImageService()},
+            { typeof(ITourService), new TourService() },
+            { typeof(ITourGuestsService), new TourGuestsService() },
+            { typeof(ITourImageService), new TourImageService() },
+            { typeof(IAccommodationAndOwnerGradeService), new AccommodationAndOwnerGradeService() },
+            { typeof(IAccommodationService), new AccommodationService() },
+            { typeof(IAccommodationGradeService), new AccommodationGradeService() },
+            { typeof(IAccommodationReservationRequestService), new AccommodationReservationRequestService() },
+            { typeof(IAccommodationImageService), new AccommodationImageService() },
             { typeof(IVoucherService), new VoucherService() },
             { typeof(IAccommodationReservationService), new AccommodationReservationService() },
-            { typeof(IUserService), new UserService()},
-            { typeof(ITourReservationService), new TourReservationService()},
-            { typeof(ITourKeyPointsService), new TourKeyPointService()},
-            { typeof(IGuestsAccommodationImagesService), new GuestsAccommodationImagesService()},
-            { typeof(ILocationService), new LocationService()}
+            { typeof(IUserService), new UserService() },
+            { typeof(ITourReservationService), new TourReservationService() },
+            { typeof(ITourKeyPointsService), new TourKeyPointService() },
+            { typeof(IGuestsAccommodationImagesService), new GuestsAccommodationImagesService() },
+            { typeof(ILocationService), new LocationService() }
         };
         public static T CreateInstance<T>()
         {

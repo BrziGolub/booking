@@ -11,6 +11,5 @@ namespace Booking.Domain.ServiceInterfaces
     {
         void Load();
         List<TourImage> GetImagesByTourId(int id);
-        int NextId();
     }
 }

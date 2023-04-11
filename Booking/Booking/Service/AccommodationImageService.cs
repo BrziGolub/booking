@@ -18,7 +18,7 @@ namespace Booking.Service
 
         private List<AccommodationImage> _images;
 
-        public AccommodationImageService()
+		public AccommodationImageService()
         {
             _repository = new AccommodationImagesRepository();
             _images = new List<AccommodationImage>();

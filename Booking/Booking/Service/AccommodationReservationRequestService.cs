@@ -26,7 +26,7 @@ namespace Booking.Service
 
         private readonly List<IObserver> _observers;
 
-        public AccommodationReservationRequestService()
+		public AccommodationReservationRequestService()
         {
             //var app = Application.Current as App;
             //_reservationService = app.AccommodationReservationService;

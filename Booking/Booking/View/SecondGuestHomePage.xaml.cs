@@ -1,31 +1,22 @@
 ﻿using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
-using Booking.Service;
 using Booking.Util;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Booking.View
 {
 	public partial class SecondGuestHomePage : Window
 	{
 		private ObservableCollection<Tour> tours;
-        //private TourService _tourService;
-        private ITourService _tourService;
 
-        public List<string> SearchState { get; set; }
+		private ITourService _tourService;
+		private ILocationService _locationService;
+
+		public List<string> SearchState { get; set; }
 		public ObservableCollection<string> SearchCity { get; set; }
 
 		public string SearchDuration { get; set; } = string.Empty;
@@ -41,14 +32,14 @@ namespace Booking.View
 			InitializeComponent();
 			DataContext = this;
 
-			//_tourService = new TourService();
 			_tourService = InjectorService.CreateInstance<ITourService>();
+			_locationService = InjectorService.CreateInstance<ILocationService>();
 
-			tours = new ObservableCollection<Tour>(_tourService.GetAll());
+			tours = new ObservableCollection<Tour>(_tourService.GetValidTours());
 
 			TourDataGrid.ItemsSource = tours;
 
-			SearchState = _tourService.GetAllStates();
+			SearchState = _locationService.GetAllStates();
 			ComboBoxState.SelectedIndex = 0;
 			SearchCity = new ObservableCollection<string>();
 			ComboBoxCity.SelectedIndex = 0;
@@ -67,7 +58,7 @@ namespace Booking.View
 			TourSearch(state, city, "", "", "");
 			tours.Remove(tours.Where(s => s.Id == id).Single());
 
-			if(tours.Count() == 0)
+			if (tours.Count() == 0)
 			{
 				MessageBox.Show("All tours at same location are full!");
 				ShowAll();
@@ -86,8 +77,8 @@ namespace Booking.View
 
 		public void ShowAll()
 		{
-            tours = _tourService.CancelSearch(tours);
-        }
+			tours = _tourService.CancelSearch(tours);
+		}
 
 		private void ReserveTour(object sender, RoutedEventArgs e)
 		{
@@ -98,7 +89,7 @@ namespace Booking.View
 
 		private void ComboBoxStateSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			SearchCity = _tourService.GetAllCitiesByState(SearchCity, SelectedState);
+			SearchCity = _locationService.GetAllCitiesByState(SearchCity, SelectedState);
 			ComboBoxCity.SelectedIndex = 0;
 		}
 
@@ -115,10 +106,10 @@ namespace Booking.View
 			view.ShowDialog();
 		}
 
-        private void ShowDestinations(object sender, RoutedEventArgs e)
-        {
+		private void ShowDestinations(object sender, RoutedEventArgs e)
+		{
 			ShowTourDestinations view = new ShowTourDestinations(SelectedTour.Destinations);
 			view.ShowDialog();
-        }
-    }
+		}
+	}
 }

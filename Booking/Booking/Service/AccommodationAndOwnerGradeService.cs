@@ -29,9 +29,7 @@ namespace Booking.Service
 
         private readonly List<IObserver> _observers;
 
-        
-
-        public AccommodationAndOwnerGradeService()
+		public AccommodationAndOwnerGradeService()
         {
             _observers = new List<IObserver>();
             _repository = new AccommodationAndOwnerGradeRepository();

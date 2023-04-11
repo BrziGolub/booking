@@ -12,10 +12,5 @@ namespace Booking.Domain.ServiceInterfaces
     {
         Voucher AddVoucher(Voucher voucher);
         void Create(Voucher voucher);
-        int NextId();
-        void Load();
-        void NotifyObservers();
-        void Subscribe(IObserver observer);
-        void Unsubscribe(IObserver observer);
     }
 }

@@ -74,6 +74,22 @@
     <Compile Include="Domain\Model\TourReservation.cs" />
     <Compile Include="Domain\Model\User.cs" />
     <Compile Include="Domain\Model\Voucher.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationAndOwnerGradeRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationGradeRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationImagesRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationReservationRequestsRepostiory.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationResevationRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IGuestsAccommodationImagesRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ILocationRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourGuestsRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourImageRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourKeyPointRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourReservationRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IUserRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IVoucherRepository.cs" />
     <Compile Include="Domain\ServiceInterfaces\IAccommodationAndOwnerGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IAccommodationGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IAccommodationImageService.cs" />
@@ -121,6 +137,7 @@
     <Compile Include="Service\TourKeyPointService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\VoucherService.cs" />
+    <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
     <Compile Include="View\AccommodationReservationView.xaml.cs">
       <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
@@ -371,6 +388,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\hourglass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Application\UseCase\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

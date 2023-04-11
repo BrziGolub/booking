@@ -30,7 +30,8 @@ namespace Booking.Service
         private AccommodationImagesRepository _accommodationImagesRepository;
         
         public static int SignedOwnerId;
-        public AccommodationService()
+
+		public AccommodationService()
         {
             _accommodationRepository = new AccommodationRepository();
             _observers = new List<IObserver>();

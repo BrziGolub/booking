@@ -1,4 +1,5 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.RepositoryInterfaces;
+using Booking.Model;
 using Booking.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,29 +9,28 @@ using System.Threading.Tasks;
 
 namespace Booking.Repository
 {
-    public class AccommodationAndOwnerGradeRepository
+    public class AccommodationAndOwnerGradeRepository : IAccommodationAndOwnerGradeRepository
     {
         private const string FilePath = "../../Resources/Data/accommodationAndOwnerGrade.csv";
 
         private readonly Serializer<AccommodationAndOwnerGrade> _serializer;
 
-        public List<AccommodationAndOwnerGrade> _accommodationsAndOwnerGrades; //sta ce mi ovo?
+        public List<AccommodationAndOwnerGrade> _accommodationsAndOwnerGrades;
 
         public AccommodationAndOwnerGradeRepository()
         {
             _serializer = new Serializer<AccommodationAndOwnerGrade>();
-            _accommodationsAndOwnerGrades = Load();
-        }
+            _accommodationsAndOwnerGrades = _serializer.FromCSV(FilePath);
+		}
 
-        public List<AccommodationAndOwnerGrade> Load()
+        public List<AccommodationAndOwnerGrade> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public void Save(List<AccommodationAndOwnerGrade> grades)
-        {
-            _serializer.ToCSV(FilePath, grades);
-        }
-
-    }
+		public AccommodationAndOwnerGrade GetById(int id)
+		{
+			return _accommodationsAndOwnerGrades.Find(a => a.Id == id);
+		}
+	}
 }

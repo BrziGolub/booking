@@ -1,96 +1,55 @@
-﻿using Booking.Domain.ServiceInterfaces;
+﻿using Booking.Domain.RepositoryInterfaces;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Observer;
-using Booking.Repository;
-using System;
+using Booking.Util;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Booking.Service
 {
-    public class VoucherService : IVoucherService
-    {
-        private readonly VoucherRepository _repository;
-        private List<Voucher> _vouchers;
+	public class VoucherService : ISubject, IVoucherService
+	{
+		private readonly IVoucherRepository _voucherRepository;
 
-        private readonly List<IObserver> _observers;
+		private readonly List<IObserver> _observers;
 
-        public VoucherService()
-        {
-            _repository = new VoucherRepository();
-            _vouchers = new List<Voucher>();
-            _observers = new List<IObserver>();
+		public VoucherService()
+		{
+			_voucherRepository = InjectorRepository.CreateInstance<IVoucherRepository>();
+			_observers = new List<IObserver>();
+		}
 
-            Load();
+		public Voucher AddVoucher(Voucher voucher)
+		{
+			return _voucherRepository.Add(voucher);
+		}
 
-        }
+		public void Create(Voucher voucher)
+		{
+			AddVoucher(voucher);
+			NotifyObservers();
+		}
 
-        public Voucher AddVoucher(Voucher voucher)
-        {
-            //Load();
-            voucher.Id = NextId();
-            _vouchers.Add(voucher);
+		public void NotifyObservers()
+		{
+			foreach (var observer in _observers)
+			{
+				observer.Update();
+			}
+		}
+		public void Subscribe(IObserver observer)
+		{
+			_observers.Add(observer);
+		}
 
-            NotifyObservers();
-            Save();
+		public void Unsubscribe(IObserver observer)
+		{
+			_observers.Remove(observer);
+		}
 
-            return voucher;
-        }
-
-        public void Create(Voucher voucher)
-        {
-            AddVoucher(voucher);
-        }
-
-        public int NextId()
-        {
-            if (_vouchers.Count == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return _vouchers.Max(t => t.Id) + 1;
-            }
-        }
-
-        public void Load()
-        {
-            _vouchers = _repository.Load();
-        }
-
-        public void Save()
-        {
-            _repository.Save(_vouchers);
-        }
-
-        public void NotifyObservers()
-        {
-            foreach (var observer in _observers)
-            {
-                observer.Update();
-            }
-        }
-        public void Subscribe(IObserver observer)
-        {
-            _observers.Add(observer);
-        }
-
-        public void Unsubscribe(IObserver observer)
-        {
-            _observers.Remove(observer);
-        }
-
-        public List<Voucher> GetAll()
-        {
-            return _vouchers;
-        }
-
-        public Voucher GetById(int id)
-        {
-            return _vouchers.Find(v => v.Id == id);
-        }
-    }   
+		public List<Voucher> GetAll()
+		{
+			return _voucherRepository.GetAll();
+		}
+	}
 }

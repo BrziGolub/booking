@@ -1,4 +1,5 @@
-﻿using Booking.Serializer;
+﻿using Booking.Observer;
+using Booking.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

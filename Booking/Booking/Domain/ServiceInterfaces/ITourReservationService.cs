@@ -9,8 +9,6 @@ namespace Booking.Domain.ServiceInterfaces
 {
     public interface ITourReservationService : IService<TourReservation>
     {
-        void Load();
-        int GenerateId();
         void CreateTourReservation(Tour tour, int visitors);
         int CheckAvailability(int id);
     }

@@ -9,9 +9,6 @@ namespace Booking.Domain.ServiceInterfaces
 {
     public interface ITourKeyPointsService : IService<TourKeyPoint>
     {
-        void Load();
-        int NextId();
-        void LoadLocations();
         List<TourKeyPoint> GetKeyPointsByTourId(int id);
         TourKeyPoint UpdateKeyPoint(TourKeyPoint tourKeyPoint);
     }

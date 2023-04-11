@@ -1,4 +1,5 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.RepositoryInterfaces;
+using Booking.Model;
 using Booking.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Repository
 {
-	public class UserRepository
+	public class UserRepository : IUserRepository
 	{
 		private const string FilePath = "../../Resources/Data/users.csv";
 
@@ -21,6 +22,15 @@ namespace Booking.Repository
 			_serializer = new Serializer<User>();
 			_users = _serializer.FromCSV(FilePath);
 		}
+        public List<User> GetAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+
+		public User GetById(int id)
+		{
+			return _users.Find(u => u.Id == id);
+		}
 
 		public User GetByUsername(string username)
 		{
@@ -28,17 +38,9 @@ namespace Booking.Repository
 			return _users.FirstOrDefault(u => u.Username == username);
 		}
 
-        public List<User> Load()
-        {
-            return _serializer.FromCSV(FilePath);
-        }
-
-        public void Save(List<User> users)
+        /*public void Save(List<User> users) // save kao u tourRepository?
         {
             _serializer.ToCSV(FilePath, users);
-        }
+        }*/
     }
-
-
-
 }

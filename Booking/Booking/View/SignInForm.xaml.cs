@@ -2,6 +2,7 @@
 using Booking.Model;
 using Booking.Repository;
 using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,8 +26,8 @@ namespace Booking.View
 	/// </summary>
 	public partial class SignInForm : Window
 	{
-		private readonly UserRepository _repository;
-       
+		private IUserService _userService;
+		//private readonly UserRepository _repository;
 
         private string _username;
 		public string Username
@@ -43,7 +44,7 @@ namespace Booking.View
 		}
 
         //public UserService UserService { get; set; }
-        public IUserService UserService { get; set; }
+        //public IUserService UserService { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -56,12 +57,13 @@ namespace Booking.View
 		{
 			InitializeComponent();
 			DataContext = this;
-			_repository = new UserRepository();
+			_userService = InjectorService.CreateInstance<IUserService>();
+			//_repository = new UserRepository();
 			//_repository.Load();
 		}
 		private void SignIn(object sender, RoutedEventArgs e)
 		{
-            User user = _repository.GetByUsername(Username);
+            User user = _userService.GetByUsername(Username);
             
 			GuideHomePage.Username = usernameTextBox.Text;
             TourService.SignedGuideId = user.Id;

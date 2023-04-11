@@ -9,7 +9,6 @@ namespace Booking.Model
 {
     public class Voucher : ISerializable
     {
-
         public int Id { get; set; }
         public User User { get; set; }
         public DateTime ValidTime { get; set; }
