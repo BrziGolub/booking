@@ -1,6 +1,4 @@
-﻿using Booking.Model.DAO;
-using Booking.Controller;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Service;
+using Booking.Util;
 
 namespace Booking.View
 {
 	public partial class ReserveTour : Window
 	{
-		private TourReservationService _tourReservationService;
+        //private TourReservationService _tourReservationService;
+        private ITourReservationService _tourReservationService;
 
-		public int NumberOfPassengers { get; set; }
+        public int NumberOfPassengers { get; set; }
 		public Tour Tour { get; set; }
 
 		public ReserveTour(Tour tour)
@@ -30,7 +31,8 @@ namespace Booking.View
 			InitializeComponent();
 			DataContext = this;
 
-			_tourReservationService = new TourReservationService();
+			//_tourReservationService = new TourReservationService();
+			_tourReservationService = InjectorService.CreateInstance<ITourReservationService>();
 
 			Tour = tour;
 		}
