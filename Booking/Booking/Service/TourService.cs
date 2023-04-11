@@ -144,6 +144,7 @@ namespace Booking.Service
 
 			foreach (Tour tour in _tourRepository.GetAll())
 			{
+				//FALI UVEZIVANJE SLIKA I LOKACIJE
 				bool isStateSearched = tour.Location.State.Equals(state) || state.Equals("All");
 				bool isCitySearche = tour.Location.City.Equals(city) || city.Equals("All");
 				bool isLanguageSearched = tour.Language.ToLower().Contains(language.ToLower()) || language.Equals("");
@@ -232,14 +233,14 @@ namespace Booking.Service
 			foreach (var destination in tour.Destinations)
 			{
 				//destination.Id = _tourKeyPointService.NextId();
-				//destination.Tour = tour;
+				destination.Tour = tour;
 				_tourKeyPointsRepository.Add(destination);
 			}
 
 			foreach (var picture in tour.Images)
 			{
 				//picture.Id = _tourImageService.NextId();
-				//picture.Tour = tour;
+				picture.Tour = tour;
 				//_tourImages.Add(picture);
 				_tourImagesRepository.Add(picture);
 			}

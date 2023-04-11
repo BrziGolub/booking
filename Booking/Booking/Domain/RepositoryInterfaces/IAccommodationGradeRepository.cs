@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.RepositoryInterfaces
 {
-	internal interface IAccommodationGradeRepository : IRepository<AccommodationGrade>
+	public interface IAccommodationGradeRepository : IRepository<AccommodationGrade>
 	{
+		int NextId();
+		AccommodationGrade Add(AccommodationGrade accommodationGrade);
+		bool IsReservationGraded(int accommodationReservationId);
 	}
 }

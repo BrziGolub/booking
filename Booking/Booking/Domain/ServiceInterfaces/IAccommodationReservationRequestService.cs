@@ -8,16 +8,12 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.ServiceInterfaces
 {
-    public interface IAccommodationReservationRequestService : IService<AccommodationReservationRequests>
+    public interface IAccommodationReservationRequestService : IService<AccommodationReservationRequests>, ISubject
     {
-        void Load();
-        int NextId();
+
         void DeleteRequest(AccommodationReservation selectedReservation);
-        void Subscribe(IObserver observer);
-        void Unsubscribe(IObserver observer);
-        void NotifyObservers();
-        void BindReservationToRequest();
         void Create(AccommodationReservation selectedResrevation, DateTime newArrivalDay, DateTime newDepartureDay, String comment);
+        List<AccommodationReservationRequests> GetAll();
 
     }
 }

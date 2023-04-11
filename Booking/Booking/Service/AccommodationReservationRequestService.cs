@@ -1,4 +1,5 @@
-﻿using Booking.Domain.ServiceInterfaces;
+﻿using Booking.Domain.RepositoryInterfaces;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Model.Enums;
 using Booking.Model.Images;
@@ -16,75 +17,58 @@ using System.Windows;
 
 namespace Booking.Service
 {
-    public class AccommodationReservationRequestService : ISubject, IAccommodationReservationRequestService
+    public class AccommodationReservationRequestService : IAccommodationReservationRequestService
     {
-        private readonly AccommodationReservationRequestsRepostiory _repository;
-        private List<AccommodationReservationRequests> _requests;
+        private readonly List<IObserver> _observers;
+        private readonly IAccommodationReservationRequestsRepostiory _repository;
+        private readonly IAccommodationResevationRepository _reservationRepository;
+        private readonly IAccommodationRepository _accommodationRepository;
+        private readonly ILocationRepository _locationRepository;
 
         //private AccommodationReservationService _reservationService;
-        private readonly IAccommodationReservationService _reservationService;
+        //private readonly IAccommodationReservationService _reservationService;
+        //private List<AccommodationReservationRequests> _requests;
 
-        private readonly List<IObserver> _observers;
 
-		public AccommodationReservationRequestService()
+        public AccommodationReservationRequestService()
         {
             //var app = Application.Current as App;
             //_reservationService = app.AccommodationReservationService;
-            _reservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
+            //_reservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
             
-            _repository = new AccommodationReservationRequestsRepostiory();
-            _requests = new List<AccommodationReservationRequests>();
             _observers = new List<IObserver>();
-          
-            Load();
+            _repository = InjectorRepository.CreateInstance<IAccommodationReservationRequestsRepostiory>();
+            _reservationRepository = InjectorRepository.CreateInstance<IAccommodationResevationRepository>();
+            _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
+            _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
         }
 
-        public void Load()
-        {
-            _requests = _repository.Load();
-            BindReservationToRequest();
-        }
-
-        public void Save()
-        {
-            _repository.Save(_requests);
-        }
-
-        public AccommodationReservationRequests GetById(int id)
-        {
-            return _requests.Find(v => v.Id == id);
-        }
 
         public List<AccommodationReservationRequests> GetAll()
         {
-            return _requests;
-        }
+            List<AccommodationReservationRequests> accommodationReservationRequestAll = new List<AccommodationReservationRequests>();
+            List<AccommodationReservationRequests> accommodationReservationRequestList = new List<AccommodationReservationRequests>();
+            accommodationReservationRequestAll = _repository.GetAll();
+            foreach (var arr in accommodationReservationRequestAll)
+            {
+                arr.AccommodationReservation = _reservationRepository.GetById(arr.AccommodationReservation.Id);
+                if(arr.AccommodationReservation.Guest.Id == AccommodationReservationService.SignedFirstGuestId) 
+                {
+                    accommodationReservationRequestList.Add(arr);
+                }
+            }
 
-        public int NextId()
-        {
-            if (_requests.Count == 0)
+            foreach (var arr in accommodationReservationRequestList)
             {
-                return 1;
+                arr.AccommodationReservation.Accommodation = _accommodationRepository.GetById(arr.AccommodationReservation.Accommodation.Id);
+                arr.AccommodationReservation.Accommodation.Location = _locationRepository.GetById(arr.AccommodationReservation.Accommodation.Location.Id);
             }
-            else
-            {
-                return _requests.Max(l => l.Id) + 1;
-            }
+            return accommodationReservationRequestList;
         }
 
         public void DeleteRequest(AccommodationReservation selectedReservation)
         {
-             /*foreach(var request in _repository.Load())
-             {
-                 if(request.AccommodationReservation.Id == selectedReservation.Id)
-                 {
-                     _requests.Remove(request);
-
-                 }
-             }*/
-           _requests.RemoveAll(request => request.AccommodationReservation.Id == selectedReservation.Id);
-
-            Save();
+            _repository.DeleteRequest(selectedReservation);
             NotifyObservers();
         }
 
@@ -106,7 +90,7 @@ namespace Booking.Service
             }
         }
 
-        public void BindReservationToRequest()
+        /*public void BindReservationToRequest()
         {
             _reservationService.Load();
             foreach(var request in _requests)
@@ -114,21 +98,12 @@ namespace Booking.Service
                 AccommodationReservation reservation = _reservationService.GetById(request.AccommodationReservation.Id);
                 request.AccommodationReservation = reservation;
             }
-        }
+        }*/
       
 
         public void Create(AccommodationReservation selectedResrevation, DateTime newArrivalDay,DateTime newDepartureDay,String comment)
         {
-            AccommodationReservationRequests newRequest = new AccommodationReservationRequests();
-
-            newRequest.Id = NextId();
-            newRequest.AccommodationReservation = selectedResrevation;
-            newRequest.NewArrivalDay = newArrivalDay;
-            newRequest.NewDeparuteDay = newDepartureDay;
-            newRequest.Status = RequestStatus.PENDNING;
-            newRequest.Comment = comment;
-            _requests.Add(newRequest);
-            Save();
+            _repository.Add(selectedResrevation, newArrivalDay, newDepartureDay, comment);
             NotifyObservers();
         }
     }

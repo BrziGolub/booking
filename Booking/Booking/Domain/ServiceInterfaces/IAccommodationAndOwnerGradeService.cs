@@ -8,16 +8,9 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.ServiceInterfaces
 {
-    public interface IAccommodationAndOwnerGradeService : IService<AccommodationAndOwnerGrade>
+    public interface IAccommodationAndOwnerGradeService : IService<AccommodationAndOwnerGrade>, ISubject
     {
-        void Load();
-        int NextId();
-        void Subscribe(IObserver observer);
-        void Unsubscribe(IObserver observer);
-        void NotifyObservers();
         List<AccommodationAndOwnerGrade> GetSeeableGrades();
-        void BindGuestsImagesToGrades();
-        void BindGradesToReservations();
         void SaveGrade(AccommodationAndOwnerGrade grade);
     }
 }

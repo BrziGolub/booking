@@ -1,5 +1,6 @@
 ﻿using Booking.Domain.RepositoryInterfaces;
 using Booking.Model;
+using Booking.Model.Enums;
 using Booking.Serializer;
 using System;
 using System.Collections.Generic;
@@ -33,5 +34,34 @@ namespace Booking.Repository
 		{
 			return _accommodationsReservationsRequests.Find(a => a.Id == id);
 		}
-	}
+        public int NextId()
+        {
+            if (_accommodationsReservationsRequests.Count == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return _accommodationsReservationsRequests.Max(l => l.Id) + 1;
+            }
+        }
+        public void DeleteRequest(AccommodationReservation selectedReservation)
+        {
+            _accommodationsReservationsRequests.RemoveAll(request => request.AccommodationReservation.Id == selectedReservation.Id);
+            _serializer.ToCSV(FilePath, _accommodationsReservationsRequests);
+        }
+        public void Add(AccommodationReservation selectedResrevation, DateTime newArrivalDay, DateTime newDepartureDay, String comment)
+        {
+            AccommodationReservationRequests newRequest = new AccommodationReservationRequests();
+
+            newRequest.Id = NextId();
+            newRequest.AccommodationReservation = selectedResrevation;
+            newRequest.NewArrivalDay = newArrivalDay;
+            newRequest.NewDeparuteDay = newDepartureDay;
+            newRequest.Status = RequestStatus.PENDNING;
+            newRequest.Comment = comment;
+            _accommodationsReservationsRequests.Add(newRequest);
+            _serializer.ToCSV(FilePath, _accommodationsReservationsRequests);
+        }
+    }
 }

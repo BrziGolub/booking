@@ -33,5 +33,23 @@ namespace Booking.Repository
 		{
 			return _accommodationsImages.Find(a => a.Id == id);
 		}
-	}
+        public int NextId()
+        {
+            int maxId = 0;
+            foreach (AccommodationImage image in _accommodationsImages)
+            {
+                if (image.Id > maxId)
+                {
+                    maxId = image.Id;
+                }
+            }
+            return maxId + 1;
+        }
+        public void Add(AccommodationImage image)
+        {
+            image.Id = NextId();
+            _accommodationsImages.Add(image);
+            _serializer.ToCSV(FilePath, _accommodationsImages);
+        }
+    }
 }
