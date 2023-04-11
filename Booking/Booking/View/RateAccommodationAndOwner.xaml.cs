@@ -140,10 +140,7 @@ namespace Booking.View
 
             Picture.Accomodation = AccommodationReservation.Accommodation;
 
-            //ovo izmeni
             GuestsAccommodationImagesService.Create(Picture);
-            //AccommodationImageService.CreateGuestsImages(Picture);
-            GuestsAccommodationImagesService.Save();
 
             tbPictures.Text = string.Empty;
         }

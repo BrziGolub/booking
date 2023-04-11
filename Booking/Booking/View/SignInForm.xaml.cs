@@ -26,10 +26,10 @@ namespace Booking.View
 	/// </summary>
 	public partial class SignInForm : Window
 	{
-		private IUserService _userService;
+		public IUserService _userService { get; set; }
 		//private readonly UserRepository _repository;
 
-        private string _username;
+		private string _username;
 		public string Username
 		{
 			get => _username;

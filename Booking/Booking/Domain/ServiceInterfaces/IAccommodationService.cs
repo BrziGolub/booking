@@ -16,5 +16,6 @@ namespace Booking.Domain.ServiceInterfaces
         void ShowAll(ObservableCollection<Accommodation> accommodationsObserve);
         Accommodation AddAccommodation(Accommodation accommodation);
         List<Accommodation> GetOwnerAccommodations();
+        List<Accommodation> GetAll();
     }
 }
