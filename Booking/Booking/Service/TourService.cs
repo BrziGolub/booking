@@ -132,10 +132,18 @@ namespace Booking.Service
 			List<Tour> _guideTours = new List<Tour>();
 
 			foreach (var tour in _tourRepository.GetAll())
-			{
+			{ 
 				if (tour.GuideId == SignedGuideId)
 				{
-					_guideTours.Add(tour);
+					tour.Location = _locationRepository.GetById(tour.Location.Id);
+						foreach (var p in _tourImagesRepository.GetAll())
+						{
+							if (p.Tour.Id == tour.Id)
+							{
+								tour.Images.Add(p);
+							}
+						}
+						_guideTours.Add(tour);
 				}
 			}
 

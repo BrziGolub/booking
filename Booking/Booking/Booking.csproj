@@ -157,19 +157,19 @@
     <Compile Include="View\GradingWindow.xaml.cs">
       <DependentUpon>GradingWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GuideCreateTour.xaml.cs">
+    <Compile Include="View\Guide\GuideCreateTour.xaml.cs">
       <DependentUpon>GuideCreateTour.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GuideFollowTourLive.xaml.cs">
+    <Compile Include="View\Guide\GuideFollowTourLive.xaml.cs">
       <DependentUpon>GuideFollowTourLive.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GuideHomePage.xaml.cs">
+    <Compile Include="View\Guide\GuideHomePage.xaml.cs">
       <DependentUpon>GuideHomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GuideKeyPointsCheck.xaml.cs">
+    <Compile Include="View\Guide\GuideKeyPointsCheck.xaml.cs">
       <DependentUpon>GuideKeyPointsCheck.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GuideStatisticAboutTours.xaml.cs">
+    <Compile Include="View\Guide\GuideStatisticAboutTours.xaml.cs">
       <DependentUpon>GuideStatisticAboutTours.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HomePageFirstGuest.xaml.cs">
@@ -243,23 +243,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\GuideCreateTour.xaml">
+    <Page Include="View\Guide\GuideCreateTour.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\GuideFollowTourLive.xaml">
+    <Page Include="View\Guide\GuideFollowTourLive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\GuideHomePage.xaml">
+    <Page Include="View\Guide\GuideHomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\GuideKeyPointsCheck.xaml">
+    <Page Include="View\Guide\GuideKeyPointsCheck.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\GuideStatisticAboutTours.xaml">
+    <Page Include="View\Guide\GuideStatisticAboutTours.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
