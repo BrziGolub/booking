@@ -65,7 +65,7 @@ namespace Booking.Service
 
 				if (pomTour.GuideId == SignedGuideId)
 				{
-					int tourVisits = _tourGuestsRepository.GetAll().Count(m => m.Tour.Id == tg.Tour.Id); // metoda za getAll u repository?
+					int tourVisits = _tourGuestsRepository.GetAll().Count(m => m.Tour.Id == tg.Tour.Id);
 
 					if (tourVisits > mostVisits)
 					{
@@ -79,6 +79,7 @@ namespace Booking.Service
 
 			if (mostVisitedTour.GuideId == SignedGuideId && mostVisits > 0)
 			{
+				mostVisitedTour.Location = _locationRepository.GetById(mostVisitedTourID);
 				lista.Add(mostVisitedTour);
 				return lista;
 			}
@@ -105,7 +106,8 @@ namespace Booking.Service
 
 					if (tourVisits > mostVisits)
 					{
-						mostVisitedTourID = tg.Tour.Id;
+                        
+                        mostVisitedTourID = tg.Tour.Id;
 						mostVisits = tourVisits;
 					}
 				}
@@ -116,7 +118,8 @@ namespace Booking.Service
 
 			if (mostVisitedTour.GuideId == SignedGuideId && mostVisits > 0)
 			{
-				lista.Add(mostVisitedTour);
+                mostVisitedTour.Location = _locationRepository.GetById(mostVisitedTourID);
+                lista.Add(mostVisitedTour);
 				return lista;
 			}
 			else
@@ -220,7 +223,6 @@ namespace Booking.Service
 			oldTour.Duration = tour.Duration;
 			oldTour.IsStarted = tour.IsStarted;
 
-			//NotifyObservers();
 			return _tourRepository.Update(tour);
 		}
 
@@ -231,8 +233,6 @@ namespace Booking.Service
 			oldTourKeyPoint.Tour = tourKeyPoint.Tour;
 			oldTourKeyPoint.Location = tourKeyPoint.Location;
 			oldTourKeyPoint.Achieved = tourKeyPoint.Achieved;
-
-			//NotifyObservers();
 
 			return _tourKeyPointsRepository.Update(tourKeyPoint);
 		}
@@ -299,7 +299,6 @@ namespace Booking.Service
 					_selectedKeyPoints.Add(keypoint);
 				}
 			}
-			//_selectedKeyPoints[0].Achieved = true;
 			return _selectedKeyPoints;
 		}
 
@@ -319,6 +318,7 @@ namespace Booking.Service
 					{
 						voucher.User.Id = pomGuest.Id;
 						voucher.ValidTime = DateTime.Now.AddYears(1);
+						voucher.IsActive = true;
 						_voucherRepository.Add(voucher);
 					}
 				}
@@ -340,9 +340,9 @@ namespace Booking.Service
 			}
 		}
 
-		public bool checkTourGuests(int tourId, int userId) //, int keyPointId
+		public bool checkTourGuests(int tourId, int userId) 
 		{
-			if (_tourGuestsRepository.GetAll().Any(u => u.Tour.Id == tourId && u.User.Id == userId)) // && u.TourKeyPoint.Id == keyPointId
+			if (_tourGuestsRepository.GetAll().Any(u => u.Tour.Id == tourId && u.User.Id == userId)) 
 			{
 				return false;
 			}
@@ -377,7 +377,7 @@ namespace Booking.Service
 
 				User pomGuest = _userRepository.GetById(g.User.Id);
 
-				if (g.Tour.Id == selectedTourID && pomGuest.Years > 17 && pomGuest.Years < 51) // >18 i <50 ???
+				if (g.Tour.Id == selectedTourID && pomGuest.Years > 17 && pomGuest.Years < 50) // >18 i <50 ???
 				{
 					sum += 1;
 				}
@@ -393,7 +393,7 @@ namespace Booking.Service
 			{
 				User pomGuest = _userRepository.GetById(g.User.Id);
 
-				if (g.Tour.Id == selectedTourID && pomGuest.Years > 50)
+				if (g.Tour.Id == selectedTourID && pomGuest.Years >= 50)
 				{
 					sum += 1;
 				}
@@ -401,7 +401,38 @@ namespace Booking.Service
 			return sum;
 		}
 
-		public void NotifyObservers()
+		public int numberWithVouchersGuests(int selectedTourID)
+		{
+			int sum = 0;
+
+            foreach (var g in _tourGuestsRepository.GetAll())
+			{
+                User pomGuest = _userRepository.GetById(g.User.Id);
+                if (g.Voucher == true && g.Tour.Id == selectedTourID)
+                {
+                    sum += 1;
+                }
+            }
+			return sum;
+		}
+
+        public int numberWithOutVouchersGuests(int selectedTourID)
+        {
+            int sum = 0;
+
+            foreach (var g in _tourGuestsRepository.GetAll())
+            {
+                User pomGuest = _userRepository.GetById(g.User.Id);
+                if (g.Voucher == false && g.Tour.Id == selectedTourID)
+                {
+                    sum += 1;
+                }
+            }
+            return sum;
+        }
+
+
+        public void NotifyObservers()
 		{
 			foreach (var observer in _observers)
 			{

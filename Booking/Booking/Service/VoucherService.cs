@@ -2,12 +2,13 @@
 using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Observer;
+using Booking.Serializer;
 using Booking.Util;
 using System.Collections.Generic;
 
 namespace Booking.Service
 {
-	public class VoucherService : ISubject, IVoucherService
+	public class VoucherService : IVoucherService
 	{
 		private readonly IVoucherRepository _voucherRepository;
 
@@ -23,11 +24,24 @@ namespace Booking.Service
 		{
 			return _voucherRepository.Add(voucher);
 		}
+        public List<Voucher> GetAll()
+        {
+            return _voucherRepository.GetAll();
+        }
+        public Voucher GetById(int id)
+        {
+			return _voucherRepository.GetById(id);
+        }
 
-		public void Create(Voucher voucher)
+        public void Create(Voucher voucher)
 		{
 			AddVoucher(voucher);
 			NotifyObservers();
+		}
+
+		public Voucher Update(Voucher voucher) 
+		{
+			return _voucherRepository.Update(voucher);
 		}
 
 		public void NotifyObservers()
@@ -47,9 +61,5 @@ namespace Booking.Service
 			_observers.Remove(observer);
 		}
 
-		public List<Voucher> GetAll()
-		{
-			return _voucherRepository.GetAll();
-		}
 	}
 }

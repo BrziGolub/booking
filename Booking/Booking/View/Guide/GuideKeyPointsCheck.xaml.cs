@@ -30,6 +30,7 @@ namespace Booking.View
         public ITourService TourService { get; set; }
         public IUserService UserService { get; set; }
         public ITourGuestsService TourGuestsService { get; set; }
+        public IVoucherService VoucherService { get; set; }
 
         public TourKeyPoint SelectedTourKeyPoint { get; set; }
         public Tour SelectedTour { get; set; }
@@ -51,7 +52,9 @@ namespace Booking.View
 
             TourGuestsService = InjectorService.CreateInstance<ITourGuestsService>();
             TourGuestsService.Subscribe(this);
-            //tourGuests = new TourGuests();
+            
+            VoucherService = InjectorService.CreateInstance<IVoucherService>();
+            VoucherService.Subscribe(this);
 
             SelectedTour = TourService.GetById(idTour);
 
@@ -104,20 +107,43 @@ namespace Booking.View
 
         private void AddGuest(object sender, RoutedEventArgs e)
         {
+            List<Voucher> pomVouchers = new List<Voucher>();
 
             if(SelectedGuest != null && SelectedTourKeyPoint != null ) 
             {
                 if (TourService.checkTourGuests(SelectedTour.Id, SelectedGuest.Id) == true)
                 {
+                    
                     tourGuests.Tour.Id = SelectedTour.Id;
                     tourGuests.User.Id = SelectedGuest.Id;
                     tourGuests.TourKeyPoint.Id = SelectedTourKeyPoint.Id;
-                    
-                    
-                    TourGuestsService.Create(tourGuests);
+                   
+                    foreach(Voucher v in VoucherService.GetAll())
+                    {
+                        Voucher pomVoucher = VoucherService.GetById(v.Id);
+
+                        if (v.IsActive && v.User.Id == tourGuests.User.Id) //  && dodati upit da li zelis da iskoristi vaucer(za sad ostavljam da uvek zeli da ga iskoristi po defaultu)
+                        {
+                            tourGuests.Voucher = true;
+                            pomVoucher.IsActive = false;
+                            MessageBox.Show("Guest " + SelectedGuest.Username.ToString() + " used voucher");                     
+                            pomVouchers.Add(pomVoucher);
+                        }
+                        /*else // FALI MI DA PREDJEM SLUCAJ UKOLIKO TAJ USER NEMA VAUCER A NEKI PRE NJEGA JE IMAO DA U tourguests.csv bude False a ne da mi ostane True
+                        {
+                            tourGuests.Voucher = false;
+                            pomVoucher.IsActive = true;
+                            pomVouchers.Add(pomVoucher); // -II-
+                        }*/
+                    }
+
+                        TourGuestsService.Create(tourGuests);
+                        foreach(Voucher v in pomVouchers)
+                        {
+                        VoucherService.Update(v);
+                        }
+
                     MessageBox.Show("Guest '" + SelectedGuest.Username.ToString() + "' is added to keypoint '" + SelectedTourKeyPoint.Location.State.ToString() + ", " + SelectedTourKeyPoint.Location.City.ToString() + "'");
-                    
-                    //TourGuestsService.NotifyObservers();
                 }
                 else
                 {

@@ -49,11 +49,6 @@ namespace Booking.View
             MostVisitedTourThisYear = new ObservableCollection<Tour>(_tourService.GetMostVisitedTourThisYear());
 
             FillComboBoxes();
-
-            
-
-            
-            
         }
 
         private void FillComboBoxes()
@@ -135,6 +130,9 @@ namespace Booking.View
                 zeroToEighteenTextBlock.Text = _tourService.numberOfZeroToEighteenGuests(turapom.Id).ToString();
                 EighteenToFifthyTextBlock.Text = _tourService.numberOfEighteenToFiftyGuests(turapom.Id).ToString();
                 FifthyPlusTextBlock.Text = _tourService.numberOfFiftyPlusGuests(turapom.Id).ToString();
+
+                withVoucherTextBlock.Text = _tourService.numberWithVouchersGuests(turapom.Id).ToString();
+                withoutVoucherTextBlock.Text = _tourService.numberWithOutVouchersGuests(turapom.Id).ToString();
             }
             else
             {
