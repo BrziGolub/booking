@@ -2,6 +2,7 @@
 using Booking.Model;
 using Booking.Model.Images;
 using Booking.Serializer;
+using Booking.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,8 @@ namespace Booking.Repository
 
 		public TourGuests Add(TourGuests tourGuest)
 		{
-			_tourGuests.Add(tourGuest);
+            _tourGuests = _serializer.FromCSV(FilePath);
+            _tourGuests.Add(tourGuest);
 			_serializer.ToCSV(FilePath, _tourGuests);
 			return tourGuest;
 		}

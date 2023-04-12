@@ -220,40 +220,35 @@ namespace Booking.Service
 			oldTour.Duration = tour.Duration;
 			oldTour.IsStarted = tour.IsStarted;
 
-			NotifyObservers();
+			//NotifyObservers();
 			return _tourRepository.Update(tour);
 		}
 
 		public TourKeyPoint UpdateKeyPoint(TourKeyPoint tourKeyPoint)
-		{
-			/*
+		{	
 			TourKeyPoint oldTourKeyPoint = _tourKeyPointsRepository.GetById(tourKeyPoint.Id);
 
 			oldTourKeyPoint.Tour = tourKeyPoint.Tour;
 			oldTourKeyPoint.Location = tourKeyPoint.Location;
 			oldTourKeyPoint.Achieved = tourKeyPoint.Achieved;
-			*/
 
-			NotifyObservers();
+			//NotifyObservers();
 
 			return _tourKeyPointsRepository.Update(tourKeyPoint);
 		}
 
 		public Tour AddTour(Tour tour)
 		{
-			//tour.Id = _tourRepository.NextId();
+			tour.Id = _tourRepository.NextId();
 			foreach (var destination in tour.Destinations)
 			{
-				//destination.Id = _tourKeyPointService.NextId();
 				destination.Tour = tour;
 				_tourKeyPointsRepository.Add(destination);
 			}
 
 			foreach (var picture in tour.Images)
 			{
-				//picture.Id = _tourImageService.NextId();
 				picture.Tour = tour;
-				//_tourImages.Add(picture);
 				_tourImagesRepository.Add(picture);
 			}
 
@@ -261,9 +256,6 @@ namespace Booking.Service
 
 			_tourRepository.Add(tour);
 			NotifyObservers();
-
-			//_tourImagesRepository.Save(_tourImages);
-			//_tourKeyPointsRepository.Save(_tourKeyPoints);
 
 			return tour;
 		}
@@ -280,7 +272,15 @@ namespace Booking.Service
 			{
 				if (tour.StartTime == DateTime.Today && tour.GuideId == SignedGuideId)
 				{
-					_todayTours.Add(tour);
+					tour.Location = _locationRepository.GetById(tour.GuideId);
+						foreach (var p in _tourImagesRepository.GetAll())
+						{
+							if (p.Tour.Id == tour.Id)
+							{
+								tour.Images.Add(p);
+							}
+						}
+                    _todayTours.Add(tour);
 				}
 			}
 			return _todayTours;
@@ -294,9 +294,12 @@ namespace Booking.Service
 			{
 				if (keypoint.Tour.Id == idTour)
 				{
+					keypoint.Location = _locationRepository.GetById(keypoint.Location.Id);
+
 					_selectedKeyPoints.Add(keypoint);
 				}
 			}
+			//_selectedKeyPoints[0].Achieved = true;
 			return _selectedKeyPoints;
 		}
 

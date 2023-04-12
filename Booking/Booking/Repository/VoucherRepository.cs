@@ -47,7 +47,8 @@ namespace Booking.Repository
 
 		public Voucher Add(Voucher voucher)
 		{
-			voucher.Id = NextId();
+			_vouchers = _serializer.FromCSV(FilePath); 
+            voucher.Id = NextId();
 			_vouchers.Add(voucher);
 			_serializer.ToCSV(FilePath, _vouchers);
 			return voucher;

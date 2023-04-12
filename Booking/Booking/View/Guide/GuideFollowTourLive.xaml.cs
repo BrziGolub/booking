@@ -75,17 +75,15 @@ namespace Booking.View
             {
                 if (SelectedTour != null )
                 {
-                    Tour pomTour = SelectedTour;
                     GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(SelectedTour.Id);
                     Pomid = SelectedTour.Id;
-                    SelectedTour.IsStarted = true;
 
-                    MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
+                    SelectedTour.IsStarted = true;
                     TourService.UpdateTour(SelectedTour);
+                    MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
+                    TourService.NotifyObservers();
 
                     guideKeyPointsCheck.ShowDialog();
-
-                    TourService.UpdateTour(pomTour);
                 }
                 else
                 {
@@ -112,8 +110,10 @@ namespace Booking.View
             if (SelectedTour != null && SelectedTour.IsStarted == true)
             {
                 SelectedTour.IsStarted = false;
-                MessageBox.Show(SelectedTour.Name.ToString() + " is ended!");
                 TourService.UpdateTour(SelectedTour);
+                MessageBox.Show(SelectedTour.Name.ToString() + " is ended!");
+                TourService.NotifyObservers();
+
             }
             else
             {
