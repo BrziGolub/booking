@@ -75,9 +75,9 @@
         </WrapPanel>
 
 
-        <Label Content="0-18" Margin="124,341,661,188" Width="45" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
+        <Label Content="0-18" Margin="-520,175,0,0" Width="45" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
         <TextBlock x:Name="zeroToEighteenTextBlock"
-                   Margin="186,344,500,194"                  
+                   Margin="-200,175,0,0"                  
                    FontSize="15"
                    FontStyle="Italic"
                    FontWeight="SemiBold"
@@ -85,9 +85,9 @@
                    Panel.ZIndex="1"
                    Height="21" Width="144"></TextBlock>
 
-        <Label Content="18-50" Margin="124,376,661,153" Width="45" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
+        <Label Content="18-50" Margin="-530,245,0,0" Width="45" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
         <TextBlock x:Name="EighteenToFifthyTextBlock"
-                   Margin="186,380,500,158"                  
+                   Margin="-200,245,0,0"                    
                    FontSize="15"
                    FontStyle="Italic"
                    FontWeight="SemiBold"
@@ -184,9 +184,9 @@
         </Canvas>
 
 
-        <Label Content="50+" Margin="124,411,661,118" Width="45" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
+        <Label Content="50+" Margin="-515,315,0,0" Width="45" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
         <TextBlock x:Name="FifthyPlusTextBlock"
-                   Margin="186,415,500,123"         
+                   Margin="-200,315,0,0"          
                    FontSize="15"
                    FontStyle="Italic"
                    FontWeight="SemiBold"
@@ -206,13 +206,13 @@
 
             <Button Width="70" Height="40" Content="Close" Margin="20 0 0 0" Click="Close"></Button>
         </WrapPanel>
-        <Label Content="With" Margin="250,155,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
-        <Label Content="voucher" Margin="235,185,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
+        <Label Content="With" Margin="270,175,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
+        <Label Content="voucher" Margin="253,205,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
 
-        <Label Content="Without" Margin="232,260,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
-        <Label Content="voucher" Margin="235,290,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
+        <Label Content="Without" Margin="250,280,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
+        <Label Content="voucher" Margin="255,310,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
         <TextBlock x:Name="withVoucherTextBlock"
-            Margin="565,351,121,187"                  
+            Margin="570,191,0,0"                  
             FontSize="15"
             FontStyle="Italic"
             FontWeight="SemiBold"
@@ -220,7 +220,7 @@
             Panel.ZIndex="1"
             Height="21" Width="144"/>
         <TextBlock x:Name="withoutVoucherTextBlock"
-            Margin="565,405,121,133"                  
+            Margin="570,295,0,0"                    
             FontSize="15"
             FontStyle="Italic"
             FontWeight="SemiBold"

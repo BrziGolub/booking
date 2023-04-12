@@ -31,6 +31,8 @@ namespace Booking.Domain.ServiceInterfaces
         int numberOfEighteenToFiftyGuests(int selectedTourID);
         int numberOfFiftyPlusGuests(int selectedTourID);
         Tour UpdateTour(Tour tour);
-        
+        int numberWithVouchersGuests(int selectedTourID);
+        int numberWithOutVouchersGuests(int selectedTourID);
+
     }
 }
