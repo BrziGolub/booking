@@ -39,6 +39,7 @@ namespace Booking.View
             this.DataContext = this;
             //_accommodationService = new AccommodationService();
             _accommodationService = InjectorService.CreateInstance<IAccommodationService>();
+            AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
             _accommodationService.Subscribe(this);
             //var app = Application.Current as App;
             //AccommodationReservationService = app.AccommodationReservationService;

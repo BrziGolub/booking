@@ -21,6 +21,7 @@ namespace Booking.Service
         private readonly List<IObserver> _observers;
         private readonly IAccommodationRepository _accommodationRepository;
         private readonly ILocationRepository _locationRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IAccommodationImagesRepository _accommodationImagesRepository;
         public static int SignedOwnerId;
 
@@ -33,23 +34,21 @@ namespace Booking.Service
         //private readonly ILocationService _locationService;
         //private readonly IUserService _userService;
 
-        
 
-		public AccommodationService()
+
+        public AccommodationService()
         {
             _observers = new List<IObserver>();
             _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
             _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
+            _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
+
 
             //var app = Application.Current as App;
             //_locationService = app.LocationService;
             //_userService = new UserService();
 
             _accommodationImagesRepository = InjectorRepository.CreateInstance<IAccommodationImagesRepository>();
-        }
-        public List<Accommodation> GetAll()
-        {
-            return _accommodationRepository.GetAll();
         }
         /*
         public void BindUserToAccommodation()
@@ -86,6 +85,24 @@ namespace Booking.Service
             }
 
         }*/
+        public List<Accommodation> GetAll() 
+        {
+            List<Accommodation> accommodationList = new List<Accommodation>();
+            accommodationList = _accommodationRepository.GetAll();
+            foreach (var a in accommodationList) 
+            {
+                a.Location = _locationRepository.GetById(a.Location.Id);
+                a.Owner = _userRepository.GetById(a.Owner.Id);
+                foreach (var p in _accommodationImagesRepository.GetAll()) 
+                {
+                    if (p.Accomodation.Id == a.Id)
+                    {
+                        a.Images.Add(p);
+                    }
+                }
+            }
+            return accommodationList;
+        }
         public Boolean IsEnumTrue(Accommodation accommodation, List<String> accommodationTypes)
         {
             Boolean info = false;
@@ -111,6 +128,13 @@ namespace Booking.Service
             foreach (Accommodation accommodation in _accommodationRepository.GetAll())
             {
                 accommodation.Location = _locationRepository.GetById(accommodation.Location.Id);
+                foreach (var p in _accommodationImagesRepository.GetAll())
+                {
+                    if (p.Accomodation.Id == accommodation.Id)
+                    {
+                        accommodation.Images.Add(p);
+                    }
+                }
                 bool isNameValid = string.IsNullOrEmpty(name) || accommodation.Name.ToLower().Contains(name.ToLower());
                 bool isStateValid = string.IsNullOrEmpty(state) || state.Equals("All") || accommodation.Location.State.ToLower().Contains(state.ToLower());
                 bool isAccommodationTypeValid = IsEnumTrue(accommodation, accommodationTypes);
@@ -132,6 +156,13 @@ namespace Booking.Service
             foreach (Accommodation accommodation in _accommodationRepository.GetAll())
             {
                 accommodation.Location = _locationRepository.GetById(accommodation.Location.Id);
+                foreach (var p in _accommodationImagesRepository.GetAll())
+                {
+                    if (p.Accomodation.Id == accommodation.Id)
+                    {
+                        accommodation.Images.Add(p);
+                    }
+                }
                 accommodationsObserve.Add(accommodation);
             }
         }
@@ -186,6 +217,14 @@ namespace Booking.Service
             {
                 if (accommodation.Owner.Id == SignedOwnerId)
                 {
+                    accommodation.Location = _locationRepository.GetById(accommodation.Location.Id);
+                    foreach (var p in _accommodationImagesRepository.GetAll())
+                    {
+                        if (p.Accomodation.Id == accommodation.Id)
+                        {
+                            accommodation.Images.Add(p);
+                        }
+                    }
                     _ownerAccommodations.Add(accommodation);
                 }
             }

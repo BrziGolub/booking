@@ -19,9 +19,10 @@ namespace Booking.Service
         private readonly List<IObserver> _observers;
         private readonly IAccommodationResevationRepository _repository;
         private readonly IAccommodationRepository _accommodationRepository;
+        private readonly ILocationRepository _locationRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IAccommodationReservationRequestService _accommodationReservationRequestRepository;
-        private readonly IAccommodationGradeService _accommodationGradeRepository;
+        private readonly IAccommodationReservationRequestsRepostiory _accommodationReservationRequestRepository;
+        private readonly IAccommodationGradeRepository _accommodationGradeRepository;
 
         // public AccommodationGradeService AccommodationGradeService { get; set; }
         // public AccommodationReservationRequestService AccommodationReservationRequestService { get; set; }
@@ -35,8 +36,9 @@ namespace Booking.Service
             _repository = InjectorRepository.CreateInstance<IAccommodationResevationRepository>();
             _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
             _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
-            _accommodationReservationRequestRepository = InjectorRepository.CreateInstance<IAccommodationReservationRequestService>();
-            _accommodationGradeRepository = InjectorRepository.CreateInstance<IAccommodationGradeService>();
+            _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
+            _accommodationReservationRequestRepository = InjectorRepository.CreateInstance<IAccommodationReservationRequestsRepostiory>();
+            _accommodationGradeRepository = InjectorRepository.CreateInstance<IAccommodationGradeRepository>();
 
             //var app = Application.Current as App;
 
@@ -46,8 +48,13 @@ namespace Booking.Service
 
             //AccommodationReservationRequestService = app.AccommodationReservationRequestService;
         }
+        public AccommodationReservation GetById(int id)
+        {
+           return _repository.GetById(id);
+        }
 
-        public List<AccommodationReservation> GetGeustsReservatonst()
+
+            public List<AccommodationReservation> GetGeustsReservatonst()
         {
             List<AccommodationReservation> _guestsReservations = new List<AccommodationReservation>();
 
@@ -56,6 +63,7 @@ namespace Booking.Service
                 if(reservation.Guest.Id == SignedFirstGuestId)
                 {
                     reservation.Accommodation = _accommodationRepository.GetById(reservation.Accommodation.Id);
+                    reservation.Accommodation.Location = _locationRepository.GetById(reservation.Accommodation.Location.Id);
                     reservation.Accommodation.Owner = _userRepository.GetById(reservation.Accommodation.Owner.Id);
                     _guestsReservations.Add(reservation);
                 }
