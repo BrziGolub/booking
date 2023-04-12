@@ -53,6 +53,11 @@ namespace Booking.Service
         {
             return _accommodationAndOwnerGrades;
         }*/
+        public int NextId()
+        {
+            return _repository.NextId();
+        }
+
         public void SaveGrade(AccommodationAndOwnerGrade grade) 
         {
             _repository.Add(grade);

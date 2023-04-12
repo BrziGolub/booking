@@ -45,7 +45,7 @@ namespace Booking.Repository
         }
         public void Add(AccommodationAndOwnerGrade grade)
         {
-            grade.Id = NextId();
+            //grade.Id = NextId(); 
             _accommodationsAndOwnerGrades.Add(grade);
             _serializer.ToCSV(FilePath, _accommodationsAndOwnerGrades);
         }
