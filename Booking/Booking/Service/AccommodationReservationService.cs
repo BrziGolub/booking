@@ -10,33 +10,35 @@ using Booking.Model;
 using Booking.Observer;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Util;
+using Booking.Domain.RepositoryInterfaces;
 
 namespace Booking.Service
 {
     public class AccommodationReservationService : ISubject, IAccommodationReservationService
     {
         private readonly List<IObserver> _observers;
+        private readonly IAccommodationResevationRepository _repository;
+        private readonly IAccommodationRepository _accommodationRepository;
+        private readonly ILocationRepository _locationRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IAccommodationReservationRequestsRepostiory _accommodationReservationRequestRepository;
+        private readonly IAccommodationGradeRepository _accommodationGradeRepository;
 
         // public AccommodationGradeService AccommodationGradeService { get; set; }
         // public AccommodationReservationRequestService AccommodationReservationRequestService { get; set; }
         // public UserService UserService { get; set; }
         // public AccommodationService AccommodationService { get; set; }
-
-        private readonly IAccommodationGradeService AccommodationGradeService;
-        private readonly IAccommodationReservationRequestService AccommodationReservationRequestService;
-        private readonly IUserService UserService;
-        private readonly IAccommodationService _accommodationService;
-
-        private List<AccommodationReservation> _reservations;
-        private readonly AccommodationResevationRepository _repository;
-
-
         public static int SignedFirstGuestId;
 
 		public AccommodationReservationService()
         {
-            _reservations = new List<AccommodationReservation>();
-            _repository = new AccommodationResevationRepository();
+            _observers = new List<IObserver>();
+            _repository = InjectorRepository.CreateInstance<IAccommodationResevationRepository>();
+            _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
+            _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
+            _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
+            _accommodationReservationRequestRepository = InjectorRepository.CreateInstance<IAccommodationReservationRequestsRepostiory>();
+            _accommodationGradeRepository = InjectorRepository.CreateInstance<IAccommodationGradeRepository>();
 
             //var app = Application.Current as App;
 
@@ -45,68 +47,49 @@ namespace Booking.Service
             //UserService = app.UserService;
 
             //AccommodationReservationRequestService = app.AccommodationReservationRequestService;
-
-            AccommodationGradeService = InjectorService.CreateInstance<IAccommodationGradeService>();
-            AccommodationReservationRequestService = InjectorService.CreateInstance<IAccommodationReservationRequestService>();
-            UserService = InjectorService.CreateInstance<IUserService>();
-            _accommodationService = InjectorService.CreateInstance<IAccommodationService>();
-
-            _observers = new List<IObserver>();
-            Load();
+        }
+        public AccommodationReservation GetById(int id)
+        {
+           return _repository.GetById(id);
         }
 
-        public List<AccommodationReservation> GetGeustsReservatonst()
+
+            public List<AccommodationReservation> GetGeustsReservatonst()
         {
             List<AccommodationReservation> _guestsReservations = new List<AccommodationReservation>();
 
-            foreach(var reservation in _reservations)
+            foreach(var reservation in _repository.GetAll())
             {
                 if(reservation.Guest.Id == SignedFirstGuestId)
                 {
+                    reservation.Accommodation = _accommodationRepository.GetById(reservation.Accommodation.Id);
+                    reservation.Accommodation.Location = _locationRepository.GetById(reservation.Accommodation.Location.Id);
+                    reservation.Accommodation.Owner = _userRepository.GetById(reservation.Accommodation.Owner.Id);
                     _guestsReservations.Add(reservation);
                 }
             }
             return _guestsReservations;
         }
-
-        public void Load()
-        {
-            _reservations = _repository.Load();
-            BindReservationToAccommodation();
-            BindReservationToGuest();
-
-        }
-        public AccommodationReservation GetById(int id)
-        {
-            return _reservations.Find(reservation => reservation.Id == id);
-        }
-        public List<AccommodationReservation> GetAll()
+        /*public List<AccommodationReservation> GetAll()
         {
             return _reservations;
-        }
-        public int NextId()
-        {
-            if (_reservations.Count == 0) return 0;
-            return _reservations.Max(s => s.Id) + 1;
-        }
+        }*/
         public void SaveReservation(AccommodationReservation reservation)
         {
-            reservation.Id = NextId();
-            _reservations.Add(reservation);
-            _repository.Save(_reservations);
+            _repository.Add(reservation);
         }
 
         public void Delete(AccommodationReservation selectedReservation)
         {
-            _reservations.Remove(selectedReservation);
-            AccommodationReservationRequestService.DeleteRequest(selectedReservation);
-            _repository.Save(_reservations); //napravi metodu Save
+            _repository.Delete(selectedReservation);
+            _accommodationReservationRequestRepository.DeleteRequest(selectedReservation);
             NotifyObservers();
         }
 
         public bool IsAbleToCancleResrvation(AccommodationReservation selectedReservation)
         {
-            if(DateTime.Now < selectedReservation.ArrivalDay.AddDays(-selectedReservation.Accommodation.CancelationPeriod))
+            selectedReservation.Accommodation = _accommodationRepository.GetById(selectedReservation.Accommodation.Id);
+            if (DateTime.Now < selectedReservation.ArrivalDay.AddDays(-selectedReservation.Accommodation.CancelationPeriod))
             {
                 return false;
             }
@@ -159,7 +142,7 @@ namespace Booking.Service
 
             List<DateTime> reservedDatesEntered = MakeListOfReservedDates(arrivalDay, departureDay);
 
-            foreach (AccommodationReservation reservation in _reservations)
+            foreach (AccommodationReservation reservation in _repository.GetAll())
             {
                 if (reservation.Accommodation.Id == selectedAccommodation.Id)
                 {
@@ -183,7 +166,7 @@ namespace Booking.Service
             //this is list od reserved days
             List<DateTime> reservedDates = new List<DateTime>();
 
-            foreach (AccommodationReservation r in _reservations)
+            foreach (AccommodationReservation r in _repository.GetAll())
             {
                 if (r.Accommodation.Id == selected.Id)
                 {
@@ -209,14 +192,15 @@ namespace Booking.Service
         public List<AccommodationReservation> GetAllUngradedReservations()
         {
             List<AccommodationReservation> reservationList = new List<AccommodationReservation>();
-            foreach (var reservation in _reservations)
+            foreach (var reservation in _repository.GetAll())
             {
                 if (IsReservationAvailableToGrade(reservation) == false)
                 {
                     continue;
                 }
-                bool flag = AccommodationGradeService.IsReservationGraded(reservation.Id);
-
+                bool flag = _accommodationGradeRepository.IsReservationGraded(reservation.Id);
+                reservation.Accommodation = _accommodationRepository.GetById(reservation.Accommodation.Id);
+                reservation.Accommodation.Owner = _userRepository.GetById(reservation.Accommodation.Owner.Id);
                 if (!flag && reservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId)
                 {
                     reservationList.Add(reservation);
@@ -313,7 +297,7 @@ namespace Booking.Service
             return GetDates(reservedDates, difference, departureDay, arrivalDay);
         }
 
-        public void BindReservationToAccommodation()
+        /*public void BindReservationToAccommodation()
         {
             _accommodationService.Load();
             foreach (AccommodationReservation reservation in _reservations)
@@ -321,8 +305,8 @@ namespace Booking.Service
                 Accommodation accommodation = _accommodationService.GetById(reservation.Accommodation.Id);
                 reservation.Accommodation = accommodation;
             }
-        }
-        public void BindReservationToGuest()
+        }*/
+        /*public void BindReservationToGuest()
         {
             UserService.Load();
             foreach (AccommodationReservation reservation in _reservations)
@@ -330,12 +314,7 @@ namespace Booking.Service
                 User user = UserService.GetById(reservation.Guest.Id);
                 reservation.Guest = user;
             }
-        }
-
-        public void Save()
-        {
-            _repository.Save(_reservations);
-        }
+        }*/
 
 
         /*public void BindReservationToAccommodation()

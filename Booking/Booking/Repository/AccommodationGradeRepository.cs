@@ -32,5 +32,34 @@ namespace Booking.Repository
 		{
 			return _accommodationsGrades.Find(a => a.Id == id);
 		}
-	}
+        public int NextId()
+        {
+            if (_accommodationsGrades.Count == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return _accommodationsGrades.Max(t => t.Id) + 1;
+            }
+        }
+        public AccommodationGrade Add(AccommodationGrade accommodationGrade)
+        {
+            accommodationGrade.Id = NextId();
+            _accommodationsGrades.Add(accommodationGrade);
+            _serializer.ToCSV(FilePath, _accommodationsGrades);
+            return accommodationGrade;
+        }
+        public bool IsReservationGraded(int accommodationReservationId)
+        {
+            foreach (var grade in _accommodationsGrades)
+            {
+                if (grade.Accommodation.Id == accommodationReservationId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }

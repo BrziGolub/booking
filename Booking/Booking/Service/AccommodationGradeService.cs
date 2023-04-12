@@ -7,51 +7,36 @@ using System.Text;
 using System.Threading.Tasks;
 using Booking.Model;
 using Booking.Domain.ServiceInterfaces;
+using Booking.Util;
+using Booking.Domain.RepositoryInterfaces;
 
 namespace Booking.Service
 {
-    public class AccommodationGradeService : ISubject, IAccommodationGradeService
+    public class AccommodationGradeService : IAccommodationGradeService
     {
-        private readonly AccommodationGradeRepository _repository;
-        private List<AccommodationGrade> _accommodationGrades;
         private readonly List<IObserver> _observers;
-        private readonly AccommodationGradeRepository _accommodationGradeRepository;
-        private AccommodationResevationRepository _accommodationReservationRepository;
+        private readonly IAccommodationGradeRepository _repository;
+        private IAccommodationResevationRepository _accommodationReservationRepository;
+
 
 		public AccommodationGradeService()
         {
-            _repository = new AccommodationGradeRepository();
-            _accommodationGrades = _repository.Load();
+            _repository = InjectorRepository.CreateInstance<IAccommodationGradeRepository>();
             _observers = new List<IObserver>();
-            _accommodationGradeRepository = new AccommodationGradeRepository();
-            _accommodationReservationRepository = new AccommodationResevationRepository();
-            BindGradesToReservations();
+            _accommodationReservationRepository = InjectorRepository.CreateInstance<IAccommodationResevationRepository>();
         }
         public List<AccommodationGrade> GetAll()
         {
-            return _accommodationGrades;
+            return _repository.GetAll();
         }
-        public AccommodationGrade GetById(int id)
+        /*public AccommodationGrade GetById(int id)
         {
             return _accommodationGrades.Find(v => v.Id == id);
-        }
-        public int NextId()
-        {
-            if (_accommodationGrades.Count == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return _accommodationGrades.Max(t => t.Id) + 1;
-            }
-        }
+        }*/
 
         public AccommodationGrade Create(AccommodationGrade accommodationGrade)
         {
-            accommodationGrade.Id = NextId();
-            _accommodationGrades.Add(accommodationGrade);
-            _accommodationGradeRepository.Save(_accommodationGrades);
+            _repository.Add(accommodationGrade);
             NotifyObservers();
             return accommodationGrade;
         }
@@ -70,6 +55,7 @@ namespace Booking.Service
                 observer.Update();
             }
         }
+        /*
         public void BindGradesToReservations()
         {
             foreach (AccommodationGrade accommodationGrade in _accommodationGrades)
@@ -83,10 +69,11 @@ namespace Booking.Service
                 }
             }
 
-        }
+        }*/
+        /*
         public bool IsReservationGraded(int accommodationReservationId)
         {
-            foreach (var grade in _accommodationGrades)
+            foreach (var grade in _repository.GetAll())
             {
                 if (grade.Accommodation.Id == accommodationReservationId)
                 {
@@ -94,11 +81,10 @@ namespace Booking.Service
                 }
             }
             return false;
-        }
-
-        public void Save()
+        }*/
+        public bool IsReservationGraded(int accommodationReservationId)
         {
-            _repository.Save(_accommodationGrades);
+            return _repository.IsReservationGraded(accommodationReservationId);
         }
     }
 }

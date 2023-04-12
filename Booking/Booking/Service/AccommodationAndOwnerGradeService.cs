@@ -1,4 +1,5 @@
-﻿using Booking.Domain.ServiceInterfaces;
+﻿using Booking.Domain.RepositoryInterfaces;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Model.Images;
 using Booking.Observer;
@@ -14,72 +15,49 @@ namespace Booking.Service
 {
     public class AccommodationAndOwnerGradeService : IAccommodationAndOwnerGradeService
     {
-        private readonly AccommodationAndOwnerGradeRepository _repository;
+        private readonly IAccommodationAndOwnerGradeRepository _repository;
+        private readonly IAccommodationResevationRepository _reservationRepository;
+        private readonly IAccommodationRepository _accommodationRepository;
+        private readonly IAccommodationGradeRepository _gradeRepository;
+        private readonly List<IObserver> _observers;
+        //private List<AccommodationAndOwnerGrade> _accommodationAndOwnerGrades;
 
-        private List<AccommodationAndOwnerGrade> _accommodationAndOwnerGrades;
 
-
-        private readonly AccommodationGradeRepository _gradeRepository;
-        private List<AccommodationGrade> _accommodationGrades;
+        //private readonly IAccommodationGradeRepository _gradeRepository;
 
         //private AccommodationReservationService _accommodationReservationService;
         //private GuestsAccommodationImagesService _guestsImagesService;
-        private readonly IAccommodationReservationService _accommodationReservationService;
-        private readonly IGuestsAccommodationImagesService _guestsImagesService;
 
-        private readonly List<IObserver> _observers;
 
 		public AccommodationAndOwnerGradeService()
         {
             _observers = new List<IObserver>();
-            _repository = new AccommodationAndOwnerGradeRepository();
-
-            _accommodationAndOwnerGrades = new List<AccommodationAndOwnerGrade>();
+            _repository = InjectorRepository.CreateInstance<IAccommodationAndOwnerGradeRepository>();
+            _reservationRepository = InjectorRepository.CreateInstance<IAccommodationResevationRepository>();
+            _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
+            _gradeRepository = InjectorRepository.CreateInstance<IAccommodationGradeRepository>();
             //_accommodationReservationService = new AccommodationReservationService();
             //_guestsImagesService = new GuestsAccommodationImagesService(); //ovo iz app
-            _accommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
-            _guestsImagesService = InjectorService.CreateInstance<IGuestsAccommodationImagesService>();
 
-            _gradeRepository = new AccommodationGradeRepository();
-            _accommodationGrades = new List<AccommodationGrade>();
-
-            Load(); 
+ 
         }
 
-        public void Load()
+        /*public void Load()
         {
             _accommodationAndOwnerGrades = _repository.Load();
             _accommodationGrades = _gradeRepository.Load();
-            BindGradesToReservations();
             BindGuestsImagesToGrades();
-        }
+        }*/
 
-        public int NextId()
-        {
-            if (_accommodationAndOwnerGrades.Count == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return _accommodationAndOwnerGrades.Max(t => t.Id) + 1;
-            }
-        }
-        public void SaveGrade(AccommodationAndOwnerGrade grade)
-        {
-            grade.Id = NextId();
-            _accommodationAndOwnerGrades.Add(grade);
-            _repository.Save(_accommodationAndOwnerGrades);
-        }
-        public List<AccommodationAndOwnerGrade> GetAllGrades()
+        /*public List<AccommodationAndOwnerGrade> GetAllGrades()
         {
             return _accommodationAndOwnerGrades;
-        }
-        public AccommodationAndOwnerGrade GetById(int id)
+        }*/
+        public void SaveGrade(AccommodationAndOwnerGrade grade) 
         {
-            return _accommodationAndOwnerGrades.Find(v => v.Id == id);
+            _repository.Add(grade);
+            //FALI DODAVANJE SLIKA U CSV
         }
-
         public void Subscribe(IObserver observer)
         {
             _observers.Add(observer);
@@ -100,11 +78,14 @@ namespace Booking.Service
         public List<AccommodationAndOwnerGrade> GetSeeableGrades() 
         {
             List<AccommodationAndOwnerGrade> _seeableGrades = new List<AccommodationAndOwnerGrade>();
-            foreach (var g in _accommodationAndOwnerGrades) 
+            foreach (var g in _repository.GetAll()) 
             {
+                g.AccommodationReservation = _reservationRepository.GetById(g.AccommodationReservation.Id);
+                g.AccommodationReservation.Accommodation = _accommodationRepository.GetById(g.AccommodationReservation.Accommodation.Id);
+                //dodati uvezivanje slika al prvo kristina mora da napravi model za te slike.
                 if (g.AccommodationReservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId) 
                 {
-                    foreach (var go in _accommodationGrades) 
+                    foreach (var go in _gradeRepository.GetAll()) 
                     {
                         if (go.Accommodation.Id == g.AccommodationReservation.Id) 
                         {
@@ -118,6 +99,7 @@ namespace Booking.Service
 
 
         //proveri ovo
+        /*
         public void BindGuestsImagesToGrades()
         {
             foreach (AccommodationAndOwnerGrade grade in _accommodationAndOwnerGrades)
@@ -131,31 +113,12 @@ namespace Booking.Service
                 }
 
             }
-        }
- 
-        public void BindGradesToReservations()
-        { 
+        }*/
 
-            foreach (AccommodationAndOwnerGrade accommodationGrade in _accommodationAndOwnerGrades)
-            {
-                foreach (AccommodationReservation accommodationReservation in _accommodationReservationService.GetAll())
-                {
-                    if (accommodationReservation.Id == accommodationGrade.AccommodationReservation.Id)
-                    {
-                        accommodationGrade.AccommodationReservation = accommodationReservation;
-                    }
-                }
-            }
-        }
-
-        public void Save()
-        {
-            _repository.Save(_accommodationAndOwnerGrades);
-        }
 
         public List<AccommodationAndOwnerGrade> GetAll()
         {
-            return _accommodationAndOwnerGrades;
+            return _repository.GetAll();
         }
     }
 }

@@ -9,8 +9,6 @@ namespace Booking.Domain.ServiceInterfaces
 {
     public interface IGuestsAccommodationImagesService : IService<AccommodationImage>
     {
-        void Load();
-        int GenerateId();
         void Create(AccommodationImage image);
     }
 }

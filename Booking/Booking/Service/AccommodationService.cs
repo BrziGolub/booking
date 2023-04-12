@@ -1,4 +1,5 @@
-﻿using Booking.Domain.ServiceInterfaces;
+﻿using Booking.Domain.RepositoryInterfaces;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Model.Enums;
 using Booking.Model.Images;
@@ -18,52 +19,38 @@ namespace Booking.Service
     public class AccommodationService : ISubject, IAccommodationService
     {
         private readonly List<IObserver> _observers;
-        private readonly AccommodationRepository _accommodationRepository;
-        private List<Accommodation> _accommodations;
-        private List<AccommodationImage> _accommodationImages;
+        private readonly IAccommodationRepository _accommodationRepository;
+        private readonly ILocationRepository _locationRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IAccommodationImagesRepository _accommodationImagesRepository;
+        public static int SignedOwnerId;
+
+
+        //private List<Accommodation> _accommodations;
+        //private List<AccommodationImage> _accommodationImages;
 
         //private LocationService _locationService;
         //private UserService _userService;
-        private readonly ILocationService _locationService;
-        private readonly IUserService _userService;
+        //private readonly ILocationService _locationService;
+        //private readonly IUserService _userService;
 
-        private AccommodationImagesRepository _accommodationImagesRepository;
-        
-        public static int SignedOwnerId;
 
-		public AccommodationService()
+
+        public AccommodationService()
         {
-            _accommodationRepository = new AccommodationRepository();
             _observers = new List<IObserver>();
-            
+            _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
+            _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
+            _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
+
+
             //var app = Application.Current as App;
             //_locationService = app.LocationService;
-            //_userService = new UserService(); 
-            _locationService = InjectorService.CreateInstance<LocationService>();
-            _userService = InjectorService.CreateInstance<UserService>();
-            
-            _accommodationImagesRepository = new AccommodationImagesRepository();
-            _accommodations = new List<Accommodation>();
-            _accommodationImages = new List<AccommodationImage>();
-            Load();
-        }
-        public void Load()
-        {
-            _accommodations = _accommodationRepository.Load();
-            _accommodationImages = _accommodationImagesRepository.Load();
-            BindLocationToAccommodaton();
-            BindImagesToAccommodaton();
-            BindUserToAccommodation();
-        }
-        public Accommodation GetById(int id)
-        {
-            return _accommodations.Find(accommodation => accommodation.Id == id);
-        }
-        public List<Accommodation> GetAll()
-        {
-            return _accommodations;
-        }
+            //_userService = new UserService();
 
+            _accommodationImagesRepository = InjectorRepository.CreateInstance<IAccommodationImagesRepository>();
+        }
+        /*
         public void BindUserToAccommodation()
         {
             _userService.Load();
@@ -97,6 +84,24 @@ namespace Booking.Service
                 }
             }
 
+        }*/
+        public List<Accommodation> GetAll() 
+        {
+            List<Accommodation> accommodationList = new List<Accommodation>();
+            accommodationList = _accommodationRepository.GetAll();
+            foreach (var a in accommodationList) 
+            {
+                a.Location = _locationRepository.GetById(a.Location.Id);
+                a.Owner = _userRepository.GetById(a.Owner.Id);
+                foreach (var p in _accommodationImagesRepository.GetAll()) 
+                {
+                    if (p.Accomodation.Id == a.Id)
+                    {
+                        a.Images.Add(p);
+                    }
+                }
+            }
+            return accommodationList;
         }
         public Boolean IsEnumTrue(Accommodation accommodation, List<String> accommodationTypes)
         {
@@ -120,8 +125,16 @@ namespace Booking.Service
         {
             observe.Clear();
 
-            foreach (Accommodation accommodation in _accommodations)
+            foreach (Accommodation accommodation in _accommodationRepository.GetAll())
             {
+                accommodation.Location = _locationRepository.GetById(accommodation.Location.Id);
+                foreach (var p in _accommodationImagesRepository.GetAll())
+                {
+                    if (p.Accomodation.Id == accommodation.Id)
+                    {
+                        accommodation.Images.Add(p);
+                    }
+                }
                 bool isNameValid = string.IsNullOrEmpty(name) || accommodation.Name.ToLower().Contains(name.ToLower());
                 bool isStateValid = string.IsNullOrEmpty(state) || state.Equals("All") || accommodation.Location.State.ToLower().Contains(state.ToLower());
                 bool isAccommodationTypeValid = IsEnumTrue(accommodation, accommodationTypes);
@@ -140,8 +153,16 @@ namespace Booking.Service
         {
             accommodationsObserve.Clear();
 
-            foreach (Accommodation accommodation in _accommodations)
+            foreach (Accommodation accommodation in _accommodationRepository.GetAll())
             {
+                accommodation.Location = _locationRepository.GetById(accommodation.Location.Id);
+                foreach (var p in _accommodationImagesRepository.GetAll())
+                {
+                    if (p.Accomodation.Id == accommodation.Id)
+                    {
+                        accommodation.Images.Add(p);
+                    }
+                }
                 accommodationsObserve.Add(accommodation);
             }
         }
@@ -162,18 +183,8 @@ namespace Booking.Service
                 observer.Update();
             }
         }
-        public int NextId()
-        {
-            if (_accommodations.Count == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return _accommodations.Max(t => t.Id) + 1;
-            }
-        }
-        public int ImageNextId()
+        
+        /*public int ImageNextId()
         {
             if (_accommodationImages.Count == 0)
             {
@@ -183,20 +194,17 @@ namespace Booking.Service
             {
                 return _accommodationImages.Max(t => t.Id) + 1;
             }
-        }
+        }*/
         public Accommodation AddAccommodation(Accommodation accommodation)
         {
-            accommodation.Id = NextId();
-            accommodation.Owner.Id = SignedOwnerId;
             foreach (var picture in accommodation.Images)
             {
-                picture.Id = ImageNextId();
                 picture.Accomodation = accommodation;
-                _accommodationImages.Add(picture);
+                _accommodationImagesRepository.Add(picture);
             }
-            _accommodations.Add(accommodation);
-            _accommodationRepository.Save(_accommodations);
-            _accommodationImagesRepository.Save(_accommodationImages);
+
+            accommodation.Owner.Id = SignedOwnerId;
+            _accommodationRepository.Add(accommodation);
             NotifyObservers();
             return accommodation;
         }
@@ -205,10 +213,18 @@ namespace Booking.Service
         {
             List<Accommodation> _ownerAccommodations = new List<Accommodation>();
 
-            foreach (var accommodation in _accommodations)
+            foreach (var accommodation in _accommodationRepository.GetAll())
             {
                 if (accommodation.Owner.Id == SignedOwnerId)
                 {
+                    accommodation.Location = _locationRepository.GetById(accommodation.Location.Id);
+                    foreach (var p in _accommodationImagesRepository.GetAll())
+                    {
+                        if (p.Accomodation.Id == accommodation.Id)
+                        {
+                            accommodation.Images.Add(p);
+                        }
+                    }
                     _ownerAccommodations.Add(accommodation);
                 }
             }
@@ -216,9 +232,5 @@ namespace Booking.Service
             return _ownerAccommodations;
         }
 
-        public void Save()
-        {
-            _accommodationRepository.Save(_accommodations);
-        }
     }
 }

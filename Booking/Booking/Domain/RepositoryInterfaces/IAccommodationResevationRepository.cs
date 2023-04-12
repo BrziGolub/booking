@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.RepositoryInterfaces
 {
-	internal interface IAccommodationResevationRepository : IRepository<AccommodationReservation>
+	public interface IAccommodationResevationRepository : IRepository<AccommodationReservation>
 	{
+		int NextId();
+		void Add(AccommodationReservation reservation);
+		void Delete(AccommodationReservation selectedReservation);
 	}
 }
