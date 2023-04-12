@@ -19,6 +19,7 @@ namespace Booking.Service
         private readonly IAccommodationResevationRepository _reservationRepository;
         private readonly IAccommodationRepository _accommodationRepository;
         private readonly IAccommodationGradeRepository _gradeRepository;
+        private readonly IUserRepository _userRepository;
         private readonly List<IObserver> _observers;
         //private List<AccommodationAndOwnerGrade> _accommodationAndOwnerGrades;
 
@@ -35,6 +36,7 @@ namespace Booking.Service
             _repository = InjectorRepository.CreateInstance<IAccommodationAndOwnerGradeRepository>();
             _reservationRepository = InjectorRepository.CreateInstance<IAccommodationResevationRepository>();
             _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
+            _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
             _gradeRepository = InjectorRepository.CreateInstance<IAccommodationGradeRepository>();
             //_accommodationReservationService = new AccommodationReservationService();
             //_guestsImagesService = new GuestsAccommodationImagesService(); //ovo iz app
@@ -82,6 +84,7 @@ namespace Booking.Service
             {
                 g.AccommodationReservation = _reservationRepository.GetById(g.AccommodationReservation.Id);
                 g.AccommodationReservation.Accommodation = _accommodationRepository.GetById(g.AccommodationReservation.Accommodation.Id);
+                g.AccommodationReservation.Guest = _userRepository.GetById(g.AccommodationReservation.Guest.Id);
                 //dodati uvezivanje slika al prvo kristina mora da napravi model za te slike.
                 if (g.AccommodationReservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId) 
                 {
