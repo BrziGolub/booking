@@ -16,12 +16,12 @@ namespace Booking.Repository
 
         private readonly Serializer<AccommodationReservation> _serializer;
 
-        public List<AccommodationReservation> _accommodations;
+        public List<AccommodationReservation> _reservations;
 
         public AccommodationResevationRepository()
         {
             _serializer = new Serializer<AccommodationReservation>();
-            _accommodations = _serializer.FromCSV(FilePath);
+            _reservations = _serializer.FromCSV(FilePath);
 		}
 
         public List<AccommodationReservation> GetAll()
@@ -31,23 +31,34 @@ namespace Booking.Repository
 
 		public AccommodationReservation GetById(int id)
 		{
-			return _accommodations.Find(a => a.Id == id);
+			return _reservations.Find(a => a.Id == id);
 		}
         public int NextId()
         {
-            if (_accommodations.Count == 0) return 0;
-            return _accommodations.Max(s => s.Id) + 1;
+            if (_reservations.Count == 0) return 0;
+            return _reservations.Max(s => s.Id) + 1;
         }
         public void Add(AccommodationReservation reservation)
         {
             reservation.Id = NextId();
-            _accommodations.Add(reservation);
-            _serializer.ToCSV(FilePath, _accommodations);
+            _reservations.Add(reservation);
+            _serializer.ToCSV(FilePath, _reservations);
         }
         public void Delete(AccommodationReservation selectedReservation)
         {
-            _accommodations.Remove(selectedReservation);
-            _serializer.ToCSV(FilePath, _accommodations);
+            // _accommodations.Remove(selectedReservation);
+            // _accommodations.RemoveAll(r => r.Equals(selectedReservation));
+            List<AccommodationReservation> _reservationsCopy = new List<AccommodationReservation>(_reservations);
+            
+            _reservations.Clear();
+           foreach(var reservation in _reservationsCopy)
+           {
+                if(reservation.Id != selectedReservation.Id)
+                {
+                    _reservations.Add(reservation);
+                }
+           }
+            _serializer.ToCSV(FilePath, _reservations);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Booking.Domain.RepositoryInterfaces;
+﻿using Booking.Domain.Model.Images;
+using Booking.Domain.RepositoryInterfaces;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Model.Images;
 using Booking.Repository;
@@ -20,7 +21,7 @@ namespace Booking.Service
             _repository = InjectorRepository.CreateInstance<IGuestsAccommodationImagesRepository>();
         }
 
-        public void Create(AccommodationImage image)
+        public void Create(GuestsAccommodationImages image)
         {
             _repository.Add(image);
         }

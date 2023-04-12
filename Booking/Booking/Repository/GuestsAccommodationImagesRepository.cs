@@ -1,4 +1,5 @@
-﻿using Booking.Domain.RepositoryInterfaces;
+﻿using Booking.Domain.Model.Images;
+using Booking.Domain.RepositoryInterfaces;
 using Booking.Model;
 using Booking.Model.Images;
 using Booking.Serializer;
@@ -14,29 +15,29 @@ namespace Booking.Repository
     {
         private const string FilePath = "../../Resources/Data/guestsAccommodationImages.csv";
 
-        private readonly Serializer<AccommodationImage> _serializer;
+        private readonly Serializer<GuestsAccommodationImages> _serializer;
 
-        public List<AccommodationImage> _accommodationsImages;
+        public List<GuestsAccommodationImages> _accommodationsImages;
 
         public GuestsAccommodationImagesRepository()
         {
-            _serializer = new Serializer<AccommodationImage>();
+            _serializer = new Serializer<GuestsAccommodationImages>();
             _accommodationsImages = _serializer.FromCSV(FilePath);
 		}
 
-        public List<AccommodationImage> GetAll()
+        public List<GuestsAccommodationImages> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-		public AccommodationImage GetById(int id)
+		public GuestsAccommodationImages GetById(int id)
 		{
 			return _accommodationsImages.Find(a => a.Id == id);
 		}
         public int NextId()
         {
             int maxId = 0;
-            foreach (AccommodationImage image in _accommodationsImages)
+            foreach (GuestsAccommodationImages image in _accommodationsImages)
             {
                 if (image.Id > maxId)
                 {
@@ -45,7 +46,7 @@ namespace Booking.Repository
             }
             return maxId + 1;
         }
-        public void Add(AccommodationImage image)
+        public void Add(GuestsAccommodationImages image)
         {
             image.Id = NextId();
             _accommodationsImages.Add(image);
