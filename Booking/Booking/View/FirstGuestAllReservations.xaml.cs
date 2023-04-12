@@ -21,13 +21,8 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for FirstGuestAllReservations.xaml
-    /// </summary>
     public partial class FirstGuestAllReservations : Page, IObserver
     {
-      
-
         public ObservableCollection<AccommodationReservation> _reservations;
         //public AccommodationReservationService _accommodationReservationService;
         
@@ -80,14 +75,16 @@ namespace Booking.View
 
         private void Button_Click_RateAccommodationAndOwner(object sender, RoutedEventArgs e)
         {
-            if (IsFiveDaysRuleAcomlished(SelectedReservation))
+            //ovo vrati posle
+            /*if (IsFiveDaysRuleAcomlished(SelectedReservation))
             {
                 MessageBox.Show("You are unable to rate you accomodation and owner");
             }
             else
             {
                 NavigationService.Navigate(new RateAccommodationAndOwner(SelectedReservation));
-            }
+            }*/
+            NavigationService.Navigate(new RateAccommodationAndOwner(SelectedReservation));
         }
 
         private void Button_Click_ResheduleAccommodationReservation(object sender, RoutedEventArgs e)

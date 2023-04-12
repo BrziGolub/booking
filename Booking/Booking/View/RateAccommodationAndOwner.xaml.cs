@@ -1,4 +1,5 @@
-﻿using Booking.Domain.ServiceInterfaces;
+﻿using Booking.Domain.Model.Images;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Model.Images;
 using Booking.Repository;
@@ -96,13 +97,11 @@ namespace Booking.View
             AccommodationLabel = setAccommodationLabel(accommodationReservation);
             OwnerLabel = setOwnerLabel(accommodationReservation);
             AccommodationReservation = new AccommodationReservation();
-            //GuestsAccommodationImagesService = new GuestsAccommodationImagesService();
             
             GuestsAccommodationImagesService = InjectorService.CreateInstance<IGuestsAccommodationImagesService>();
 
             AccommodationReservation = accommodationReservation;
             accommodationAndOwnerGrade = new AccommodationAndOwnerGrade();
-            //AccommodationAndOwnerGradeService = new AccommodationAndOwnerGradeService(); //ovo povezi iz app
             AccommodationAndOwnerGradeService = InjectorService.CreateInstance<IAccommodationAndOwnerGradeService>();
 
             comboBoxCleaness.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
@@ -134,12 +133,14 @@ namespace Booking.View
         private void Button_Click_Plus(object sender, RoutedEventArgs e)
         {
           
-            AccommodationImage Picture = new AccommodationImage();
+            GuestsAccommodationImages Picture = new GuestsAccommodationImages();
             Picture.Url = tbPictures.Text;
-            AccommodationReservation.Accommodation.Images.Add(Picture);
 
+           // AccommodationReservation.Accommodation.Images.Add(Picture);
             Picture.Accomodation = AccommodationReservation.Accommodation;
-
+            Picture.Guest.Id = AccommodationReservationService.SignedFirstGuestId;
+            //uvezi grade i slike
+            accommodationAndOwnerGrade.Images.Add(Picture);
             GuestsAccommodationImagesService.Create(Picture);
 
             tbPictures.Text = string.Empty;

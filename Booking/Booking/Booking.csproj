@@ -66,6 +66,7 @@
     <Compile Include="Domain\Model\Enums\AccommodationType.cs" />
     <Compile Include="Domain\Model\Enums\RequestStatus.cs" />
     <Compile Include="Domain\Model\Images\AccommodationImage.cs" />
+    <Compile Include="Domain\Model\Images\GuestsAccommodationImages.cs" />
     <Compile Include="Domain\Model\Images\TourImage.cs" />
     <Compile Include="Domain\Model\Location.cs" />
     <Compile Include="Domain\Model\Tour.cs" />

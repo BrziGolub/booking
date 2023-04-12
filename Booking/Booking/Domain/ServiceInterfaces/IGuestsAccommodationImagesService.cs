@@ -1,4 +1,4 @@
-﻿using Booking.Model.Images;
+﻿using Booking.Domain.Model.Images;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.ServiceInterfaces
 {
-    public interface IGuestsAccommodationImagesService : IService<AccommodationImage>
+    public interface IGuestsAccommodationImagesService : IService<GuestsAccommodationImages>
     {
-        void Create(AccommodationImage image);
+        void Create(GuestsAccommodationImages image);
     }
 }
