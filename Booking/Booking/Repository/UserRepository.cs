@@ -38,9 +38,9 @@ namespace Booking.Repository
 			return _users.FirstOrDefault(u => u.Username == username);
 		}
 
-        /*public void Save(List<User> users) // save kao u tourRepository?
+        public void Save(List<User> users) // save kao u tourRepository?
         {
             _serializer.ToCSV(FilePath, users);
-        }*/
+        }
     }
 }

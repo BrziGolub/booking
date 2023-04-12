@@ -99,7 +99,42 @@ namespace Booking.Service
             }
             return _seeableGrades;
         }
+        public void CheckSuper(AccommodationReservation selectedReservation) 
+        {
+            List<User> AllUsers = new List<User>();
+            AllUsers = _userRepository.GetAll();
+            int Counter = 0;
+            double GradeSum = 0; 
+            selectedReservation.Accommodation = _accommodationRepository.GetById(selectedReservation.Accommodation.Id);
+            selectedReservation.Accommodation.Owner = _userRepository.GetById(selectedReservation.Accommodation.Owner.Id);
+            foreach (var user in AllUsers)
+            {
+                if (user.Id == selectedReservation.Accommodation.Owner.Id) 
+                {
+                    foreach (var ocena in _repository.GetAll()) 
+                    {
+                        ocena.AccommodationReservation = _reservationRepository.GetById(ocena.AccommodationReservation.Id);
+                        ocena.AccommodationReservation.Accommodation = _accommodationRepository.GetById(ocena.AccommodationReservation.Accommodation.Id);
 
+                        if (ocena.AccommodationReservation.Accommodation.Owner.Id == user.Id) 
+                        {
+                            Counter++;
+                            GradeSum = GradeSum + ((Convert.ToDouble(ocena.OwnersCourtesy) + Convert.ToDouble(ocena.Cleaness)) / 2);
+                        }
+                    }
+                    if (Counter >= 50 && (GradeSum / Counter) > 4.5)
+                    {
+                        user.Super = 1;
+                    }
+                    else 
+                    {
+                        user.Super = 0;
+                    }
+                }
+
+            }
+            _userRepository.Save(AllUsers);
+        }
 
         //proveri ovo
         /*
