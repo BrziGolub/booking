@@ -173,6 +173,9 @@
     <Compile Include="View\Guide\GuideStatisticAboutTours.xaml.cs">
       <DependentUpon>GuideStatisticAboutTours.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Guide\GuideViewReviews.xaml.cs">
+      <DependentUpon>GuideViewReviews.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HomePageFirstGuest.xaml.cs">
       <DependentUpon>HomePageFirstGuest.xaml</DependentUpon>
     </Compile>
@@ -261,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Guide\GuideStatisticAboutTours.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Guide\GuideViewReviews.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
