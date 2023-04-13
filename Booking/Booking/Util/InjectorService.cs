@@ -28,6 +28,7 @@ namespace Booking.Util
             { typeof(IGuestsAccommodationImagesService), new GuestsAccommodationImagesService() },
             { typeof(ILocationService), new LocationService() }
         };
+
         public static T CreateInstance<T>()
         {
             Type type = typeof(T);

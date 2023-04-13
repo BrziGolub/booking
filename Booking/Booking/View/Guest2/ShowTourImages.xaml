@@ -5,17 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="ShowTourImages" Height="400" Width="400"
+        Title="ShowTourImages" Height="450" Width="450"
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="NoResize">
-    <Grid>
+    <Grid Margin="16">
 
 		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="32"/>
+			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
-		
-		<ListBox x:Name="ListBoxImages" Grid.Row="0">
+
+		<Label Grid.Row="0" Content="Images" FontSize="24" Margin="0 0 0 8"/>
+
+		<ListBox x:Name="ListBoxImages" Grid.Row="1" Margin="0 8">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Image Source="{Binding Url}" Width="350"/>
@@ -23,7 +26,7 @@
 			</ListBox.ItemTemplate>
 		</ListBox>
 
-		<Button Grid.Row="1" Content="Close" Margin="4" Click="ButtonClose"/>
+		<Button Grid.Row="2" Content="Close(F5)" Margin="0 8 0 0" Width="100" Height="27" Click="ButtonClose" HorizontalAlignment="Right"/>
 		
 	</Grid>
 </Window>
