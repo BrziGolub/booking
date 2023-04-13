@@ -25,7 +25,7 @@
 				<MenuItem Header="Simple tour" FontSize="14"/>
 				<MenuItem Header="Complex tour" FontSize="14"/>
 			</MenuItem>
-			<MenuItem Header="_Vouchers" FontSize="14"/>
+			<MenuItem Header="_Vouchers" FontSize="14" Click="ShowVouchers"/>
 			<MenuItem Header="_Statistics" FontSize="14"/>
 			<MenuItem Header="PDF" FontSize="14"/>
 			<MenuItem Header="_Tutorial" FontSize="14"/>

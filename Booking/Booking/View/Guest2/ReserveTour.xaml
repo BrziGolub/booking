@@ -29,19 +29,22 @@
 
 		<Label x:Name="LabelRemainingSpace" Grid.Row="2" Margin="0 8" VerticalContentAlignment="Center" FontSize="14"/>
 
-		<CheckBox Grid.Row="3" Content="Redeem a voucher" FontSize="14" Margin="0 8">
+		<CheckBox Grid.Row="3" Content="Redeem a voucher" IsChecked="{Binding IsVoucherChecked}" FontSize="14" Margin="0 8">
 			
 		</CheckBox>
 
 		<DataGrid Grid.Row="4" FontSize="14" Margin="0 8"
 				  AutoGenerateColumns="False"
 				  SelectionMode="Single"
-				  IsReadOnly="True">
+				  IsReadOnly="True"
+				  ItemsSource="{Binding vouchers}"
+				  SelectedItem="{Binding SelectedVoucher}"
+				  x:Name="DejtaGrid">
 			
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="ID" Width="2*"/>
+				<DataGridTextColumn Header="ID" Width="2*" Binding="{Binding Id}"/>
 				<DataGridTextColumn Header="Descriprion" Width="5*"/>
-				<DataGridTextColumn Header="Expiration date" Width="3*"/>
+				<DataGridTextColumn Header="Expiration date" Width="3*" Binding="{Binding ValidTime, StringFormat={}{0:dd/MM/yyyy}}"/>
 			</DataGrid.Columns>
 		</DataGrid>
 		
