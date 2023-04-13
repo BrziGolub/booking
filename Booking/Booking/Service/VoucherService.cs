@@ -51,5 +51,10 @@ namespace Booking.Service
 		{
 			return _voucherRepository.GetAll();
 		}
+
+		public List<Voucher> GetVouchersByUserId(int id)
+		{
+			return _voucherRepository.GetValidVouchersByUserId(id);
+		}
 	}
 }

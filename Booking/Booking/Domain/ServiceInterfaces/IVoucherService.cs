@@ -12,5 +12,7 @@ namespace Booking.Domain.ServiceInterfaces
     {
         Voucher AddVoucher(Voucher voucher);
         void Create(Voucher voucher);
-    }
+        List<Voucher> GetVouchersByUserId(int id);
+
+	}
 }

@@ -11,5 +11,6 @@ namespace Booking.Domain.RepositoryInterfaces
 	{
 		int NextId();
 		Voucher Add(Voucher voucher);
+		List<Voucher> GetValidVouchersByUserId(int id);
 	}
 }

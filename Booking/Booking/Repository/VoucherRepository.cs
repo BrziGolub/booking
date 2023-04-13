@@ -52,5 +52,18 @@ namespace Booking.Repository
 			_serializer.ToCSV(FilePath, _vouchers);
 			return voucher;
 		}
+
+		public List<Voucher> GetValidVouchersByUserId(int id)
+		{
+			List<Voucher> list = new List<Voucher>();
+			foreach (Voucher voucher in _vouchers)
+			{
+				if (voucher.User.Id == id && voucher.IsActive)
+				{
+					list.Add(voucher);
+				}
+			}
+			return list;
+		}
 	}
 }

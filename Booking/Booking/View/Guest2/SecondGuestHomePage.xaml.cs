@@ -1,6 +1,7 @@
 ﻿using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Util;
+using Booking.View.Guest2;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -109,6 +110,12 @@ namespace Booking.View
 		private void ShowDestinations(object sender, RoutedEventArgs e)
 		{
 			ShowTourDestinations view = new ShowTourDestinations(SelectedTour.Destinations);
+			view.ShowDialog();
+		}
+
+		private void ShowVouchers(object sender, RoutedEventArgs e)
+		{
+			ShowVouchers view = new ShowVouchers();
 			view.ShowDialog();
 		}
 	}
