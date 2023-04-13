@@ -56,5 +56,11 @@ namespace Booking.Service
 		{
 			return _voucherRepository.GetValidVouchersByUserId(id);
 		}
+
+		public void RedeemVoucher(Voucher voucher)
+		{
+			voucher.IsActive = false;
+			_voucherRepository.Update(voucher);
+		}
 	}
 }

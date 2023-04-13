@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,25 @@ namespace Booking.View
 	public partial class ReserveTour : Window
 	{
         private ITourReservationService _tourReservationService;
+		private IVoucherService _voucherService;
 
-        public int NumberOfPassengers { get; set; }
+		private ObservableCollection<Voucher> vouchers;
+
+		public int NumberOfPassengers { get; set; }
+
 		public Tour Tour { get; set; }
+
+		public Voucher SelectedVoucher { get; set; }
+
+		public bool IsVoucherChecked
+		{
+			get { return (bool)GetValue(IsCheckBoxCheckedProperty); }
+			set { SetValue(IsCheckBoxCheckedProperty, value); }
+		}
+
+		public static readonly DependencyProperty IsCheckBoxCheckedProperty =
+			DependencyProperty.Register("IsCheckBoxChecked", typeof(bool),
+			typeof(ReserveTour), new UIPropertyMetadata(false));
 
 		public ReserveTour(Tour tour)
 		{
@@ -31,8 +48,12 @@ namespace Booking.View
 			DataContext = this;
 
 			_tourReservationService = InjectorService.CreateInstance<ITourReservationService>();
+			_voucherService = InjectorService.CreateInstance<IVoucherService>();
 
 			Tour = tour;
+			vouchers = new ObservableCollection<Voucher>(_voucherService.GetVouchersByUserId(TourService.SignedGuideId));
+
+			DejtaGrid.ItemsSource = vouchers;
 		}
 
 		private void Reserve(object sender, RoutedEventArgs e)
@@ -42,9 +63,21 @@ namespace Booking.View
 			{
 				if (availability >= NumberOfPassengers)
 				{
-					_tourReservationService.CreateTourReservation(Tour, NumberOfPassengers);
-					MessageBox.Show("Tour created");
-					Close();
+					if (IsVoucherChecked)
+					{
+						if (SelectedVoucher == null)
+						{
+							MessageBox.Show("Voucher is not selected!");
+						}
+						else
+						{
+							ReserveATourWithVoucher();
+						}
+					}
+					else
+					{
+						ReserveATour();
+					}
 				}
 				else if (availability < NumberOfPassengers && availability > 0)
 				{
@@ -59,6 +92,20 @@ namespace Booking.View
 					Close();
 				}
 			}
+		}
+
+		private void ReserveATour()
+		{
+			_tourReservationService.CreateTourReservation(Tour, NumberOfPassengers);
+			MessageBox.Show("Tour reserved");
+			Close();
+		}
+
+		private void ReserveATourWithVoucher()
+		{
+			MessageBox.Show(SelectedVoucher.Id.ToString() + " is selected");
+			_voucherService.RedeemVoucher(SelectedVoucher);
+			ReserveATour();
 		}
 
 		private void Cancel(object sender, RoutedEventArgs e)
