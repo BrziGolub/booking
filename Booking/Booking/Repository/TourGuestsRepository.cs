@@ -5,32 +5,34 @@ using Booking.Serializer;
 using Booking.Service;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace Booking.Repository
 {
-    public class TourGuestsRepository : ITourGuestsRepository
-    {
-        private const string FilePath = "../../Resources/Data/tourGuests.csv";
+	public class TourGuestsRepository : ITourGuestsRepository
+	{
+		private const string FilePath = "../../Resources/Data/tourGuests.csv";
 
-        private readonly Serializer<TourGuests> _serializer;
+		private readonly Serializer<TourGuests> _serializer;
 
-        public List<TourGuests> _tourGuests;
+		public List<TourGuests> _tourGuests;
 
-        public TourGuestsRepository() 
-        {
-            _serializer = new Serializer<TourGuests>();
-            _tourGuests = _serializer.FromCSV(FilePath);
-		}		
+		public TourGuestsRepository()
+		{
+			_serializer = new Serializer<TourGuests>();
+			_tourGuests = _serializer.FromCSV(FilePath);
+		}
 
 		public List<TourGuests> GetAll()
-        {
-            return _serializer.FromCSV(FilePath);
-        }
-
+		{
+			return _serializer.FromCSV(FilePath);
+		}
 		public TourGuests GetById(int id)
 		{
 			return null;

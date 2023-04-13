@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Background="#D6E6F2" 
         Title="GuideFollowTourLive" Height="800" Width="1200">
     <Grid>
         <WrapPanel FlowDirection="LeftToRight" HorizontalAlignment="Center" VerticalAlignment="Top" Height="87" Width="436" Margin="0,700,0,0" Panel.ZIndex="1">

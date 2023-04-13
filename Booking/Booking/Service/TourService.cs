@@ -63,7 +63,7 @@ namespace Booking.Service
 			{
 				Tour pomTour = _tourRepository.GetById(tg.Tour.Id);
 
-				if (pomTour.GuideId == SignedGuideId)
+				if (pomTour.GuideId == SignedGuideId && pomTour.IsStarted == false)
 				{
 					int tourVisits = _tourGuestsRepository.GetAll().Count(m => m.Tour.Id == tg.Tour.Id);
 
@@ -76,10 +76,11 @@ namespace Booking.Service
 			}
 
 			mostVisitedTour = _tourRepository.GetById(mostVisitedTourID);
+			mostVisitedTour.GuestsAsTour = mostVisits;//numberOfGuestsAtTour(mostVisitedTour.Id);
 
 			if (mostVisitedTour.GuideId == SignedGuideId && mostVisits > 0)
 			{
-				mostVisitedTour.Location = _locationRepository.GetById(mostVisitedTourID);
+				mostVisitedTour.Location = _locationRepository.GetById(mostVisitedTour.Location.Id);
 				lista.Add(mostVisitedTour);
 				return lista;
 			}
@@ -100,11 +101,12 @@ namespace Booking.Service
 			foreach (TourGuests tg in _tourGuestsRepository.GetAll())
 			{
 				Tour pomTour = _tourRepository.GetById(tg.Tour.Id);
-				if (pomTour.StartTime.Year == DateTime.Now.Year && pomTour.GuideId == SignedGuideId)
+				if (pomTour.StartTime.Year == DateTime.Now.Year && pomTour.GuideId == SignedGuideId && pomTour.IsStarted == false)
 				{
 					int tourVisits = _tourGuestsRepository.GetAll().Count(m => m.Tour.Id == tg.Tour.Id);
+                    
 
-					if (tourVisits > mostVisits)
+                    if (tourVisits > mostVisits)
 					{
                         
                         mostVisitedTourID = tg.Tour.Id;
@@ -115,10 +117,11 @@ namespace Booking.Service
 			}
 
 			mostVisitedTour = _tourRepository.GetById(mostVisitedTourID);
+			mostVisitedTour.GuestsAsTour = mostVisits;//numberOfGuestsAtTour(mostVisitedTour.Id);
 
-			if (mostVisitedTour.GuideId == SignedGuideId && mostVisits > 0)
+            if (mostVisitedTour.GuideId == SignedGuideId && mostVisits > 0)
 			{
-                mostVisitedTour.Location = _locationRepository.GetById(mostVisitedTourID);
+                mostVisitedTour.Location = _locationRepository.GetById(mostVisitedTour.Location.Id);
                 lista.Add(mostVisitedTour);
 				return lista;
 			}
@@ -437,8 +440,6 @@ namespace Booking.Service
             }
             return sum;
         }
-
-
         public void NotifyObservers()
 		{
 			foreach (var observer in _observers)
