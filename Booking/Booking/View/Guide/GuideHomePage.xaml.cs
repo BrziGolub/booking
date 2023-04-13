@@ -27,7 +27,6 @@ namespace Booking.View
     public partial class GuideHomePage : Window, IObserver
     {
         public ObservableCollection<Tour> Tours { get; set; }
-        //public TourService _tourService { get; set; }
         public ITourService _tourService { get; set; }
 
         public Tour SelectedTour { get; set; }
@@ -39,7 +38,6 @@ namespace Booking.View
         {
             InitializeComponent();            
             this.DataContext = this;
-            //_tourService = new TourService();
             _tourService = InjectorService.CreateInstance<ITourService>();
             
             _tourService.Subscribe(this);

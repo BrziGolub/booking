@@ -47,10 +47,21 @@ namespace Booking.Repository
 
 		public Voucher Add(Voucher voucher)
 		{
-			voucher.Id = NextId();
+			_vouchers = _serializer.FromCSV(FilePath); 
+            voucher.Id = NextId();
 			_vouchers.Add(voucher);
 			_serializer.ToCSV(FilePath, _vouchers);
 			return voucher;
 		}
+
+		public Voucher Update(Voucher voucher) 
+		{
+            //_vouchers = _serializer.FromCSV(FilePath);
+            Voucher founded = _vouchers.Find(v=>v.Id == voucher.Id);
+			founded = voucher;
+			_serializer.ToCSV(FilePath, _vouchers);
+			return founded;
+		}
+
 	}
 }

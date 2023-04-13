@@ -103,6 +103,7 @@ namespace Booking.View
             AccommodationReservation = accommodationReservation;
             accommodationAndOwnerGrade = new AccommodationAndOwnerGrade();
             AccommodationAndOwnerGradeService = InjectorService.CreateInstance<IAccommodationAndOwnerGradeService>();
+            accommodationAndOwnerGrade.Id = AccommodationAndOwnerGradeService.NextId();
 
             comboBoxCleaness.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
             comboBoxCourtesy.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
@@ -125,7 +126,7 @@ namespace Booking.View
             accommodationAndOwnerGrade.OwnersCourtesy = Courtesy;
             accommodationAndOwnerGrade.Comment = Comment;
             accommodationAndOwnerGrade.AccommodationReservation = AccommodationReservation;
-
+           
             AccommodationAndOwnerGradeService.SaveGrade(accommodationAndOwnerGrade);
             AccommodationAndOwnerGradeService.CheckSuper(AccommodationReservation);
         }
@@ -135,11 +136,9 @@ namespace Booking.View
           
             GuestsAccommodationImages Picture = new GuestsAccommodationImages();
             Picture.Url = tbPictures.Text;
-
-           // AccommodationReservation.Accommodation.Images.Add(Picture);
-            Picture.Accomodation = AccommodationReservation.Accommodation;
             Picture.Guest.Id = AccommodationReservationService.SignedFirstGuestId;
-            //uvezi grade i slike
+            Picture.Grade.Id = accommodationAndOwnerGrade.Id;
+
             accommodationAndOwnerGrade.Images.Add(Picture);
             GuestsAccommodationImagesService.Create(Picture);
 

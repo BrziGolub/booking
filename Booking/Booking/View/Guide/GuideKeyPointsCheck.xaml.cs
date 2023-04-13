@@ -25,22 +25,18 @@ namespace Booking.View
     {
 
         public ObservableCollection<TourKeyPoint> KeyPoints { get; set; }
-
         public ObservableCollection<User> Guests { get; set; }
-
-        ///public TourService TourService { get; set; }
-        ///public UserService UserService{ get; set; } 
-        ///public TourGuestsService TourGuestsService { get; set; }
 
         public ITourService TourService { get; set; }
         public IUserService UserService { get; set; }
         public ITourGuestsService TourGuestsService { get; set; }
+        public IVoucherService VoucherService { get; set; }
 
         public TourKeyPoint SelectedTourKeyPoint { get; set; }
         public Tour SelectedTour { get; set; }
         public User SelectedGuest { get; set; }
 
-        public TourGuests tourGuests;
+        public TourGuests tourGuests = new TourGuests();
 
        
         public GuideKeyPointsCheck(int idTour)
@@ -48,29 +44,25 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
 
-			//var app = Application.Current as App;
-
-			//TourService = app.TourService;
 			TourService = InjectorService.CreateInstance<ITourService>();
             TourService.Subscribe(this);
             
-            //UserService = app.UserService;
             UserService = InjectorService.CreateInstance<IUserService>();
             UserService.Subscribe(this);
 
-            //TourGuestsService = app.TourGuestsService;
             TourGuestsService = InjectorService.CreateInstance<ITourGuestsService>();
             TourGuestsService.Subscribe(this);
-            tourGuests = new TourGuests();
+            
+            VoucherService = InjectorService.CreateInstance<IVoucherService>();
+            VoucherService.Subscribe(this);
 
             SelectedTour = TourService.GetById(idTour);
 
             Guests = new ObservableCollection<User>(UserService.GetGuests());
             KeyPoints = new ObservableCollection<TourKeyPoint>(TourService.GetSelectedTourKeyPoints(SelectedTour.Id));
-           
 
             KeyPoints[0].Achieved = true;
-            
+            TourService.UpdateKeyPoint(KeyPoints[0]);
         }
 
         public void Update()
@@ -93,13 +85,17 @@ namespace Booking.View
             if (SelectedTourKeyPoint != null)
             {
                 SelectedTourKeyPoint.Achieved = true;
-                MessageBox.Show(SelectedTourKeyPoint.Location.State.ToString() + " " + SelectedTourKeyPoint.Location.City.ToString() + " is achieved!");
                 TourService.UpdateKeyPoint(SelectedTourKeyPoint);
+                MessageBox.Show(SelectedTourKeyPoint.Location.State.ToString() + " " + SelectedTourKeyPoint.Location.City.ToString() + " is achieved!");
+                TourService.NotifyObservers();
 
                 if (KeyPoints[KeyPoints.Count() - 1].Achieved == true)
                 {
                     SelectedTour.IsStarted = false;
-                    MessageBox.Show("Tour ended, you achieved last keypoint!"); 
+                    TourService.UpdateTour(SelectedTour);
+                    MessageBox.Show("Tour ended, you achieved last keypoint!");
+                    TourService.NotifyObservers();
+                    
                     this.Close();
                 }
             }
@@ -111,18 +107,43 @@ namespace Booking.View
 
         private void AddGuest(object sender, RoutedEventArgs e)
         {
+            List<Voucher> pomVouchers = new List<Voucher>();
 
             if(SelectedGuest != null && SelectedTourKeyPoint != null ) 
             {
                 if (TourService.checkTourGuests(SelectedTour.Id, SelectedGuest.Id) == true)
                 {
+                    
                     tourGuests.Tour.Id = SelectedTour.Id;
                     tourGuests.User.Id = SelectedGuest.Id;
                     tourGuests.TourKeyPoint.Id = SelectedTourKeyPoint.Id;
+                   
+                    foreach(Voucher v in VoucherService.GetAll())
+                    {
+                        Voucher pomVoucher = VoucherService.GetById(v.Id);
+
+                        if (v.IsActive && v.User.Id == tourGuests.User.Id) //  && dodati upit da li zelis da iskoristi vaucer(za sad ostavljam da uvek zeli da ga iskoristi po defaultu)
+                        {
+                            tourGuests.Voucher = true;
+                            pomVoucher.IsActive = false;
+                            MessageBox.Show("Guest " + SelectedGuest.Username.ToString() + " used voucher");                     
+                            pomVouchers.Add(pomVoucher);
+                        }
+                        /*else // FALI MI DA PREDJEM SLUCAJ UKOLIKO TAJ USER NEMA VAUCER A NEKI PRE NJEGA JE IMAO DA U tourguests.csv bude False a ne da mi ostane True
+                        {
+                            tourGuests.Voucher = false;
+                            pomVoucher.IsActive = true;
+                            pomVouchers.Add(pomVoucher); // -II-
+                        }*/
+                    }
+
+                        TourGuestsService.Create(tourGuests);
+                        foreach(Voucher v in pomVouchers)
+                        {
+                        VoucherService.Update(v);
+                        }
 
                     MessageBox.Show("Guest '" + SelectedGuest.Username.ToString() + "' is added to keypoint '" + SelectedTourKeyPoint.Location.State.ToString() + ", " + SelectedTourKeyPoint.Location.City.ToString() + "'");
-                    TourGuestsService.Create(tourGuests);
-                    TourGuestsService.NotifyObservers();
                 }
                 else
                 {

@@ -3,6 +3,7 @@ using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Observer;
 using Booking.Repository;
+using Booking.Serializer;
 using Booking.Util;
 using System;
 using System.Collections.Generic;
@@ -24,16 +25,23 @@ namespace Booking.Service
         }
 
         public TourGuests AddTourGuests(TourGuests tourGuests)
-        {           
+        {
+            //_repository.Add(tourGuests);
+            //NotifyObservers();
+            //return tourGuests;
+            
             return _repository.Add(tourGuests);
         }
 
         public void Create(TourGuests tourGuests)
         {
             AddTourGuests(tourGuests);
-			NotifyObservers();
 		}
 
+        public List<TourGuests> GetAll()
+        {
+            return _repository.GetAll();
+        }
         public void NotifyObservers()
         {
             foreach (var observer in _observers)

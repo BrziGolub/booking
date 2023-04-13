@@ -10,6 +10,7 @@ namespace Booking.Domain.ServiceInterfaces
 {
     public interface IAccommodationAndOwnerGradeService : IService<AccommodationAndOwnerGrade>, ISubject
     {
+        int NextId();
         List<AccommodationAndOwnerGrade> GetSeeableGrades();
         void SaveGrade(AccommodationAndOwnerGrade grade);
         void CheckSuper(AccommodationReservation selectedResevation);

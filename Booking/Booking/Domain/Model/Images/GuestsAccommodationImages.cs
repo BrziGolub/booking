@@ -12,19 +12,19 @@ namespace Booking.Domain.Model.Images
     {
         public int Id { get; set; }
         public string Url { get; set; }
-        public Accommodation Accomodation { get; set; }
+        public AccommodationAndOwnerGrade Grade { get; set; }
         public User Guest { get; set; }
 
         public GuestsAccommodationImages()
         {
-            Accomodation = new Accommodation();
+            Grade = new AccommodationAndOwnerGrade();
             Guest = new User();
         }
 
         public void FromCSV(string[] values)
         {
             Id = int.Parse(values[0]);
-            Accomodation.Id = int.Parse(values[1]);
+            Grade.Id = int.Parse(values[1]);
             Url = values[2];
             Guest.Id = int.Parse(values[3]);
         }
@@ -34,7 +34,7 @@ namespace Booking.Domain.Model.Images
             string[] csvValues =
             {
                 Id.ToString(),
-                Accomodation.Id.ToString(),
+                Grade.Id.ToString(),
                 Url,
                 Guest.Id.ToString(),
             };

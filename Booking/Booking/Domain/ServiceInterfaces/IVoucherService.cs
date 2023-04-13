@@ -8,9 +8,12 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.ServiceInterfaces
 {
-    public interface IVoucherService : IService<Voucher>
+    public interface IVoucherService : ISubject,IService<Voucher>
     {
         Voucher AddVoucher(Voucher voucher);
         void Create(Voucher voucher);
+        List<Voucher> GetAll();
+        Voucher GetById(int id);
+        Voucher Update(Voucher voucher);
     }
 }

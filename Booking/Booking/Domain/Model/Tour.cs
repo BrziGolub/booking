@@ -30,7 +30,6 @@ namespace Booking.Model
 
 		public int GuideId { get; set; }
 
-
         public bool IsStarted { get; set; }
 
         public bool IsCancelable()
@@ -39,6 +38,8 @@ namespace Booking.Model
             return timeUntilStart > TimeSpan.FromHours(48);
         }
 
+		public Voucher Voucher { get; set; }
+	
         public Tour()
 		{
 			Location = new Location();
@@ -73,7 +74,7 @@ namespace Booking.Model
                 StartTime.ToString("dd/MM/yyyy"),		//6
                 Duration.ToString(),                    //7
 				IsStarted.ToString(),					//8
-				GuideId.ToString()						//9
+				GuideId.ToString(),						//9
             };
 			return csvValues;
 		}
