@@ -107,10 +107,24 @@ namespace Booking.View
             }
         }
 
+        private MessageBoxResult ConfirmVoucherUse()
+        {
+            string sMessageBoxText = $"Are guest want to use voucher?";
+            string sCaption = "Voucher";
+
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+            return result;
+        }
         private void AddGuest(object sender, RoutedEventArgs e)
         {
             List<Voucher> pomVouchers = new List<Voucher>();
             
+
+
             tourGuests.Voucher = false;
             if(SelectedGuest != null && SelectedTourKeyPoint != null ) 
             {
@@ -124,8 +138,8 @@ namespace Booking.View
                     foreach(Voucher v in VoucherService.GetUserVouchers(tourGuests.User.Id))
                     {
                         Voucher pomVoucher = VoucherService.GetById(v.Id);
-
-                        if (v.IsActive) //  && dodati upit da li zelis da iskoristi vaucer(za sad ostavljam da uvek zeli da ga iskoristi po defaultu)
+                        MessageBoxResult result = ConfirmVoucherUse();
+                        if (v.IsActive && result == MessageBoxResult.Yes) 
                         {
                             tourGuests.Voucher = true;
                             pomVoucher.IsActive = false;
