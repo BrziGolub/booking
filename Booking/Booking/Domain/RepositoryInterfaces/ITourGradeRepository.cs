@@ -10,6 +10,6 @@ namespace Booking.Domain.RepositoryInterfaces
     public interface ITourGradeRepository : IRepository<TourGrade>
     {
         int NextId();
-
+        TourGrade Update(TourGrade tourGrade);
     }
 }

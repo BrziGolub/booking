@@ -7,7 +7,7 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Booking.View.Guide.GuideViewReviews"
         mc:Ignorable="d"
         Background="#D6E6F2"
-        Title="GuideViewReviews" Height="580" Width="850" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="GuideViewReviews" Height="580" Width="930" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <TextBlock Margin="24,6,0,0" FontWeight="Bold" FontSize="32" Text="Reviews of tours" Foreground="#FFFFF200" >
             <TextBlock.Effect>
@@ -15,7 +15,7 @@
             </TextBlock.Effect>
         </TextBlock>
 
-        <Separator Margin="0,0,0,440" Width="800" HorizontalAlignment="Center" />
+        <Separator Margin="0,0,0,440" Width="890" HorizontalAlignment="Center" />
 
         <DataGrid      
         x:Name="reviewsDataGrid"
@@ -23,19 +23,21 @@
         SelectionMode="Single"
         IsReadOnly="True" 
         Margin="0,0,0,0" 
-        Width="800" Height="400"
+        Width="890" Height="400"
         RowHeight="35"
         AutoGenerateColumns="False"             
         CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserReorderColumns="False"
+        SelectedItem="{Binding SelectedTourGrade}"
         ItemsSource="{Binding Path=TourGrades, UpdateSourceTrigger=PropertyChanged}">
          >
 
             <DataGrid.Columns>
-                <DataGridTextColumn Width="85" Header="Guest name" Binding="{Binding Guest.Name}"/>
+                <DataGridTextColumn Width="85" Header="Guest name" Binding="{Binding Guest.Username}"/>
                 <DataGridTextColumn Width="138" Header="Knowledge guide grade" Binding="{Binding KnowledgeGuideGrade}"/>
                 <DataGridTextColumn Width="138" Header="Language guide grade" Binding="{Binding LanguageGuideGrade}"/>
                 <DataGridTextColumn Width="138" Header="Interest of tour Grade" Binding="{Binding InterestOfTourGrade}"/>
-                <DataGridTextColumn Width="131" Header="Key-Point at which joined" Binding="{Binding }"/>
+                <DataGridTextColumn Width="90" Header="Tour" Binding="{Binding Tour.Name}"/>
+                <DataGridTextColumn Width="131" Header="Key-Point at which joined" Binding="{Binding StateAndCity}"/>
                 <DataGridTemplateColumn Header="Review text">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -49,7 +51,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Status" Width="92" Binding="{Binding }"/>
+                <DataGridTextColumn Header="Status" Width="92" Binding="{Binding Valid}"/>
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="{x:Type DataGridRow}">
