@@ -14,5 +14,52 @@
         </TextBlock>
 
         <Separator Margin="0,-120,0,480" Width="1024" HorizontalAlignment="Center" />
+        <Label Content="Number of grades" FontSize="20" Margin="-650,-275,50,0" Width="200" Height="100" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
+        <TextBlock x:Name="NumberOfGrades"
+                   Margin="200,-310,20,0"                  
+                   FontSize="50"
+                   FontStyle="Italic"
+                   FontWeight="SemiBold"
+                   Foreground="Black"
+                   Panel.ZIndex="1"
+                   Height="100" Width="600"></TextBlock>
+
+        <Label Content="Average grade" FontSize="20" Margin="-670,170,0,0" Width="200" Height="100" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
+        <TextBlock x:Name="AverageGrade"
+                   Margin="200,135,0,0"                    
+                   FontSize="50"
+                   FontStyle="Italic"
+                   FontWeight="SemiBold"
+                   Foreground="Black"
+                   Panel.ZIndex="1"
+                   Height="100" Width="600"></TextBlock>
+
+        <Canvas>
+            <Rectangle Width="200" Height="100" Stroke="Black" StrokeThickness="2" Canvas.Left="50" Canvas.Top="150" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="#303841"/>
+                </Rectangle.Fill>
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="2" Opacity="0.5"/>
+                </Rectangle.Effect>
+                <Rectangle.Clip>
+                    <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,200,100"/>
+                </Rectangle.Clip>
+            </Rectangle>
+
+            <Rectangle Width="200" Height="100" Stroke="Black" StrokeThickness="2" Canvas.Left="50" Canvas.Top="371" Fill="#303841" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="2" Opacity="0.5"/>
+                </Rectangle.Effect>
+                <Rectangle.Clip>
+                    <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,200,100"/>
+                </Rectangle.Clip>
+            </Rectangle>
+        </Canvas>
+        <Label Content="To become a super owner you need at least 50 reservations with an average score above 4.5" FontSize="21" Margin="5,475,50,0" Width="1000" Height="100" Panel.ZIndex="1"  FontWeight="ExtraBold"></Label>
+        <WrapPanel FlowDirection="LeftToRight" Margin="500,650,0,0">
+            <Button Margin="20 0 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Click="Close" >CLOSE</Button>
+        </WrapPanel>
+        
     </Grid>
 </Window>

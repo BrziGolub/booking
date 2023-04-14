@@ -140,6 +140,38 @@ namespace Booking.Service
             }
             _userRepository.Save(AllUsers);
         }
+        public int GetNumberOfGrades() 
+        {
+            int Counter = 0;
+            foreach (var ocena in _repository.GetAll())
+            {
+                ocena.AccommodationReservation = _reservationRepository.GetById(ocena.AccommodationReservation.Id);
+                ocena.AccommodationReservation.Accommodation = _accommodationRepository.GetById(ocena.AccommodationReservation.Accommodation.Id);
+
+                if (ocena.AccommodationReservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId)
+                {
+                    Counter++;
+                }
+            }
+            return Counter;
+        }
+        public double GetAverageGrade() 
+        {
+            int Counter = 0;
+            double GradeSum = 0;
+            foreach (var ocena in _repository.GetAll())
+            {
+                ocena.AccommodationReservation = _reservationRepository.GetById(ocena.AccommodationReservation.Id);
+                ocena.AccommodationReservation.Accommodation = _accommodationRepository.GetById(ocena.AccommodationReservation.Accommodation.Id);
+
+                if (ocena.AccommodationReservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId)
+                {
+                    Counter++;
+                    GradeSum = GradeSum + ((Convert.ToDouble(ocena.OwnersCourtesy) + Convert.ToDouble(ocena.Cleaness)) / 2);
+                }
+            }
+            return GradeSum/Counter;
+        }
 
         //proveri ovo
         /*

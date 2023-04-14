@@ -70,6 +70,13 @@ namespace Booking.View
             OwnerGradingGuests ownerGradingGuests = new OwnerGradingGuests();
             ownerGradingGuests.Show();
         }
+
+        private void SuperOwner(object sender, RoutedEventArgs e)
+        {
+            SuperOwner superOwner = new SuperOwner();
+            superOwner.Show();
+        }
+
         public void Update()
         {
             Accommodations.Clear();

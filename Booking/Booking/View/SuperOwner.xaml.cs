@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Booking.Domain.ServiceInterfaces;
+using Booking.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,18 @@ namespace Booking.View
     /// </summary>
     public partial class SuperOwner : Window
     {
+        public IAccommodationAndOwnerGradeService _gradeService { get; set; }
         public SuperOwner()
         {
             InitializeComponent();
+            this.DataContext = this;
+            _gradeService = InjectorService.CreateInstance<IAccommodationAndOwnerGradeService>();
+            NumberOfGrades.Text = _gradeService.GetNumberOfGrades().ToString();
+            AverageGrade.Text = _gradeService.GetAverageGrade().ToString();
+        }
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

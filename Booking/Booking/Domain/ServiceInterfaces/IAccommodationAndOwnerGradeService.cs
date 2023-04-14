@@ -14,5 +14,7 @@ namespace Booking.Domain.ServiceInterfaces
         List<AccommodationAndOwnerGrade> GetSeeableGrades();
         void SaveGrade(AccommodationAndOwnerGrade grade);
         void CheckSuper(AccommodationReservation selectedResevation);
+        int GetNumberOfGrades();
+        double GetAverageGrade();
     }
 }
