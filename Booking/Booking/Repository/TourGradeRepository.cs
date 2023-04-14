@@ -13,13 +13,13 @@ namespace Booking.Repository
     public class TourGradeRepository : ITourGradeRepository
     {
         private const string FilePath = "../../Resources/Data/tourGrades.csv";
-        public List<TourGrade> _tourGrades;
         private readonly Serializer<TourGrade> _serializer;
+        private List<TourGrade> _tourGrades;
 
         public TourGradeRepository()
         {
             _serializer = new Serializer<TourGrade>();
-            _tourGrades = new List<TourGrade>();
+            _tourGrades =_serializer.FromCSV(FilePath);
         }
         public List<TourGrade> GetAll()
         {
@@ -30,6 +30,13 @@ namespace Booking.Repository
            return _tourGrades.Find(tg => tg.Id == id);
         }
 
+        public TourGrade Update(TourGrade tourGrade) 
+        {
+            TourGrade founded = _tourGrades.Find(tg=> tg.Id == tourGrade.Id);
+            founded = tourGrade;
+            _serializer.ToCSV(FilePath, _tourGrades);
+            return founded;
+        }
         public int NextId()
         {
             if (_tourGrades.Count == 0)

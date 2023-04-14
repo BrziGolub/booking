@@ -21,9 +21,6 @@ using System.Windows.Shapes;
 
 namespace Booking.View.Guide
 {
-    /// <summary>
-    /// Interaction logic for GuideViewReviews.xaml
-    /// </summary>
     public partial class GuideViewReviews : Window, IObserver
     {
         public ObservableCollection<TourGrade> TourGrades { get; set; }
@@ -46,12 +43,33 @@ namespace Booking.View.Guide
 
         private void ShowReviewText(object sender, RoutedEventArgs e)
         {
+            ShowReviewComment showReviewComment = new ShowReviewComment(SelectedTourGrade.Id);
+            showReviewComment.ShowDialog();
+        }
 
+        private MessageBoxResult ConfirmReport()
+        {
+            string sMessageBoxText = $"Are you sure to report grade?";
+            string sCaption = "Report grade";
+
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+            return result;
         }
         private void Report(object sender, RoutedEventArgs e)
         {
-
+            MessageBoxResult result = ConfirmReport();
+            if (result == MessageBoxResult.Yes)
+            {
+                SelectedTourGrade.Valid = false;
+                _tourGradeService.UpdateTourGrade(SelectedTourGrade);
+                _tourGradeService.NotifyObservers();
+            }
         }
+
         private void Close(object sender, RoutedEventArgs e)
         {
             this.Close();
