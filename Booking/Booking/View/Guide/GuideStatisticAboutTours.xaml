@@ -42,13 +42,13 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Width="125" Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTextColumn Width="93" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="Language" Binding="{Binding Language}"/>
-                <DataGridTextColumn Header="Max Visitors" Width="75" Binding="{Binding MaxVisitors}"/>
+                <DataGridTextColumn Width="80" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
+                <DataGridTextColumn Width="80" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>
+                <DataGridTextColumn Width="80" Header="Language" Binding="{Binding Language}"/>
+                <DataGridTextColumn Header="Visitors number" Width="95" Binding="{Binding GuestsAsTour}"/>
                 <DataGridTextColumn Width="93" Header="Departure Date" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}" ></DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="Duration" Binding="{Binding Duration}"></DataGridTextColumn>
-                <DataGridTextColumn Width="78" Header="Description" Binding="{Binding Description}"></DataGridTextColumn>
+                <DataGridTextColumn Width="60" Header="Duration" Binding="{Binding Duration}"></DataGridTextColumn>
+                <DataGridTextColumn Width="159" Header="Description" Binding="{Binding Description}"></DataGridTextColumn>
 
             </DataGrid.Columns>
             <DataGrid.RowStyle>

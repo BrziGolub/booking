@@ -29,12 +29,7 @@ namespace Booking.View
     public partial class GuideFollowTourLive : Window , IObserver
     {
         public ObservableCollection<Tour> Tours { get; set; }
-
-        //public TourService TourService { get; set; }
         public ITourService TourService { get; set; }
-
-        //public TourImageRepository _tourImageRepository { get; set; }
-
         public Tour SelectedTour { get; set; }
 
         int Pomid { get; set; }
@@ -45,9 +40,6 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
 
-            //var app = Application.Current as App;
-
-            //TourService = app.TourService;
             TourService = InjectorService.CreateInstance<ITourService>();
             
             TourService.Subscribe(this);

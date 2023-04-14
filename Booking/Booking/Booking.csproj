@@ -70,6 +70,7 @@
     <Compile Include="Domain\Model\Images\TourImage.cs" />
     <Compile Include="Domain\Model\Location.cs" />
     <Compile Include="Domain\Model\Tour.cs" />
+    <Compile Include="Domain\Model\TourGrade.cs" />
     <Compile Include="Domain\Model\TourGuests.cs" />
     <Compile Include="Domain\Model\TourKeyPoint.cs" />
     <Compile Include="Domain\Model\TourReservation.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Domain\RepositoryInterfaces\IGuestsAccommodationImagesRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ILocationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourGradeRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourGuestsRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourImageRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourKeyPointRepository.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Domain\ServiceInterfaces\IGuestsAccommodationImagesService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ILocationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourImageService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourKeyPointsService.cs" />
@@ -117,6 +120,7 @@
     <Compile Include="Repository\AccommodationResevationRepository.cs" />
     <Compile Include="Repository\GuestsAccommodationImagesRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
+    <Compile Include="Repository\TourGradeRepository.cs" />
     <Compile Include="Repository\TourGuestsRepository.cs" />
     <Compile Include="Repository\TourImageRepository.cs" />
     <Compile Include="Repository\TourKeyPointRepository.cs" />
@@ -133,6 +137,7 @@
     <Compile Include="Service\AccommodationReservationService.cs" />
     <Compile Include="Service\AccommodationService.cs" />
     <Compile Include="Service\GuestsAccommodationImagesService.cs" />
+    <Compile Include="Service\TourGradeService.cs" />
     <Compile Include="Service\TourGuestsService.cs" />
     <Compile Include="Service\TourImageService.cs" />
     <Compile Include="Service\TourKeyPointService.cs" />
@@ -172,6 +177,12 @@
     </Compile>
     <Compile Include="View\Guide\GuideStatisticAboutTours.xaml.cs">
       <DependentUpon>GuideStatisticAboutTours.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Guide\GuideViewReviews.xaml.cs">
+      <DependentUpon>GuideViewReviews.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Guide\ShowReviewComment.xaml.cs">
+      <DependentUpon>ShowReviewComment.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HomePageFirstGuest.xaml.cs">
       <DependentUpon>HomePageFirstGuest.xaml</DependentUpon>
@@ -267,6 +278,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Guide\GuideViewReviews.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Guide\ShowReviewComment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\HomePageFirstGuest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -354,6 +373,7 @@
     <None Include="Resources\Data\accommodationsReservationsRequests.csv" />
     <None Include="Resources\Data\guestsAccommodationImages.csv" />
     <None Include="Resources\Data\locations.csv" />
+    <None Include="Resources\Data\tourGrades.csv" />
     <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />
     <None Include="Resources\Data\tourKeyPoints.csv" />

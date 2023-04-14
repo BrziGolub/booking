@@ -28,6 +28,21 @@ namespace Booking.Service
         {
             return _voucherRepository.GetAll();
         }
+
+        public List<Voucher> GetUserVouchers(int id)
+        {
+			List<Voucher> vouchers = new List<Voucher>();	
+
+			foreach(Voucher voucher in _voucherRepository.GetAll())
+			{
+				if(voucher.User.Id == id)
+				{
+					vouchers.Add(voucher);
+				}	
+			}
+            return vouchers;
+        }
+
         public Voucher GetById(int id)
         {
 			return _voucherRepository.GetById(id);

@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Resources;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Util;
+using Booking.View.Guide;
 
 namespace Booking.View
 {
@@ -114,6 +115,12 @@ namespace Booking.View
         {
             GuideStatisticAboutTours statistics = new GuideStatisticAboutTours();
             statistics.Show();
+        }
+
+        private void OpenViewReviews(object sender, RoutedEventArgs e)
+        {
+            GuideViewReviews reviews = new GuideViewReviews();
+            reviews.Show();
         }
     }
 }

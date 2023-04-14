@@ -28,7 +28,7 @@ namespace Booking.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-		public Voucher GetById(int id)
+        public Voucher GetById(int id)
 		{
 			return _vouchers.Find(v => v.Id == id);
 		}

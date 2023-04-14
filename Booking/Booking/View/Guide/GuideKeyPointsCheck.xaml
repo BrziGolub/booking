@@ -42,7 +42,23 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
                 <DataGridTextColumn Width="*" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>
-                <DataGridTextColumn Width="60" Header="Achieved" Binding="{Binding Achieved}"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Width="60" Header="Achieved" Binding="{Binding Achieved}">
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Content" Value="No" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="Background" Value="Yellow"/>
+                                    <Setter Property="BorderBrush" Value="Gray"/>
+                                </Trigger>
+                                <DataTrigger Binding="{Binding Achieved}" Value="True">
+                                    <Setter Property="Content" Value="Yes" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
             </DataGrid.Columns>
         </DataGrid>
 
