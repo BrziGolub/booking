@@ -1,4 +1,5 @@
-﻿using Booking.Domain.ServiceInterfaces;
+﻿using Booking.Domain.Model;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Repository;
 using Booking.Service;
@@ -21,13 +22,11 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-	/// <summary>
-	/// Interaction logic for SignInForm.xaml
-	/// </summary>
 	public partial class SignInForm : Window
 	{
 		public IUserService _userService { get; set; }
-		//private readonly UserRepository _repository;
+
+		public INotificationService _notificationService { get; set; }
 
 		private string _username;
 		public string Username
@@ -43,9 +42,6 @@ namespace Booking.View
 			}
 		}
 
-        //public UserService UserService { get; set; }
-        //public IUserService UserService { get; set; }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -57,16 +53,18 @@ namespace Booking.View
 		{
 			InitializeComponent();
 			DataContext = this;
-			_userService = InjectorService.CreateInstance<IUserService>();
-			//_repository = new UserRepository();
-			//_repository.Load();
+            _notificationService = InjectorService.CreateInstance<INotificationService>();
+            _userService = InjectorService.CreateInstance<IUserService>();
+			
 		}
+	
 		private void SignIn(object sender, RoutedEventArgs e)
 		{
             User user = _userService.GetByUsername(Username);
             
 			GuideHomePage.Username = usernameTextBox.Text;
             TourService.SignedGuideId = user.Id;
+            List<Notification> notifications = _notificationService.GetUserNotifications(user);
 
             if (user != null)
 			{
@@ -75,10 +73,12 @@ namespace Booking.View
 
 					if(user.Role == 1)
 					{
-						AccommodationService.SignedOwnerId = user.Id;
+					
+                        AccommodationService.SignedOwnerId = user.Id;
 						OwnerHomePage ownerHomePage = new OwnerHomePage();
 						ownerHomePage.Show();
-						Close();
+                        _notificationService.SendNotification(notifications, user);
+                        Close();
 					}
                     else if (user.Role == 2)
                     {
@@ -88,11 +88,11 @@ namespace Booking.View
                     }
                     else if(user.Role == 3)
 					{
-						//AccommodationService.SignedFirstGuestId = user.Id;
 						AccommodationReservationService.SignedFirstGuestId = user.Id;
-
                         FirstGuestHomePage fisrtGuestHomePage = new FirstGuestHomePage();
                         fisrtGuestHomePage.Show();
+                        _notificationService.SendNotification(notifications, user);
+						Close();
                     }
                     else if (user.Role == 4)
                     {

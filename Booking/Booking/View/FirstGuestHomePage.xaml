@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Menu Height="30" Width="1100" Background="#FFFFF980">
+            <Menu Height="30" Width="1100" Background="Beige">
                 <MenuItem Header="HomePage" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage"></MenuItem>
                 <MenuItem Header="Quick search" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
                 <MenuItem Header="My reservations" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"></MenuItem>

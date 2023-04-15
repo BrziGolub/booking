@@ -8,6 +8,7 @@ using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -129,6 +130,8 @@ namespace Booking.View
            
             AccommodationAndOwnerGradeService.SaveGrade(accommodationAndOwnerGrade);
 
+            //NavigationService.RemoveBackEntry(); // uklanja prethodnu stranicu iz steka
+            NavigationService.GoBack(); // vraća se na prethodnu stranicu
         }
 
         private void Button_Click_Plus(object sender, RoutedEventArgs e)

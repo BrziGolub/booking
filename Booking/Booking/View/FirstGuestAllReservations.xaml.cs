@@ -1,4 +1,5 @@
-﻿using Booking.Domain.ServiceInterfaces;
+﻿using Booking.Domain.Model;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Observer;
 using Booking.Service;
@@ -24,43 +25,32 @@ namespace Booking.View
     public partial class FirstGuestAllReservations : Page, IObserver
     {
         public ObservableCollection<AccommodationReservation> _reservations;
-        //public AccommodationReservationService _accommodationReservationService;
         
         public IAccommodationReservationService _accommodationReservationService;
+
+        public INotificationService _notificationService;
+
+        public IAccommodationAndOwnerGradeService accommodationAndOwnerGradeService;
         public AccommodationReservation SelectedReservation { get; set; }
+
         public FirstGuestAllReservations()
         {
             InitializeComponent();
             this.DataContext = this;
-
-            // var app = Application.Current as App;
-            //_accommodationReservationService = app.AccommodationReservationService;
+            SelectedReservation = new AccommodationReservation();
+            accommodationAndOwnerGradeService = InjectorService.CreateInstance<IAccommodationAndOwnerGradeService>();
             _accommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
+            _notificationService = InjectorService.CreateInstance<INotificationService>();
 
             _reservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetGeustsReservatonst());
 
             _accommodationReservationService.Subscribe(this);
             ReservationsDataGrid.ItemsSource = _reservations;
 
-            setWidthForReservationsDataGrid();
+            SetWidthForReservationsDataGrid();
 
         }
-
-        public bool IsFiveDaysRuleAcomlished(AccommodationReservation  selectedReservation)
-        {
-            if(selectedReservation == null)
-            {
-                return false;
-
-            }else if(selectedReservation.ArrivalDay <= DateTime.Now && DateTime.Now >= selectedReservation.ArrivalDay.AddDays(5))
-            {
-                return true;
-            }
-            return false;
-        }
-
-
-        public void setWidthForReservationsDataGrid()
+        public void SetWidthForReservationsDataGrid()
         {
             double totalWidth = 0;
             foreach (DataGridColumn column in ReservationsDataGrid.Columns)
@@ -75,8 +65,7 @@ namespace Booking.View
 
         private void Button_Click_RateAccommodationAndOwner(object sender, RoutedEventArgs e)
         {
-            //ovo vrati posle
-            /*if (IsFiveDaysRuleAcomlished(SelectedReservation))
+            /*if (accommodationAndOwnerGradeService.PermissionForRating(SelectedReservation))
             {
                 MessageBox.Show("You are unable to rate you accomodation and owner");
             }
@@ -94,11 +83,18 @@ namespace Booking.View
 
         private void Button_Click_CancleReservation(object sender, RoutedEventArgs e)
         {
-            bool cancle = _accommodationReservationService.IsAbleToCancleResrvation(SelectedReservation);
-            if (cancle)
+            bool cancel = _accommodationReservationService.IsAbleToCancleResrvation(SelectedReservation);
+            Notification newNotification = new Notification();
+
+            if (cancel)
             {
+                newNotification.Text = "Reservation for: " + SelectedReservation.Accommodation.Name + " " + SelectedReservation.ArrivalDay.ToShortDateString() + " - " + SelectedReservation.DepartureDay.ToShortDateString() + " is cancled guest: " + SelectedReservation.Guest.Username.ToString();
+                newNotification.User = SelectedReservation.Accommodation.Owner;
+                newNotification.IsRead = false;
+                _notificationService.CreateCancellationNotification(newNotification);
+
                 _accommodationReservationService.Delete(SelectedReservation);
-                MessageBox.Show("Your reservation is canceled!"); 
+                MessageBox.Show("Your reservation is cancelled!"); 
             }
             else
             {

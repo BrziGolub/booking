@@ -54,26 +54,23 @@ namespace Booking.Service
         }
 
 
-            public List<AccommodationReservation> GetGeustsReservatonst()
+        public List<AccommodationReservation> GetGeustsReservatonst()
         {
             List<AccommodationReservation> _guestsReservations = new List<AccommodationReservation>();
 
-            foreach(var reservation in _repository.GetAll())
+            foreach (var reservation in _repository.GetAll())
             {
-                if(reservation.Guest.Id == SignedFirstGuestId)
+                if (reservation.Guest.Id == SignedFirstGuestId)
                 {
                     reservation.Accommodation = _accommodationRepository.GetById(reservation.Accommodation.Id);
                     reservation.Accommodation.Location = _locationRepository.GetById(reservation.Accommodation.Location.Id);
                     reservation.Accommodation.Owner = _userRepository.GetById(reservation.Accommodation.Owner.Id);
+                    reservation.Guest = _userRepository.GetById(SignedFirstGuestId);
                     _guestsReservations.Add(reservation);
                 }
             }
             return _guestsReservations;
         }
-        /*public List<AccommodationReservation> GetAll()
-        {
-            return _reservations;
-        }*/
         public void SaveReservation(AccommodationReservation reservation)
         {
             _repository.Add(reservation);
@@ -88,12 +85,9 @@ namespace Booking.Service
 
         public bool IsAbleToCancleResrvation(AccommodationReservation selectedReservation)
         {
-            selectedReservation.Accommodation = _accommodationRepository.GetById(selectedReservation.Accommodation.Id);
-            if (DateTime.Now < selectedReservation.ArrivalDay.AddDays(-selectedReservation.Accommodation.CancelationPeriod))
-            {
-                return false;
-            }
-            return true;
+            DateTime currentDate = DateTime.Now;
+            DateTime cancellationDate = selectedReservation.ArrivalDay.AddDays(-selectedReservation.Accommodation.CancelationPeriod);
+            return (currentDate <= cancellationDate);
         }
 
         public void Subscribe(IObserver observer)
@@ -176,7 +170,7 @@ namespace Booking.Service
                     }
                 }
             }
-            //throw out duplicates
+            //throw out duplicate
             List<DateTime> uniqueReservedDatesList = reservedDates.Distinct().ToList();
 
             //sort in ascending order

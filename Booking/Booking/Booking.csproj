@@ -69,6 +69,7 @@
     <Compile Include="Domain\Model\Images\GuestsAccommodationImages.cs" />
     <Compile Include="Domain\Model\Images\TourImage.cs" />
     <Compile Include="Domain\Model\Location.cs" />
+    <Compile Include="Domain\Model\Notification.cs" />
     <Compile Include="Domain\Model\Tour.cs" />
     <Compile Include="Domain\Model\TourGrade.cs" />
     <Compile Include="Domain\Model\TourGuests.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationResevationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IGuestsAccommodationImagesRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ILocationRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\INotificationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourGradeRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourGuestsRepository.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Domain\ServiceInterfaces\IAccommodationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IGuestsAccommodationImagesService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ILocationService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\INotificationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
@@ -120,6 +123,7 @@
     <Compile Include="Repository\AccommodationResevationRepository.cs" />
     <Compile Include="Repository\GuestsAccommodationImagesRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
+    <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\TourGradeRepository.cs" />
     <Compile Include="Repository\TourGuestsRepository.cs" />
     <Compile Include="Repository\TourImageRepository.cs" />
@@ -137,6 +141,7 @@
     <Compile Include="Service\AccommodationReservationService.cs" />
     <Compile Include="Service\AccommodationService.cs" />
     <Compile Include="Service\GuestsAccommodationImagesService.cs" />
+    <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Service\TourGradeService.cs" />
     <Compile Include="Service\TourGuestsService.cs" />
     <Compile Include="Service\TourImageService.cs" />
@@ -366,6 +371,7 @@
     <None Include="Resources\Data\accommodationsReservationsRequests.csv" />
     <None Include="Resources\Data\guestsAccommodationImages.csv" />
     <None Include="Resources\Data\locations.csv" />
+    <None Include="Resources\Data\notifications.csv" />
     <None Include="Resources\Data\tourGrades.csv" />
     <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />

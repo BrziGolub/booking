@@ -23,8 +23,6 @@ namespace Booking.View
 {
     public partial class AccommodationReservationView : Window
     {
-        //public AccommodationReservationService AccommodationReservationService { get; set; }
-
         public IAccommodationReservationService AccommodationReservationService { get; set; }
 
         private Accommodation SelectedAccommodation;

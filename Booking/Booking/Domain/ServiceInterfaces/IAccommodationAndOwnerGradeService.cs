@@ -13,5 +13,6 @@ namespace Booking.Domain.ServiceInterfaces
         int NextId();
         List<AccommodationAndOwnerGrade> GetSeeableGrades();
         void SaveGrade(AccommodationAndOwnerGrade grade);
+        bool PermissionForRating(AccommodationReservation selectedReservation);
     }
 }

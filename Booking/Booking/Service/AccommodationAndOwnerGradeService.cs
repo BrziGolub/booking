@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Booking.Service
 {
@@ -102,28 +103,23 @@ namespace Booking.Service
             return _seeableGrades;
         }
 
-
-        //proveri ovo
-        /*
-        public void BindGuestsImagesToGrades()
-        {
-            foreach (AccommodationAndOwnerGrade grade in _accommodationAndOwnerGrades)
-            {
-                foreach (var image in _guestsImagesService.GetAll())
-                {
-                    if (image.Accomodation.Id == grade.Id)
-                    {
-                        grade.Images.Add(image);
-                    }
-                }
-
-            }
-        }*/
-
-
+ 
         public List<AccommodationAndOwnerGrade> GetAll()
         {
             return _repository.GetAll();
+        }
+      
+        public bool PermissionForRating(AccommodationReservation selectedReservation)
+        {
+            if (selectedReservation == null)
+            {
+                return false;
+
+            }else if (selectedReservation.DepartureDay.AddDays(5) > DateTime.Now)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -27,7 +27,9 @@ namespace Booking.Util
             { typeof(ITourKeyPointsService), new TourKeyPointService() },
             { typeof(IGuestsAccommodationImagesService), new GuestsAccommodationImagesService() },
             { typeof(ILocationService), new LocationService() },
-            { typeof(ITourGradeService), new TourGradeService() }
+            { typeof(ITourGradeService), new TourGradeService() },
+            { typeof(INotificationService), new NotificationService() }
+
         };
         public static T CreateInstance<T>()
         {
