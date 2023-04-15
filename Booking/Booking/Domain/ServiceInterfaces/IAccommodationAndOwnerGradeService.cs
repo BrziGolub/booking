@@ -16,5 +16,6 @@ namespace Booking.Domain.ServiceInterfaces
         void CheckSuper(AccommodationReservation selectedResevation);
         int GetNumberOfGrades();
         double GetAverageGrade();
+        string SuperWindowText();
     }
 }

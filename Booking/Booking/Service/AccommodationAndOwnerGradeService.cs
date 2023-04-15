@@ -140,6 +140,30 @@ namespace Booking.Service
             }
             _userRepository.Save(AllUsers);
         }
+        public string SuperWindowText() 
+        {
+            int Counter = 0;
+            double GradeSum = 0;
+            foreach (var ocena in _repository.GetAll())
+            {
+                ocena.AccommodationReservation = _reservationRepository.GetById(ocena.AccommodationReservation.Id);
+                ocena.AccommodationReservation.Accommodation = _accommodationRepository.GetById(ocena.AccommodationReservation.Accommodation.Id);
+
+                if (ocena.AccommodationReservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId)
+                {
+                    Counter++;
+                    GradeSum = GradeSum + ((Convert.ToDouble(ocena.OwnersCourtesy) + Convert.ToDouble(ocena.Cleaness)) / 2);
+                }
+            }
+            if (Counter >= 50 && (GradeSum / Counter) > 4.5)
+            {
+                return "Congratulations you are a super-owner";
+            }
+            else 
+            {
+                return "To become a super owner you need at least 50 reservations with an average score above 4.5";
+            }
+        }
         public int GetNumberOfGrades() 
         {
             int Counter = 0;

@@ -29,6 +29,7 @@ namespace Booking.View
             _gradeService = InjectorService.CreateInstance<IAccommodationAndOwnerGradeService>();
             NumberOfGrades.Text = _gradeService.GetNumberOfGrades().ToString();
             AverageGrade.Text = _gradeService.GetAverageGrade().ToString();
+            IsSuper.Text = _gradeService.SuperWindowText();
         }
         private void Close(object sender, RoutedEventArgs e)
         {
