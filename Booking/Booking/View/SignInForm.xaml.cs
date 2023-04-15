@@ -21,13 +21,9 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-	/// <summary>
-	/// Interaction logic for SignInForm.xaml
-	/// </summary>
 	public partial class SignInForm : Window
 	{
-		public IUserService _userService { get; set; }
-		//private readonly UserRepository _repository;
+		private IUserService _userService;
 
 		private string _username;
 		public string Username
@@ -43,9 +39,6 @@ namespace Booking.View
 			}
 		}
 
-        //public UserService UserService { get; set; }
-        //public IUserService UserService { get; set; }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -57,10 +50,10 @@ namespace Booking.View
 		{
 			InitializeComponent();
 			DataContext = this;
+
 			_userService = InjectorService.CreateInstance<IUserService>();
-			//_repository = new UserRepository();
-			//_repository.Load();
 		}
+
 		private void SignIn(object sender, RoutedEventArgs e)
 		{
             User user = _userService.GetByUsername(Username);
