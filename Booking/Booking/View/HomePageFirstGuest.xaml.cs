@@ -79,7 +79,7 @@ namespace Booking.View
             LocationService = InjectorService.CreateInstance<ILocationService>();
             AccommodationService = InjectorService.CreateInstance < IAccommodationService>() ;
 
-            _accommodations = new ObservableCollection<Accommodation>(AccommodationService.GetAll().OrderByDescending(a=>a.Owner.Super));
+            _accommodations = new ObservableCollection<Accommodation>(AccommodationService.GetAllSuper().OrderByDescending(a=>a.Owner.Super));
 
             CityCollection = new ObservableCollection<string>();
 
