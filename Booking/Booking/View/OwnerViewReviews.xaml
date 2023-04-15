@@ -13,6 +13,7 @@
             Margin="72 50 72 92" 
             RowHeight="50"
             AutoGenerateColumns="False"
+            SelectedItem="{Binding SelectedGrade}"
             SelectionMode="Single"
             CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserReorderColumns="False"
             ItemsSource="{Binding Path=Grades, UpdateSourceTrigger=PropertyChanged}" >
@@ -23,16 +24,10 @@
                 <DataGridTextColumn Width="*" Header="Comment" Binding="{Binding Comment}"></DataGridTextColumn>
                 <DataGridTextColumn Width="*" Header="Guest" Binding="{Binding AccommodationReservation.Guest.Username}"></DataGridTextColumn>
 
-                <DataGridTemplateColumn Header="Pictures" Width="*">
+                <DataGridTemplateColumn Header="Images" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding Images}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Image Source="{Binding Url}" Width="80" Height="80" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                            <Button Content="Show" Click="ShowImages"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

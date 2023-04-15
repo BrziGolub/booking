@@ -211,6 +211,9 @@
     <Compile Include="View\SecondGuestHomePage.xaml.cs">
       <DependentUpon>SecondGuestHomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ShowGradeImages.xaml.cs">
+      <DependentUpon>ShowGradeImages.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ShowTourDestinations.xaml.cs">
       <DependentUpon>ShowTourDestinations.xaml</DependentUpon>
     </Compile>
@@ -319,6 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SecondGuestHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowGradeImages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
