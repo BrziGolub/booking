@@ -65,7 +65,7 @@ namespace Booking.View
 
         private void Button_Click_RateAccommodationAndOwner(object sender, RoutedEventArgs e)
         {
-            /*if (accommodationAndOwnerGradeService.PermissionForRating(SelectedReservation))
+           /* if (accommodationAndOwnerGradeService.PermissionForRating(SelectedReservation))
             {
                 MessageBox.Show("You are unable to rate you accomodation and owner");
             }

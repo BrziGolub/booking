@@ -31,7 +31,7 @@ namespace Booking.View
         public String AccommodationLabel { get; set; } = String.Empty;
         public String ReservedDaysLabel { get; set; } = String.Empty;
         public AccommodationReservation AccommodationReservation { get; set; }
-        //public AccommodationReservationRequestService AccommodationReservationRequestsService { get; set; }
+      
         public IAccommodationReservationRequestService AccommodationReservationRequestsService { get; set; }
 
 
@@ -90,7 +90,7 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
             AccommodationReservation = SelectedReservation;
-            //AccommodationReservationRequestsService = new AccommodationReservationRequestService();//ovo povezi sa app
+          
             AccommodationReservationRequestsService = InjectorService.CreateInstance<IAccommodationReservationRequestService>();
 
             AccommodationLabel = SetAccommodationLabel(SelectedReservation);
@@ -114,6 +114,7 @@ namespace Booking.View
         private void Button_Click_SendRequest(object sender, RoutedEventArgs e)
         {
             AccommodationReservationRequestsService.Create(AccommodationReservation, NewArrivalDay, NewDepartureDay, Comment);
+            NavigationService.Navigate(new FisrtGuestAllRequests());
         }
     }
 }

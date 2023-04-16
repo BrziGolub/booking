@@ -16,7 +16,7 @@ namespace Booking.Model
         public DateTime NewArrivalDay { get; set; }
         public DateTime NewDeparuteDay { get; set; }
         public RequestStatus Status { get; set; }
-        public String Comment { get; set; }
+        public String Comment { get; set; } //komentar vlasnik 
 
             
         public AccommodationReservationRequests(AccommodationReservation accommodationReservation, DateTime newArrivalDay, DateTime newDeparuteDay, RequestStatus status, string comment)
