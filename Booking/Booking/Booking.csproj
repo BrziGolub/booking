@@ -434,11 +434,10 @@
     <Resource Include="Resources\Images\booking.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\request.png" />
+    <Resource Include="Resources\Images\hourglass.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\hourglass.png" />
+    <Resource Include="Resources\Images\request.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

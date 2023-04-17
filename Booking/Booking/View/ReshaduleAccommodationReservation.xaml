@@ -17,8 +17,8 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" HorizontalAlignment="Left" Orientation="Horizontal" Margin="10,0,10,0" >
-            <Image Source="hourglass.png" Height="30"></Image>
-            <Label FontWeight="Bold" FontSize="17" >Reshadule your reservation</Label>
+            <Image Source="/Resources/Images/hourglass.png" Height="30"></Image>
+            <Label FontWeight="Bold" FontSize="17" >Reschedule your reservation</Label>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,0,10,0">
             <Label Content="Accommodation: " FontWeight="Bold"></Label>
@@ -45,8 +45,6 @@
             <DatePicker SelectedDateFormat="Short" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Width="200" SelectedDate="{Binding NewArrivalDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}" Margin="0,0,0,14"/>
             <Label Grid.Row="1" Grid.Column="0">Choose departure day:</Label>
             <DatePicker  SelectedDateFormat="Short" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Width="200"  Height="24" SelectedDate="{Binding NewDepartureDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-            <Label Grid.Row="2">Add comment:</Label>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
