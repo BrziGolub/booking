@@ -145,6 +145,7 @@
     <Compile Include="Service\VoucherService.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
+    <Compile Include="View\AccommodationReservationRequest.cs" />
     <Compile Include="View\AccommodationReservationView.xaml.cs">
       <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>
@@ -186,6 +187,9 @@
     </Compile>
     <Compile Include="View\HomePageFirstGuest.xaml.cs">
       <DependentUpon>HomePageFirstGuest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OwnerDateMove.xaml.cs">
+      <DependentUpon>OwnerDateMove.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OwnerGradingGuests.xaml.cs">
       <DependentUpon>OwnerGradingGuests.xaml</DependentUpon>
@@ -290,6 +294,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HomePageFirstGuest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OwnerDateMove.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

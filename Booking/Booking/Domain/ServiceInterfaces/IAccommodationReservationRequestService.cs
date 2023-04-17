@@ -14,6 +14,8 @@ namespace Booking.Domain.ServiceInterfaces
         void DeleteRequest(AccommodationReservation selectedReservation);
         void Create(AccommodationReservation selectedResrevation, DateTime newArrivalDay, DateTime newDepartureDay, String comment);
         List<AccommodationReservationRequests> GetAll();
+        List<AccommodationReservationRequests> GetSeeableDateChanges();
+        String CheckDate(AccommodationReservationRequests request);
 
     }
 }

@@ -20,6 +20,7 @@ namespace Booking.Service
         private readonly IAccommodationRepository _accommodationRepository;
         private readonly IAccommodationGradeRepository _gradeRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IGuestsAccommodationImagesRepository _gradeImageRepository;
         private readonly List<IObserver> _observers;
         //private List<AccommodationAndOwnerGrade> _accommodationAndOwnerGrades;
 
@@ -38,10 +39,11 @@ namespace Booking.Service
             _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
             _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
             _gradeRepository = InjectorRepository.CreateInstance<IAccommodationGradeRepository>();
+            _gradeImageRepository = InjectorRepository.CreateInstance<IGuestsAccommodationImagesRepository>();
             //_accommodationReservationService = new AccommodationReservationService();
             //_guestsImagesService = new GuestsAccommodationImagesService(); //ovo iz app
 
- 
+
         }
 
         /*public void Load()
@@ -90,7 +92,13 @@ namespace Booking.Service
                 g.AccommodationReservation = _reservationRepository.GetById(g.AccommodationReservation.Id);
                 g.AccommodationReservation.Accommodation = _accommodationRepository.GetById(g.AccommodationReservation.Accommodation.Id);
                 g.AccommodationReservation.Guest = _userRepository.GetById(g.AccommodationReservation.Guest.Id);
-                //dodati uvezivanje slika al prvo kristina mora da napravi model za te slike.
+                foreach (var picture in _gradeImageRepository.GetAll())
+                {
+                    if (picture.Grade.Id == g.Id)
+                    {
+                        g.Images.Add(picture);
+                    }
+                }
                 if (g.AccommodationReservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId) 
                 {
                     foreach (var go in _gradeRepository.GetAll()) 
