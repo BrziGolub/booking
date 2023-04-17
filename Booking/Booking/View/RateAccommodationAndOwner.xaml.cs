@@ -25,23 +25,16 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for RateAccommodationAndOwner.xaml
-    /// </summary>
     public partial class RateAccommodationAndOwner : Page
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public String AccommodationLabel { get; set; } = String.Empty;
         public String OwnerLabel { get; set;} = String.Empty;
 
+
         public AccommodationAndOwnerGrade accommodationAndOwnerGrade;
-
-        //public AccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
-
-        //public GuestsAccommodationImagesService GuestsAccommodationImagesService { get; set; }
         public IAccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
         public IGuestsAccommodationImagesService GuestsAccommodationImagesService { get; set; }
-
         public AccommodationReservation AccommodationReservation { get; set; }
 
         private int _cleaness;
@@ -120,33 +113,43 @@ namespace Booking.View
         {
             return accommodationReservation.Accommodation.Owner.Username;
         }
-    
-        private void Button_Click_Subbmit(object sender, RoutedEventArgs e)
+
+        private void MakeGrade()
         {
             accommodationAndOwnerGrade.Cleaness = Cleaness;
             accommodationAndOwnerGrade.OwnersCourtesy = Courtesy;
             accommodationAndOwnerGrade.Comment = Comment;
             accommodationAndOwnerGrade.AccommodationReservation = AccommodationReservation;
-           
-            AccommodationAndOwnerGradeService.SaveGrade(accommodationAndOwnerGrade);
+        }
 
-            //NavigationService.RemoveBackEntry(); // uklanja prethodnu stranicu iz steka
-            NavigationService.GoBack(); // vraća se na prethodnu stranicu
+        private void Button_Click_Subbmit(object sender, RoutedEventArgs e)
+        {
+            MakeGrade();
+
+            AccommodationAndOwnerGradeService.SaveGrade(accommodationAndOwnerGrade);
+            NavigationService.GoBack();
             AccommodationAndOwnerGradeService.CheckSuper(AccommodationReservation);
+        }
+
+
+        private void MakePicture(GuestsAccommodationImages Picture)
+        {
+            Picture.Url = tbPictures.Text;
+            Picture.Guest.Id = AccommodationReservationService.SignedFirstGuestId;
+            Picture.Grade.Id = accommodationAndOwnerGrade.Id;
+            accommodationAndOwnerGrade.Images.Add(Picture);
         }
 
         private void Button_Click_Plus(object sender, RoutedEventArgs e)
         {
-          
             GuestsAccommodationImages Picture = new GuestsAccommodationImages();
-            Picture.Url = tbPictures.Text;
-            Picture.Guest.Id = AccommodationReservationService.SignedFirstGuestId;
-            Picture.Grade.Id = accommodationAndOwnerGrade.Id;
 
-            accommodationAndOwnerGrade.Images.Add(Picture);
+            MakePicture(Picture);
             GuestsAccommodationImagesService.Create(Picture);
 
             tbPictures.Text = string.Empty;
         }
+
+      
     }
 }

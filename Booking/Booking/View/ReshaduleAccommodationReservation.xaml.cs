@@ -22,9 +22,6 @@ using Booking.Util;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for ReshaduleAccommodationReservation.xaml
-    /// </summary>
     public partial class ReshaduleAccommodationReservation : Page
     {
 

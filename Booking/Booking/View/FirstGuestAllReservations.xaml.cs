@@ -88,18 +88,23 @@ namespace Booking.View
 
             if (cancel)
             {
-                newNotification.Text = "Reservation for: " + SelectedReservation.Accommodation.Name + " " + SelectedReservation.ArrivalDay.ToShortDateString() + " - " + SelectedReservation.DepartureDay.ToShortDateString() + " is cancled guest: " + SelectedReservation.Guest.Username.ToString();
-                newNotification.User = SelectedReservation.Accommodation.Owner;
-                newNotification.IsRead = false;
-                _notificationService.CreateCancellationNotification(newNotification);
-
+                MakeNotification(newNotification);
                 _accommodationReservationService.Delete(SelectedReservation);
-                MessageBox.Show("Your reservation is cancelled!"); 
+
+                MessageBox.Show("Your reservation is cancelled!");
             }
             else
             {
                 MessageBox.Show("You are unable to cancle reservation!");
             }
+        }
+
+        private void MakeNotification(Notification newNotification)
+        {
+            newNotification.Text = "Reservation for: " + SelectedReservation.Accommodation.Name + " " + SelectedReservation.ArrivalDay.ToShortDateString() + " - " + SelectedReservation.DepartureDay.ToShortDateString() + " is cancled guest: " + SelectedReservation.Guest.Username.ToString();
+            newNotification.User = SelectedReservation.Accommodation.Owner;
+            newNotification.IsRead = false;
+            _notificationService.CreateCancellationNotification(newNotification);
         }
 
         public void Update()
