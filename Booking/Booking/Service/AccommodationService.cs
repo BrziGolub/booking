@@ -25,17 +25,6 @@ namespace Booking.Service
         private readonly IAccommodationImagesRepository _accommodationImagesRepository;
         public static int SignedOwnerId;
 
-
-        //private List<Accommodation> _accommodations;
-        //private List<AccommodationImage> _accommodationImages;
-
-        //private LocationService _locationService;
-        //private UserService _userService;
-        //private readonly ILocationService _locationService;
-        //private readonly IUserService _userService;
-
-
-
         public AccommodationService()
         {
             _observers = new List<IObserver>();
@@ -43,48 +32,9 @@ namespace Booking.Service
             _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
             _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
 
-
-            //var app = Application.Current as App;
-            //_locationService = app.LocationService;
-            //_userService = new UserService();
-
             _accommodationImagesRepository = InjectorRepository.CreateInstance<IAccommodationImagesRepository>();
         }
-        /*
-        public void BindUserToAccommodation()
-        {
-            _userService.Load();
-            foreach(Accommodation accommodation in _accommodations)
-            {
-                User user = _userService.GetById(accommodation.Owner.Id);
-                accommodation.Owner = user;
-            }
-        }
-        public void BindLocationToAccommodaton()
-        {
-            _locationService.Load();
-
-            foreach (Accommodation accommodation in _accommodations)
-            {
-                Location location = _locationService.GetById(accommodation.Location.Id);
-                accommodation.Location = location;
-            }
-
-        }
-        public void BindImagesToAccommodaton()
-        {
-            foreach (Accommodation accommodation in _accommodations)
-            {
-                foreach (AccommodationImage accommodationImage in _accommodationImagesRepository.Load())
-                {
-                    if (accommodationImage.Accomodation.Id == accommodation.Id)
-                    {
-                        accommodation.Images.Add(accommodationImage);
-                    }
-                }
-            }
-
-        }*/
+        
         public List<Accommodation> GetAll() //proveriti da li se negde koristi jer sam ja napravio GetAllSuper koja menja ovu na jednom mestu
         {
             List<Accommodation> accommodationList = new List<Accommodation>();
@@ -125,9 +75,9 @@ namespace Booking.Service
             }
             return accommodationList;
         }
-        public Boolean IsEnumTrue(Accommodation accommodation, List<String> accommodationTypes)
+        public bool IsAccommodationTypeValid(Accommodation accommodation, List<String> accommodationTypes)
         {
-            Boolean info = false;
+            bool info = false;
 
             if (accommodationTypes.Count == 0)
             {
@@ -143,13 +93,40 @@ namespace Booking.Service
             }
             return info;
         }
+        public bool IsCapasityValid(string numberOfGuests, Accommodation accommodation)
+        {
+            return string.IsNullOrEmpty(numberOfGuests) || int.Parse(numberOfGuests) <= accommodation.Capacity;
+        }
+
+        public bool IsCityValid(string city, Accommodation accommodation)
+        {
+            return string.IsNullOrEmpty(city) || accommodation.Location.City.ToLower().Contains(city.ToLower());
+        }
+
+        public bool IsStateValid(string state, Accommodation accommodation)
+        {
+            return string.IsNullOrEmpty(state) || state.Equals("All") || accommodation.Location.State.ToLower().Contains(state.ToLower());
+        }
+
+        public bool IsNameValid(string name, Accommodation accommodation)
+        {
+            return string.IsNullOrEmpty(name) || accommodation.Name.ToLower().Contains(name.ToLower());
+        }
+
+        public bool IsMinNumberOfDaysValid(string minNumDaysOfReservation, Accommodation accommodation)
+        {
+            return string.IsNullOrEmpty(minNumDaysOfReservation) || int.Parse(minNumDaysOfReservation) >= accommodation.MinNumberOfDays;
+        }
+
         public void Search(ObservableCollection<Accommodation> observe, string name, string city, string state, List<string> accommodationTypes, string numberOfGuests, string minNumDaysOfReservation)
         {
             observe.Clear();
 
             foreach (Accommodation accommodation in _accommodationRepository.GetAll())
             {
+                //binding
                 accommodation.Location = _locationRepository.GetById(accommodation.Location.Id);
+
                 foreach (var p in _accommodationImagesRepository.GetAll())
                 {
                     if (p.Accomodation.Id == accommodation.Id)
@@ -157,26 +134,22 @@ namespace Booking.Service
                         accommodation.Images.Add(p);
                     }
                 }
-                bool isNameValid = string.IsNullOrEmpty(name) || accommodation.Name.ToLower().Contains(name.ToLower());
-                bool isStateValid = string.IsNullOrEmpty(state) || state.Equals("All") || accommodation.Location.State.ToLower().Contains(state.ToLower());
-                bool isAccommodationTypeValid = IsEnumTrue(accommodation, accommodationTypes);
-                bool isCityValid = string.IsNullOrEmpty(city) || accommodation.Location.City.ToLower().Contains(city.ToLower());
-                bool isCapacityValid = string.IsNullOrEmpty(numberOfGuests) || int.Parse(numberOfGuests) <= accommodation.Capacity;
-                bool isMinNumberOfDaysValid = string.IsNullOrEmpty(minNumDaysOfReservation) || int.Parse(minNumDaysOfReservation) >= accommodation.MinNumberOfDays;
 
-                if (isNameValid && isStateValid && isAccommodationTypeValid && isCityValid && isCapacityValid && isMinNumberOfDaysValid)
+                if (IsNameValid(name, accommodation) && IsStateValid(state, accommodation) && IsAccommodationTypeValid(accommodation, accommodationTypes) && IsCityValid(city, accommodation) && IsCapasityValid(numberOfGuests, accommodation) && IsMinNumberOfDaysValid(minNumDaysOfReservation, accommodation))
                 {
                     observe.Add(accommodation);
                 }
             }
 
         }
+
         public void ShowAll(ObservableCollection<Accommodation> accommodationsObserve)
         {
             accommodationsObserve.Clear();
 
             foreach (Accommodation accommodation in _accommodationRepository.GetAll())
             {
+                //binding
                 accommodation.Location = _locationRepository.GetById(accommodation.Location.Id);
                 foreach (var p in _accommodationImagesRepository.GetAll())
                 {
@@ -206,17 +179,6 @@ namespace Booking.Service
             }
         }
         
-        /*public int ImageNextId()
-        {
-            if (_accommodationImages.Count == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return _accommodationImages.Max(t => t.Id) + 1;
-            }
-        }*/
         public Accommodation AddAccommodation(Accommodation accommodation)
         {
             foreach (var picture in accommodation.Images)

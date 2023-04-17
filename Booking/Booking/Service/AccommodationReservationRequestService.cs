@@ -25,17 +25,9 @@ namespace Booking.Service
         private readonly IAccommodationRepository _accommodationRepository;
         private readonly ILocationRepository _locationRepository;
 
-        //private AccommodationReservationService _reservationService;
-        //private readonly IAccommodationReservationService _reservationService;
-        //private List<AccommodationReservationRequests> _requests;
-
-
         public AccommodationReservationRequestService()
         {
-            //var app = Application.Current as App;
-            //_reservationService = app.AccommodationReservationService;
-            //_reservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
-            
+           
             _observers = new List<IObserver>();
             _repository = InjectorRepository.CreateInstance<IAccommodationReservationRequestsRepostiory>();
             _reservationRepository = InjectorRepository.CreateInstance<IAccommodationResevationRepository>();
@@ -126,17 +118,6 @@ namespace Booking.Service
                 observer.Update();
             }
         }
-
-        /*public void BindReservationToRequest()
-        {
-            _reservationService.Load();
-            foreach(var request in _requests)
-            {
-                AccommodationReservation reservation = _reservationService.GetById(request.AccommodationReservation.Id);
-                request.AccommodationReservation = reservation;
-            }
-        }*/
-      
 
         public void Create(AccommodationReservation selectedResrevation, DateTime newArrivalDay,DateTime newDepartureDay,String comment)
         {

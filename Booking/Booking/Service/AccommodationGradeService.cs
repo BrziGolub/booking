@@ -29,11 +29,6 @@ namespace Booking.Service
         {
             return _repository.GetAll();
         }
-        /*public AccommodationGrade GetById(int id)
-        {
-            return _accommodationGrades.Find(v => v.Id == id);
-        }*/
-
         public AccommodationGrade Create(AccommodationGrade accommodationGrade)
         {
             _repository.Add(accommodationGrade);

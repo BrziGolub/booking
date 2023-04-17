@@ -149,7 +149,6 @@
     <Compile Include="Application\UseCases\VoucherService.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
-    <Compile Include="View\AccommodationReservationRequest.cs" />
     <Compile Include="View\AccommodationReservationView.xaml.cs">
       <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>
@@ -407,7 +406,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\user.png" />
+    <Resource Include="Resources\Images\user.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\dismissal.png" />
@@ -416,7 +415,7 @@
     <Resource Include="View\demo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\logout.png" />
+    <Resource Include="Resources\Images\logout.png" />
     <Resource Include="Resources\Images\paris.jpg" />
     <Resource Include="Resources\Images\prague.jpg" />
   </ItemGroup>
@@ -424,13 +423,13 @@
     <Resource Include="Resources\Images\sreckoMrk.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\location.png" />
+    <Resource Include="Resources\Images\location.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\medal.png" />
+    <Resource Include="Resources\Images\medal.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\booking.png" />
+    <Resource Include="Resources\Images\booking.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\request.png" />
