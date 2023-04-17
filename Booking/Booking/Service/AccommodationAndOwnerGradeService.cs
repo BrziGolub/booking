@@ -22,16 +22,9 @@ namespace Booking.Service
         private readonly IAccommodationGradeRepository _gradeRepository;
         private readonly IUserRepository _userRepository;
         private readonly IGuestsAccommodationImagesRepository _gradeImageRepository;
+
         private readonly List<IObserver> _observers;
-        //private List<AccommodationAndOwnerGrade> _accommodationAndOwnerGrades;
-
-
-        //private readonly IAccommodationGradeRepository _gradeRepository;
-
-        //private AccommodationReservationService _accommodationReservationService;
-        //private GuestsAccommodationImagesService _guestsImagesService;
-
-
+       
 		public AccommodationAndOwnerGradeService()
         {
             _observers = new List<IObserver>();
@@ -41,23 +34,8 @@ namespace Booking.Service
             _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
             _gradeRepository = InjectorRepository.CreateInstance<IAccommodationGradeRepository>();
             _gradeImageRepository = InjectorRepository.CreateInstance<IGuestsAccommodationImagesRepository>();
-            //_accommodationReservationService = new AccommodationReservationService();
-            //_guestsImagesService = new GuestsAccommodationImagesService(); //ovo iz app
-
-
         }
 
-        /*public void Load()
-        {
-            _accommodationAndOwnerGrades = _repository.Load();
-            _accommodationGrades = _gradeRepository.Load();
-            BindGuestsImagesToGrades();
-        }*/
-
-        /*public List<AccommodationAndOwnerGrade> GetAllGrades()
-        {
-            return _accommodationAndOwnerGrades;
-        }*/
         public int NextId()
         {
             return _repository.NextId();
@@ -66,7 +44,6 @@ namespace Booking.Service
         public void SaveGrade(AccommodationAndOwnerGrade grade) 
         {
             _repository.Add(grade);
-            //FALI DODAVANJE SLIKA U CSV
         }
         public void Subscribe(IObserver observer)
         {
@@ -205,24 +182,6 @@ namespace Booking.Service
             }
             return GradeSum/Counter;
         }
-
-        //proveri ovo
-        /*
-        public void BindGuestsImagesToGrades()
-        {
-            foreach (AccommodationAndOwnerGrade grade in _accommodationAndOwnerGrades)
-            {
-                foreach (var image in _guestsImagesService.GetAll())
-                {
-                    if (image.Accomodation.Id == grade.Id)
-                    {
-                        grade.Images.Add(image);
-                    }
-                }
-
-            }
-        }*/
-
 
         public List<AccommodationAndOwnerGrade> GetAll()
         {

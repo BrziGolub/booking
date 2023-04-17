@@ -24,10 +24,6 @@ namespace Booking.Service
         private readonly IAccommodationReservationRequestsRepostiory _accommodationReservationRequestRepository;
         private readonly IAccommodationGradeRepository _accommodationGradeRepository;
 
-        // public AccommodationGradeService AccommodationGradeService { get; set; }
-        // public AccommodationReservationRequestService AccommodationReservationRequestService { get; set; }
-        // public UserService UserService { get; set; }
-        // public AccommodationService AccommodationService { get; set; }
         public static int SignedFirstGuestId;
 
 		public AccommodationReservationService()
@@ -39,20 +35,11 @@ namespace Booking.Service
             _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
             _accommodationReservationRequestRepository = InjectorRepository.CreateInstance<IAccommodationReservationRequestsRepostiory>();
             _accommodationGradeRepository = InjectorRepository.CreateInstance<IAccommodationGradeRepository>();
-
-            //var app = Application.Current as App;
-
-            //AccommodationGradeService = app.AccommodationGradeService;
-            //AccommodationService = app.AccommodationService;
-            //UserService = app.UserService;
-
-            //AccommodationReservationRequestService = app.AccommodationReservationRequestService;
         }
         public AccommodationReservation GetById(int id)
         {
            return _repository.GetById(id);
         }
-
 
         public List<AccommodationReservation> GetGeustsReservatonst()
         {
@@ -290,44 +277,5 @@ namespace Booking.Service
             //return the list of ranges
             return GetDates(reservedDates, difference, departureDay, arrivalDay);
         }
-
-        /*public void BindReservationToAccommodation()
-        {
-            _accommodationService.Load();
-            foreach (AccommodationReservation reservation in _reservations)
-            {
-                Accommodation accommodation = _accommodationService.GetById(reservation.Accommodation.Id);
-                reservation.Accommodation = accommodation;
-            }
-        }*/
-        /*public void BindReservationToGuest()
-        {
-            UserService.Load();
-            foreach (AccommodationReservation reservation in _reservations)
-            {
-                User user = UserService.GetById(reservation.Guest.Id);
-                reservation.Guest = user;
-            }
-        }*/
-
-
-        /*public void BindReservationToAccommodation()
-
-        {
-            AccommodationService.Load();
-            foreach (AccommodationReservation accommodationReservation in _reservations)
-            {
-                foreach (Accommodation accommodation in _accommodationRepository.Load())
-                {
-                    if (accommodation.Id == accommodationReservation.Accommodation.Id)
-                    {
-                        accommodationReservation.Accommodation = accommodation;
-                    }
-                }
-            }
-        }
-        */
-
-
     }
 }

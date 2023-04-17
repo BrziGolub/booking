@@ -425,13 +425,13 @@
     <Resource Include="Resources\Images\sreckoMrk.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\location.png" />
+    <Resource Include="Resources\Images\location.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\medal.png" />
+    <Resource Include="Resources\Images\medal.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\booking.png" />
+    <Resource Include="Resources\Images\booking.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\request.png" />
