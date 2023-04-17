@@ -15,7 +15,7 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,0,0" Grid.ColumnSpan="2"  HorizontalAlignment="Center">
-            <Image Source="booking.png" Height="30" Width="30" ></Image>
+            <Image Source="/Resources/Images/booking.png" Height="30" Width="30" ></Image>
             <Label FontWeight="Bold" FontSize="16" >My reservations</Label>
         </StackPanel>
 

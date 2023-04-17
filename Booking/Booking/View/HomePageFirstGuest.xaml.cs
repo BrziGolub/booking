@@ -21,15 +21,12 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for HomePageFirstGuest.xaml
-    /// </summary>
+  
     public partial class HomePageFirstGuest : Page
     {
 
         private ObservableCollection<Accommodation> _accommodations;
-        //public AccommodationService AccommodationService { get; set; }
-        //public LocationService LocationService { get; set; }
+        
 
         public IAccommodationService AccommodationService { get; set; }
         public ILocationService LocationService { get; set; }
@@ -73,9 +70,7 @@ namespace Booking.View
         public HomePageFirstGuest()
         {
             InitializeComponent();
-            //var app = Application.Current as App;
-            //LocationService = app.LocationService;
-            //AccommodationService = app.AccommodationService;
+     
             LocationService = InjectorService.CreateInstance<ILocationService>();
             AccommodationService = InjectorService.CreateInstance < IAccommodationService>() ;
 
@@ -151,7 +146,7 @@ namespace Booking.View
 
         private void Button_Click_Book(object sender, RoutedEventArgs e)
         {
-            //ovo izmeni
+          
             if (SelectedAccommodation == null)
             {
                 MessageBox.Show("Please select an accommodation to reserve.");

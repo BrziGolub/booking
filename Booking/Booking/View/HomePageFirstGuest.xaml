@@ -41,7 +41,7 @@
         </Grid>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,0,20,0" HorizontalAlignment="Center">
-            <Image Source="location.png"></Image>
+            <Image Source="/Resources/Images/location.png"></Image>
             <Label FontWeight="Bold" FontSize="17">What's your next destination?</Label>
         </StackPanel>
 

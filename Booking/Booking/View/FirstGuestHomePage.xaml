@@ -17,7 +17,7 @@
                 <MenuItem Header="HomePage" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage"></MenuItem>
                 <MenuItem Header="Quick search" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
                 <MenuItem Header="My reservations" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"></MenuItem>
-                <MenuItem Header="Reshedule requests" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ResheduleRequests" ></MenuItem>
+                <MenuItem Header="Reschedule requests" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ResheduleRequests" ></MenuItem>
                 <MenuItem Header="Reviews" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
                 <MenuItem Header="Forums" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
                 <MenuItem Header="Notfications" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
@@ -28,12 +28,12 @@
                 <MenuItem Width="240"/>
                 <MenuItem Header="Log out" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3">
                     <MenuItem.Icon>
-                        <Image  Source="logOut.png" Width="30" Height="17" />
+                        <Image  Source="/Resources/Images/logOut.png" Width="30" Height="17" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="My Profile" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3">
                     <MenuItem.Icon>
-                        <Image Source="User.png" Width="20" Height="17" />
+                        <Image Source="/Resources/Images/User.png" Width="20" Height="17" />
                     </MenuItem.Icon>
                 </MenuItem>
             </Menu>
