@@ -16,16 +16,18 @@ namespace Booking.Model
         public DateTime NewArrivalDay { get; set; }
         public DateTime NewDeparuteDay { get; set; }
         public RequestStatus Status { get; set; }
-        public String Comment { get; set; } //komentar vlasnik 
+        public String Comment { get; set; }
+        public String Accessable { get; set; }
 
             
-        public AccommodationReservationRequests(AccommodationReservation accommodationReservation, DateTime newArrivalDay, DateTime newDeparuteDay, RequestStatus status, string comment)
+        public AccommodationReservationRequests(AccommodationReservation accommodationReservation, DateTime newArrivalDay, DateTime newDeparuteDay, RequestStatus status, string comment, string accessable)
         {
             AccommodationReservation = accommodationReservation;
             NewArrivalDay = newArrivalDay;
             NewDeparuteDay = newDeparuteDay;
             Status = status;
             Comment = comment;
+            Accessable = accessable;
         }
 
         public AccommodationReservationRequests()
@@ -51,6 +53,7 @@ namespace Booking.Model
                 System.Console.WriteLine("Doslo je do greske prilikom ucitavanja tipa smestaja");
             }
             Comment = values[5];
+            Accessable = values[6];
         }
 
         public string[] ToCSV()
@@ -62,7 +65,8 @@ namespace Booking.Model
                 NewArrivalDay.ToString("dd/MM/yyyy"),
                 NewDeparuteDay.ToString("dd/MM/yyyy"),
                 Status.ToString(),
-                Comment
+                Comment,
+                Accessable,
         };
             return csvValues;
         }

@@ -85,7 +85,7 @@ namespace Booking.Service
             }
 
         }*/
-        public List<Accommodation> GetAll() 
+        public List<Accommodation> GetAll() //proveriti da li se negde koristi jer sam ja napravio GetAllSuper koja menja ovu na jednom mestu
         {
             List<Accommodation> accommodationList = new List<Accommodation>();
             accommodationList = _accommodationRepository.GetAll();
@@ -99,6 +99,28 @@ namespace Booking.Service
                     {
                         a.Images.Add(p);
                     }
+                }
+            }
+            return accommodationList;
+        }
+        public List<Accommodation> GetAllSuper()
+        {
+            List<Accommodation> accommodationList = new List<Accommodation>();
+            accommodationList = _accommodationRepository.GetAll();
+            foreach (var a in accommodationList)
+            {
+                a.Location = _locationRepository.GetById(a.Location.Id);
+                a.Owner = _userRepository.GetById(a.Owner.Id);
+                foreach (var p in _accommodationImagesRepository.GetAll())
+                {
+                    if (p.Accomodation.Id == a.Id)
+                    {
+                        a.Images.Add(p);
+                    }
+                }
+                if (a.Owner.Super == 1) 
+                {
+                    a.Name = a.Name + "*";
                 }
             }
             return accommodationList;

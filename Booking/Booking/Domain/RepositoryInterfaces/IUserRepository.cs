@@ -10,6 +10,6 @@ namespace Booking.Domain.RepositoryInterfaces
 	public interface IUserRepository : IRepository<User>
 	{
 		User GetByUsername(string username);
-		//void Save(List<User> users); // mozda malo drugaciji save
+		void Save(List<User> users); // mozda malo drugaciji save
 	}
 }

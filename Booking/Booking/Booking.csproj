@@ -150,6 +150,7 @@
     <Compile Include="Service\VoucherService.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
+    <Compile Include="View\AccommodationReservationRequest.cs" />
     <Compile Include="View\AccommodationReservationView.xaml.cs">
       <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>
@@ -192,6 +193,9 @@
     <Compile Include="View\HomePageFirstGuest.xaml.cs">
       <DependentUpon>HomePageFirstGuest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\OwnerDateMove.xaml.cs">
+      <DependentUpon>OwnerDateMove.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OwnerGradingGuests.xaml.cs">
       <DependentUpon>OwnerGradingGuests.xaml</DependentUpon>
     </Compile>
@@ -216,6 +220,9 @@
     <Compile Include="View\SecondGuestHomePage.xaml.cs">
       <DependentUpon>SecondGuestHomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ShowGradeImages.xaml.cs">
+      <DependentUpon>ShowGradeImages.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ShowTourDestinations.xaml.cs">
       <DependentUpon>ShowTourDestinations.xaml</DependentUpon>
     </Compile>
@@ -227,6 +234,9 @@
     </Compile>
     <Compile Include="View\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SuperOwner.xaml.cs">
+      <DependentUpon>SuperOwner.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -292,6 +302,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\OwnerDateMove.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\OwnerGradingGuests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -324,6 +338,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ShowGradeImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ShowTourDestinations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -337,6 +355,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SignInForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SuperOwner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

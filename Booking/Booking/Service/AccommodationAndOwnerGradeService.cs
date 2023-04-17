@@ -20,6 +20,8 @@ namespace Booking.Service
         private readonly IAccommodationResevationRepository _reservationRepository;
         private readonly IAccommodationRepository _accommodationRepository;
         private readonly IAccommodationGradeRepository _gradeRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IGuestsAccommodationImagesRepository _gradeImageRepository;
         private readonly List<IObserver> _observers;
         //private List<AccommodationAndOwnerGrade> _accommodationAndOwnerGrades;
 
@@ -36,11 +38,13 @@ namespace Booking.Service
             _repository = InjectorRepository.CreateInstance<IAccommodationAndOwnerGradeRepository>();
             _reservationRepository = InjectorRepository.CreateInstance<IAccommodationResevationRepository>();
             _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
+            _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
             _gradeRepository = InjectorRepository.CreateInstance<IAccommodationGradeRepository>();
+            _gradeImageRepository = InjectorRepository.CreateInstance<IGuestsAccommodationImagesRepository>();
             //_accommodationReservationService = new AccommodationReservationService();
             //_guestsImagesService = new GuestsAccommodationImagesService(); //ovo iz app
 
- 
+
         }
 
         /*public void Load()
@@ -88,7 +92,14 @@ namespace Booking.Service
             {
                 g.AccommodationReservation = _reservationRepository.GetById(g.AccommodationReservation.Id);
                 g.AccommodationReservation.Accommodation = _accommodationRepository.GetById(g.AccommodationReservation.Accommodation.Id);
-                //dodati uvezivanje slika al prvo kristina mora da napravi model za te slike.
+                g.AccommodationReservation.Guest = _userRepository.GetById(g.AccommodationReservation.Guest.Id);
+                foreach (var picture in _gradeImageRepository.GetAll())
+                {
+                    if (picture.Grade.Id == g.Id)
+                    {
+                        g.Images.Add(picture);
+                    }
+                }
                 if (g.AccommodationReservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId) 
                 {
                     foreach (var go in _gradeRepository.GetAll()) 
@@ -102,8 +113,117 @@ namespace Booking.Service
             }
             return _seeableGrades;
         }
+        public void CheckSuper(AccommodationReservation selectedReservation) 
+        {
+            List<User> AllUsers = new List<User>();
+            AllUsers = _userRepository.GetAll();
+            int Counter = 0;
+            double GradeSum = 0; 
+            selectedReservation.Accommodation = _accommodationRepository.GetById(selectedReservation.Accommodation.Id);
+            selectedReservation.Accommodation.Owner = _userRepository.GetById(selectedReservation.Accommodation.Owner.Id);
+            foreach (var user in AllUsers)
+            {
+                if (user.Id == selectedReservation.Accommodation.Owner.Id) 
+                {
+                    foreach (var ocena in _repository.GetAll()) 
+                    {
+                        ocena.AccommodationReservation = _reservationRepository.GetById(ocena.AccommodationReservation.Id);
+                        ocena.AccommodationReservation.Accommodation = _accommodationRepository.GetById(ocena.AccommodationReservation.Accommodation.Id);
 
- 
+                        if (ocena.AccommodationReservation.Accommodation.Owner.Id == user.Id) 
+                        {
+                            Counter++;
+                            GradeSum = GradeSum + ((Convert.ToDouble(ocena.OwnersCourtesy) + Convert.ToDouble(ocena.Cleaness)) / 2);
+                        }
+                    }
+                    if (Counter >= 50 && (GradeSum / Counter) > 4.5)
+                    {
+                        user.Super = 1;
+                    }
+                    else 
+                    {
+                        user.Super = 0;
+                    }
+                }
+
+            }
+            _userRepository.Save(AllUsers);
+        }
+        public string SuperWindowText() 
+        {
+            int Counter = 0;
+            double GradeSum = 0;
+            foreach (var ocena in _repository.GetAll())
+            {
+                ocena.AccommodationReservation = _reservationRepository.GetById(ocena.AccommodationReservation.Id);
+                ocena.AccommodationReservation.Accommodation = _accommodationRepository.GetById(ocena.AccommodationReservation.Accommodation.Id);
+
+                if (ocena.AccommodationReservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId)
+                {
+                    Counter++;
+                    GradeSum = GradeSum + ((Convert.ToDouble(ocena.OwnersCourtesy) + Convert.ToDouble(ocena.Cleaness)) / 2);
+                }
+            }
+            if (Counter >= 50 && (GradeSum / Counter) > 4.5)
+            {
+                return "Congratulations you are a super-owner";
+            }
+            else 
+            {
+                return "To become a super owner you need at least 50 reservations with an average score above 4.5";
+            }
+        }
+        public int GetNumberOfGrades() 
+        {
+            int Counter = 0;
+            foreach (var ocena in _repository.GetAll())
+            {
+                ocena.AccommodationReservation = _reservationRepository.GetById(ocena.AccommodationReservation.Id);
+                ocena.AccommodationReservation.Accommodation = _accommodationRepository.GetById(ocena.AccommodationReservation.Accommodation.Id);
+
+                if (ocena.AccommodationReservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId)
+                {
+                    Counter++;
+                }
+            }
+            return Counter;
+        }
+        public double GetAverageGrade() 
+        {
+            int Counter = 0;
+            double GradeSum = 0;
+            foreach (var ocena in _repository.GetAll())
+            {
+                ocena.AccommodationReservation = _reservationRepository.GetById(ocena.AccommodationReservation.Id);
+                ocena.AccommodationReservation.Accommodation = _accommodationRepository.GetById(ocena.AccommodationReservation.Accommodation.Id);
+
+                if (ocena.AccommodationReservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId)
+                {
+                    Counter++;
+                    GradeSum = GradeSum + ((Convert.ToDouble(ocena.OwnersCourtesy) + Convert.ToDouble(ocena.Cleaness)) / 2);
+                }
+            }
+            return GradeSum/Counter;
+        }
+
+        //proveri ovo
+        /*
+        public void BindGuestsImagesToGrades()
+        {
+            foreach (AccommodationAndOwnerGrade grade in _accommodationAndOwnerGrades)
+            {
+                foreach (var image in _guestsImagesService.GetAll())
+                {
+                    if (image.Accomodation.Id == grade.Id)
+                    {
+                        grade.Images.Add(image);
+                    }
+                }
+
+            }
+        }*/
+
+
         public List<AccommodationAndOwnerGrade> GetAll()
         {
             return _repository.GetAll();

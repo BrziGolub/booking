@@ -28,6 +28,7 @@ namespace Booking.View
         public ObservableCollection<AccommodationAndOwnerGrade> Grades { get; set; }
         //public AccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
         public IAccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
+        public AccommodationAndOwnerGrade SelectedGrade { get; set; }
         public OwnerViewReviews()
         {
             InitializeComponent();
@@ -52,6 +53,11 @@ namespace Booking.View
         private void Close(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        private void ShowImages(object sender, RoutedEventArgs e)
+        {
+            ShowGradeImages view = new ShowGradeImages(SelectedGrade.Images);
+            view.ShowDialog();
         }
     }
 }

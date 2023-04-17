@@ -132,6 +132,7 @@ namespace Booking.View
 
             //NavigationService.RemoveBackEntry(); // uklanja prethodnu stranicu iz steka
             NavigationService.GoBack(); // vraća se na prethodnu stranicu
+            AccommodationAndOwnerGradeService.CheckSuper(AccommodationReservation);
         }
 
         private void Button_Click_Plus(object sender, RoutedEventArgs e)

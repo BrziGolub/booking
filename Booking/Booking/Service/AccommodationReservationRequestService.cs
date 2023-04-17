@@ -65,6 +65,43 @@ namespace Booking.Service
             }
             return accommodationReservationRequestList;
         }
+        public List<AccommodationReservationRequests> GetSeeableDateChanges() 
+        {
+            List<AccommodationReservationRequests> accommodationReservationRequestAll = new List<AccommodationReservationRequests>();
+            List<AccommodationReservationRequests> accommodationReservationRequestList = new List<AccommodationReservationRequests>();
+            accommodationReservationRequestAll = _repository.GetAll();
+            foreach (var arr in accommodationReservationRequestAll)
+            {
+                arr.AccommodationReservation = _reservationRepository.GetById(arr.AccommodationReservation.Id);
+                arr.AccommodationReservation.Accommodation = _accommodationRepository.GetById(arr.AccommodationReservation.Accommodation.Id);
+                if (arr.AccommodationReservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId && arr.Status.ToString().Equals("PENDNING"))
+                {
+                    arr.Accessable = CheckDate(arr);
+                    accommodationReservationRequestList.Add(arr);
+                }
+            }
+            return accommodationReservationRequestList;
+        }
+        public String CheckDate(AccommodationReservationRequests request) 
+        {
+            List<AccommodationReservation> accommodationReservations = new List<AccommodationReservation>();
+            accommodationReservations = _reservationRepository.GetAll();
+            foreach (var reservation in accommodationReservations) 
+            {
+                reservation.Accommodation = _accommodationRepository.GetById(reservation.Accommodation.Id);
+                for (DateTime date = request.NewArrivalDay; date <= request.NewDeparuteDay; date=date.AddDays(1)) 
+                {
+                    for (DateTime reservationDate = reservation.ArrivalDay; reservationDate <= reservation.DepartureDay; reservationDate=reservationDate.AddDays(1)) 
+                    {
+                        if (date.Equals(reservationDate) && reservation.Accommodation.Owner.Id == request.AccommodationReservation.Accommodation.Owner.Id) 
+                        {
+                            return "Ocupied";
+                        }
+                    }
+                }
+            }
+            return "Free";
+        }
 
         public void DeleteRequest(AccommodationReservation selectedReservation)
         {

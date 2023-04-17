@@ -20,10 +20,10 @@
             <Button Content=" Register accommodation" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 20 10 0" Click="RegisterAccomodation" HorizontalContentAlignment="Left" />
             <Button Content=" Accomodation stats" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
             <Button Content=" Site proposal" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
-            <Button Content=" Handling date changes" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
+            <Button Content=" Handling date changes" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Click="DateMove" HorizontalContentAlignment="Left" />
             <Button Content=" Gradeing guests" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Click="GradingGuests" HorizontalContentAlignment="Left" />
             <Button Content=" View reviews" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Click="ViewReviews" HorizontalContentAlignment="Left" />
-            <Button Content=" Super-owner" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
+            <Button Content=" Super-owner" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Click="SuperOwner" HorizontalContentAlignment="Left" />
             <Button Content=" Scheduling renovations" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
             <Button Content=" Show renovations" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
             <Button Content=" Forum" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
