@@ -119,9 +119,9 @@ namespace Booking.Service
             }
         }
 
-        public void Create(AccommodationReservation selectedResrevation, DateTime newArrivalDay,DateTime newDepartureDay,String comment)
+        public void Create(AccommodationReservation selectedResrevation, DateTime newArrivalDay,DateTime newDepartureDay)
         {
-            _repository.Add(selectedResrevation, newArrivalDay, newDepartureDay, comment);
+            _repository.Add(selectedResrevation, newArrivalDay, newDepartureDay);
             NotifyObservers();
         }
     }

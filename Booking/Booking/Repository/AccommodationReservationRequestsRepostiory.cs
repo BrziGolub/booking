@@ -50,7 +50,7 @@ namespace Booking.Repository
             _accommodationsReservationsRequests.RemoveAll(request => request.AccommodationReservation.Id == selectedReservation.Id);
             _serializer.ToCSV(FilePath, _accommodationsReservationsRequests);
         }
-        public void Add(AccommodationReservation selectedResrevation, DateTime newArrivalDay, DateTime newDepartureDay, String comment)
+        public void Add(AccommodationReservation selectedResrevation, DateTime newArrivalDay, DateTime newDepartureDay)
         {
             AccommodationReservationRequests newRequest = new AccommodationReservationRequests();
 
@@ -59,7 +59,7 @@ namespace Booking.Repository
             newRequest.NewArrivalDay = newArrivalDay;
             newRequest.NewDeparuteDay = newDepartureDay;
             newRequest.Status = RequestStatus.PENDNING;
-            newRequest.Comment = comment;
+            newRequest.Comment = String.Empty;
             _accommodationsReservationsRequests.Add(newRequest);
             _serializer.ToCSV(FilePath, _accommodationsReservationsRequests);
         }

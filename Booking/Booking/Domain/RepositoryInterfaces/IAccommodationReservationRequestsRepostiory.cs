@@ -11,6 +11,6 @@ namespace Booking.Domain.RepositoryInterfaces
 	{
 		int NextId();
 		void DeleteRequest(AccommodationReservation selectedReservation);
-		void Add(AccommodationReservation selectedResrevation, DateTime newArrivalDay, DateTime newDepartureDay, String comment);
+		void Add(AccommodationReservation selectedResrevation, DateTime newArrivalDay, DateTime newDepartureDay);
 	}
 }

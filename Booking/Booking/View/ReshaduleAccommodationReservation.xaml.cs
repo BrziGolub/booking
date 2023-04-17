@@ -62,19 +62,6 @@ namespace Booking.View
             }
         }
 
-        public String _comment;
-        public String Comment
-        {
-            get => _comment;
-            set
-            {
-                if (_comment != value)
-                {
-                    _comment = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -110,7 +97,7 @@ namespace Booking.View
 
         private void Button_Click_SendRequest(object sender, RoutedEventArgs e)
         {
-            AccommodationReservationRequestsService.Create(AccommodationReservation, NewArrivalDay, NewDepartureDay, Comment);
+            AccommodationReservationRequestsService.Create(AccommodationReservation, NewArrivalDay, NewDepartureDay);
             NavigationService.Navigate(new FisrtGuestAllRequests());
         }
     }
