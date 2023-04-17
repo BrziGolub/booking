@@ -106,8 +106,6 @@
     <Compile Include="Domain\ServiceInterfaces\IService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
-    <Compile Include="Domain\ServiceInterfaces\ITourImageService.cs" />
-    <Compile Include="Domain\ServiceInterfaces\ITourKeyPointsService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourReservationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IUserService.cs" />
@@ -143,13 +141,10 @@
     <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Application\UseCases\TourGradeService.cs" />
     <Compile Include="Application\UseCases\TourGuestsService.cs" />
-    <Compile Include="Application\UseCases\TourImageService.cs" />
-    <Compile Include="Application\UseCases\TourKeyPointService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Application\UseCases\VoucherService.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
-    <Compile Include="View\AccommodationReservationRequest.cs" />
     <Compile Include="View\AccommodationReservationView.xaml.cs">
       <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>
@@ -168,7 +163,13 @@
     <Compile Include="View\GradingWindow.xaml.cs">
       <DependentUpon>GradingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\ViewModels\Guide\GuideCreateTourViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\GuideFollowTourLiveViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideHomePageViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\GuideKeyPointsCheckViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\GuideStatisticAboutToursViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\GuideViewReviewsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\ShowReviewCommentViewModel.cs" />
     <Compile Include="WPF\Views\Guide\GuideCreateTour.xaml.cs">
       <DependentUpon>GuideCreateTour.xaml</DependentUpon>
     </Compile>
@@ -407,16 +408,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\user.png" />
+    <Resource Include="Resources\Images\user.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\dismissal.png" />
+    <Resource Include="Resources\Images\dismissal.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\demo.png" />
+    <Resource Include="Resources\Images\demo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\logout.png" />
+    <Resource Include="Resources\Images\logout.png" />
     <Resource Include="Resources\Images\paris.jpg" />
     <Resource Include="Resources\Images\prague.jpg" />
   </ItemGroup>

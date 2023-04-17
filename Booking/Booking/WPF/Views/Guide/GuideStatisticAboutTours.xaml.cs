@@ -27,7 +27,6 @@ namespace Booking.View
         public ObservableCollection<Tour> MostVisitedTourGenerraly { get; set; }
         public ObservableCollection<Tour> MostVisitedTourThisYear { get; set; }
         public ObservableCollection<Tour> averageNumberOfGuests { get; set; }
-        //public TourService TourService { get; set; }
         public ITourService _tourService { get; set; }
         public User user { get; set; }
 
@@ -38,9 +37,6 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
 
-            //var app = Application.Current as App;
-
-            //TourService = app.TourService;
             _tourService = InjectorService.CreateInstance<ITourService>();
             _tourService.Subscribe(this);
 
@@ -48,10 +44,10 @@ namespace Booking.View
             MostVisitedTourGenerraly = new ObservableCollection<Tour>(_tourService.GetMostVisitedTourGenerally()); 
             MostVisitedTourThisYear = new ObservableCollection<Tour>(_tourService.GetMostVisitedTourThisYear());
 
-            FillComboBoxes();
+            FillComboBox();
         }
 
-        private void FillComboBoxes()
+        private void FillComboBox()
         {
             List<string> items1 = new List<string>();
 
@@ -68,7 +64,6 @@ namespace Booking.View
             }
             var distinctItems = items1.Distinct().ToList();
             comboBoxTours.ItemsSource = distinctItems;
-
         }
 
         public void Update()

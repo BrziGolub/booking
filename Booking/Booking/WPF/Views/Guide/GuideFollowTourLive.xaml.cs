@@ -51,8 +51,42 @@ namespace Booking.View
 
         private void StartTour(object sender, RoutedEventArgs e)
         {
-            
-             int startedTours = 0;
+
+            int startedTours = 0;
+            startedTours = CheckNumberOfStartedTours(startedTours);
+
+            if (startedTours < 1)
+            {
+                StartSelectedTour();
+            }
+            else
+            {
+                MessageBox.Show("You can start maximum 1 tour in same time!");
+            }
+        }
+
+        private void StartSelectedTour()
+        {
+            if (SelectedTour != null)
+            {
+                GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(SelectedTour.Id);
+                Pomid = SelectedTour.Id;
+
+                SelectedTour.IsStarted = true;
+                TourService.UpdateTour(SelectedTour);
+                MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
+                TourService.NotifyObservers();
+
+                guideKeyPointsCheck.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("In order to start the tour, you first need to select it!");
+            }
+        }
+
+        private int CheckNumberOfStartedTours(int startedTours)
+        {
             foreach (var tour in Tours)
             {
                 if (tour.IsStarted == true)
@@ -63,29 +97,7 @@ namespace Booking.View
 
             }
 
-            if (startedTours < 1)
-            {
-                if (SelectedTour != null )
-                {
-                    GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(SelectedTour.Id);
-                    Pomid = SelectedTour.Id;
-
-                    SelectedTour.IsStarted = true;
-                    TourService.UpdateTour(SelectedTour);
-                    MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
-                    TourService.NotifyObservers();
-
-                    guideKeyPointsCheck.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("In order to start the tour, you first need to select it!");
-                }
-            }
-            else 
-            {
-                MessageBox.Show("You can start maximum 1 tour in same time!");
-            }
+            return startedTours;
         }
 
         public void Update()
