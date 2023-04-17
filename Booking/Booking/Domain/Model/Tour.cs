@@ -30,7 +30,6 @@ namespace Booking.Model
 
 		public int GuideId { get; set; }
 
-
         public bool IsStarted { get; set; }
 
         public bool IsCancelable()
