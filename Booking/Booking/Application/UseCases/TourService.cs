@@ -76,7 +76,7 @@ namespace Booking.Service
 			}
 
 			mostVisitedTour = _tourRepository.GetById(mostVisitedTourID);
-			mostVisitedTour.GuestsAsTour = mostVisits;//numberOfGuestsAtTour(mostVisitedTour.Id);
+			mostVisitedTour.GuestsAsTour = mostVisits;
 
 			if (mostVisitedTour.GuideId == SignedGuideId && mostVisits > 0)
 			{
@@ -117,7 +117,7 @@ namespace Booking.Service
 			}
 
 			mostVisitedTour = _tourRepository.GetById(mostVisitedTourID);
-			mostVisitedTour.GuestsAsTour = mostVisits;//numberOfGuestsAtTour(mostVisitedTour.Id);
+			mostVisitedTour.GuestsAsTour = mostVisits;
 
             if (mostVisitedTour.GuideId == SignedGuideId && mostVisits > 0)
 			{
@@ -311,39 +311,39 @@ namespace Booking.Service
 			if (tour == null) return null;
 
 			if (tour.IsCancelable())
-			{
-
-				foreach (TourGuests tg in _tourGuestsRepository.GetAll())
-				{
-					User pomGuest = _userRepository.GetById(tg.User.Id);
-
-					if (tg.Tour.Id == idTour)
-					{
-						voucher.User.Id = pomGuest.Id;
-						voucher.ValidTime = DateTime.Now.AddYears(1);
-						voucher.IsActive = true;
-						_voucherRepository.Add(voucher);
-					}
-				}
-
-				_tourKeyPointsRepository.DeleteByTourId(idTour);
-				_tourImagesRepository.DeleteByTourId(idTour);
-				_tourGuestsRepository.DeleteByTourId(idTour);
-
-				_tourRepository.Delete(tour);
-
-				NotifyObservers();
-
-				return tour;
-			}
-			else
+            {
+                CheckVoucher(idTour);
+                _tourKeyPointsRepository.DeleteByTourId(idTour);
+                _tourImagesRepository.DeleteByTourId(idTour);
+                _tourGuestsRepository.DeleteByTourId(idTour);
+                _tourRepository.Delete(tour);
+                NotifyObservers();
+                return tour;
+            }
+            else
 			{
 				MessageBox.Show("You can cancel the tour no later than 48 hours before the start!");
 				return null;
 			}
 		}
 
-		public bool checkTourGuests(int tourId, int userId) 
+        private void CheckVoucher(int idTour)
+        {
+            foreach (TourGuests tg in _tourGuestsRepository.GetAll())
+            {
+                User pomGuest = _userRepository.GetById(tg.User.Id);
+
+                if (tg.Tour.Id == idTour)
+                {
+                    voucher.User.Id = pomGuest.Id;
+                    voucher.ValidTime = DateTime.Now.AddYears(1);
+                    voucher.IsActive = true;
+                    _voucherRepository.Add(voucher);
+                }
+            }
+        }
+
+        public bool checkTourGuests(int tourId, int userId) 
 		{
 			if (_tourGuestsRepository.GetAll().Any(u => u.Tour.Id == tourId && u.User.Id == userId)) 
 			{

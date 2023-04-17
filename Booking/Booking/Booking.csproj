@@ -142,12 +142,12 @@
     <Compile Include="Service\AccommodationService.cs" />
     <Compile Include="Service\GuestsAccommodationImagesService.cs" />
     <Compile Include="Service\NotificationService.cs" />
-    <Compile Include="Service\TourGradeService.cs" />
-    <Compile Include="Service\TourGuestsService.cs" />
-    <Compile Include="Service\TourImageService.cs" />
-    <Compile Include="Service\TourKeyPointService.cs" />
+    <Compile Include="Application\UseCases\TourGradeService.cs" />
+    <Compile Include="Application\UseCases\TourGuestsService.cs" />
+    <Compile Include="Application\UseCases\TourImageService.cs" />
+    <Compile Include="Application\UseCases\TourKeyPointService.cs" />
     <Compile Include="Service\UserService.cs" />
-    <Compile Include="Service\VoucherService.cs" />
+    <Compile Include="Application\UseCases\VoucherService.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
     <Compile Include="View\AccommodationReservationRequest.cs" />
@@ -155,8 +155,8 @@
       <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service\LocationService.cs" />
-    <Compile Include="Service\TourReservationService.cs" />
-    <Compile Include="Service\TourService.cs" />
+    <Compile Include="Application\UseCases\TourReservationService.cs" />
+    <Compile Include="Application\UseCases\TourService.cs" />
     <Compile Include="View\FirstGuestAllReservations.xaml.cs">
       <DependentUpon>FirstGuestAllReservations.xaml</DependentUpon>
     </Compile>
@@ -169,25 +169,26 @@
     <Compile Include="View\GradingWindow.xaml.cs">
       <DependentUpon>GradingWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Guide\GuideCreateTour.xaml.cs">
+    <Compile Include="WPF\ViewModels\Guide\GuideHomePageViewModel.cs" />
+    <Compile Include="WPF\Views\Guide\GuideCreateTour.xaml.cs">
       <DependentUpon>GuideCreateTour.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Guide\GuideFollowTourLive.xaml.cs">
+    <Compile Include="WPF\Views\Guide\GuideFollowTourLive.xaml.cs">
       <DependentUpon>GuideFollowTourLive.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Guide\GuideHomePage.xaml.cs">
+    <Compile Include="WPF\Views\Guide\GuideHomePage.xaml.cs">
       <DependentUpon>GuideHomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Guide\GuideKeyPointsCheck.xaml.cs">
+    <Compile Include="WPF\Views\Guide\GuideKeyPointsCheck.xaml.cs">
       <DependentUpon>GuideKeyPointsCheck.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Guide\GuideStatisticAboutTours.xaml.cs">
+    <Compile Include="WPF\Views\Guide\GuideStatisticAboutTours.xaml.cs">
       <DependentUpon>GuideStatisticAboutTours.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Guide\GuideViewReviews.xaml.cs">
+    <Compile Include="WPF\Views\Guide\GuideViewReviews.xaml.cs">
       <DependentUpon>GuideViewReviews.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Guide\ShowReviewComment.xaml.cs">
+    <Compile Include="WPF\Views\Guide\ShowReviewComment.xaml.cs">
       <DependentUpon>ShowReviewComment.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HomePageFirstGuest.xaml.cs">
@@ -270,31 +271,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Guide\GuideCreateTour.xaml">
+    <Page Include="WPF\Views\Guide\GuideCreateTour.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Guide\GuideFollowTourLive.xaml">
+    <Page Include="WPF\Views\Guide\GuideFollowTourLive.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Guide\GuideHomePage.xaml">
+    <Page Include="WPF\Views\Guide\GuideHomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Guide\GuideKeyPointsCheck.xaml">
+    <Page Include="WPF\Views\Guide\GuideKeyPointsCheck.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Guide\GuideStatisticAboutTours.xaml">
+    <Page Include="WPF\Views\Guide\GuideStatisticAboutTours.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Guide\GuideViewReviews.xaml">
+    <Page Include="WPF\Views\Guide\GuideViewReviews.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Guide\ShowReviewComment.xaml">
+    <Page Include="WPF\Views\Guide\ShowReviewComment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -438,8 +439,6 @@
   <ItemGroup>
     <Resource Include="View\hourglass.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Application\UseCase\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

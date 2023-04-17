@@ -41,8 +41,10 @@ namespace Booking.Model
         {
             Id = int.Parse(values[0]);
             Accommodation.Id = int.Parse(values[1]);
-            ArrivalDay = DateConversion.StringToDate(values[2]);
-            DepartureDay = DateConversion.StringToDate(values[3]);
+            //ArrivalDay = DateConversion.StringToDate(values[2]);
+            ArrivalDay = DateTime.Parse(values[2]);
+            //DepartureDay = DateConversion.StringToDate(values[3]);
+            DepartureDay = DateTime.Parse(values[3]);
             Guest.Id = int.Parse(values[4]);
         }
 
