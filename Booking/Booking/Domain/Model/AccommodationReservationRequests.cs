@@ -1,5 +1,4 @@
-﻿using Booking.Conversion;
-using Booking.Model.Enums;
+﻿using Booking.Model.Enums;
 using Booking.Serializer;
 using System;
 using System.Collections.Generic;

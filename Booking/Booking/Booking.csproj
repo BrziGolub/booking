@@ -60,7 +60,6 @@
     <Compile Include="Domain\Model\AccommodationAndOwnerGrade.cs" />
     <Compile Include="Domain\Model\AccommodationGrade.cs" />
     <Compile Include="Domain\Model\AccommodationReservation.cs" />
-    <Compile Include="Conversion\DateConversion.cs" />
     <Compile Include="Domain\Model\Accommodation.cs" />
     <Compile Include="Domain\Model\AccommodationReservationRequests.cs" />
     <Compile Include="Domain\Model\Enums\AccommodationType.cs" />
