@@ -90,20 +90,24 @@ namespace Booking.View
                 TourService.UpdateKeyPoint(SelectedTourKeyPoint);
                 MessageBox.Show(SelectedTourKeyPoint.Location.State.ToString() + " " + SelectedTourKeyPoint.Location.City.ToString() + " is achieved!");
                 TourService.NotifyObservers();
-
-                if (KeyPoints[KeyPoints.Count() - 1].Achieved == true)
-                {
-                    SelectedTour.IsStarted = false;
-                    TourService.UpdateTour(SelectedTour);
-                    MessageBox.Show("Tour ended, you achieved last keypoint!");
-                    TourService.NotifyObservers();
-                    
-                    this.Close();
-                }
+                EndTour();
             }
             else 
             {
                 MessageBox.Show("You must first mark the keypoint that has been achieved!");
+            }
+        }
+
+        private void EndTour()
+        {
+            if (KeyPoints[KeyPoints.Count() - 1].Achieved == true)
+            {
+                SelectedTour.IsStarted = false;
+                TourService.UpdateTour(SelectedTour);
+                MessageBox.Show("Tour ended, you achieved last keypoint!");
+                TourService.NotifyObservers();
+
+                this.Close();
             }
         }
 
@@ -122,40 +126,25 @@ namespace Booking.View
         private void AddGuest(object sender, RoutedEventArgs e)
         {
             List<Voucher> pomVouchers = new List<Voucher>();
-            
-
 
             tourGuests.Voucher = false;
             if(SelectedGuest != null && SelectedTourKeyPoint != null ) 
             {
                 if (TourService.checkTourGuests(SelectedTour.Id, SelectedGuest.Id) == true)
                 {
-                    
+
                     tourGuests.Tour.Id = SelectedTour.Id;
                     tourGuests.User.Id = SelectedGuest.Id;
                     tourGuests.TourKeyPoint.Id = SelectedTourKeyPoint.Id;
-                   
-                    foreach(Voucher v in VoucherService.GetUserVouchers(tourGuests.User.Id))
+
+                    CheckVouchers(pomVouchers);
+
+                    TourGuestsService.Create(tourGuests);
+
+                    foreach (Voucher v in pomVouchers)
                     {
-                        Voucher pomVoucher = VoucherService.GetById(v.Id);
-                        MessageBoxResult result = ConfirmVoucherUse();
-                        if (v.IsActive && result == MessageBoxResult.Yes) 
-                        {
-                            tourGuests.Voucher = true;
-                            pomVoucher.IsActive = false;
-                            MessageBox.Show("Guest " + SelectedGuest.Username.ToString() + " used voucher");
-                            pomVouchers.Add(pomVoucher);
-                        }
-
-
-                    }
-
-                        TourGuestsService.Create(tourGuests);
-                        
-                        foreach(Voucher v in pomVouchers)
-                        {
                         VoucherService.Update(v);
-                        }
+                    }
 
                     MessageBox.Show("Guest '" + SelectedGuest.Username.ToString() + "' is added to keypoint '" + SelectedTourKeyPoint.Location.State.ToString() + ", " + SelectedTourKeyPoint.Location.City.ToString() + "'");
                 }
@@ -171,8 +160,22 @@ namespace Booking.View
 
         }
 
+        private void CheckVouchers(List<Voucher> pomVouchers)
+        {
+            foreach (Voucher v in VoucherService.GetUserVouchers(tourGuests.User.Id))
+            {
+                Voucher pomVoucher = VoucherService.GetById(v.Id);
+                MessageBoxResult result = ConfirmVoucherUse();
+                if (v.IsActive && result == MessageBoxResult.Yes)
+                {
+                    tourGuests.Voucher = true;
+                    pomVoucher.IsActive = false;
+                    MessageBox.Show("Guest " + SelectedGuest.Username.ToString() + " used voucher");
+                    pomVouchers.Add(pomVoucher);
+                }
 
 
-
+            }
+        }
     }
 }

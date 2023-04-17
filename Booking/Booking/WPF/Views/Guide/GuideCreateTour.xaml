@@ -4,9 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
-        mc:Ignorable="d"
-        Closing="GuideCreateTour_FormClosing"
-        
+        mc:Ignorable="d"        
         Title="GuideCreateTour" Height="645" Width="420" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Grid>
 

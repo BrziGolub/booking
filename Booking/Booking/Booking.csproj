@@ -149,7 +149,6 @@
     <Compile Include="Application\UseCases\VoucherService.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
-    <Compile Include="View\AccommodationReservationRequest.cs" />
     <Compile Include="View\AccommodationReservationView.xaml.cs">
       <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>
@@ -168,7 +167,13 @@
     <Compile Include="View\GradingWindow.xaml.cs">
       <DependentUpon>GradingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\ViewModels\Guide\GuideCreateTourViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\GuideFollowTourLiveViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideHomePageViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\GuideKeyPointsCheckViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\GuideStatisticAboutToursViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\GuideViewReviewsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\ShowReviewCommentViewModel.cs" />
     <Compile Include="WPF\Views\Guide\GuideCreateTour.xaml.cs">
       <DependentUpon>GuideCreateTour.xaml</DependentUpon>
     </Compile>
@@ -407,16 +412,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\user.png" />
+    <Resource Include="Resources\Images\user.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\dismissal.png" />
+    <Resource Include="Resources\Images\dismissal.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\demo.png" />
+    <Resource Include="Resources\Images\demo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\logout.png" />
+    <Resource Include="Resources\Images\logout.png" />
     <Resource Include="Resources\Images\paris.jpg" />
     <Resource Include="Resources\Images\prague.jpg" />
   </ItemGroup>

@@ -25,24 +25,16 @@ namespace Booking.View
 {
     public partial class GuideCreateTour : Window
     {
-        //public TourService tourService { get; set; }
-        //public LocationService locationService { get; set; }
         public ITourService tourService { get; set; }
         public ILocationService locationService { get; set; }
 
-
         public Tour tour = new Tour();
         public ObservableCollection<string> CityCollection { get; set; }
-
         public event PropertyChangedEventHandler PropertyChanged;
         public GuideCreateTour()
         {
             InitializeComponent();
             this.DataContext = this;
-            
-            //tourService = new TourService
-            //locationService = new LocationService();
-
             tourService = InjectorService.CreateInstance<ITourService>();
             locationService = InjectorService.CreateInstance<ILocationService>();
 
@@ -50,6 +42,39 @@ namespace Booking.View
         }
 
         private void FillComboBoxes()
+        {
+            FillLocationsComboBox();
+
+            CityCollection = new ObservableCollection<string>();
+            FillKeyPointsComboBox();
+
+            if (comboBox1.SelectedItem == null)
+            {
+                comboBox2.IsEnabled = false;
+            }
+        }
+
+        private void FillKeyPointsComboBox()
+        {
+            List<string> items = new List<string>();
+
+            using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string[] fields = reader.ReadLine().Split(',');
+                    foreach (var field in fields)
+                    {
+                        string[] pom = field.Split('|');
+                        items.Add(pom[1] + ", " + pom[2]);
+                    }
+                }
+            }
+
+            comboBox.ItemsSource = items;
+        }
+
+        private void FillLocationsComboBox()
         {
             List<string> items1 = new List<string>();
 
@@ -68,38 +93,8 @@ namespace Booking.View
             }
             var distinctItems = items1.Distinct().ToList();
             comboBox1.ItemsSource = distinctItems;
-
-
-            CityCollection = new ObservableCollection<string>();
-
-            List<string> items = new List<string>();
-
-            using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
-            {
-                while (!reader.EndOfStream)
-                {
-                    string[] fields = reader.ReadLine().Split(',');
-                    foreach (var field in fields)
-                    {
-                        string[] pom = field.Split('|');
-                        items.Add(pom[1] + ", " + pom[2]);
-                    }
-                }
-            }
-
-            comboBox.ItemsSource = items;
-
-
-            if (comboBox1.SelectedItem == null)
-            {
-                comboBox2.IsEnabled = false;
-            }
         }
-        private void GuideCreateTour_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            GuideHomePage guideHomePage = new GuideHomePage();
-            guideHomePage.Show();
-        }
+
         public void FillCity(object sender, SelectionChangedEventArgs e)
         {
             CityCollection.Clear();
@@ -294,36 +289,41 @@ namespace Booking.View
             {
                 MessageBox.Show("'DESCRIPTION' not entered");
             }
-            else 
+            else
             { tour.Description = Description; }
-           
+
             if (tbLanguage.Text == "")
             { MessageBox.Show("'LANGUAGE' not entered"); }
-            else 
+            else
             { tour.Language = TourLanguage; }
 
             if (tbMaxGuests.Text == "")
             { MessageBox.Show("'MAX GUESTS NUMBER' not entered"); }
-            else 
+            else
             { tour.MaxVisitors = MaxGuestNumber; }
-            
+
             if (datePicker.Text == "")
             { MessageBox.Show("'TOUR START DATE' not entered"); }
             else
             { tour.StartTime = DateTime.Parse(StartTime); }
 
             if (tbDuration.Text == "")
-            { 
-               MessageBox.Show("'DURATION' not entered");
+            {
+                MessageBox.Show("'DURATION' not entered");
             }
             else { tour.Duration = Duration; }
 
+            CheckProtections();
 
+        }
+
+        private void CheckProtections()
+        {
             if (tour.Destinations.Count < 2)
             {
                 MessageBox.Show("Tour need to have 2 'KEY POINTS' at least");
             }
-            else if(tour.Images.Count == 0)
+            else if (tour.Images.Count == 0)
             {
                 MessageBox.Show("Tour need to have 1 'PICTURE' at least");
             }
@@ -344,15 +344,12 @@ namespace Booking.View
                 MessageBox.Show("'DURATION' should be greater than 0");
             }
 
-
             else
             {
                 tourService.Create(tour);
                 MessageBox.Show("Tour successfully created");
                 this.Close();
             }
-
-            
         }
 
         private void AddKeyPoint(object sender, RoutedEventArgs e)
