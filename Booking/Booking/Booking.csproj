@@ -106,8 +106,6 @@
     <Compile Include="Domain\ServiceInterfaces\IService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
-    <Compile Include="Domain\ServiceInterfaces\ITourImageService.cs" />
-    <Compile Include="Domain\ServiceInterfaces\ITourKeyPointsService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourReservationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IUserService.cs" />
@@ -143,8 +141,6 @@
     <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Application\UseCases\TourGradeService.cs" />
     <Compile Include="Application\UseCases\TourGuestsService.cs" />
-    <Compile Include="Application\UseCases\TourImageService.cs" />
-    <Compile Include="Application\UseCases\TourKeyPointService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Application\UseCases\VoucherService.cs" />
     <Compile Include="Util\InjectorRepository.cs" />

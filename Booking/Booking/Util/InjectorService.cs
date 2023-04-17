@@ -14,7 +14,6 @@ namespace Booking.Util
         {
             { typeof(ITourService), new TourService() },
             { typeof(ITourGuestsService), new TourGuestsService() },
-            { typeof(ITourImageService), new TourImageService() },
             { typeof(IAccommodationAndOwnerGradeService), new AccommodationAndOwnerGradeService() },
             { typeof(IAccommodationService), new AccommodationService() },
             { typeof(IAccommodationGradeService), new AccommodationGradeService() },
@@ -24,7 +23,6 @@ namespace Booking.Util
             { typeof(IAccommodationReservationService), new AccommodationReservationService() },
             { typeof(IUserService), new UserService() },
             { typeof(ITourReservationService), new TourReservationService() },
-            { typeof(ITourKeyPointsService), new TourKeyPointService() },
             { typeof(IGuestsAccommodationImagesService), new GuestsAccommodationImagesService() },
             { typeof(ILocationService), new LocationService() },
             { typeof(ITourGradeService), new TourGradeService() },
