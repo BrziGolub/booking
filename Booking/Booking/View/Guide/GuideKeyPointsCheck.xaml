@@ -91,7 +91,7 @@
             </DataGrid.CellStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" Header="Name" Binding="{Binding Username}"></DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="Added" Binding="{Binding }"></DataGridTextColumn>
+                
             </DataGrid.Columns>
         </DataGrid>
 
