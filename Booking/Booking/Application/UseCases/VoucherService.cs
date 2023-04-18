@@ -76,8 +76,6 @@ namespace Booking.Service
 			_observers.Remove(observer);
 		}
 
-		
-
 		public List<Voucher> GetVouchersByUserId(int id)
 		{
 			return _voucherRepository.GetValidVouchersByUserId(id);

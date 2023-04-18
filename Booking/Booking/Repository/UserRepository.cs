@@ -35,7 +35,7 @@ namespace Booking.Repository
 		public User GetByUsername(string username)
 		{
 			_users = _serializer.FromCSV(FilePath);
-			return _users.FirstOrDefault(u => u.Username == username);
+			return _users.Find(u => u.Username == username);
 		}
 
         public void Save(List<User> users) // save kao u tourRepository?

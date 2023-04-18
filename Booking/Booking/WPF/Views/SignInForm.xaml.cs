@@ -25,8 +25,6 @@ namespace Booking.View
 	public partial class SignInForm : Window
 	{
 		public IUserService _userService { get; set; }
-		//private readonly UserRepository _repository;
-
 		public INotificationService _notificationService { get; set; }
 
 		private string _username;
@@ -53,8 +51,9 @@ namespace Booking.View
 		public SignInForm()
 		{
 			InitializeComponent();
-            _notificationService = InjectorService.CreateInstance<INotificationService>();
+			DataContext = this;
             _userService = InjectorService.CreateInstance<IUserService>();
+            _notificationService = InjectorService.CreateInstance<INotificationService>();
 			
 			//_repository.Load();
 	
@@ -64,7 +63,7 @@ namespace Booking.View
             User user = _userService.GetByUsername(Username);
             
 			//GuideHomePage.Username = usernameTextBox.Text;
-            TourService.SignedGuideId = user.Id;
+            
             List<Notification> notifications = _notificationService.GetUserNotifications(user);
 
             if (user != null)
@@ -83,6 +82,7 @@ namespace Booking.View
 					}
                     else if (user.Role == 2)
                     {
+                        TourService.SignedGuideId = user.Id;
                         GuideHomePage guideHomePage = new GuideHomePage();
                         guideHomePage.Show();
                         Close();
@@ -97,7 +97,8 @@ namespace Booking.View
                     }
                     else if (user.Role == 4)
                     {
-						SecondGuestHomePage secondGuestHomePage = new SecondGuestHomePage();
+                        TourService.SignedGuideId = user.Id;
+                        SecondGuestHomePage secondGuestHomePage = new SecondGuestHomePage();
 						secondGuestHomePage.Show();
 						Close();
 					}

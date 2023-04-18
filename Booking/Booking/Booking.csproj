@@ -131,36 +131,36 @@
     <Compile Include="Repository\VoucherRepository.cs" />
     <Compile Include="Serializer\ISerializable.cs" />
     <Compile Include="Serializer\Serializer.cs" />
-    <Compile Include="Service\AccommodationAndOwnerGradeService.cs" />
-    <Compile Include="Service\AccommodationGradeService.cs" />
-    <Compile Include="Service\AccommodationImageService.cs" />
-    <Compile Include="Service\AccommodationReservationRequestService.cs" />
-    <Compile Include="Service\AccommodationReservationService.cs" />
-    <Compile Include="Service\AccommodationService.cs" />
-    <Compile Include="Service\GuestsAccommodationImagesService.cs" />
-    <Compile Include="Service\NotificationService.cs" />
+    <Compile Include="Application\UseCases\AccommodationAndOwnerGradeService.cs" />
+    <Compile Include="Application\UseCases\AccommodationGradeService.cs" />
+    <Compile Include="Application\UseCases\AccommodationImageService.cs" />
+    <Compile Include="Application\UseCases\AccommodationReservationRequestService.cs" />
+    <Compile Include="Application\UseCases\AccommodationReservationService.cs" />
+    <Compile Include="Application\UseCases\AccommodationService.cs" />
+    <Compile Include="Application\UseCases\GuestsAccommodationImagesService.cs" />
+    <Compile Include="Application\UseCases\NotificationService.cs" />
     <Compile Include="Application\UseCases\TourGradeService.cs" />
     <Compile Include="Application\UseCases\TourGuestsService.cs" />
-    <Compile Include="Service\UserService.cs" />
+    <Compile Include="Application\UseCases\UserService.cs" />
     <Compile Include="Application\UseCases\VoucherService.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
-    <Compile Include="View\AccommodationReservationView.xaml.cs">
+    <Compile Include="WPF\Views\Guest1\AccommodationReservationView.xaml.cs">
       <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Service\LocationService.cs" />
+    <Compile Include="Application\UseCases\LocationService.cs" />
     <Compile Include="Application\UseCases\TourReservationService.cs" />
     <Compile Include="Application\UseCases\TourService.cs" />
-    <Compile Include="View\FirstGuestAllReservations.xaml.cs">
+    <Compile Include="WPF\Views\Guest1\FirstGuestAllReservations.xaml.cs">
       <DependentUpon>FirstGuestAllReservations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FirstGuestHomePage.xaml.cs">
+    <Compile Include="WPF\Views\Guest1\FirstGuestHomePage.xaml.cs">
       <DependentUpon>FirstGuestHomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FisrtGuestAllRequests.xaml.cs">
+    <Compile Include="WPF\Views\Guest1\FisrtGuestAllRequests.xaml.cs">
       <DependentUpon>FisrtGuestAllRequests.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GradingWindow.xaml.cs">
+    <Compile Include="WPF\Views\Owner\GradingWindow.xaml.cs">
       <DependentUpon>GradingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourViewModel.cs" />
@@ -170,11 +170,10 @@
     <Compile Include="WPF\ViewModels\Guide\GuideStatisticAboutToursViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideViewReviewsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\ShowReviewCommentViewModel.cs" />
-    <Compile Include="WPF\Views\Guide\GuideCreateTour.xaml.cs">
-    <Compile Include="View\Guest2\ShowVouchers.xaml.cs">
+    <Compile Include="WPF\Views\Guest2\ShowVouchers.xaml.cs">
       <DependentUpon>ShowVouchers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GuideCreateTour.xaml.cs">
+    <Compile Include="WPF\Views\Guide\GuideCreateTour.xaml.cs">
       <DependentUpon>GuideCreateTour.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guide\GuideFollowTourLive.xaml.cs">
@@ -195,53 +194,52 @@
     <Compile Include="WPF\Views\Guide\ShowReviewComment.xaml.cs">
       <DependentUpon>ShowReviewComment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\HomePageFirstGuest.xaml.cs">
+    <Compile Include="WPF\Views\Guest1\HomePageFirstGuest.xaml.cs">
       <DependentUpon>HomePageFirstGuest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\OwnerDateMove.xaml.cs">
+    <Compile Include="WPF\Views\Owner\OwnerDateMove.xaml.cs">
       <DependentUpon>OwnerDateMove.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\OwnerGradingGuests.xaml.cs">
+    <Compile Include="WPF\Views\Owner\OwnerGradingGuests.xaml.cs">
       <DependentUpon>OwnerGradingGuests.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\OwnerViewReviews.xaml.cs">
+    <Compile Include="WPF\Views\Owner\OwnerViewReviews.xaml.cs">
       <DependentUpon>OwnerViewReviews.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RateAccommodationAndOwner.xaml.cs">
+    <Compile Include="WPF\Views\Guest1\RateAccommodationAndOwner.xaml.cs">
       <DependentUpon>RateAccommodationAndOwner.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Guest2\ReserveTour.xaml.cs">
+    <Compile Include="WPF\Views\Guest2\ReserveTour.xaml.cs">
       <DependentUpon>ReserveTour.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\OwnerHomePage.xaml.cs">
+    <Compile Include="WPF\Views\Owner\OwnerHomePage.xaml.cs">
       <DependentUpon>OwnerHomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\OwnerRegisterAccommodation.xaml.cs">
+    <Compile Include="WPF\Views\Owner\OwnerRegisterAccommodation.xaml.cs">
       <DependentUpon>OwnerRegisterAccommodation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ReshaduleAccommodationReservation.xaml.cs">
+    <Compile Include="WPF\Views\Guest1\ReshaduleAccommodationReservation.xaml.cs">
       <DependentUpon>ReshaduleAccommodationReservation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Guest2\SecondGuestHomePage.xaml.cs">
+    <Compile Include="WPF\Views\Guest2\SecondGuestHomePage.xaml.cs">
       <DependentUpon>SecondGuestHomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ShowGradeImages.xaml.cs">
+    <Compile Include="WPF\Views\Owner\ShowGradeImages.xaml.cs">
       <DependentUpon>ShowGradeImages.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ShowTourDestinations.xaml.cs">
-    <Compile Include="View\Guest2\ShowTourDestinations.xaml.cs">
+    <Compile Include="WPF\Views\Guest2\ShowTourDestinations.xaml.cs">
       <DependentUpon>ShowTourDestinations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Guest2\ShowTourImages.xaml.cs">
+    <Compile Include="WPF\Views\Guest2\ShowTourImages.xaml.cs">
       <DependentUpon>ShowTourImages.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ShowDatesAccommodationsReservations.xaml.cs">
+    <Compile Include="WPF\Views\Guest1\ShowDatesAccommodationsReservations.xaml.cs">
       <DependentUpon>ShowDatesAccommodationsReservations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SignInForm.xaml.cs">
+    <Compile Include="WPF\Views\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SuperOwner.xaml.cs">
+    <Compile Include="WPF\Views\Owner\SuperOwner.xaml.cs">
       <DependentUpon>SuperOwner.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -256,31 +254,30 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AccommodationReservationView.xaml">
+    <Page Include="WPF\Views\Guest1\AccommodationReservationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FirstGuestAllReservations.xaml">
+    <Page Include="WPF\Views\Guest1\FirstGuestAllReservations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FirstGuestHomePage.xaml">
+    <Page Include="WPF\Views\Guest1\FirstGuestHomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FisrtGuestAllRequests.xaml">
+    <Page Include="WPF\Views\Guest1\FisrtGuestAllRequests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\GradingWindow.xaml">
+    <Page Include="WPF\Views\Owner\GradingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Guest2\ShowVouchers.xaml">
+    <Page Include="WPF\Views\Guest2\ShowVouchers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\GuideCreateTour.xaml">
     <Page Include="WPF\Views\Guide\GuideCreateTour.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -309,68 +306,67 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\HomePageFirstGuest.xaml">
+    <Page Include="WPF\Views\Guest1\HomePageFirstGuest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\OwnerDateMove.xaml">
+    <Page Include="WPF\Views\Owner\OwnerDateMove.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\OwnerGradingGuests.xaml">
+    <Page Include="WPF\Views\Owner\OwnerGradingGuests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\OwnerHomePage.xaml">
+    <Page Include="WPF\Views\Owner\OwnerHomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\OwnerRegisterAccommodation.xaml">
+    <Page Include="WPF\Views\Owner\OwnerRegisterAccommodation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\OwnerViewReviews.xaml">
+    <Page Include="WPF\Views\Owner\OwnerViewReviews.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RateAccommodationAndOwner.xaml">
+    <Page Include="WPF\Views\Guest1\RateAccommodationAndOwner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Guest2\ReserveTour.xaml">
+    <Page Include="WPF\Views\Guest2\ReserveTour.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ReshaduleAccommodationReservation.xaml">
+    <Page Include="WPF\Views\Guest1\ReshaduleAccommodationReservation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Guest2\SecondGuestHomePage.xaml">
+    <Page Include="WPF\Views\Guest2\SecondGuestHomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ShowGradeImages.xaml">
+    <Page Include="WPF\Views\Owner\ShowGradeImages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ShowTourDestinations.xaml">
-    <Page Include="View\Guest2\ShowTourDestinations.xaml">
+    <Page Include="WPF\Views\Guest2\ShowTourDestinations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Guest2\ShowTourImages.xaml">
+    <Page Include="WPF\Views\Guest2\ShowTourImages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ShowDatesAccommodationsReservations.xaml">
+    <Page Include="WPF\Views\Guest1\ShowDatesAccommodationsReservations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SignInForm.xaml">
+    <Page Include="WPF\Views\SignInForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SuperOwner.xaml">
+    <Page Include="WPF\Views\Owner\SuperOwner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -450,5 +446,6 @@
   <ItemGroup>
     <Resource Include="Resources\Images\request.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
