@@ -85,7 +85,7 @@ namespace Booking.Service
                 {
                     for (DateTime reservationDate = reservation.ArrivalDay; reservationDate <= reservation.DepartureDay; reservationDate=reservationDate.AddDays(1)) 
                     {
-                        if (date.Equals(reservationDate) && reservation.Accommodation.Owner.Id == request.AccommodationReservation.Accommodation.Owner.Id) 
+                        if (date.Equals(reservationDate) && reservation.Accommodation.Id == request.AccommodationReservation.Accommodation.Id) 
                         {
                             return "Ocupied";
                         }
@@ -95,7 +95,46 @@ namespace Booking.Service
             return "Free";
         }
 
-        public void DeleteRequest(AccommodationReservation selectedReservation)
+        public void SaveRejected(AccommodationReservationRequests request) 
+        {
+            List<AccommodationReservationRequests> accommodationReservationRequestAll = new List<AccommodationReservationRequests>();
+            accommodationReservationRequestAll = _repository.GetAll();
+            foreach (var arr in accommodationReservationRequestAll)
+            {
+                if (arr.Id == request.Id) 
+                {
+                    arr.Comment=request.Comment;
+                    arr.Status = RequestStatus.DECLINED;
+                }
+            }
+            _repository.Save(accommodationReservationRequestAll);
+        }
+        public void SaveAccepted(AccommodationReservationRequests request)
+        {
+            List<AccommodationReservationRequests> accommodationReservationRequestAll = new List<AccommodationReservationRequests>();
+            accommodationReservationRequestAll = _repository.GetAll();
+            foreach (var arr in accommodationReservationRequestAll)
+            {
+                if (arr.Id == request.Id)
+                {
+                    arr.Status = RequestStatus.ACCEPTED;
+                }
+            }
+            _repository.Save(accommodationReservationRequestAll);
+            List<AccommodationReservation> allReservations = new List<AccommodationReservation>();
+            allReservations = _reservationRepository.GetAll();
+            foreach (var reservation in allReservations)
+            {
+                if (reservation.Id == request.AccommodationReservation.Id)
+                {
+                    reservation.ArrivalDay = request.NewArrivalDay;
+                    reservation.DepartureDay = request.NewDeparuteDay;
+                }
+            }
+            _reservationRepository.Save(allReservations);
+        }
+
+            public void DeleteRequest(AccommodationReservation selectedReservation)
         {
             _repository.DeleteRequest(selectedReservation);
             NotifyObservers();

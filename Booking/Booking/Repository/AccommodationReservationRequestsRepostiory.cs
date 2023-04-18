@@ -24,6 +24,11 @@ namespace Booking.Repository
             _serializer = new Serializer<AccommodationReservationRequests>();
             _accommodationsReservationsRequests = _serializer.FromCSV(FilePath);
 		}
+        public void Save(List<AccommodationReservationRequests> list) 
+        {
+            _accommodationsReservationsRequests= list;
+            _serializer.ToCSV(FilePath, _accommodationsReservationsRequests);
+        }
 
         public List<AccommodationReservationRequests> GetAll()
         {

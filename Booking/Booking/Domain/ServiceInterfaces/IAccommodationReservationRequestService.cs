@@ -16,6 +16,8 @@ namespace Booking.Domain.ServiceInterfaces
         List<AccommodationReservationRequests> GetAll();
         List<AccommodationReservationRequests> GetSeeableDateChanges();
         String CheckDate(AccommodationReservationRequests request);
+        void SaveRejected(AccommodationReservationRequests request);
+        void SaveAccepted(AccommodationReservationRequests request);
 
     }
 }
