@@ -87,5 +87,11 @@ namespace Booking.View
         private void OpenPictures(object sender, RoutedEventArgs e)
         {
         }
+        private void LogOut(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            this.Close();
+        }
     }
 }

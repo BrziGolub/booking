@@ -94,5 +94,8 @@
                 </DataGrid>
             </ScrollViewer>
         </StackPanel>
+        <WrapPanel FlowDirection="LeftToRight" Margin="785,10,0,671">
+            <Button Margin ="118 0 0 0 " HorizontalAlignment="Left"  Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="LogOut" >LOG OUT</Button>
+        </WrapPanel>
     </Grid>
 </Window>

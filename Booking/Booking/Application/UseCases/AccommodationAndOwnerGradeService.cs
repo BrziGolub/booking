@@ -147,7 +147,7 @@ namespace Booking.Service
             }
             else 
             {
-                return "To become a super owner you need at least 50 reservations with an average score above 4.5";
+                return "To become a super owner you need at least 50 grades with an average score above 4.5";
             }
         }
         public int GetNumberOfGrades() 

@@ -146,6 +146,14 @@
     <Compile Include="Application\UseCases\VoucherService.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
+    <Compile Include="WPF\ViewModels\Owner\GradingWindowViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\OwnerDateMoveViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\OwnerGradingGuestsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\OwnerHomePageViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\OwnerRegisterAccommodationViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\OwnerViewReviewsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\ShowGradeImagesViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\SuperOwnerViewModel.cs" />
     <Compile Include="WPF\Views\Guest1\AccommodationReservationView.xaml.cs">
       <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
     </Compile>
