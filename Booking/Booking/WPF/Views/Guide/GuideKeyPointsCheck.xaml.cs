@@ -58,7 +58,7 @@ namespace Booking.View
 
             SelectedTour = TourService.GetById(idTour);
 
-            Guests = new ObservableCollection<User>(UserService.GetGuests());
+            Guests = new ObservableCollection<User>(UserService.GetReservedGuests(SelectedTour.Id));
             KeyPoints = new ObservableCollection<TourKeyPoint>(TourService.GetSelectedTourKeyPoints(SelectedTour.Id));
 
             KeyPoints[0].Achieved = true;
@@ -76,7 +76,7 @@ namespace Booking.View
             }
 
             Guests.Clear();
-            foreach(User user in UserService.GetGuests())
+            foreach(User user in UserService.GetReservedGuests(SelectedTour.Id))
             {
                 Guests.Add(user);
             }
@@ -166,13 +166,17 @@ namespace Booking.View
             foreach (Voucher v in VoucherService.GetUserVouchers(tourGuests.User.Id))
             {
                 Voucher pomVoucher = VoucherService.GetById(v.Id);
-                MessageBoxResult result = ConfirmVoucherUse();
-                if (v.IsActive && result == MessageBoxResult.Yes)
+                
+                if (pomVoucher.IsActive == true )
                 {
-                    tourGuests.Voucher = true;
-                    pomVoucher.IsActive = false;
-                    MessageBox.Show("Guest " + SelectedGuest.Username.ToString() + " used voucher");
-                    pomVouchers.Add(pomVoucher);
+                    MessageBoxResult result = ConfirmVoucherUse();
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        tourGuests.Voucher = true;
+                        pomVoucher.IsActive = false;
+                        MessageBox.Show("Guest " + SelectedGuest.Username.ToString() + " used voucher");
+                        pomVouchers.Add(pomVoucher);
+                    }
                 }
 
 

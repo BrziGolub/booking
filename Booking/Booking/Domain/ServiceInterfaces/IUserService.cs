@@ -12,5 +12,6 @@ namespace Booking.Domain.ServiceInterfaces
     {
         List<User> GetGuests();
         User GetByUsername(string username);
+        List<User> GetReservedGuests(int tourId);
     }
 }
