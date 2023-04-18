@@ -29,6 +29,7 @@ namespace Booking.Util
             { typeof(INotificationService), new NotificationService() }
 
         };
+
         public static T CreateInstance<T>()
         {
             Type type = typeof(T);

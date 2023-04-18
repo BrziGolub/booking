@@ -54,14 +54,25 @@ namespace Booking.Repository
 			return voucher;
 		}
 
-		public Voucher Update(Voucher voucher) 
+		public List<Voucher> GetValidVouchersByUserId(int id)
 		{
-            //_vouchers = _serializer.FromCSV(FilePath);
-            Voucher founded = _vouchers.Find(v=>v.Id == voucher.Id);
+			List<Voucher> list = new List<Voucher>();
+			foreach (Voucher voucher in _vouchers)
+			{
+				if (voucher.User.Id == id && voucher.IsActive && voucher.ValidTime > DateTime.Now)
+				{
+					list.Add(voucher);
+				}
+			}
+			return list;
+		}
+
+		public Voucher Update(Voucher voucher)
+		{
+			Voucher founded = _vouchers.Find(v => v.Id == voucher.Id);
 			founded = voucher;
 			_serializer.ToCSV(FilePath, _vouchers);
 			return founded;
 		}
-
 	}
 }

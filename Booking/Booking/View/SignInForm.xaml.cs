@@ -25,6 +25,7 @@ namespace Booking.View
 	public partial class SignInForm : Window
 	{
 		public IUserService _userService { get; set; }
+		//private readonly UserRepository _repository;
 
 		public INotificationService _notificationService { get; set; }
 
@@ -52,12 +53,12 @@ namespace Booking.View
 		public SignInForm()
 		{
 			InitializeComponent();
-			DataContext = this;
             _notificationService = InjectorService.CreateInstance<INotificationService>();
             _userService = InjectorService.CreateInstance<IUserService>();
 			
-		}
+			//_repository.Load();
 	
+		}
 		private void SignIn(object sender, RoutedEventArgs e)
 		{
             User user = _userService.GetByUsername(Username);

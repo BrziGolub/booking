@@ -42,11 +42,11 @@ namespace Booking.Service
 			voucher = new Voucher();
 		}
 
-        public Tour GetById(int id)
-        {
-            return _tourRepository.GetById(id);
-        }
-        public Tour GetByName(string name)
+		public Tour GetById(int id)
+		{
+			return _tourRepository.GetById(id);
+		}
+		public Tour GetByName(string name)
 		{
 			return _tourRepository.GetByName(name);
 		}
@@ -129,9 +129,7 @@ namespace Booking.Service
 			{
 				return new List<Tour>();
 			}
-
 		}
-
 
 		public List<Tour> GetGuideTours()
 		{
@@ -160,9 +158,16 @@ namespace Booking.Service
 		{
 			observe.Clear();
 
-			foreach (Tour tour in _tourRepository.GetAll())
+			foreach (Tour tour in _tourRepository.GetValidTours())
 			{
-				//FALI UVEZIVANJE SLIKA I LOKACIJE
+				tour.Location = _locationRepository.GetById(tour.Location.Id);
+				tour.Destinations = _tourKeyPointsRepository.GetKeyPointsByTourId(tour.Id);
+				tour.Images = _tourImagesRepository.GetTourImagesByTourId(tour.Id);
+				foreach (TourKeyPoint keyPoint in tour.Destinations)
+				{
+					keyPoint.Location = _locationRepository.GetById(keyPoint.Location.Id);
+				}
+
 				bool isStateSearched = tour.Location.State.Equals(state) || state.Equals("All");
 				bool isCitySearche = tour.Location.City.Equals(city) || city.Equals("All");
 				bool isLanguageSearched = tour.Language.ToLower().Contains(language.ToLower()) || language.Equals("");
@@ -204,8 +209,15 @@ namespace Booking.Service
 		{
 			observe.Clear();
 
-			foreach (Tour tour in _tourRepository.GetAll())
+			foreach (Tour tour in _tourRepository.GetValidTours())
 			{
+				tour.Location = _locationRepository.GetById(tour.Location.Id);
+				tour.Destinations = _tourKeyPointsRepository.GetKeyPointsByTourId(tour.Id);
+				tour.Images = _tourImagesRepository.GetTourImagesByTourId(tour.Id);
+				foreach (TourKeyPoint keyPoint in tour.Destinations)
+				{
+					keyPoint.Location = _locationRepository.GetById(keyPoint.Location.Id);
+				}
 				observe.Add(tour);
 			}
 

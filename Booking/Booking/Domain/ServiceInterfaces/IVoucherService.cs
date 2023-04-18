@@ -16,5 +16,7 @@ namespace Booking.Domain.ServiceInterfaces
         Voucher GetById(int id);
         Voucher Update(Voucher voucher);
         List<Voucher> GetUserVouchers(int id);
-    }
+        List<Voucher> GetVouchersByUserId(int id);
+        void RedeemVoucher(Voucher voucher);
+	}
 }

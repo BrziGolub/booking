@@ -76,5 +76,17 @@ namespace Booking.Service
 			_observers.Remove(observer);
 		}
 
+		
+
+		public List<Voucher> GetVouchersByUserId(int id)
+		{
+			return _voucherRepository.GetValidVouchersByUserId(id);
+		}
+
+		public void RedeemVoucher(Voucher voucher)
+		{
+			voucher.IsActive = false;
+			_voucherRepository.Update(voucher);
+		}
 	}
 }

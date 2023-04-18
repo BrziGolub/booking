@@ -171,6 +171,10 @@
     <Compile Include="WPF\ViewModels\Guide\GuideViewReviewsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\ShowReviewCommentViewModel.cs" />
     <Compile Include="WPF\Views\Guide\GuideCreateTour.xaml.cs">
+    <Compile Include="View\Guest2\ShowVouchers.xaml.cs">
+      <DependentUpon>ShowVouchers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GuideCreateTour.xaml.cs">
       <DependentUpon>GuideCreateTour.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guide\GuideFollowTourLive.xaml.cs">
@@ -206,7 +210,7 @@
     <Compile Include="View\RateAccommodationAndOwner.xaml.cs">
       <DependentUpon>RateAccommodationAndOwner.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ReserveTour.xaml.cs">
+    <Compile Include="View\Guest2\ReserveTour.xaml.cs">
       <DependentUpon>ReserveTour.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OwnerHomePage.xaml.cs">
@@ -218,16 +222,17 @@
     <Compile Include="View\ReshaduleAccommodationReservation.xaml.cs">
       <DependentUpon>ReshaduleAccommodationReservation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SecondGuestHomePage.xaml.cs">
+    <Compile Include="View\Guest2\SecondGuestHomePage.xaml.cs">
       <DependentUpon>SecondGuestHomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ShowGradeImages.xaml.cs">
       <DependentUpon>ShowGradeImages.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ShowTourDestinations.xaml.cs">
+    <Compile Include="View\Guest2\ShowTourDestinations.xaml.cs">
       <DependentUpon>ShowTourDestinations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ShowTourImages.xaml.cs">
+    <Compile Include="View\Guest2\ShowTourImages.xaml.cs">
       <DependentUpon>ShowTourImages.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ShowDatesAccommodationsReservations.xaml.cs">
@@ -271,6 +276,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Guest2\ShowVouchers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GuideCreateTour.xaml">
     <Page Include="WPF\Views\Guide\GuideCreateTour.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -327,7 +337,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ReserveTour.xaml">
+    <Page Include="View\Guest2\ReserveTour.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -335,7 +345,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SecondGuestHomePage.xaml">
+    <Page Include="View\Guest2\SecondGuestHomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -344,10 +354,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ShowTourDestinations.xaml">
+    <Page Include="View\Guest2\ShowTourDestinations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ShowTourImages.xaml">
+    <Page Include="View\Guest2\ShowTourImages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

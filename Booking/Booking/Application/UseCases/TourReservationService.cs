@@ -16,6 +16,7 @@ namespace Booking.Service
 		public TourReservationService()
 		{
 			_repository = InjectorRepository.CreateInstance<ITourReservationRepository>();
+			_tourRepository = InjectorRepository.CreateInstance<ITourRepository>();
 		}
 
 		public TourReservation GetById(int id)

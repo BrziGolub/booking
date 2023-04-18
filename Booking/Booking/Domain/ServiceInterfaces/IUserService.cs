@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.ServiceInterfaces
 {
-    public interface IUserService : ISubject,IService<User>
+    public interface IUserService : ISubject, IService<User>
     {
         List<User> GetGuests();
         User GetByUsername(string username);

@@ -13,7 +13,9 @@ namespace Booking.Model
         public User User { get; set; }
         public DateTime ValidTime { get; set; }
         public bool IsActive { get; set; }
-        public Voucher() {
+
+        public Voucher()
+        {
             User = new User();
         }
 
