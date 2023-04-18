@@ -29,13 +29,14 @@ namespace Booking.View
         public ObservableCollection<AccommodationReservationRequests> Requests { get; set; }
         public AccommodationReservationRequests SelectedAccommodationReservationRequest { get; set; }
         public IAccommodationReservationRequestService AccommodationReservationRequestService { get; set; }
+        public INotificationService NotificationService { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public OwnerDateMove()
         {
             InitializeComponent();
             this.DataContext = this;
             AccommodationReservationRequestService = InjectorService.CreateInstance<IAccommodationReservationRequestService>();
-
+            NotificationService = InjectorService.CreateInstance<INotificationService>();
             AccommodationReservationRequestService.Subscribe(this);
             Requests = new ObservableCollection<AccommodationReservationRequests>(AccommodationReservationRequestService.GetSeeableDateChanges());
         }
@@ -74,11 +75,13 @@ namespace Booking.View
         {
             SelectedAccommodationReservationRequest.Comment = OwnerComment;
             AccommodationReservationRequestService.SaveRejected(SelectedAccommodationReservationRequest);
+            NotificationService.MakeReject(SelectedAccommodationReservationRequest);
             this.Close();
         }
         private void Button_Click_Accept(object sender, RoutedEventArgs e)
         {
             AccommodationReservationRequestService.SaveAccepted(SelectedAccommodationReservationRequest);
+            NotificationService.MakeAccepted(SelectedAccommodationReservationRequest);
             this.Close();
         }
     }

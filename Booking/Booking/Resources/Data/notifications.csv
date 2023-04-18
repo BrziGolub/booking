@@ -1,3 +1,5 @@
 1|6|Reservation for: hotelPrague 17/05/2023 - 22/05/2023 is cancled  guest: mrk|True
 2|6|Reservation for: hotelPrague 17/05/2023 - 22/05/2023 is cancled  guest: mrk|True
 3|6|Reservation for: hotelMONA 17/05/2023 - 22/05/2023 is cancled guest: mrk|True
+4|4|The date move request for hotelPrague is rejected Owner:Katarina|True
+5|4|The date move request for hotelPrague was accepted new dates are 28/04/2023 - 30/04/2023 Owner:Katarina|True
