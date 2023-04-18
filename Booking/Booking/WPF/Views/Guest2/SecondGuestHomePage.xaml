@@ -51,13 +51,14 @@
                       AutoGenerateColumns="False"
                       SelectionMode="Single"
                       IsReadOnly="True"
-                      Margin="0 8 0 0">
+                      Margin="0 8 0 0"
+					  x:Name="ActiveTourDataGrid">
                 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Width="*"/>
-                    <DataGridTextColumn Header="State" Width="*"/>
-                    <DataGridTextColumn Header="City" Width="*"/>
-                    <DataGridTextColumn Header="Visitos" Width="*"/>
+                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Tour.Name}"/>
+                    <DataGridTextColumn Header="State" Width="*" Binding="{Binding Tour.Location.State}"/>
+                    <DataGridTextColumn Header="City" Width="*" Binding="{Binding Tour.Location.City}"/>
+                    <DataGridTextColumn Header="Visitos" Width="*" Binding="{Binding NumberOfVisitors}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

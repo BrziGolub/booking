@@ -11,8 +11,6 @@ namespace Booking.Model
 
 		public Tour Tour { get; set; }
 
-		//public Guide Guide { get; set; }
-
 		public int NumberOfVisitors { get; set; }
 
 		public TourReservation()

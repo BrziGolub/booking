@@ -13,5 +13,7 @@ namespace Booking.Domain.ServiceInterfaces
         TourGuests AddTourGuests(TourGuests tourGuests);
         void Create(TourGuests tourGuests);
         List<TourGuests> GetAll();
-    }
+        TourGuests UpdateTourGuest(TourGuests tourGuests);
+        TourGuests CheckPresence(int id);
+	}
 }

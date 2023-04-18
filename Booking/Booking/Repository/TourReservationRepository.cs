@@ -55,5 +55,10 @@ namespace Booking.Repository
             _toursReservations.RemoveAll(tr => tr.Tour.Id == id);
             _serializer.ToCSV(FilePath, _toursReservations);
         }
+
+		public List<TourReservation> GetReservationsByGuestId(int id)
+		{
+			return _toursReservations.FindAll(r => r.User.Id == id);
+		}
     }
 }

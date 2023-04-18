@@ -1,17 +1,7 @@
 ﻿using Booking.Domain.RepositoryInterfaces;
 using Booking.Model;
-using Booking.Model.Images;
 using Booking.Serializer;
-using Booking.Service;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
 
 namespace Booking.Repository
 {
@@ -40,8 +30,8 @@ namespace Booking.Repository
 
 		public TourGuests Add(TourGuests tourGuest)
 		{
-            _tourGuests = _serializer.FromCSV(FilePath);
-            _tourGuests.Add(tourGuest);
+			_tourGuests = _serializer.FromCSV(FilePath);
+			_tourGuests.Add(tourGuest);
 			_serializer.ToCSV(FilePath, _tourGuests);
 			return tourGuest;
 		}
@@ -50,6 +40,20 @@ namespace Booking.Repository
 		{
 			_tourGuests.RemoveAll(TourKeyPoint => TourKeyPoint.Tour.Id == id);
 			_serializer.ToCSV(FilePath, _tourGuests);
+		}
+
+		public TourGuests Update(TourGuests tourGuests)
+		{
+			List<TourGuests> foundedList = _tourGuests.FindAll(t => t.Tour.Id == tourGuests.Tour.Id);
+			TourGuests founded = foundedList.Find(t => t.User.Id == tourGuests.User.Id);
+			founded = tourGuests;
+			_serializer.ToCSV(FilePath, _tourGuests);
+			return tourGuests;
+		}
+
+		public List<TourGuests> GetByUserId(int id)
+		{
+			return _tourGuests.FindAll(t => t.User.Id == id);
 		}
 	}
 }
