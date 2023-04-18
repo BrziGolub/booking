@@ -23,9 +23,7 @@ namespace Booking.Service
         private readonly IUserRepository _userRepository;
         private readonly IAccommodationReservationRequestsRepostiory _accommodationReservationRequestRepository;
         private readonly IAccommodationGradeRepository _accommodationGradeRepository;
-
         public static int SignedFirstGuestId;
-
 		public AccommodationReservationService()
         {
             _observers = new List<IObserver>();
@@ -45,6 +43,7 @@ namespace Booking.Service
         {
             List<AccommodationReservation> _guestsReservations = new List<AccommodationReservation>();
 
+            //binding
             foreach (var reservation in _repository.GetAll())
             {
                 if (reservation.Guest.Id == SignedFirstGuestId)
@@ -86,7 +85,6 @@ namespace Booking.Service
         {
             _observers.Remove(observer);
         }
-
         public void NotifyObservers()
         {
             foreach (var observer in _observers)
@@ -94,7 +92,6 @@ namespace Booking.Service
                 observer.Update();
             }
         }
-
         public List<DateTime> MakeListOfReservedDates(DateTime initialDate, DateTime endDate)
         {
             List<DateTime> reservedDates = new List<DateTime>();
@@ -120,7 +117,6 @@ namespace Booking.Service
         }
         public bool Reserve(DateTime arrivalDay, DateTime departureDay, Accommodation selectedAccommodation)
         {
-
             List<DateTime> reservedDatesEntered = MakeListOfReservedDates(arrivalDay, departureDay);
 
             foreach (AccommodationReservation reservation in _repository.GetAll())
@@ -131,20 +127,16 @@ namespace Booking.Service
 
                     if (IsDatesMatche(reservedDatesEntered, reservedDates) == false)
                     {
-                        //unsuccessful reservation
                         return false;
                     }
                 }
             }
             AccommodationReservation newReservation = new AccommodationReservation(selectedAccommodation, arrivalDay, departureDay);
-
-            //successful reservation
             SaveReservation(newReservation);
             return true;
         }
         public List<DateTime> SetReservedDates(DateTime arrivalDay, DateTime departureDay, Accommodation selected)
         {
-            //this is list od reserved days
             List<DateTime> reservedDates = new List<DateTime>();
 
             foreach (AccommodationReservation r in _repository.GetAll())
@@ -157,14 +149,10 @@ namespace Booking.Service
                     }
                 }
             }
-            //throw out duplicate
             List<DateTime> uniqueReservedDatesList = reservedDates.Distinct().ToList();
-
-            //sort in ascending order
             uniqueReservedDatesList.Sort();
             return uniqueReservedDatesList;
         }
-
         public bool IsReservationAvailableToGrade(AccommodationReservation accommodationReservation)
         {
             return accommodationReservation.DepartureDay <= DateTime.Now && accommodationReservation.DepartureDay.AddDays(5) >= DateTime.Now;
@@ -193,79 +181,65 @@ namespace Booking.Service
         {
             List<(DateTime, DateTime)> rangeOfDates = new List<(DateTime, DateTime)>();
 
-            //find date before
+            DateTime endDate = FindDateAfter(reservedDates, difference, departureDay);
+            rangeOfDates.Add((endDate.AddDays(-difference), endDate));
 
+            DateTime startDate = FindDateBefore(reservedDates, difference, arrivalDay);
+            rangeOfDates.Add((startDate, startDate.AddDays(difference)));
+            return rangeOfDates;
+        }
+
+        private DateTime FindDateAfter(List<DateTime> reservedDates, int difference, DateTime departureDay)
+        {
             DateTime endDate = departureDay;
-            bool endFlag = true;
-
-            while (endFlag)
+            while (true)
             {
-                bool isEndValid = false;
+                bool isEndValid = IsDateValid(reservedDates, endDate, difference);
 
-                for (int i = 1; i <= difference; i++)
+                if (!isEndValid)
                 {
-                    foreach (var ReservedDay in reservedDates)
-                    {
-                        DateTime final_moment = endDate;
-
-                        if (final_moment.AddDays(-i) == ReservedDay || final_moment.AddDays(-i) == DateTime.Now)
-                        {
-                            isEndValid = true;
-                            if (endDate.AddDays(-i) == DateTime.Now)
-                            {
-                                endFlag = false;
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                if (isEndValid == false)
-                {
-                    rangeOfDates.Add((endDate.AddDays(-difference), endDate));
-                    endFlag = false;
-
+                    return endDate;
                 }
                 else
                 {
                     endDate = endDate.AddDays(-1);
                 }
             }
-
-            //find date after
-
-            endFlag = true;
+        }
+        private DateTime FindDateBefore(List<DateTime> reservedDates, int difference, DateTime arrivalDay)
+        {
             DateTime startDate = arrivalDay;
-
-            while (endFlag)
+            while (true)
             {
-                bool isEndValid = false;
+                bool isStartValid = IsDateValid(reservedDates, startDate, difference);
 
-                for (int i = 1; i <= difference; i++)
+                if (!isStartValid)
                 {
-                    foreach (var ReservedDay in reservedDates)
-                    {
-                        DateTime initial_moment = startDate;
-                        if (initial_moment.AddDays(i) == ReservedDay)
-                        {
-                            isEndValid = true;
-                        }
-                    }
-                }
-
-                if (isEndValid == false)
-                {
-                    rangeOfDates.Add((startDate, startDate.AddDays(difference)));
-                    endFlag = false;
-
+                    return startDate;
                 }
                 else
                 {
                     startDate = startDate.AddDays(1);
                 }
             }
+        }
+        private bool IsDateValid(List<DateTime> reservedDates, DateTime date, int difference)
+        {
+            for (int i = 1; i <= difference; i++)
+            {
+                DateTime checkDate = date.AddDays(-i);
 
-            return rangeOfDates;
+                if (checkDate == DateTime.Now)
+                {
+                    return true;
+                }
+
+                if (reservedDates.Contains(checkDate))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         public List<(DateTime, DateTime)> SuggestOtherDates(DateTime arrivalDay, DateTime departureDay, Accommodation selectedAccommodation)
         {
@@ -274,7 +248,6 @@ namespace Booking.Service
             List<DateTime> reservedDates = new List<DateTime>();
             reservedDates = SetReservedDates(arrivalDay, departureDay, selectedAccommodation);
 
-            //return the list of ranges
             return GetDates(reservedDates, difference, departureDay, arrivalDay);
         }
     }

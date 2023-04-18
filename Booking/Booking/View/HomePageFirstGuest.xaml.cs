@@ -26,8 +26,6 @@ namespace Booking.View
     {
 
         private ObservableCollection<Accommodation> _accommodations;
-        
-
         public IAccommodationService AccommodationService { get; set; }
         public ILocationService LocationService { get; set; }
 
@@ -137,13 +135,6 @@ namespace Booking.View
             AccommodationService.ShowAll(_accommodations);
 
         }
-
-        public void BookAccommodation(Accommodation selectedAccommodation)
-        {
-            AccommodationReservationView dialog = new AccommodationReservationView(selectedAccommodation);
-            dialog.Show();
-        }
-
         private void Button_Click_Book(object sender, RoutedEventArgs e)
         {
           
@@ -152,10 +143,8 @@ namespace Booking.View
                 MessageBox.Show("Please select an accommodation to reserve.");
                 return;
             }
-
-            BookAccommodation(SelectedAccommodation);
+            AccommodationReservationView dialog = new AccommodationReservationView(SelectedAccommodation);
+            dialog.Show();
         }
-
-        
     }
 }
