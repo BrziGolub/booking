@@ -14,13 +14,16 @@ namespace Booking.Model
         public User User { get; set; }
         public TourKeyPoint TourKeyPoint { get; set; }
         public bool Voucher { get; set; }
+        public bool IsPresent { get; set; }
 
         public TourGuests() 
         {
             Tour = new Tour();
             User = new User();
             TourKeyPoint = new TourKeyPoint();
-        }
+            IsPresent = false;
+
+		}
 
         public void FromCSV(string[] values)
         {
@@ -28,7 +31,8 @@ namespace Booking.Model
             User.Id = int.Parse(values[1]);
             TourKeyPoint.Id = int.Parse(values[2]);
             Voucher = Convert.ToBoolean(values[3]);
-        }
+			IsPresent = Convert.ToBoolean(values[4]);
+		}
 
         public string[] ToCSV()
         {
@@ -37,8 +41,9 @@ namespace Booking.Model
                 Tour.Id.ToString(),
                 User.Id.ToString(),
                 TourKeyPoint.Id.ToString(),
-                Voucher.ToString()
-            };
+                Voucher.ToString(),
+				IsPresent.ToString()
+			};
             return csvValues;
         }
 

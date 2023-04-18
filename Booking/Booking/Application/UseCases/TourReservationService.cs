@@ -12,11 +12,15 @@ namespace Booking.Service
 	{
 		private readonly ITourReservationRepository _repository;
 		private readonly ITourRepository _tourRepository;
+		private readonly ILocationRepository _locationRepository;
+		private readonly ITourKeyPointRepository _keyPointsRepository;
 
 		public TourReservationService()
 		{
 			_repository = InjectorRepository.CreateInstance<ITourReservationRepository>();
 			_tourRepository = InjectorRepository.CreateInstance<ITourRepository>();
+			_locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
+			_keyPointsRepository = InjectorRepository.CreateInstance<ITourKeyPointRepository>();
 		}
 
 		public TourReservation GetById(int id)
@@ -54,6 +58,33 @@ namespace Booking.Service
 			}
 
 			return availability - busyness;
+		}
+
+		public TourReservation GetActiveTour(int id)
+		{
+			List<TourReservation> list = _repository.GetReservationsByGuestId(id);
+			TourReservation tourReservation = new TourReservation();
+
+			foreach (TourReservation res in list)
+			{
+				res.Tour = _tourRepository.GetById(res.Tour.Id);
+				res.Tour.Destinations = _keyPointsRepository.GetKeyPointsByTourId(res.Tour.Id);
+				res.Tour.Location = _locationRepository.GetById(res.Tour.Location.Id);
+				if (res.Tour.IsStarted)
+				{
+					tourReservation = res;
+				}
+			}
+
+			foreach (TourKeyPoint kp in tourReservation.Tour.Destinations)
+			{
+				if (kp.Achieved)
+				{
+					tourReservation.Tour.Location = _locationRepository.GetById(kp.Location.Id);
+				}
+			}
+
+			return tourReservation;
 		}
 	}
 }
