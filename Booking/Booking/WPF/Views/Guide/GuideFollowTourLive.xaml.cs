@@ -23,9 +23,6 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for GuideFollowTourLive.xaml
-    /// </summary>
     public partial class GuideFollowTourLive : Window , IObserver
     {
         public ObservableCollection<Tour> Tours { get; set; }
@@ -46,17 +43,6 @@ namespace Booking.View
 
             Pomid = -1;
             Tours = new ObservableCollection<Tour>(TourService.GetTodayTours());
-
-            //CheckIfTodayToursIsEmpty();
-
-        }
-
-        private void CheckIfTodayToursIsEmpty()
-        {
-            if (Tours.Count == 0)
-            {
-                MessageBox.Show("Today you don't have tours!");
-            }
         }
 
         private void StartTour(object sender, RoutedEventArgs e)
@@ -81,13 +67,19 @@ namespace Booking.View
             {
                 GuideKeyPointsCheck guideKeyPointsCheck = new GuideKeyPointsCheck(SelectedTour.Id);
                 Pomid = SelectedTour.Id;
+                if (SelectedTour.IsEnded)
+                {
+                    MessageBox.Show("You cant start ended tour!");
+                }
+                else
+                {
+                    SelectedTour.IsStarted = true;
+                    TourService.UpdateTour(SelectedTour);
+                    MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
+                    TourService.NotifyObservers();
 
-                SelectedTour.IsStarted = true;
-                TourService.UpdateTour(SelectedTour);
-                MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
-                TourService.NotifyObservers();
-
-                guideKeyPointsCheck.ShowDialog();
+                    guideKeyPointsCheck.ShowDialog();
+                }
             }
             else
             {

@@ -77,7 +77,7 @@ namespace Booking.Repository
 			List<Tour> list = new List<Tour>();
 			foreach (Tour tour in _tours)
 			{
-				if (tour.StartTime > DateTime.Now)
+				if (tour.StartTime > DateTime.Now || tour.StartTime.Date == DateTime.Now.Date)
 				{
 					list.Add(tour);
 				}

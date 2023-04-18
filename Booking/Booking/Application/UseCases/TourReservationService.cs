@@ -39,6 +39,7 @@ namespace Booking.Service
 
 			reservation.Tour = tour;
 			reservation.NumberOfVisitors = visitors;
+			reservation.User.Id = TourService.SignedGuideId;
 
 			_repository.Add(reservation);
 		}
