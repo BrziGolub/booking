@@ -34,8 +34,6 @@ namespace Booking.Service
             _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
             _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
         }
-
-
         public List<AccommodationReservationRequests> GetAll()
         {
             List<AccommodationReservationRequests> accommodationReservationRequestAll = new List<AccommodationReservationRequests>();
