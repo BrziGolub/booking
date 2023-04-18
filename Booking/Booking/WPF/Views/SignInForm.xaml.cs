@@ -62,7 +62,7 @@ namespace Booking.View
 		{
             User user = _userService.GetByUsername(Username);
             
-			//GuideHomePage.Username = usernameTextBox.Text;
+			GuideHomePage.Username = usernameTextBox.Text;
             
             List<Notification> notifications = _notificationService.GetUserNotifications(user);
 

@@ -51,7 +51,19 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Status" Width="92" Binding="{Binding Valid}"/>
+
+                <DataGridCheckBoxColumn Width="92" Header="Status" Binding="{Binding Valid}">
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Content" Value="No" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Valid}" Value="True">
+                                    <Setter Property="Content" Value="Yes" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="{x:Type DataGridRow}">

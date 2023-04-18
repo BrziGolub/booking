@@ -20,6 +20,7 @@ namespace Booking.Service
 		private readonly ITourGuestsRepository _tourGuestsRepository;
 		private readonly IUserRepository _userRepository;
 		private readonly IVoucherRepository _voucherRepository;
+		private readonly ITourReservationRepository _tourReservationRepository;
 
 		private readonly List<IObserver> _observers;
 
@@ -36,6 +37,7 @@ namespace Booking.Service
 			_tourGuestsRepository = InjectorRepository.CreateInstance<ITourGuestsRepository>();
 			_userRepository = InjectorRepository.CreateInstance<IUserRepository>();
 			_voucherRepository = InjectorRepository.CreateInstance<IVoucherRepository>();
+			_tourReservationRepository = InjectorRepository.CreateInstance<ITourReservationRepository>();
 
 			_observers = new List<IObserver>();
 
@@ -137,7 +139,7 @@ namespace Booking.Service
 
 			foreach (var tour in _tourRepository.GetAll())
 			{ 
-				if (tour.GuideId == SignedGuideId)
+				if (tour.GuideId == SignedGuideId && (tour.StartTime > DateTime.Now || tour.StartTime.Date == DateTime.Now.Date))
 				{
 					tour.Location = _locationRepository.GetById(tour.Location.Id);
 						foreach (var p in _tourImagesRepository.GetAll())
@@ -329,6 +331,7 @@ namespace Booking.Service
                 _tourKeyPointsRepository.DeleteByTourId(idTour);
                 _tourImagesRepository.DeleteByTourId(idTour);
                 _tourGuestsRepository.DeleteByTourId(idTour);
+				_tourReservationRepository.DeleteByTourId(idTour);
                 _tourRepository.Delete(tour);
                 NotifyObservers();
                 return tour;
@@ -341,6 +344,21 @@ namespace Booking.Service
 		}
 
         private void CheckVoucher(int idTour)
+        {
+            foreach (TourReservation tr in _tourReservationRepository.GetAll())
+            {
+                User pomGuest = _userRepository.GetById(tr.User.Id);
+
+				if(tr.Tour.Id == idTour)
+				{
+                    voucher.User.Id = pomGuest.Id;
+                    voucher.ValidTime = DateTime.Now.AddYears(1);
+                    voucher.IsActive = true;
+                    _voucherRepository.Add(voucher);
+                }
+            }
+        }
+        private void CheckVoucher1(int idTour)
         {
             foreach (TourGuests tg in _tourGuestsRepository.GetAll())
             {
@@ -377,7 +395,7 @@ namespace Booking.Service
 				User pomGuest = _userRepository.GetById(g.User.Id);
 				Tour pomTour = _tourRepository.GetById(g.Tour.Id);
 
-				if (g.Tour.Id == selectedTourID && pomGuest.Years > 0 && pomGuest.Years < 18 && pomTour.IsStarted == false)
+				if (g.Tour.Id == selectedTourID && pomGuest.Years > 0 && pomGuest.Years < 18 && pomTour.IsStarted == false && pomTour.IsEnded == true)
 				{
 					sum += 1;
 				}
@@ -395,7 +413,7 @@ namespace Booking.Service
 				User pomGuest = _userRepository.GetById(g.User.Id);
                 Tour pomTour = _tourRepository.GetById(g.Tour.Id);
 
-                if (g.Tour.Id == selectedTourID && pomGuest.Years > 17 && pomGuest.Years < 50 && pomTour.IsStarted == false) // >18 i <50 ???
+                if (g.Tour.Id == selectedTourID && pomGuest.Years > 17 && pomGuest.Years < 50 && pomTour.IsStarted == false && pomTour.IsEnded == true) 
 				{
 					sum += 1;
 				}
@@ -412,7 +430,7 @@ namespace Booking.Service
 				User pomGuest = _userRepository.GetById(g.User.Id);
                 Tour pomTour = _tourRepository.GetById(g.Tour.Id);
 
-                if (g.Tour.Id == selectedTourID && pomGuest.Years >= 50 && pomTour.IsStarted == false)
+                if (g.Tour.Id == selectedTourID && pomGuest.Years >= 50 && pomTour.IsStarted == false && pomTour.IsEnded == true)
 				{
 					sum += 1;
 				}
@@ -429,7 +447,7 @@ namespace Booking.Service
                 User pomGuest = _userRepository.GetById(g.User.Id);
                 Tour pomTour = _tourRepository.GetById(g.Tour.Id);
 
-                if (g.Voucher == true && g.Tour.Id == selectedTourID && pomTour.IsStarted == false)
+                if (g.Voucher == true && g.Tour.Id == selectedTourID && pomTour.IsStarted == false && pomTour.IsEnded == true)
                 {
                     sum += 1;
                 }
@@ -446,7 +464,7 @@ namespace Booking.Service
                 User pomGuest = _userRepository.GetById(g.User.Id);
                 Tour pomTour = _tourRepository.GetById(g.Tour.Id);
 
-                if (g.Voucher == false && g.Tour.Id == selectedTourID && pomTour.IsStarted == false)
+                if (g.Voucher == false && g.Tour.Id == selectedTourID && pomTour.IsStarted == false && pomTour.IsEnded == true)
                 {
                     sum += 1;
                 }

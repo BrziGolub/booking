@@ -59,7 +59,10 @@ namespace Booking.View
         private void OpenFollowTourLive(object sender, RoutedEventArgs e)
         {
             GuideFollowTourLive guideFollowTourLive = new GuideFollowTourLive();
+            if(guideFollowTourLive.Tours.Count > 0)
             guideFollowTourLive.Show();
+            else
+            MessageBox.Show("Today you don't have tours!");
         }
 
         public void Update()

@@ -11,12 +11,14 @@ namespace Booking.Service
 	public class UserService : IUserService
 	{
 		private readonly IUserRepository _userRepository;
+		private readonly ITourReservationRepository _tourReservationRepository;
 
 		private readonly List<IObserver> _observers;
 
 		public UserService()
 		{
 			_userRepository = InjectorRepository.CreateInstance<IUserRepository>();
+			_tourReservationRepository = InjectorRepository.CreateInstance<ITourReservationRepository>();
 			_observers = new List<IObserver>();
 		}
 
@@ -33,7 +35,21 @@ namespace Booking.Service
 			return users;
 		}
 
-		public User GetByUsername(string username)
+        public List<User> GetReservedGuests(int tourId)
+        {
+            List<User> users = new List<User>();
+            foreach(TourReservation tr in _tourReservationRepository.GetAll())
+            {
+             if(tr.Tour.Id == tourId)
+				{
+					User pomUser = _userRepository.GetById(tr.User.Id);
+					users.Add(pomUser);
+				}
+            }
+            return users;
+        }
+
+        public User GetByUsername(string username)
 		{
 			return _userRepository.GetByUsername(username);
 		}

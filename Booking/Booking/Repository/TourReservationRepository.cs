@@ -49,5 +49,11 @@ namespace Booking.Repository
 			_serializer.ToCSV(FilePath, _toursReservations);
 			return tourReservation;
 		}
-	}
+
+        public void DeleteByTourId(int id)
+        {
+            _toursReservations.RemoveAll(tr => tr.Tour.Id == id);
+            _serializer.ToCSV(FilePath, _toursReservations);
+        }
+    }
 }

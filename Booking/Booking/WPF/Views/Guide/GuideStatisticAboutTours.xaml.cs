@@ -56,7 +56,7 @@ namespace Booking.View
                 while (!reader.EndOfStream)
                 {
                     string[] fields = reader.ReadLine().Split('|');
-                    if (fields[9] == TourService.SignedGuideId.ToString())
+                    if (fields[9] == TourService.SignedGuideId.ToString() && fields[10] == "True")
                     {
                         items1.Add(fields[1]);
                     }

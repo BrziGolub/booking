@@ -11,5 +11,7 @@ namespace Booking.Domain.RepositoryInterfaces
 	{
 		int NextId();
 		TourReservation Add(TourReservation tourReservation);
-	}
+		void DeleteByTourId(int id);
+
+    }
 }

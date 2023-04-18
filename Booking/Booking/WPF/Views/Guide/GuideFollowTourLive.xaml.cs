@@ -41,12 +41,22 @@ namespace Booking.View
             this.DataContext = this;
 
             TourService = InjectorService.CreateInstance<ITourService>();
-            
+
             TourService.Subscribe(this);
 
             Pomid = -1;
             Tours = new ObservableCollection<Tour>(TourService.GetTodayTours());
 
+            //CheckIfTodayToursIsEmpty();
+
+        }
+
+        private void CheckIfTodayToursIsEmpty()
+        {
+            if (Tours.Count == 0)
+            {
+                MessageBox.Show("Today you don't have tours!");
+            }
         }
 
         private void StartTour(object sender, RoutedEventArgs e)
