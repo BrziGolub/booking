@@ -83,11 +83,10 @@ namespace Booking.View
         private void Button_Click_CancleReservation(object sender, RoutedEventArgs e)
         {
             bool cancel = _accommodationReservationService.IsAbleToCancleResrvation(SelectedReservation);
-            Notification newNotification = new Notification();
 
             if (cancel)
             {
-                MakeNotification(newNotification);
+                _notificationService.MakeCancellationNotification(SelectedReservation);
                 _accommodationReservationService.Delete(SelectedReservation);
 
                 MessageBox.Show("Your reservation is cancelled!");
@@ -97,15 +96,6 @@ namespace Booking.View
                 MessageBox.Show("You are unable to cancle reservation!");
             }
         }
-
-        private void MakeNotification(Notification newNotification)
-        {
-            newNotification.Text = "Reservation for: " + SelectedReservation.Accommodation.Name + " " + SelectedReservation.ArrivalDay.ToShortDateString() + " - " + SelectedReservation.DepartureDay.ToShortDateString() + " is cancled guest: " + SelectedReservation.Guest.Username.ToString();
-            newNotification.User = SelectedReservation.Accommodation.Owner;
-            newNotification.IsRead = false;
-            _notificationService.CreateCancellationNotification(newNotification);
-        }
-
         public void Update()
         {
             _reservations.Clear();
