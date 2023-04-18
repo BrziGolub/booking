@@ -15,5 +15,7 @@ namespace Booking.Domain.ServiceInterfaces
         TourGrade GetById(int id);
         List<TourGrade> GetGuideGrades();
         TourGrade UpdateTourGrade(TourGrade grade);
-    }
+        TourGrade AddTourGrade(TourGrade tourGrade);
+        List<TourGrade> GetGradesByGuestId(int id);
+	}
 }

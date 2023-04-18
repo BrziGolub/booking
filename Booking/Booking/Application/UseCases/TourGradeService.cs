@@ -86,16 +86,28 @@ namespace Booking.Service
         {
             _observers.Add(observer);
         }
+
         public void Unsubscribe(IObserver observer)
         {
             _observers.Remove(observer);
         }
+
         public void NotifyObservers()
         {
             foreach (var observer in _observers)
             {
                 observer.Update();
             }
+        }
+
+        public TourGrade AddTourGrade(TourGrade tourGrade)
+        {
+            return _repository.Add(tourGrade);
+        }
+
+        public List<TourGrade> GetGradesByGuestId(int id)
+        {
+            return _repository.GetAllByGuestId(id);
         }
     }
 }
