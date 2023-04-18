@@ -50,33 +50,7 @@ namespace Booking.Service
                 observer.Update();
             }
         }
-        /*
-        public void BindGradesToReservations()
-        {
-            foreach (AccommodationGrade accommodationGrade in _accommodationGrades)
-            {
-                foreach (AccommodationReservation accommodationReservation in _accommodationReservationRepository.Load())
-                {
-                    if (accommodationReservation.Id == accommodationGrade.Accommodation.Id)
-                    {
-                        accommodationGrade.Accommodation = accommodationReservation;
-                    }
-                }
-            }
-
-        }*/
-        /*
-        public bool IsReservationGraded(int accommodationReservationId)
-        {
-            foreach (var grade in _repository.GetAll())
-            {
-                if (grade.Accommodation.Id == accommodationReservationId)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }*/
+        
         public bool IsReservationGraded(int accommodationReservationId)
         {
             return _repository.IsReservationGraded(accommodationReservationId);

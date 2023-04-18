@@ -39,9 +39,6 @@ namespace Booking.View
             InitializeComponent();
             accommodationReservationId = ReservationId;
             this.DataContext = this;
-            //var app = Application.Current as App;
-            //AccommodationReservationService = app.AccommodationReservationService;
-            //AccommodationGradeService = app.AccommodationGradeService;
             AccommodationReservationService =  InjectorService.CreateInstance<IAccommodationReservationService>();
             AccommodationGradeService = InjectorService.CreateInstance<IAccommodationGradeService>();
 

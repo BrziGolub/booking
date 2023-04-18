@@ -82,11 +82,6 @@ namespace Booking.View
             SelectedAccommodation = selectedAccommodation;
             DepartureDay = DateTime.Now;
             ArrivalDay = DateTime.Now;
-            //var app = Application.Current as App;
-
-            //AccommodationReservationService = app.AccommodationReservationService;
-
-            //AccommodationReservationService = new AccommodationReservationService();
 
             AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
 

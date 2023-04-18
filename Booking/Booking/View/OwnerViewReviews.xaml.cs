@@ -26,7 +26,6 @@ namespace Booking.View
     public partial class OwnerViewReviews : Window, IObserver
     {
         public ObservableCollection<AccommodationAndOwnerGrade> Grades { get; set; }
-        //public AccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
         public IAccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
         public AccommodationAndOwnerGrade SelectedGrade { get; set; }
         public OwnerViewReviews()
@@ -34,9 +33,6 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
 
-            //var app = Application.Current as App;
-
-            //AccommodationAndOwnerGradeService = app.AccommodationAndOwnerGradeService;
             AccommodationAndOwnerGradeService = InjectorService.CreateInstance<IAccommodationAndOwnerGradeService>();
 
             AccommodationAndOwnerGradeService.Subscribe(this);

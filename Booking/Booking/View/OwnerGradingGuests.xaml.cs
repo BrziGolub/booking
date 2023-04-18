@@ -24,7 +24,6 @@ namespace Booking.View
     /// </summary>
     public partial class OwnerGradingGuests : Window
     {
-        //public AccommodationReservationService AccommodationReservationService { get; set; }
         public IAccommodationReservationService AccommodationReservationService { get; set; }
         public ObservableCollection<AccommodationReservation> reservations { get; set; }
         public AccommodationReservation SelectedReservation { get; set; }
@@ -32,8 +31,6 @@ namespace Booking.View
         {
             InitializeComponent();
             this.DataContext = this;
-            //var app = Application.Current as App;
-            //AccommodationReservationService = app.AccommodationReservationService;
             AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
 
             reservations = new ObservableCollection<AccommodationReservation>(AccommodationReservationService.GetAllUngradedReservations());

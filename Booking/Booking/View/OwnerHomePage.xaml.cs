@@ -25,26 +25,19 @@ namespace Booking.View
     /// </summary>
     public partial class OwnerHomePage : Window, IObserver
     {
-        //public AccommodationReservationService AccommodationReservationService { get; set; }
         public IAccommodationReservationService AccommodationReservationService { get; set; }
         public ObservableCollection<AccommodationReservation> Reservations { get; set; }
         public Accommodation SelectedAccommodation { get; set; }
         public ObservableCollection<Accommodation> Accommodations { get; set; }
-        
-        //public AccommodationService _accommodationService { get; set; }
+
         public IAccommodationService _accommodationService { get; set; }
         public OwnerHomePage()
         {
             InitializeComponent();
             this.DataContext = this;
-            //_accommodationService = new AccommodationService();
             _accommodationService = InjectorService.CreateInstance<IAccommodationService>();
             AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
             _accommodationService.Subscribe(this);
-            //var app = Application.Current as App;
-            //AccommodationReservationService = app.AccommodationReservationService;
-
-            //AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>(); // proveri da li ti treba !!!
 
             Reservations = new ObservableCollection<AccommodationReservation>(AccommodationReservationService.GetAllUngradedReservations());
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetOwnerAccommodations());

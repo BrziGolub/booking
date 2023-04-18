@@ -29,8 +29,6 @@ namespace Booking.View
     /// </summary>
     public partial class OwnerRegisterAccommodation : Window
     {
-        //public AccommodationService AccommodationService { get; set; }
-        //public LocationService LocationService { get; set; }
 
         public IAccommodationService AccommodationService { get; set; }
         public ILocationService LocationService { get; set; }
@@ -59,11 +57,8 @@ namespace Booking.View
             InitializeComponent();
             TypecomboBox.ItemsSource = new List<string>() { "APARTMENT", "HOUSE", "COTTAGE" };
             this.DataContext = this;
-            //var app = Application.Current as App;
-            //AccommodationService = app.AccommodationService;
             AccommodationService = InjectorService.CreateInstance<IAccommodationService>();
             CityCollection = new ObservableCollection<string>();
-            //LocationService = app.LocationService;
             LocationService = InjectorService.CreateInstance<ILocationService>();
 
 
@@ -224,28 +219,23 @@ namespace Booking.View
 
         private void CreateAccommodation(object sender, RoutedEventArgs e)
         {
-            //accommodation.Id = accommodationController.NextId();
             accommodation.Name = AccommodationName;
-            //---------LOCATION----------//
 
             Location location = new Location
             {
                 State = Country,
                 City = City
             };
-            //locationController.Create(location);
 
             int LocationID = LocationService.GetIdByCountryAndCity(Country, City);
             accommodation.Location.Id = LocationID;
             accommodation.Location = LocationService.GetById(LocationID);
-            //-------------------------------
 
             accommodation.Type = Type;
             accommodation.Capacity = Capacity;
             accommodation.MinNumberOfDays = MinNumberOfDays;
             accommodation.CancelationPeriod = CancelationPeriod;
 
-            //------------PROTECTIONS------------------
             if (accommodation.Name == null)
             {
                 MessageBox.Show("'NAME' not entered");
@@ -278,7 +268,6 @@ namespace Booking.View
             {
                 MessageBox.Show("'PICTURES URL' not entered");
             }
-            //------------------------------------------
 
             else
             {

@@ -35,7 +35,7 @@ namespace Booking.Service
             _accommodationImagesRepository = InjectorRepository.CreateInstance<IAccommodationImagesRepository>();
         }
         
-        public List<Accommodation> GetAll() //proveriti da li se negde koristi jer sam ja napravio GetAllSuper koja menja ovu na jednom mestu
+        public List<Accommodation> GetAll() 
         {
             List<Accommodation> accommodationList = new List<Accommodation>();
             accommodationList = _accommodationRepository.GetAll();
