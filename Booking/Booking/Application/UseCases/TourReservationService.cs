@@ -86,5 +86,17 @@ namespace Booking.Service
 
 			return tourReservation;
 		}
+
+		public List<TourReservation> GetReservationsByGuestId(int id)
+		{
+			List<TourReservation> list = _repository.GetReservationsByGuestId(id);
+
+			foreach (TourReservation res in list)
+			{
+				res.Tour = _tourRepository.GetById(res.Tour.Id);
+			}
+
+			return list;
+		}
 	}
 }

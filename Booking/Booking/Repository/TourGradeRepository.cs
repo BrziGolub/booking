@@ -37,6 +37,7 @@ namespace Booking.Repository
             _serializer.ToCSV(FilePath, _tourGrades);
             return founded;
         }
+
         public int NextId()
         {
             if (_tourGrades.Count == 0)
@@ -47,6 +48,19 @@ namespace Booking.Repository
             {
                 return _tourGrades.Max(t => t.Id) + 1;
             }
+        }
+
+        public TourGrade Add(TourGrade tourGrade)
+        {
+			tourGrade.Id = NextId();
+			_tourGrades.Add(tourGrade);
+			_serializer.ToCSV(FilePath, _tourGrades);
+			return tourGrade;
+		}
+
+        public List<TourGrade> GetAllByGuestId(int id)
+        {
+            return _tourGrades.FindAll(t => t.Guest.Id == id);
         }
     }
 }

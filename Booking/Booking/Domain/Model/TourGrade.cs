@@ -18,6 +18,7 @@ namespace Booking.Domain.Model
         public int LanguageGuideGrade { get; set; }
         public int InterestOfTourGrade { get; set; }
         public string Comment { get; set; }
+        //public List<GradeImage> images { get; set; }
         public bool Valid { get; set; }
         public TourKeyPoint keyPointJoined { get; set; }
         public string StateAndCity { get; set; }

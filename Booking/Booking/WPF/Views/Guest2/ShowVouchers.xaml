@@ -33,7 +33,6 @@
 			
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="ID" Width="2*" Binding="{Binding Id}"/>
-				<DataGridTextColumn Header="Description" Width="4*"/>
 				<DataGridTextColumn Header="Expiration date" Width="3*" Binding="{Binding ValidTime, StringFormat={}{0:dd/MM/yyyy}}"/>
 			</DataGrid.Columns>
 		</DataGrid>

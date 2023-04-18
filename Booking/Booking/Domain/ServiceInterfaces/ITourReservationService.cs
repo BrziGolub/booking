@@ -12,5 +12,6 @@ namespace Booking.Domain.ServiceInterfaces
         void CreateTourReservation(Tour tour, int visitors);
         int CheckAvailability(int id);
         TourReservation GetActiveTour(int id);
+        List<TourReservation> GetReservationsByGuestId(int id);
 	}
 }

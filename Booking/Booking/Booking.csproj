@@ -169,6 +169,9 @@
     <Compile Include="WPF\Views\Guest1\FisrtGuestAllRequests.xaml.cs">
       <DependentUpon>FisrtGuestAllRequests.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\Views\Guest2\RateTour.xaml.cs">
+      <DependentUpon>RateTour.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Owner\GradingWindow.xaml.cs">
       <DependentUpon>GradingWindow.xaml</DependentUpon>
     </Compile>
@@ -276,6 +279,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest1\FisrtGuestAllRequests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest2\RateTour.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -11,5 +11,7 @@ namespace Booking.Domain.RepositoryInterfaces
     {
         int NextId();
         TourGrade Update(TourGrade tourGrade);
-    }
+        TourGrade Add(TourGrade tourGrade);
+        List<TourGrade> GetAllByGuestId(int id);
+	}
 }

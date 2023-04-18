@@ -1,8 +1,10 @@
-﻿using Booking.Domain.ServiceInterfaces;
+﻿using Booking.Domain.Model;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Service;
 using Booking.Util;
 using Booking.View.Guest2;
+using Booking.WPF.Views.Guest2;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -21,6 +23,7 @@ namespace Booking.View
 		private ILocationService _locationService;
 		private ITourReservationService _tourReservationService;
 		private ITourGuestsService _tourGuestsService;
+		private ITourGradeService _tourGradeService;
 
 		public List<string> SearchState { get; set; }
 		public ObservableCollection<string> SearchCity { get; set; }
@@ -42,6 +45,7 @@ namespace Booking.View
 			_locationService = InjectorService.CreateInstance<ILocationService>();
 			_tourReservationService = InjectorService.CreateInstance<ITourReservationService>();
 			_tourGuestsService = InjectorService.CreateInstance<ITourGuestsService>();
+			_tourGradeService = InjectorService.CreateInstance<ITourGradeService>();
 
 			tours = new ObservableCollection<Tour>(_tourService.GetValidTours());
 			activeTour = new ObservableCollection<TourReservation> { _tourReservationService.GetActiveTour(TourService.SignedGuideId) };
@@ -58,6 +62,7 @@ namespace Booking.View
 			SelectedCity = "All";
 
 			CheckPresence();
+			GradeTour();
 		}
 
 		private void ButtonSearch_Click(object sender, RoutedEventArgs e)
@@ -135,7 +140,7 @@ namespace Booking.View
 			TourGuests tourGuest = _tourGuestsService.CheckPresence(TourService.SignedGuideId);
 			if (tourGuest != null && !tourGuest.IsPresent)
 			{
-                MessageBoxResult dialogResult = MessageBoxResponse(tourGuest.Tour.Name);
+                MessageBoxResult dialogResult = PresenceOnTourResponse(tourGuest.Tour.Name);
 				if (dialogResult == MessageBoxResult.Yes)
 				{
 					tourGuest.IsPresent = true;
@@ -144,10 +149,42 @@ namespace Booking.View
 			}
 		}
 
-		private MessageBoxResult MessageBoxResponse(string name)
+		private MessageBoxResult PresenceOnTourResponse(string name)
 		{
 			string sMessageBoxText = $"Are you present on tour \n{name}?";
 			string sCaption = "Presence on tour";
+
+			MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+			MessageBoxImage icnMessageBox = MessageBoxImage.Question;
+
+			MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+			return result;
+		}
+
+		private void GradeTour()
+		{
+			List<TourReservation> tourReservations = _tourReservationService.GetReservationsByGuestId(TourService.SignedGuideId);
+			List<TourGrade> tourGrades = _tourGradeService.GetGradesByGuestId(TourService.SignedGuideId);
+
+			foreach (TourReservation tourReservation in tourReservations)
+			{
+				TourGrade tourGrade = tourGrades.Find(t => t.Tour.Id == tourReservation.Tour.Id);
+				if (tourReservation.Tour.IsEnded && tourGrade == null)
+				{
+					MessageBoxResult dialogResult = RateTourResponse(tourReservation.Tour.Name);
+					if (dialogResult == MessageBoxResult.Yes)
+					{
+						RateTour view = new RateTour(tourReservation.Tour);
+						view.Show();
+					}
+				}
+			}
+		}
+
+		private MessageBoxResult RateTourResponse(string name)
+		{
+			string sMessageBoxText = $"Would you like to rate a tour: \n{name}?";
+			string sCaption = "Rate a tour";
 
 			MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
 			MessageBoxImage icnMessageBox = MessageBoxImage.Question;
