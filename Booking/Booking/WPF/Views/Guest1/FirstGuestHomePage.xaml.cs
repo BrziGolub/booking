@@ -49,5 +49,12 @@ namespace Booking.View
         {
             FrameHomePage.Content = new FisrtGuestAllRequests();
         }
+
+        private void MenuItem_Click_LogOut(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            this.Close();
+        }
     }
 }

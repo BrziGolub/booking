@@ -26,7 +26,7 @@
                     <MenuItem Header="SRB"></MenuItem>
                 </MenuItem>
                 <MenuItem Width="240"/>
-                <MenuItem Header="Log out" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3">
+                <MenuItem Header="Log out" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3" Click="MenuItem_Click_LogOut">
                     <MenuItem.Icon>
                         <Image  Source="/Resources/Images/logOut.png" Width="30" Height="17" />
                     </MenuItem.Icon>
