@@ -79,6 +79,14 @@ namespace Booking.Service
                 }
             }
         }
+        public void MakeCancellationNotification(AccommodationReservation SelectedReservation)
+        {
+            Notification newNotification = new Notification();
+            newNotification.Text = "Reservation for: " + SelectedReservation.Accommodation.Name + " " + SelectedReservation.ArrivalDay.ToShortDateString() + " - " + SelectedReservation.DepartureDay.ToShortDateString() + " is cancled guest: " + SelectedReservation.Guest.Username.ToString();
+            newNotification.User = SelectedReservation.Accommodation.Owner;
+            newNotification.IsRead = false;
+            CreateCancellationNotification(newNotification);
+        }
         public void CreateCancellationNotification(Notification notification)
         {
             _repository.Add(notification);

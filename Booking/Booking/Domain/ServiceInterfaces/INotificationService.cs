@@ -17,5 +17,6 @@ namespace Booking.Domain.ServiceInterfaces
         void SendNotification(List<Notification> notifications, User user);
         void MakeReject(AccommodationReservationRequests SelectedAccommodationReservationRequest);
         void MakeAccepted(AccommodationReservationRequests SelectedAccommodationReservationRequest);
+        void MakeCancellationNotification(AccommodationReservation SelectedReservation);
     }
 }
