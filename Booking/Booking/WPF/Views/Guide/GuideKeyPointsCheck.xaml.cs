@@ -103,6 +103,7 @@ namespace Booking.View
             if (KeyPoints[KeyPoints.Count() - 1].Achieved == true)
             {
                 SelectedTour.IsStarted = false;
+                SelectedTour.IsEnded = true;
                 TourService.UpdateTour(SelectedTour);
                 MessageBox.Show("Tour ended, you achieved last keypoint!");
                 TourService.NotifyObservers();

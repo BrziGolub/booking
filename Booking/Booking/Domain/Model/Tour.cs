@@ -32,6 +32,7 @@ namespace Booking.Model
 
         public bool IsStarted { get; set; }
 		public int GuestsAsTour { get; set; }
+        public bool IsEnded { get; set; }
 
         public bool IsCancelable()
         {
@@ -47,6 +48,7 @@ namespace Booking.Model
 			Destinations = new List<TourKeyPoint>();
 			Images = new List<TourImage>();
 			IsStarted = false;
+			IsEnded = false;
 		}
 
 		public Tour(string name, Location location, string desc, string lang, int maxVisitors, DateTime dt, double duration, int guideId)
@@ -76,6 +78,7 @@ namespace Booking.Model
                 Duration.ToString(),                    //7
 				IsStarted.ToString(),					//8
 				GuideId.ToString(),						//9
+				IsEnded.ToString(),						//10
             };
 			return csvValues;
 		}
@@ -92,6 +95,7 @@ namespace Booking.Model
 			Duration = Convert.ToDouble(values[7]);
 			IsStarted = Convert.ToBoolean(values[8]);
 			GuideId = Convert.ToInt32(values[9]);
+			IsEnded = Convert.ToBoolean(values[10]);
 		}
 	}
 }

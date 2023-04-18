@@ -225,6 +225,7 @@ namespace Booking.Service
 			oldTour.StartTime = tour.StartTime;
 			oldTour.Duration = tour.Duration;
 			oldTour.IsStarted = tour.IsStarted;
+			oldTour.IsEnded = tour.IsEnded;
 
 			return _tourRepository.Update(tour);
 		}

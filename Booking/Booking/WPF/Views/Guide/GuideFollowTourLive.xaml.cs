@@ -114,6 +114,7 @@ namespace Booking.View
             if (SelectedTour != null && SelectedTour.IsStarted == true)
             {
                 SelectedTour.IsStarted = false;
+                SelectedTour.IsEnded = true;
                 TourService.UpdateTour(SelectedTour);
                 MessageBox.Show(SelectedTour.Name.ToString() + " is ended!");
                 TourService.NotifyObservers();
