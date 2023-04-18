@@ -1,5 +1,6 @@
 ﻿using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
+using Booking.Service;
 using Booking.Util;
 using Booking.View.Guest2;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ namespace Booking.View
 	public partial class SecondGuestHomePage : Window
 	{
 		private ObservableCollection<Tour> tours;
+		private ObservableCollection<TourReservation> activeTour;
 
 		private ITourService _tourService;
 		private ILocationService _locationService;
+		private ITourReservationService _tourReservationService;
 
 		public List<string> SearchState { get; set; }
 		public ObservableCollection<string> SearchCity { get; set; }
@@ -35,12 +38,15 @@ namespace Booking.View
 
 			_tourService = InjectorService.CreateInstance<ITourService>();
 			_locationService = InjectorService.CreateInstance<ILocationService>();
+			_tourReservationService = InjectorService.CreateInstance<ITourReservationService>();
 
-			tours = new ObservableCollection<Tour>(_tourService.GetValidTours());
+            tours = new ObservableCollection<Tour>(_tourService.GetValidTours());
+            activeTour = new ObservableCollection<TourReservation> { _tourReservationService.GetActiveTour(TourService.SignedGuideId) };
 
-			TourDataGrid.ItemsSource = tours;
+            TourDataGrid.ItemsSource = tours;
+			ActiveTourDataGrid.ItemsSource = activeTour;
 
-			SearchState = _locationService.GetAllStates();
+            SearchState = _locationService.GetAllStates();
 			ComboBoxState.SelectedIndex = 0;
 			SearchCity = new ObservableCollection<string>();
 			ComboBoxCity.SelectedIndex = 0;

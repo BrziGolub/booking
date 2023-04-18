@@ -34,6 +34,7 @@ namespace Booking.Service
 			TourReservation reservation = new TourReservation();
 
 			reservation.Tour = tour;
+			reservation.User.Id = TourService.SignedGuideId;
 			reservation.NumberOfVisitors = visitors;
 
 			_repository.Add(reservation);
@@ -54,6 +55,31 @@ namespace Booking.Service
 			}
 
 			return availability - busyness;
+		}
+
+		public TourReservation GetActiveTour(int id)
+		{
+			List<TourReservation> list = _repository.GetReservationsByGuestId(id);
+            TourReservation tourReservation = new TourReservation();
+
+            foreach (TourReservation res in list)
+			{
+				res.Tour = _tourRepository.GetById(res.Tour.Id);
+				if(res.Tour.IsStarted)
+				{
+                    tourReservation = res;
+				}
+			}
+
+			foreach (TourKeyPoint kp in tourReservation.Tour.Destinations)
+			{
+				if(kp.Achieved)
+				{
+					tourReservation.Tour.Location = kp.Location;
+				}
+			}
+
+			return tourReservation;
 		}
 	}
 }
