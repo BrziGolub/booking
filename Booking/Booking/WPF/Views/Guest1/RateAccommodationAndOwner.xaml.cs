@@ -128,7 +128,7 @@ namespace Booking.View
 
             AccommodationAndOwnerGradeService.SaveGrade(accommodationAndOwnerGrade);
             NavigationService.GoBack();
-            AccommodationAndOwnerGradeService.CheckSuper(AccommodationReservation);
+            AccommodationAndOwnerGradeService.CheckSuper(AccommodationReservation); 
         }
 
 
