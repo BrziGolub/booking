@@ -21,9 +21,6 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for FirstGuestHomePage.xaml
-    /// </summary>
     public partial class FirstGuestHomePage : Window
     {
   
@@ -32,7 +29,7 @@ namespace Booking.View
         {
             InitializeComponent();
             this.DataContext = this;
-          
+            FrameHomePage.Content = new HomePageFirstGuest();
         }
       
         private void MenuItem_Click_HomePage(object sender, RoutedEventArgs e)

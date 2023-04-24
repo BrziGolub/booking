@@ -2,6 +2,7 @@
 using Booking.Model;
 using Booking.Service;
 using Booking.Util;
+using Booking.WPF.Views.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -68,6 +69,7 @@ namespace Booking.View
         public HomePageFirstGuest()
         {
             InitializeComponent();
+            this.DataContext = this;
      
             LocationService = InjectorService.CreateInstance<ILocationService>();
             AccommodationService = InjectorService.CreateInstance < IAccommodationService>() ;
@@ -145,6 +147,13 @@ namespace Booking.View
             }
             AccommodationReservationView dialog = new AccommodationReservationView(SelectedAccommodation);
             dialog.Show();
+        }
+
+        private void Button_Click_ShowImages(object sender, RoutedEventArgs e)
+        {
+            
+                NavigationService.Navigate(new ShowAccommodationImages(SelectedAccommodation));
+            
         }
     }
 }
