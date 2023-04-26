@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FisrtGuestAllRequests">
 
-    <Grid Background="AliceBlue">
+    <Grid Background="AliceBlue" >
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition/>
@@ -18,8 +18,8 @@
             <Image Source="/Resources/Images/request.png" Height="30" Width="30"></Image>
             <Label FontWeight="Bold" FontSize="17" >My reschedule requests</Label>
         </StackPanel>
-        <DataGrid Grid.Row="1" Margin="10,20,10,50" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" 
-                  Name="RequestsDataGrid" HorizontalAlignment="Center">
+        <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" 
+                  Name="RequestsDataGrid" HorizontalAlignment="Center" Margin="20,0,20,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Accommodation name"  Width="140" Binding="{Binding AccommodationReservation.Accommodation.Name}">
                     <DataGridTextColumn.HeaderStyle>
@@ -73,7 +73,9 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="SHOW MORE DETALS" FontWeight="Bold" Width="140" Margin="4"></Button>
+        </StackPanel>
         
     </Grid>
 </Page>

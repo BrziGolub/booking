@@ -137,6 +137,8 @@ namespace Booking.View
             AccommodationService.ShowAll(_accommodations);
 
         }
+
+        //za ovo napraviti Page:
         private void Button_Click_Book(object sender, RoutedEventArgs e)
         {
           
