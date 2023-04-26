@@ -8,7 +8,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FirstGuestAllReservations">
 
-    <Grid Background="AliceBlue">
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/Images/hotel.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition/>

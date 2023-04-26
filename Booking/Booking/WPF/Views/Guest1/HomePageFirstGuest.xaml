@@ -8,7 +8,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomePageFirstGuest">
 
-    <Grid Background="AliceBlue">
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/Images/maldives.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="60"/>

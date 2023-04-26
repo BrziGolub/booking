@@ -8,7 +8,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RateAccommodationAndOwner">
 
-    <Grid Background="AliceBlue">
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/Images/stars.jpg"></ImageBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="30"/>
