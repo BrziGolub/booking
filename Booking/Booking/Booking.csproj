@@ -493,5 +493,13 @@
   <ItemGroup>
     <Resource Include="Resources\Images\stars.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\book.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Notifications.Wpf">
+      <Version>0.1.1</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

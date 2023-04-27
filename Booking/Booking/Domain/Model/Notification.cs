@@ -12,8 +12,9 @@ namespace Booking.Domain.Model
     {
         public int Id { get; set; }
         public User User { get; set; }
-        public string Text { get; set; }
+        public string Message { get; set; }
         public bool IsRead { get; set; }
+        public string Title { get; set; }
 
         public Notification()
         {
@@ -24,8 +25,9 @@ namespace Booking.Domain.Model
         {
             Id = int.Parse(values[0]);
             User.Id = int.Parse(values[1]);
-            Text = values[2];
+            Message = values[2];
             IsRead = bool.Parse(values[3]);
+            Title = values[4];
         }
 
         public string[] ToCSV()
@@ -34,8 +36,9 @@ namespace Booking.Domain.Model
             {
                 Id.ToString(),
                 User.Id.ToString(),
-                Text,
-                IsRead.ToString()
+                Message,
+                IsRead.ToString(), 
+                Title
             };
             return csvValues;
         }
