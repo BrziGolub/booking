@@ -6,11 +6,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="GuestBOOKING" Height="600" Width="1100" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
+        Title="GuestBOOKING" Height="635" Width="1100" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
@@ -39,13 +39,12 @@
                 </MenuItem>
             </Menu>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="1">
+        <StackPanel Orientation="Vertical" Grid.Row="1" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Margin="0,0,0,-573">
             <Grid>
-                <Frame x:Name="FrameHomePage" Height="Auto"/>
-                <notifications:NotificationArea x:Name="WindowArea" Panel.ZIndex="1000" HorizontalAlignment="Right" Position="TopRight" Width="Auto" Height="200" Margin="4"></notifications:NotificationArea>
+                <Frame x:Name="FrameHomePage" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto"/>
+                <notifications:NotificationArea x:Name="WindowArea" Panel.ZIndex="1000" HorizontalAlignment="Right"
+                                                Position="TopRight" Width="Auto" Height="525" Margin="20" VerticalAlignment="Top"></notifications:NotificationArea>
             </Grid>
         </StackPanel>
-        
-        
     </Grid>
 </Window>
