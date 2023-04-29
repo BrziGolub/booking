@@ -17,6 +17,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Booking.View
@@ -31,7 +32,7 @@ namespace Booking.View
             this.DataContext = this;
             FrameHomePage.Content = new HomePageFirstGuest();
         }
-      
+
         private void MenuItem_Click_HomePage(object sender, RoutedEventArgs e)
         {
             FrameHomePage.Content = new HomePageFirstGuest();
@@ -39,7 +40,8 @@ namespace Booking.View
 
         private void MenuItem_Click_MyReservations(object sender, RoutedEventArgs e)
         {
-            FrameHomePage.Content = new FirstGuestAllReservations();
+            FrameHomePage.Content = new FirstGuestAllReservations(this.FrameHomePage.NavigationService);
+           
         }
 
         private void MenuItem_Click_ResheduleRequests(object sender, RoutedEventArgs e)

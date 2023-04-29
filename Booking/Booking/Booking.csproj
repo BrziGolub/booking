@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Domain\Model\AccommodationAndOwnerGrade.cs" />
     <Compile Include="Domain\Model\AccommodationGrade.cs" />
     <Compile Include="Domain\Model\AccommodationReservation.cs" />
@@ -146,6 +147,10 @@
     <Compile Include="Application\UseCases\VoucherService.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\FirstGuestAllRequestsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\FirstGuestAllReservationsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\RateAccommodationAndOwnerViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\GradingWindowViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerDateMoveViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerGradingGuestsViewModel.cs" />
@@ -501,5 +506,6 @@
       <Version>0.1.1</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

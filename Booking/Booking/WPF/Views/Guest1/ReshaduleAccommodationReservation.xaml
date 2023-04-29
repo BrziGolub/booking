@@ -48,7 +48,7 @@
         </Grid>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
-            <Button FontWeight="Bold"  Margin="3"  Click="Button_Click_SendRequest">SEND REQUEST</Button>
+            <Button FontWeight="Bold"  Margin="3"  Command="{Binding Button_Click_SendRequest}">SEND REQUEST</Button>
         </StackPanel>
     </Grid>
 </Page>

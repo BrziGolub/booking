@@ -22,7 +22,7 @@
             <Label FontWeight="Bold" FontSize="16" >My reservations</Label>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,20,10,20" Name="ReservationsDataGrid" 
+        <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,20,10,20" ItemsSource="{Binding Path = Reservations}" x:Name="ReservationsDataGrid"
                    SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Accommodation name" Width="150" Binding="{Binding Accommodation.Name}">
@@ -72,9 +72,9 @@
         </DataGrid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1"  Height="50">
-            <Button  Margin="5" Height="30" Width="50" FontWeight="Bold" Click="Button_Click_RateAccommodationAndOwner" Content="RATE"></Button>
-            <Button  Margin="5" Height="30" Width="80"  FontWeight="Bold" Click="Button_Click_ResheduleAccommodationReservation" Content="RESHEDULE"></Button>
-            <Button  Margin="5" Height="30" Width="50"  FontWeight="Bold" Content="CANCLE" Click="Button_Click_CancleReservation"></Button>
+            <Button  Margin="5" Height="30" Width="50" FontWeight="Bold" Content="RATE" Command="{Binding Button_Click_RateAccommodationAndOwner}"></Button>
+            <Button  Margin="5" Height="30" Width="80"  FontWeight="Bold"  Content="RESHEDULE"  Command="{Binding Button_Click_ResheduleAccommodationReservation}"></Button>
+            <Button  Margin="5" Height="30" Width="50"  FontWeight="Bold" Content="CANCLE"   Command="{Binding Button_Click_CancleReservation}" ></Button>
         </StackPanel>
     </Grid>
 </Page>
