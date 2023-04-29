@@ -45,7 +45,7 @@
             <Label Grid.Column="0" Grid.Row="0">Accommodation name:</Label>
             <TextBox Grid.Column="1" Grid.Row="0" Margin="3" Text="{Binding Path=SearchName}"></TextBox>
             <Label Grid.Column="2" Grid.Row="0">State:</Label>
-            <ComboBox Grid.Column="3" Grid.Row="0" x:Name="CountrycomboBox" Margin="3" SelectionChanged="FillCity"  SelectedItem="{Binding Path=SearchState,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+            <ComboBox Grid.Column="3" Grid.Row="0" x:Name="CountrycomboBox"  ItemsSource="{Binding Path=CountrycomboBox}"  Margin="3" SelectionChanged="FillCity"  SelectedItem="{Binding Path=SearchState,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
             <Label Grid.Column="4" Grid.Row="0">Type:</Label>
             <CheckBox Grid.Column="5" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedApartment}">APARTMNET</CheckBox>
             <CheckBox Grid.Column="6" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedCottage}">COTTAGE</CheckBox>
@@ -54,7 +54,7 @@
             <Label Grid.Column="0"  Grid.Row="1">Staying days:</Label>
             <TextBox Grid.Column="1"  Grid.Row="1" Margin="3" Text="{Binding Path=SearchReservationDays}"></TextBox>
             <Label Grid.Column="2"  Grid.Row="1">City:</Label>
-            <ComboBox x:Name="CitycomboBox" Grid.Column="3"  Grid.Row="1" Margin="3" SelectionChanged="FillCity" ItemsSource="{Binding Path=CityCollection}" SelectedItem="{Binding Path=SearchCity, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+            <ComboBox x:Name="CitycomboBox" Grid.Column="3"  Grid.Row="1" Margin="3" SelectionChanged="FillCity" IsEnabled="{Binding CityComboboxEnabled}" ItemsSource="{Binding Path=CityCollection}" SelectedItem="{Binding Path=SearchCity, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
             <Label Grid.Column="4"  Grid.Row="1">Number of guests:</Label>
             <TextBox Grid.Column="5"  Grid.Row="1" Margin="3" Text="{Binding Path=SerachGuests}"></TextBox>
         </Grid>

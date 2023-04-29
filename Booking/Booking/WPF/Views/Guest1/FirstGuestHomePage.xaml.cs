@@ -30,7 +30,7 @@ namespace Booking.View
         {
             InitializeComponent();
             this.DataContext = this;
-            FrameHomePage.Content = new HomePageFirstGuest();
+            FrameHomePage.Content = new HomePageFirstGuest(this.FrameHomePage.NavigationService);
         }
 
         private void MenuItem_Click_HomePage(object sender, RoutedEventArgs e)

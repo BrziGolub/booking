@@ -18,7 +18,7 @@ using Booking.Commands;
 
 namespace Booking.WPF.ViewModels.Guest1
 {
-    public class RateAccommodationAndOwnerViewModel
+    public class RateAccommodationAndOwnerViewModel: INotifyPropertyChanged
     {
        
         public event PropertyChangedEventHandler PropertyChanged;
@@ -45,7 +45,7 @@ namespace Booking.WPF.ViewModels.Guest1
                 if (_tbPictures != value)
                 {
                     _tbPictures = value;
-                    OnPropertyChanged("Pictures");
+                    OnPropertyChanged();
                 }
             }
         }
