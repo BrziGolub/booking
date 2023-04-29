@@ -22,14 +22,12 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for FisrtGuestAllRequests.xaml
-    /// </summary>
+
     public partial class FisrtGuestAllRequests : Page, IObserver
     {
 
         public ObservableCollection<AccommodationReservationRequests> _requests;
-        //public AccommodationReservationRequestService _requestsService { get; set; }
+       
         public IAccommodationReservationRequestService _requestsService { get; set; }
 
 
@@ -38,8 +36,6 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = this;
             
-            //var app = Application.Current as App;
-            //_requestsService = app.AccommodationReservationRequestService;
             _requestsService = InjectorService.CreateInstance<IAccommodationReservationRequestService>();
             
             _requestsService.Subscribe(this);

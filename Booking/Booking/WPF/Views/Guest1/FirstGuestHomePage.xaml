@@ -2,43 +2,49 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:notifications="clr-namespace:Notifications.Wpf.Controls;assembly=Notifications.Wpf"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="GuestBOOKING" Height="600" Width="1100" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
+        Title="GuestBOOKING" Height="635" Width="1100" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Menu Height="30" Width="1100" Background="Beige">
-                <MenuItem Header="HomePage" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage"></MenuItem>
-                <MenuItem Header="Quick search" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
-                <MenuItem Header="My reservations" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"></MenuItem>
-                <MenuItem Header="Reschedule requests" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ResheduleRequests" ></MenuItem>
-                <MenuItem Header="Reviews" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
-                <MenuItem Header="Forums" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
-                <MenuItem Header="Notfications" FontWeight="Bold" HorizontalAlignment="Right"></MenuItem>
+            <Menu Height="Auto" Width="1100" Background="Beige">
+                <MenuItem Header="HomePage" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage"/>
+                <MenuItem Header="Quick search" FontWeight="Bold" HorizontalAlignment="Right"/>
+                <MenuItem Header="My reservations" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"/>
+                <MenuItem Header="Reschedule requests" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ResheduleRequests"/>
+                <MenuItem Header="Reviews" FontWeight="Bold" HorizontalAlignment="Right"/>
+                <MenuItem Header="Forums" FontWeight="Bold" HorizontalAlignment="Right"/>
+                <MenuItem Header="Notfications" FontWeight="Bold" HorizontalAlignment="Right"/>
                 <MenuItem Header="Language"  FontWeight="Bold" HorizontalAlignment="Right">
-                    <MenuItem Header="ENG"></MenuItem>
-                    <MenuItem Header="SRB"></MenuItem>
+                    <MenuItem Header="ENG"/>
+                    <MenuItem Header="SRB"/>
                 </MenuItem>
-                <MenuItem Width="240"/>
-                <MenuItem Header="Log out" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3" Click="MenuItem_Click_LogOut">
+                <Separator Width="230"  Background="Beige"/>
+                <MenuItem Header="Log out" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1" Margin="3" Click="MenuItem_Click_LogOut">
                     <MenuItem.Icon>
-                        <Image  Source="/Resources/Images/logOut.png" Width="30" Height="17" />
+                        <Image  Source="/Resources/Images/logOut.png" Width="30" Height="17"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="My Profile" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3">
                     <MenuItem.Icon>
-                        <Image Source="/Resources/Images/User.png" Width="20" Height="17" />
+                        <Image Source="/Resources/Images/User.png" Width="20" Height="17"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </Menu>
         </StackPanel>
-
-        <Frame x:Name="FrameHomePage" Grid.Row="1" ></Frame>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Margin="0,0,0,-573">
+            <Grid>
+                <Frame x:Name="FrameHomePage" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto"/>
+                <notifications:NotificationArea x:Name="WindowArea" Panel.ZIndex="1000" HorizontalAlignment="Right"
+                                                Position="TopRight" Width="Auto" Height="525" Margin="20" VerticalAlignment="Top"></notifications:NotificationArea>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>

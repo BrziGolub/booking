@@ -5,88 +5,128 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Booking.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="400" d:DesignWidth="800"
       Title="HomePageFirstGuest">
 
-    <Grid Background="AliceBlue">
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/Images/maldives.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="30"/>
             <RowDefinition/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="1" Margin="20,0,20,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="89*"/>
-                <ColumnDefinition Width="89*"/>
-                <ColumnDefinition Width="89*"/>
-                <ColumnDefinition Width="110*"/>
-                <ColumnDefinition Width="144*"/>
-                <ColumnDefinition Width="113*"/>
-                <ColumnDefinition Width="77*"/>
-                <ColumnDefinition Width="0*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" >Accommodation name:</Label>
-            <TextBox  Grid.Column="1" Margin="3,3,3,3" Text="{Binding Path=SearchName}"></TextBox>
-            <Label Grid.Column="2" Width="Auto" Grid.ColumnSpan="2" Margin="0,0,88,0">State:</Label>
-            <ComboBox Grid.Column="3" x:Name="CountrycomboBox"  Margin="2,3,3,3" SelectionChanged="FillCity"  SelectedItem="{Binding Path=SearchState,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
-            <Label Grid.Column="4" Width="Auto" Grid.ColumnSpan="2">Type:</Label>
-            <CheckBox  Grid.Column="5" Margin="5,5,5,5" IsChecked="{Binding Path=IsCheckedApartment}">APARTMNET</CheckBox>
-            <CheckBox Grid.Column="6" Margin="5,5,4,5" IsChecked="{Binding Path=IsCheckedCottage}">COTTAGE</CheckBox>
-            <CheckBox  Grid.Column="7" Margin="3" IsChecked="{Binding Path=IsCheckedHouse}">HOUSE</CheckBox>
-        </Grid>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,0,20,0" HorizontalAlignment="Center">
             <Image Source="/Resources/Images/location.png"></Image>
             <Label FontWeight="Bold" FontSize="17">What's your next destination?</Label>
         </StackPanel>
 
+        <Grid Grid.Row="1" Margin="20,0,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <Grid Grid.Row="2" Margin="20,0,20,0" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="88*"/>
-                <ColumnDefinition Width="81*" />
-                <ColumnDefinition Width="98*" />
-                <ColumnDefinition Width="110"/>
-                <ColumnDefinition Width="69*"/>
-                <ColumnDefinition Width="88*"/>
-                <ColumnDefinition Width="88*"/>
-                <ColumnDefinition Width="88*"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0"  Margin="3">Staying days:</Label>
-            <TextBox Grid.Column="1" Margin="3,3,3,3" Text="{Binding Path=SearchReservationDays}" ></TextBox>
-            <Label Grid.Column="2"  Margin="3,3,1,0" >City:</Label>
-            <ComboBox x:Name="CitycomboBox"  Grid.Column="3" Margin="12,0,3,0"  ItemsSource="{Binding Path=CityCollection}" SelectedItem="{Binding Path=SearchCity, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="22"></ComboBox>
-            <Label Grid.Column="4" Margin="0,3,20,3" Grid.ColumnSpan="2">Number of guests:</Label>
-            <TextBox Grid.Column="5" Margin="3,3,65,3" Text="{Binding Path=SerachGuests}" Grid.ColumnSpan="2"></TextBox>
+
+            <Label Grid.Column="0" Grid.Row="0">Accommodation name:</Label>
+            <TextBox Grid.Column="1" Grid.Row="0" Margin="3" Text="{Binding Path=SearchName}"></TextBox>
+            <Label Grid.Column="2" Grid.Row="0">State:</Label>
+            <ComboBox Grid.Column="3" Grid.Row="0" x:Name="CountrycomboBox" Margin="3" SelectionChanged="FillCity"  SelectedItem="{Binding Path=SearchState,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+            <Label Grid.Column="4" Grid.Row="0">Type:</Label>
+            <CheckBox Grid.Column="5" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedApartment}">APARTMNET</CheckBox>
+            <CheckBox Grid.Column="6" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedCottage}">COTTAGE</CheckBox>
+            <CheckBox Grid.Column="7" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedHouse}">HOUSE</CheckBox>
+
+            <Label Grid.Column="0"  Grid.Row="1">Staying days:</Label>
+            <TextBox Grid.Column="1"  Grid.Row="1" Margin="3" Text="{Binding Path=SearchReservationDays}"></TextBox>
+            <Label Grid.Column="2"  Grid.Row="1">City:</Label>
+            <ComboBox x:Name="CitycomboBox" Grid.Column="3"  Grid.Row="1" Margin="3" SelectionChanged="FillCity" ItemsSource="{Binding Path=CityCollection}" SelectedItem="{Binding Path=SearchCity, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+            <Label Grid.Column="4"  Grid.Row="1">Number of guests:</Label>
+            <TextBox Grid.Column="5"  Grid.Row="1" Margin="3" Text="{Binding Path=SerachGuests}"></TextBox>
         </Grid>
 
-        <Button Grid.Row ="3" HorizontalAlignment="Right" Width="120" FontWeight="Bold" Margin="20,5,20,5" Click="Button_Click_Search">SEARCH</Button>
+        <Button Grid.Row ="2" HorizontalAlignment="Right" Width="120" FontWeight="Bold" Margin="20,5,20,5" Click="Button_Click_Search">SEARCH</Button>
 
-        <StackPanel Grid.Row="4" Margin="20,0,20,5">
+        <StackPanel Grid.Row="3" Margin="20,0,20,5">
             <DataGrid x:Name="AccommodationDataGrid"  
                       SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
-                      IsReadOnly="True" AutoGenerateColumns="False" Height="280" HeadersVisibility="Column" FontSize="13" >
+                      IsReadOnly="True" AutoGenerateColumns="False" Height="350" HeadersVisibility="Column" FontSize="13" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Width="120" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="State" Width="100" Binding="{Binding Location.State}"/>
-                    <DataGridTextColumn Header="City" Width="100" Binding="{Binding Location.City}"/>
-                    <DataGridTextColumn Header="Type" Width="80"  Binding="{Binding Type}"/>
-                    <DataGridTextColumn Header="Capacity" Width="80"  Binding="{Binding Capacity}" />
-                    <DataGridTextColumn Header="Advance reservation restrictions" Binding="{Binding MinNumberOfDays}"/>
-                    <DataGridTextColumn Header="CancelationPeriod" Binding="{Binding CancelationPeriod}"/>
+                    <DataGridTextColumn Header="Name" Width="120" Binding="{Binding Name}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="State" Width="100" Binding="{Binding Location.State}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="City" Width="100" Binding="{Binding Location.City}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Type" Width="80"  Binding="{Binding Type}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Capacity" Width="80"  Binding="{Binding Capacity}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Advance reservation restrictions" Binding="{Binding MinNumberOfDays}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="CancelationPeriod" Binding="{Binding CancelationPeriod}">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
                     <DataGridTemplateColumn Header="Images" Width="*">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ItemsControl ItemsSource="{Binding Images}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Image Source="{Binding Url}" Width="80" Height="80" />
+                                            <Image Source="{Binding Url}" Width="140" Height="120" Margin="5"/>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
@@ -98,11 +138,12 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="BOOK"  Margin="5,5,5,5" Grid.Row="1"  FontWeight="Bold" Click="Button_Click_Book"></Button>
-            <Button Content="SHOW ALL"  Margin="5,5,5,5"  FontWeight="Bold" Click="Button_Click_ShowAll"></Button>
-            <Button Content="SHOW IMAGES"  Margin="5,5,5,5"  FontWeight="Bold"></Button>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Height="60" VerticalAlignment="Center">
+            <Button Content="BOOK"  Margin="5,5,5,5" Grid.Row="1" Height="30" FontWeight="Bold" Click="Button_Click_Book"></Button>
+            <Button Content="SHOW ALL"  Margin="5,5,5,5"  Height="30"  FontWeight="Bold" Click="Button_Click_ShowAll"></Button>
+            <Button Content="SHOW IMAGES"  Margin="5,5,5,5"  Height="30" FontWeight="Bold" Click="Button_Click_ShowImages"></Button>
         </StackPanel>
 
+        
     </Grid>
 </Page>

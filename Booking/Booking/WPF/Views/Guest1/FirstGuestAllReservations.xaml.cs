@@ -4,6 +4,8 @@ using Booking.Model;
 using Booking.Observer;
 using Booking.Service;
 using Booking.Util;
+using Notifications.Wpf.Controls;
+using Notifications.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -65,9 +67,13 @@ namespace Booking.View
 
         private void Button_Click_RateAccommodationAndOwner(object sender, RoutedEventArgs e)
         {
+            var notificationManager = new NotificationManager();
+            NotificationContent content = new NotificationContent { Title = "Permission denied!", Message = "You are unable to rate you accomodation and owner" , Type = NotificationType.Error };
+           
+
             if (accommodationAndOwnerGradeService.PermissionForRating(SelectedReservation))
             {
-                MessageBox.Show("You are unable to rate you accomodation and owner");
+                notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(30));
             }
             else
             {
@@ -84,16 +90,20 @@ namespace Booking.View
         {
             bool cancel = _accommodationReservationService.IsAbleToCancleResrvation(SelectedReservation);
 
+            var notificationManager = new NotificationManager();
+            NotificationContent contentDenied = new NotificationContent { Title = "Permission denied!", Message = "You are unable to cancle yout resevartion!", Type = NotificationType.Error };
+            NotificationContent contentAllowed = new NotificationContent { Title = "Succesful!", Message = "Your reservation is cancelled!", Type = NotificationType.Success };
+
             if (cancel)
             {
                 _notificationService.MakeCancellationNotification(SelectedReservation);
                 _accommodationReservationService.Delete(SelectedReservation);
 
-                MessageBox.Show("Your reservation is cancelled!");
+                notificationManager.Show(contentAllowed, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
             }
             else
             {
-                MessageBox.Show("You are unable to cancle reservation!");
+                notificationManager.Show(contentDenied, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(30));
             }
         }
         public void Update()

@@ -92,7 +92,7 @@ namespace Booking.View
 						AccommodationReservationService.SignedFirstGuestId = user.Id;
                         FirstGuestHomePage fisrtGuestHomePage = new FirstGuestHomePage();
                         fisrtGuestHomePage.Show();
-                        _notificationService.SendNotification(notifications, user);
+                        _notificationService.SendToastNotification(user);
 						Close();
                     }
                     else if (user.Role == 4)
