@@ -153,7 +153,7 @@ namespace Booking.WPF.ViewModels.Guest1
 
             AccommodationAndOwnerGradeService.SaveGrade(accommodationAndOwnerGrade);
             this.NavigationService.GoBack();
-           //AccommodationAndOwnerGradeService.CheckSuper(AccommodationReservation); ovo je Milvicevo
+            AccommodationAndOwnerGradeService.CheckSuper(AccommodationReservation); //ovo je Milvicevo
 
         }
 

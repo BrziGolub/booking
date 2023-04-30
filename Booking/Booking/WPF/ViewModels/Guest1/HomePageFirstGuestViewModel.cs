@@ -1,4 +1,5 @@
-﻿using Booking.Domain.ServiceInterfaces;
+﻿using Booking.Commands;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Util;
 using Booking.View;
@@ -6,20 +7,26 @@ using Booking.WPF.Views.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace Booking.WPF.ViewModels.Guest1
 {
-    public class HomePageFirstGuestViewModel
+    public class HomePageFirstGuestViewModel: INotifyPropertyChanged
     {
-        private ObservableCollection<Accommodation> Accommodations { get; set; }
+        public ObservableCollection<Accommodation> Accommodations { get; set; }
         public Accommodation SelectedAccommodation { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public List<string> accommodationTypes;
         public IAccommodationService AccommodationService { get; set; }
         public ILocationService LocationService { get; set; }
@@ -37,9 +44,24 @@ namespace Booking.WPF.ViewModels.Guest1
         public ObservableCollection<string> CityCollection { get; set; }
         public ObservableCollection<string> CountrycomboBox { get; set; }
        
-        public bool CityComboboxEnabled { get; set; }
+        
+        private bool _cityComboBoxEnabled;
+        public bool CityComboboxEnabled
+    {
+            get => _cityComboBoxEnabled;
+            set
+            {
+                if (_cityComboBoxEnabled != value)
+                {
+                    _cityComboBoxEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        public void FillCity(object sender, SelectionChangedEventArgs e)
+        public ICommand FillCityCommand { get; set; }
+
+        public void FillCity(object param)
         {
             CityCollection.Clear();
 
@@ -58,6 +80,11 @@ namespace Booking.WPF.ViewModels.Guest1
             }
         }
 
+        public RelayCommand Button_Click_Book { get; set; }
+        public RelayCommand Button_Click_ShowAll { get; set; }
+        public RelayCommand Button_Click_ShowImages { get; set; }
+        public RelayCommand Button_Click_Search { get; set; }
+
         public NavigationService NavigationService { get; set; }
 
         public HomePageFirstGuestViewModel(NavigationService navigationService)
@@ -73,8 +100,18 @@ namespace Booking.WPF.ViewModels.Guest1
             NavigationService = navigationService;
 
             accommodationTypes = new List<string>();
-
+            SetCommands();
             FillComboBox();
+        }
+
+
+        public void SetCommands()
+        {
+            Button_Click_Book = new RelayCommand(ButtonBook);
+            Button_Click_ShowAll = new RelayCommand(ButtonShowAll);
+            Button_Click_ShowImages = new RelayCommand(ButtonShowImages);
+            Button_Click_Search = new RelayCommand(ButtonSearch);
+            FillCityCommand = new RelayCommand(FillCity);
         }
 
         public void FillComboBox()
@@ -114,8 +151,7 @@ namespace Booking.WPF.ViewModels.Guest1
             }
         }
 
-
-        private void ButtonSearch(object sender, RoutedEventArgs e)
+        private void ButtonSearch(object sender)
         {
             accommodationTypes.Clear();
 
@@ -135,7 +171,7 @@ namespace Booking.WPF.ViewModels.Guest1
             AccommodationService.Search(Accommodations, SearchName, SearchCity, SearchState, accommodationTypes, SerachGuests, SearchReservationDays);
         }
 
-        private void ButtonShowAll(object sender, RoutedEventArgs e)
+        private void ButtonShowAll(object param)
         {
 
             AccommodationService.ShowAll(Accommodations);
@@ -143,7 +179,7 @@ namespace Booking.WPF.ViewModels.Guest1
         }
 
         //za ovo napraviti Page:
-        private void ButtonBook(object sender, RoutedEventArgs e)
+        private void ButtonBook(object param)
         {
 
             if (SelectedAccommodation == null)
@@ -155,11 +191,16 @@ namespace Booking.WPF.ViewModels.Guest1
             dialog.Show();
         }
 
-        private void ButtonShowImages(object sender, RoutedEventArgs e)
+        private void ButtonShowImages(object sender)
         {
 
             NavigationService.Navigate(new ShowAccommodationImages(SelectedAccommodation));
 
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
 

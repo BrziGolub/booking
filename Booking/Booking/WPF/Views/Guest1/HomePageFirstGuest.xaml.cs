@@ -31,5 +31,13 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = new HomePageFirstGuestViewModel(navigationService);
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext is HomePageFirstGuestViewModel viewModel)
+            {
+                viewModel.FillCityCommand.Execute(null);
+            }
+        }
     }
 }

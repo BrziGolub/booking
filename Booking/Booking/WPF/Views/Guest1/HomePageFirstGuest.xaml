@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Booking.View"
+      
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="800"
       Title="HomePageFirstGuest">
@@ -45,7 +46,9 @@
             <Label Grid.Column="0" Grid.Row="0">Accommodation name:</Label>
             <TextBox Grid.Column="1" Grid.Row="0" Margin="3" Text="{Binding Path=SearchName}"></TextBox>
             <Label Grid.Column="2" Grid.Row="0">State:</Label>
-            <ComboBox Grid.Column="3" Grid.Row="0" x:Name="CountrycomboBox"  ItemsSource="{Binding Path=CountrycomboBox}"  Margin="3" SelectionChanged="FillCity"  SelectedItem="{Binding Path=SearchState,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+            <ComboBox   Grid.Column="3" ItemsSource="{Binding Path=CountrycomboBox}" Margin="3" SelectedItem="{Binding Path=SearchState, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ComboBox_SelectionChanged" />
+
+
             <Label Grid.Column="4" Grid.Row="0">Type:</Label>
             <CheckBox Grid.Column="5" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedApartment}">APARTMNET</CheckBox>
             <CheckBox Grid.Column="6" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedCottage}">COTTAGE</CheckBox>
@@ -54,17 +57,18 @@
             <Label Grid.Column="0"  Grid.Row="1">Staying days:</Label>
             <TextBox Grid.Column="1"  Grid.Row="1" Margin="3" Text="{Binding Path=SearchReservationDays}"></TextBox>
             <Label Grid.Column="2"  Grid.Row="1">City:</Label>
-            <ComboBox x:Name="CitycomboBox" Grid.Column="3"  Grid.Row="1" Margin="3" SelectionChanged="FillCity" IsEnabled="{Binding CityComboboxEnabled}" ItemsSource="{Binding Path=CityCollection}" SelectedItem="{Binding Path=SearchCity, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+            <ComboBox  Grid.Column="3"  Grid.Row="1" Margin="3" IsEnabled="{Binding CityComboboxEnabled, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=CityCollection}" SelectedItem="{Binding Path=SearchCity, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
             <Label Grid.Column="4"  Grid.Row="1">Number of guests:</Label>
+            
             <TextBox Grid.Column="5"  Grid.Row="1" Margin="3" Text="{Binding Path=SerachGuests}"></TextBox>
         </Grid>
 
-        <Button Grid.Row ="2" HorizontalAlignment="Right" Width="120" FontWeight="Bold" Margin="20,5,20,5" Click="Button_Click_Search">SEARCH</Button>
+        <Button Grid.Row ="2" HorizontalAlignment="Right" Width="120" FontWeight="Bold" Margin="20,5,20,5" Command="{Binding Button_Click_Search}">SEARCH</Button>
 
         <StackPanel Grid.Row="3" Margin="20,0,20,5">
             <DataGrid x:Name="AccommodationDataGrid"  
                       SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
-                      IsReadOnly="True" AutoGenerateColumns="False" Height="350" HeadersVisibility="Column" FontSize="13" >
+                      IsReadOnly="True" AutoGenerateColumns="False" Height="350" HeadersVisibility="Column" FontSize="13"  ItemsSource="{Binding Path = Accommodations}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Width="120" Binding="{Binding Name}">
                         <DataGridTextColumn.HeaderStyle>
@@ -139,9 +143,9 @@
 
 
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Height="60" VerticalAlignment="Center">
-            <Button Content="BOOK"  Margin="5,5,5,5" Grid.Row="1" Height="30" FontWeight="Bold" Click="Button_Click_Book"></Button>
-            <Button Content="SHOW ALL"  Margin="5,5,5,5"  Height="30"  FontWeight="Bold" Click="Button_Click_ShowAll"></Button>
-            <Button Content="SHOW IMAGES"  Margin="5,5,5,5"  Height="30" FontWeight="Bold" Click="Button_Click_ShowImages"></Button>
+            <Button Content="BOOK"  Margin="5,5,5,5" Grid.Row="1" Height="30" FontWeight="Bold"  Command="{Binding Button_Click_Book}"></Button>
+            <Button Content="SHOW ALL"  Margin="5,5,5,5"  Height="30"  FontWeight="Bold" Command="{Binding Button_Click_ShowAll}"></Button>
+            <Button Content="SHOW IMAGES"  Margin="5,5,5,5"  Height="30" FontWeight="Bold" Command="{Binding Button_Click_ShowImages}"></Button>
         </StackPanel>
 
         

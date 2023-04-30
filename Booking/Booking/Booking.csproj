@@ -149,7 +149,7 @@
     <Compile Include="Util\InjectorService.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestAllRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestAllReservationsViewModel.cs" />
-    <Compile Include="WPF\ViewModels\Guest1\HomePageFirstGuest.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\HomePageFirstGuestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\RateAccommodationAndOwnerViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
@@ -508,6 +508,11 @@
       <Version>0.1.1</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\reschaduleImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\clock.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
