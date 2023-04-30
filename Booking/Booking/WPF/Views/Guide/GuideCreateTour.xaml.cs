@@ -20,6 +20,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using Booking.Application.UseCases;
 
 namespace Booking.View
 {
@@ -27,6 +29,7 @@ namespace Booking.View
     {
         public ITourService tourService { get; set; }
         public ILocationService locationService { get; set; }
+        public ITourImageService tourImageService { get; set; }
 
         public Tour tour = new Tour();
         public ObservableCollection<string> CityCollection { get; set; }
@@ -37,6 +40,7 @@ namespace Booking.View
             this.DataContext = this;
             tourService = InjectorService.CreateInstance<ITourService>();
             locationService = InjectorService.CreateInstance<ILocationService>();
+            tourImageService = InjectorService.CreateInstance<ITourImageService>();
 
             FillComboBoxes();
         }
@@ -120,7 +124,7 @@ namespace Booking.View
             get => _name;
             set
             {
-                if (_name != value) 
+                if (_name != value)
                 {
                     _name = value;
                     OnPropertyChanged();
@@ -134,10 +138,10 @@ namespace Booking.View
             get => _city;
             set
             {
-                if (_city != value) 
+                if (_city != value)
                 {
-                _city = value; 
-                OnPropertyChanged();
+                    _city = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -360,9 +364,9 @@ namespace Booking.View
                 string pom = comboBox.SelectedItem.ToString();
                 string[] CountryCity = pom.Split(',');
                 string Country = CountryCity[0];
-                string City = CountryCity[1].Trim(); 
+                string City = CountryCity[1].Trim();
 
-                int locationId= locationService.GetIdByCountryAndCity(Country, City);        
+                int locationId = locationService.GetIdByCountryAndCity(Country, City);
                 Location location = locationService.GetById(locationId);
 
                 TourKeyPoint tourKeyPoints = new TourKeyPoint();
@@ -372,20 +376,70 @@ namespace Booking.View
             comboBox.SelectedIndex = -1;
         }
 
+
+        List<string> imagePaths = new List<string>();
+        int currentImageIndex = -1;
         private void AddPicture(object sender, RoutedEventArgs e)
         {
+            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
+            dialog.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
+
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string imagePath = dialog.FileName;
+                imagePaths.Add(imagePath);
+                currentImageIndex = imagePaths.Count - 1;
+                imageSlideshow.Source = new BitmapImage(new Uri(imagePath));
+                tbPictures.Text = imagePath;
+            }
+
             if (tbPictures.Text != "")
             {
-              TourImage Images = new TourImage();
-              Images.Url = tbPictures.Text;
-              tour.Images.Add(Images);
+                TourImage Images = new TourImage();
+                Images.Url = tbPictures.Text;
+                tour.Images.Add(Images);
             }
             else
             {
                 MessageBox.Show("Photo URL can't be empty!");
             }
 
-            tbPictures.Text = string.Empty;
+        }
+
+        private void RemovePicture(object sender, RoutedEventArgs e)
+        {
+            //TourImage tourImage = tourService.FindImageByUrl(tbPictures.Text);
+            // tourImageService.RemoveTourImage(tourImage);
+            TourImage Images = new TourImage();
+            Images.Url = tbPictures.Text;
+            imageSlideshow.Source = null;
+            imagePaths.Remove(Images.Url);
+            tour.Images.Remove(Images);
+            tbPictures.Text = "";
+        }
+
+
+
+        private void buttonPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentImageIndex > 0)
+            {
+                currentImageIndex--;
+                string imagePath = imagePaths[currentImageIndex];
+                imageSlideshow.Source = new BitmapImage(new Uri(imagePath));
+                tbPictures.Text = imagePath;
+            }
+        }
+
+        private void buttonNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentImageIndex < imagePaths.Count - 1)
+            {
+                currentImageIndex++;
+                string imagePath = imagePaths[currentImageIndex];
+                imageSlideshow.Source = new BitmapImage(new Uri(imagePath));
+                tbPictures.Text = imagePath;
+            }
         }
     }
 }

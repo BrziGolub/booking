@@ -1,4 +1,5 @@
 ﻿using Booking.Model;
+using Booking.Model.Images;
 using Booking.Observer;
 using Booking.View;
 using System;
@@ -33,6 +34,6 @@ namespace Booking.Domain.ServiceInterfaces
         Tour UpdateTour(Tour tour);
         int numberWithVouchersGuests(int selectedTourID);
         int numberWithOutVouchersGuests(int selectedTourID);
-
+        TourImage FindImageByUrl(string url);
     }
 }

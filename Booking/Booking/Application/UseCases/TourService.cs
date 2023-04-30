@@ -1,6 +1,7 @@
 ﻿using Booking.Domain.RepositoryInterfaces;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
+using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Util;
 using System;
@@ -106,12 +107,12 @@ namespace Booking.Service
 				if (pomTour.StartTime.Year == DateTime.Now.Year && pomTour.GuideId == SignedGuideId && pomTour.IsStarted == false)
 				{
 					int tourVisits = _tourGuestsRepository.GetAll().Count(m => m.Tour.Id == tg.Tour.Id);
-                    
 
-                    if (tourVisits > mostVisits)
+
+					if (tourVisits > mostVisits)
 					{
-                        
-                        mostVisitedTourID = tg.Tour.Id;
+
+						mostVisitedTourID = tg.Tour.Id;
 						mostVisits = tourVisits;
 					}
 				}
@@ -121,10 +122,10 @@ namespace Booking.Service
 			mostVisitedTour = _tourRepository.GetById(mostVisitedTourID);
 			mostVisitedTour.GuestsAsTour = mostVisits;
 
-            if (mostVisitedTour.GuideId == SignedGuideId && mostVisits > 0)
+			if (mostVisitedTour.GuideId == SignedGuideId && mostVisits > 0)
 			{
-                mostVisitedTour.Location = _locationRepository.GetById(mostVisitedTour.Location.Id);
-                lista.Add(mostVisitedTour);
+				mostVisitedTour.Location = _locationRepository.GetById(mostVisitedTour.Location.Id);
+				lista.Add(mostVisitedTour);
 				return lista;
 			}
 			else
@@ -138,18 +139,18 @@ namespace Booking.Service
 			List<Tour> _guideTours = new List<Tour>();
 
 			foreach (var tour in _tourRepository.GetAll())
-			{ 
+			{
 				if (tour.GuideId == SignedGuideId && (tour.StartTime > DateTime.Now || tour.StartTime.Date == DateTime.Now.Date))
 				{
 					tour.Location = _locationRepository.GetById(tour.Location.Id);
-						foreach (var p in _tourImagesRepository.GetAll())
+					foreach (var p in _tourImagesRepository.GetAll())
+					{
+						if (p.Tour.Id == tour.Id)
 						{
-							if (p.Tour.Id == tour.Id)
-							{
-								tour.Images.Add(p);
-							}
+							tour.Images.Add(p);
 						}
-						_guideTours.Add(tour);
+					}
+					_guideTours.Add(tour);
 				}
 			}
 
@@ -245,7 +246,7 @@ namespace Booking.Service
 		}
 
 		public TourKeyPoint UpdateKeyPoint(TourKeyPoint tourKeyPoint)
-		{	
+		{
 			TourKeyPoint oldTourKeyPoint = _tourKeyPointsRepository.GetById(tourKeyPoint.Id);
 
 			oldTourKeyPoint.Tour = tourKeyPoint.Tour;
@@ -291,14 +292,14 @@ namespace Booking.Service
 				if (tour.StartTime == DateTime.Today && tour.GuideId == SignedGuideId)
 				{
 					tour.Location = _locationRepository.GetById(tour.Id);
-						foreach (var p in _tourImagesRepository.GetAll())
+					foreach (var p in _tourImagesRepository.GetAll())
+					{
+						if (p.Tour.Id == tour.Id)
 						{
-							if (p.Tour.Id == tour.Id)
-							{
-								tour.Images.Add(p);
-							}
+							tour.Images.Add(p);
 						}
-                    _todayTours.Add(tour);
+					}
+					_todayTours.Add(tour);
 				}
 			}
 			return _todayTours;
@@ -326,57 +327,57 @@ namespace Booking.Service
 			if (tour == null) return null;
 
 			if (tour.IsCancelable())
-            {
-                CheckVoucher(idTour);
-                _tourKeyPointsRepository.DeleteByTourId(idTour);
-                _tourImagesRepository.DeleteByTourId(idTour);
-                _tourGuestsRepository.DeleteByTourId(idTour);
+			{
+				CheckVoucher(idTour);
+				_tourKeyPointsRepository.DeleteByTourId(idTour);
+				_tourImagesRepository.DeleteByTourId(idTour);
+				_tourGuestsRepository.DeleteByTourId(idTour);
 				_tourReservationRepository.DeleteByTourId(idTour);
-                _tourRepository.Delete(tour);
-                NotifyObservers();
-                return tour;
-            }
-            else
+				_tourRepository.Delete(tour);
+				NotifyObservers();
+				return tour;
+			}
+			else
 			{
 				MessageBox.Show("You can cancel the tour no later than 48 hours before the start!");
 				return null;
 			}
 		}
 
-        private void CheckVoucher(int idTour)
-        {
-            foreach (TourReservation tr in _tourReservationRepository.GetAll())
-            {
-                User pomGuest = _userRepository.GetById(tr.User.Id);
-
-				if(tr.Tour.Id == idTour)
-				{
-                    voucher.User.Id = pomGuest.Id;
-                    voucher.ValidTime = DateTime.Now.AddYears(1);
-                    voucher.IsActive = true;
-                    _voucherRepository.Add(voucher);
-                }
-            }
-        }
-        private void CheckVoucher1(int idTour)
-        {
-            foreach (TourGuests tg in _tourGuestsRepository.GetAll())
-            {
-                User pomGuest = _userRepository.GetById(tg.User.Id);
-
-                if (tg.Tour.Id == idTour)
-                {
-                    voucher.User.Id = pomGuest.Id;
-                    voucher.ValidTime = DateTime.Now.AddYears(1);
-                    voucher.IsActive = true;
-                    _voucherRepository.Add(voucher);
-                }
-            }
-        }
-
-        public bool checkTourGuests(int tourId, int userId) 
+		private void CheckVoucher(int idTour)
 		{
-			if (_tourGuestsRepository.GetAll().Any(u => u.Tour.Id == tourId && u.User.Id == userId)) 
+			foreach (TourReservation tr in _tourReservationRepository.GetAll())
+			{
+				User pomGuest = _userRepository.GetById(tr.User.Id);
+
+				if (tr.Tour.Id == idTour)
+				{
+					voucher.User.Id = pomGuest.Id;
+					voucher.ValidTime = DateTime.Now.AddYears(1);
+					voucher.IsActive = true;
+					_voucherRepository.Add(voucher);
+				}
+			}
+		}
+		private void CheckVoucher1(int idTour)
+		{
+			foreach (TourGuests tg in _tourGuestsRepository.GetAll())
+			{
+				User pomGuest = _userRepository.GetById(tg.User.Id);
+
+				if (tg.Tour.Id == idTour)
+				{
+					voucher.User.Id = pomGuest.Id;
+					voucher.ValidTime = DateTime.Now.AddYears(1);
+					voucher.IsActive = true;
+					_voucherRepository.Add(voucher);
+				}
+			}
+		}
+
+		public bool checkTourGuests(int tourId, int userId)
+		{
+			if (_tourGuestsRepository.GetAll().Any(u => u.Tour.Id == tourId && u.User.Id == userId))
 			{
 				return false;
 			}
@@ -411,9 +412,9 @@ namespace Booking.Service
 			{
 
 				User pomGuest = _userRepository.GetById(g.User.Id);
-                Tour pomTour = _tourRepository.GetById(g.Tour.Id);
+				Tour pomTour = _tourRepository.GetById(g.Tour.Id);
 
-                if (g.Tour.Id == selectedTourID && pomGuest.Years > 17 && pomGuest.Years < 50 && pomTour.IsStarted == false && pomTour.IsEnded == true) 
+				if (g.Tour.Id == selectedTourID && pomGuest.Years > 17 && pomGuest.Years < 50 && pomTour.IsStarted == false && pomTour.IsEnded == true)
 				{
 					sum += 1;
 				}
@@ -428,9 +429,9 @@ namespace Booking.Service
 			foreach (var g in _tourGuestsRepository.GetAll())
 			{
 				User pomGuest = _userRepository.GetById(g.User.Id);
-                Tour pomTour = _tourRepository.GetById(g.Tour.Id);
+				Tour pomTour = _tourRepository.GetById(g.Tour.Id);
 
-                if (g.Tour.Id == selectedTourID && pomGuest.Years >= 50 && pomTour.IsStarted == false && pomTour.IsEnded == true)
+				if (g.Tour.Id == selectedTourID && pomGuest.Years >= 50 && pomTour.IsStarted == false && pomTour.IsEnded == true)
 				{
 					sum += 1;
 				}
@@ -442,51 +443,34 @@ namespace Booking.Service
 		{
 			int sum = 0;
 
-            foreach (var g in _tourGuestsRepository.GetAll())
+			foreach (var g in _tourGuestsRepository.GetAll())
 			{
-                User pomGuest = _userRepository.GetById(g.User.Id);
-                Tour pomTour = _tourRepository.GetById(g.Tour.Id);
+				User pomGuest = _userRepository.GetById(g.User.Id);
+				Tour pomTour = _tourRepository.GetById(g.Tour.Id);
 
-                if (g.Voucher == true && g.Tour.Id == selectedTourID && pomTour.IsStarted == false && pomTour.IsEnded == true)
-                {
-                    sum += 1;
-                }
-            }
+				if (g.Voucher == true && g.Tour.Id == selectedTourID && pomTour.IsStarted == false && pomTour.IsEnded == true)
+				{
+					sum += 1;
+				}
+			}
 			return sum;
 		}
 
-        public int numberWithOutVouchersGuests(int selectedTourID)
-        {
-            int sum = 0;
-
-            foreach (var g in _tourGuestsRepository.GetAll())
-            {
-                User pomGuest = _userRepository.GetById(g.User.Id);
-                Tour pomTour = _tourRepository.GetById(g.Tour.Id);
-
-                if (g.Voucher == false && g.Tour.Id == selectedTourID && pomTour.IsStarted == false && pomTour.IsEnded == true)
-                {
-                    sum += 1;
-                }
-            }
-            return sum;
-        }
-        public void NotifyObservers()
+		public int numberWithOutVouchersGuests(int selectedTourID)
 		{
-			foreach (var observer in _observers)
+			int sum = 0;
+
+			foreach (var g in _tourGuestsRepository.GetAll())
 			{
-				observer.Update();
+				User pomGuest = _userRepository.GetById(g.User.Id);
+				Tour pomTour = _tourRepository.GetById(g.Tour.Id);
+
+				if (g.Voucher == false && g.Tour.Id == selectedTourID && pomTour.IsStarted == false && pomTour.IsEnded == true)
+				{
+					sum += 1;
+				}
 			}
-		}
-
-		public void Subscribe(IObserver observer)
-		{
-			_observers.Add(observer);
-		}
-
-		public void Unsubscribe(IObserver observer)
-		{
-			_observers.Remove(observer);
+			return sum;
 		}
 
 		public List<Tour> GetValidTours()
@@ -504,5 +488,29 @@ namespace Booking.Service
 			}
 			return list;
 		}
-	}
+
+		public TourImage FindImageByUrl(string url)
+		{
+			return _tourImagesRepository.GetByUrl(url);
+		}
+
+        public void NotifyObservers()
+        {
+            foreach (var observer in _observers)
+            {
+                observer.Update();
+            }
+        }
+
+        public void Subscribe(IObserver observer)
+        {
+            _observers.Add(observer);
+        }
+
+        public void Unsubscribe(IObserver observer)
+        {
+            _observers.Remove(observer);
+        }
+
+    }
 }

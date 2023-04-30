@@ -14,5 +14,8 @@ namespace Booking.Domain.RepositoryInterfaces
 		TourImage Add(TourImage tourImage);
 		List<TourImage> GetTourImagesByTourId(int id);
 		void DeleteByTourId(int id);
-	}
+		TourImage GetByUrl(string url);
+		void Delete(TourImage tourImage);
+
+    }
 }
