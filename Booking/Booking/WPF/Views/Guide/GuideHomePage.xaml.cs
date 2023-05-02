@@ -19,6 +19,7 @@ using System.Resources;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Util;
 using Booking.View.Guide;
+using Booking.WPF.Views.Guide;
 
 namespace Booking.View
 {
@@ -124,6 +125,12 @@ namespace Booking.View
         {
             GuideViewReviews reviews = new GuideViewReviews();
             reviews.Show();
+        }
+
+        private void ShowDescriptionText(object sender, RoutedEventArgs e)
+        {
+            ShowDescription showDescriptionText = new ShowDescription(SelectedTour.Id);
+            showDescriptionText.Show();
         }
     }
 }

@@ -3,6 +3,7 @@ using Booking.Model;
 using Booking.Observer;
 using Booking.Service;
 using Booking.Util;
+using Booking.WPF.Views.Guide;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,6 +30,7 @@ namespace Booking.View
         public ObservableCollection<Tour> averageNumberOfGuests { get; set; }
         public ITourService _tourService { get; set; }
         public User user { get; set; }
+        public Tour SelectedTour { get; set; }
 
 
         public GuideStatisticAboutTours()
@@ -83,8 +85,8 @@ namespace Booking.View
 
         private void MostVisitedThisYear(object sender, RoutedEventArgs e)
         {
-            buttonGenerraly.Background = Brushes.LightPink;
-            buttonThisYear.Background = Brushes.LightGreen;
+            buttonGenerraly.Background = new SolidColorBrush(Color.FromRgb(0x72, 0x87, 0x9E));
+            buttonThisYear.Background = new SolidColorBrush(Color.FromRgb(0xAA, 0xCB, 0xF0));
 
             mostVisitedDataGrid.ItemsSource = MostVisitedTourThisYear; 
 
@@ -97,8 +99,8 @@ namespace Booking.View
 
         private void buttonGenerraly_Click(object sender, RoutedEventArgs e)
         {
-            buttonGenerraly.Background = Brushes.LightGreen;
-            buttonThisYear.Background = Brushes.LightPink;
+            buttonThisYear.Background = new SolidColorBrush(Color.FromRgb(0x72, 0x87, 0x9E));
+            buttonGenerraly.Background = new SolidColorBrush(Color.FromRgb(0xAA, 0xCB, 0xF0));
 
             mostVisitedDataGrid.ItemsSource = MostVisitedTourGenerraly;
 
@@ -141,6 +143,11 @@ namespace Booking.View
             zeroToEighteenTextBlock.Text = "";
             EighteenToFifthyTextBlock.Text = "";
             FifthyPlusTextBlock.Text = "";
+        }
+        private void ShowDescriptionText(object sender, RoutedEventArgs e)
+        {
+            ShowDescription showDescriptionText = new ShowDescription(SelectedTour.Id);
+            showDescriptionText.Show();
         }
     }
 }

@@ -177,6 +177,9 @@
     <Compile Include="WPF\Views\Guest2\RateTour.xaml.cs">
       <DependentUpon>RateTour.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\Views\Guide\ShowDescription.xaml.cs">
+      <DependentUpon>ShowDescription.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Owner\GradingWindow.xaml.cs">
       <DependentUpon>GradingWindow.xaml</DependentUpon>
     </Compile>
@@ -292,6 +295,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest2\RateTour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guide\ShowDescription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

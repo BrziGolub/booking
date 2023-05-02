@@ -408,8 +408,6 @@ namespace Booking.View
 
         private void RemovePicture(object sender, RoutedEventArgs e)
         {
-            //TourImage tourImage = tourService.FindImageByUrl(tbPictures.Text);
-            // tourImageService.RemoveTourImage(tourImage);
             TourImage Images = new TourImage();
             Images.Url = tbPictures.Text;
             imageSlideshow.Source = null;
@@ -439,6 +437,45 @@ namespace Booking.View
                 string imagePath = imagePaths[currentImageIndex];
                 imageSlideshow.Source = new BitmapImage(new Uri(imagePath));
                 tbPictures.Text = imagePath;
+            }
+        }
+
+        private void IncreaseMaxGuests(object sender, RoutedEventArgs e)
+        {
+            int currentValue;
+            if (int.TryParse(tbMaxGuests.Text, out currentValue))
+            {
+                tbMaxGuests.Text = (currentValue + 10).ToString();
+            }
+        }
+
+        private void DecreaseMaxGuests(object sender, RoutedEventArgs e)
+        {
+            int currentValue;
+            if (int.TryParse(tbMaxGuests.Text, out currentValue) && currentValue > 0)
+            {
+                tbMaxGuests.Text = (currentValue - 10).ToString();
+            }
+            if(currentValue<9)
+            {
+                tbMaxGuests.Text = "0";
+            }
+        }
+
+        private void IncreaseDuration(object sender, RoutedEventArgs e)
+        {
+            int currentValue;
+            if (int.TryParse(tbDuration.Text, out currentValue))
+            {
+                tbDuration.Text = (currentValue + 1).ToString();
+            }
+        }
+        private void DecreaseDuration(object sender, RoutedEventArgs e)
+        {
+            int currentValue;
+            if (int.TryParse(tbDuration.Text, out currentValue) && currentValue > 0)
+            {
+                tbDuration.Text = (currentValue - 1).ToString();
             }
         }
     }
