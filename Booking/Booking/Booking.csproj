@@ -508,11 +508,5 @@
       <Version>0.1.1</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\reschaduleImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\clock.jpg" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

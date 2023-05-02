@@ -23,7 +23,7 @@
             <Label FontSize="17" Content="{Binding AccommodationLabel}" Width="500"></Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" Grid.Row="2">
-            <Button x:Name="PreviousButton" IsEnabled="False"  Margin="10" Height="30" Width="95" Command="{Binding PreviousButton_Click}">
+            <Button x:Name="PreviousButton" IsEnabled="{Binding IsPreviousEnabled,UpdateSourceTrigger=PropertyChanged}"  Margin="10" Height="30" Width="95" Command="{Binding PreviousButton_Click}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <Image  Width="25" Height="30" Source="/Resources/Images/prevoius.png"/>
@@ -32,7 +32,7 @@
                 </Button.Content>
             </Button>
             <Image Grid.Row="0" Margin="10" Width="500" Source="{Binding CurrentImageUrl,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
-            <Button x:Name="NextButton"  Margin="10" Height="30" Width="80" Command="{Binding NextButton_Click}">
+            <Button x:Name="NextButton"  Margin="10" Height="30" Width="80" Command="{Binding NextButton_Click}" IsEnabled="{Binding IsNextEnabled,UpdateSourceTrigger=PropertyChanged}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="NEXT" Margin="5" FontWeight="SemiBold" />

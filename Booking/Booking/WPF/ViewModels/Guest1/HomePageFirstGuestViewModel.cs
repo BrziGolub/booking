@@ -133,7 +133,6 @@ namespace Booking.WPF.ViewModels.Guest1
             }
             var distinctItems = items.Distinct().ToList();
 
-            // CountrycomboBox = distinctItems;
             UpdateCountryComboBox(distinctItems);
 
             if (SearchState == null)

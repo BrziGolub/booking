@@ -18,6 +18,7 @@ namespace Booking.WPF.ViewModels.Guest1
         public String AccommodationLabel { get; set; } = String.Empty;
 
         private List<string> pictureUrls;
+
         private int currentPictureIndex;
 
         public String _currentImageUrl;
@@ -34,6 +35,36 @@ namespace Booking.WPF.ViewModels.Guest1
             }
         }
 
+        public bool _isNextEnabled;
+
+        public bool IsNextEnabled
+        {
+            get => _isNextEnabled;
+            set
+            {
+                if (_isNextEnabled != value)
+                {
+                    _isNextEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool _isPreviousEnabled;
+
+        public bool IsPreviousEnabled
+        {
+            get => _isPreviousEnabled;
+            set
+            {
+                if (_isPreviousEnabled != value)
+                {
+                    _isPreviousEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public RelayCommand PreviousButton_Click { get; set; }
         public RelayCommand NextButton_Click { get; set; }
 
@@ -43,10 +74,22 @@ namespace Booking.WPF.ViewModels.Guest1
             AccommodationLabel = SetAccommodationLabel(SelectedAccommodation);
             pictureUrls = new List<string>();
             currentPictureIndex = 0;
+            
             setUrls();
 
             PreviousButton_Click = new RelayCommand(PreviousButton);
             NextButton_Click = new RelayCommand(NextButton);
+            IsPreviousEnabled = false;
+           
+
+            if (currentPictureIndex == pictureUrls.Count - 1)
+            {
+                IsNextEnabled = false;
+            }
+            else
+            {
+                IsNextEnabled = true;
+            }
         }
 
         public void setUrls()
@@ -69,12 +112,12 @@ namespace Booking.WPF.ViewModels.Guest1
             {
                 currentPictureIndex--;
                 SetCurrentImage();
-                //NextButton.IsEnabled = true;
+                IsNextEnabled = true;
             }
 
             if (currentPictureIndex == 0)
             {
-               // PreviousButton.IsEnabled = false;
+                IsPreviousEnabled = false;
             }
         }
 
@@ -84,12 +127,12 @@ namespace Booking.WPF.ViewModels.Guest1
             {
                 currentPictureIndex++;
                 SetCurrentImage();
-              //  PreviousButton.IsEnabled = true;
+                IsPreviousEnabled = true;
             }
 
             if (currentPictureIndex == pictureUrls.Count - 1)
             {
-              //  NextButton.IsEnabled = false;
+                IsNextEnabled = false;
             }
         }
 
