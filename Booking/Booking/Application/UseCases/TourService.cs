@@ -494,6 +494,19 @@ namespace Booking.Service
 			return _tourImagesRepository.GetByUrl(url);
 		}
 
+		public List<TourKeyPoint> GetTourKeyPoints() 
+		{
+			List<TourKeyPoint> lista = new List<TourKeyPoint>();
+			foreach(TourKeyPoint t in lista)
+			{
+				t.Tour = _tourRepository.GetById(t.Tour.Id);
+				t.Location = _locationRepository.GetById(t.Location.Id);
+				
+			}
+
+			return lista;
+		}
+
         public void NotifyObservers()
         {
             foreach (var observer in _observers)

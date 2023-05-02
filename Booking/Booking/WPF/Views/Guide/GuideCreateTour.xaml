@@ -77,10 +77,12 @@
         <StackPanel Margin="0,0,-105,0">
             <ComboBox x:Name="comboBox" Margin="360,365,0,0" Width="180" Height="21"  BorderBrush="Black" Background="Black"  />
             <Button Panel.ZIndex="1" Margin="577 -20 0 0" Height="22" Width="22" Content="+" FontSize="14" FontWeight="Bold" Click="AddKeyPoint" />
-            <Button Panel.ZIndex="1" Margin="638 -25 0 0" Height="22" Width="22" Content="-" FontSize="14" FontWeight="Bold"  />
+            <Button Panel.ZIndex="1" Margin="638 -25 0 0" Height="22" Width="22" Content="-" FontSize="14" FontWeight="Bold" Click="RemoveKeyPoint"  />
         </StackPanel>
 
-        <DataGrid Width="330" Height="130" Margin="435 260 0 0">
+        <DataGrid Width="330" Height="130" Margin="435 260 0 0"
+         SelectedItem="{Binding SelectedTourKeyPoint}"
+         ItemsSource="{Binding Path=tourKeyPoints1, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="170" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
                 <DataGridTextColumn Width="170" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>

@@ -22,17 +22,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using Booking.Application.UseCases;
+using Booking.Observer;
 
 namespace Booking.View
 {
-    public partial class GuideCreateTour : Window
+    public partial class GuideCreateTour : Window ,IObserver
     {
         public ITourService tourService { get; set; }
         public ILocationService locationService { get; set; }
         public ITourImageService tourImageService { get; set; }
+        TourKeyPoint SelectedTourKeyPoint { get; set; }
 
         public Tour tour = new Tour();
         public ObservableCollection<string> CityCollection { get; set; }
+        public ObservableCollection<TourKeyPoint> tourKeyPoints1 { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public GuideCreateTour()
         {
@@ -41,6 +45,8 @@ namespace Booking.View
             tourService = InjectorService.CreateInstance<ITourService>();
             locationService = InjectorService.CreateInstance<ILocationService>();
             tourImageService = InjectorService.CreateInstance<ITourImageService>();
+
+            tourKeyPoints1 = new ObservableCollection<TourKeyPoint>(tourService.GetTourKeyPoints());
 
             FillComboBoxes();
         }
@@ -370,8 +376,10 @@ namespace Booking.View
                 Location location = locationService.GetById(locationId);
 
                 TourKeyPoint tourKeyPoints = new TourKeyPoint();
+                tourKeyPoints1.Add(tourKeyPoints);
                 tourKeyPoints.Location = location;
                 tour.Destinations.Add(tourKeyPoints);
+                
             }
             comboBox.SelectedIndex = -1;
         }
@@ -477,6 +485,22 @@ namespace Booking.View
             {
                 tbDuration.Text = (currentValue - 1).ToString();
             }
+        }
+
+        public void Update()
+        {
+            tourKeyPoints1.Clear();
+
+            foreach (TourKeyPoint t in tourService.GetTourKeyPoints())
+            {
+                tourKeyPoints1.Add(t);
+            }
+        }
+
+        private void RemoveKeyPoint(object sender, RoutedEventArgs e)
+        {
+            tourKeyPoints1.Remove(SelectedTourKeyPoint);
+            Update();
         }
     }
 }
