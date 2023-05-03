@@ -80,14 +80,32 @@
             <Button Panel.ZIndex="1" Margin="638 -25 0 0" Height="22" Width="22" Content="-" FontSize="14" FontWeight="Bold" Click="RemoveKeyPoint"  />
         </StackPanel>
 
-        <DataGrid Width="330" Height="130" Margin="435 260 0 0"
-         SelectedItem="{Binding SelectedTourKeyPoint}"
-         ItemsSource="{Binding Path=tourKeyPoints1, UpdateSourceTrigger=PropertyChanged}">
+        <DataGrid 
+            x:Name="KeyPointsDataGrid" 
+            BorderBrush="Black"
+            SelectionMode="Single"
+            IsReadOnly="True" 
+            Width="330" Height="130" Margin="435 260 0 0"
+            AlternationCount="2"
+            AutoGenerateColumns="False"             
+            CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserReorderColumns="False"
+            SelectedItem="{Binding SelectedTourKeyPoint}"
+            ItemsSource="{Binding Path=tourKeyPoints1, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="170" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
-                <DataGridTextColumn Width="170" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>
+                <DataGridTextColumn Width="161" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
+                <DataGridTextColumn Width="161" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>
             </DataGrid.Columns>
-            
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="#ADBAC4"/>
+                    <Style.Triggers>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                            <Setter Property="Background" Value="#F5F5F5"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+
         </DataGrid>
         
 

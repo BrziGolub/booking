@@ -38,6 +38,9 @@ namespace Booking.View
         public ObservableCollection<TourKeyPoint> tourKeyPoints1 { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        List<string> imagePaths = new List<string>();
+        int currentImageIndex = -1;
         public GuideCreateTour()
         {
             InitializeComponent();
@@ -49,6 +52,23 @@ namespace Booking.View
             tourKeyPoints1 = new ObservableCollection<TourKeyPoint>(tourService.GetTourKeyPoints());
 
             FillComboBoxes();
+            NextPreviousPhotoButtonsVisibility();
+            //KeyPointsDataGrid.Items.Clear();
+        }
+
+        private void NextPreviousPhotoButtonsVisibility()
+        {
+            if (imagePaths.Count == 0)
+            {
+                imageSlideshow.Source = null;
+                buttonNext.Visibility = Visibility.Collapsed;
+                buttonPrevious.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                buttonNext.Visibility = Visibility.Visible;
+                buttonPrevious.Visibility = Visibility.Visible;
+            }
         }
 
         private void FillComboBoxes()
@@ -384,9 +404,6 @@ namespace Booking.View
             comboBox.SelectedIndex = -1;
         }
 
-
-        List<string> imagePaths = new List<string>();
-        int currentImageIndex = -1;
         private void AddPicture(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
@@ -406,6 +423,7 @@ namespace Booking.View
                 TourImage Images = new TourImage();
                 Images.Url = tbPictures.Text;
                 tour.Images.Add(Images);
+                NextPreviousPhotoButtonsVisibility();
             }
             else
             {
@@ -422,6 +440,7 @@ namespace Booking.View
             imagePaths.Remove(Images.Url);
             tour.Images.Remove(Images);
             tbPictures.Text = "";
+            NextPreviousPhotoButtonsVisibility();
         }
 
 

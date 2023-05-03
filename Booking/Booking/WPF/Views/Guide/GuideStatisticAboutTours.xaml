@@ -210,15 +210,32 @@
 
 
         <WrapPanel Margin="0 470 0 0" Width="250" Height="50">
-            <Button Width="70" Height="40" Content="Show" Margin="0 0 0 0" Click="ShowStatistic"></Button>
-            <Button Width="70" Height="40" Margin="20 0 0 0" Click="ResetStatistic" >
+            <Button Width="70" Height="40" Content="Show" Margin="0 0 0 0" FontWeight="Bold" Click="ShowStatistic">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Width="70" Height="40" Margin="20 0 0 0" FontWeight="Bold" Click="ResetStatistic" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
                 <StackPanel>
                     <TextBlock>Reset</TextBlock>
                     <TextBlock>statistics</TextBlock>
                 </StackPanel>
             </Button>
 
-            <Button Width="70" Height="40" Content="Close" Margin="20 0 0 0" Click="Close"></Button>
+            <Button Width="70" Height="40" Content="Close" FontWeight="Bold" Margin="20 0 0 0" Click="Close">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </WrapPanel>
         <Label Content="With" Margin="270,175,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
         <Label Content="voucher" Margin="253,205,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>

@@ -1,5 +1,6 @@
 ﻿using Booking.Domain.RepositoryInterfaces;
 using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Util;
@@ -13,10 +14,12 @@ namespace Booking.Application.UseCases
 {
     public class TourImageService : ITourImageService
     {
+        private readonly ITourRepository _tourRepository;
         private readonly ITourImageRepository _tourImageRepository;
         private readonly List<IObserver> _observers;
         public TourImageService()
         {
+            _tourRepository = InjectorRepository.CreateInstance<ITourRepository>();
             _tourImageRepository = InjectorRepository.CreateInstance<ITourImageRepository>();
             _observers = new List<IObserver>();
         }
@@ -29,6 +32,31 @@ namespace Booking.Application.UseCases
             _tourImageRepository.Delete(tourImage);
             NotifyObservers();
             return tourImage;
+        }
+
+        public List<TourImage> GetImagesByTourId(int tourId)
+        {
+            return _tourImageRepository.GetTourImagesByTourId(tourId);
+        }
+
+        public List<TourImage> GetImagesFromStartedTourId()
+        {
+            List<TourImage> list = new List<TourImage>();
+            Tour tour = _tourRepository.GetStartedTour();
+
+            if (tour.Description != null)
+            {
+                foreach (TourImage image in _tourImageRepository.GetAll())
+                {
+                    if (image.Tour.Id == tour.Id)
+                    {
+                        list.Add(image);
+                    }
+                }
+                return list;
+            }
+            else
+                return list;
         }
         public void NotifyObservers()
         {

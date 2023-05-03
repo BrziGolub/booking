@@ -11,7 +11,8 @@ namespace Booking.Domain.ServiceInterfaces
     public interface ITourImageService : ISubject, IService<TourImage>
     {
         TourImage RemoveTourImage(TourImage image);
-
+        List<TourImage> GetImagesByTourId(int tourId);
+        List<TourImage> GetImagesFromStartedTourId();
 
     }
 }

@@ -5,6 +5,7 @@ using Booking.Observer;
 using Booking.Repository;
 using Booking.Service;
 using Booking.Util;
+using Booking.WPF.Views.Guide;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,6 +21,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Booking.View
 {
@@ -27,10 +29,11 @@ namespace Booking.View
     {
         public ObservableCollection<Tour> Tours { get; set; }
         public ITourService TourService { get; set; }
+        public ITourImageService TourImageService { get; set; }
         public Tour SelectedTour { get; set; }
-
         int Pomid { get; set; }
-
+        List<string> imagePaths = new List<string>();
+        int currentImageIndex = -1;
 
         public GuideFollowTourLive()
         {
@@ -38,11 +41,38 @@ namespace Booking.View
             this.DataContext = this;
 
             TourService = InjectorService.CreateInstance<ITourService>();
+            TourImageService = InjectorService.CreateInstance<ITourImageService>();
 
             TourService.Subscribe(this);
 
             Pomid = -1;
             Tours = new ObservableCollection<Tour>(TourService.GetTodayTours());
+
+            LoadImages();
+        }
+
+        private void LoadImages()
+        {
+            imagePaths.Clear();
+            List<TourImage> tourImages = TourImageService.GetImagesFromStartedTourId();
+
+            foreach (TourImage image in tourImages)
+            {
+                string imagePath = image.Url;
+                imagePaths.Add(imagePath);
+                imageSlideshow.Source = new BitmapImage(new Uri(imagePath));
+            }
+            if (tourImages.Count == 0) 
+            { 
+                imageSlideshow.Source = null;
+                buttonNext.Visibility = Visibility.Collapsed;
+                buttonPrevious.Visibility = Visibility.Collapsed;
+            }
+            else 
+            {
+                buttonNext.Visibility = Visibility.Visible;
+                buttonPrevious.Visibility = Visibility.Visible;
+            }
         }
 
         private void StartTour(object sender, RoutedEventArgs e)
@@ -77,7 +107,7 @@ namespace Booking.View
                     TourService.UpdateTour(SelectedTour);
                     MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
                     TourService.NotifyObservers();
-
+                   
                     guideKeyPointsCheck.ShowDialog();
                 }
             }
@@ -109,6 +139,7 @@ namespace Booking.View
             {
                 Tours.Add(t);
             }
+            LoadImages();
         }
 
         private void EndTour(object sender, RoutedEventArgs e)
@@ -120,6 +151,7 @@ namespace Booking.View
                 TourService.UpdateTour(SelectedTour);
                 MessageBox.Show(SelectedTour.Name.ToString() + " is ended!");
                 TourService.NotifyObservers();
+               
 
             }
             else
@@ -156,5 +188,32 @@ namespace Booking.View
         {
             this.Close();
         }
+
+        private void ShowDescriptionText(object sender, RoutedEventArgs e)
+        {
+            ShowDescription showDescriptionText = new ShowDescription(SelectedTour.Id);
+            showDescriptionText.Show();
+        }
+
+        private void buttonPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentImageIndex > 0)
+            {
+                currentImageIndex--;
+                string imagePath = imagePaths[currentImageIndex];
+                imageSlideshow.Source = new BitmapImage(new Uri(imagePath));
+            }
+        }
+
+        private void buttonNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentImageIndex < imagePaths.Count - 1)
+            {
+                currentImageIndex++;
+                string imagePath = imagePaths[currentImageIndex];
+                imageSlideshow.Source = new BitmapImage(new Uri(imagePath));
+            }
+        }
+
     }
 }
