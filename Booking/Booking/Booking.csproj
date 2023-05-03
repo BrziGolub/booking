@@ -147,6 +147,7 @@
     <Compile Include="Application\UseCases\VoucherService.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\BookAccommodationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestAllRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestAllReservationsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\HomePageFirstGuestViewModel.cs" />
@@ -161,12 +162,12 @@
     <Compile Include="WPF\ViewModels\Owner\OwnerViewReviewsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowGradeImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\SuperOwnerViewModel.cs" />
-    <Compile Include="WPF\Views\Guest1\AccommodationReservationView.xaml.cs">
-      <DependentUpon>AccommodationReservationView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Application\UseCases\LocationService.cs" />
     <Compile Include="Application\UseCases\TourReservationService.cs" />
     <Compile Include="Application\UseCases\TourService.cs" />
+    <Compile Include="WPF\Views\Guest1\BookAccommodation.xaml.cs">
+      <DependentUpon>BookAccommodation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Guest1\FirstGuestAllReservations.xaml.cs">
       <DependentUpon>FirstGuestAllReservations.xaml</DependentUpon>
     </Compile>
@@ -276,7 +277,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="WPF\Views\Guest1\AccommodationReservationView.xaml">
+    <Page Include="WPF\Views\Guest1\BookAccommodation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -507,6 +508,9 @@
     <PackageReference Include="Notifications.Wpf">
       <Version>0.1.1</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\reserve.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

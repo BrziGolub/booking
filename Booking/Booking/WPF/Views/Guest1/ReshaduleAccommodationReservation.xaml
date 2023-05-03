@@ -21,13 +21,13 @@
             <Label FontWeight="Bold" FontSize="17" >Reschedule your reservation</Label>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal"  HorizontalAlignment="Center">
-            <Label Content="Accommodation: " FontWeight="Bold" Width="100"></Label>
+            <Label Content="Accommodation: " FontWeight="Bold" Width="110"></Label>
             <Label Content="{Binding AccommodationLabel}" Width="300"></Label>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Label Content="Reserved days: " FontWeight="Bold" Width="100"></Label>
-            <Label Content="{Binding ReservedDaysLabel}" Width="300"></Label>
+            <Label Content="{Binding ReservedDaysLabel}" Width="310"></Label>
         </StackPanel>
 
         <Grid Grid.Row="3" Margin="10,0,10,200" HorizontalAlignment="Center">
@@ -36,7 +36,7 @@
                 <RowDefinition  Height="40"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions >
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="210"/>
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
 

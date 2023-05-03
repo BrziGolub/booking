@@ -131,7 +131,7 @@ namespace Booking.Service
                     }
                 }
             }
-            AccommodationReservation newReservation = new AccommodationReservation(selectedAccommodation, arrivalDay, departureDay);
+            AccommodationReservation newReservation = new AccommodationReservation(selectedAccommodation, arrivalDay, departureDay, AccommodationReservationService.SignedFirstGuestId);
             SaveReservation(newReservation);
             return true;
         }

@@ -22,31 +22,35 @@
         </StackPanel>
         <Grid HorizontalAlignment="Stretch" Grid.Row="1" Margin="50,0,50,150" Width="450">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="150*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="Choose arrival day:" Margin="20" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0"></Label>
-            <Label Content="Choose departure day:" Margin="20" HorizontalAlignment="Left" Grid.Row="1"  Grid.Column="0"></Label>
-            <Label Content="Number of guests:" Margin="20" HorizontalAlignment="Left" Grid.Row="2"  Grid.Column="0"></Label>
+            <Label Content="Accommodation:" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Center"></Label>
+            <Label Content="Choose arrival day:" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Width="110" VerticalAlignment="Center"></Label>
+            <Label Content="Choose departure day:" HorizontalAlignment="Left" Grid.Row="2"  Grid.Column="0" Width="130"  VerticalAlignment="Center"></Label>
+            <Label Content="Number of guests:" HorizontalAlignment="Left" Grid.Row="3"  Grid.Column="0" Width="108"  VerticalAlignment="Center"></Label>
 
-            <StackPanel  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
-                <DatePicker Width="180" SelectedDate="{Binding ArrivalDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}" RenderTransformOrigin="0.493,4.276"/>
+            <Label Content="{Binding AccommodationLabel}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"></Label>
+            
+            <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="180" >
+                <DatePicker Width="180" SelectedDate="{Binding ArrivalDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}"  SelectedDateFormat="Short"/>
             </StackPanel>
 
-            <StackPanel  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
-                <DatePicker Width="180" SelectedDate="{Binding DepartureDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged ,StringFormat='{}{0:dd/MM/yyyy}'}" RenderTransformOrigin="0.493,4.276" SelectedDateFormat="Short"/>
+            <StackPanel  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="180" >
+                <DatePicker Width="180" SelectedDate="{Binding DepartureDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged ,StringFormat='{}{0:dd/MM/yyyy}'}"  SelectedDateFormat="Short"/>
             </StackPanel>
-            <TextBox Grid.Row="2" Grid.Column="1" Height="30" Width="180"  Text="{Binding Path=NumberOfGuests, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Width="80" Height="24" Text="{Binding Path=NumberOfGuests, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="0,10,0,10"/>
         </Grid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="RESERVE" Margin="8" FontWeight="Bold" ></Button>
-            <Button Content="CANCLE" Margin="8" FontWeight="Bold"></Button>
+            <Button Content="RESERVE" Margin="8" FontWeight="Bold" Command="{Binding Reserve_Button_Click}"></Button>
+            <Button Content="CANCLE" Margin="8" FontWeight="Bold" Command="{Binding Cancle_Button_Click}"></Button>
         </StackPanel>
     </Grid>
 </Page>

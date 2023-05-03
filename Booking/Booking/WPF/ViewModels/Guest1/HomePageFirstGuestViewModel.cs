@@ -4,6 +4,7 @@ using Booking.Model;
 using Booking.Util;
 using Booking.View;
 using Booking.WPF.Views.Guest1;
+using Notifications.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -177,17 +178,19 @@ namespace Booking.WPF.ViewModels.Guest1
 
         }
 
-        //za ovo napraviti Page:
         private void ButtonBook(object param)
         {
+            var notificationManager = new NotificationManager();
 
             if (SelectedAccommodation == null)
             {
-                MessageBox.Show("Please select an accommodation to reserve.");
-                return;
+                NotificationContent content = new NotificationContent { Title = "Permission denied!", Message = "Please select an accommodation to reserve.", Type = NotificationType.Error };
+                notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
             }
-            AccommodationReservationView dialog = new AccommodationReservationView(SelectedAccommodation);
-            dialog.Show();
+            else
+            {
+                NavigationService.Navigate(new BookAccommodation(SelectedAccommodation, NavigationService));
+            }
         }
 
         private void ButtonShowImages(object sender)

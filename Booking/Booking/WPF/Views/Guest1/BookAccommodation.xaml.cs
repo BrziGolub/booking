@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Booking.Model;
+using Booking.WPF.ViewModels.Guest1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +17,12 @@ using System.Windows.Shapes;
 
 namespace Booking.WPF.Views.Guest1
 {
-    /// <summary>
-    /// Interaction logic for BookAccommodation.xaml
-    /// </summary>
     public partial class BookAccommodation : Page
     {
-        public BookAccommodation()
+        public BookAccommodation(Accommodation selectedAccommodation, NavigationService navigation)
         {
             InitializeComponent();
+            this.DataContext = new BookAccommodationViewModel(selectedAccommodation, navigation);
         }
     }
 }
