@@ -31,12 +31,12 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="Accommodation:" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Center"></Label>
+            <Label Content="Accommodation:" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Center" FontWeight="Bold" FontSize="15"></Label>
             <Label Content="Choose arrival day:" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Width="110" VerticalAlignment="Center"></Label>
             <Label Content="Choose departure day:" HorizontalAlignment="Left" Grid.Row="2"  Grid.Column="0" Width="130"  VerticalAlignment="Center"></Label>
             <Label Content="Number of guests:" HorizontalAlignment="Left" Grid.Row="3"  Grid.Column="0" Width="108"  VerticalAlignment="Center"></Label>
 
-            <Label Content="{Binding AccommodationLabel}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"></Label>
+            <Label Content="{Binding AccommodationLabel}"  FontWeight="Bold"  FontSize="15" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"></Label>
             
             <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="180" >
                 <DatePicker Width="180" SelectedDate="{Binding ArrivalDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}"  SelectedDateFormat="Short"/>

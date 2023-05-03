@@ -5,3 +5,6 @@
 5|4|The date move request for hotelPrague was accepted new dates are 28/04/2023 - 30/04/2023 Owner:Katarina|True|titleGuest
 6|6|Reservation for: hotelMONA 05/05/2023 - 17/05/2023 is cancled guest: mrk|True|titleOwner
 7|7|Reservation for: NazivSmestaja 05/05/2023 - 10/06/2023 is cancled guest: mrk|False|TitleOwner
+8|1|Reservation for: asgfasd 11/05/2023 - 15/06/2023 is cancled guest: mrk|False|TitleOwner
+9|6|Reservation for: HomeForHoliday 17/05/2023 - 24/06/2023 is cancled guest: mrk|False|TitleOwner
+10|6|Reservation for: hotelMONA 13/10/2023 - 23/11/2023 is cancled guest: mrk|False|TitleOwner
