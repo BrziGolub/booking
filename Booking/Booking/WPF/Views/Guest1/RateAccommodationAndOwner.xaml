@@ -34,7 +34,7 @@
         </StackPanel>
 
        
-       <Grid VerticalAlignment="Stretch" Grid.Row="3" Margin="15">
+       <Grid VerticalAlignment="Stretch" Grid.Row="3" Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>

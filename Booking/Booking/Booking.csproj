@@ -157,6 +157,7 @@
     <Compile Include="WPF\ViewModels\Guest1\RateAccommodationAndOwnerViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\ShowRequestCommentViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\GradingWindowViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerDateMoveViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerGradingGuestsViewModel.cs" />
@@ -185,6 +186,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guest1\ShowAccommodationImages.xaml.cs">
       <DependentUpon>ShowAccommodationImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest1\ShowRequestComment.xaml.cs">
+      <DependentUpon>ShowRequestComment.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guest2\RateTour.xaml.cs">
       <DependentUpon>RateTour.xaml</DependentUpon>
@@ -304,6 +308,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest1\ShowAccommodationImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\ShowRequestComment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -533,6 +541,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\starsBlur.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\change.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\information.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
