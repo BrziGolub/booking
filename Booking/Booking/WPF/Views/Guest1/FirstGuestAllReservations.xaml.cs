@@ -21,37 +21,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Booking.WPF.ViewModels.Guest1;
 
 namespace Booking.View
 {
-    public partial class FirstGuestAllReservations : Page, IObserver
+    public partial class FirstGuestAllReservations : Page
     {
-        public ObservableCollection<AccommodationReservation> _reservations;
-        
-        public IAccommodationReservationService _accommodationReservationService;
-
-        public INotificationService _notificationService;
-
-        public IAccommodationAndOwnerGradeService accommodationAndOwnerGradeService;
-        public AccommodationReservation SelectedReservation { get; set; }
-
-        public FirstGuestAllReservations()
+       
+        public FirstGuestAllReservations(NavigationService navigationService)
         {
             InitializeComponent();
-            this.DataContext = this;
-            SelectedReservation = new AccommodationReservation();
-            accommodationAndOwnerGradeService = InjectorService.CreateInstance<IAccommodationAndOwnerGradeService>();
-            _accommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
-            _notificationService = InjectorService.CreateInstance<INotificationService>();
-
-            _reservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetGeustsReservatonst());
-
-            _accommodationReservationService.Subscribe(this);
-            ReservationsDataGrid.ItemsSource = _reservations;
+            this.DataContext = new FirstGuestAllReservationsViewModel(navigationService);
 
             SetWidthForReservationsDataGrid();
-
         }
+
         public void SetWidthForReservationsDataGrid()
         {
             double totalWidth = 0;
@@ -63,56 +47,6 @@ namespace Booking.View
                 }
             }
             ReservationsDataGrid.Width = totalWidth;
-        }
-
-        private void Button_Click_RateAccommodationAndOwner(object sender, RoutedEventArgs e)
-        {
-            var notificationManager = new NotificationManager();
-            NotificationContent content = new NotificationContent { Title = "Permission denied!", Message = "You are unable to rate you accomodation and owner" , Type = NotificationType.Error };
-           
-
-            if (accommodationAndOwnerGradeService.PermissionForRating(SelectedReservation))
-            {
-                notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(30));
-            }
-            else
-            {
-                NavigationService.Navigate(new RateAccommodationAndOwner(SelectedReservation));
-            }
-        }
-
-        private void Button_Click_ResheduleAccommodationReservation(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ReshaduleAccommodationReservation(SelectedReservation));
-        }
-
-        private void Button_Click_CancleReservation(object sender, RoutedEventArgs e)
-        {
-            bool cancel = _accommodationReservationService.IsAbleToCancleResrvation(SelectedReservation);
-
-            var notificationManager = new NotificationManager();
-            NotificationContent contentDenied = new NotificationContent { Title = "Permission denied!", Message = "You are unable to cancle yout resevartion!", Type = NotificationType.Error };
-            NotificationContent contentAllowed = new NotificationContent { Title = "Succesful!", Message = "Your reservation is cancelled!", Type = NotificationType.Success };
-
-            if (cancel)
-            {
-                _notificationService.MakeCancellationNotification(SelectedReservation);
-                _accommodationReservationService.Delete(SelectedReservation);
-
-                notificationManager.Show(contentAllowed, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
-            }
-            else
-            {
-                notificationManager.Show(contentDenied, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(30));
-            }
-        }
-        public void Update()
-        {
-            _reservations.Clear();
-            foreach(var reservation in _accommodationReservationService.GetGeustsReservatonst())
-            {
-                _reservations.Add(reservation);
-            }
         }
     }
 }

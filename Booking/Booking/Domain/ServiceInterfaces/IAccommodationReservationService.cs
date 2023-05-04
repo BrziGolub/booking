@@ -23,5 +23,6 @@ namespace Booking.Domain.ServiceInterfaces
         List<(DateTime, DateTime)> GetDates(List<DateTime> reservedDates, int difference, DateTime departureDay, DateTime arrivalDay);
         List<(DateTime, DateTime)> SuggestOtherDates(DateTime arrivalDay, DateTime departureDay, Accommodation selectedAccommodation);
         AccommodationReservation GetById(int id);
+        int GetSignedInFirstGuest();
     }
 }

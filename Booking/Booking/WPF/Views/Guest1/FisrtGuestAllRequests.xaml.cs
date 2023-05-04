@@ -4,6 +4,7 @@ using Booking.Observer;
 using Booking.Repository;
 using Booking.Service;
 using Booking.Util;
+using Booking.WPF.ViewModels.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,24 +24,14 @@ using System.Windows.Shapes;
 namespace Booking.View
 {
 
-    public partial class FisrtGuestAllRequests : Page, IObserver
+    public partial class FisrtGuestAllRequests : Page
     {
-
-        public ObservableCollection<AccommodationReservationRequests> _requests;
-       
-        public IAccommodationReservationRequestService _requestsService { get; set; }
-
 
         public FisrtGuestAllRequests()
         {
             InitializeComponent();
-            this.DataContext = this;
-            
-            _requestsService = InjectorService.CreateInstance<IAccommodationReservationRequestService>();
-            
-            _requestsService.Subscribe(this);
-            _requests = new ObservableCollection<AccommodationReservationRequests>(_requestsService.GetAll());
-            RequestsDataGrid.ItemsSource = _requests;
+            this.DataContext = new FirstGuestAllRequestsViewModel();
+             
             setWidthForReservationsDataGrid();
         }
 
@@ -57,13 +48,5 @@ namespace Booking.View
             RequestsDataGrid.Width = totalWidth;
         }
 
-        public void Update()
-        {
-            _requests.Clear();
-            foreach(var request in _requestsService.GetAll())
-            {
-                _requests.Add(request);
-            }
-        }
     }
 }

@@ -1,13 +1,7 @@
-﻿using Booking.Domain.ServiceInterfaces;
-using Booking.Model;
-using Booking.Service;
-using Booking.Util;
+﻿using Booking.Model;
 using Booking.WPF.ViewModels.Guest1;
-using Booking.WPF.Views.Guest1;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,15 +15,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Booking.View
+namespace Booking.WPF.Views.Guest1
 {
-  
-    public partial class HomePageFirstGuest : Page
+    public partial class AccommodationDateSugestions : Page
     {
-        public HomePageFirstGuest(NavigationService navigationService)
+        public AccommodationDateSugestions(List<(DateTime, DateTime)> ranges, Accommodation selectedAccommodation)
         {
             InitializeComponent();
-            this.DataContext = new HomePageFirstGuestViewModel(navigationService);
+            this.DataContext = new AccommodationDateSuggestionsViewModel(ranges, selectedAccommodation);
         }
     }
 }

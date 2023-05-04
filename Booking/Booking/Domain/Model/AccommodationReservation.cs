@@ -27,12 +27,13 @@ namespace Booking.Model
             Guest = new User();
         }
 
-        public AccommodationReservation(Accommodation accommodation, DateTime arrivalDay, DateTime departureDay)
+        public AccommodationReservation(Accommodation accommodation, DateTime arrivalDay, DateTime departureDay, int guestId)
         {
             this.Accommodation = accommodation;
             this.ArrivalDay = arrivalDay;
             this.DepartureDay = departureDay;
-           // this.Guest = guest;
+            Guest = new User();
+            Guest.Id = guestId;
         }
 
 
@@ -40,9 +41,7 @@ namespace Booking.Model
         {
             Id = int.Parse(values[0]);
             Accommodation.Id = int.Parse(values[1]);
-            //ArrivalDay = DateConversion.StringToDate(values[2]);
             ArrivalDay = DateTime.Parse(values[2]);
-            //DepartureDay = DateConversion.StringToDate(values[3]);
             DepartureDay = DateTime.Parse(values[3]);
             Guest.Id = int.Parse(values[4]);
         }
