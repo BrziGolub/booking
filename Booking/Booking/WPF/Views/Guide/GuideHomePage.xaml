@@ -19,7 +19,7 @@
                     <GradientStop Color="#FFF200" Offset="1"/>
                 </LinearGradientBrush>
             </StackPanel.Background>
-            <Button Content=" Create tour" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 44 10 0" Click="OpenCreateTour" HorizontalContentAlignment="Left"  >
+            <Button Content=" Create tour" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 44 10 0"  HorizontalContentAlignment="Left" Command="{Binding OpenCreateTour}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -33,7 +33,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content=" Tour statistics" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Click="OpenStatisticsAboutTour" >
+            <Button Content=" Tour statistics" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Command="{Binding OpenStatisticsAboutTour}" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -47,7 +47,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content=" Follow the tour live" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Click="OpenFollowTourLive" >
+            <Button Content=" Follow the tour live" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Command="{Binding OpenFollowTourLive}" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -78,7 +78,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content=" View reviews " FontWeight="SemiBold"  Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Click="OpenViewReviews" >
+            <Button Content=" View reviews " FontWeight="SemiBold"  Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Command="{Binding OpenViewReviews}" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -89,7 +89,7 @@
 
             <Image Margin="-170 15 10 10" Height="45" Width="45" Source="/Resources/Images/user.png"/>
             <TextBlock Margin="-85 -85 0 0" FontSize="17" FontStyle="Italic" FontWeight="Bold" Foreground="#FF303841" Height="21" Width="50">Guide</TextBlock>
-            <TextBlock x:Name="usernameTextBlock" Margin="9 -45 0 0" FontSize="15" FontStyle="Italic" FontWeight="SemiBold" Foreground="#D6E6F2" Height="21" Width="144"></TextBlock>
+            <TextBlock x:Name="usernameTextBlock" Margin="9 -45 0 0" FontSize="15" FontStyle="Italic" FontWeight="SemiBold" Foreground="#D6E6F2" Height="21" Width="144" Text="{Binding Username}"></TextBlock>
 
             <Button  FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 0 15 0" HorizontalContentAlignment="Left" >
                 <Button.Content>
@@ -119,7 +119,7 @@
                 </Button.Resources>
             </Button>
 
-            <Button  FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Click="LogOut" >
+            <Button  FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Command="{Binding LogOut}" >
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <Image Width="23" Height="23" Margin="0" Source="/Resources/Images/logout.png" />
@@ -155,8 +155,8 @@
             AlternationCount="2"
             AutoGenerateColumns="False"             
             CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserReorderColumns="False"
-            SelectedItem="{Binding SelectedTour}"
-            ItemsSource="{Binding Path=Tours, UpdateSourceTrigger=PropertyChanged}">
+            SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding Path=Tours}">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="125" Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
@@ -169,7 +169,7 @@
                         <DataGridTemplateColumn Header="Description">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Click="ShowDescriptionText" Content="Show" FontSize="11" Width="65" Height="30" FontStyle="Oblique">
+                                    <Button  Content="Show" FontSize="11" Width="65" Height="30" FontStyle="Oblique" Command="{Binding DataContext.ShowDescriptionText, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                         <Button.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="5"></Setter>
@@ -183,7 +183,8 @@
                     <DataGridTemplateColumn Header="Cancel tour">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                    <Button Click="CancelTour" Content="Cancel" FontSize="11" Width="65" Height="30" FontStyle="Oblique">
+                                    <Button Content="Cancel" FontSize="11" Width="65" Height="30" FontStyle="Oblique" 
+                                            Command="{Binding DataContext.CancelTour, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                         <Button.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="5"></Setter>
@@ -208,6 +209,7 @@
             </DataGrid>
             </ScrollViewer>
         </StackPanel>
-        
+
+
     </Grid>
 </Window>
