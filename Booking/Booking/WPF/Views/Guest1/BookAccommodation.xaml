@@ -9,7 +9,7 @@
       Title="BookAccommodation">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Resources/Images/book.jpg"></ImageBrush>
+            <ImageBrush ImageSource="/Resources/Images/bookBlur.jpg"></ImageBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>

@@ -10,53 +10,58 @@
 
     <Grid >
         <Grid.Background>
-            <ImageBrush ImageSource="/Resources/Images/stars.jpg"></ImageBrush>
+            <ImageBrush ImageSource="/Resources/Images/starsBlur.jpg"></ImageBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,5,10,10" >
-            <Image Source="/Resources/Images/medal.png" Width="30" Height="30"></Image>
-            <Label FontWeight="Bold" FontSize="17" >Rate your accommodation and owner!</Label>
+            <Image Source="/Resources/Images/medal.png" Width="50" Height="45"></Image>
+            <Label FontWeight="Bold" FontSize="19" >Rate your accommodation and owner!</Label>
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="20,0,10,0" HorizontalAlignment="Left">
-            <Label Content="Accommodation: " FontWeight="Bold" Width="118"></Label>
-            <Label Content="{Binding AccommodationLabel}" Width="290"></Label>
-        </StackPanel>
-
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="20,0,10,0" HorizontalAlignment="Left">
-            <Label Content="Owner: " FontWeight="Bold" Width="56"></Label>
-            <Label Content="{Binding OwnerLabel}" Width="350"></Label>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="20,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <Label Content="Accommodation: " FontWeight="Bold" Width="140" FontSize="14"></Label>
+            <Label Content="{Binding AccommodationLabel}" Width="400" FontSize="14"></Label>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal"  Margin="20,0,10,0" HorizontalAlignment="Left">
-            <Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="20,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <Label Content="Owner: " FontWeight="Bold" Width="56" FontSize="14"></Label>
+            <Label Content="{Binding OwnerLabel}" Width="350" FontSize="14"></Label>
+        </StackPanel>
+
+       
+       <Grid VerticalAlignment="Stretch" Grid.Row="3" Margin="15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
-                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="100"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Width="200">Rate cleaness:</Label>
-                <ComboBox x:Name="comboBoxCleaness"  ItemsSource="{Binding Path= comboBoxCleaness}" SelectedItem="{Binding Path=Cleaness, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Grid.Column="1" Width="200"  Margin="5,5,5,5"></ComboBox>
-                <Label Grid.Row="1" Grid.Column="0" Width="200">Rate courtesy of the owner:</Label>
-                <ComboBox  x:Name="comboBoxCourtesy"  ItemsSource="{Binding Path= comboBoxCourtesy}"  SelectedItem="{Binding Path=Courtesy, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Width="200"  Margin="5"></ComboBox>
-                <Label Grid.Row="2" Grid.Column="0" Width="200">Add comment:</Label>
-                <TextBox Grid.Row ="2" Grid.Column="1" Width="200" Height="120" Margin="5" VerticalAlignment="Top" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
-                <Label Grid.Row="3" Grid.Column="0">Add images url:</Label>
-                <TextBox  x:Name="tbPictures" Text= "{Binding Path= Pictures,UpdateSourceTrigger=PropertyChanged }" Margin ="5" Grid.Row="3" Grid.Column="1" Width="120" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left"></TextBox>
-                <Button  Grid.Row="3" Grid.Column="1" Content="+" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,5,40,0"  Command="{Binding Button_Click_Plus}"></Button>
-            </Grid>
-        </StackPanel>
+                 <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">Rate cleaness:</Label>
+                <ComboBox x:Name="comboBoxCleaness"  ItemsSource="{Binding Path= comboBoxCleaness}" SelectedItem="{Binding Path=Cleaness, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Grid.Column="1" Margin="5"></ComboBox>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left">Rate courtesy of the owner:</Label>
+                <ComboBox  x:Name="comboBoxCourtesy"  ItemsSource="{Binding Path= comboBoxCourtesy}"  SelectedItem="{Binding Path=Courtesy, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"  Margin="5"></ComboBox>
+                <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left">Add comment:</Label>
+                <TextBox Grid.Row ="2" Grid.Column="1" Height="80" Margin="5" VerticalAlignment="Top" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+                <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left">Add images url:</Label>
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
+                    <TextBox  x:Name="tbPictures" Width="150" Height="40" Text= "{Binding Path= Pictures,UpdateSourceTrigger=PropertyChanged }" Margin ="5" ></TextBox>
+                    <Button Content="+" Width="30" Height="30" Margin="5"  Command="{Binding Button_Click_Plus}"></Button>
+                </StackPanel>
+               
+        </Grid>
+        
 
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button FontWeight="Bold" Margin="3" Width="100" Command="{Binding Button_Click_Subbmit}" >SUBBMIT</Button>
