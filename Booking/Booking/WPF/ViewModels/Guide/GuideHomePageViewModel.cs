@@ -71,8 +71,6 @@ namespace Booking.WPF.ViewModels.Guide
 
             Tours = new ObservableCollection<Tour>(_tourService.GetGuideTours());
 
-            //usernameTextBlock.Text = Username;
-
             SetCommands();
         }
 
