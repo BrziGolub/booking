@@ -4,6 +4,7 @@ using Booking.Model;
 using Booking.Repository;
 using Booking.Service;
 using Booking.Util;
+using Booking.WPF.ViewModels.Guide;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -62,7 +63,7 @@ namespace Booking.View
 		{
             User user = _userService.GetByUsername(Username);
             
-			GuideHomePage.Username = usernameTextBox.Text;
+			GuideHomePageViewModel._username = usernameTextBox.Text;
             
             List<Notification> notifications = _notificationService.GetUserNotifications(user);
 
