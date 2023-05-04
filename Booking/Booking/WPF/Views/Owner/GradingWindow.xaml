@@ -5,33 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="GradingWindow" Height="450" Width="400">
+        Title="GradingWindow" Height="768" Width="1024">
     <Grid>
-        <Label Content="Cleanliness*" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" FontSize="15" />
-        <StackPanel Margin="0,0,-105,0">
-            <ComboBox x:Name="comboBoxCleanliness" Margin="30,30,0,0" Width="180" SelectedItem="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+        <TextBlock Margin="10,6,0,0" FontWeight="Bold" FontSize="42" Text="Grading guests" Foreground="#FFFFF200" >
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="4" Color="#303841" BlurRadius="5" />
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <Separator Margin="0,-120,0,480" Width="1024" HorizontalAlignment="Center" />
+        <Label Content="Cleanliness*" HorizontalAlignment="Left" Margin="40,80,0,0" VerticalAlignment="Top" FontSize="35" />
+        <StackPanel Margin="0,60,70,0">
+            <ComboBox x:Name="comboBoxCleanliness" Margin="0,30,0,0" FontSize="30" Height="50" Width="250" SelectedItem="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
         </StackPanel>
 
 
-        <Label Content="RuleFollowing*" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top" FontSize="15" />
-        <Label Content="Communication*" HorizontalAlignment="Left" Margin="40,100,0,0" VerticalAlignment="Top" FontSize="15" />
+        <Label Content="RuleFollowing*" HorizontalAlignment="Left" Margin="40,160,0,0" VerticalAlignment="Top" FontSize="35" />
+        <Label Content="Communication*" HorizontalAlignment="Left" Margin="40,240,0,0" VerticalAlignment="Top" FontSize="35" />
 
-        <StackPanel Margin="0,0,-105,0">
-            <ComboBox x:Name="comboBoxRuleFollowing" Margin="30,65,0,0" Width="180" SelectedItem="{Binding Path=RuleFollowing, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
-            <ComboBox x:Name="comboBoxCommunication" Margin="30,15,0,0" Width="180" SelectedItem="{Binding Path=Communication, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+        <StackPanel Margin="0,60,70,0">
+            <ComboBox x:Name="comboBoxRuleFollowing" Margin="0,110,0,0" Width="250" FontSize="30" Height="50" SelectedItem="{Binding Path=RuleFollowing, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+            <ComboBox x:Name="comboBoxCommunication" Margin="0,30,0,0" Width="250" FontSize="30" Height="50" SelectedItem="{Binding Path=Communication, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
         </StackPanel>
 
-        <Label Content="Comment*" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox x:Name="tbDescription" HorizontalAlignment="Left" Margin="170,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Height="120" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Content="Comment*" HorizontalAlignment="Left" Margin="720,80,0,0" VerticalAlignment="Top" FontSize="35"/>
+        <TextBox x:Name="tbDescription" HorizontalAlignment="Left" Margin="630,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" FontSize="15" Height="240" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Content="Lateness*" HorizontalAlignment="Left" Margin="40,280,0,0" VerticalAlignment="Top" FontSize="15" />
-        <StackPanel Margin="0,0,-105,0">
-            <ComboBox x:Name="comboBoxLateness" Margin="30,285,0,0" Width="180" SelectedItem="{Binding Path=Lateness, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+        <Label Content="Lateness*" HorizontalAlignment="Left" Margin="40,320,0,0" VerticalAlignment="Top" FontSize="35" />
+        <StackPanel Margin="0,60,70,0">
+            <ComboBox x:Name="comboBoxLateness" Margin="0,270,0,0" Width="250" FontSize="30" Height="50" SelectedItem="{Binding Path=Lateness, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
         </StackPanel>
 
-        <WrapPanel FlowDirection="LeftToRight" Margin="0,340,0,0">
-            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click_Grade" >GRADE</Button>
-            <Button Margin="10 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click_Close" >CLOSE</Button>
+        <WrapPanel FlowDirection="LeftToRight" Margin="200,620,0,0">
+            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="150" Height="75" FontWeight="Bold" FontSize="35" Click="Button_Click_Grade" >GRADE</Button>
+            <Button Margin="60 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Click="Button_Click_Close" >CLOSE</Button>
         </WrapPanel>
 
     </Grid>

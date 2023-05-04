@@ -10,8 +10,9 @@
         <DataGrid 
             x:Name="dataGrid" 
             IsReadOnly="True" 
-            Margin="72 50 72 92" 
-            RowHeight="50"
+            Margin="12 50 12 92" 
+            RowHeight="40"
+            FontSize="15"
             AutoGenerateColumns="False"
             SelectedItem="{Binding SelectedGrade}"
             SelectionMode="Single"
@@ -24,7 +25,7 @@
                 <DataGridTextColumn Width="*" Header="Comment" Binding="{Binding Comment}"></DataGridTextColumn>
                 <DataGridTextColumn Width="*" Header="Guest" Binding="{Binding AccommodationReservation.Guest.Username}"></DataGridTextColumn>
 
-                <DataGridTemplateColumn Header="Images" Width="80">
+                <DataGridTemplateColumn Header="Images" Width="60">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Show" Click="ShowImages"/>

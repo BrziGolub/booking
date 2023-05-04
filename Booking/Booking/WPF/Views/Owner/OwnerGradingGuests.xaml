@@ -5,24 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="OwnerGradingGuests" Height="420" Width="350">
+        Title="OwnerGradingGuests" Height="768" Width="1024">
     <Grid>
-        <DataGrid x:Name="AccommodationDataGrid" 
+        <TextBlock Margin="10,6,0,0" FontWeight="Bold" FontSize="42" Text="Grading guests" Foreground="#FFFFF200" >
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="4" Color="#303841" BlurRadius="5" />
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <Separator Margin="0,-120,0,480" Width="1024" HorizontalAlignment="Center" />
+        <DataGrid x:Name="AccommodationDataGrid" Margin="12 50 12 92" RowHeight="30"
                       SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding reservations}"
-                      IsReadOnly="True" AutoGenerateColumns="False" Height="226" HeadersVisibility="Column" FontSize="13" Width="322" RenderTransformOrigin="0.503,0.552" >
+                      IsReadOnly="True" AutoGenerateColumns="False" Height="526" HeadersVisibility="Column" FontSize="20" Width="980" RenderTransformOrigin="0.503,0.552" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="120" Binding="{Binding Accommodation.Name}" />
-                <DataGridTextColumn Header="Arrival Day" Width="100" Binding="{Binding ArrivalDay , StringFormat={}{0:dd/MM/yyyy}}" />
-                <DataGridTextColumn Header="Departure Day" Width="100" Binding="{Binding DepartureDay, StringFormat={}{0:dd/MM/yyyy}}"/>
+                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Accommodation.Name}" />
+                <DataGridTextColumn Header="Arrival Day" Width="*" Binding="{Binding ArrivalDay , StringFormat={}{0:dd/MM/yyyy}}" />
+                <DataGridTextColumn Header="Departure Day" Width="*" Binding="{Binding DepartureDay, StringFormat={}{0:dd/MM/yyyy}}"/>
 
 
             </DataGrid.Columns>
         </DataGrid>
 
-        <WrapPanel FlowDirection="LeftToRight" Margin="-30,320,0,0">
-            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click_Grade" >GRADE</Button>
-            <Button Margin="10 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="Button_Click_Close" >CLOSE</Button>
+        <WrapPanel FlowDirection="LeftToRight" Margin="200,620,0,0">
+            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="150" Height="75" FontWeight="Bold" FontSize="35" Click="Button_Click_Grade" >GRADE</Button>
+            <Button Margin="60 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Click="Button_Click_Close" >CLOSE</Button>
         </WrapPanel>
     </Grid>
 </Window>
