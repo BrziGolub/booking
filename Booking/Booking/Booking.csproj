@@ -284,12 +284,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="WPF\Views\Guest1\AccommodationDateSugestions.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="WPF\Views\Guest1\BookAccommodation.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="WPF\Views\Guest1\FirstGuestAllReservations.xaml">
       <SubType>Designer</SubType>
@@ -521,12 +521,6 @@
     <PackageReference Include="Notifications.Wpf">
       <Version>0.1.1</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\reserve.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\question.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
