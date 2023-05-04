@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows;
 using System.Collections.ObjectModel;
 using Booking.Commands;
+using Notifications.Wpf;
 
 namespace Booking.WPF.ViewModels.Guest1
 {
@@ -116,11 +117,11 @@ namespace Booking.WPF.ViewModels.Guest1
             NavigationService = navigationService;
             Button_Click_Subbmit = new RelayCommand(ButtonSubbmit);
             Button_Click_Plus = new RelayCommand(ButtonPlus);
-            setComboboxes();
+            setComboBoxes();
            
         }
 
-        public void setComboboxes()
+        public void setComboBoxes()
         {
             List<int> grades = new List<int>(){ 1, 2, 3, 4, 5 };
             comboBoxCleaness = new ObservableCollection<int>(grades);
@@ -153,8 +154,11 @@ namespace Booking.WPF.ViewModels.Guest1
 
             AccommodationAndOwnerGradeService.SaveGrade(accommodationAndOwnerGrade);
             this.NavigationService.GoBack();
-            AccommodationAndOwnerGradeService.CheckSuper(AccommodationReservation); //ovo je Milvicevo
+            AccommodationAndOwnerGradeService.CheckSuper(AccommodationReservation); //ovo je od Coe 
 
+            var notificationManager = new NotificationManager();
+            NotificationContent content = new NotificationContent { Title = "Congratulations!", Message = "You succesfuly rate your accommodation", Type = NotificationType.Success};
+            notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
         }
 
 

@@ -10,27 +10,27 @@
 
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
             <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
-            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10,0,10,0" VerticalAlignment="Center" >
             <Image Source="/Resources/Images/hourglass.png" Height="30"></Image>
             <Label FontWeight="Bold" FontSize="17" >Reschedule your reservation</Label>
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal"  HorizontalAlignment="Center">
+        <StackPanel Grid.Row="1" Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Accommodation: " FontWeight="Bold" Width="110"></Label>
             <Label Content="{Binding AccommodationLabel}" Width="300"></Label>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Reserved days: " FontWeight="Bold" Width="100"></Label>
             <Label Content="{Binding ReservedDaysLabel}" Width="310"></Label>
         </StackPanel>
 
-        <Grid Grid.Row="3" Margin="10,0,10,200" HorizontalAlignment="Center">
+        <Grid Grid.Row="3" Margin="0,30,0,120" HorizontalAlignment="Center" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition  Height="40"/>

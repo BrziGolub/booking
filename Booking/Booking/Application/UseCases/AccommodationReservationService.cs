@@ -34,6 +34,11 @@ namespace Booking.Service
             _accommodationReservationRequestRepository = InjectorRepository.CreateInstance<IAccommodationReservationRequestsRepostiory>();
             _accommodationGradeRepository = InjectorRepository.CreateInstance<IAccommodationGradeRepository>();
         }
+
+        public int GetSignedInFirstGuest()
+        {
+            return SignedFirstGuestId;
+        }
         public AccommodationReservation GetById(int id)
         {
            return _repository.GetById(id);

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Booking.Model;
+using Booking.WPF.ViewModels.Guest1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +17,12 @@ using System.Windows.Shapes;
 
 namespace Booking.WPF.Views.Guest1
 {
-    /// <summary>
-    /// Interaction logic for AccommodationDatesSuggestionsxaml.xaml
-    /// </summary>
-    public partial class AccommodationDatesSuggestionsxaml : Page
+    public partial class AccommodationDateSugestions : Page
     {
-        public AccommodationDatesSuggestionsxaml()
+        public AccommodationDateSugestions(List<(DateTime, DateTime)> ranges, Accommodation selectedAccommodation)
         {
             InitializeComponent();
+            this.DataContext = new AccommodationDateSuggestionsViewModel(ranges, selectedAccommodation);
         }
     }
 }

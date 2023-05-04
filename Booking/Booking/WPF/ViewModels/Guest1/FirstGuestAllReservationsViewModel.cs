@@ -69,7 +69,17 @@ namespace Booking.WPF.ViewModels.Guest1
 
         private void ButtonResheduleAccommodationReservation(object param)
         {
-            NavigationService.Navigate(new ReshaduleAccommodationReservation(SelectedReservation, NavigationService));
+            var notificationManager = new NotificationManager();
+
+            if (SelectedReservation == null)
+            {
+                NotificationContent content = new NotificationContent { Title = "Permission denied!", Message = "Please select your reservation!", Type = NotificationType.Error };
+                notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
+            }
+            else
+            {
+                NavigationService.Navigate(new ReshaduleAccommodationReservation(SelectedReservation, NavigationService));
+            }
         }
 
         private void ButtonCancleReservation(object param)
@@ -86,6 +96,11 @@ namespace Booking.WPF.ViewModels.Guest1
                 _accommodationReservationService.Delete(SelectedReservation);
 
                 notificationManager.Show(contentAllowed, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
+            }
+            else if (SelectedReservation == null)
+            {
+                NotificationContent content = new NotificationContent { Title = "Permission denied!", Message = "Please select your reservation!", Type = NotificationType.Error };
+                notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
             }
             else
             {

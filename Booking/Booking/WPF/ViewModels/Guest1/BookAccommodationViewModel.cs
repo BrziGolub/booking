@@ -4,6 +4,7 @@ using Booking.Model;
 using Booking.Service;
 using Booking.Util;
 using Booking.View;
+using Booking.WPF.Views.Guest1;
 using Notifications.Wpf;
 using System;
 using System.Collections.Generic;
@@ -143,8 +144,7 @@ namespace Booking.WPF.ViewModels.Guest1
 
         private void ShowAvailableDatesDialog(List<(DateTime, DateTime)> suggestedDateRanges, Accommodation selectedAccommodation)
         {
-            ShowDatesAccommodationsReservations dialog = new ShowDatesAccommodationsReservations(suggestedDateRanges, selectedAccommodation);
-            dialog.Show();
+            NavigationService.Navigate(new AccommodationDateSugestions(suggestedDateRanges, selectedAccommodation));
         }
 
     }
