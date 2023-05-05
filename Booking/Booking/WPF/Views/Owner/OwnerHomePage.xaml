@@ -17,13 +17,13 @@
                     <GradientStop Color="#FFD2F119" Offset="1"/>
                 </LinearGradientBrush>
             </StackPanel.Background>
-            <Button Content=" Register accommodation" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 20 10 0" Click="RegisterAccomodation" HorizontalContentAlignment="Left" />
+            <Button Content=" Register accommodation" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 20 10 0" Command="{Binding OpenRegisterAccommodation}" HorizontalContentAlignment="Left" />
             <Button Content=" Accomodation stats" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
             <Button Content=" Site proposal" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
-            <Button Content=" Handling date changes" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Click="DateMove" HorizontalContentAlignment="Left" />
-            <Button Content=" Gradeing guests" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Click="GradingGuests" HorizontalContentAlignment="Left" />
-            <Button Content=" View reviews" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Click="ViewReviews" HorizontalContentAlignment="Left" />
-            <Button Content=" Super-owner" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Click="SuperOwner" HorizontalContentAlignment="Left" />
+            <Button Content=" Handling date changes" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Command="{Binding OpenDateMove}" HorizontalContentAlignment="Left" />
+            <Button Content=" Gradeing guests" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Command="{Binding OpenGradingGuests}" HorizontalContentAlignment="Left" />
+            <Button Content=" View reviews" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Command="{Binding OpenViewReviews}" HorizontalContentAlignment="Left" />
+            <Button Content=" Super-owner" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Command="{Binding OpenSuperOwner}" HorizontalContentAlignment="Left" />
             <Button Content=" Scheduling renovations" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
             <Button Content=" Show renovations" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
             <Button Content=" Forum" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
@@ -55,7 +55,7 @@
             AlternationCount="2"
             AutoGenerateColumns="False"             
             CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserReorderColumns="False"
-            SelectedItem="{Binding SelectedAccommodation}"
+            SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
             ItemsSource="{Binding Path=Accommodations, UpdateSourceTrigger=PropertyChanged}">
 
                     <DataGrid.Columns>
@@ -69,7 +69,7 @@
                         <DataGridTemplateColumn Header="Pictures">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Click="OpenPictures" Content="See" FontSize="11" Width="65" Height="30" FontStyle="Oblique">
+                                    <Button Command="{Binding DataContext.ShowPictures, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Content="See" FontSize="11" Width="65" Height="30" FontStyle="Oblique">
                                         <Button.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="5"></Setter>
@@ -95,7 +95,7 @@
             </ScrollViewer>
         </StackPanel>
         <WrapPanel FlowDirection="LeftToRight" Margin="785,10,0,671">
-            <Button Margin ="118 0 0 0 " HorizontalAlignment="Left"  Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="LogOut" >LOG OUT</Button>
+            <Button Margin ="118 0 0 0 " HorizontalAlignment="Left"  Width="80" Height="30" FontWeight="Bold" FontSize="15" Command="{Binding OwnerLogOut}" >LOG OUT</Button>
         </WrapPanel>
     </Grid>
 </Window>

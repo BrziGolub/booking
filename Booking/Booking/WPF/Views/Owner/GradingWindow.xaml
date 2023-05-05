@@ -16,7 +16,7 @@
         <Separator Margin="0,-120,0,480" Width="1024" HorizontalAlignment="Center" />
         <Label Content="Cleanliness*" HorizontalAlignment="Left" Margin="40,80,0,0" VerticalAlignment="Top" FontSize="35" />
         <StackPanel Margin="0,60,70,0">
-            <ComboBox x:Name="comboBoxCleanliness" Margin="0,30,0,0" FontSize="30" Height="50" Width="250" SelectedItem="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+            <ComboBox x:Name="comboBoxCleanlinessName" Margin="0,30,0,0" FontSize="30" Height="50" Width="250" ItemsSource="{Binding Path= comboBoxCleanliness}" SelectedItem="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
         </StackPanel>
 
 
@@ -24,8 +24,8 @@
         <Label Content="Communication*" HorizontalAlignment="Left" Margin="40,240,0,0" VerticalAlignment="Top" FontSize="35" />
 
         <StackPanel Margin="0,60,70,0">
-            <ComboBox x:Name="comboBoxRuleFollowing" Margin="0,110,0,0" Width="250" FontSize="30" Height="50" SelectedItem="{Binding Path=RuleFollowing, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
-            <ComboBox x:Name="comboBoxCommunication" Margin="0,30,0,0" Width="250" FontSize="30" Height="50" SelectedItem="{Binding Path=Communication, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+            <ComboBox x:Name="comboBoxRuleFollowingName" Margin="0,110,0,0" Width="250" FontSize="30" Height="50" ItemsSource="{Binding Path= comboBoxRuleFollowing}" SelectedItem="{Binding Path=RuleFollowing, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+            <ComboBox x:Name="comboBoxCommunicationName" Margin="0,30,0,0" Width="250" FontSize="30" Height="50" ItemsSource="{Binding Path= comboBoxCommunication}" SelectedItem="{Binding Path=Communication, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
         </StackPanel>
 
         <Label Content="Comment*" HorizontalAlignment="Left" Margin="720,80,0,0" VerticalAlignment="Top" FontSize="35"/>
@@ -33,12 +33,12 @@
 
         <Label Content="Lateness*" HorizontalAlignment="Left" Margin="40,320,0,0" VerticalAlignment="Top" FontSize="35" />
         <StackPanel Margin="0,60,70,0">
-            <ComboBox x:Name="comboBoxLateness" Margin="0,270,0,0" Width="250" FontSize="30" Height="50" SelectedItem="{Binding Path=Lateness, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+            <ComboBox x:Name="comboBoxLatenessName" Margin="0,270,0,0" Width="250" FontSize="30" Height="50" ItemsSource="{Binding Path= comboBoxLateness}" SelectedItem="{Binding Path=Lateness, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
         </StackPanel>
 
         <WrapPanel FlowDirection="LeftToRight" Margin="200,620,0,0">
-            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="150" Height="75" FontWeight="Bold" FontSize="35" Click="Button_Click_Grade" >GRADE</Button>
-            <Button Margin="60 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Click="Button_Click_Close" >CLOSE</Button>
+            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Grade}" >GRADE</Button>
+            <Button Margin="60 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Close}" >CLOSE</Button>
         </WrapPanel>
 
     </Grid>

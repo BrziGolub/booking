@@ -5,43 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="OwnerRegisterAccommodation" Height="445" Width="420" ResizeMode="NoResize">
+        Title="OwnerRegisterAccommodation" Height="768" Width="1024" ResizeMode="NoResize">
     <Grid>
-        <Label Content="Name*" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox HorizontalAlignment="Left" Margin="170,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}"  />
+        <TextBlock Margin="10,6,0,0" FontWeight="Bold" FontSize="32" Text="Register accommodation" Foreground="#FFFFF200" >
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="4" Color="#303841" BlurRadius="5" />
+            </TextBlock.Effect>
+        </TextBlock>
 
-        <Label Content="Country*" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top" FontSize="15" />
-        <ComboBox x:Name="CountrycomboBox" SelectionChanged="FillCity"  Margin="165,-15,50,243" Width="180" Height="21"  BorderBrush="Black" Background="Black" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}"  />
+        <Separator Margin="0,-150,0,480" Width="1024" HorizontalAlignment="Center" />
+        <Label Content="Name*" HorizontalAlignment="Left" Margin="40,60,0,0" VerticalAlignment="Top" FontSize="20" />
+        <TextBox HorizontalAlignment="Left" Margin="220,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="20" Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}"  />
 
-        <Label Content="City*" HorizontalAlignment="Left" Margin="40,100,0,0" VerticalAlignment="Top" FontSize="15" />
-        <ComboBox x:Name="CitycomboBox" Margin="165,75,50,243" Width="180" Height="21"  BorderBrush="Black" Background="Black" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=CityCollection}" />
+        <Label Content="Country*" HorizontalAlignment="Left" Margin="40,110,0,0" VerticalAlignment="Top" FontSize="20" />
+        <ComboBox x:Name="CountrycomboBox" SelectionChanged="FillCity"  Margin="-318,-465,0,0" Width="250" Height="30"  BorderBrush="Black" Background="Black" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}"  />
 
-        <Label Content="Type*" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <StackPanel Margin="0,0,0,2">
-        <ComboBox Name="TypecomboBox" Grid.Row="2" Grid.Column="1" Height="20" VerticalAlignment="Center" Margin="170,145,55,243" SelectedItem="{Binding Path=Type}" />
+        <Label Content="City*" HorizontalAlignment="Left" Margin="40,160,0,0" VerticalAlignment="Top" FontSize="20" />
+        <ComboBox x:Name="CitycomboBox" Margin="-318,-370,0,0" Width="250" Height="30"  BorderBrush="Black" Background="Black" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=CityCollection}" />
+
+        <Label Content="Type*" HorizontalAlignment="Left" Margin="40,210,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <StackPanel Margin="-432,70,0,0">
+            <ComboBox Name="TypecomboBox" Grid.Row="2" Grid.Column="1" Height="30" Width="250" VerticalAlignment="Center" Margin="170,145,55,243" SelectedItem="{Binding Path=Type}" />
         </StackPanel>
 
-                <Label Content="Max guests*" HorizontalAlignment="Left" Margin="40,175,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox HorizontalAlignment="Left" Margin="170,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=Capacity, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Max guests*" HorizontalAlignment="Left" Margin="40,260,0,0" VerticalAlignment="Top" FontSize="20" />
+        <TextBox HorizontalAlignment="Left" Margin="221,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="20" Text="{Binding Path=Capacity, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Content="Min days*" HorizontalAlignment="Left" Margin="40,205,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox HorizontalAlignment="Left" Margin="170,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=MinNumberOfDays, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Content="Min days*" HorizontalAlignment="Left" Margin="40,310,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox HorizontalAlignment="Left" Margin="221,315,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="20" Text="{Binding Path=MinNumberOfDays, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Content="Cancelation days*" HorizontalAlignment="Left" Margin="40,240,0,0" VerticalAlignment="Top" FontSize="15"/>
-        <TextBox HorizontalAlignment="Left" Margin="170,245,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" Text="{Binding Path=CancelationPeriod, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Content="Cancelation days*" HorizontalAlignment="Left" Margin="40,360,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox HorizontalAlignment="Left" Margin="221,365,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="20" Text="{Binding Path=CancelationPeriod, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Content="Pictures*" HorizontalAlignment="Left" Margin="40,275,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox x:Name="tbPictures" HorizontalAlignment="Left" Margin="170,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" />
+        <Label Content="Pictures*" HorizontalAlignment="Left" Margin="540,60,0,0" VerticalAlignment="Top" FontSize="20" />
+        <TextBox x:Name="tbPictures" HorizontalAlignment="Left" Margin="650,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="15" />
 
         <StackPanel Margin="0,0,-192,2">
-            <Button Panel.ZIndex="1" Margin="173,280,32,122"  Content="+" Height="21" Width="22" FontSize="14" FontWeight="Bold" Click="AddPicture" />
+            <Button Panel.ZIndex="1" Margin="690,65,32,122"  Content="+" Height="30" Width="30" FontSize="17" FontWeight="Bold" Click="AddPicture" />
+            <Button Panel.ZIndex="1" Margin="752,-275,0,0"  Content="-" Height="30" Width="30" FontSize="17" FontWeight="Bold" Click="RemovePicture" />
         </StackPanel>
 
-        <WrapPanel FlowDirection="LeftToRight" Margin="0,328,0,31">
-            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="CreateAccommodation" >CREATE</Button>
-            <Button Margin="10 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="80" Height="30" FontWeight="Bold" FontSize="15" Click="CloseWindow" >CLOSE</Button>
+        <WrapPanel FlowDirection="LeftToRight" Margin="200,620,0,0">
+            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="150" Height="75" FontWeight="Bold" FontSize="35" Click="CreateAccommodation" >CREATE</Button>
+            <Button Margin="60 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Click="CloseWindow" >CLOSE</Button>
         </WrapPanel>
 
+        <Border BorderBrush="Black" BorderThickness="2">
+            <StackPanel Margin="530,-240,0,0" Width="450" Height="280">
+                <Button x:Name="buttonPrevious" Content="⬅" Height="25" Width="25" Margin="-400 125 0 0" Click="buttonPrevious_Click" />
+
+                <Button x:Name="buttonNext" Content="➞" Height="25" Width="25" Margin="400 -35 0 0" Click="buttonNext_Click" />
+
+                <Image x:Name="imageSlideshow" Stretch="UniformToFill" Height="230" Width="350" Margin="0 -120 0 0"/>
+
+            </StackPanel>
+        </Border>
 
     </Grid>
 </Window>

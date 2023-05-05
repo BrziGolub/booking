@@ -344,6 +344,17 @@ namespace Booking.Service
 			}
 		}
 
+		public TourKeyPoint removeKeyPoint(int idKeyPoint)
+		{
+			TourKeyPoint tourKeyPoint = _tourKeyPointsRepository.GetById(idKeyPoint);
+			if (tourKeyPoint == null) return null;
+
+			_tourKeyPointsRepository.DeleteById(idKeyPoint);
+			NotifyObservers();
+
+			return tourKeyPoint;
+		}
+
 		private void CheckVoucher(int idTour)
 		{
 			foreach (TourReservation tr in _tourReservationRepository.GetAll())

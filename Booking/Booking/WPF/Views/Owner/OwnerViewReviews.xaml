@@ -7,12 +7,21 @@
         mc:Ignorable="d"
         Title="OwnerViewReviews" Height="768" Width="1024">
     <Grid>
+        <TextBlock Margin="10,6,0,0" FontWeight="Bold" FontSize="32" Text="View reviews" Foreground="#FFFFF200" >
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="4" Color="#303841" BlurRadius="5" />
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <Separator Margin="0,-150,0,480" Width="1024" HorizontalAlignment="Center" />
+        
         <DataGrid 
             x:Name="dataGrid" 
             IsReadOnly="True" 
             Margin="12 50 12 92" 
             RowHeight="40"
             FontSize="15"
+            Height="550"
             AutoGenerateColumns="False"
             SelectedItem="{Binding SelectedGrade}"
             SelectionMode="Single"
@@ -28,7 +37,7 @@
                 <DataGridTemplateColumn Header="Images" Width="60">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Show" Click="ShowImages"/>
+                            <Button Content="Show" Command="{Binding DataContext.ShowPictures, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -36,7 +45,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel FlowDirection="LeftToRight" Margin="500,650,0,0">
-            <Button Margin="20 0 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Click="Close" >CLOSE</Button>
+            <Button Margin="20 -10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Command="{Binding CloseWindow}" >CLOSE</Button>
         </WrapPanel>
     </Grid>
 </Window>
