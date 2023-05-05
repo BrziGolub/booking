@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View.Guide"
-        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Booking.View.Guide.GuideViewReviews"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:local1="clr-namespace:Booking.WPF.ViewModels.Guide" x:Class="Booking.View.Guide.GuideViewReviews"
         mc:Ignorable="d"
         Background="#D6E6F2"
         Title="Reviews of tours" Height="580" Width="883" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
     <Grid>
         <TextBlock Margin="17,4,0,0" FontWeight="Bold" FontSize="32" Text="Reviews of tours" Foreground="#FFFFF200" >
             <TextBlock.Effect>
@@ -43,7 +44,8 @@
                 <DataGridTemplateColumn Header="Review text">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="ShowReviewText" Content="Show" FontSize="11" Width="65" Height="30" FontStyle="Oblique">
+                            <Button Content="Show" FontSize="11" Width="65" Height="30" FontStyle="Oblique"
+                                    Command="{Binding DataContext.ShowReviewText, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -80,7 +82,7 @@
         </DataGrid>
 
         <WrapPanel Margin="0 480 0 0" Width="160" Height="50">
-            <Button Width="70" Height="40" Content="Report" Margin="0 0 0 0" Click="Report" FontSize="15" FontWeight="Bold">
+            <Button Width="70" Height="40" Content="Report" Margin="0 0 0 0" FontSize="15" FontWeight="Bold" Command="{Binding Report}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -89,7 +91,7 @@
             </Button>
 
 
-            <Button Width="70" Height="40" Content="Close" Margin="20 0 0 0" Click="Close" FontSize="15" FontWeight="Bold">
+            <Button Width="70" Height="40" Content="Close" Margin="20 0 0 0" FontSize="15" FontWeight="Bold" Command="{Binding Close}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>

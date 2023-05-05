@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Booking.View"
+        xmlns:local="clr-namespace:Booking.View" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"        
         Title="GuideCreateTour" Height="750" Width="830" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#D6E6F2">
     <Grid>
@@ -26,8 +26,8 @@
         <Label Content="Max guests*" HorizontalAlignment="Left" Margin="40,270,0,0" VerticalAlignment="Top" FontSize="15"/>
         <TextBox x:Name="tbMaxGuests" HorizontalAlignment="Left" Margin="170,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="15" Text="{Binding Path=MaxGuestNumber, UpdateSourceTrigger=PropertyChanged}"/>
         <StackPanel Margin="-690,200,0,0">
-            <Button Panel.ZIndex="1" Margin="490,75,0,0"  Content="+" Height="22" Width="22" FontSize="14" FontWeight="Bold" Click="IncreaseMaxGuests" />
-            <Button Panel.ZIndex="1" Margin="552,-22,0,0"  Content="-" Height="22" Width="22" FontSize="14" FontWeight="Bold" Click="DecreaseMaxGuests" />
+            <Button Panel.ZIndex="1" Margin="490,75,0,0"  Content="+" Height="22" Width="22" FontSize="14" FontWeight="Bold" Command="{Binding IncreaseMaxGuests}" />
+            <Button Panel.ZIndex="1" Margin="552,-22,0,0"  Content="-" Height="22" Width="22" FontSize="14" FontWeight="Bold" Command="{Binding DecreaseMaxGuests}" />
         </StackPanel>
 
 
@@ -39,16 +39,27 @@
         <Label Content="Duration*" HorizontalAlignment="Left" Margin="40,370,0,0" VerticalAlignment="Top" FontSize="15" />
         <TextBox x:Name="tbDuration" HorizontalAlignment="Left" Margin="170,375,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="15" Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}"/>
         <StackPanel Margin="-690,300,0,0">
-            <Button Panel.ZIndex="1" Margin="490,75,0,0"  Content="+" Height="22" Width="22" FontSize="14" FontWeight="Bold" Click="IncreaseDuration" />
-            <Button Panel.ZIndex="1" Margin="552,-22,0,0"  Content="-" Height="22" Width="22" FontSize="14" FontWeight="Bold" Click="DecreaseDuration" />
+            <Button Panel.ZIndex="1" Margin="490,75,0,0"  Content="+" Height="22" Width="22" FontSize="14" FontWeight="Bold" Command="{Binding IncreaseDuration}" />
+            <Button Panel.ZIndex="1" Margin="552,-22,0,0"  Content="-" Height="22" Width="22" FontSize="14" FontWeight="Bold" Command="{Binding DecreaseDuration}" />
         </StackPanel>
 
         <Label Content="Country*" HorizontalAlignment="Left" Margin="40,420,0,0" VerticalAlignment="Top" FontSize="15" />
         <Label Content="City*" HorizontalAlignment="Left" Margin="40,470,0,0" VerticalAlignment="Top" FontSize="15" />
 
         <StackPanel Margin="0,0,-105,0">
-            <ComboBox x:Name="comboBox1" Margin="-399,425,0,0" Width="180" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="FillCity"></ComboBox>
-            <ComboBox x:Name="comboBox2" Margin="-399,30,0,0" Width="180" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=CityCollection}"></ComboBox>
+            <ComboBox  Margin="-399,425,0,0" Width="180" 
+                      SelectedItem="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Path=CountryCollection}" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged" >
+                        <i:InvokeCommandAction Command="{Binding FillCityCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <ComboBox Margin="-399,30,0,0" Width="180" 
+                      IsEnabled="{Binding CityComboboxEnabled, UpdateSourceTrigger=PropertyChanged}" 
+                      ItemsSource="{Binding Path=CityCollection}" 
+                      SelectedItem="{Binding Path=SelectedCity, UpdateSourceTrigger=PropertyChanged}" /> 
         </StackPanel>
 
         <Label Content="Language*" HorizontalAlignment="Left" Margin="40,530,0,0" VerticalAlignment="Top" FontSize="15" />
@@ -56,28 +67,32 @@
 
 
         <Label Content="Pictures*" HorizontalAlignment="Left" Margin="450,70,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox x:Name="tbPictures" HorizontalAlignment="Left" Margin="540,75,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" MaxHeight="35" FontSize="15" />
+        <TextBox  HorizontalAlignment="Left" Margin="540,75,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="180" MaxHeight="35" FontSize="15" Text="{Binding Path=TbPictures}" />
         <StackPanel Margin="0,0,-192,2">
-            <Button Panel.ZIndex="1" Margin="490,75,0,0"  Content="+" Height="22" Width="22" FontSize="14" FontWeight="Bold" Click="AddPicture" />
-            <Button Panel.ZIndex="1" Margin="552,-22,0,0"  Content="-" Height="22" Width="22" FontSize="14" FontWeight="Bold" Click="RemovePicture" />
+            <Button Panel.ZIndex="1" Margin="490,75,0,0"  Content="+" Height="22" Width="22" FontSize="14" FontWeight="Bold" Command="{Binding AddPicture}" />
+            <Button Panel.ZIndex="1" Margin="552,-22,0,0"  Content="-" Height="22" Width="22" FontSize="14" FontWeight="Bold" Command="{Binding RemovePicture}" />
         </StackPanel>
 
         <Border BorderBrush="Black" BorderThickness="2">
             <StackPanel Margin="430,-290,0,0" Width="350" Height="200">
-                <Button x:Name="buttonPrevious" Content="⬅" Height="18" Width="18" Margin="-315 85 0 0" Click="buttonPrevious_Click" />
+                <Button Content="⬅" Height="18" Width="18" Margin="-315 85 0 0" Command="{Binding PreviousPicture}" Visibility="{Binding ButtonPreviousVisibility}"/>
 
-                <Button x:Name="buttonNext" Content="➞" Height="18" Width="18" Margin="320 -15 0 0" Click="buttonNext_Click" />
+                <Button Content="➞" Height="18" Width="18" Margin="320 -15 0 0" Command="{Binding NextPicture}" Visibility="{Binding ButtonNextVisibility}"/>
 
-                <Image x:Name="imageSlideshow" Stretch="UniformToFill" Height="185" Width="280" Margin="0 -100 0 0"/>
+                <Image Stretch="UniformToFill" Height="185" Width="280" Margin="0 -100 0 0" Source="{Binding ImageSlideshowSource}"/>
 
             </StackPanel>
         </Border>
         
         <Label Content="Key points*" HorizontalAlignment="Left" Margin="450,360,0,0"  VerticalAlignment="Top" FontSize="15"/>
         <StackPanel Margin="0,0,-105,0">
-            <ComboBox x:Name="comboBox" Margin="360,365,0,0" Width="180" Height="21"  BorderBrush="Black" Background="Black"  />
-            <Button Panel.ZIndex="1" Margin="577 -20 0 0" Height="22" Width="22" Content="+" FontSize="14" FontWeight="Bold" Click="AddKeyPoint" />
-            <Button Panel.ZIndex="1" Margin="638 -25 0 0" Height="22" Width="22" Content="-" FontSize="14" FontWeight="Bold" Click="RemoveKeyPoint"  />
+            <ComboBox Margin="360,365,0,0" Width="180" Height="21"  BorderBrush="Black" Background="Black" 
+                      ItemsSource="{Binding Path=KeyPointsCollection}" 
+                      SelectedItem="{Binding Path=SelectedKeyPoint, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="{Binding SelectedIndexKeyPoint}"
+                      />
+            <Button Panel.ZIndex="1" Margin="577 -20 0 0" Height="22" Width="22" Content="+" FontSize="14" FontWeight="Bold" Command="{Binding AddTourKeyPoint}" />
+            <Button Panel.ZIndex="1" Margin="638 -25 0 0" Height="22" Width="22" Content="-" FontSize="14" FontWeight="Bold" Command="{Binding RemoveTourKeyPoint}"  />
         </StackPanel>
 
         <DataGrid 
@@ -89,7 +104,7 @@
             AlternationCount="2"
             AutoGenerateColumns="False"             
             CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserReorderColumns="False"
-            SelectedItem="{Binding SelectedTourKeyPoint}"
+            SelectedItem="{Binding SelectedTourKeyPoint, UpdateSourceTrigger=PropertyChanged}"
             ItemsSource="{Binding Path=tourKeyPoints1, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="161" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
@@ -110,14 +125,14 @@
         
 
         <WrapPanel FlowDirection="LeftToRight" Margin="10,620,0,0">
-            <Button Margin ="318 10 0 0 " HorizontalAlignment="Left"  Width="100" Height="45" FontWeight="Bold" FontSize="18" Click="Create" >Create
+            <Button Margin ="318 10 0 0 " HorizontalAlignment="Left"  Width="100" Height="45" FontWeight="Bold" FontSize="18" Command="{Binding SaveTourCommand}" IsEnabled="True"  >Create
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Margin="10 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" Height="45" FontWeight="Bold" FontSize="18" Click="Close" >Close
+            <Button Margin="10 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" Height="45" FontWeight="Bold" FontSize="18" Command="{Binding Close}" >Close
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
