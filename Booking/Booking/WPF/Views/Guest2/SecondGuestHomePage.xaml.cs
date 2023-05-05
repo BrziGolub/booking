@@ -10,7 +10,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-//using System.Windows.Forms;
 
 namespace Booking.View
 {
@@ -119,13 +118,13 @@ namespace Booking.View
 
 		private void ShowImages(object sender, RoutedEventArgs e)
 		{
-			ShowTourImages view = new ShowTourImages(SelectedTour.Images);
+			ShowTourImages view = new ShowTourImages(SelectedTour);
 			view.ShowDialog();
 		}
 
 		private void ShowDestinations(object sender, RoutedEventArgs e)
 		{
-			ShowTourDestinations view = new ShowTourDestinations(SelectedTour.Destinations);
+			ShowTourDestinations view = new ShowTourDestinations(SelectedTour);
 			view.ShowDialog();
 		}
 

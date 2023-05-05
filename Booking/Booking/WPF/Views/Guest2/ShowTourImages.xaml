@@ -12,13 +12,19 @@
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
 
 		<Label Grid.Row="0" Content="Images" FontSize="24" Margin="0 0 0 8"/>
 
-		<ListBox x:Name="ListBoxImages" Grid.Row="1" Margin="0 8">
+		<TextBlock Grid.Row="1" Text="{Binding Location}"/>
+
+		<TextBlock Grid.Row="2" Text="{Binding Tour.StartTime, StringFormat={}{0:dd/MM/yyyy}}"/>
+
+		<ListBox ItemsSource="{Binding Images}" Grid.Row="3" Margin="0 8">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Image Source="{Binding Url}" Width="350"/>
@@ -26,7 +32,13 @@
 			</ListBox.ItemTemplate>
 		</ListBox>
 
-		<Button Grid.Row="2" Content="Close(F5)" Margin="0 8 0 0" Width="100" Height="27" Click="ButtonClose" HorizontalAlignment="Right"/>
-		
+		<Button Grid.Row="4" Content="Close(F5)" Margin="0 8 0 0" Width="100" Height="27" Command="{Binding Button_Click_Close}" HorizontalAlignment="Right">
+			<Button.Resources>
+				<Style TargetType="Border">
+					<Setter Property="CornerRadius" Value="5"/>
+				</Style>
+			</Button.Resources>
+		</Button>
+
 	</Grid>
 </Window>

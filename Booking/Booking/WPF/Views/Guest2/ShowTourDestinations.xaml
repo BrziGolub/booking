@@ -8,31 +8,45 @@
         Title="ShowTourDestinations" Height="400" Width="450"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
+	
     <Grid Margin="16">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
 			<RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
 		<Label Grid.Row="0" Content="Checkpoints" FontSize="24" Margin="0 0 0 8"/>
 
-		<DataGrid Grid.Row="1"
+		<TextBlock Grid.Row="1" Text="{Binding Location}"/>
+
+		<TextBlock Grid.Row="2" Text="{Binding Tour.StartTime, StringFormat={}{0:dd/MM/yyyy}}"/>
+
+		<DataGrid Grid.Row="3"
                   Margin="0 8 0 8"
                   x:Name="DataGridDestinations"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   SelectionMode="Single"
-				  FontSize="14">
+				  FontSize="14"
+				  ItemsSource="{Binding Destinations}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="State" Width="*" Binding="{Binding Location.State}"/>
                 <DataGridTextColumn Header="City" Width="*" Binding="{Binding Location.City}"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.Row="2" Content="Close(F5)" Width="100" Height="27" Margin="0 8 0 0" Click="ButtonClose" HorizontalAlignment="Right" FontSize="14"/>
-    </Grid>
+		<Button Grid.Row="4" Content="Close(F5)" Width="100" Height="27" Margin="0 8 0 0" Command="{Binding Button_Click_Close}" HorizontalAlignment="Right" FontSize="14">
+			<Button.Resources>
+				<Style TargetType="Border">
+					<Setter Property="CornerRadius" Value="5"/>
+				</Style>
+			</Button.Resources>
+		</Button>
+	</Grid>
 </Window>
