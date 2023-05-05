@@ -16,7 +16,7 @@
         <Separator Margin="0,-120,0,480" Width="1024" HorizontalAlignment="Center" />
         <DataGrid x:Name="AccommodationDataGrid" Margin="12 50 12 92" RowHeight="30"
                       SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding reservations}"
+                      ItemsSource="{Binding reservations, UpdateSourceTrigger=PropertyChanged}"
                       IsReadOnly="True" AutoGenerateColumns="False" Height="526" HeadersVisibility="Column" FontSize="20" Width="980" RenderTransformOrigin="0.503,0.552" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Accommodation.Name}" />
@@ -28,8 +28,8 @@
         </DataGrid>
 
         <WrapPanel FlowDirection="LeftToRight" Margin="200,620,0,0">
-            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="150" Height="75" FontWeight="Bold" FontSize="35" Click="Button_Click_Grade" >GRADE</Button>
-            <Button Margin="60 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Click="Button_Click_Close" >CLOSE</Button>
+            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Grade}" >GRADE</Button>
+            <Button Margin="60 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Close}" >CLOSE</Button>
         </WrapPanel>
     </Grid>
 </Window>

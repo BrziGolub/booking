@@ -32,9 +32,8 @@ namespace Booking.View
         
         public AccommodationGrade accommodationGrade = new AccommodationGrade();
         int accommodationReservationId;
-        private OwnerGradingGuests OwnerGradingGuests;
 
-        public GradingWindow(int ReservationId, OwnerGradingGuests ownerGradingGuests)
+        public GradingWindow(int ReservationId)
         {
             InitializeComponent();
             accommodationReservationId = ReservationId;
@@ -46,7 +45,6 @@ namespace Booking.View
             comboBoxRuleFollowing.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
             comboBoxCommunication.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
             comboBoxLateness.ItemsSource = new List<int>() { 1, 2, 3, 4, 5 };
-            this.OwnerGradingGuests = ownerGradingGuests;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -161,7 +159,6 @@ namespace Booking.View
             {
                 AccommodationGradeService.Create(accommodationGrade);
                 MessageBox.Show("Grade successfully created");
-                OwnerGradingGuests.RefreshWindow();
                 this.Close();
             }
         }
