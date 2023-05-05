@@ -4,6 +4,7 @@ using Booking.Model;
 using Booking.Observer;
 using Booking.Util;
 using Booking.View;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -98,6 +99,8 @@ namespace Booking.WPF.ViewModels.Owner
         }
         private void OpenPictures(object param)
         {
+            ShowOwnerAccommodationImages showOwnerAccommodationImages = new ShowOwnerAccommodationImages(SelectedAccommodation);
+            showOwnerAccommodationImages.Show();
         }
         private void LogOut(object param)
         {
