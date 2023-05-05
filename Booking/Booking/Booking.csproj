@@ -164,6 +164,7 @@
     <Compile Include="WPF\ViewModels\Owner\OwnerRegisterAccommodationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerViewReviewsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowGradeImagesViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\ShowOwnerAccommodationImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\SuperOwnerViewModel.cs" />
     <Compile Include="Application\UseCases\LocationService.cs" />
     <Compile Include="Application\UseCases\TourReservationService.cs" />
@@ -264,6 +265,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guest2\ShowTourImages.xaml.cs">
       <DependentUpon>ShowTourImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Owner\ShowOwnerAccommodationImages.xaml.cs">
+      <DependentUpon>ShowOwnerAccommodationImages.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
@@ -400,6 +404,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest2\ShowTourImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Owner\ShowOwnerAccommodationImages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
