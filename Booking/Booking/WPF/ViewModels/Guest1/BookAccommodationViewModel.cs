@@ -11,9 +11,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Navigation;
 
 namespace Booking.WPF.ViewModels.Guest1
@@ -89,6 +93,7 @@ namespace Booking.WPF.ViewModels.Guest1
                 {
                    if(NumberOfGuests == String.Empty)
                    {
+                       
                         return "This filed is required!";
                    }
                    else
@@ -120,9 +125,6 @@ namespace Booking.WPF.ViewModels.Guest1
                 return true;
             }
         }
-
-
-
 
         public BookAccommodationViewModel(Accommodation selectedAccommodation, NavigationService navigationService)
         {

@@ -16,10 +16,13 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using Booking.Commands;
 using Notifications.Wpf;
+using System.Text.RegularExpressions;
+using Booking.Model.Images;
+using System.Windows.Media.Imaging;
 
 namespace Booking.WPF.ViewModels.Guest1
 {
-    public class RateAccommodationAndOwnerViewModel: INotifyPropertyChanged
+    public class RateAccommodationAndOwnerViewModel: INotifyPropertyChanged, IDataErrorInfo
     {
        
         public event PropertyChangedEventHandler PropertyChanged;
@@ -37,19 +40,7 @@ namespace Booking.WPF.ViewModels.Guest1
 
         public NavigationService NavigationService { get; set; }
 
-        private string _tbPictures;
-        public string Pictures
-        {
-            get => _tbPictures;
-            set
-            {
-                if (_tbPictures != value)
-                {
-                    _tbPictures = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+     
 
         private int _cleaness;
         public int Cleaness
@@ -91,8 +82,14 @@ namespace Booking.WPF.ViewModels.Guest1
                     OnPropertyChanged();
                 }
             }
-        }
+    
 
+
+      
+
+
+        List<string> imagePaths = new List<string>();
+        int currentImageIndex = -1;
         public RelayCommand Button_Click_Subbmit { get; set; }
         public RelayCommand Button_Click_Plus { get; set; }
 
@@ -100,6 +97,57 @@ namespace Booking.WPF.ViewModels.Guest1
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public string Error => null;
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName.Equals("Comment") )
+                {
+                    if (Comment == String.Empty)
+                    {
+                        return "This filed is required!";
+                    }
+                }
+
+                if (columnName.Equals("Courtesy"))
+                {
+                    if(Courtesy == 0)
+                    {
+                        return "This filed is required!";
+                    }
+                }
+
+                if (columnName.Equals("Cleaness"))
+                {
+                    if(Cleaness == 0)
+                    {
+                        return "This filed is required!";
+                    }
+                }
+                return null;
+            }
+        }
+
+        private readonly string[] _validatedProperties = { "Comment", "Courtesy", "Cleaness" };
+
+        public bool IsValid
+        {
+            get
+            {
+                foreach (var property in _validatedProperties)
+                {
+                    if (this[property] != null)
+                        return false;
+                }
+
+                return true;
+            }
+        }
+
+
 
         public RateAccommodationAndOwnerViewModel(AccommodationReservation accommodationReservation, NavigationService navigationService)
         {
@@ -116,7 +164,10 @@ namespace Booking.WPF.ViewModels.Guest1
 
             NavigationService = navigationService;
             Button_Click_Subbmit = new RelayCommand(ButtonSubbmit);
-            Button_Click_Plus = new RelayCommand(ButtonPlus);
+            //Button_Click_Plus = new RelayCommand(ButtonPlus);
+            Comment = String.Empty;
+            Courtesy = 0;
+            Cleaness = 0;
             setComboBoxes();
            
         }
@@ -150,6 +201,10 @@ namespace Booking.WPF.ViewModels.Guest1
 
         private void ButtonSubbmit(object param)
         {
+           /* if(IsValid == false){
+                //obavetsenje
+                return;
+            }*/
             MakeGrade();
 
             AccommodationAndOwnerGradeService.SaveGrade(accommodationAndOwnerGrade);
@@ -162,24 +217,29 @@ namespace Booking.WPF.ViewModels.Guest1
         }
 
 
-        private void MakePicture(GuestsAccommodationImages Picture)
-        {
-            Picture.Url = Pictures;
-            Picture.Guest.Id = AccommodationReservationService.SignedFirstGuestId;
-            Picture.Grade.Id = accommodationAndOwnerGrade.Id;
-            accommodationAndOwnerGrade.Images.Add(Picture);
-        }
+        /*  private void MakePicture(GuestsAccommodationImages Picture)
+          {
+              Picture.Url = Pictures;
+              Picture.Guest.Id = AccommodationReservationService.SignedFirstGuestId;
+              Picture.Grade.Id = accommodationAndOwnerGrade.Id;
+              accommodationAndOwnerGrade.Images.Add(Picture);
+          }
 
-        private void ButtonPlus(object param)
-        {
-            GuestsAccommodationImages Picture = new GuestsAccommodationImages();
+          private void ButtonPlus(object param)
+          {
+              GuestsAccommodationImages Picture = new GuestsAccommodationImages();
 
-            MakePicture(Picture);
-            GuestsAccommodationImagesService.Create(Picture);
+              MakePicture(Picture);
+              GuestsAccommodationImagesService.Create(Picture);
 
-            Pictures = string.Empty;
-        }
+              Pictures = string.Empty;
+          }*/
+
+     
+
+      
+
+
 
     }
-
 }
