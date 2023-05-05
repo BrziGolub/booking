@@ -84,7 +84,7 @@
             </Rectangle>
         </Canvas>
         <WrapPanel FlowDirection="LeftToRight" Margin="500,650,0,0">
-            <Button Margin="20 0 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Command="{Binding CloseSuper}" >CLOSE</Button>
+            <Button Margin="20 -10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Command="{Binding CloseSuper}" >CLOSE</Button>
         </WrapPanel>
         
     </Grid>

@@ -32,11 +32,14 @@ namespace Booking.View
 
         public IAccommodationService AccommodationService { get; set; }
         public ILocationService LocationService { get; set; }
+        public IAccommodationImageService accommodationImageService { get; set; }
 
         public Accommodation accommodation = new Accommodation();
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<string> CityCollection { get; set; }
+        List<string> imagePaths = new List<string>();
+        int currentImageIndex = -1;
 
         public void FillCity(object sender, SelectionChangedEventArgs e)
         {
@@ -60,9 +63,25 @@ namespace Booking.View
             AccommodationService = InjectorService.CreateInstance<IAccommodationService>();
             CityCollection = new ObservableCollection<string>();
             LocationService = InjectorService.CreateInstance<ILocationService>();
+            accommodationImageService = InjectorService.CreateInstance<IAccommodationImageService>();
 
 
             FillComboBox();
+            NextPreviousPhotoButtonsVisibility();
+        }
+        private void NextPreviousPhotoButtonsVisibility()
+        {
+            if (imagePaths.Count == 0)
+            {
+                imageSlideshow.Source = null;
+                buttonNext.Visibility = Visibility.Collapsed;
+                buttonPrevious.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                buttonNext.Visibility = Visibility.Visible;
+                buttonPrevious.Visibility = Visibility.Visible;
+            }
         }
 
         public void FillComboBox()
@@ -279,11 +298,24 @@ namespace Booking.View
 
         private void AddPicture(object sender, RoutedEventArgs e)
         {
+            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
+            dialog.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
+
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string imagePath = dialog.FileName;
+                imagePaths.Add(imagePath);
+                currentImageIndex = imagePaths.Count - 1;
+                imageSlideshow.Source = new BitmapImage(new Uri(imagePath));
+                tbPictures.Text = imagePath;
+            }
+
             if (tbPictures.Text != "")
             {
                 AccommodationImage Pictures = new AccommodationImage();
                 Pictures.Url = tbPictures.Text;
                 accommodation.Images.Add(Pictures);
+                NextPreviousPhotoButtonsVisibility();
             }
             else 
             {
@@ -291,6 +323,36 @@ namespace Booking.View
             }
 
             tbPictures.Text = string.Empty;
+        }
+        private void RemovePicture(object sender, RoutedEventArgs e)
+        {
+            AccommodationImage Images = new AccommodationImage();
+            Images.Url = tbPictures.Text;
+            imageSlideshow.Source = null;
+            imagePaths.Remove(Images.Url);
+            accommodation.Images.Remove(Images);
+            tbPictures.Text = "";
+            NextPreviousPhotoButtonsVisibility();
+        }
+        private void buttonPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentImageIndex > 0)
+            {
+                currentImageIndex--;
+                string imagePath = imagePaths[currentImageIndex];
+                imageSlideshow.Source = new BitmapImage(new Uri(imagePath));
+                tbPictures.Text = imagePath;
+            }
+        }
+        private void buttonNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentImageIndex < imagePaths.Count - 1)
+            {
+                currentImageIndex++;
+                string imagePath = imagePaths[currentImageIndex];
+                imageSlideshow.Source = new BitmapImage(new Uri(imagePath));
+                tbPictures.Text = imagePath;
+            }
         }
 
         private void CountrycomboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
