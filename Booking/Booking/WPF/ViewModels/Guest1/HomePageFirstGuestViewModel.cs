@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,7 +22,7 @@ using System.Windows.Navigation;
 
 namespace Booking.WPF.ViewModels.Guest1
 {
-    public class HomePageFirstGuestViewModel: INotifyPropertyChanged
+    public class HomePageFirstGuestViewModel: INotifyPropertyChanged , IDataErrorInfo
     {
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         public Accommodation SelectedAccommodation { get; set; }
@@ -87,6 +88,55 @@ namespace Booking.WPF.ViewModels.Guest1
         public RelayCommand Button_Click_Search { get; set; }
 
         public NavigationService NavigationService { get; set; }
+
+        public string Error => null;
+
+        private Regex _searchReservationDaysRegex = new Regex("[1-9]{1,2}");
+        private Regex _searchGuestRegex = new Regex("^[1-9][0-9]?$");
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "SerachGuests")
+                {
+                    if(SerachGuests != String.Empty)
+                    {
+                        Match match = _searchGuestRegex.Match(SerachGuests);
+                        if (!match.Success)
+                            return "Number of guests is not in correct format!";
+                    }
+                }
+
+                if(columnName == "SearchReservationDays")
+                {
+                    if(SearchReservationDays != String.Empty)
+                    {
+                        Match match = _searchReservationDaysRegex.Match(SearchReservationDays);
+                        if (!match.Success)
+                            return "Staying days is not in correct format!";
+                    }
+                }
+
+                return null;
+            }
+        }
+
+        private readonly string[] _validatedProperties = { "SerachGuests" , "SearchReservationDays" };
+
+        public bool IsValid
+        {
+            get
+            {
+                foreach (var property in _validatedProperties)
+                {
+                    if (this[property] != null)
+                        return false;
+                }
+
+                return true;
+            }
+        }
 
         public HomePageFirstGuestViewModel(NavigationService navigationService)
         {
@@ -168,7 +218,17 @@ namespace Booking.WPF.ViewModels.Guest1
                 accommodationTypes.Add("HOUSE");
             }
 
-            AccommodationService.Search(Accommodations, SearchName, SearchCity, SearchState, accommodationTypes, SerachGuests, SearchReservationDays);
+            if (IsValid)
+            {
+
+                AccommodationService.Search(Accommodations, SearchName, SearchCity, SearchState, accommodationTypes, SerachGuests, SearchReservationDays);
+            }
+            else
+            {
+                //ovde treba notification
+                MessageBox.Show("ne moze");
+            }
+
         }
 
         private void ButtonShowAll(object param)
