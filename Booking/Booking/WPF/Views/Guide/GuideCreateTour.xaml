@@ -92,7 +92,7 @@
                       SelectedIndex="{Binding SelectedIndexKeyPoint}"
                       />
             <Button Panel.ZIndex="1" Margin="577 -20 0 0" Height="22" Width="22" Content="+" FontSize="14" FontWeight="Bold" Command="{Binding AddTourKeyPoint}" />
-            <Button Panel.ZIndex="1" Margin="638 -25 0 0" Height="22" Width="22" Content="-" FontSize="14" FontWeight="Bold" Command="{Binding RemoveKeyPoint}"  />
+            <Button Panel.ZIndex="1" Margin="638 -25 0 0" Height="22" Width="22" Content="-" FontSize="14" FontWeight="Bold" Command="{Binding RemoveTourKeyPoint}"  />
         </StackPanel>
 
         <DataGrid 
@@ -104,7 +104,7 @@
             AlternationCount="2"
             AutoGenerateColumns="False"             
             CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserReorderColumns="False"
-            SelectedItem="{Binding SelectedTourKeyPoint}"
+            SelectedItem="{Binding SelectedTourKeyPoint, UpdateSourceTrigger=PropertyChanged}"
             ItemsSource="{Binding Path=tourKeyPoints1, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="161" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>

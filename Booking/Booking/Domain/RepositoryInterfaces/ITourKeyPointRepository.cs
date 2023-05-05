@@ -14,5 +14,7 @@ namespace Booking.Domain.RepositoryInterfaces
 		TourKeyPoint Update(TourKeyPoint keyPoint);
 		List<TourKeyPoint> GetKeyPointsByTourId(int id);
 		void DeleteByTourId(int id);
-	}
+		void DeleteById(int id);
+
+    }
 }

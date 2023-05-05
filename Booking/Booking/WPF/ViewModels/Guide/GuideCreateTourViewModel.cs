@@ -3,7 +3,6 @@ using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Model.Images;
 using Booking.Observer;
-using Booking.Service;
 using Booking.Util;
 using System;
 using System.Collections.Generic;
@@ -12,14 +11,10 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Booking.WPF.ViewModels.Guide
 {
@@ -28,7 +23,17 @@ namespace Booking.WPF.ViewModels.Guide
         public ITourService tourService { get; set; }
         public ILocationService locationService { get; set; }
         public ITourImageService tourImageService { get; set; }
-        TourKeyPoint SelectedTourKeyPoint { get; set; }
+        
+        private TourKeyPoint _selectedTourKeyPoint;
+        public TourKeyPoint SelectedTourKeyPoint
+        {
+            get { return _selectedTourKeyPoint; }
+            set
+            {
+                _selectedTourKeyPoint = value;
+                OnPropertyChanged("SelectedTourKeyPoint");
+            }
+        }
 
         public Tour tour = new Tour();
         
@@ -265,6 +270,7 @@ namespace Booking.WPF.ViewModels.Guide
             get { return _buttonPreviousVisibility; }
             set { _buttonPreviousVisibility = value; OnPropertyChanged(); }
         }
+
         
         private readonly Window _window;
         public GuideCreateTourViewModel(Window window)
@@ -396,10 +402,10 @@ namespace Booking.WPF.ViewModels.Guide
                 int locationId = locationService.GetIdByCountryAndCity(Country, City);
                 Location location = locationService.GetById(locationId);
 
-                TourKeyPoint tourKeyPoints = new TourKeyPoint();
-                tourKeyPoints1.Add(tourKeyPoints);
-                tourKeyPoints.Location = location;
-                tour.Destinations.Add(tourKeyPoints);
+                TourKeyPoint tourKeyPoint = new TourKeyPoint();
+                tourKeyPoints1.Add(tourKeyPoint);
+                tourKeyPoint.Location = location;
+                tour.Destinations.Add(tourKeyPoint);
 
             }   
             SelectedIndexKeyPoint = -1;
@@ -407,8 +413,17 @@ namespace Booking.WPF.ViewModels.Guide
         }
         private void ButtonRemoveKeyPoint(object param)
         {
-            tourKeyPoints1.Remove(SelectedTourKeyPoint);
-            Update();
+            if(SelectedTourKeyPoint != null) 
+            {
+                //TourKeyPoint pom = SelectedTourKeyPoint;
+                tour.Destinations.RemoveAll(d => d.Location.City == SelectedTourKeyPoint.Location.City && d.Location.State == SelectedTourKeyPoint.Location.State);
+                tourKeyPoints1.Remove(SelectedTourKeyPoint);
+            }
+            else
+            {
+                MessageBox.Show("You need to select keypoint if you want to remove it!");
+            }
+
         }
         private void CloseWindow()
         {
@@ -429,9 +444,7 @@ namespace Booking.WPF.ViewModels.Guide
                 ButtonPreviousVisibility = Visibility.Visible;
              }
          }
-        
-
-       
+          
         
         public ICommand SaveTourCommand
         {
@@ -504,7 +517,7 @@ namespace Booking.WPF.ViewModels.Guide
                     MessageBox.Show("'DURATION' should be greater than 0");
                     return;
                 }
-                if(TbPictures == "")
+                if(tour.Images.Count < 1)
                 {
                     MessageBox.Show("Tour need to have 1 'IMAGE' at least");
                     return;
@@ -549,15 +562,44 @@ namespace Booking.WPF.ViewModels.Guide
 
         private void ButtonRemovePicture(object param)
         {
-            TourImage Images = new TourImage();
-            Images.Url = TbPictures;
+            TourImage image = new TourImage
+            {
+                Url = TbPictures
+            };
             ImageSlideshowSource = null;
-            imagePaths.Remove(Images.Url);
-            tour.Images.Remove(Images);
-            TbPictures = "";
+            imagePaths.Remove(image.Url);
+
+            int indexToRemove = -1;
+            for (int i = 0; i < tour.Images.Count; i++)
+            {
+                if (tour.Images[i].Url == image.Url)
+                {
+                    indexToRemove = i;
+                    break;
+                }
+            }
+
+            if (indexToRemove != -1)
+            {
+                tour.Images.RemoveAt(indexToRemove);
+
+                if (tour.Images.Count == 0)
+                {
+                    currentImageIndex = -1;
+                    TbPictures = "";
+                    ImageSlideshowSource = null;
+                }
+                else
+                {
+                    currentImageIndex = (currentImageIndex - 1 + tour.Images.Count) % tour.Images.Count;
+
+                    ImageSlideshowSource = new BitmapImage(new Uri(tour.Images[currentImageIndex].Url));
+                    TbPictures = tour.Images[currentImageIndex].Url;
+                }
+            }
+
             NextPreviousPhotoButtonsVisibility();
         }
-
 
 
         private void buttonPrevious_Click(object param)

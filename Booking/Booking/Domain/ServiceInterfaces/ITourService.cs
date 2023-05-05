@@ -36,5 +36,6 @@ namespace Booking.Domain.ServiceInterfaces
         int numberWithOutVouchersGuests(int selectedTourID);
         TourImage FindImageByUrl(string url);
         List<TourKeyPoint> GetTourKeyPoints();
+        TourKeyPoint removeKeyPoint(int idKeyPoint);
     }
 }
