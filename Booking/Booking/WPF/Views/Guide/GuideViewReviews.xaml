@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Booking.View.Guide"
-        xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:local1="clr-namespace:Booking.WPF.ViewModels.Guide" x:Class="Booking.View.Guide.GuideViewReviews"
+    x:Class="Booking.View.Guide.GuideViewReviews"
         mc:Ignorable="d"
         Background="#D6E6F2"
         Title="Reviews of tours" Height="580" Width="883" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
