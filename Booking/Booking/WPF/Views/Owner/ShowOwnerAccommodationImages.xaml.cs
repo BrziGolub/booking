@@ -24,7 +24,7 @@ namespace Booking.WPF.Views.Owner
         public ShowOwnerAccommodationImages(Accommodation SelectedAccommodation)
         {
             InitializeComponent();
-            this.DataContext = new ShowOwnerAccommodationImagesViewModel(SelectedAccommodation);
+            this.DataContext = new ShowOwnerAccommodationImagesViewModel(SelectedAccommodation,this);
         }
     }
 }

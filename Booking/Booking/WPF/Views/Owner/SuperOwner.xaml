@@ -19,6 +19,7 @@
                    Text="{Binding NumberOfGradesText}"
                    Margin="200,-310,20,0"                  
                    FontSize="50"
+                   ToolTip="This is the number of grades you have"
                    FontStyle="Italic"
                    FontWeight="SemiBold"
                    Foreground="Black"
@@ -30,6 +31,7 @@
                    Text="{Binding AverageGradeText}"
                    Margin="200,135,0,0"                    
                    FontSize="50"
+                   ToolTip="This is your average grade"
                    FontStyle="Italic"
                    FontWeight="SemiBold"
                    Foreground="Black"
@@ -84,7 +86,7 @@
             </Rectangle>
         </Canvas>
         <WrapPanel FlowDirection="LeftToRight" Margin="500,650,0,0">
-            <Button Margin="20 -10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Command="{Binding CloseSuper}" >CLOSE</Button>
+            <Button Margin="20 -10 0 0"  VerticalAlignment="Center" ToolTip="Press to close this window" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Command="{Binding CloseSuper}" >CLOSE</Button>
         </WrapPanel>
         
     </Grid>
