@@ -2,6 +2,7 @@
 using Booking.Model;
 using Booking.Service;
 using Booking.Util;
+using Booking.WPF.ViewModels.Guest2;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,25 +22,10 @@ namespace Booking.View.Guest2
 {
 	public partial class ShowVouchers : Window
 	{
-		private readonly IVoucherService _voucherService;
-
-		private ObservableCollection<Voucher> vouchers;
-
 		public ShowVouchers()
 		{
 			InitializeComponent();
-			DataContext = this;
-
-			_voucherService = InjectorService.CreateInstance<IVoucherService>();
-
-			vouchers = new ObservableCollection<Voucher>(_voucherService.GetVouchersByUserId(TourService.SignedGuideId));
-
-			DejtaGrid.ItemsSource = vouchers;
-		}
-
-		private void ButtonClose(object sender, RoutedEventArgs e)
-		{
-			Close();
+			DataContext = new ShowVouchersViewModel(this);
 		}
 	}
 }

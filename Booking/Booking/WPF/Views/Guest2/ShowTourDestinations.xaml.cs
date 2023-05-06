@@ -1,4 +1,5 @@
 ﻿using Booking.Model;
+using Booking.WPF.ViewModels.Guest2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +16,12 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for ShowTourDestinations.xaml
-    /// </summary>
     public partial class ShowTourDestinations : Window
     {
-        public ShowTourDestinations(List<TourKeyPoint> tourKeyPoints)
+        public ShowTourDestinations(Tour tour)
         {
             InitializeComponent();
-            DataContext = this;
-
-            DataGridDestinations.ItemsSource = tourKeyPoints;
-        }
-
-        private void ButtonClose(object sender, RoutedEventArgs e)
-        {
-            Close();
+            DataContext = new ShowTourDestinationsViewModel(this, tour);
         }
     }
 }

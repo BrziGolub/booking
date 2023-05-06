@@ -28,15 +28,20 @@
 				  IsReadOnly="True"
 				  SelectionMode="Single"
 				  FontSize="14"
-				  ItemsSource="{Binding vouchers}"
-				  x:Name="DejtaGrid">
+				  ItemsSource="{Binding Vouchers}">
 			
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="ID" Width="2*" Binding="{Binding Id}"/>
+				<DataGridTextColumn Header="No." Width="2*" Binding="{Binding Id}"/>
 				<DataGridTextColumn Header="Expiration date" Width="3*" Binding="{Binding ValidTime, StringFormat={}{0:dd/MM/yyyy}}"/>
 			</DataGrid.Columns>
 		</DataGrid>
 
-		<Button Grid.Row="2" Content="Close(F5)" Width="100" Height="27" FontSize="14" HorizontalAlignment="Right" Margin="0 8 0 0" Click="ButtonClose"/>
+		<Button Grid.Row="2" Content="Close(F5)" Width="100" Height="27" FontSize="14" HorizontalAlignment="Right" Margin="0 8 0 0" Command="{Binding Button_Click_Close}">
+			<Button.Resources>
+				<Style TargetType="Border">
+					<Setter Property="CornerRadius" Value="5"/>
+				</Style>
+			</Button.Resources>
+		</Button>
 	</Grid>
 </Window>
