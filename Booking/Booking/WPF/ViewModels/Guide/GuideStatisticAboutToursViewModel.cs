@@ -18,7 +18,6 @@ namespace Booking.WPF.ViewModels.Guide
 {
     public class GuideStatisticAboutToursViewModel : IObserver, INotifyPropertyChanged
     {
-
         public ObservableCollection<Tour> MostVisitedTourGenerraly { get; set; }
         public ObservableCollection<Tour> MostVisitedTourThisYear { get; set; }
         public ObservableCollection<Tour> averageNumberOfGuests { get; set; }
