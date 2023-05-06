@@ -225,8 +225,9 @@ namespace Booking.WPF.ViewModels.Guest1
             }
             else
             {
-                //ovde treba notification
-                MessageBox.Show("ne moze");
+                var notificationManager = new NotificationManager();
+                NotificationContent content = new NotificationContent { Title = "Unable to search!", Message = "Your filed are not in correct frmat!", Type = NotificationType.Error };
+                notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
             }
 
         }
@@ -255,7 +256,10 @@ namespace Booking.WPF.ViewModels.Guest1
 
         private void ButtonShowImages(object sender)
         {
+            if(SelectedAccommodation == null)
+            {
 
+            }
             NavigationService.Navigate(new ShowAccommodationImages(SelectedAccommodation));
 
         }
