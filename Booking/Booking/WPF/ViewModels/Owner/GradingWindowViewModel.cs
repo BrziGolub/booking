@@ -169,6 +169,7 @@ namespace Booking.WPF.ViewModels.Owner
             {
                 AccommodationGradeService.Create(accommodationGrade);
                 MessageBox.Show("Grade successfully created");
+                AccommodationReservationService.NotifyObservers();
                 _window.Close();
             }
         }
