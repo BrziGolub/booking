@@ -23,8 +23,8 @@
         </TextBlock>
 
         <WrapPanel Margin="343,99,0,0">
-            <Button x:Name="buttonGenerraly" Width="70" Height="20" Click="buttonGenerraly_Click" Background="#AACBF0" >Generraly</Button>
-            <Button x:Name="buttonThisYear" Width="70" Height="20" Click="MostVisitedThisYear" Background="#72879E">This year</Button>
+            <Button  Width="70" Height="20" Command="{Binding Generraly}" Background="{Binding Button1Color}" >Generraly</Button>
+            <Button  Width="70" Height="20" Command="{Binding MostVisitedThisYear}" Background="{Binding Button2Color}">This year</Button>
         </WrapPanel>
 
         <DataGrid      
@@ -38,7 +38,7 @@
             AutoGenerateColumns="False"             
             CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserReorderColumns="False"
             SelectedItem="{Binding SelectedTour}"
-            ItemsSource="{Binding Path=MostVisitedTourGenerraly, UpdateSourceTrigger=PropertyChanged}" >
+            ItemsSource="{Binding Path=MostVisitedTourPom, UpdateSourceTrigger=PropertyChanged}" >
             >
 
             <DataGrid.Columns>
@@ -52,7 +52,7 @@
                 <DataGridTemplateColumn Header="Description">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="ShowDescriptionText" Content="Show" FontSize="11" Width="65" Height="30" FontStyle="Oblique">
+                            <Button Content="Show" FontSize="11" Width="65" Height="30" FontStyle="Oblique" Command="{Binding DataContext.ShowDescriptionText, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" >
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -85,29 +85,29 @@
 
         <WrapPanel Margin="300 260 0 0">
             <Label Content="Select tour:" FontSize="13"/>
-            <ComboBox x:Name="comboBoxTours" Width="120" Height="20" />
+            <ComboBox Width="120" Height="20" ItemsSource="{Binding Path=TourCollection}" SelectedIndex="{Binding SelectedIndex}" Text="{Binding TourCB}" />
         </WrapPanel>
 
 
         <Label Content="0-18" Margin="-520,175,0,0" Width="45" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
-        <TextBlock x:Name="zeroToEighteenTextBlock"
-                   Margin="-200,175,0,0"                  
+        <TextBlock Margin="-200,175,0,0"                  
                    FontSize="15"
                    FontStyle="Italic"
                    FontWeight="SemiBold"
                    Foreground="Black"
                    Panel.ZIndex="1"
-                   Height="21" Width="144"></TextBlock>
+                   Height="21" Width="144"
+                   Text="{Binding Path=ZeroToEighteenTB, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
 
         <Label Content="18-50" Margin="-530,245,0,0" Width="45" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
-        <TextBlock x:Name="EighteenToFifthyTextBlock"
-                   Margin="-200,245,0,0"                    
+        <TextBlock Margin="-200,245,0,0"                    
                    FontSize="15"
                    FontStyle="Italic"
                    FontWeight="SemiBold"
                    Foreground="Black"
                    Panel.ZIndex="1"
-                   Height="21" Width="144"></TextBlock>
+                   Height="21" Width="144"
+                   Text="{Binding Path=EighteenToFifthyTB, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
 
         <Canvas>
             <Rectangle Width="70" Height="35" Stroke="Black" StrokeThickness="2" Canvas.Left="109" Canvas.Top="336" HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -199,25 +199,25 @@
 
 
         <Label Content="50+" Margin="-515,315,0,0" Width="45" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
-        <TextBlock x:Name="FifthyPlusTextBlock"
-                   Margin="-200,315,0,0"          
+        <TextBlock Margin="-200,315,0,0"          
                    FontSize="15"
                    FontStyle="Italic"
                    FontWeight="SemiBold"
                    Foreground="Black"
                    Panel.ZIndex="1"
-                   Height="21" Width="144"></TextBlock>
+                   Height="21" Width="144"
+                   Text="{Binding Path=FifthyPlusTB, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
 
 
         <WrapPanel Margin="0 470 0 0" Width="250" Height="50">
-            <Button Width="70" Height="40" Content="Show" Margin="0 0 0 0" FontWeight="Bold" Click="ShowStatistic">
+            <Button Width="70" Height="40" Content="Show" Margin="0 0 0 0" FontWeight="Bold" Command="{Binding ShowStatistic}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Width="70" Height="40" Margin="20 0 0 0" FontWeight="Bold" Click="ResetStatistic" >
+            <Button Width="70" Height="40" Margin="20 0 0 0" FontWeight="Bold" Command="{Binding ResetStatistic}" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -229,7 +229,7 @@
                 </StackPanel>
             </Button>
 
-            <Button Width="70" Height="40" Content="Close" FontWeight="Bold" Margin="20 0 0 0" Click="Close">
+            <Button Width="70" Height="40" Content="Close" FontWeight="Bold" Margin="20 0 0 0" Command="{Binding Close}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -242,22 +242,22 @@
 
         <Label Content="Without" Margin="250,280,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
         <Label Content="voucher" Margin="255,310,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
-        <TextBlock x:Name="withVoucherTextBlock"
-            Margin="570,191,0,0"                  
+        <TextBlock Margin="570,191,0,0"                  
             FontSize="15"
             FontStyle="Italic"
             FontWeight="SemiBold"
             Foreground="Black"
             Panel.ZIndex="1"
-            Height="21" Width="144"/>
-        <TextBlock x:Name="withoutVoucherTextBlock"
-            Margin="570,295,0,0"                    
+            Height="21" Width="144"
+            Text="{Binding Path=WithVoucherTB, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Margin="570,295,0,0"                    
             FontSize="15"
             FontStyle="Italic"
             FontWeight="SemiBold"
             Foreground="Black"
             Panel.ZIndex="1"
-            Height="21" Width="144"/>
+            Height="21" Width="144"
+            Text="{Binding Path=WithOutVoucherTB, UpdateSourceTrigger=PropertyChanged}"/>
 
 
     </Grid>
