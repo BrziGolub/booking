@@ -32,7 +32,7 @@ namespace Booking.Service
         public AccommodationGrade Create(AccommodationGrade accommodationGrade)
         {
             _repository.Add(accommodationGrade);
-            NotifyObservers();
+            //NotifyObservers();
             return accommodationGrade;
         }
         public void Subscribe(IObserver observer)

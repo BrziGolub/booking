@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Booking.View"
+        xmlns:local="clr-namespace:Booking.View" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="OwnerRegisterAccommodation" Height="768" Width="1024" ResizeMode="NoResize">
     <Grid>
@@ -18,14 +18,27 @@
         <TextBox HorizontalAlignment="Left" Margin="220,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="20" Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}"  />
 
         <Label Content="Country*" HorizontalAlignment="Left" Margin="40,110,0,0" VerticalAlignment="Top" FontSize="20" />
-        <ComboBox x:Name="CountrycomboBox" SelectionChanged="FillCity"  Margin="-318,-465,0,0" Width="250" Height="30"  BorderBrush="Black" Background="Black" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}"  />
-
         <Label Content="City*" HorizontalAlignment="Left" Margin="40,160,0,0" VerticalAlignment="Top" FontSize="20" />
-        <ComboBox x:Name="CitycomboBox" Margin="-318,-370,0,0" Width="250" Height="30"  BorderBrush="Black" Background="Black" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=CityCollection}" />
+
+        <StackPanel Margin="0,0,-105,0">
+            <ComboBox  Margin="-440,115,0,0" Width="250" Height="30" 
+                      SelectedItem="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Path=CountryCollection}" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged" >
+                        <i:InvokeCommandAction Command="{Binding FillCityCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <ComboBox Margin="-440,20,0,0" Width="250" Height="30" 
+                      IsEnabled="{Binding CityComboboxEnabled, UpdateSourceTrigger=PropertyChanged}" 
+                      ItemsSource="{Binding Path=CityCollection}" 
+                      SelectedItem="{Binding Path=SelectedCity, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
 
         <Label Content="Type*" HorizontalAlignment="Left" Margin="40,210,0,0" VerticalAlignment="Top" FontSize="20"/>
         <StackPanel Margin="-432,70,0,0">
-            <ComboBox Name="TypecomboBox" Grid.Row="2" Grid.Column="1" Height="30" Width="250" VerticalAlignment="Center" Margin="170,145,55,243" SelectedItem="{Binding Path=Type}" />
+            <ComboBox Name="TypecomboBox" Grid.Row="2" Grid.Column="1" Height="30" Width="250" VerticalAlignment="Center" Margin="170,145,55,243" ItemsSource="{Binding Path= comboBoxType}" SelectedItem="{Binding Path=Type}" />
         </StackPanel>
 
                 <Label Content="Max guests*" HorizontalAlignment="Left" Margin="40,260,0,0" VerticalAlignment="Top" FontSize="20" />
@@ -38,25 +51,25 @@
         <TextBox HorizontalAlignment="Left" Margin="221,365,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="20" Text="{Binding Path=CancelationPeriod, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label Content="Pictures*" HorizontalAlignment="Left" Margin="540,60,0,0" VerticalAlignment="Top" FontSize="20" />
-        <TextBox x:Name="tbPictures" HorizontalAlignment="Left" Margin="650,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="15" />
+        <TextBox x:Name="tbPictures" HorizontalAlignment="Left" Margin="650,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="15" Text="{Binding Path=TbPictures}" />
 
         <StackPanel Margin="0,0,-192,2">
-            <Button Panel.ZIndex="1" Margin="690,65,32,122"  Content="+" Height="30" Width="30" FontSize="17" FontWeight="Bold" Click="AddPicture" />
-            <Button Panel.ZIndex="1" Margin="752,-275,0,0"  Content="-" Height="30" Width="30" FontSize="17" FontWeight="Bold" Click="RemovePicture" />
+            <Button Panel.ZIndex="1" Margin="690,65,32,122"  Content="+" Height="30" Width="30" FontSize="17" FontWeight="Bold" Command="{Binding AddPicture}" />
+            <Button Panel.ZIndex="1" Margin="752,-275,0,0"  Content="-" Height="30" Width="30" FontSize="17" FontWeight="Bold" Command="{Binding RemovePicture}" />
         </StackPanel>
 
         <WrapPanel FlowDirection="LeftToRight" Margin="200,620,0,0">
-            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="150" Height="75" FontWeight="Bold" FontSize="35" Click="CreateAccommodation" >CREATE</Button>
-            <Button Margin="60 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Click="CloseWindow" >CLOSE</Button>
+            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Create}" >CREATE</Button>
+            <Button Margin="60 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Close}" >CLOSE</Button>
         </WrapPanel>
 
         <Border BorderBrush="Black" BorderThickness="2">
             <StackPanel Margin="530,-240,0,0" Width="450" Height="280">
-                <Button x:Name="buttonPrevious" Content="⬅" Height="25" Width="25" Margin="-400 125 0 0" Click="buttonPrevious_Click" />
+                <Button x:Name="buttonPrevious" Content="⬅" Height="25" Width="25" Margin="-400 125 0 0" Command="{Binding PreviousPicture}" Visibility="{Binding ButtonPreviousVisibility}" />
 
-                <Button x:Name="buttonNext" Content="➞" Height="25" Width="25" Margin="400 -35 0 0" Click="buttonNext_Click" />
+                <Button x:Name="buttonNext" Content="➞" Height="25" Width="25" Margin="400 -35 0 0" Command="{Binding NextPicture}" Visibility="{Binding ButtonNextVisibility}" />
 
-                <Image x:Name="imageSlideshow" Stretch="UniformToFill" Height="230" Width="350" Margin="0 -120 0 0"/>
+                <Image x:Name="imageSlideshow" Stretch="UniformToFill" Height="230" Width="350" Margin="0 -120 0 0" Source="{Binding ImageSlideshowSource}"/>
 
             </StackPanel>
         </Border>
