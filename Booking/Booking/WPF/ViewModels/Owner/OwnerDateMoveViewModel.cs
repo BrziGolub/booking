@@ -81,13 +81,13 @@ namespace Booking.WPF.ViewModels.Owner
             SelectedAccommodationReservationRequest.Comment = OwnerComment;
             AccommodationReservationRequestService.SaveRejected(SelectedAccommodationReservationRequest);
             NotificationService.MakeReject(SelectedAccommodationReservationRequest);
-            CloseWindow();
+            AccommodationReservationRequestService.NotifyObservers();
         }
         private void Button_Click_Accept(object param)
         {
             AccommodationReservationRequestService.SaveAccepted(SelectedAccommodationReservationRequest);
             NotificationService.MakeAccepted(SelectedAccommodationReservationRequest);
-            CloseWindow();
+            AccommodationReservationRequestService.NotifyObservers();
         }
         private void CloseWindow()
         {

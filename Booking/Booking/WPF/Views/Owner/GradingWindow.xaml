@@ -14,26 +14,26 @@
         </TextBlock>
 
         <Separator Margin="0,-120,0,480" Width="1024" HorizontalAlignment="Center" />
-        <Label Content="Cleanliness*" HorizontalAlignment="Left" Margin="40,80,0,0" VerticalAlignment="Top" FontSize="35" />
+        <Label Content="Cleanliness*" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top" FontSize="35" />
         <StackPanel Margin="0,60,70,0">
-            <ComboBox x:Name="comboBoxCleanlinessName" Margin="0,30,0,0" ToolTip="Press and choose a grade which best describes the guests cleanliness" FontSize="30" Height="50" Width="250" ItemsSource="{Binding Path= comboBoxCleanliness}" SelectedItem="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+            <ComboBox x:Name="comboBoxCleanlinessName" Margin="0,40,0,0" ToolTip="Press and choose a grade which best describes the guests cleanliness" FontSize="30" Height="50" Width="250" ItemsSource="{Binding Path= comboBoxCleanliness}" SelectedItem="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
         </StackPanel>
 
 
-        <Label Content="RuleFollowing*" HorizontalAlignment="Left" Margin="40,160,0,0" VerticalAlignment="Top" FontSize="35" />
-        <Label Content="Communication*" HorizontalAlignment="Left" Margin="40,240,0,0" VerticalAlignment="Top" FontSize="35" />
+        <Label Content="RuleFollowing*" HorizontalAlignment="Left" Margin="40,190,0,0" VerticalAlignment="Top" FontSize="35" />
+        <Label Content="Communication*" HorizontalAlignment="Left" Margin="40,290,0,0" VerticalAlignment="Top" FontSize="35" />
 
         <StackPanel Margin="0,60,70,0">
-            <ComboBox x:Name="comboBoxRuleFollowingName" Margin="0,110,0,0" ToolTip="Press and choose a grade which best describes the guests rule following" Width="250" FontSize="30" Height="50" ItemsSource="{Binding Path= comboBoxRuleFollowing}" SelectedItem="{Binding Path=RuleFollowing, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
-            <ComboBox x:Name="comboBoxCommunicationName" Margin="0,30,0,0" ToolTip="Press and choose a grade which best describes the guests communication" Width="250" FontSize="30" Height="50" ItemsSource="{Binding Path= comboBoxCommunication}" SelectedItem="{Binding Path=Communication, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+            <ComboBox x:Name="comboBoxRuleFollowingName" Margin="0,140,0,0" ToolTip="Press and choose a grade which best describes the guests rule following" Width="250" FontSize="30" Height="50" ItemsSource="{Binding Path= comboBoxRuleFollowing}" SelectedItem="{Binding Path=RuleFollowing, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+            <ComboBox x:Name="comboBoxCommunicationName" Margin="0,50,0,0" ToolTip="Press and choose a grade which best describes the guests communication" Width="250" FontSize="30" Height="50" ItemsSource="{Binding Path= comboBoxCommunication}" SelectedItem="{Binding Path=Communication, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
         </StackPanel>
 
         <Label Content="Comment*" HorizontalAlignment="Left" Margin="720,80,0,0" VerticalAlignment="Top" FontSize="35"/>
-        <TextBox x:Name="tbDescription" HorizontalAlignment="Left" ToolTip="Press to add a comment" Margin="630,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" FontSize="15" Height="240" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="tbDescription" HorizontalAlignment="Left" ToolTip="Press to add a comment" Margin="630,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" FontSize="15" Height="306" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Content="Lateness*" HorizontalAlignment="Left" Margin="40,320,0,0" VerticalAlignment="Top" FontSize="35" />
+        <Label Content="Lateness*" HorizontalAlignment="Left" Margin="40,390,0,0" VerticalAlignment="Top" FontSize="35" />
         <StackPanel Margin="0,60,70,0">
-            <ComboBox x:Name="comboBoxLatenessName" ToolTip="Press and choose a grade which best describes the guests lateness" Margin="0,270,0,0" Width="250" FontSize="30" Height="50" ItemsSource="{Binding Path= comboBoxLateness}" SelectedItem="{Binding Path=Lateness, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+            <ComboBox x:Name="comboBoxLatenessName" ToolTip="Press and choose a grade which best describes the guests lateness" Margin="0,335,0,0" Width="250" FontSize="30" Height="50" ItemsSource="{Binding Path= comboBoxLateness}" SelectedItem="{Binding Path=Lateness, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
         </StackPanel>
 
         <WrapPanel FlowDirection="LeftToRight" Margin="200,620,0,0">
