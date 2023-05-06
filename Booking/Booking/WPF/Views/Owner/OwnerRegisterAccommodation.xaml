@@ -20,7 +20,7 @@
         <Label Content="Country*" HorizontalAlignment="Left" Margin="40,110,0,0" VerticalAlignment="Top" FontSize="20" />
         <Label Content="City*" HorizontalAlignment="Left" Margin="40,160,0,0" VerticalAlignment="Top" FontSize="20" />
 
-        <StackPanel Margin="0,0,-105,0">
+        <StackPanel Margin="17,0,-105,0">
             <ComboBox  Margin="-440,115,0,0" Width="250" Height="30" 
                       SelectedItem="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding Path=CountryCollection}" >

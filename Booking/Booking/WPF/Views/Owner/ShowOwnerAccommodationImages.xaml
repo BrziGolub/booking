@@ -16,12 +16,12 @@
             <Image Source="/Resources/Images/imageIcon.png" Height="30" Width="30"></Image>
             <Label FontWeight="Bold" FontSize="17" >Accommodation images</Label>
         </StackPanel>
-        <StackPanel Grid.Row="1" Margin="20,0,20,0" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Margin="10,0,20,0" Orientation="Horizontal">
             <Label FontSize="17" FontWeight="Bold">Accommodation:</Label>
             <Label FontSize="17" Content="{Binding AccommodationLabel}" Width="500"></Label>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="10,0,0,0" HorizontalAlignment="Center" Grid.Row="2" Width="1024"  >
-            <Button x:Name="PreviousButton" IsEnabled="{Binding IsPreviousEnabled,UpdateSourceTrigger=PropertyChanged}"  Margin="10" Height="30" Width="95" Command="{Binding PreviousButton_Click}">
+        <StackPanel Orientation="Horizontal" Margin="-20,0,0,0" HorizontalAlignment="Center" Grid.Row="2" Width="1024"  >
+            <Button x:Name="PreviousButton" IsEnabled="{Binding IsPreviousEnabled,UpdateSourceTrigger=PropertyChanged}"  Margin="30" Height="30" Width="95" Command="{Binding PreviousButton_Click}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <Image  Width="25" Height="30" Source="/Resources/Images/prevoius.png"/>
