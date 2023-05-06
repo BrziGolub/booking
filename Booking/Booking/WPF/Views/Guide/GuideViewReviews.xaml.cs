@@ -18,11 +18,5 @@ namespace Booking.View.Guide
             this.DataContext = new GuideViewReviewsViewModel(this);
             reviewsDataGrid.Items.Clear();
         }
-
-
-
-
-
-
     }
 }

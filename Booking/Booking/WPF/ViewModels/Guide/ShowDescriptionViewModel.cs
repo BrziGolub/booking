@@ -1,11 +1,6 @@
 ﻿using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Booking.WPF.ViewModels.Guide
 {
