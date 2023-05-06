@@ -27,10 +27,10 @@ namespace Booking.View
     public partial class FisrtGuestAllRequests : Page
     {
 
-        public FisrtGuestAllRequests()
+        public FisrtGuestAllRequests(NavigationService navigationService)
         {
             InitializeComponent();
-            this.DataContext = new FirstGuestAllRequestsViewModel();
+            this.DataContext = new FirstGuestAllRequestsViewModel(navigationService);
              
             setWidthForReservationsDataGrid();
         }

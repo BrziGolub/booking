@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Booking.Service
 {
@@ -43,6 +44,12 @@ namespace Booking.Service
 
         public void SaveGrade(AccommodationAndOwnerGrade grade) 
         {
+            foreach (var picture in grade.Images)
+            {
+                picture.Grade = grade;
+                picture.Guest = grade.AccommodationReservation.Guest;
+                _gradeImageRepository.Add(picture);
+            }
             _repository.Add(grade);
         }
         public void Subscribe(IObserver observer)

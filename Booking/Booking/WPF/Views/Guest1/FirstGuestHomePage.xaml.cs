@@ -46,7 +46,7 @@ namespace Booking.View
 
         private void MenuItem_Click_ResheduleRequests(object sender, RoutedEventArgs e)
         {
-            FrameHomePage.Content = new FisrtGuestAllRequests();
+            FrameHomePage.Content = new FisrtGuestAllRequests(this.FrameHomePage.NavigationService);
         }
 
         private void MenuItem_Click_LogOut(object sender, RoutedEventArgs e)

@@ -95,7 +95,7 @@ namespace Booking.WPF.ViewModels.Guest1
             var notificationManager = new NotificationManager();
             NotificationContent content = new NotificationContent { Title = "Success!", Message = "You succesfuly sent request for: " + AccommodationReservation.Accommodation.Name , Type = NotificationType.Success };
             notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
-            NavigationService.Navigate(new FisrtGuestAllRequests());
+            NavigationService.Navigate(new FisrtGuestAllRequests(NavigationService));
         }
     }
 }
