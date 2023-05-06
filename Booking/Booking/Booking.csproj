@@ -158,6 +158,7 @@
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowRequestCommentViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\ShowDescriptionViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\GradingWindowViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerDateMoveViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerGradingGuestsViewModel.cs" />

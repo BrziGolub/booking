@@ -105,10 +105,10 @@ namespace Booking.WPF.ViewModels.Guide
         private void ButtonFollowTourLive(object param)
         {
             GuideFollowTourLive guideFollowTourLive = new GuideFollowTourLive();
-            if (guideFollowTourLive.Tours.Count > 0)
+            //if (guideFollowTourLive.Tours.Count > 0)
                 guideFollowTourLive.Show();
-            else
-                MessageBox.Show("Today you don't have tours!");
+            //else
+              //  MessageBox.Show("Today you don't have tours!");
         }
 
         private void ButtonViewReviews(object param)

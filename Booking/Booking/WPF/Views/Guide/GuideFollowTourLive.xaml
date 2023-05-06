@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Background="#D6E6F2" 
@@ -19,14 +18,14 @@
         <Separator Margin="40 -610 0 0" Width="893" HorizontalAlignment="Left" />
 
         <WrapPanel FlowDirection="LeftToRight" HorizontalAlignment="Center" VerticalAlignment="Top" Height="87" Width="536" Margin="0,700,0,0" Panel.ZIndex="1">
-            <Button Content="Start tour"  Width="105" Height="45" Click="StartTour"  FontSize="15" Margin ="42 0 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"  >
+            <Button Content="Start tour"  Width="105" Height="45" FontSize="15" Margin ="42 0 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding StartTour}" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button  Width="105" Height="45"   FontSize="15" Margin ="10 0 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ShowOnGoingTour"  >
+            <Button  Width="105" Height="45"   FontSize="15" Margin ="10 0 0 0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ShowOnGoingTour}"  >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -38,14 +37,14 @@
                 </StackPanel>
             </Button>
 
-            <Button Content="End tour"   Width="105" Height="45"  FontSize="15" FontWeight="Bold" Margin="10 0 0 0" Click="EndTour" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Button Content="End tour"   Width="105" Height="45"  FontSize="15" FontWeight="Bold" Margin="10 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding EndTour}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="Close"   Width="105" Height="45"  FontSize="15" FontWeight="Bold" Margin="10 0 0 0" Click="Close" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Button Content="Close"   Width="105" Height="45"  FontSize="15" FontWeight="Bold" Margin="10 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Close}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -92,7 +91,7 @@
                         <DataGridTemplateColumn Header="Description">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Click="ShowDescriptionText" Content="Show" FontSize="11" Width="65" Height="45" FontStyle="Oblique">
+                                    <Button  Content="Show" FontSize="11" Width="65" Height="45" FontStyle="Oblique" Command="{Binding DataContext.ShowDescriptionText, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                         <Button.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="5"></Setter>
@@ -116,11 +115,11 @@
 
         <Border BorderBrush="Black" BorderThickness="2">
             <StackPanel Margin="0,380,0,0" Width="350" Height="200">
-                <Button x:Name="buttonPrevious" Content="⬅" Height="18" Width="18" Margin="-315 85 0 0" Click="buttonPrevious_Click" />
+                <Button Content="⬅" Height="18" Width="18" Margin="-315 85 0 0" Command="{Binding PreviousPicture}" Visibility="{Binding ButtonPreviousVisibility}" />
 
-                <Button x:Name="buttonNext" Content="➞" Height="18" Width="18" Margin="320 -15 0 0" Click="buttonNext_Click" />
+                <Button Content="➞" Height="18" Width="18" Margin="320 -15 0 0" Command="{Binding NextPicture}" Visibility="{Binding ButtonNextVisibility}" />
 
-                <Image x:Name="imageSlideshow" Stretch="UniformToFill" Height="185" Width="280" Margin="0 -100 0 0"/>
+                <Image Stretch="UniformToFill" Height="185" Width="280" Margin="0 -100 0 0" Source="{Binding ImageSlideshowSource}"/>
 
             </StackPanel>
         </Border>
