@@ -28,8 +28,8 @@
         </DataGrid>
 
         <WrapPanel FlowDirection="LeftToRight" Margin="200,620,0,0">
-            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left"  Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Grade}" >GRADE</Button>
-            <Button Margin="60 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Close}" >CLOSE</Button>
+            <Button Margin ="118 10 0 0 " HorizontalAlignment="Left" ToolTip="Select a reservation and then press this to grade it " Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Grade}" >GRADE</Button>
+            <Button Margin="60 10 0 0"  VerticalAlignment="Center" ToolTip="Press to close this window" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Close}" >CLOSE</Button>
         </WrapPanel>
     </Grid>
 </Window>

@@ -37,7 +37,7 @@
                 <DataGridTemplateColumn Header="Images" Width="60">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Show" Command="{Binding DataContext.ShowPictures, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                            <Button Content="Show" ToolTip="Press to see the pictures that the guest uploaded for this review" Command="{Binding DataContext.ShowPictures, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -45,7 +45,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel FlowDirection="LeftToRight" Margin="500,650,0,0">
-            <Button Margin="20 -10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Command="{Binding CloseWindow}" >CLOSE</Button>
+            <Button Margin="20 -10 0 0"  VerticalAlignment="Center" ToolTip="Press to close this window" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Command="{Binding CloseWindow}" >CLOSE</Button>
         </WrapPanel>
     </Grid>
 </Window>

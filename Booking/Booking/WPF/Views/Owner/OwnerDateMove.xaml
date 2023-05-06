@@ -30,11 +30,11 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Reasoning" HorizontalAlignment="Left" Margin="750,70,0,0" FontWeight="ExtraBold" VerticalAlignment="Top" FontSize="32" />
-        <TextBox HorizontalAlignment="Left" Margin="690,125,0,0" TextWrapping="Wrap" Height="470" VerticalAlignment="Top" Width="310" FontSize="15" Text="{Binding Path=OwnerComment, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox HorizontalAlignment="Left" ToolTip="Press to enter a reason why you declined the date move request" Margin="690,125,0,0" TextWrapping="Wrap" Height="470" VerticalAlignment="Top" Width="310" FontSize="15" Text="{Binding Path=OwnerComment, UpdateSourceTrigger=PropertyChanged}"/>
         <WrapPanel FlowDirection="LeftToRight" Margin="120,640,0,0">
-            <Button Margin ="118 -10 0 0 " HorizontalAlignment="Left"  Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Accept}" >ACCEPT</Button>
-            <Button Margin="10 -10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Reject}" >REJECT</Button>
-            <Button Margin="60 -10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Close}" >CLOSE</Button>
+            <Button Margin ="118 -10 0 0 " HorizontalAlignment="Left" ToolTip="Choose a request and then press this to accept the date move request and change it" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Accept}" >ACCEPT</Button>
+            <Button Margin="10 -10 0 0"  VerticalAlignment="Center" ToolTip="Choose a request and then press this to reject the date move request, everything will stay the same" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Reject}" >REJECT</Button>
+            <Button Margin="60 -10 0 0"  VerticalAlignment="Center" ToolTip="Press to close this window" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Close}" >CLOSE</Button>
         </WrapPanel>
     </Grid>
 </Window>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Booking.WPF.ViewModels.Owner
 {
@@ -66,9 +67,12 @@ namespace Booking.WPF.ViewModels.Owner
 
         public RelayCommand PreviousButton_Click { get; set; }
         public RelayCommand NextButton_Click { get; set; }
+        public RelayCommand CloseWindow { get; set; }
+        private readonly Window _window;
 
-        public ShowOwnerAccommodationImagesViewModel(Accommodation SelectedAccommodation)
+        public ShowOwnerAccommodationImagesViewModel(Accommodation SelectedAccommodation,Window window)
         {
+            _window = window;
             selectedAccommodation = SelectedAccommodation;
             AccommodationLabel = SetAccommodationLabel(SelectedAccommodation);
             pictureUrls = new List<string>();
@@ -78,6 +82,7 @@ namespace Booking.WPF.ViewModels.Owner
 
             PreviousButton_Click = new RelayCommand(PreviousButton);
             NextButton_Click = new RelayCommand(NextButton);
+            CloseWindow = new RelayCommand(Close);
             IsPreviousEnabled = false;
 
 
@@ -89,6 +94,10 @@ namespace Booking.WPF.ViewModels.Owner
             {
                 IsNextEnabled = true;
             }
+        }
+        private void Close(object param)
+        {
+            _window.Close();
         }
 
         public void setUrls()
