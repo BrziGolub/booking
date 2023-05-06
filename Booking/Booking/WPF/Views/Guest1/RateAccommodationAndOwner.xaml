@@ -100,15 +100,15 @@
             </TextBox>
             <Label Grid.Row="0" Grid.Column="2"  HorizontalAlignment="Left" FontSize="14">Add picture:</Label>
             <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                <Button   Content="+" Height="22" Width="22" FontSize="14" FontWeight="Bold" />
-                <TextBox   HorizontalAlignment="Left" TextWrapping="Wrap" Width="160" Height="35" FontSize="15" Margin="7"/>
-                <Button   Content="-" Height="22" Width="22" FontSize="14" FontWeight="Bold" />
+                <Button   Content="+" Height="22" Width="22" FontSize="14" FontWeight="Bold" Command="{Binding AddPicture}"/>
+                <TextBox   HorizontalAlignment="Left" TextWrapping="Wrap" Width="160" Height="35" FontSize="15" Margin="7" Text="{Binding Path=TbPictures}"/>
+                <Button   Content="-" Height="22" Width="22" FontSize="14" FontWeight="Bold"  Command="{Binding RemovePicture}"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" >
-                <Button  Content="⬅" Height="18" Width="18" />
-                <Image  Stretch="UniformToFill" Width="200" />
-                <Button  Content="➞"  Height="18" Width="18"/>
+                <Button  Content="⬅" Height="18" Width="18" Command="{Binding PreviousPicture}" Visibility="{Binding ButtonPreviousVisibility}"/>
+                <Image  Stretch="UniformToFill" Width="200" Source="{Binding ImageSlideshowSource}"/>
+                <Button  Content="➞"  Height="18" Width="18" Command="{Binding NextPicture}" Visibility="{Binding ButtonNextVisibility}"/>
             </StackPanel>
 
         </Grid>
