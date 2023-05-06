@@ -181,14 +181,14 @@ namespace Booking.Service
         
         public Accommodation AddAccommodation(Accommodation accommodation)
         {
+
+            accommodation.Owner.Id = SignedOwnerId;
+            _accommodationRepository.Add(accommodation);
             foreach (var picture in accommodation.Images)
             {
                 picture.Accomodation = accommodation;
                 _accommodationImagesRepository.Add(picture);
             }
-
-            accommodation.Owner.Id = SignedOwnerId;
-            _accommodationRepository.Add(accommodation);
             NotifyObservers();
             return accommodation;
         }
