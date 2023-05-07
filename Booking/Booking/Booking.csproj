@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Application\UseCases\TourImageService.cs" />
+    <Compile Include="Application\UseCases\TourRequestService.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Domain\Model\AccommodationAndOwnerGrade.cs" />
     <Compile Include="Domain\Model\AccommodationGrade.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Domain\Model\TourGrade.cs" />
     <Compile Include="Domain\Model\TourGuests.cs" />
     <Compile Include="Domain\Model\TourKeyPoint.cs" />
+    <Compile Include="Domain\Model\TourRequest.cs" />
     <Compile Include="Domain\Model\TourReservation.cs" />
     <Compile Include="Domain\Model\User.cs" />
     <Compile Include="Domain\Model\Voucher.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="Domain\ServiceInterfaces\ITourGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourImageService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourRequestService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourReservationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IUserService.cs" />
@@ -123,6 +126,7 @@
     <Compile Include="Repository\AccommodationReservationRequestsRepostiory.cs" />
     <Compile Include="Repository\AccommodationResevationRepository.cs" />
     <Compile Include="Repository\GuestsAccommodationImagesRepository.cs" />
+    <Compile Include="Repository\ITourRequestRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\TourGradeRepository.cs" />
@@ -130,6 +134,7 @@
     <Compile Include="Repository\TourImageRepository.cs" />
     <Compile Include="Repository\TourKeyPointRepository.cs" />
     <Compile Include="Repository\TourRepository.cs" />
+    <Compile Include="Repository\TourRequestRepository.cs" />
     <Compile Include="Repository\TourReservationRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\VoucherRepository.cs" />
@@ -158,6 +163,7 @@
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowRequestCommentViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\ShowDescriptionViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\GradingWindowViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerDateMoveViewModel.cs" />
@@ -194,6 +200,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guest2\RateTour.xaml.cs">
       <DependentUpon>RateTour.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guide\GuideCreateTourBasedOnTourRequest.xaml.cs">
+      <DependentUpon>GuideCreateTourBasedOnTourRequest.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guide\ShowDescription.xaml.cs">
       <DependentUpon>ShowDescription.xaml</DependentUpon>
@@ -321,6 +330,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest2\RateTour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guide\GuideCreateTourBasedOnTourRequest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -464,6 +477,7 @@
     <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />
     <None Include="Resources\Data\tourKeyPoints.csv" />
+    <None Include="Resources\Data\tourRequests.csv" />
     <None Include="Resources\Data\tourReservations.csv" />
     <None Include="Resources\Data\tours.csv" />
     <None Include="Resources\Data\users.csv" />

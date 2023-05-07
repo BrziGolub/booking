@@ -41,9 +41,12 @@ namespace Booking.WPF.ViewModels.Guide
         public RelayCommand OpenStatisticsAboutTour { get; set; }
         public RelayCommand OpenFollowTourLive { get; set; }
         public RelayCommand OpenViewReviews { get; set; }
+        public RelayCommand OpenCreateTourBasedOnRequests { get; set; }
         public RelayCommand LogOut { get; set; }
         public RelayCommand CancelTour { get; set; }
         public RelayCommand ShowDescriptionText { get; set; }
+        
+        
 
         private readonly Window _window;
 
@@ -69,6 +72,7 @@ namespace Booking.WPF.ViewModels.Guide
             OpenStatisticsAboutTour = new RelayCommand(ButtonStatisticAboutTour);
             OpenFollowTourLive = new RelayCommand(ButtonFollowTourLive);
             OpenViewReviews = new RelayCommand(ButtonViewReviews);
+            OpenCreateTourBasedOnRequests = new RelayCommand(ButtonOpenCreateTourBasedOnRequests);
             LogOut = new RelayCommand(ButtonLogOut);
             CancelTour = new RelayCommand(ButtonCancelTour);
             ShowDescriptionText = new RelayCommand(ButtonShowDescriptionText);
@@ -124,6 +128,11 @@ namespace Booking.WPF.ViewModels.Guide
             {
                 MessageBox.Show("You need to select tour if you want to cancel it!");
             }
+        }
+        private void ButtonOpenCreateTourBasedOnRequests(object param)
+        { 
+        GuideCreateTourBasedOnTourRequest guideCreateTourBasedOnTourRequest = new GuideCreateTourBasedOnTourRequest();
+            guideCreateTourBasedOnTourRequest.Show();
         }
         private MessageBoxResult ConfirmTourCancel()
         {
