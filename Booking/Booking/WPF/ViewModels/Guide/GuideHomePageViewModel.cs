@@ -10,6 +10,7 @@ using System.ComponentModel;
 using Booking.Commands;
 using Booking.WPF.Views.Guide;
 
+
 namespace Booking.WPF.ViewModels.Guide
 {
     public class GuideHomePageViewModel : IObserver, INotifyPropertyChanged
@@ -130,9 +131,9 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
         private void ButtonOpenCreateTourBasedOnRequests(object param)
-        { 
-        GuideCreateTourBasedOnTourRequest guideCreateTourBasedOnTourRequest = new GuideCreateTourBasedOnTourRequest();
-            guideCreateTourBasedOnTourRequest.Show();
+        {
+            CustomMessageBox customMessageBox = new CustomMessageBox();
+            customMessageBox.ShowDialog();
         }
         private MessageBoxResult ConfirmTourCancel()
         {
