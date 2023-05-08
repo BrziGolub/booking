@@ -61,7 +61,7 @@ namespace Booking.WPF.ViewModels.Guest1
             }
         }
 
-        public ICommand FillCityCommand { get; set; }
+        public RelayCommand FillCityCommand { get; set; }
 
         public void FillCity(object param)
         {
@@ -186,7 +186,7 @@ namespace Booking.WPF.ViewModels.Guest1
 
             UpdateCountryComboBox(distinctItems);
 
-            if (SearchState == null)
+            if (SearchState == String.Empty)
             {
                 CityComboboxEnabled = false;
             }

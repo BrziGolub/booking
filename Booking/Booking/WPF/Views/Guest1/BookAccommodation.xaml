@@ -21,31 +21,31 @@
             <ImageBrush ImageSource="/Resources/Images/bookBlur.jpg"></ImageBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
             <RowDefinition/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="55"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Margin="5">
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Margin="15">
             <Image Source="/Resources/Images/reserve.png" Height="50" Width="50" ></Image>
             <Label Content="Book your accommodation!" FontSize="18" FontWeight="Bold" ></Label>
         </StackPanel>
-        <Grid HorizontalAlignment="Stretch" Grid.Row="1" Margin="50,0,50,150" Width="450">
+        <Grid HorizontalAlignment="Center" Grid.Row="1" Margin="0,30,0,0" Width="500" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Label Content="Accommodation:" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Center" FontWeight="Bold" FontSize="15"></Label>
-            <Label Content="Choose arrival day:" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"  FontSize="15"></Label>
-            <Label Content="Choose departure day:" HorizontalAlignment="Left" Grid.Row="2"  Grid.Column="0" VerticalAlignment="Center"  FontSize="15"></Label>
-            <Label Content="Number of guests:" HorizontalAlignment="Left" Grid.Row="3"  Grid.Column="0"  VerticalAlignment="Center" FontSize="15"></Label>
+            <Label Content="Accommodation:" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Center" FontWeight="Bold" FontSize="18"></Label>
+            <Label Content="Choose arrival day:" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"  FontSize="17"></Label>
+            <Label Content="Choose departure day:" HorizontalAlignment="Left" Grid.Row="2"  Grid.Column="0" VerticalAlignment="Center"  FontSize="17"></Label>
+            <Label Content="Number of guests:" HorizontalAlignment="Left" Grid.Row="3"  Grid.Column="0"  VerticalAlignment="Center" FontSize="17"></Label>
 
-            <Label Content="{Binding AccommodationLabel}"  FontWeight="Bold"  FontSize="15" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="220"></Label>
+            <Label Content="{Binding AccommodationLabel}"  FontWeight="Bold"  FontSize="15" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" ></Label>
 
             <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="180" >
                 <DatePicker Width="180" SelectedDate="{Binding ArrivalDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}"  SelectedDateFormat="Short"/>
@@ -70,8 +70,8 @@
         </Grid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="RESERVE" Margin="8" FontWeight="Bold" Command="{Binding Reserve_Button_Click}"></Button>
-            <Button Content="CANCLE" Margin="8" FontWeight="Bold" Command="{Binding Cancle_Button_Click}"></Button>
+            <Button Content="RESERVE" Margin="9" FontWeight="Bold" Command="{Binding Reserve_Button_Click}" Width="70"></Button>
+            <Button Content="CANCLE" Margin="9" FontWeight="Bold" Command="{Binding Cancle_Button_Click}" Width="60"></Button>
         </StackPanel>
     </Grid>
 </Page>

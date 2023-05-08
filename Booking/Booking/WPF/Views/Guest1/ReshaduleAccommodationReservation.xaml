@@ -17,39 +17,39 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition />
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="55"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10,0,10,0" VerticalAlignment="Center" >
             <Image Source="/Resources/Images/hourglass.png" Height="30"></Image>
             <Label FontWeight="Bold" FontSize="17" >Reschedule your reservation</Label>
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Accommodation: " FontWeight="Bold" Width="122" FontSize="14"></Label>
-            <Label Content="{Binding AccommodationLabel}" Width="290"  FontSize="14"></Label>
+        <StackPanel Grid.Row="1" Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+            <Label Content="Accommodation: " FontWeight="Bold" Width="150" FontSize="16"></Label>
+            <Label Content="{Binding AccommodationLabel}" Width="350"  FontSize="16"></Label>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Reserved days: " FontWeight="Bold" Width="120" FontSize="14"></Label>
-            <Label Content="{Binding ReservedDaysLabel}" Width="290" FontSize="14"></Label>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+            <Label Content="Reserved days: " FontWeight="Bold" Width="150" FontSize="16"></Label>
+            <Label Content="{Binding ReservedDaysLabel}" Width="350" FontSize="16"></Label>
         </StackPanel>
 
-        <Grid Grid.Row="3" Margin="0,30,0,120" HorizontalAlignment="Center" >
+        <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Width="500">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition  Height="40"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition  Height="60"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions >
-                <ColumnDefinition Width="210"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" FontSize="14">Choose arrival day:</Label>
-            <DatePicker SelectedDateFormat="Short" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Width="200" SelectedDate="{Binding NewArrivalDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}" Margin="0,0,0,14"/>
-            <Label Grid.Row="1" Grid.Column="0" FontSize="14">Choose departure day:</Label>
+            <Label Grid.Row="0" Grid.Column="0" FontSize="16">Choose arrival day:</Label>
+            <DatePicker SelectedDateFormat="Short" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Width="200" Height="24" SelectedDate="{Binding NewArrivalDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}" />
+            <Label Grid.Row="1" Grid.Column="0" FontSize="16">Choose departure day:</Label>
             <DatePicker  SelectedDateFormat="Short" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Width="200"  Height="24" SelectedDate="{Binding NewDepartureDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}"/>
         </Grid>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="4">
             <Button FontWeight="Bold"  Margin="3"  Command="{Binding Button_Click_SendRequest}">SEND REQUEST</Button>
         </StackPanel>
     </Grid>
