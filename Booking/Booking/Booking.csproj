@@ -163,6 +163,7 @@
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowRequestCommentViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\GuideAcceptingTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel1.cs" />
     <Compile Include="WPF\ViewModels\Guide\ShowDescriptionViewModel.cs" />
@@ -204,6 +205,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guide\CustomMessageBox.xaml.cs">
       <DependentUpon>CustomMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guide\GuideAcceptingTourRequest.xaml.cs">
+      <DependentUpon>GuideAcceptingTourRequest.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guide\GuideCreateTourBasedOnTourRequest.xaml.cs">
       <DependentUpon>GuideCreateTourBasedOnTourRequest.xaml</DependentUpon>
@@ -341,6 +345,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guide\CustomMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guide\GuideAcceptingTourRequest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

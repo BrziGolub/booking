@@ -11,5 +11,6 @@ namespace Booking.Domain.ServiceInterfaces
     {
         string GetMostPopularLanguageInLastYear();
         int GetMostPopularLocationIdInLastYear();
+        List<TourRequest> GetAll();
     }
 }
