@@ -1,11 +1,11 @@
-﻿<Window x:Class="Booking.WPF.Views.Guide.GuideCreateTourBasedOnTourRequest"
+﻿<Window x:Class="Booking.WPF.Views.Guide.GuideCreateTourBasedOnTourRequest1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.WPF.Views.Guide" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-               Title="GuideCreateTourBasedOnTourRequest" Height="750" Width="830" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#D6E6F2">
+        Title="GuideCreateTourBasedOnTourRequest" Height="750" Width="830" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#D6E6F2">
     <Grid>
 
         <TextBlock Margin="38 8 0 0" FontWeight="Bold" FontSize="32" Text="All tours" Foreground="#FFFFF200" >
@@ -47,18 +47,23 @@
         <Label Content="City*" HorizontalAlignment="Left" Margin="40,470,0,0" VerticalAlignment="Top" FontSize="15" />
 
         <StackPanel Margin="0,0,-105,0">
-            <TextBox  Margin="-399,425,0,0"  Width="180" FontSize="15" 
-                      IsEnabled="False"
-                      Text="{Binding Path=Country}" >
-            </TextBox>
-            <TextBox Margin="-399,30,0,0" Width="180" FontSize="15"
-                      IsEnabled="False"
-                      Text="{Binding Path=City}" 
-                       />
+            <ComboBox  Margin="-399,425,0,0" Width="180" 
+                      SelectedItem="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Path=CountryCollection}" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged" >
+                        <i:InvokeCommandAction Command="{Binding FillCityCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <ComboBox Margin="-399,30,0,0" Width="180" 
+                      IsEnabled="{Binding CityComboboxEnabled, UpdateSourceTrigger=PropertyChanged}" 
+                      ItemsSource="{Binding Path=CityCollection}" 
+                      SelectedItem="{Binding Path=SelectedCity, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
 
         <Label Content="Language*" HorizontalAlignment="Left" Margin="40,530,0,0" VerticalAlignment="Top" FontSize="15" />
-        <TextBox x:Name="tbLanguage" HorizontalAlignment="Left" Margin="170,535,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" IsEnabled="True" Text="{Binding Path=TourLanguage, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="tbLanguage" HorizontalAlignment="Left" Margin="170,535,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="15" IsEnabled="False" Text="{Binding Path=TourLanguage, UpdateSourceTrigger=PropertyChanged}"/>
 
 
         <Label Content="Pictures*" HorizontalAlignment="Left" Margin="450,70,0,0" VerticalAlignment="Top" FontSize="15" />

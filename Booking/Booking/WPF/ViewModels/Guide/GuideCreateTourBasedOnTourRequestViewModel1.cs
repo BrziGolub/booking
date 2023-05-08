@@ -19,7 +19,7 @@ using System.Windows;
 
 namespace Booking.WPF.ViewModels.Guide
 {
-    public class GuideCreateTourBasedOnTourRequestViewModel : IObserver, INotifyPropertyChanged
+    public class GuideCreateTourBasedOnTourRequestViewModel1 : IObserver, INotifyPropertyChanged
     {
         public ITourService tourService { get; set; }
         public ILocationService locationService { get; set; }
@@ -275,7 +275,7 @@ namespace Booking.WPF.ViewModels.Guide
 
 
         private readonly Window _window;
-        public GuideCreateTourBasedOnTourRequestViewModel(Window window)
+        public GuideCreateTourBasedOnTourRequestViewModel1(Window window)
         {
             _window = window;
             tourService = InjectorService.CreateInstance<ITourService>();
@@ -292,17 +292,12 @@ namespace Booking.WPF.ViewModels.Guide
             FillMostPopular();
             SetCommands();
             NextPreviousPhotoButtonsVisibility();
-            SelectedIndexKeyPoint = -1;
-            FillKeyPointsComboBox();
+            FillComboBox();
         }
 
         private void FillMostPopular()
         {
-            //TourLanguage = tourRequestService.GetMostPopularLanguageInLastYear();
-            int LocationId = tourRequestService.GetMostPopularLocationIdInLastYear();
-            Location location = locationService.GetById(LocationId);
-            Country = location.State;
-            City = location.City;
+            TourLanguage = tourRequestService.GetMostPopularLanguageInLastYear();
         }
 
         public void SetCommands()
@@ -320,9 +315,60 @@ namespace Booking.WPF.ViewModels.Guide
             IncreaseDuration = new RelayCommand(ButtonIncreaseDuration);
             DecreaseDuration = new RelayCommand(ButtonDecreaseDuration);
 
-
+            FillCityCommand = new RelayCommand(FillCity);
         }
-      
+
+        public void FillCity(object param)
+        {
+            CityCollection.Clear();
+
+            var locations = locationService.GetAll().Where(l => l.State.Equals(SelectedCountry));
+
+            foreach (Location c in locations)
+            {
+                CityCollection.Add(c.City);
+            }
+
+            CityComboboxEnabled = true;
+        }
+
+        public void FillComboBox()
+        {
+            List<string> items = new List<string>();
+
+            using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+
+                    string[] fields = reader.ReadLine().Split(',');
+                    foreach (var field in fields)
+                    {
+                        string[] Countries = field.Split('|');
+                        items.Add(Countries[1]);
+                    }
+                }
+            }
+            var distinctItems = items.Distinct().ToList();
+
+            UpdateCountryCollection(distinctItems);
+
+            if (SelectedCountry == null)
+            {
+                CityComboboxEnabled = false;
+            }
+            SelectedIndexKeyPoint = -1;
+            FillKeyPointsComboBox();
+        }
+
+        public void UpdateCountryCollection(List<string> coutries)
+        {
+            CountryCollection.Clear();
+            foreach (string str in coutries)
+            {
+                CountryCollection.Add(str);
+            }
+        }
 
         private void FillKeyPointsComboBox()
         {
@@ -347,6 +393,7 @@ namespace Booking.WPF.ViewModels.Guide
                 KeyPointsCollection.Add(str);
             }
         }
+
 
         private void ButtonClose(object param)
         {
@@ -426,8 +473,8 @@ namespace Booking.WPF.ViewModels.Guide
 
         private bool CanSaveTour()
         {
-            return !string.IsNullOrEmpty(TourName) && !string.IsNullOrEmpty(Country) &&
-             !string.IsNullOrEmpty(City) && !string.IsNullOrEmpty(Description) &&
+            return !string.IsNullOrEmpty(TourName) && !string.IsNullOrEmpty(SelectedCountry) &&
+             !string.IsNullOrEmpty(SelectedCity) && !string.IsNullOrEmpty(Description) &&
              !string.IsNullOrEmpty(TourLanguage) && MaxGuestNumber > 0 &&
              StartTime != null && Duration > 0;
         }
@@ -438,10 +485,10 @@ namespace Booking.WPF.ViewModels.Guide
             {
                 Location location = new Location
                 {
-                    State = Country,
-                    City = City
+                    State = SelectedCountry,
+                    City = SelectedCity
                 };
-                int LocationID = locationService.GetIdByCountryAndCity(Country, City);
+                int LocationID = locationService.GetIdByCountryAndCity(SelectedCountry, SelectedCity);
                 tour.Location.Id = LocationID;
                 tour.Location = locationService.GetById(LocationID);
                 tour.Name = TourName;
@@ -459,6 +506,16 @@ namespace Booking.WPF.ViewModels.Guide
                 if (tour.Images.Count == 0)
                 {
                     MessageBox.Show("Tour need to have 1 'PICTURE' at least");
+                    return;
+                }
+                if (string.IsNullOrEmpty(SelectedCountry))
+                {
+                    MessageBox.Show("'COUNTRY' not entered");
+                    return;
+                }
+                if (string.IsNullOrEmpty(tour.Location.City))
+                {
+                    MessageBox.Show("'CITY' not entered");
                     return;
                 }
                 if (tour.MaxVisitors < 1)
@@ -633,6 +690,5 @@ namespace Booking.WPF.ViewModels.Guide
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-    
     }
 }
