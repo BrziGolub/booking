@@ -8,45 +8,61 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ShowRequestComment">
 
-    <Grid Background="AliceBlue">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush   ImageSource="/Resources/Images/showDetils.png"></ImageBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="120"/>
+            <RowDefinition Height="60"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" Margin="20,0,0,0" Orientation="Horizontal">
-            <Label Content="Your request is: " FontSize="16" FontWeight="Bold" Width="150"></Label>
-            <Label Content="{Binding StatusLabel}" Width="400" FontSize="16"></Label>
-        </StackPanel>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Image  Source="/Resources/Images/information.png" Height="35"></Image>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image  Source="/Resources/Images/information.png" Height="40"></Image>
             <Label Content="Request details!" FontWeight="Bold" FontSize="18"></Label>
         </StackPanel>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center"  Margin="20,0,0,0">
-            <Label Content="Accommodation" FontSize="16" FontWeight="Bold" Width="150"></Label>
-            <Label Content="{Binding AccommodationLabel}" FontSize="16" Width="400"></Label>
-        </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center"  Margin="20,0,0,0">
-            <Label Content="Reservation for: " FontSize="16" FontWeight="Bold"  Width="150"></Label>
-            <Label Content="{Binding RangeLabel}" FontSize="16" Width="400"></Label>
-        </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Margin="90,40,90,60"  CornerRadius="10" 
+                HorizontalAlignment="Center" VerticalAlignment="Top" Background="AliceBlue">
+            <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="120"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center"  Margin="20,0,0,0">
-            <Label Content="Owner: " FontSize="16" FontWeight="Bold"  Width="150"></Label>
-            <Label Content="{Binding OwnerNameLabel}" FontSize="16" Width="400"></Label>
-        </StackPanel>
 
-        <StackPanel Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Stretch"  Margin="20,0,0,0">
-            <Label Content="Owner's comment: " FontSize="16" FontWeight="Bold"  Width="150"></Label>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="20,8,0,0">
-                <TextBlock Text="{Binding CommentLabel}" FontSize="16" Width="300" TextWrapping="Wrap" Margin="5"/>
-            </Border>
-        </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Your request is: " FontSize="16" FontWeight="Bold" Width="150"></Label>
+                <Label Content="{Binding StatusLabel}" Width="400" FontSize="16"></Label>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Accommodation" FontSize="16" FontWeight="Bold" Width="150"></Label>
+                <Label Content="{Binding AccommodationLabel}" FontSize="16" Width="400"></Label>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Reservation for: " FontSize="16" FontWeight="Bold"  Width="150"></Label>
+                <Label Content="{Binding RangeLabel}" FontSize="16" Width="400"></Label>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center"  HorizontalAlignment="Center">
+                <Label Content="Owner: " FontSize="16" FontWeight="Bold"  Width="150"></Label>
+                <Label Content="{Binding OwnerNameLabel}" FontSize="16" Width="400"></Label>
+            </StackPanel>
+
+            <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center"  HorizontalAlignment="Center">
+                <Label Content="Owner's comment: " FontSize="16" FontWeight="Bold"  Width="150"></Label>
+                <Border BorderBrush="Black" BorderThickness="1" Margin="5" CornerRadius="10">
+                    <TextBlock Text="{Binding CommentLabel}" FontSize="16" Width="380" TextWrapping="Wrap" Margin="5" Height="100"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+        </Border>
 
 
     </Grid>

@@ -13,16 +13,16 @@
             <ImageBrush ImageSource="/Resources/Images/waiting.jpg"></ImageBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="45"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,2,10,5" HorizontalAlignment="Center">
             <Image Source="/Resources/Images/request.png" Height="30" Width="30"></Image>
             <Label FontWeight="Bold" FontSize="17" >My reschedule requests</Label>
         </StackPanel>
         <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Path=Requests}"
-                  Name="RequestsDataGrid" HorizontalAlignment="Center" Margin="20,0,20,0" SelectedItem="{Binding SelectedRequest}">
+                  Name="RequestsDataGrid" HorizontalAlignment="Center" Margin="100,20,100,60" SelectedItem="{Binding SelectedRequest}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Accommodation name"  Width="140" Binding="{Binding AccommodationReservation.Accommodation.Name}">
                     <DataGridTextColumn.HeaderStyle>
@@ -31,35 +31,35 @@
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="State" Width="100"  Binding="{Binding AccommodationReservation.Accommodation.Location.State}">
+                <DataGridTextColumn Header="State" Width="*"  Binding="{Binding AccommodationReservation.Accommodation.Location.State}">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="City" Width="100"  Binding="{Binding AccommodationReservation.Accommodation.Location.City}">
+                <DataGridTextColumn Header="City" Width="*"  Binding="{Binding AccommodationReservation.Accommodation.Location.City}">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Start date" Width="80" Binding="{Binding NewArrivalDay, StringFormat='{}{0:dd/MM/yyyy}'}">
+                <DataGridTextColumn Header="Start date" Width="*" Binding="{Binding NewArrivalDay, StringFormat='{}{0:dd/MM/yyyy}'}">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="End date" Width="80"  Binding="{Binding NewDeparuteDay,  StringFormat='{}{0:dd/MM/yyyy}'}" >
+                <DataGridTextColumn Header="End date" Width="*"  Binding="{Binding NewDeparuteDay,  StringFormat='{}{0:dd/MM/yyyy}'}" >
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Status" Width="110"  Binding="{Binding Status}" >
+                <DataGridTextColumn Header="Status" Width="*"  Binding="{Binding Status}" >
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="FontWeight" Value="Bold"/>

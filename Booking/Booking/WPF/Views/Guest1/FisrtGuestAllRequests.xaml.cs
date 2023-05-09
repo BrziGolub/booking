@@ -32,21 +32,10 @@ namespace Booking.View
             InitializeComponent();
             this.DataContext = new FirstGuestAllRequestsViewModel(navigationService);
              
-            setWidthForReservationsDataGrid();
+           
         }
 
-        public void setWidthForReservationsDataGrid()
-        {
-            double totalWidth = 0;
-            foreach (DataGridColumn column in RequestsDataGrid.Columns)
-            {
-                if (column.ActualWidth > 0)
-                {
-                    totalWidth += column.ActualWidth;
-                }
-            }
-            RequestsDataGrid.Width = totalWidth;
-        }
+   
 
     }
 }
