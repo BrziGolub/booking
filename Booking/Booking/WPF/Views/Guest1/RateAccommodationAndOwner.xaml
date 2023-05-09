@@ -20,7 +20,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Resources/Images/starsBlur.jpg"></ImageBrush>
         </Grid.Background>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="45"/>
             <RowDefinition Height="40"/>
@@ -28,7 +28,7 @@
             <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        
+
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal">
             <Image Source="/Resources/Images/medal.png" Width="50" Height="45"></Image>
             <Label FontWeight="Bold" FontSize="17" VerticalAlignment="Center">Rate your accommodation and owner!</Label>
@@ -44,7 +44,7 @@
             <Label Content="{Binding OwnerLabel}" Width="400" FontSize="15" FontWeight="Bold"></Label>
         </StackPanel>
 
-        <Grid Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="35,0,0,0">
+        <Grid Grid.Row="3" Margin="35,0,0,25" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
@@ -103,18 +103,42 @@
             </TextBox>
 
             <Label Grid.Row="0" Grid.Column="2"  HorizontalAlignment="Right" FontSize="14" >Add picture:</Label>
-            <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.ColumnSpan="2">
-                <Button   Content="-" Height="22" Width="22" FontSize="14" FontWeight="Black"  Command="{Binding RemovePicture}"/>
-                <TextBox   HorizontalAlignment="Left" TextWrapping="Wrap" Width="180" FontSize="15" Margin="5" Text="{Binding Path=TbPictures}"/>
-                <Button   Content="+" Height="22" Width="22" FontSize="14" FontWeight="Black" Command="{Binding AddPicture}"/>
+            <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                <Button  Height="30" Width="30" FontSize="14" FontWeight="Black"  Command="{Binding RemovePicture}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image  Width="25" Height="30" Source="/Resources/Images/minus.png"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <TextBox   HorizontalAlignment="Left" TextWrapping="Wrap" Width="170" FontSize="15" Margin="5" Text="{Binding Path=TbPictures}"/>
+                <Button  Height="30" Width="30" FontSize="14" FontWeight="Black" Command="{Binding AddPicture}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image  Width="25" Height="30" Source="/Resources/Images/more.png"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Stretch">
-                <Button  Content="⬅" Height="18" Width="18" Command="{Binding PreviousPicture}" Visibility="{Binding ButtonPreviousVisibility}"/>
+                <Button  Height="30" Width="30" Command="{Binding PreviousPicture}" Visibility="{Binding ButtonPreviousVisibility}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image  Width="25" Height="30" Source="/Resources/Images/prevoius.png"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
                 <Image  Stretch="UniformToFill" Width="250" Source="{Binding ImageSlideshowSource}" Margin="5"/>
-                <Button  Content="➞"  Height="18" Width="18" Command="{Binding NextPicture}" Visibility="{Binding ButtonNextVisibility}"/>
+                <Button  Height="30" Width="30" Command="{Binding NextPicture}" Visibility="{Binding ButtonNextVisibility}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image  Width="25" Height="30" Source="/Resources/Images/next.png"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
             </StackPanel>
-            
+
             <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left"  FontSize="14">Areas that needs renovation:</Label>
             <TextBox Grid.Row ="3" Grid.Column="1" Margin="5" VerticalAlignment="Top" Text="{Binding Path= RenovationAreas, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  Validation.ErrorTemplate="{StaticResource ValidationTemplate}" AcceptsReturn="True" TextWrapping="Wrap" Height="25">
@@ -141,8 +165,8 @@
         </Grid>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button FontWeight="Bold" Margin="3" Width="100" Command="{Binding Button_Click_Subbmit}" >SUBBMIT</Button>
+            <Button FontWeight="Bold" Margin="1" Width="100" Command="{Binding Button_Click_Subbmit}" Height="30">SUBBMIT</Button>
         </StackPanel>
     </Grid>
-    
+
 </Page>

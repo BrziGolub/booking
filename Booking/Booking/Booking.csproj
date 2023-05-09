@@ -580,5 +580,14 @@
   <ItemGroup>
     <Resource Include="Resources\Images\showDetils.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\travelBlue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\more.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -121,6 +121,13 @@ namespace Booking.WPF.ViewModels.Guest1
             }
         }
 
+        public bool Level1 { get; set; }
+        public bool Level2{ get; set; }
+        public bool Level3 { get; set; }
+        public bool Level4 { get; set; }
+        public bool Level5 { get; set; }
+
+
         private BitmapImage _imageSlideshowSource;
         public BitmapImage ImageSlideshowSource
         {
@@ -187,7 +194,10 @@ namespace Booking.WPF.ViewModels.Guest1
 
                 if (columnName.Equals("RenovationAreas"))
                 {
-                    return "This filed is required!";
+                    if (RenovationAreas.Equals(String.Empty))
+                    {
+                        return "This filed is required!";
+                    }
                 }
                 return null;
             }
@@ -236,6 +246,7 @@ namespace Booking.WPF.ViewModels.Guest1
             Comment = String.Empty;
             Courtesy = 0;
             Cleaness = 0;
+            RenovationAreas = String.Empty;
             setComboBoxes();
             NextPreviousPhotoButtonsVisibility();
 
@@ -282,6 +293,30 @@ namespace Booking.WPF.ViewModels.Guest1
             accommodationAndOwnerGrade.OwnersCourtesy = Courtesy;
             accommodationAndOwnerGrade.Comment = Comment;
             accommodationAndOwnerGrade.AccommodationReservation = AccommodationReservation;
+            accommodationAndOwnerGrade.RenovationArea = RenovationAreas;
+            setLevels();
+        }
+
+        public void setLevels()
+        {
+            if (Level1)
+            {
+                accommodationAndOwnerGrade.RenovationUrgencyLevel = 1;
+            }else if (Level2)
+            {
+                accommodationAndOwnerGrade.RenovationUrgencyLevel = 2;
+            }else if (Level3)
+            {
+                accommodationAndOwnerGrade.RenovationUrgencyLevel = 3;
+            }else if (Level4)
+            {
+                accommodationAndOwnerGrade.RenovationUrgencyLevel = 4;
+            }
+            else if (Level5)
+            {
+                accommodationAndOwnerGrade.RenovationUrgencyLevel = 5;
+            }
+            
         }
 
         private void ButtonSubbmit(object param)
