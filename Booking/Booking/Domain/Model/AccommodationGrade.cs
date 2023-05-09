@@ -12,7 +12,6 @@ namespace Booking.Model
         public int Id { get; set; }
         public AccommodationReservation Accommodation { get; set; }
         public int Cleanliness { get; set; }
-
         public int RuleFollowing { get; set; }
         public string Comment { get; set; }
         public int Communication { get; set; }

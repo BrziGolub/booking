@@ -16,8 +16,6 @@ namespace Booking.Model
         public int OwnersCourtesy { get; set; }
         public string Comment { get; set; }
         public List<GuestsAccommodationImages> Images { get; set; }
-        public String RenovationArea { get; set; }
-        public int RenovationUrgencyLevel { get; set; }
 
         public AccommodationAndOwnerGrade()
         {
@@ -32,8 +30,6 @@ namespace Booking.Model
             Cleaness = int.Parse(values[2]);
             OwnersCourtesy = int.Parse(values[3]);
             Comment = values[4];
-            RenovationArea = values[5];
-            RenovationUrgencyLevel = int.Parse(values[6]);
         }
 
         public string[] ToCSV()
@@ -45,8 +41,6 @@ namespace Booking.Model
                 Cleaness.ToString(),
                 OwnersCourtesy.ToString(),
                 Comment,
-                RenovationArea,
-                RenovationUrgencyLevel.ToString()
             };
             return csvValues;
         }

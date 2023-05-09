@@ -20,7 +20,7 @@
                 <MenuItem Header="Quick search" FontWeight="Bold" HorizontalAlignment="Right"/>
                 <MenuItem Header="My reservations" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"/>
                 <MenuItem Header="Reschedule requests" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ResheduleRequests"/>
-                <MenuItem Header="Reviews" FontWeight="Bold" HorizontalAlignment="Right"/>
+                <MenuItem Header="Reviews" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_Reviews"/>
                 <MenuItem Header="Forums" FontWeight="Bold" HorizontalAlignment="Right"/>
                 <MenuItem Header="Notfications" FontWeight="Bold" HorizontalAlignment="Right"/>
                 <MenuItem Header="Language"  FontWeight="Bold" HorizontalAlignment="Right">

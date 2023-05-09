@@ -1,6 +1,7 @@
 ﻿using Booking.Model;
 using Booking.Model.Enums;
 using Booking.Service;
+using Booking.WPF.Views.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -47,6 +48,11 @@ namespace Booking.View
         private void MenuItem_Click_ResheduleRequests(object sender, RoutedEventArgs e)
         {
             FrameHomePage.Content = new FisrtGuestAllRequests(this.FrameHomePage.NavigationService);
+        }
+
+        private void MenuItem_Click_Reviews(object sender, RoutedEventArgs e)
+        {
+            FrameHomePage.Content = new FirstGuestReviews();
         }
 
         private void MenuItem_Click_LogOut(object sender, RoutedEventArgs e)
