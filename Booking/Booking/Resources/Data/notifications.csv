@@ -8,5 +8,5 @@
 8|1|Reservation for: asgfasd 11/05/2023 - 15/06/2023 is cancled guest: mrk|False|TitleOwner
 9|4|The date move request for hotelPrague is rejected Owner:Katarina|True|TitleGuest
 10|4|The date move request for hotelPrague was accepted new dates are 26/04/2023 - 28/04/2023 Owner:Katarina|True|TitleGuest
-11|4|The date move request for hotelMONA was accepted new dates are 18/05/2023 - 16/06/2023 Owner:Katarina|False|TitleGuest
-12|4|The date move request for hotelPrague is rejected Owner:Katarina|False|TitleGuest
+11|4|The date move request for hotelMONA was accepted new dates are 18/05/2023 - 16/06/2023 Owner:Katarina|True|TitleGuest
+12|4|The date move request for hotelPrague is rejected Owner:Katarina|True|TitleGuest

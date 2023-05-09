@@ -93,15 +93,15 @@ namespace Booking.WPF.ViewModels.Guest1
 
 
 
-        public List<string> _pictures;
-        public List<string> Pictures
+        public String _renovationAreas;
+        public String RenovationAreas
         {
-            get => _pictures;
+            get => _renovationAreas;
             set
             {
-                if (_pictures != value)
+                if (_renovationAreas != value)
                 {
-                    _pictures = value;
+                    _renovationAreas = value;
                     OnPropertyChanged();
                 }
             }
@@ -184,11 +184,16 @@ namespace Booking.WPF.ViewModels.Guest1
                         return "This filed is required!";
                     }
                 }
+
+                if (columnName.Equals("RenovationAreas"))
+                {
+                    return "This filed is required!";
+                }
                 return null;
             }
         }
 
-        private readonly string[] _validatedProperties = { "Comment", "Courtesy", "Cleaness" };
+        private readonly string[] _validatedProperties = { "Comment", "Courtesy", "Cleaness", "RenovationAreas" };
 
         public bool IsValid
         {
