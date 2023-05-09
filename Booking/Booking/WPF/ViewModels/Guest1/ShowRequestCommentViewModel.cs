@@ -39,7 +39,7 @@ namespace Booking.WPF.ViewModels.Guest1
                 CommentLabel = SelectedRequest.Comment;
             }
             OwnerNameLabel = SelectedRequest.AccommodationReservation.Accommodation.Owner.Username;
-            RangeLabel = SelectedRequest.NewArrivalDay.ToString("dd/MM/yyyy") + SelectedRequest.NewDeparuteDay.ToString("dd/MM/yyyy");
+            RangeLabel = SelectedRequest.NewArrivalDay.ToString("dd/MM/yyyy") + " - " + SelectedRequest.NewDeparuteDay.ToString("dd/MM/yyyy");
 
         }
     }

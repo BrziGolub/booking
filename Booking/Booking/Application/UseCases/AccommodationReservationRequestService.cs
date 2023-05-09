@@ -24,6 +24,7 @@ namespace Booking.Service
         private readonly IAccommodationResevationRepository _reservationRepository;
         private readonly IAccommodationRepository _accommodationRepository;
         private readonly ILocationRepository _locationRepository;
+        private readonly IUserRepository _userRepository;
 
         public AccommodationReservationRequestService()
         {
@@ -33,6 +34,7 @@ namespace Booking.Service
             _reservationRepository = InjectorRepository.CreateInstance<IAccommodationResevationRepository>();
             _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
             _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
+            _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
         }
         public List<AccommodationReservationRequests> GetAll()
         {
@@ -52,6 +54,7 @@ namespace Booking.Service
             {
                 arr.AccommodationReservation.Accommodation = _accommodationRepository.GetById(arr.AccommodationReservation.Accommodation.Id);
                 arr.AccommodationReservation.Accommodation.Location = _locationRepository.GetById(arr.AccommodationReservation.Accommodation.Location.Id);
+                arr.AccommodationReservation.Accommodation.Owner = _userRepository.GetById(arr.AccommodationReservation.Accommodation.Owner.Id);
             }
             return accommodationReservationRequestList;
         }

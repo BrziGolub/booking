@@ -522,15 +522,6 @@
     <Resource Include="Resources\Images\waiting.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\rate.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\stars.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\book.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
       <Version>1.1.39</Version>
     </PackageReference>
@@ -555,6 +546,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\showDetils.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
