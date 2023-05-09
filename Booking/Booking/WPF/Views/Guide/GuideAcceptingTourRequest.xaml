@@ -15,12 +15,12 @@
 
         <Separator Margin="-15,-505,0,0" Width="600" HorizontalAlignment="Center" />
         
-        <Rectangle  Margin="-20 -335 0 0" Width="600" Height="150" Fill="#F5F5F5" Stroke="Black" StrokeThickness="2" RadiusX="10" RadiusY="10"/>
+        <Rectangle  Margin="-20 -325 0 0" Width="730" Height="160" Fill="#F5F5F5" Stroke="Black" StrokeThickness="2" RadiusX="10" RadiusY="10"/>
 
-        <StackPanel Width="600" Height="150" Margin="0 -320 0 0">
+        <StackPanel Width="700" Height="150" Margin="0 -325 0 0">
             
-            <Label Margin="1 15 0 0" FontSize="15">Country:</Label>
-            <ComboBox Width="100" Margin="-350 -25 0 0" FontSize="15"
+            <Label Margin="-8 15 0 0" FontSize="15">Country:</Label>
+            <ComboBox Width="120" Height="25" Margin="-445 -25 0 0" FontSize="15"
                 SelectedItem="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding Path=CountryCollection}">
             <i:Interaction.Triggers>
@@ -30,14 +30,28 @@
             </i:Interaction.Triggers>
         </ComboBox>
 
-            <Label Margin="1 25 0 0" FontSize="15">City:</Label>
-            <ComboBox Width="100" Margin="-350 -25 0 0" FontSize="15" 
+            <Label Margin="-8 25 0 0" FontSize="15">City:</Label>
+            <ComboBox Width="120" Height="25" Margin="-445 -25 0 0" FontSize="15" 
                       IsEnabled="{Binding CityComboboxEnabled, UpdateSourceTrigger=PropertyChanged}" 
                       ItemsSource="{Binding Path=CityCollection}" 
                       SelectedItem="{Binding Path=SelectedCity, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
         </StackPanel>
 
-        <WrapPanel Margin="-10 -205 0 0" Width="80" Height="50">
+        <StackPanel  Width="700" Height="150" Margin="0 -325 0 0">
+            <Label Margin="220 15 0 0" FontSize="15">Guests number:</Label>
+            <TextBox Width="120" Height="25" Margin="110 -25 0 0" FontSize="15" Text="{Binding SelectedNumberOfGuests}"></TextBox>
+            <Label Margin="220 25 0 0" FontSize="15">Language:</Label>
+            <TextBox Width="120" Height="25" Margin="110 -25 0 0" FontSize="15" Text="{Binding SelectedLanguage}"></TextBox>
+        </StackPanel>
+
+        <StackPanel  Width="700" Height="150" Margin="0 -325 0 0">
+            <Label Margin="480 15 0 0" FontSize="15">Start date:</Label>
+            <DatePicker Width="120" Height="25" Margin="550 -26 0 0" FontSize="15"></DatePicker>
+            <Label Margin="480 25 0 0" FontSize="15">End date:</Label>
+            <DatePicker Width="120" Height="25" Margin="550 -26 0 0" FontSize="15"></DatePicker>
+        </StackPanel>
+
+        <WrapPanel Margin="-10 -195 0 0" Width="80" Height="50">
             <Button Width="65" Height="30" Content="Filter" Margin="0 0 0 0" FontSize="15" FontWeight="Bold" Command="{Binding Filter}">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -47,13 +61,12 @@
             </Button>
         </WrapPanel>
 
-        <StackPanel Margin="40 230 40 0">
+        <StackPanel Margin="40 230 59 0">
 
-            <ScrollViewer>
-                <DataGrid 
+            <DataGrid 
             x:Name="dataGrid" 
             IsReadOnly="True" 
-            Width="600"
+            Width="725"
                 Height="320"
             RowHeight="50"
             AutoGenerateColumns="False"
@@ -62,25 +75,21 @@
             CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserReorderColumns="False"
             SelectedItem="{Binding SelectedTourRequest}"
             ItemsSource="{Binding Path=TourRequests, UpdateSourceTrigger=PropertyChanged}" >
-                    <DataGrid.Columns>
-                        
-                        <DataGridTextColumn Width="105" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
-                        <DataGridTextColumn Width="105" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>
-                        <DataGridTextColumn Width="100" Header="Language" Binding="{Binding Language}"/>
-                        <DataGridTextColumn Width="100"  Header="Guests Number" Binding="{Binding GuestsNumber}"/>
-                        <DataGridTextColumn Width="100" Header="Start Date" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}" ></DataGridTextColumn>
-                        <DataGridTextColumn Width="100" Header="End Date" Binding="{Binding EndTime, StringFormat={}{0:dd/MM/yyyy}}" ></DataGridTextColumn>
-                        
-                        
+                <DataGrid.Columns>
 
+                    <DataGridTextColumn Width="135" Header="State" Binding="{Binding Location.State}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="135" Header="City" Binding="{Binding Location.City}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="130" Header="Language" Binding="{Binding Language}"/>
+                    <DataGridTextColumn Width="100"  Header="Guests Number" Binding="{Binding GuestsNumber}"/>
+                    <DataGridTextColumn Width="108" Header="Start Date" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}" ></DataGridTextColumn>
+                    <DataGridTextColumn Width="109" Header="End Date" Binding="{Binding EndTime, StringFormat={}{0:dd/MM/yyyy}}" ></DataGridTextColumn>
 
-                    </DataGrid.Columns>
-                </DataGrid>
-            </ScrollViewer>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
 
         <WrapPanel Margin="0 560 0 0" Width="160" Height="50">
-            <Button Width="70" Height="40" Content="Accept" Margin="0 0 0 0" FontSize="15" FontWeight="Bold" Command="{Binding Report}">
+            <Button Width="70" Height="40" Content="Accept" Margin="0 0 0 0" FontSize="15" FontWeight="Bold" Command="{Binding Accept}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>

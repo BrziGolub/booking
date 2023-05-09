@@ -1,6 +1,7 @@
 ﻿using Booking.Domain.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,5 +13,6 @@ namespace Booking.Domain.ServiceInterfaces
         string GetMostPopularLanguageInLastYear();
         int GetMostPopularLocationIdInLastYear();
         List<TourRequest> GetAll();
+        void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language);// fale datumi jos
     }
 }

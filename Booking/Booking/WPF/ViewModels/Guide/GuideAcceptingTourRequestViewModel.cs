@@ -25,12 +25,19 @@ namespace Booking.WPF.ViewModels.Guide
     {
 
         public RelayCommand Close { get; set; }
+        public RelayCommand Filter { get; set; }
+        public RelayCommand Accept { get; set; }
+        
         public ICommand FillCityCommand { get; set; }
+        
 
         public ITourRequestService tourRequestService { get; set; }
         public ILocationService locationService { get; set; }
-        public string SelectedCountry { get; set; }
-        public string SelectedCity { get; set; }
+        public string SelectedCountry { get; set; } = string.Empty;
+        public string SelectedCity { get; set; } = string.Empty;
+
+        public string SelectedNumberOfGuests { get; set; } = string.Empty;
+        public string SelectedLanguage { get; set;} = string.Empty;
 
 
         private TourRequest _selectedTourRequest;
@@ -76,6 +83,7 @@ namespace Booking.WPF.ViewModels.Guide
             CityCollection = new ObservableCollection<string>();
             CountryCollection = new ObservableCollection<string>();
 
+
             FillComboBox();
             SetCommands();
         }
@@ -99,7 +107,7 @@ namespace Booking.WPF.ViewModels.Guide
             List<string> items = new List<string>() { "All" };
 
             using (StreamReader reader = new StreamReader("../../Resources/Data/locations.csv"))
-            {
+            {   
                 while (!reader.EndOfStream)
                 {
 
@@ -115,10 +123,14 @@ namespace Booking.WPF.ViewModels.Guide
 
             UpdateCountryCollection(distinctItems);
 
-            if (SelectedCountry == null)
+            if (SelectedCountry == null )
             {
                 CityComboboxEnabled = false;
             }
+            /*if (SelectedCountry == "All")
+            {
+                CityComboboxEnabled = false;
+            }*/ // TREBA DA NAPRAVIM 
 
         }
 
@@ -135,11 +147,28 @@ namespace Booking.WPF.ViewModels.Guide
         public void SetCommands()
         {
             Close = new RelayCommand(ButtonClose);
+            Filter = new RelayCommand(ButtonFilter);
+            Accept = new RelayCommand(ButtonAccept);
+
             FillCityCommand = new RelayCommand(FillCity);
         }
             private void ButtonClose(object param)
         {
             CloseWindow();
+        }
+
+        private void ButtonFilter(object param)
+        {
+            //MessageBox.Show("filter");
+            TourRequests.Clear();
+
+            tourRequestService.Search(TourRequests, SelectedCity, SelectedCountry, SelectedNumberOfGuests, SelectedLanguage);
+
+        }
+
+        private void ButtonAccept(object param)
+        {
+            MessageBox.Show("Accept");
         }
         private void CloseWindow()
         {
