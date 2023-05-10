@@ -46,7 +46,7 @@ namespace Booking.Application.UseCases
             return tourRequests;
         }
 
-        public void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language)// fale datumi jos
+        public void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language, DateTime? startDate, DateTime? endDate)
         {
             observe.Clear();
 
@@ -54,7 +54,7 @@ namespace Booking.Application.UseCases
             {
                 tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
 
-                if (IsCountryValid(country,tourRequest) && IsCityValid(city,tourRequest)  && IsNumberOfGuestsValid(numberOfGuests,tourRequest) && IsLanguageOfGuestsValid(language,tourRequest))
+                if (IsCountryValid(country,tourRequest) && IsCityValid(city,tourRequest)  && IsNumberOfGuestsValid(numberOfGuests,tourRequest) && IsLanguageOfGuestsValid(language,tourRequest) && IsTourRequestInDateRange(startDate, endDate, tourRequest))
                 {
                     observe.Add(tourRequest);
                 }
@@ -62,8 +62,6 @@ namespace Booking.Application.UseCases
 
             }
 
-
-            //return observe;
         }
 
         public bool IsCountryValid(string country, TourRequest tourRequest)
@@ -73,17 +71,65 @@ namespace Booking.Application.UseCases
 
         public bool IsCityValid(string city, TourRequest tourRequest)
         {
-            return string.IsNullOrEmpty(city) || tourRequest.Location.State.ToLower().Contains(city.ToLower());
+            return string.IsNullOrEmpty(city) || tourRequest.Location.City.ToLower().Contains(city.ToLower());
         }
 
         public bool IsNumberOfGuestsValid(string number, TourRequest tourRequest)
         {
-            return string.IsNullOrEmpty(number) || tourRequest.GuestsNumber.Equals(number);
+            if (string.IsNullOrEmpty(number))
+            {
+                return true;
+            }
+
+            int guestsNumber;
+
+            if (int.TryParse(number, out guestsNumber))
+            {
+                return tourRequest.GuestsNumber == guestsNumber;
+            }
+
+            return false;
         }
 
         public bool IsLanguageOfGuestsValid(string language, TourRequest tourRequest)
         {
             return string.IsNullOrEmpty(language) || tourRequest.Language.ToLower().Contains(language.ToLower());
+        }
+
+        private bool IsTourRequestInDateRange(DateTime? startDate, DateTime? endDate, TourRequest tourRequest)
+        {
+            if (startDate == null && endDate == null) 
+            {
+                return true;
+            }
+
+            if (startDate == null && tourRequest.StartTime <= endDate)
+            {
+                return true;
+            }
+
+            if (endDate == null && tourRequest.EndTime >= startDate)
+            {
+                return true;
+            }
+
+            if (tourRequest.StartTime <= endDate && tourRequest.EndTime >= startDate)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void ShowAll(ObservableCollection<TourRequest> observe) 
+        { 
+            observe.Clear();
+            foreach(TourRequest tourRequest in _tourRequestRepository.GetAll())
+            { 
+                tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
+                observe.Add(tourRequest);
+            }
+
         }
     }
 }

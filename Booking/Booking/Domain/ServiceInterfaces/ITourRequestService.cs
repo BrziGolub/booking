@@ -13,6 +13,7 @@ namespace Booking.Domain.ServiceInterfaces
         string GetMostPopularLanguageInLastYear();
         int GetMostPopularLocationIdInLastYear();
         List<TourRequest> GetAll();
-        void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language);// fale datumi jos
+        void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language, DateTime? startDate, DateTime? endDate);
+        void ShowAll(ObservableCollection<TourRequest> observe);
     }
 }

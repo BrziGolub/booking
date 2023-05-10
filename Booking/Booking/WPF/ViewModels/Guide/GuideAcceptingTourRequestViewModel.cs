@@ -26,6 +26,7 @@ namespace Booking.WPF.ViewModels.Guide
 
         public RelayCommand Close { get; set; }
         public RelayCommand Filter { get; set; }
+        public RelayCommand ResetFilter { get; set; }
         public RelayCommand Accept { get; set; }
         
         public ICommand FillCityCommand { get; set; }
@@ -33,11 +34,79 @@ namespace Booking.WPF.ViewModels.Guide
 
         public ITourRequestService tourRequestService { get; set; }
         public ILocationService locationService { get; set; }
-        public string SelectedCountry { get; set; } = string.Empty;
-        public string SelectedCity { get; set; } = string.Empty;
+        //public string SelectedCountry { get; set; } //= string.Empty;
 
-        public string SelectedNumberOfGuests { get; set; } = string.Empty;
-        public string SelectedLanguage { get; set;} = string.Empty;
+        public string _selectedCountry;
+        public string SelectedCountry
+        {
+            get => _selectedCountry;
+            set
+            {
+                if (_selectedCountry != value)
+                {
+                    _selectedCountry = value;
+                    OnPropertyChanged(nameof(SelectedCountry));
+                }
+            }
+        }
+
+        //public string SelectedCity { get; set; } //= string.Empty;
+        public string _selectedCity;
+        public string SelectedCity
+        {
+            get => _selectedCity;
+            set
+            {
+                if (_selectedCity!= value)
+                {
+                    _selectedCity= value;
+                    OnPropertyChanged(nameof(SelectedCity));
+                }
+            }
+        }
+
+        //public string SelectedNumberOfGuests { get; set; } //= string.Empty;
+        public string _selectedNumberOfGuests;
+        public string SelectedNumberOfGuests
+        {
+            get => _selectedNumberOfGuests;
+            set
+            {
+                if (_selectedNumberOfGuests!= value)
+                {
+                    _selectedNumberOfGuests= value;
+                    OnPropertyChanged(nameof(SelectedNumberOfGuests));
+                }
+            }
+        }
+        //public string SelectedLanguage { get; set;} //= string.Empty;
+        public string _selectedLanguage;
+        public string SelectedLanguage
+        {
+            get => _selectedLanguage;
+            set
+            {
+                if (_selectedLanguage!= value)
+                {
+                    _selectedLanguage= value;
+                    OnPropertyChanged(nameof(SelectedLanguage));
+                }
+            }
+        }
+
+        private DateTime? _startDate;
+        public DateTime? StartDate
+        {
+            get { return _startDate; }
+            set { _startDate = value; OnPropertyChanged(nameof(StartDate)); }
+        }
+
+        private DateTime? _endDate;
+        public DateTime? EndDate
+        {
+            get { return _endDate; }
+            set { _endDate = value; OnPropertyChanged(nameof(EndDate)); }
+        }
 
 
         private TourRequest _selectedTourRequest;
@@ -148,6 +217,7 @@ namespace Booking.WPF.ViewModels.Guide
         {
             Close = new RelayCommand(ButtonClose);
             Filter = new RelayCommand(ButtonFilter);
+            ResetFilter = new RelayCommand(ButtonResetFilter);
             Accept = new RelayCommand(ButtonAccept);
 
             FillCityCommand = new RelayCommand(FillCity);
@@ -159,13 +229,22 @@ namespace Booking.WPF.ViewModels.Guide
 
         private void ButtonFilter(object param)
         {
-            //MessageBox.Show("filter");
             TourRequests.Clear();
 
-            tourRequestService.Search(TourRequests, SelectedCity, SelectedCountry, SelectedNumberOfGuests, SelectedLanguage);
+            tourRequestService.Search(TourRequests, SelectedCity, SelectedCountry, SelectedNumberOfGuests, SelectedLanguage, StartDate, EndDate);
 
         }
-
+        private void ButtonResetFilter(object param)
+        {
+            TourRequests.Clear();
+            tourRequestService.ShowAll(TourRequests);
+            SelectedCity = null;
+            SelectedCountry = null;
+            SelectedLanguage = null;
+            SelectedNumberOfGuests = null;
+            StartDate = null;
+            EndDate = null;
+        }
         private void ButtonAccept(object param)
         {
             MessageBox.Show("Accept");
