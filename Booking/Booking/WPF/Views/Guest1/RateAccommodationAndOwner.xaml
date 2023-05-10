@@ -22,26 +22,26 @@
         </Grid.Background>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
             <RowDefinition Height="120" />
             <RowDefinition Height="45"/>
            
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
             <Image Source="/Resources/Images/medal.png" Width="50" Height="45"></Image>
             <Label FontWeight="Bold" FontSize="17" VerticalAlignment="Center">Rate your accommodation and owner!</Label>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0">
-            <Label Content="Accommodation: " FontWeight="Bold" Width="200" FontSize="14"></Label>
-            <Label Content="{Binding AccommodationLabel}" Width="400" FontSize="14" FontWeight="Bold"></Label>
+            <Label Content="Accommodation: " FontWeight="Bold" Width="200" FontSize="15"></Label>
+            <Label Content="{Binding AccommodationLabel}" Width="400" FontSize="15" FontWeight="Bold"></Label>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal"   HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0">
+        <StackPanel Grid.Row="2" Orientation="Horizontal"   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,0,0,0">
             <Label Content="Owner: " FontWeight="Bold" Width="200" FontSize="15"></Label>
             <Label Content="{Binding OwnerLabel}" Width="400" FontSize="15" FontWeight="Bold"></Label>
         </StackPanel>
