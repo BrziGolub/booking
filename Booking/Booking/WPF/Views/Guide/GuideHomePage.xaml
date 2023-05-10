@@ -39,7 +39,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content=" Statistics on requests" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" >
+            <Button Content=" Requests statistic" FontWeight="SemiBold" Width="150" Height="30" HorizontalAlignment="Left" Margin="1 2 10 0" HorizontalContentAlignment="Left" Command="{Binding OpenTourRequestStatistic}" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>

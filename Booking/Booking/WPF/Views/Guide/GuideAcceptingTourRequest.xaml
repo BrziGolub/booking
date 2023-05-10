@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="GuideAcceptingTourRequest" Height="650" Width="883" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#D6E6F2">
     <Grid>
-        <TextBlock Margin="130,4,0,0" FontWeight="Bold" FontSize="32" Text="Accepting tour request" Foreground="#FFFFF200" >
+        <TextBlock Margin="65,4,0,0" FontWeight="Bold" FontSize="32" Text="Accepting tour request" Foreground="#FFFFF200" >
             <TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="4" Color="#303841" BlurRadius="5" />
             </TextBlock.Effect>
         </TextBlock>
 
-        <Separator Margin="-15,-505,0,0" Width="600" HorizontalAlignment="Center" />
+        <Separator Margin="-18,-505,0,0" Width="730" HorizontalAlignment="Center" />
 
         <Rectangle  Margin="-20 -325 0 0" Width="730" Height="160" Fill="#C7E2ED" Stroke="Black" StrokeThickness="2" RadiusX="10" RadiusY="10"/>
 
@@ -74,8 +74,9 @@
             x:Name="dataGrid" 
             IsReadOnly="True" 
             Width="725"
-                Height="320"
+            Height="320"
             RowHeight="50"
+            AlternationCount="2"
             AutoGenerateColumns="False"
             SelectionMode="Single"
                 
@@ -92,6 +93,16 @@
                     <DataGridTextColumn Width="109" Header="End Date" Binding="{Binding EndTime, StringFormat={}{0:dd/MM/yyyy}}" ></DataGridTextColumn>
 
                 </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="#ADBAC4"/>
+                        <Style.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                <Setter Property="Background" Value="#F5F5F5"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
             </DataGrid>
         </StackPanel>
 
