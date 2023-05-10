@@ -19,7 +19,7 @@
 
     <Grid >
         <Grid.Background>
-            <ImageBrush ImageSource="/Resources/Images/maldives.jpg"></ImageBrush>
+            <ImageBrush ImageSource="/Resources/Images/blue.jpg"></ImageBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>

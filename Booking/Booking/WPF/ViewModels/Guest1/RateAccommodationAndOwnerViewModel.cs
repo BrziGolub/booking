@@ -19,6 +19,7 @@ using Notifications.Wpf;
 using System.Text.RegularExpressions;
 using Booking.Model.Images;
 using System.Windows.Media.Imaging;
+using Booking.WPF.Views.Guest1;
 
 namespace Booking.WPF.ViewModels.Guest1
 {
@@ -151,6 +152,21 @@ namespace Booking.WPF.ViewModels.Guest1
         {
             get { return _buttonPreviousVisibility; }
             set { _buttonPreviousVisibility = value; OnPropertyChanged(); }
+        }
+
+        private object _currentPage;
+
+        public object CurrentPage
+        {
+            get { return _currentPage; }
+            set
+            {
+                if (_currentPage != value)
+                {
+                    _currentPage = value;
+                    OnPropertyChanged(nameof(CurrentPage));
+                }
+            }
         }
 
 
@@ -307,13 +323,15 @@ namespace Booking.WPF.ViewModels.Guest1
             }*/
             MakeGrade();
 
-            AccommodationAndOwnerGradeService.SaveGrade(accommodationAndOwnerGrade);
-            this.NavigationService.GoBack();
+           //AccommodationAndOwnerGradeService.SaveGrade(accommodationAndOwnerGrade);
+           /*this.NavigationService.GoBack();
             AccommodationAndOwnerGradeService.CheckSuper(AccommodationReservation); //ovo je od Coe 
 
             var notificationManager = new NotificationManager();
             NotificationContent content = new NotificationContent { Title = "Congratulations!", Message = "You succesfuly rate your accommodation", Type = NotificationType.Success};
-            notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
+            notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));*/
+
+            CurrentPage = new RenovationApproval();
         }
 
         private void ButtonAddPicture(object param)

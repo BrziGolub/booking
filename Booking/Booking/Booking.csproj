@@ -197,6 +197,9 @@
     <Compile Include="WPF\Views\Guest1\FisrtGuestAllRequests.xaml.cs">
       <DependentUpon>FisrtGuestAllRequests.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\Views\Guest1\RenovationApproval.xaml.cs">
+      <DependentUpon>RenovationApproval.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Guest1\ShowAccommodationImages.xaml.cs">
       <DependentUpon>ShowAccommodationImages.xaml</DependentUpon>
     </Compile>
@@ -333,6 +336,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest1\FisrtGuestAllRequests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\RenovationApproval.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -551,15 +558,6 @@
     <Resource Include="Resources\Images\prevoius.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\hotel.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\maldives.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\waiting.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
       <Version>1.1.39</Version>
     </PackageReference>
@@ -574,22 +572,7 @@
     <Resource Include="Resources\Images\question.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\bookBlur.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\starsBlur.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\change.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\information.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\showDetils.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\travelBlue.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\minus.png" />
@@ -599,6 +582,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\review.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\fly.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\blue.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\blue1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\travel1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
