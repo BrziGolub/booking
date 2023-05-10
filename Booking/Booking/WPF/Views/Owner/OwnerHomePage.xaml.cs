@@ -18,6 +18,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VirtualKeyboard.Wpf;
 
 namespace Booking.View
 {
@@ -30,6 +31,7 @@ namespace Booking.View
         {
             InitializeComponent();
             this.DataContext = new OwnerHomePageViewModel(this);
+            
         }
     }
 }

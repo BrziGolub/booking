@@ -13,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using VirtualKeyboard.Wpf;
 
 namespace Booking.WPF.ViewModels.Owner
 {
@@ -34,6 +36,8 @@ namespace Booking.WPF.ViewModels.Owner
         private readonly Window _window;
         public OwnerHomePageViewModel(Window window)
         {
+            VKeyboard.Listen<TextBox>(e => e.Text);
+            VKeyboard.Config(typeof(KeyBoardCustom));
             _window = window;
             _accommodationService = InjectorService.CreateInstance<IAccommodationService>();
             AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();

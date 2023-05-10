@@ -7,6 +7,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using VirtualKeyboard.Wpf;
 
 namespace Booking
 {
@@ -36,6 +38,7 @@ namespace Booking
             AccommodationAndOwnerGradeService = new AccommodationAndOwnerGradeService();
             AccommodationReservationRequestService = new AccommodationReservationRequestService();
             //AccommodationReservationService.AccommodationReservationRequestService = AccommodationReservationRequestService;*/
+            
         }
     }
 }

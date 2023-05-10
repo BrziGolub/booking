@@ -13,14 +13,17 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using VirtualKeyboard.Wpf;
 
 namespace Booking.WPF.ViewModels.Owner
 {
-    public class OwnerRegisterAccommodationViewModel: INotifyPropertyChanged
+    public class OwnerRegisterAccommodationViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
         public IAccommodationService AccommodationService { get; set; }
         public ILocationService LocationService { get; set; }
@@ -42,7 +45,7 @@ namespace Booking.WPF.ViewModels.Owner
         public string SelectedCity { get; set; }
         public ObservableCollection<string> CityCollection { get; set; }
         public ObservableCollection<string> CountryCollection { get; set; }
-        public ObservableCollection<string> comboBoxType { get; set; }
+        public ObservableCollection<AccommodationType> comboBoxType { get; set; }
 
         private bool _cityComboBoxEnabled;
         public bool CityComboboxEnabled
@@ -109,11 +112,10 @@ namespace Booking.WPF.ViewModels.Owner
             get => _type;
             set
             {
-                if (_type != value)
-                {
-                    _type = value;
-                    OnPropertyChanged();
-                }
+
+                _type = value;
+                OnPropertyChanged();
+
             }
         }
 
@@ -234,11 +236,17 @@ namespace Booking.WPF.ViewModels.Owner
 
             CityCollection = new ObservableCollection<string>();
             CountryCollection = new ObservableCollection<string>();
-            List<string> types = new List<string>() { "APARTMENT", "HOUSE", "COTTAGE"};
-            comboBoxType = new ObservableCollection<string>(types);
+            List<AccommodationType> theList = Enum.GetValues(typeof(AccommodationType)).Cast<AccommodationType>().ToList();
+
+            comboBoxType = new ObservableCollection<AccommodationType>(theList);
             SetCommands();
             FillComboBox();
             NextPreviousPhotoButtonsVisibility();
+
+            AccommodationName = "";
+            SelectedCountry = "";
+            Type = AccommodationType.APARTMENT;
+
         }
         public void SetCommands()
         {
@@ -250,6 +258,35 @@ namespace Booking.WPF.ViewModels.Owner
             PreviousPicture = new RelayCommand(buttonPrevious_Click);
 
             FillCityCommand = new RelayCommand(FillCity);
+        }
+
+        public string Error => null;
+        private Regex _numberOfGuestsRegex = new Regex("^[1-9][0-9]?$");
+
+        private readonly string[] _validatedProperties = { "AccommodationName", "SelectedCountry" };
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "AccommodationName")
+                {
+                    if (AccommodationName == String.Empty)
+                    {
+
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "SelectedCountry")
+                {
+                    if (SelectedCountry == "")
+                    {
+                        return "This filed is required!";
+                    }
+                }
+
+
+                return null;
+            }
         }
 
         public void FillCity(object param)

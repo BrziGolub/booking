@@ -235,6 +235,9 @@
     <Compile Include="WPF\Views\Guest1\HomePageFirstGuest.xaml.cs">
       <DependentUpon>HomePageFirstGuest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\Views\Owner\KeyBoardCustom.xaml.cs">
+      <DependentUpon>KeyBoardCustom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Owner\OwnerDateMove.xaml.cs">
       <DependentUpon>OwnerDateMove.xaml</DependentUpon>
     </Compile>
@@ -365,6 +368,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest1\HomePageFirstGuest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Owner\KeyBoardCustom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -537,6 +544,9 @@
     </PackageReference>
     <PackageReference Include="Notifications.Wpf">
       <Version>0.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="VirtualKeyboard.Wpf">
+      <Version>0.1.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
