@@ -46,8 +46,11 @@ namespace Booking.WPF.ViewModels.Guide
         public RelayCommand LogOut { get; set; }
         public RelayCommand CancelTour { get; set; }
         public RelayCommand ShowDescriptionText { get; set; }
-        
-        
+        public RelayCommand OpenAcceptTourRequest { get; set; }
+        public RelayCommand OpenTourRequestStatistic { get; set; }
+
+
+
 
         private readonly Window _window;
 
@@ -77,7 +80,8 @@ namespace Booking.WPF.ViewModels.Guide
             LogOut = new RelayCommand(ButtonLogOut);
             CancelTour = new RelayCommand(ButtonCancelTour);
             ShowDescriptionText = new RelayCommand(ButtonShowDescriptionText);
-            
+            OpenAcceptTourRequest = new RelayCommand(ButtonOpenAcceptTourRequest);
+            OpenTourRequestStatistic = new RelayCommand(ButtonOpenTourRequestStatistic);
         }
 
         private void ButtonCreateTour(object param)
@@ -153,6 +157,17 @@ namespace Booking.WPF.ViewModels.Guide
             ShowDescription showDescriptionText = new ShowDescription(SelectedTour.Id);
             showDescriptionText.Show();
         }
+        private void ButtonOpenAcceptTourRequest(object param)
+        {
+            GuideAcceptingTourRequest guideAcceptingTourRequest = new GuideAcceptingTourRequest();
+            guideAcceptingTourRequest.Show();
+        }
+        private void ButtonOpenTourRequestStatistic(object param)
+        {
+            GuideRequestsStatistic guideRequestsStatistic = new GuideRequestsStatistic();
+            guideRequestsStatistic.Show();
+        }
+        
         public void Update()
         {
             Tours.Clear();
