@@ -7,6 +7,17 @@
         mc:Ignorable="d"
         Title="ReserveTour" Height="450" Width="450"
 		WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+
     <Grid Margin="16">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
@@ -24,10 +35,10 @@
 
 		<StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 8">
 			<Label Margin="0" Content="Number of visitors:" VerticalContentAlignment="Center" FontSize="14"/>
-			<TextBox Margin="0" Text="{Binding Path=NumberOfPassengers}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" Width="50"/>
+            <TextBox Margin="0" Text="{Binding NumberOfPassengers}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" Width="50"/>
 		</StackPanel>
 
-		<Label x:Name="LabelRemainingSpace" Grid.Row="2" Margin="0 8" VerticalContentAlignment="Center" FontSize="14"/>
+		<Label Grid.Row="2" Content="{Binding Label}" Margin="0 8" VerticalContentAlignment="Center" FontSize="14"/>
 
 		<CheckBox Grid.Row="3" Content="Redeem a voucher" IsChecked="{Binding IsVoucherChecked}" FontSize="14" Margin="0 8">
 			
@@ -37,9 +48,8 @@
 				  AutoGenerateColumns="False"
 				  SelectionMode="Single"
 				  IsReadOnly="True"
-				  ItemsSource="{Binding vouchers}"
-				  SelectedItem="{Binding SelectedVoucher}"
-				  x:Name="DejtaGrid">
+				  ItemsSource="{Binding Vouchers}"
+				  SelectedItem="{Binding SelectedVoucher}">
 			
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="ID" Width="2*" Binding="{Binding Id}"/>
@@ -48,9 +58,9 @@
 		</DataGrid>
 		
 		<StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 8 0 0">
-			<Button Margin="0 0 8 0" Content="Cancel(F1)" Click="Cancel" Width="100" Height="27" FontSize="14"/>
-			<Button Margin="8 0 0 0" Content="Reserve(F2)" Click="Reserve" Width="100" Height="27" FontSize="14"/>
-		</StackPanel>
+            <Button Margin="0 0 8 0" Content="Cancel(F1)" Command="{Binding Button_Click_Close}" Width="100" Height="27" FontSize="14" Style="{StaticResource ButtonStyle}"/>
+            <Button Margin="8 0 0 0" Content="Reserve(F2)" Command="{Binding Button_Click_Reserve}" Width="100" Height="27" FontSize="14" Style="{StaticResource ButtonStyle}"/>
+        </StackPanel>
 		
 	</Grid>
 </Window>
