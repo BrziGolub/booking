@@ -8,6 +8,17 @@
         Title="ShowTourImages" Height="450" Width="450"
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+
     <Grid Margin="16">
 
 		<Grid.RowDefinitions>
@@ -24,21 +35,27 @@
 
 		<TextBlock Grid.Row="2" Text="{Binding Tour.StartTime, StringFormat={}{0:dd/MM/yyyy}}"/>
 
-		<ListBox ItemsSource="{Binding Images}" Grid.Row="3" Margin="0 8">
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<Image Source="{Binding Url}" Width="350"/>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
+        <Image Grid.Row="3" Source="{Binding ImageSource}" Margin="0 8"/>
 
-		<Button Grid.Row="4" Content="Close(F5)" Margin="0 8 0 0" Width="100" Height="27" Command="{Binding Button_Click_Close}" HorizontalAlignment="Right">
-			<Button.Resources>
-				<Style TargetType="Border">
-					<Setter Property="CornerRadius" Value="5"/>
-				</Style>
-			</Button.Resources>
-		</Button>
+        <Grid Grid.Row="4" Margin="0 8 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
 
-	</Grid>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+
+                <Button Content="Previous(F1)" Width="100" Height="27" FontSize="14" Margin="0 0 8 0" Command="{Binding Button_Click_Prev}" Style="{StaticResource ButtonStyle}"/>
+                <Button Content="Next(F2)" Width="100" Height="27" FontSize="14" Margin="8 0" Command="{Binding Button_Click_Next}" Style="{StaticResource ButtonStyle}"/>
+                <TextBlock Text="{Binding Text}" FontSize="14" Margin="8 0 0 0" VerticalAlignment="Center"/>
+
+            </StackPanel>
+
+            <Button Grid.Column="1" Content="Close(F5)" Width="100" Height="27" FontSize="14" Command="{Binding Button_Click_Close}" Style="{StaticResource ButtonStyle}"/>
+        </Grid>
+
+    </Grid>
 </Window>
