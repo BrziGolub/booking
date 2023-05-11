@@ -21,6 +21,8 @@ namespace Booking.WPF.Views.Guide
         {
             InitializeComponent();
             this.DataContext = new GuideRequestsStatisticViewModel(this);
+            GenerallyDataGrid.Items.Clear();
+            YearlyDataGrid.Items.Clear();
         }
     }
 }

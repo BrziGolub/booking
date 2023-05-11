@@ -1,4 +1,5 @@
-﻿using Booking.Domain.Model;
+﻿using Booking.Domain.DTO;
+using Booking.Domain.Model;
 using Booking.Serializer;
 using System;
 using System.Collections.Generic;
@@ -95,6 +96,36 @@ namespace Booking.Repository
             }
 
             return mostPopularLocationId ?? -1;
+        }
+
+        public List<TourRequest> GetByLocationId(int id)
+        {
+            List<TourRequest > list = new List<TourRequest>();
+
+            foreach(TourRequest tourRequest in _tourRequests)
+            {
+                if(tourRequest.Location.Id == id)
+                {
+                    list.Add(tourRequest);
+                }
+            }
+
+            return list;
+        }
+
+        public List<TourRequest> GetByLanguage(string language)
+        {
+            List<TourRequest> list = new List<TourRequest>();
+
+            foreach (TourRequest tourRequest in _tourRequests)
+            {
+                if (tourRequest.Language.ToLower() == language.ToLower())
+                {
+                    list.Add(tourRequest);
+                }
+            }
+
+            return list;
         }
     }
 }

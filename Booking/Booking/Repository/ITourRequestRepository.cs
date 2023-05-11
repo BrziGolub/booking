@@ -1,4 +1,5 @@
-﻿using Booking.Domain.Model;
+﻿using Booking.Domain.DTO;
+using Booking.Domain.Model;
 using Booking.Domain.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace Booking.Repository
     {
         string GetMostPopularLanguageInLastYear();
         int GetMostPopularLocationIdInLastYear();
+        List<TourRequest> GetByLocationId(int id);
+        List<TourRequest> GetByLanguage(string language);
     }
 }

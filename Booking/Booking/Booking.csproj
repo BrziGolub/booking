@@ -61,6 +61,8 @@
     <Compile Include="Application\UseCases\TourImageService.cs" />
     <Compile Include="Application\UseCases\TourRequestService.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Domain\DTO\MonthlyRequests.cs" />
+    <Compile Include="Domain\DTO\YearlyRequests.cs" />
     <Compile Include="Domain\Model\AccommodationAndOwnerGrade.cs" />
     <Compile Include="Domain\Model\AccommodationGrade.cs" />
     <Compile Include="Domain\Model\AccommodationReservation.cs" />

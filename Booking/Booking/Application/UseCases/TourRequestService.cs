@@ -1,4 +1,5 @@
-﻿using Booking.Domain.Model;
+﻿using Booking.Domain.DTO;
+using Booking.Domain.Model;
 using Booking.Domain.RepositoryInterfaces;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
@@ -7,6 +8,8 @@ using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -131,5 +134,105 @@ namespace Booking.Application.UseCases
             }
 
         }
+
+        public List<YearlyRequests> GetRequestsByYearAndLocation(int locationId)
+        {
+            List<YearlyRequests> requestsByYear = new List<YearlyRequests>();
+
+            List<TourRequest> tourRequests = _tourRequestRepository.GetByLocationId(locationId);
+
+            var requestsGroupedByYear = tourRequests.GroupBy(tr => tr.StartTime.Year)
+                                                     .Select(g => new { Year = g.Key, Count = g.Count() });
+
+            foreach (var group in requestsGroupedByYear)
+            {
+                YearlyRequests yearlyRequests = new YearlyRequests
+                {
+                    Year = group.Year,
+                    Count = group.Count
+                };
+
+                requestsByYear.Add(yearlyRequests);
+            }
+
+            return requestsByYear;
+        }
+
+        public List<YearlyRequests> GetRequestsByYearAndLanguage(string language)
+        {
+            List<YearlyRequests> requestsByYear = new List<YearlyRequests>();
+
+            List<TourRequest> tourRequests = _tourRequestRepository.GetByLanguage(language);
+
+            var requestsGroupedByYear = tourRequests.GroupBy(tr => tr.StartTime.Year)
+                                                     .Select(g => new { Year = g.Key, Count = g.Count() });
+
+            foreach (var group in requestsGroupedByYear)
+            {
+                YearlyRequests yearlyRequests = new YearlyRequests
+                {
+                    Year = group.Year,
+                    Count = group.Count
+                };
+
+                requestsByYear.Add(yearlyRequests);
+            }
+
+            return requestsByYear;
+        }
+
+        public List<MonthlyRequests> GetRequestsByMonthAndLocation(int locationId, int year)
+        {
+            List<MonthlyRequests> requestsByMonth = new List<MonthlyRequests>();
+
+            List<TourRequest> tourRequests = _tourRequestRepository.GetByLocationId(locationId);
+
+            var requestsGroupedByMonth = tourRequests.Where(tr => tr.StartTime.Year == year)
+                                                     .GroupBy(tr => tr.StartTime.Month)
+                                                     .Select(g => new { Month = g.Key, Count = g.Count() });
+
+            foreach (var group in requestsGroupedByMonth)
+            {
+                MonthlyRequests monthlyRequests = new MonthlyRequests
+                {
+                    MonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(group.Month),
+                    Count = group.Count
+                };
+
+                requestsByMonth.Add(monthlyRequests);
+            }
+
+
+            return requestsByMonth;
+        }
+
+        public List<MonthlyRequests> GetRequestsByMonthAndLanguage(string language, int year)
+        {
+            List<MonthlyRequests> requestsByMonth = new List<MonthlyRequests>();
+
+            List<TourRequest> tourRequests = _tourRequestRepository.GetByLanguage(language);
+
+            var requestsGroupedByMonth = tourRequests.Where(tr => tr.StartTime.Year == year)
+                                                     .GroupBy(tr => tr.StartTime.Month)
+                                                     .Select(g => new { Month = g.Key, Count = g.Count() });
+
+            foreach (var group in requestsGroupedByMonth)
+            {
+                MonthlyRequests monthlyRequests = new MonthlyRequests
+                {
+                    MonthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(group.Month),
+                    Count = group.Count
+                };
+
+                requestsByMonth.Add(monthlyRequests);
+            }
+
+
+            return requestsByMonth;
+        }
+
+
+
+
     }
 }

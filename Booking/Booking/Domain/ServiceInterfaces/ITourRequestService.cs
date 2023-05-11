@@ -1,4 +1,5 @@
-﻿using Booking.Domain.Model;
+﻿using Booking.Domain.DTO;
+using Booking.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,5 +16,9 @@ namespace Booking.Domain.ServiceInterfaces
         List<TourRequest> GetAll();
         void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language, DateTime? startDate, DateTime? endDate);
         void ShowAll(ObservableCollection<TourRequest> observe);
+        List<YearlyRequests> GetRequestsByYearAndLocation(int locationId);
+        List<YearlyRequests> GetRequestsByYearAndLanguage(string language);
+        List<MonthlyRequests> GetRequestsByMonthAndLocation(int locationId, int year);
+        List<MonthlyRequests> GetRequestsByMonthAndLanguage(string language, int year);
     }
 }
