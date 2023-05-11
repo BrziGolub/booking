@@ -245,6 +245,9 @@ namespace Booking.WPF.ViewModels.Owner
 
             AccommodationName = "";
             SelectedCountry = "";
+            SelectedCity = "";
+            TbPictures = "";
+
             Type = AccommodationType.APARTMENT;
 
         }
@@ -263,7 +266,7 @@ namespace Booking.WPF.ViewModels.Owner
         public string Error => null;
         private Regex _numberOfGuestsRegex = new Regex("^[1-9][0-9]?$");
 
-        private readonly string[] _validatedProperties = { "AccommodationName", "SelectedCountry" };
+        private readonly string[] _validatedProperties = { "AccommodationName", "SelectedCountry", "SelectedCity", "TbPictures" };
         public string this[string columnName]
         {
             get
@@ -279,6 +282,20 @@ namespace Booking.WPF.ViewModels.Owner
                 else if (columnName == "SelectedCountry")
                 {
                     if (SelectedCountry == "")
+                    {
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "SelectedCity")
+                {
+                    if (SelectedCity == "")
+                    {
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "TbPictures")
+                {
+                    if (TbPictures == "")
                     {
                         return "This filed is required!";
                     }
@@ -380,7 +397,7 @@ namespace Booking.WPF.ViewModels.Owner
         private bool CanSaveAccommodation()
         {
             return !string.IsNullOrEmpty(AccommodationName) && !string.IsNullOrEmpty(SelectedCountry) &&
-             !string.IsNullOrEmpty(SelectedCity) && Capacity > 0 && MinNumberOfDays > 0 && CancelationPeriod > 0;
+             !string.IsNullOrEmpty(SelectedCity) && Capacity > 0 && MinNumberOfDays > 0 && CancelationPeriod >= 0;
         }
 
         private void CreateAccommodation()
@@ -391,8 +408,8 @@ namespace Booking.WPF.ViewModels.Owner
 
                 Location location = new Location
                 {
-                    State = SelectedCountry,
-                    City = SelectedCity
+                State = SelectedCountry,
+                City = SelectedCity
                 };
 
                 int LocationID = LocationService.GetIdByCountryAndCity(SelectedCountry, SelectedCity);
@@ -429,9 +446,19 @@ namespace Booking.WPF.ViewModels.Owner
                     MessageBox.Show("'CAPACITY' not entered");
                     return;
                 }
+                if (accommodation.Capacity < 0)
+                {
+                    MessageBox.Show("'CAPACITY' should be greater than 0");
+                    return;
+                }
                 if (accommodation.MinNumberOfDays == 0)
                 {
                     MessageBox.Show("'MIN NUMBER OF DAYS' not entered");
+                    return;
+                }
+                if (accommodation.MinNumberOfDays < 0)
+                {
+                    MessageBox.Show("'MIN NUMBER OF DAYS' should be greater than 0");
                     return;
                 }
                 if (accommodation.CancelationPeriod < 0)

@@ -35,6 +35,7 @@ namespace Booking.WPF.ViewModels.Owner
             AccommodationReservationRequestService.Subscribe(this);
             Requests = new ObservableCollection<AccommodationReservationRequests>(AccommodationReservationRequestService.GetSeeableDateChanges());
             SetCommands();
+            OwnerComment = "";
         }
 
         public void SetCommands()
@@ -78,10 +79,19 @@ namespace Booking.WPF.ViewModels.Owner
         }
         private void Button_Click_Reject(object param)
         {
-            SelectedAccommodationReservationRequest.Comment = OwnerComment;
-            AccommodationReservationRequestService.SaveRejected(SelectedAccommodationReservationRequest);
-            NotificationService.MakeReject(SelectedAccommodationReservationRequest);
-            AccommodationReservationRequestService.NotifyObservers();
+            if (OwnerComment.Equals(""))
+            {
+                MessageBox.Show("'COMMENT' not entered");
+                return;
+            }
+            else
+            {
+                SelectedAccommodationReservationRequest.Comment = OwnerComment;
+                AccommodationReservationRequestService.SaveRejected(SelectedAccommodationReservationRequest);
+                NotificationService.MakeReject(SelectedAccommodationReservationRequest);
+                AccommodationReservationRequestService.NotifyObservers();
+            }
+            
         }
         private void Button_Click_Accept(object param)
         {

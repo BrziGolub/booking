@@ -61,8 +61,18 @@
             </ComboBox>
             <ComboBox Margin="-440,20,0,0" Width="250" ToolTip="Press and choose in what city will your new accommodation be" Height="30" 
                       IsEnabled="{Binding CityComboboxEnabled, UpdateSourceTrigger=PropertyChanged}" 
-                      ItemsSource="{Binding Path=CityCollection}" 
-                      SelectedItem="{Binding Path=SelectedCity, UpdateSourceTrigger=PropertyChanged}" />
+                      ItemsSource="{Binding Path=CityCollection, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                      SelectedItem="{Binding Path=SelectedCity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" >
+                    <ComboBox.Style>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Style.Triggers>
+                                <Trigger Property="Validation.HasError" Value="True">
+                                    <Setter Property="BorderBrush" Value="Red" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ComboBox.Style>
+            </ComboBox>
         </StackPanel>
 
         <Label Content="Type*" HorizontalAlignment="Left" Margin="40,210,0,0" VerticalAlignment="Top" FontSize="20"/>
@@ -84,14 +94,43 @@
         </TextBox>
 
         <Label Content="Min days*" HorizontalAlignment="Left" Margin="40,310,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox HorizontalAlignment="Left" Margin="221,315,0,0" ToolTip="Press to add minimum number of days required to make a reservation on your new accommodation" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="20" Text="{Binding Path=MinNumberOfDays, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox HorizontalAlignment="Left" Margin="221,315,0,0" ToolTip="Press to add minimum number of days required to make a reservation on your new accommodation" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="20" Text="{Binding Path=MinNumberOfDays, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="BorderBrush" Value="Red" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
 
         <Label Content="Cancelation days*" HorizontalAlignment="Left" Margin="40,360,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox HorizontalAlignment="Left" Margin="221,365,0,0" TextWrapping="Wrap" ToolTip="Press to add minimum days before the reservation that the guest can cancel it" VerticalAlignment="Top" Height="30" Width="250" FontSize="20" Text="{Binding Path=CancelationPeriod, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox HorizontalAlignment="Left" Margin="221,365,0,0" TextWrapping="Wrap" ToolTip="Press to add minimum days before the reservation that the guest can cancel it" VerticalAlignment="Top" Height="30" Width="250" FontSize="20" Text="{Binding Path=CancelationPeriod, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="BorderBrush" Value="Red" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
 
         <Label Content="Pictures*" HorizontalAlignment="Left" Margin="540,60,0,0" VerticalAlignment="Top" FontSize="20" />
-        <TextBox x:Name="tbPictures" HorizontalAlignment="Left" Margin="650,65,0,0" ToolTip="This is your pictures path in your computer" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="15" Text="{Binding Path=TbPictures}" />
-
+        <TextBox x:Name="tbPictures" HorizontalAlignment="Left" Margin="650,65,0,0" ToolTip="This is your pictures path in your computer" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="15" Text="{Binding Path=TbPictures, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" >
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="BorderBrush" Value="Red" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
         <StackPanel Margin="0,0,-192,2">
             <Button Panel.ZIndex="1"  Margin="690,65,32,122"  Content="+" Height="30" ToolTip="Press to add a picture" Width="30" FontSize="17" FontWeight="Bold" Command="{Binding AddPicture}" />
             <Button Panel.ZIndex="1" Margin="752,-275,0,0"  Content="-" Height="30" Width="30" ToolTip="Press to delete the current showing picture" FontSize="17" FontWeight="Bold" Command="{Binding RemovePicture}" />
