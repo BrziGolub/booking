@@ -20,6 +20,7 @@ namespace Booking.WPF.ViewModels.Guest2
 
 		public ObservableCollection<Voucher> Vouchers { get; set; }
 		public RelayCommand Button_Click_Close { get; set; }
+		public RelayCommand Button_Click_GenerateReport { get; set; }
 
 		public ShowVouchersViewModel(Window window)
 		{
@@ -27,12 +28,25 @@ namespace Booking.WPF.ViewModels.Guest2
 			_voucherService = InjectorService.CreateInstance<IVoucherService>();
 
 			Vouchers = new ObservableCollection<Voucher>(_voucherService.GetVouchersByUserId(TourService.SignedGuideId));
+
+			InitializeCommands();
+		}
+
+		private void InitializeCommands()
+		{
 			Button_Click_Close = new RelayCommand(ButtonClose);
+			Button_Click_GenerateReport = new RelayCommand(ButtonGenerateReport);
 		}
 
 		private void ButtonClose(object param)
 		{
 			_window.Close();
+		}
+
+		private void ButtonGenerateReport(object param)
+		{
+			//TO DO: Implement pdf
+			MessageBox.Show("Mrk");
 		}
 	}
 }

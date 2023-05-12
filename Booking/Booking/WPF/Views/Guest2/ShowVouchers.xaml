@@ -7,41 +7,98 @@
         mc:Ignorable="d"
         Title="ShowVouchers" Height="400" Width="450"
 		WindowStartupLocation="CenterScreen"
-		ResizeMode="NoResize">
-	
-    <Grid Margin="16">
+		ResizeMode="NoResize"
+		Background="#BBC1D1">
 
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
+	<Window.Resources>
+		<SolidColorBrush x:Key="PrimaryBlueColor" Color="#348EF6"/>
+		<SolidColorBrush x:Key="SecondaryBlueColor" Color="#EFF2FF"/>
 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="auto"/>
-		</Grid.RowDefinitions>
+		<SolidColorBrush x:Key="CardBackgroundColor" Color="#FFF"/>
+		<SolidColorBrush x:Key="BlackTextColor" Color="#000"/>
 
-		<Label Grid.Row="0" Content="My vouchers" FontSize="24" Margin="0 0 0 8"/>
+		<SolidColorBrush x:Key="PrimaryGrayColor" Color="#BBC1D1"/>
 
-		<DataGrid Grid.Row="1" Margin="0 8"
+		<Style TargetType="Label">
+			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
+			<Setter Property="FontFamily" Value="Calibri"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+
+		<Style TargetType="TextBlock">
+			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
+			<Setter Property="FontFamily" Value="Calibri"/>
+		</Style>
+
+		<Style TargetType="DataGrid">
+			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
+			<Setter Property="FontFamily" Value="Calibri"/>
+		</Style>
+
+		<Style x:Key="ButtonStyle" TargetType="Button">
+			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
+			<Setter Property="FontFamily" Value="Calibri"/>
+			<Style.Resources>
+				<Style TargetType="Border">
+					<Setter Property="CornerRadius" Value="6"/>
+				</Style>
+			</Style.Resources>
+		</Style>
+
+		<Style x:Key="CardHolder" TargetType="Border">
+			<Setter Property="Background" Value="{StaticResource CardBackgroundColor}"/>
+			<Setter Property="CornerRadius" Value="6"/>
+			<Setter Property="Padding" Value="8"/>
+		</Style>
+	</Window.Resources>
+
+	<Border Margin="8" Style="{StaticResource CardHolder}">
+		<Grid>
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+
+			<Grid Grid.Row="0" Margin="0 0 0 8">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="auto"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+
+				<Image Source="/Resources/Images/voucher128.png" Height="40"/>
+				<Label Grid.Column="1" Content="My vouchers" FontSize="24" Margin="8 0 0 0"/>
+				<Button Grid.Column="2" Width="40" Margin="4" Command="{Binding Button_Click_GenerateReport}" Style="{StaticResource ButtonStyle}">
+					<StackPanel>
+						<Image Source="/Resources/Images/document-pdf64.png"/>
+					</StackPanel>
+				</Button>
+			</Grid>
+
+			<DataGrid Grid.Row="1" Margin="0 8"
 				  AutoGenerateColumns="False"
 				  IsReadOnly="True"
 				  SelectionMode="Single"
 				  FontSize="14"
 				  ItemsSource="{Binding Vouchers}">
-			
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="No." Width="2*" Binding="{Binding Id}"/>
-				<DataGridTextColumn Header="Expiration date" Width="3*" Binding="{Binding ValidTime, StringFormat={}{0:dd/MM/yyyy}}"/>
-			</DataGrid.Columns>
-		</DataGrid>
 
-		<Button Grid.Row="2" Content="Close(F5)" Width="100" Height="27" FontSize="14" HorizontalAlignment="Right" Margin="0 8 0 0" Command="{Binding Button_Click_Close}">
-			<Button.Resources>
-				<Style TargetType="Border">
-					<Setter Property="CornerRadius" Value="5"/>
-				</Style>
-			</Button.Resources>
-		</Button>
-	</Grid>
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="No." Width="2*" Binding="{Binding Id}"/>
+					<DataGridTextColumn Header="Expiration date" Width="3*" Binding="{Binding ValidTime, StringFormat={}{0:dd/MM/yyyy}}"/>
+				</DataGrid.Columns>
+			</DataGrid>
+
+			<Button Grid.Row="2" Content="Close(F5)" Width="100" Height="27" FontSize="14" HorizontalAlignment="Right" Margin="0 8 0 0" Command="{Binding Button_Click_Close}" Style="{StaticResource ButtonStyle}"/>
+
+		</Grid>
+	</Border>
 </Window>

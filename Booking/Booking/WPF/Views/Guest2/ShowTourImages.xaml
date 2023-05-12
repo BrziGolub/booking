@@ -7,55 +7,87 @@
         mc:Ignorable="d"
         Title="ShowTourImages" Height="450" Width="450"
 		WindowStartupLocation="CenterScreen"
-		ResizeMode="NoResize">
+		ResizeMode="NoResize"
+		Background="#BBC1D1">
 
-    <Window.Resources>
-        <Style x:Key="ButtonStyle" TargetType="Button">
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Style.Resources>
+	<Window.Resources>
+		<SolidColorBrush x:Key="PrimaryBlueColor" Color="#348EF6"/>
+		<SolidColorBrush x:Key="SecondaryBlueColor" Color="#EFF2FF"/>
+
+		<SolidColorBrush x:Key="CardBackgroundColor" Color="#FFF"/>
+		<SolidColorBrush x:Key="BlackTextColor" Color="#000"/>
+
+		<SolidColorBrush x:Key="PrimaryGrayColor" Color="#BBC1D1"/>
+
+		<Style TargetType="Label">
+			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
+			<Setter Property="FontFamily" Value="Calibri"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+
+		<Style TargetType="TextBlock">
+			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
+			<Setter Property="FontFamily" Value="Calibri"/>
+		</Style>
+		
+		<Style x:Key="ButtonStyle" TargetType="Button">
+			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
+			<Setter Property="FontFamily" Value="Calibri"/>
+			<Style.Resources>
+				<Style TargetType="Border">
+					<Setter Property="CornerRadius" Value="6"/>
+				</Style>
+			</Style.Resources>
         </Style>
+
+		<Style x:Key="CardHolder" TargetType="Border">
+			<Setter Property="Background" Value="{StaticResource CardBackgroundColor}"/>
+			<Setter Property="CornerRadius" Value="6"/>
+			<Setter Property="Padding" Value="8"/>
+		</Style>
     </Window.Resources>
 
-    <Grid Margin="16">
+	<Border Margin="8" Style="{StaticResource CardHolder}">
+		<Grid>
 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="auto"/>
-		</Grid.RowDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
 
-		<Label Grid.Row="0" Content="Images" FontSize="24" Margin="0 0 0 8"/>
+			<StackPanel Grid.Row="0" Margin="0 0 0 8" Orientation="Horizontal">
+				<Image Source="/Resources/Images/images128.png" Height="40"/>
+				<Label Content="Images" FontSize="24" Margin="8 0 0 0"/>
+			</StackPanel>
 
-		<TextBlock Grid.Row="1" Text="{Binding Location}"/>
+			<StackPanel Grid.Row="1" Margin="8" Orientation="Vertical">
+				<TextBlock Grid.Row="0" Text="{Binding Location}" VerticalAlignment="Center"/>
+				<TextBlock Grid.Row="1" Text="{Binding Tour.StartTime, StringFormat={}{0:dd/MM/yyyy}}" VerticalAlignment="Center"/>
+			</StackPanel>
 
-		<TextBlock Grid.Row="2" Text="{Binding Tour.StartTime, StringFormat={}{0:dd/MM/yyyy}}"/>
+			<Image Grid.Row="2" Margin="0 8" Source="{Binding ImageSource}"/>
 
-        <Image Grid.Row="3" Source="{Binding ImageSource}" Margin="0 8"/>
+			<Grid Grid.Row="3" Margin="0 8 0 0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="auto"/>
+				</Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="4" Margin="0 8 0 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
+				<StackPanel Grid.Column="0" Orientation="Horizontal">
 
-            <StackPanel Grid.Column="0" Orientation="Horizontal">
+					<Button Content="Previous(F1)" Width="100" Height="27" FontSize="14" Margin="0 0 8 0" Command="{Binding Button_Click_Prev}" Style="{StaticResource ButtonStyle}"/>
+					<Button Content="Next(F2)" Width="100" Height="27" FontSize="14" Margin="8 0" Command="{Binding Button_Click_Next}" Style="{StaticResource ButtonStyle}"/>
+					<TextBlock Text="{Binding Text}" FontSize="14" Margin="8 0 0 0" VerticalAlignment="Center"/>
 
-                <Button Content="Previous(F1)" Width="100" Height="27" FontSize="14" Margin="0 0 8 0" Command="{Binding Button_Click_Prev}" Style="{StaticResource ButtonStyle}"/>
-                <Button Content="Next(F2)" Width="100" Height="27" FontSize="14" Margin="8 0" Command="{Binding Button_Click_Next}" Style="{StaticResource ButtonStyle}"/>
-                <TextBlock Text="{Binding Text}" FontSize="14" Margin="8 0 0 0" VerticalAlignment="Center"/>
+				</StackPanel>
 
-            </StackPanel>
-
-            <Button Grid.Column="1" Content="Close(F5)" Width="100" Height="27" FontSize="14" Command="{Binding Button_Click_Close}" Style="{StaticResource ButtonStyle}"/>
-        </Grid>
-
-    </Grid>
+				<Button Grid.Column="1" Content="Close(F5)" Width="100" Height="27" FontSize="14" Command="{Binding Button_Click_Close}" Style="{StaticResource ButtonStyle}"/>
+			</Grid>
+		</Grid>
+	</Border>
 </Window>
