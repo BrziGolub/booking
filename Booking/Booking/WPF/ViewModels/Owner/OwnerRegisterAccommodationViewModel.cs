@@ -421,7 +421,7 @@ namespace Booking.WPF.ViewModels.Owner
                 accommodation.MinNumberOfDays = MinNumberOfDays;
                 accommodation.CancelationPeriod = CancelationPeriod;
 
-                if (accommodation.Name == null)
+                if (accommodation.Name.Equals(""))
                 {
                     MessageBox.Show("'NAME' not entered");
                     return;

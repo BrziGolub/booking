@@ -187,7 +187,7 @@ namespace Booking.Service
                     GradeSum = GradeSum + ((Convert.ToDouble(ocena.OwnersCourtesy) + Convert.ToDouble(ocena.Cleaness)) / 2);
                 }
             }
-            return GradeSum/Counter;
+            return Math.Round(GradeSum / Counter,2);
         }
 
         public List<AccommodationAndOwnerGrade> GetAll()

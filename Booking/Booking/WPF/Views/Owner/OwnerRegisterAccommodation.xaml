@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Booking.View" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         
         mc:Ignorable="d"
-        Title="OwnerRegisterAccommodation" Height="768" Width="1024" ResizeMode="NoResize">
+        Title="OwnerRegisterAccommodation" Height="768" Width="1024" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
             <StackPanel>

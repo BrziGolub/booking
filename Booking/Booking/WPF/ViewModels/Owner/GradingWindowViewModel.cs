@@ -15,7 +15,7 @@ using System.Windows;
 
 namespace Booking.WPF.ViewModels.Owner
 {
-    public class GradingWindowViewModel:INotifyPropertyChanged
+    public class GradingWindowViewModel:INotifyPropertyChanged, IDataErrorInfo
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -41,6 +41,58 @@ namespace Booking.WPF.ViewModels.Owner
             AccommodationGradeService = InjectorService.CreateInstance<IAccommodationGradeService>();
             setComboBoxes();
             SetCommands();
+            Cleanliness = -1;
+            RuleFollowing = -1;
+            Communication = -1;
+            Lateness = -1;
+            Comment = "";
+        }
+        public string Error => null;
+        private readonly string[] _validatedProperties = { "Cleanliness", "RuleFollowing", "Communication", "Lateness","Comment" };
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "Cleanliness")
+                {
+                    if (Cleanliness == -1)
+                    {
+
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "RuleFollowing")
+                {
+                    if (RuleFollowing == -1)
+                    {
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "Communication")
+                {
+                    if (Communication == -1)
+                    {
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "Lateness")
+                {
+                    if (Lateness == -1)
+                    {
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "Comment")
+                {
+                    if (Comment == String.Empty)
+                    {
+                        return "This filed is required!";
+                    }
+                }
+
+
+                return null;
+            }
         }
         public void setComboBoxes()
         {
@@ -157,7 +209,7 @@ namespace Booking.WPF.ViewModels.Owner
             {
                 MessageBox.Show("'Communication' not entered");
             }
-            else if (accommodationGrade.Comment == null)
+            else if (accommodationGrade.Comment.Equals(""))
             {
                 MessageBox.Show("'Comment' not entered");
             }

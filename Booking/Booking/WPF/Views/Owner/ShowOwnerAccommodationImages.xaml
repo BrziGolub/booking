@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.WPF.Views.Owner"
         mc:Ignorable="d"
-        Title="ShowOwnerAccommodationImages" Height="768" Width="1024">
+        Title="ShowOwnerAccommodationImages" Height="768" Width="1024"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
