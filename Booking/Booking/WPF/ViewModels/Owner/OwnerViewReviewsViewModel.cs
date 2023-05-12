@@ -51,7 +51,7 @@ namespace Booking.WPF.ViewModels.Owner
         }
         private void ShowImages(object param)
         {
-            ShowGradeImages view = new ShowGradeImages(SelectedGrade.Images);
+            ShowGradeImages view = new ShowGradeImages(SelectedGrade);
             view.ShowDialog();
         }
     }
