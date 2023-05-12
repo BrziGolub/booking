@@ -165,6 +165,7 @@
     <Compile Include="WPF\ViewModels\Guest1\RateAccommodationAndOwnerViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest2\RateTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\ReserveTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\SecondGuestHomePageViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\ShowTourDestinationsViewModel.cs" />
