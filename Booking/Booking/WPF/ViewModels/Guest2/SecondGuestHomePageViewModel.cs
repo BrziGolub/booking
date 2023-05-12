@@ -318,8 +318,8 @@ namespace Booking.WPF.ViewModels.Guest2
 
 		private readonly string[] _validatedProperties = { "SearchVisitors", "SearchLanguage", "SearchDuration" };
 
-		private Regex _number = new Regex("[1-9][0-9]*");
-		private Regex _word = new Regex("[A-Z]*[a-z]*");
+		private Regex _number = new Regex(@"^[1-9]\d*$");
+		private Regex _word = new Regex("^[A-Za-z]*$");
 
 		public string this[string columnName]
 		{
@@ -335,9 +335,12 @@ namespace Booking.WPF.ViewModels.Guest2
 				}
 				else if (columnName == "SearchLanguage")
 				{
-					Match match = _word.Match(SearchLanguage);
-					if (!match.Success)
-						return "Wrong format";
+					if (!string.IsNullOrEmpty(SearchLanguage))
+					{
+						Match match = _word.Match(SearchLanguage);
+						if (!match.Success)
+							return "Wrong format";
+					}
 				}
 				else if (columnName == "SearchDuration")
 				{
