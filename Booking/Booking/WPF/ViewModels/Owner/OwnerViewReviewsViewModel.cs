@@ -4,6 +4,7 @@ using Booking.Model;
 using Booking.Observer;
 using Booking.Util;
 using Booking.View;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,6 +22,7 @@ namespace Booking.WPF.ViewModels.Owner
         public AccommodationAndOwnerGrade SelectedGrade { get; set; }
         public RelayCommand CloseWindow { get; set; }
         public RelayCommand ShowPictures { get; set; }
+        public RelayCommand ShowComment { get; set; }
         private readonly Window _window;
         public OwnerViewReviewsViewModel(Window window)
         {
@@ -35,6 +37,7 @@ namespace Booking.WPF.ViewModels.Owner
         {
             CloseWindow = new RelayCommand(Close);
             ShowPictures = new RelayCommand(ShowImages);
+            ShowComment = new RelayCommand(ShowCommentWindow);
 
         }
         public void Update()
@@ -48,6 +51,11 @@ namespace Booking.WPF.ViewModels.Owner
         private void Close(object param)
         {
             _window.Close();
+        }
+        private void ShowCommentWindow(object param)
+        {
+            ShowCommentViewReview showDescriptionText = new ShowCommentViewReview(SelectedGrade.Id);
+            showDescriptionText.Show();
         }
         private void ShowImages(object param)
         {

@@ -32,10 +32,16 @@
                 <DataGridTextColumn Width="*" Header="Accommodation name" Binding="{Binding AccommodationReservation.Accommodation.Name}"></DataGridTextColumn>
                 <DataGridTextColumn Width="*" Header="Cleanliness" Binding="{Binding Cleaness}"/>
                 <DataGridTextColumn Header="Owner courtasy" Width="*" Binding="{Binding OwnersCourtesy}"/>
-                <DataGridTextColumn Width="*" Header="Comment" Binding="{Binding Comment}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Comment" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Show" ToolTip="Press to see the comment that the guest wrote for this review" Command="{Binding DataContext.ShowComment, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Width="*" Header="Guest" Binding="{Binding AccommodationReservation.Guest.Username}"></DataGridTextColumn>
 
-                <DataGridTemplateColumn Header="Images" Width="60">
+                <DataGridTemplateColumn Header="Images" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Show" ToolTip="Press to see the pictures that the guest uploaded for this review" Command="{Binding DataContext.ShowPictures, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>

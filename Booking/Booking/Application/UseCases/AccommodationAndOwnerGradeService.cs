@@ -41,6 +41,11 @@ namespace Booking.Service
         {
             return _repository.NextId();
         }
+        public AccommodationAndOwnerGrade GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
+
 
         public void SaveGrade(AccommodationAndOwnerGrade grade) 
         {
