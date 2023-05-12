@@ -43,7 +43,11 @@ namespace Booking.Service
         }
         public AccommodationAndOwnerGrade GetById(int id)
         {
-            return _repository.GetById(id);
+            AccommodationAndOwnerGrade grade = _repository.GetById(id);
+            grade.AccommodationReservation = _reservationRepository.GetById(grade.AccommodationReservation.Id);
+            grade.AccommodationReservation.Accommodation = _accommodationRepository.GetById(grade.AccommodationReservation.Accommodation.Id);
+            grade.AccommodationReservation.Guest = _userRepository.GetById(grade.AccommodationReservation.Guest.Id);
+            return grade;
         }
 
 

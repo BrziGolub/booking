@@ -93,6 +93,10 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
+        <StackPanel Margin="-690,200,0,0">
+            <Button Panel.ZIndex="1" Margin="660,65,0,0"  Content="+" Height="30" ToolTip="Press to increase the number by 1" Width="30" FontSize="14" FontWeight="Bold" Command="{Binding IncreaseMaxGuests}" />
+            <Button Panel.ZIndex="1" Margin="730,-30,0,0"  Content="-" Height="30" ToolTip="Press to decrease the number by 1" Width="30" FontSize="14" FontWeight="Bold" Command="{Binding DecreaseMaxGuests}" />
+        </StackPanel>
 
         <Label Content="Min days*" HorizontalAlignment="Left" Margin="40,310,0,0" VerticalAlignment="Top" FontSize="20"/>
         <TextBox HorizontalAlignment="Left" Margin="221,315,0,0" ToolTip="Press to add minimum number of days required to make a reservation on your new accommodation" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="20" Text="{Binding Path=MinNumberOfDays, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
@@ -106,6 +110,10 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
+        <StackPanel Margin="-690,250,0,0">
+            <Button Panel.ZIndex="1" Margin="660,65,0,0"  Content="+" Height="30" ToolTip="Press to increase the number by 1" Width="30" FontSize="14" FontWeight="Bold" Command="{Binding IncreaseMinDays}" />
+            <Button Panel.ZIndex="1" Margin="730,-30,0,0"  Content="-" Height="30" ToolTip="Press to decrease the number by 1" Width="30" FontSize="14" FontWeight="Bold" Command="{Binding DecreaseMinDays}" />
+        </StackPanel>
 
         <Label Content="Cancelation days*" HorizontalAlignment="Left" Margin="40,360,0,0" VerticalAlignment="Top" FontSize="20"/>
         <TextBox HorizontalAlignment="Left" Margin="221,365,0,0" TextWrapping="Wrap" ToolTip="Press to add minimum days before the reservation that the guest can cancel it" VerticalAlignment="Top" Height="30" Width="250" FontSize="20" Text="{Binding Path=CancelationPeriod, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
@@ -119,6 +127,10 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
+        <StackPanel Margin="-690,300,0,0">
+            <Button Panel.ZIndex="1" Margin="660,65,0,0"  Content="+" Height="30" ToolTip="Press to increase the number by 1" Width="30" FontSize="14" FontWeight="Bold" Command="{Binding IncreaseCancelationPeriod}" />
+            <Button Panel.ZIndex="1" Margin="730,-30,0,0"  Content="-" Height="30" ToolTip="Press to decrease the number by 1" Width="30" FontSize="14" FontWeight="Bold" Command="{Binding DecreaseCancelationPeriod}" />
+        </StackPanel>
 
         <Label Content="Pictures*" HorizontalAlignment="Left" Margin="540,60,0,0" VerticalAlignment="Top" FontSize="20" />
         <TextBox x:Name="tbPictures" HorizontalAlignment="Left" Margin="650,65,0,0" ToolTip="This is your pictures path in your computer" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="250" FontSize="15" Text="{Binding Path=TbPictures, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" >

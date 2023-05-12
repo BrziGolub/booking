@@ -30,7 +30,7 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
-            <Image Grid.Row="0" Margin="10" Width="750" Source="{Binding CurrentImageUrl,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+            <Image Grid.Row="0" Height="500" Margin="10" Width="750" Source="{Binding CurrentImageUrl,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
             <Button x:Name="NextButton"  Margin="10" Height="30" ToolTip="Press to see the next picture" Width="80" Command="{Binding NextButton_Click}" IsEnabled="{Binding IsNextEnabled,UpdateSourceTrigger=PropertyChanged}" >
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
@@ -41,7 +41,7 @@
             </Button>
         </StackPanel>
         <WrapPanel FlowDirection="LeftToRight" Margin="500,740,0,0">
-            <Button Margin="70 -90 0 0"  VerticalAlignment="Center" ToolTip="Press to close this window" HorizontalAlignment="Left" Width="120" Height="60" FontWeight="Bold" FontSize="32" Command="{Binding CloseWindow}" >CLOSE</Button>
+            <Button Margin="70 -100 0 0"  VerticalAlignment="Center" ToolTip="Press to close this window" HorizontalAlignment="Left" Width="120" Height="60" FontWeight="Bold" FontSize="32" Command="{Binding CloseWindow}" >CLOSE</Button>
         </WrapPanel>
     </Grid>
 </Window>

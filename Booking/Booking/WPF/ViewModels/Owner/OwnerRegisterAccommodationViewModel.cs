@@ -39,6 +39,12 @@ namespace Booking.WPF.ViewModels.Owner
         public RelayCommand PreviousPicture { get; set; }
         public RelayCommand NextPicture { get; set; }
         public RelayCommand Close { get; set; }
+        public RelayCommand IncreaseMaxGuests { get; set; }
+        public RelayCommand DecreaseMaxGuests { get; set; }
+        public RelayCommand IncreaseMinDays { get; set; }
+        public RelayCommand DecreaseMinDays { get; set; }
+        public RelayCommand IncreaseCancelationPeriod { get; set; }
+        public RelayCommand DecreaseCancelationPeriod { get; set; }
         public ICommand FillCityCommand { get; set; }
         private ICommand _create;
         public string SelectedCountry { get; set; }
@@ -259,6 +265,13 @@ namespace Booking.WPF.ViewModels.Owner
 
             NextPicture = new RelayCommand(buttonNext_Click);
             PreviousPicture = new RelayCommand(buttonPrevious_Click);
+
+            IncreaseMaxGuests = new RelayCommand(ButtonIncreaseMaxGuests);
+            DecreaseMaxGuests = new RelayCommand(ButtonDecreaseMaxGuests);
+            IncreaseMinDays = new RelayCommand(ButtonIncreaseMinDays);
+            DecreaseMinDays = new RelayCommand(ButtonDecreaseMinDays);
+            IncreaseCancelationPeriod = new RelayCommand(ButtonIncreaseCancelationPeriod);
+            DecreaseCancelationPeriod = new RelayCommand(ButtonDecreaseCancelationPeriod);
 
             FillCityCommand = new RelayCommand(FillCity);
         }
@@ -563,6 +576,57 @@ namespace Booking.WPF.ViewModels.Owner
                 string imagePath = imagePaths[currentImageIndex];
                 ImageSlideshowSource = new BitmapImage(new Uri(imagePath));
                 TbPictures = imagePath;
+            }
+        }
+        private void ButtonIncreaseMaxGuests(object param)
+        {
+            int currentValue;
+            if (int.TryParse(Capacity.ToString(), out currentValue))
+            {
+                Capacity = (currentValue + 1);
+            }
+        }
+
+        private void ButtonDecreaseMaxGuests(object param)
+        {
+            int currentValue;
+            if (int.TryParse(Capacity.ToString(), out currentValue) && currentValue > 0)
+            {
+                Capacity = (currentValue - 1);
+            }
+        }
+        private void ButtonIncreaseMinDays(object param)
+        {
+            int currentValue;
+            if (int.TryParse(MinNumberOfDays.ToString(), out currentValue))
+            {
+                MinNumberOfDays = (currentValue + 1);
+            }
+        }
+
+        private void ButtonDecreaseMinDays(object param)
+        {
+            int currentValue;
+            if (int.TryParse(MinNumberOfDays.ToString(), out currentValue) && currentValue > 0)
+            {
+                MinNumberOfDays = (currentValue - 1);
+            }
+        }
+        private void ButtonIncreaseCancelationPeriod(object param)
+        {
+            int currentValue;
+            if (int.TryParse(CancelationPeriod.ToString(), out currentValue))
+            {
+                CancelationPeriod = (currentValue + 1);
+            }
+        }
+
+        private void ButtonDecreaseCancelationPeriod(object param)
+        {
+            int currentValue;
+            if (int.TryParse(CancelationPeriod.ToString(), out currentValue) && currentValue > 0)
+            {
+                CancelationPeriod = (currentValue - 1);
             }
         }
     }
