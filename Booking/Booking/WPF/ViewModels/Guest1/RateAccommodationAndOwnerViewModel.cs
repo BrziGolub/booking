@@ -19,6 +19,7 @@ using Notifications.Wpf;
 using System.Text.RegularExpressions;
 using Booking.Model.Images;
 using System.Windows.Media.Imaging;
+using Booking.WPF.Views.Guest1;
 
 namespace Booking.WPF.ViewModels.Guest1
 {
@@ -91,22 +92,6 @@ namespace Booking.WPF.ViewModels.Guest1
             }
         }
 
-
-
-        public String _renovationAreas;
-        public String RenovationAreas
-        {
-            get => _renovationAreas;
-            set
-            {
-                if (_renovationAreas != value)
-                {
-                    _renovationAreas = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         public string _tbPictures;
         public string TbPictures
         {
@@ -120,13 +105,6 @@ namespace Booking.WPF.ViewModels.Guest1
                 }
             }
         }
-
-        public bool Level1 { get; set; }
-        public bool Level2{ get; set; }
-        public bool Level3 { get; set; }
-        public bool Level4 { get; set; }
-        public bool Level5 { get; set; }
-
 
         private BitmapImage _imageSlideshowSource;
         public BitmapImage ImageSlideshowSource
@@ -151,6 +129,21 @@ namespace Booking.WPF.ViewModels.Guest1
         {
             get { return _buttonPreviousVisibility; }
             set { _buttonPreviousVisibility = value; OnPropertyChanged(); }
+        }
+
+        private object _currentPage;
+
+        public object CurrentPage
+        {
+            get { return _currentPage; }
+            set
+            {
+                if (_currentPage != value)
+                {
+                    _currentPage = value;
+                    OnPropertyChanged(nameof(CurrentPage));
+                }
+            }
         }
 
 
@@ -191,19 +184,11 @@ namespace Booking.WPF.ViewModels.Guest1
                         return "This filed is required!";
                     }
                 }
-
-                if (columnName.Equals("RenovationAreas"))
-                {
-                    if (RenovationAreas.Equals(String.Empty))
-                    {
-                        return "This filed is required!";
-                    }
-                }
                 return null;
             }
         }
 
-        private readonly string[] _validatedProperties = { "Comment", "Courtesy", "Cleaness", "RenovationAreas" };
+        private readonly string[] _validatedProperties = { "Comment", "Courtesy", "Cleaness"};
 
         public bool IsValid
         {
@@ -246,7 +231,6 @@ namespace Booking.WPF.ViewModels.Guest1
             Comment = String.Empty;
             Courtesy = 0;
             Cleaness = 0;
-            RenovationAreas = String.Empty;
             setComboBoxes();
             NextPreviousPhotoButtonsVisibility();
 
@@ -293,8 +277,7 @@ namespace Booking.WPF.ViewModels.Guest1
             accommodationAndOwnerGrade.OwnersCourtesy = Courtesy;
             accommodationAndOwnerGrade.Comment = Comment;
             accommodationAndOwnerGrade.AccommodationReservation = AccommodationReservation;
-            
-         
+          
         }
 
     
@@ -305,15 +288,12 @@ namespace Booking.WPF.ViewModels.Guest1
                 //obavetsenje
                 return;
             }*/
-            MakeGrade();
+             //MakeGrade();
 
-            AccommodationAndOwnerGradeService.SaveGrade(accommodationAndOwnerGrade);
-            this.NavigationService.GoBack();
-            AccommodationAndOwnerGradeService.CheckSuper(AccommodationReservation); //ovo je od Coe 
+             // AccommodationAndOwnerGradeService.SaveGrade(accommodationAndOwnerGrade); //u save grade cuvam slike!
+             //AccommodationAndOwnerGradeService.CheckSuper(AccommodationReservation); //ovo je od Coe 
 
-            var notificationManager = new NotificationManager();
-            NotificationContent content = new NotificationContent { Title = "Congratulations!", Message = "You succesfuly rate your accommodation", Type = NotificationType.Success};
-            notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
+             CurrentPage = new RenovationApproval(AccommodationReservation, NavigationService); 
         }
 
         private void ButtonAddPicture(object param)
