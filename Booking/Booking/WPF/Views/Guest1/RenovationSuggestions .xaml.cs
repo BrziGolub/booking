@@ -16,13 +16,13 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Booking.WPF.Views.Guest1
-{
-    public partial class RenovationApproval : Page
+{ 
+    public partial class RenovationSuggestions : Page
     {
-        public RenovationApproval(AccommodationReservation selectedReservation, NavigationService navigationService)
+        public RenovationSuggestions(AccommodationReservation selectedReservation, NavigationService navigationService)
         {
             InitializeComponent();
-            this.DataContext = new RenovationApprovalViewModel(selectedReservation, navigationService);
+            this.DataContext = new RenovationSuggestionsViewModel(selectedReservation, navigationService);
         }
     }
 }
