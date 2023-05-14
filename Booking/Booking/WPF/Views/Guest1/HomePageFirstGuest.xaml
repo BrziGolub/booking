@@ -79,7 +79,7 @@
                 ValidatesOnDataErrors=True}"  Validation.ErrorTemplate="{StaticResource ValidationTemplate}"></TextBox>
         </Grid>
 
-        <Button Grid.Row ="2" HorizontalAlignment="Right" Width="120" FontWeight="Bold" Margin="20,15,20,5" Command="{Binding Button_Click_Search}">SEARCH</Button>
+        <Button Grid.Row ="2" HorizontalAlignment="Right" Width="120" FontWeight="Bold" Margin="20,15,20,5" Command="{Binding Button_Click_Search}" >SEARCH</Button>
 
         <StackPanel Grid.Row="3" Margin="20,0,20,0" >
             <DataGrid x:Name="AccommodationDataGrid"  
@@ -99,6 +99,7 @@
                                 <Setter Property="FontWeight" Value="Bold"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                       
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="City" Width="100" Binding="{Binding Location.City}">
                         <DataGridTextColumn.HeaderStyle>
@@ -106,6 +107,7 @@
                                 <Setter Property="FontWeight" Value="Bold"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Type" Width="80"  Binding="{Binding Type}">
                         <DataGridTextColumn.HeaderStyle>
@@ -113,6 +115,7 @@
                                 <Setter Property="FontWeight" Value="Bold"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Capacity" Width="80"  Binding="{Binding Capacity}">
                         <DataGridTextColumn.HeaderStyle>
@@ -120,6 +123,7 @@
                                 <Setter Property="FontWeight" Value="Bold"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                     
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Advance reservation restrictions" Binding="{Binding MinNumberOfDays}">
                         <DataGridTextColumn.HeaderStyle>
@@ -127,6 +131,7 @@
                                 <Setter Property="FontWeight" Value="Bold"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="CancelationPeriod" Binding="{Binding CancelationPeriod}">
                         <DataGridTextColumn.HeaderStyle>
@@ -134,6 +139,7 @@
                                 <Setter Property="FontWeight" Value="Bold"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                       
                     </DataGridTextColumn>
                     <DataGridTemplateColumn Header="Images" Width="*">
                         <DataGridTemplateColumn.HeaderStyle>
