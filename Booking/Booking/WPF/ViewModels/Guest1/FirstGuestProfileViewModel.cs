@@ -68,6 +68,7 @@ namespace Booking.WPF.ViewModels.Guest1
                     _starImageVisibility = value;
                     OnPropertyChanged();
                 }
+                
 
             }
         }
