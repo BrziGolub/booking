@@ -165,6 +165,7 @@
     <Compile Include="WPF\ViewModels\Guest1\BookAccommodationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestAllRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestAllReservationsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\FirstGuestProfileViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestReviewsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\HomePageFirstGuestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\RateAccommodationAndOwnerViewModel.cs" />
@@ -208,6 +209,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guest1\FirstGuestHomePage.xaml.cs">
       <DependentUpon>FirstGuestHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest1\FirstGuestProfile.xaml.cs">
+      <DependentUpon>FirstGuestProfile.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guest1\FirstGuestReviews.xaml.cs">
       <DependentUpon>FirstGuestReviews.xaml</DependentUpon>
@@ -361,6 +365,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest1\FirstGuestHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\FirstGuestProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -678,6 +686,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\blue2.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\profile.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

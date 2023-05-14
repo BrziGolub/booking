@@ -33,9 +33,9 @@
                         <Image  Source="/Resources/Images/logOut.png" Width="30" Height="17"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="My Profile" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3">
+                <MenuItem Header="My Profile" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3" Click="MenuItem_Click_MyProfile">
                     <MenuItem.Icon>
-                        <Image Source="/Resources/Images/User.png" Width="20" Height="17"/>
+                        <Image Source="/Resources/Images/user.png"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
             </Menu>
