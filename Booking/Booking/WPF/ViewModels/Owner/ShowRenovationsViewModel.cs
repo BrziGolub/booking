@@ -4,6 +4,7 @@ using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Observer;
 using Booking.Util;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -55,8 +56,8 @@ namespace Booking.WPF.ViewModels.Owner
         }
         private void ShowDescriptionWindow(object param)
         {
-            //ShowCommentViewReview showDescriptionText = new ShowCommentViewReview(SelectedGrade.Id);
-            //showDescriptionText.Show();
+            ShowDescriptionForRenovation showDescriptionText = new ShowDescriptionForRenovation(SelectedRenovation.Id);
+            showDescriptionText.Show();
         }
         private void DeleteRenovation(object param)
         {

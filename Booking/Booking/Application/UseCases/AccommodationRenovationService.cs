@@ -25,7 +25,10 @@ namespace Booking.Application.UseCases
         }
         public AccommodationRenovation GetById(int id)
         {
-            return _repository.GetById(id);
+            AccommodationRenovation accommodationRenovation = new AccommodationRenovation();
+            accommodationRenovation = _repository.GetById(id);
+            accommodationRenovation.Accommodation = _accommodationRepository.GetById(accommodationRenovation.Accommodation.Id);
+            return accommodationRenovation;
         }
         public void SaveRenovation(AccommodationRenovation renovation)
         {

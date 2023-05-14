@@ -198,6 +198,7 @@
     <Compile Include="WPF\ViewModels\Owner\OwnerViewReviewsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\SchedulingRenovationsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowCommentViewReviewViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\ShowDescriptionForRenovationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowGradeImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowOwnerAccommodationImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowRenovationsViewModel.cs" />
@@ -331,6 +332,9 @@
     </Compile>
     <Compile Include="WPF\Views\Owner\ShowCommentViewReview.xaml.cs">
       <DependentUpon>ShowCommentViewReview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Owner\ShowDescriptionForRenovation.xaml.cs">
+      <DependentUpon>ShowDescriptionForRenovation.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Owner\ShowGradeImages.xaml.cs">
       <DependentUpon>ShowGradeImages.xaml</DependentUpon>
@@ -522,6 +526,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Owner\ShowCommentViewReview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Owner\ShowDescriptionForRenovation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
