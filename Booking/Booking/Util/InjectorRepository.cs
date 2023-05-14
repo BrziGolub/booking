@@ -32,7 +32,7 @@ namespace Booking.Util
 			{ typeof(ITourGradeRepository), new TourGradeRepository()},
             { typeof(INotificationRepository), new NotificationRepository()},
 			{ typeof(ITourRequestRepository), new TourRequestRepository()},
-			{ typeof(IAccommodationRenovationRepository), new AccommodationRenovationRepository()}
+			{ typeof(IAccommodationRenovationRepository), new AccommodationRenovationRepository()},
 			{ typeof(IRenovationRecommodationRepository), new RenovationRecommodationRepository()}
         };
 

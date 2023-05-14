@@ -30,7 +30,7 @@ namespace Booking.Util
             { typeof(INotificationService), new NotificationService() },
             { typeof(ITourImageService), new TourImageService() },
             { typeof(ITourRequestService), new TourRequestService() },
-            { typeof(IAccommodationRenovationService), new AccommodationRenovationService() }
+            { typeof(IAccommodationRenovationService), new AccommodationRenovationService() },
             {typeof(IRenovationRecommodationService), new RenovationRecommodationService() }
         };
 
