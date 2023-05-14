@@ -17,6 +17,8 @@ namespace Booking.WPF.ViewModels.Guest1
 
         public IAccommodationGradeService AccommodationGradeService { get; set; }
 
+        public AccommodationGrade SelectedGrade { get; set; }
+
 
         public FirstGuestReviewsViewModel()
         {

@@ -1,4 +1,5 @@
-﻿using Booking.WPF.ViewModels.Guest1;
+﻿using Booking.Model;
+using Booking.WPF.ViewModels.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,12 @@ namespace Booking.WPF.Views.Guest1
 {
     public partial class FirstGuestReviews : Page
     {
+        private FirstGuestReviewsViewModel _viewModel;
         public FirstGuestReviews()
         {
             InitializeComponent();
-            this.DataContext = new FirstGuestReviewsViewModel();
+            _viewModel = new FirstGuestReviewsViewModel();
+            this.DataContext = _viewModel;
         }
     }
 }

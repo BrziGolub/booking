@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Application\UseCases\AccommodationRenovationService.cs" />
+    <Compile Include="Application\UseCases\RenovationRecommodationService.cs" />
     <Compile Include="Application\UseCases\TourImageService.cs" />
     <Compile Include="Application\UseCases\TourRequestService.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Domain\Model\Images\TourImage.cs" />
     <Compile Include="Domain\Model\Location.cs" />
     <Compile Include="Domain\Model\Notification.cs" />
+    <Compile Include="Domain\Model\RenovationRecommodation.cs" />
     <Compile Include="Domain\Model\Tour.cs" />
     <Compile Include="Domain\Model\TourGrade.cs" />
     <Compile Include="Domain\Model\TourGuests.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Domain\RepositoryInterfaces\IGuestsAccommodationImagesRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ILocationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\INotificationRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IRenovationRecommodationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourGradeRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourGuestsRepository.cs" />
@@ -114,6 +117,7 @@
     <Compile Include="Domain\ServiceInterfaces\IGuestsAccommodationImagesService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ILocationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\INotificationService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IRenovationRecommodationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
@@ -136,6 +140,7 @@
     <Compile Include="Repository\ITourRequestRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
     <Compile Include="Repository\NotificationRepository.cs" />
+    <Compile Include="Repository\RenovationRecommodationRepository.cs" />
     <Compile Include="Repository\TourGradeRepository.cs" />
     <Compile Include="Repository\TourGuestsRepository.cs" />
     <Compile Include="Repository\TourImageRepository.cs" />
@@ -168,6 +173,8 @@
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestReviewsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\HomePageFirstGuestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\RateAccommodationAndOwnerViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\RenovationApprovalViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\RenovationSuggestionsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\RateTourViewModel.cs" />
@@ -214,6 +221,12 @@
     </Compile>
     <Compile Include="WPF\Views\Guest1\FisrtGuestAllRequests.xaml.cs">
       <DependentUpon>FisrtGuestAllRequests.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest1\RenovationApproval.xaml.cs">
+      <DependentUpon>RenovationApproval.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest1\RenovationSuggestions .xaml.cs">
+      <DependentUpon>RenovationSuggestions .xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guest1\ShowAccommodationImages.xaml.cs">
       <DependentUpon>ShowAccommodationImages.xaml</DependentUpon>
@@ -369,6 +382,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest1\FisrtGuestAllRequests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\RenovationApproval.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\RenovationSuggestions .xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -557,6 +578,7 @@
     <None Include="Resources\Data\guestsAccommodationImages.csv" />
     <None Include="Resources\Data\locations.csv" />
     <None Include="Resources\Data\notifications.csv" />
+    <None Include="Resources\Data\renovationRecommodations.csv" />
     <None Include="Resources\Data\tourGrades.csv" />
     <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />
@@ -613,15 +635,6 @@
     <Resource Include="Resources\Images\prevoius.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\hotel.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\maldives.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\waiting.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
       <Version>1.1.39</Version>
     </PackageReference>
@@ -639,22 +652,7 @@
     <Resource Include="Resources\Images\question.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\bookBlur.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\starsBlur.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\change.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\information.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\showDetils.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\travelBlue.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\minus.png" />
@@ -686,6 +684,22 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\destination128.png" />
+    <Resource Include="Resources\Images\fly.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\blue.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\blue1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\travel1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\renovation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\blue2.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

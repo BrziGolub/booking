@@ -18,39 +18,40 @@
     </Page.Resources>
     <Grid >
         <Grid.Background>
-            <ImageBrush ImageSource="/Resources/Images/starsBlur.jpg"></ImageBrush>
+            <ImageBrush ImageSource="/Resources/Images/blue1.jpg"></ImageBrush>
         </Grid.Background>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="45"/>
+           
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
             <Image Source="/Resources/Images/medal.png" Width="50" Height="45"></Image>
             <Label FontWeight="Bold" FontSize="17" VerticalAlignment="Center">Rate your accommodation and owner!</Label>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0">
-            <Label Content="Accommodation: " FontWeight="Bold" Width="200" FontSize="14"></Label>
-            <Label Content="{Binding AccommodationLabel}" Width="400" FontSize="14" FontWeight="Bold"></Label>
+            <Label Content="Accommodation: " FontWeight="Bold" Width="200" FontSize="15"></Label>
+            <Label Content="{Binding AccommodationLabel}" Width="400" FontSize="15" FontWeight="Bold"></Label>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal"   HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0">
+        <StackPanel Grid.Row="2" Orientation="Horizontal"   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,0,0,0">
             <Label Content="Owner: " FontWeight="Bold" Width="200" FontSize="15"></Label>
             <Label Content="{Binding OwnerLabel}" Width="400" FontSize="15" FontWeight="Bold"></Label>
         </StackPanel>
 
-        <Grid Grid.Row="3" Margin="35,0,0,25" Grid.RowSpan="2">
+        <Grid Grid.Row="3" Margin="35,0,0,3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="80"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="120"/>
+               
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -61,7 +62,7 @@
 
             <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  FontSize="15" >Rate cleaness:</Label>
             <ComboBox x:Name="comboBoxCleaness"  ItemsSource="{Binding Path= comboBoxCleaness}" SelectedItem="{Binding Path=Cleaness, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
-                       Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Top" >
+                       Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Top" Height="30" >
                 <ComboBox.Style>
                     <Style TargetType="{x:Type ComboBox}">
                         <Style.Triggers>
@@ -76,7 +77,7 @@
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" FontSize="14" >Rate courtesy of the owner:</Label>
             <ComboBox  x:Name="comboBoxCourtesy"  ItemsSource="{Binding Path= comboBoxCourtesy}"  SelectedItem="{Binding Path=Courtesy, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
-                        Grid.Row="1" Grid.Column="1"  VerticalAlignment="Top" Margin="5">
+                        Grid.Row="1" Grid.Column="1"  VerticalAlignment="Top" Margin="5" Height="30">
                 <ComboBox.Style>
                     <Style TargetType="{x:Type ComboBox}">
                         <Style.Triggers>
@@ -104,7 +105,7 @@
 
             <Label Grid.Row="0" Grid.Column="2"  HorizontalAlignment="Right" FontSize="14" >Add picture:</Label>
             <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" >
-                <Button  Height="30" Width="30" FontSize="14" FontWeight="Black"  Command="{Binding RemovePicture}">
+                <Button  Height="30" Width="30" FontSize="14" FontWeight="Black"  Command="{Binding RemovePicture}" Background="LightGoldenrodYellow">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <Image  Width="25" Height="30" Source="/Resources/Images/minus.png"/>
@@ -112,7 +113,7 @@
                     </Button.Content>
                 </Button>
                 <TextBox   HorizontalAlignment="Left" TextWrapping="Wrap" Width="170" FontSize="15" Margin="5" Text="{Binding Path=TbPictures}"/>
-                <Button  Height="30" Width="30" FontSize="14" FontWeight="Black" Command="{Binding AddPicture}">
+                <Button  Height="30" Width="30" FontSize="14" FontWeight="Black" Command="{Binding AddPicture}" Background="LightGoldenrodYellow">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <Image  Width="25" Height="30" Source="/Resources/Images/more.png"/>
@@ -122,15 +123,15 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Stretch">
-                <Button  Height="30" Width="30" Command="{Binding PreviousPicture}" Visibility="{Binding ButtonPreviousVisibility}">
+                <Button  Height="30" Width="30" Command="{Binding PreviousPicture}" Visibility="{Binding ButtonPreviousVisibility}" Background="LightGoldenrodYellow">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <Image  Width="25" Height="30" Source="/Resources/Images/prevoius.png"/>
                         </StackPanel>
                     </Button.Content>
                 </Button>
-                <Image  Stretch="UniformToFill" Width="250" Source="{Binding ImageSlideshowSource}" Margin="5"/>
-                <Button  Height="30" Width="30" Command="{Binding NextPicture}" Visibility="{Binding ButtonNextVisibility}">
+                <Image  Stretch="UniformToFill" Width="250" Height="150" Source="{Binding ImageSlideshowSource}" Margin="5"/>
+                <Button  Height="30" Width="30" Command="{Binding NextPicture}" Visibility="{Binding ButtonNextVisibility}" Background="LightGoldenrodYellow">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal">
                             <Image  Width="25" Height="30" Source="/Resources/Images/next.png"/>
@@ -138,35 +139,20 @@
                     </Button.Content>
                 </Button>
             </StackPanel>
-
-            <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left"  FontSize="14">Areas that needs renovation:</Label>
-            <TextBox Grid.Row ="3" Grid.Column="1" Margin="5" VerticalAlignment="Top" Text="{Binding Path= RenovationAreas, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                 Validation.ErrorTemplate="{StaticResource ValidationTemplate}" AcceptsReturn="True" TextWrapping="Wrap" Height="25">
-                <TextBox.Style>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Style.Triggers>
-                            <Trigger Property="Validation.HasError" Value="True">
-                                <Setter Property="BorderBrush" Value="Red" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-            </TextBox>
-
-            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"  FontSize="14">Urgency for renovation:</Label>
-            <StackPanel Grid.Row="4" Grid.Column="1" Margin="6">
-                <RadioButton GroupName="Levels" Content="Level 1 - Nice to have"  FontSize="14" Margin="2" IsChecked="{Binding Level1 , UpdateSourceTrigger=PropertyChanged}"></RadioButton>
-                <RadioButton GroupName="Levels" Content="Levele 2 - Minor complaints"  FontSize="14" Margin="2" IsChecked="{Binding Level2 , UpdateSourceTrigger=PropertyChanged}"></RadioButton>
-                <RadioButton GroupName="Levels" Content="Levele 3 - Really bothersome"  FontSize="14" Margin="2" IsChecked="{Binding Level3 , UpdateSourceTrigger=PropertyChanged}"></RadioButton>
-                <RadioButton GroupName="Levels" Content="Level 4 - Really necessery"  FontSize="14" Margin="2" IsChecked="{Binding Level4 , UpdateSourceTrigger=PropertyChanged}"></RadioButton>
-                <RadioButton GroupName="Levels" Content="Level 5 - Very bad contition"  FontSize="14" Margin="2" IsChecked="{Binding Level5 , UpdateSourceTrigger=PropertyChanged}"></RadioButton>
-            </StackPanel>
-
         </Grid>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button FontWeight="Bold" Margin="1" Width="100" Command="{Binding Button_Click_Subbmit}" Height="30">SUBBMIT</Button>
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button FontWeight="Bold" Margin="5" Width="100" Command="{Binding Button_Click_Subbmit}" Height="30" Background="LightGoldenrodYellow">SUBBMIT</Button>
         </StackPanel>
+
+        <ContentControl Content="{Binding CurrentPage}" Grid.Row="4" Margin="280,5,280,5">
+            <ContentControl.ContentTemplate>
+                <DataTemplate>
+                    <Frame Content="{Binding}" />
+                </DataTemplate>
+            </ContentControl.ContentTemplate>
+        </ContentControl>
+        
     </Grid>
 
 </Page>

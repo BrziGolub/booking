@@ -25,8 +25,6 @@ namespace Booking.View
 {
     public partial class FirstGuestHomePage : Window
     {
-  
-
         public FirstGuestHomePage()
         {
             InitializeComponent();

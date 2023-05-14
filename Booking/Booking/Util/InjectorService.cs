@@ -31,6 +31,7 @@ namespace Booking.Util
             { typeof(ITourImageService), new TourImageService() },
             { typeof(ITourRequestService), new TourRequestService() },
             { typeof(IAccommodationRenovationService), new AccommodationRenovationService() }
+            {typeof(IRenovationRecommodationService), new RenovationRecommodationService() }
         };
 
         public static T CreateInstance<T>()
