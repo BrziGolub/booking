@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Application\UseCases\AccommodationRenovationService.cs" />
     <Compile Include="Application\UseCases\TourImageService.cs" />
     <Compile Include="Application\UseCases\TourRequestService.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Domain\DTO\YearlyRequests.cs" />
     <Compile Include="Domain\Model\AccommodationAndOwnerGrade.cs" />
     <Compile Include="Domain\Model\AccommodationGrade.cs" />
+    <Compile Include="Domain\Model\AccommodationRenovation.cs" />
     <Compile Include="Domain\Model\AccommodationReservation.cs" />
     <Compile Include="Domain\Model\Accommodation.cs" />
     <Compile Include="Domain\Model\AccommodationReservationRequests.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationAndOwnerGradeRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationGradeRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationImagesRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IAccommodationRenovationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationReservationRequestsRepostiory.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationResevationRepository.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="Domain\ServiceInterfaces\IAccommodationAndOwnerGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IAccommodationGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IAccommodationImageService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IAccommodationRenovationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IAccommodationReservationRequestService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IAccommodationReservationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IAccommodationService.cs" />
@@ -122,6 +126,7 @@
     <Compile Include="Repository\AccommodationAndOwnerGradeRepository.cs" />
     <Compile Include="Repository\AccommodationGradeRepository.cs" />
     <Compile Include="Repository\AccommodationImagesRepository.cs" />
+    <Compile Include="Repository\AccommodationRenovationRepository.cs" />
     <Compile Include="Repository\AccommodationRepository.cs" />
     <Compile Include="Observer\IObserver.cs" />
     <Compile Include="Observer\ISubject.cs" />
@@ -182,7 +187,9 @@
     <Compile Include="WPF\ViewModels\Owner\OwnerGradingGuestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerHomePageViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerRegisterAccommodationViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\OwnerSchedulingRenovationsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerViewReviewsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\SchedulingRenovationsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowCommentViewReviewViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowGradeImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowOwnerAccommodationImagesViewModel.cs" />
@@ -281,6 +288,9 @@
     <Compile Include="WPF\Views\Owner\OwnerGradingGuests.xaml.cs">
       <DependentUpon>OwnerGradingGuests.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\Views\Owner\OwnerSchedulingRenovations.xaml.cs">
+      <DependentUpon>OwnerSchedulingRenovations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Owner\OwnerViewReviews.xaml.cs">
       <DependentUpon>OwnerViewReviews.xaml</DependentUpon>
     </Compile>
@@ -301,6 +311,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guest2\SecondGuestHomePage.xaml.cs">
       <DependentUpon>SecondGuestHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Owner\SchedulingRenovations.xaml.cs">
+      <DependentUpon>SchedulingRenovations.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Owner\ShowCommentViewReview.xaml.cs">
       <DependentUpon>ShowCommentViewReview.xaml</DependentUpon>
@@ -455,6 +468,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WPF\Views\Owner\OwnerSchedulingRenovations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPF\Views\Owner\OwnerViewReviews.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -472,6 +489,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest2\SecondGuestHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Owner\SchedulingRenovations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -530,6 +551,7 @@
     <None Include="Resources\Data\AccommodationGrades.csv" />
     <None Include="Resources\Data\accommodationImages.csv" />
     <None Include="Resources\Data\accommodations.csv" />
+    <None Include="Resources\Data\accommodationsRenovations.csv" />
     <None Include="Resources\Data\accommodationsReservations.csv" />
     <None Include="Resources\Data\accommodationsReservationsRequests.csv" />
     <None Include="Resources\Data\guestsAccommodationImages.csv" />

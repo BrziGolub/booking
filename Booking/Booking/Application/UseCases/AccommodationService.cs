@@ -34,7 +34,11 @@ namespace Booking.Service
 
             _accommodationImagesRepository = InjectorRepository.CreateInstance<IAccommodationImagesRepository>();
         }
-        
+        public int GetSignedInOwner()
+        {
+            return SignedOwnerId;
+        }
+
         public List<Accommodation> GetAll() 
         {
             List<Accommodation> accommodationList = new List<Accommodation>();
