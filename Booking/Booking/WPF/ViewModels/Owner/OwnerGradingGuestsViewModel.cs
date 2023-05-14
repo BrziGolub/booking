@@ -47,8 +47,16 @@ namespace Booking.WPF.ViewModels.Owner
 
         private void Button_Click_Grade(object param)
         {
+            if (SelectedReservation == null)
+            {
+                MessageBox.Show("Choose a reservation to grade");
+                return;
+            }
+            else 
+            { 
             GradingWindow gradingWindow = new GradingWindow(SelectedReservation.Id);
             gradingWindow.Show();
+            }
         }
         public void Update()
         {
