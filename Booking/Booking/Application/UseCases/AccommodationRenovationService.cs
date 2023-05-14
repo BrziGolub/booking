@@ -2,6 +2,7 @@
 using Booking.Domain.RepositoryInterfaces;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Observer;
+using Booking.Service;
 using Booking.Util;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,12 @@ namespace Booking.Application.UseCases
     {
         private readonly List<IObserver> _observers;
         private readonly IAccommodationRenovationRepository _repository;
+        private IAccommodationRepository _accommodationRepository;
         public AccommodationRenovationService()
         {
             _observers = new List<IObserver>();
             _repository = InjectorRepository.CreateInstance<IAccommodationRenovationRepository>();
+            _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
         }
         public AccommodationRenovation GetById(int id)
         {
@@ -43,6 +46,25 @@ namespace Booking.Application.UseCases
             {
                 observer.Update();
             }
+        }
+        public List<AccommodationRenovation> GetSeeableRenovations()
+        {
+            List<AccommodationRenovation> _seeableRenovations = new List<AccommodationRenovation>();
+            foreach (var r in _repository.GetAll())
+            {
+                r.Accommodation = _accommodationRepository.GetById(r.Accommodation.Id);
+
+                if (r.Accommodation.Owner.Id == AccommodationService.SignedOwnerId) 
+                {
+                    _seeableRenovations.Add(r);
+                }
+            }
+            return _seeableRenovations;
+        }
+        public void Delete(AccommodationRenovation selectedRenovation)
+        {
+            _repository.Delete(selectedRenovation);
+            NotifyObservers();
         }
     }
 }

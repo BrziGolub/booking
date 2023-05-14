@@ -12,6 +12,8 @@ namespace Booking.Domain.ServiceInterfaces
     {
         AccommodationRenovation GetById(int id);
         void SaveRenovation(AccommodationRenovation renovation);
+        List<AccommodationRenovation> GetSeeableRenovations();
+        void Delete(AccommodationRenovation selectedRenovation);
 
     }
 }

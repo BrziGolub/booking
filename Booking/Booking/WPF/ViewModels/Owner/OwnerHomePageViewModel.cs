@@ -32,6 +32,7 @@ namespace Booking.WPF.ViewModels.Owner
         public RelayCommand OwnerLogOut { get; set; }
         public RelayCommand OpenSuperOwner { get; set; }
         public RelayCommand OpenSchedulingRenovations { get; set; }
+        public RelayCommand OpenShowRenovations { get; set; }
         public RelayCommand ShowPictures { get; set; }
 
         private readonly Window _window;
@@ -62,6 +63,7 @@ namespace Booking.WPF.ViewModels.Owner
             OpenSuperOwner = new RelayCommand(SuperOwner);
             ShowPictures = new RelayCommand(OpenPictures);
             OpenSchedulingRenovations = new RelayCommand(SchedulingRenovation);
+            OpenShowRenovations = new RelayCommand(ShowRenovation);
         }
 
 
@@ -74,6 +76,11 @@ namespace Booking.WPF.ViewModels.Owner
         {
             OwnerViewReviews ownerViewReviews = new OwnerViewReviews();
             ownerViewReviews.Show();
+        }
+        private void ShowRenovation(object param)
+        {
+            ShowRenovations showRenovations = new ShowRenovations();
+            showRenovations.Show();
         }
         private void SchedulingRenovation(object param)
         {

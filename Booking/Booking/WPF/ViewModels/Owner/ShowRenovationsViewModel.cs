@@ -1,0 +1,82 @@
+﻿using Booking.Commands;
+using Booking.Domain.Model;
+using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
+using Booking.Observer;
+using Booking.Util;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace Booking.WPF.ViewModels.Owner
+{
+    public class ShowRenovationsViewModel : IObserver
+    {
+        public ObservableCollection<AccommodationRenovation> Renovations { get; set; }
+        public IAccommodationRenovationService AccommodationRenovationService { get; set; }
+        public IAccommodationReservationService AccommodationReservationService { get; set; }
+        public AccommodationRenovation SelectedRenovation { get; set; }
+        public RelayCommand Close { get; set; }
+        public RelayCommand Delete { get; set; }
+        public RelayCommand ShowDescription { get; set; }
+        private readonly Window _window;
+        public ShowRenovationsViewModel(Window window)
+        {
+            _window = window;
+            AccommodationRenovationService = InjectorService.CreateInstance<IAccommodationRenovationService>();
+            AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
+
+            AccommodationRenovationService.Subscribe(this);
+            Renovations = new ObservableCollection<AccommodationRenovation>(AccommodationRenovationService.GetSeeableRenovations());
+            SetCommands();
+        }
+        public void SetCommands()
+        {
+            Close = new RelayCommand(CloseWindow);
+            Delete = new RelayCommand(DeleteRenovation);
+            ShowDescription = new RelayCommand(ShowDescriptionWindow);
+
+        }
+        public void Update()
+        {
+            Renovations.Clear();
+            foreach (AccommodationRenovation r in AccommodationRenovationService.GetSeeableRenovations())
+            {
+                Renovations.Add(r);
+            }
+        }
+        private void CloseWindow(object param)
+        {
+            _window.Close();
+        }
+        private void ShowDescriptionWindow(object param)
+        {
+            //ShowCommentViewReview showDescriptionText = new ShowCommentViewReview(SelectedGrade.Id);
+            //showDescriptionText.Show();
+        }
+        private void DeleteRenovation(object param)
+        {
+            if (SelectedRenovation == null)
+            {
+                MessageBox.Show("Select a renovation to delete");
+                return;
+            }
+            else if (SelectedRenovation.StartDay.AddDays(5) > DateTime.Now) 
+            {
+                MessageBox.Show("You can only delete renovation which will happen in more than 5 days");
+                return;
+            }
+            else
+            {
+                AccommodationReservation reservation = new AccommodationReservation();
+                reservation = AccommodationReservationService.GetByRenovation(SelectedRenovation);
+                AccommodationRenovationService.Delete(SelectedRenovation);
+                AccommodationReservationService.Delete(reservation);
+            }
+        }
+    }
+}

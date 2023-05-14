@@ -1,4 +1,5 @@
-﻿using Booking.Model;
+﻿using Booking.Domain.Model;
+using Booking.Model;
 using Booking.Observer;
 using System;
 using System.Collections.Generic;
@@ -25,5 +26,6 @@ namespace Booking.Domain.ServiceInterfaces
         AccommodationReservation GetById(int id);
         int GetSignedInFirstGuest();
         List<(DateTime, DateTime)> SuggestDatesForRenovation(DateTime startDay, DateTime endDay, int duration, Accommodation selectedAccommodation);
+        AccommodationReservation GetByRenovation(AccommodationRenovation renovation);
     }
 }

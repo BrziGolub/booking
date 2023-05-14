@@ -11,6 +11,7 @@ using Booking.Observer;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Util;
 using Booking.Domain.RepositoryInterfaces;
+using Booking.Domain.Model;
 
 namespace Booking.Service
 {
@@ -42,6 +43,18 @@ namespace Booking.Service
         public AccommodationReservation GetById(int id)
         {
            return _repository.GetById(id);
+        }
+        public AccommodationReservation GetByRenovation(AccommodationRenovation renovation)
+        {
+            AccommodationReservation reservation = new AccommodationReservation();
+            foreach (var r in _repository.GetAll()) 
+            {
+                if (renovation.StartDay == r.ArrivalDay && renovation.EndDay == r.DepartureDay && r.Guest.Id == renovation.Accommodation.Owner.Id && r.Accommodation.Id==renovation.Accommodation.Id)
+                {
+                    reservation = r;
+                }
+            }
+            return reservation;
         }
 
         public List<AccommodationReservation> GetGeustsReservatonst()
