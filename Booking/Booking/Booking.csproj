@@ -77,6 +77,7 @@
     <Compile Include="Domain\Model\Location.cs" />
     <Compile Include="Domain\Model\Notification.cs" />
     <Compile Include="Domain\Model\RenovationRecommodation.cs" />
+    <Compile Include="Domain\Model\SuperGuest.cs" />
     <Compile Include="Domain\Model\Tour.cs" />
     <Compile Include="Domain\Model\TourGrade.cs" />
     <Compile Include="Domain\Model\TourGuests.cs" />
