@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Application\UseCases\RenovationRecommodationService.cs" />
+    <Compile Include="Application\UseCases\SuperGuestService.cs" />
     <Compile Include="Application\UseCases\TourImageService.cs" />
     <Compile Include="Application\UseCases\TourRequestService.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Domain\RepositoryInterfaces\INotificationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IRenovationRecommodationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ISuperGuestRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourGradeRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourGuestsRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourImageRepository.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="Repository\LocationRepository.cs" />
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\RenovationRecommodationRepository.cs" />
+    <Compile Include="Repository\SuperGuestRepository.cs" />
     <Compile Include="Repository\TourGradeRepository.cs" />
     <Compile Include="Repository\TourGuestsRepository.cs" />
     <Compile Include="Repository\TourImageRepository.cs" />
