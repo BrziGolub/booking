@@ -22,7 +22,7 @@
             <Label FontWeight="Bold" FontSize="17" >My reschedule requests</Label>
         </StackPanel>
         <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Path=Requests}"
-                  Name="RequestsDataGrid" HorizontalAlignment="Center" Margin="100,20,100,60" SelectedItem="{Binding SelectedRequest}">
+                  Name="RequestsDataGrid" HorizontalAlignment="Center" Margin="100,20,100,120" SelectedItem="{Binding SelectedRequest}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Accommodation name"  Width="140" Binding="{Binding AccommodationReservation.Accommodation.Name}">
                     <DataGridTextColumn.HeaderStyle>

@@ -22,7 +22,7 @@
             <Label FontWeight="Bold" FontSize="16" >My reservations</Label>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="80,20,80,40" ItemsSource="{Binding Path = Reservations}" x:Name="ReservationsDataGrid"
+        <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="80,20,80,100" ItemsSource="{Binding Path = Reservations}" x:Name="ReservationsDataGrid"
                    SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Accommodation name" Width="*" Binding="{Binding Accommodation.Name}">
