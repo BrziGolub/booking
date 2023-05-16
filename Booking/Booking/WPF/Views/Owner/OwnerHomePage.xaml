@@ -25,8 +25,8 @@
             <Button Content=" Gradeing guests" FontSize="18" Width="250" ToolTip="Press to see reservations that you can grade" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Command="{Binding OpenGradingGuests}" HorizontalContentAlignment="Left" />
             <Button Content=" View reviews" FontSize="18" Width="250" ToolTip="Press to see grades that you got from guests" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Command="{Binding OpenViewReviews}" HorizontalContentAlignment="Left" />
             <Button Content=" Super-owner" FontSize="18" Width="250" ToolTip="Press to see if you are a super-owner" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Command="{Binding OpenSuperOwner}" HorizontalContentAlignment="Left" />
-            <Button Content=" Scheduling renovations" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
-            <Button Content=" Show renovations" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
+            <Button Content=" Scheduling renovations" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" Command="{Binding OpenSchedulingRenovations}" />
+            <Button Content=" Show renovations" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" Command="{Binding OpenShowRenovations}"/>
             <Button Content=" Forum" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
 
             <!--    <Menu BorderBrush="Black" BorderThickness="3" Width="200"> 

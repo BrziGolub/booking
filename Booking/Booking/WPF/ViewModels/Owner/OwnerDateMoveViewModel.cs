@@ -81,7 +81,12 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (OwnerComment.Equals(""))
             {
-                MessageBox.Show("'COMMENT' not entered");
+                MessageBox.Show("'REASONING' not entered");
+                return;
+            } 
+            else if (SelectedAccommodationReservationRequest==null) 
+            {
+                MessageBox.Show("Choose a move request");
                 return;
             }
             else
@@ -95,9 +100,17 @@ namespace Booking.WPF.ViewModels.Owner
         }
         private void Button_Click_Accept(object param)
         {
+            if (SelectedAccommodationReservationRequest == null)
+            {
+                MessageBox.Show("Choose a move request");
+                return;
+            }
+            else 
+            { 
             AccommodationReservationRequestService.SaveAccepted(SelectedAccommodationReservationRequest);
             NotificationService.MakeAccepted(SelectedAccommodationReservationRequest);
             AccommodationReservationRequestService.NotifyObservers();
+            }
         }
         private void CloseWindow()
         {

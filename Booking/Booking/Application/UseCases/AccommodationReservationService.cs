@@ -11,6 +11,7 @@ using Booking.Observer;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Util;
 using Booking.Domain.RepositoryInterfaces;
+using Booking.Domain.Model;
 
 namespace Booking.Service
 {
@@ -42,6 +43,18 @@ namespace Booking.Service
         public AccommodationReservation GetById(int id)
         {
            return _repository.GetById(id);
+        }
+        public AccommodationReservation GetByRenovation(AccommodationRenovation renovation)
+        {
+            AccommodationReservation reservation = new AccommodationReservation();
+            foreach (var r in _repository.GetAll()) 
+            {
+                if (renovation.StartDay == r.ArrivalDay && renovation.EndDay == r.DepartureDay && r.Guest.Id == renovation.Accommodation.Owner.Id && r.Accommodation.Id==renovation.Accommodation.Id)
+                {
+                    reservation = r;
+                }
+            }
+            return reservation;
         }
 
         public List<AccommodationReservation> GetGeustsReservatonst()
@@ -150,7 +163,7 @@ namespace Booking.Service
                 {
                     for (DateTime date = r.ArrivalDay; date <= r.DepartureDay; date = date.AddDays(1))
                     {
-                        reservedDates.Add(date);
+                            reservedDates.Add(date);
                     }
                 }
             }
@@ -175,7 +188,7 @@ namespace Booking.Service
                 bool flag = _accommodationGradeRepository.IsReservationGraded(reservation.Id);
                 reservation.Accommodation = _accommodationRepository.GetById(reservation.Accommodation.Id);
                 reservation.Accommodation.Owner = _userRepository.GetById(reservation.Accommodation.Owner.Id);
-                if (!flag && reservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId)
+                if (!flag && reservation.Accommodation.Owner.Id == AccommodationService.SignedOwnerId && reservation.Guest.Id!= AccommodationService.SignedOwnerId)
                 {
                     reservationList.Add(reservation);
                 }
@@ -255,5 +268,32 @@ namespace Booking.Service
 
             return GetDates(reservedDates, difference, departureDay, arrivalDay);
         }
+        public List<(DateTime, DateTime)> SuggestDatesForRenovation(DateTime startDay, DateTime endDay, int duration, Accommodation selectedAccommodation) 
+        {
+            List<DateTime> reservedDates = new List<DateTime>();
+            reservedDates = SetReservedDates(startDay, endDay, selectedAccommodation);
+            List<(DateTime, DateTime)> rangeOfDates = new List<(DateTime, DateTime)>();
+            for (DateTime date = startDay; date <= endDay; date = date.AddDays(1))
+            {
+                int flag = 0;
+                DateTime limit = date.AddDays(duration);
+                for (DateTime date2 = date; date2 <= limit; date2 = date2.AddDays(1))
+                {
+                    foreach (var d in reservedDates)
+                    {
+                        if (date2 == d) 
+                        {
+                            flag = 1;
+                        }
+                    }
+                }
+                if (flag == 0 && date.AddDays(duration)<=endDay) 
+                {
+                    rangeOfDates.Add((date, date.AddDays(duration)));
+                }
+            }
+            return rangeOfDates;
+        }
+        
     }
 }

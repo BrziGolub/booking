@@ -34,6 +34,8 @@ namespace Booking.Util
 			{ typeof(ITourRequestRepository), new TourRequestRepository()},
 			{ typeof(IRenovationRecommodationRepository), new RenovationRecommodationRepository()},
 			{typeof(ISuperGuestRepository), new SuperGuestRepository() }
+			{ typeof(IAccommodationRenovationRepository), new AccommodationRenovationRepository()},
+			{ typeof(IRenovationRecommodationRepository), new RenovationRecommodationRepository()}
         };
 
 		public static T CreateInstance<T>()
