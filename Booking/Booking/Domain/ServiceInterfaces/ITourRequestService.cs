@@ -31,5 +31,6 @@ namespace Booking.Domain.ServiceInterfaces
         int GetNumberOfRequestsByState(int id, string state, string year);
         List<string> GetCitiesByUserId(int id, string year);
         int GetNumberOfRequestsByCity(int id, string city, string year);
+        double GetAverageVisitorsByUserId(int id, string year);
 	}
 }

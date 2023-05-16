@@ -298,7 +298,7 @@ namespace Booking.Application.UseCases
 		public List<string> GetYearsByUserId(int id)
 		{
 			List<string> result = new List<string>() { "All" };
-			foreach (var tr in GetAll())
+			foreach (var tr in GetRequestsByUserId(id))
 			{
 				if (!result.Contains(tr.CreatedDate.Year.ToString()))
 				{
@@ -368,6 +368,37 @@ namespace Booking.Application.UseCases
 		public int GetNumberOfRequestsByCity(int id, string city, string year)
 		{
 			return (year.Equals("All")) ? GetRequestsByUserId(id).Where(tr => tr.Location.City.Equals(city)).Count() : GetRequestsByUserId(id).Where(tr => tr.CreatedDate.Year.ToString().Equals(year)).Where(tr => tr.Location.City.Equals(city)).Count();
+		}
+
+		public double GetAverageVisitorsByUserId(int id, string year)
+		{
+			double visitors = 0;
+			int size = 0;
+
+			if (year.Equals("All"))
+			{
+				foreach (var tr in GetRequestsByUserId(id))
+				{
+					if (tr.Status.Equals("Accepted"))
+					{
+						size++;
+						visitors += tr.GuestsNumber;
+					}
+				}
+			}
+			else
+			{
+				foreach (var tr in GetRequestsByUserId(id))
+				{
+					if (tr.Status.Equals("Accepted") && tr.CreatedDate.Year.ToString().Equals(year))
+					{
+						size++;
+						visitors += tr.GuestsNumber;
+					}
+				}
+			}
+
+			return size > 0 ? Math.Round(visitors/size, 2) : visitors;
 		}
 	}
 }

@@ -1,23 +1,17 @@
 ﻿using Booking.Commands;
-using LiveChartsCore.SkiaSharpView;
+using Booking.Domain.ServiceInterfaces;
+using Booking.Service;
+using Booking.Util;
 using LiveChartsCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
-using LiveChartsCore.SkiaSharpView.VisualElements;
-using Booking.Domain.ServiceInterfaces;
-using Booking.Application.UseCases;
-using Booking.Util;
-using Booking.Service;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using HarfBuzzSharp;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace Booking.WPF.ViewModels.Guest2
 {
@@ -45,6 +39,20 @@ namespace Booking.WPF.ViewModels.Guest2
 		}
 		public int SelectedIndex { get; set; }
 
+		private double _visitors;
+		public double Visitors
+		{
+			get => _visitors;
+			set
+			{
+				if (_visitors != value)
+				{
+					_visitors = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+
 		public RelayCommand Button_Click_Close { get; set; }
 		public RelayCommand Selection_Changed { get; set; }
 
@@ -61,6 +69,7 @@ namespace Booking.WPF.ViewModels.Guest2
 
 			InitializeCommands();
 			UpdateCharts();
+			AverageVisitors();
 		}
 
 		private void InitializeCommands()
@@ -77,6 +86,12 @@ namespace Booking.WPF.ViewModels.Guest2
 		private void ComboBoxStateSelectionChanged(object param)
 		{
 			UpdateCharts();
+			AverageVisitors();
+		}
+
+		private void AverageVisitors()
+		{
+			Visitors = _tourRequestService.GetAverageVisitorsByUserId(TourService.SignedGuideId, SelectedYear);
 		}
 
 		private IEnumerable<ISeries> _pie;
@@ -219,15 +234,6 @@ namespace Booking.WPF.ViewModels.Guest2
 			}
 		}
 
-		/*public LabelVisual PieTitle { get; set; } =
-			new LabelVisual
-			{
-				Text = "% of accepted requests",
-				TextSize = 18,
-				Padding = new LiveChartsCore.Drawing.Padding(15),
-				Paint = new SolidColorPaint(SKColors.DarkSlateGray)
-			};*/
-
 		private void UpdateCharts()
 		{
 			PieChart();
@@ -235,7 +241,7 @@ namespace Booking.WPF.ViewModels.Guest2
 			StateChart();
 			CityChart();
 		}
-		
+
 		private void PieChart()
 		{
 			PieSeries = new ISeries[]

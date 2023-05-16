@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Booking.WPF.Views.Guest2"
         mc:Ignorable="d"
         Title="StatisticsView"
-		Height="600" Width="900"
+		Height="700" Width="900"
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="NoResize"
 		Background="#BBC1D1"
@@ -32,6 +32,8 @@
 		<Style TargetType="TextBlock">
 			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
 			<Setter Property="FontFamily" Value="Calibri"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="14"/>
 		</Style>
 
 		<Style x:Key="ButtonStyle" TargetType="Button">
@@ -48,6 +50,13 @@
 			<Setter Property="Background" Value="{StaticResource CardBackgroundColor}"/>
 			<Setter Property="CornerRadius" Value="6"/>
 			<Setter Property="Padding" Value="8"/>
+		</Style>
+
+		<Style x:Key="ChartBorder" TargetType="Border">
+			<Setter Property="Background" Value="{StaticResource CardBackgroundColor}"/>
+			<Setter Property="CornerRadius" Value="6"/>
+			<Setter Property="Padding" Value="4"/>
+			<Setter Property="Margin" Value="4"/>
 		</Style>
 	</Window.Resources>
 
@@ -80,7 +89,7 @@
 
 				<StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0 0 0 8">
 					<Label Content="Year:" Margin="0 0 8 0"/>
-					<ComboBox Width="80" Margin="8 0 0 0" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" SelectedIndex="{Binding SelectedIndex}" MaxDropDownHeight="200">
+					<ComboBox Width="80" Margin="8 0 0 0" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" SelectedIndex="{Binding SelectedIndex}" MaxDropDownHeight="200" VerticalContentAlignment="Center" FontSize="14">
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="SelectionChanged">
 								<i:InvokeCommandAction Command="{Binding Selection_Changed, UpdateSourceTrigger=PropertyChanged}"/>
@@ -89,29 +98,50 @@
 					</ComboBox>
 				</StackPanel>
 
-				<lvc:PieChart Grid.Column="0" Grid.Row="1"
-							  Series="{Binding PieSeries, UpdateSourceTrigger=PropertyChanged}"
-							  Margin="4"/>
-							  <!--="{Binding PieTitle}"-->
+				<Border Style="{StaticResource ChartBorder}"
+						Grid.Column="0" Grid.Row="1">
 
+					<Grid Grid.Column="0" Grid.Row="1">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="auto"/>
+						</Grid.RowDefinitions>
 
-				<lvc:CartesianChart Grid.Column="1" Grid.Row="1"
-									Series="{Binding LangSeries}"
-									XAxes="{Binding LangXAxes}"
-									YAxes="{Binding LangYAxes}"
-									Margin="4"/>
+						<lvc:PieChart Grid.Row="0"
+							  Series="{Binding PieSeries, UpdateSourceTrigger=PropertyChanged}"/>
+						<!--="{Binding PieTitle}"-->
 
-				<lvc:CartesianChart Grid.Column="0" Grid.Row="2"
-									Series="{Binding StateSeries}"
-									XAxes="{Binding StateXAxes}"
-									YAxes="{Binding StateYAxes}"
-									Margin="4"/>
+						<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+							<Label Content="Average number of visitors(Accepted only):" Margin="0 0 4 0"/>
+							<TextBlock Text="{Binding Visitors}" Margin="4 0 0 0"/>
+						</StackPanel>
+					</Grid>
 
-				<lvc:CartesianChart Grid.Column="1" Grid.Row="2"
-									Series="{Binding CitySeries}"
-									XAxes="{Binding CityXAxes}"
-									YAxes="{Binding CityYAxes}"
-									Margin="4"/>
+				</Border>
+
+				<Border Style="{StaticResource ChartBorder}"
+						Grid.Column="1" Grid.Row="1">
+					
+					<lvc:CartesianChart Series="{Binding LangSeries}"
+										XAxes="{Binding LangXAxes}"
+										YAxes="{Binding LangYAxes}"/>
+				</Border>
+
+				<Border Style="{StaticResource ChartBorder}"
+						Grid.Column="0" Grid.Row="2">
+
+					<lvc:CartesianChart Series="{Binding StateSeries}"
+										XAxes="{Binding StateXAxes}"
+										YAxes="{Binding StateYAxes}"/>
+				</Border>
+
+				<Border Style="{StaticResource ChartBorder}"
+						Grid.Column="1" Grid.Row="2">
+
+					<lvc:CartesianChart Series="{Binding CitySeries}"
+										XAxes="{Binding CityXAxes}"
+										YAxes="{Binding CityYAxes}"/>
+				</Border>
 			</Grid>
 
 			<StackPanel Grid.Row="2" Margin="0 8 0 0" HorizontalAlignment="Right" Orientation="Horizontal">
