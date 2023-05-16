@@ -275,6 +275,8 @@ namespace Booking.Application.UseCases
 			if (oldTourRequest == null) return null;
 
 			oldTourRequest.Status = tourRequest.Status;
+			oldTourRequest.Notify = tourRequest.Notify;
+			oldTourRequest.TourReservedStartTime = tourRequest.TourReservedStartTime;
 
 			return _tourRequestRepository.Update(tourRequest);
 		}

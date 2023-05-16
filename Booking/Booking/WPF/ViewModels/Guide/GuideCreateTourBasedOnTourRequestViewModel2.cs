@@ -454,6 +454,8 @@ namespace Booking.WPF.ViewModels.Guide
                 tour.StartTime = DateTime.Parse(StartTime);
                 tour.Duration = Duration;
                 SelectedTourRequest.Status = "Accepted";
+                SelectedTourRequest.Notify = true;
+                SelectedTourRequest.TourReservedStartTime = DateTime.Parse(StartTime);
 
                 if (tour.Destinations.Count < 2)
                 {
