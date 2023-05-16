@@ -31,6 +31,11 @@
 			<Setter Property="FontFamily" Value="Calibri"/>
 		</Style>
 
+		<Style TargetType="TextBox">
+			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
+			<Setter Property="FontFamily" Value="Calibri"/>
+		</Style>
+
 		<Style TargetType="DataGrid">
 			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
 			<Setter Property="FontFamily" Value="Calibri"/>
@@ -73,7 +78,7 @@
 
         <Menu>
             <MenuItem Header="_Request" FontSize="14">
-                <MenuItem Header="Simple tour" FontSize="14"/>
+				<MenuItem Header="Simple tour" FontSize="14" Command="{Binding Button_Click_TourRequest}"/>
                 <MenuItem Header="Complex tour" FontSize="14"/>
             </MenuItem>
             <MenuItem Header="_Vouchers" FontSize="14" Command="{Binding Button_Click_ShowVouchers}"/>

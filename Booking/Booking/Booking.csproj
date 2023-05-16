@@ -177,6 +177,7 @@
     <Compile Include="WPF\ViewModels\Guest1\RenovationSuggestionsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest2\CreateTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\RateTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\ReserveTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\SecondGuestHomePageViewModel.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="WPF\ViewModels\Guest2\ShowTourImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\ShowVouchersViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowRequestCommentViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest2\TourRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideAcceptingTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel1.cs" />
@@ -236,8 +238,14 @@
     <Compile Include="WPF\Views\Guest1\ShowRequestComment.xaml.cs">
       <DependentUpon>ShowRequestComment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\Views\Guest2\CreateTourRequestView.xaml.cs">
+      <DependentUpon>CreateTourRequestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Guest2\RateTour.xaml.cs">
       <DependentUpon>RateTour.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest2\TourRequestsView.xaml.cs">
+      <DependentUpon>TourRequestsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guide\CustomMessageBox.xaml.cs">
       <DependentUpon>CustomMessageBox.xaml</DependentUpon>
@@ -409,7 +417,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WPF\Views\Guest2\CreateTourRequestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPF\Views\Guest2\RateTour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest2\TourRequestsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -21,10 +21,13 @@ namespace Booking.Domain.Model
         public int GuestsNumber{ get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        public User User { get; set; }
+        public string Status { get; set; }
 
         public TourRequest()
         {
             Location = new Location();
+            User = new User();
         }
 
         public string[] ToCSV()
@@ -37,7 +40,9 @@ namespace Booking.Domain.Model
                 Language,                               //4
                 GuestsNumber.ToString(),			    //5
                 StartTime.ToString("dd/MM/yyyy"),		//6
-                EndTime.ToString("dd/MM/yyyy")          //7
+                EndTime.ToString("dd/MM/yyyy"),         //7
+                User.Id.ToString(),                     //8
+                Status                                  //9
             };
             return csvValues;
         }
@@ -52,6 +57,8 @@ namespace Booking.Domain.Model
             GuestsNumber = Convert.ToInt32(values[5]);
             StartTime = DateTime.Parse(values[6]);
             EndTime = DateTime.Parse(values[7]);
+            User.Id = Convert.ToInt32(values[8]);
+            Status = values[9];
         }
     }
 }

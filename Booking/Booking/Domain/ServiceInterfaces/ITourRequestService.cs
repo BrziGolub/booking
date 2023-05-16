@@ -20,5 +20,7 @@ namespace Booking.Domain.ServiceInterfaces
         List<YearlyRequests> GetRequestsByYearAndLanguage(string language);
         List<MonthlyRequests> GetRequestsByMonthAndLocation(int locationId, int year);
         List<MonthlyRequests> GetRequestsByMonthAndLanguage(string language, int year);
-    }
+        TourRequest AddTourRequest(TourRequest tourRequest);
+        List<TourRequest> GetRequestsByUserId(int id);
+	}
 }
