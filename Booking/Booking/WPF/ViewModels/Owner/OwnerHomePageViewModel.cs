@@ -31,6 +31,7 @@ namespace Booking.WPF.ViewModels.Owner
         public RelayCommand OpenViewReviews { get; set; }
         public RelayCommand OwnerLogOut { get; set; }
         public RelayCommand OpenSuperOwner { get; set; }
+        public RelayCommand OpenAccommodationStatistics { get; set; }
         public RelayCommand OpenSchedulingRenovations { get; set; }
         public RelayCommand OpenShowRenovations { get; set; }
         public RelayCommand ShowPictures { get; set; }
@@ -64,6 +65,7 @@ namespace Booking.WPF.ViewModels.Owner
             ShowPictures = new RelayCommand(OpenPictures);
             OpenSchedulingRenovations = new RelayCommand(SchedulingRenovation);
             OpenShowRenovations = new RelayCommand(ShowRenovation);
+            OpenAccommodationStatistics = new RelayCommand(AccommodationStatistics);
         }
 
 
@@ -93,6 +95,19 @@ namespace Booking.WPF.ViewModels.Owner
             {
                 SchedulingRenovations schedulingRenovations = new SchedulingRenovations(SelectedAccommodation);
                 schedulingRenovations.Show();
+            }
+        }
+        private void AccommodationStatistics(object param)
+        {
+            if (SelectedAccommodation == null)
+            {
+                MessageBox.Show("Select a accommodation please");
+                return;
+            }
+            else
+            {
+                AccommodationStatisticsByYears accommodationStatisticsByYears = new AccommodationStatisticsByYears(SelectedAccommodation);
+                accommodationStatisticsByYears.Show();
             }
         }
 

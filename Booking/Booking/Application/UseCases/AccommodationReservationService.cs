@@ -12,6 +12,7 @@ using Booking.Domain.ServiceInterfaces;
 using Booking.Util;
 using Booking.Domain.RepositoryInterfaces;
 using Booking.Domain.Model;
+using Booking.Domain.DTO;
 
 namespace Booking.Service
 {
@@ -79,6 +80,10 @@ namespace Booking.Service
         {
             _repository.Add(reservation);
         }
+        //public List<OwnerYearStatistic> GetYearStatistics(Accommodation selectedAccommodation)
+        //{
+            
+        //}
 
         public void Delete(AccommodationReservation selectedReservation)
         {
