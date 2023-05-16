@@ -89,7 +89,7 @@
 					<DataGridTextColumn Header="Description" Width="4*" Binding="{Binding Description}">
 						<DataGridTextColumn.ElementStyle>
 							<Style>
-								<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+								<Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
 							</Style>
 						</DataGridTextColumn.ElementStyle>
 					</DataGridTextColumn>
