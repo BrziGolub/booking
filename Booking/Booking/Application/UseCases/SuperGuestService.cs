@@ -1,5 +1,6 @@
 ﻿using Booking.Domain.Model;
 using Booking.Domain.RepositoryInterfaces;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Repository;
 using Booking.Service;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Application.UseCases
 {
-    public class SuperGuestService
+    public class SuperGuestService: ISuperGuestService
     {
         public readonly ISuperGuestRepository _repository;
         public readonly IUserRepository _userRepository;
@@ -44,7 +45,6 @@ namespace Booking.Application.UseCases
                     _guestsReservations.Add(reservation);
                 }
             }
-
             return _guestsReservations;
         }
 
@@ -52,19 +52,9 @@ namespace Booking.Application.UseCases
         {
             List<AccommodationReservation> _guestsReservations = GetGeustsReservatonst(SignedGuest);
 
-            _guestsReservations = _guestsReservations.OrderBy(r => r.DepartureDay.Date).ToList();
+            _guestsReservations = _guestsReservations.OrderBy(r => r.DepartureDay.AddYears(1).Year > DateTime.Now.Year).ThenBy(r => r.DepartureDay.Date).ToList();
 
-            int numberOfResrvations = 0;
-
-            foreach(var reservation in _guestsReservations)
-            {
-                if(numberOfResrvations == 10)
-                {
-                    return reservation.DepartureDay;
-                }
-            }
-
-            return DateTime.MinValue;
+            return _guestsReservations[10].DepartureDay; 
         }
 
         public void CreateSuperGuest(User signedGuest, int numberOfReservations)
@@ -89,7 +79,7 @@ namespace Booking.Application.UseCases
 
             foreach(var reservation in _guestsReservations)
             {
-                if(reservation.DepartureDay.AddYears(1) > DateTime.Now)
+                if(reservation.DepartureDay.AddYears(1).Year > DateTime.Now.Year)
                 {
                     countNumberOfReservations++;
                 }

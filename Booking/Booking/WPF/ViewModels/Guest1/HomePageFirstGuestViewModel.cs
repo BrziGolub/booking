@@ -256,12 +256,10 @@ namespace Booking.WPF.ViewModels.Guest1
 
         private void ButtonShowImages(object sender)
         {
-            if(SelectedAccommodation == null)
+            if(SelectedAccommodation != null)
             {
-
+                NavigationService.Navigate(new ShowAccommodationImages(SelectedAccommodation));
             }
-            NavigationService.Navigate(new ShowAccommodationImages(SelectedAccommodation));
-
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

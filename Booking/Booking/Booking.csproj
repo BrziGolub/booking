@@ -118,6 +118,7 @@
     <Compile Include="Domain\ServiceInterfaces\INotificationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IRenovationRecommodationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ISuperGuestService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourImageService.cs" />
@@ -569,6 +570,7 @@
     <None Include="Resources\Data\locations.csv" />
     <None Include="Resources\Data\notifications.csv" />
     <None Include="Resources\Data\renovationRecommodations.csv" />
+    <None Include="Resources\Data\superGuest.csv" />
     <None Include="Resources\Data\tourGrades.csv" />
     <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />
