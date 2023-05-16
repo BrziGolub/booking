@@ -1,16 +1,26 @@
-﻿using System;
+﻿using Booking.Application.UseCases;
+using Booking.Domain.Model;
+using Booking.Domain.RepositoryInterfaces;
+using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
+using Booking.Service;
+using Booking.Util;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Booking.WPF.ViewModels.Guest1
 {
     public class FirstGuestProfileViewModel: INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public ISuperGuestService SuperGuestService { get; set; }
+        public IUserService UserService { get; set; }
 
         public string _numberOfReservations;
         public string NumberOfReservations
@@ -57,8 +67,8 @@ namespace Booking.WPF.ViewModels.Guest1
             }
         }
 
-        public bool _starImageVisibility;
-        public bool StarImageVisibility
+        public Visibility _starImageVisibility;
+        public Visibility StarImageVisibility
         {
             get => _starImageVisibility;
             set
@@ -73,11 +83,34 @@ namespace Booking.WPF.ViewModels.Guest1
 
         public FirstGuestProfileViewModel()
         {
-            //proba
-            NumberOfReservations = "10";
+            SuperGuestService = InjectorService.CreateInstance<ISuperGuestService>();
+            UserService = InjectorService.CreateInstance<IUserService>();
+            User SignedGuest = UserService.GetById(AccommodationReservationService.SignedFirstGuestId);
+
+            if(SignedGuest.Super == 1)
+            {
+                SetSuperGuest(SignedGuest);
+            }
+            else
+            {
+                SetOrdinaryGuest();
+            }
+            NumberOfReservations = SuperGuestService.CalculateReservationsForLastYear(SignedGuest).ToString();     
+        }
+
+        public void SetSuperGuest(User SignedGuest)
+        {
             TypeOfGuest = "SUPER";
-            BonusPoints = "5";
-            StarImageVisibility = true;
+            StarImageVisibility = Visibility.Visible;
+            SuperGuest superGuest = SuperGuestService.GetSuperBySignedGuestId(SignedGuest.Id);
+            BonusPoints = superGuest.BonusPoints.ToString();
+        }
+
+        public void SetOrdinaryGuest()
+        {
+            TypeOfGuest = "ORDINARY";
+            StarImageVisibility = Visibility.Hidden;
+            BonusPoints = "0";
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

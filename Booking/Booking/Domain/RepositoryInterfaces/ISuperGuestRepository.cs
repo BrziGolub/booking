@@ -13,5 +13,7 @@ namespace Booking.Domain.RepositoryInterfaces
         int NextId();
         void Add(SuperGuest guest);
         void Delete(SuperGuest guest);
+        void Update(SuperGuest updateGuest);
+        SuperGuest GetSuperBySignedGuestId(int id);
     }
 }

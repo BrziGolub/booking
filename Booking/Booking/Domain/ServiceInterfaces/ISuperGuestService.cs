@@ -17,6 +17,9 @@ namespace Booking.Domain.ServiceInterfaces
         void SetOrdinaryGuest(SuperGuest superGuest, User signedGuest);
         void CheckActivationDate(User SignedGuest);
         void CheckSuperGuest();
+        void ReduceBonusPoints();
+        int CalculateReservationsForLastYear(User SignedGuest);
+        SuperGuest GetSuperBySignedGuestId(int id);
 
     }
 }

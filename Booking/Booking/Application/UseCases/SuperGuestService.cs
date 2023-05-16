@@ -52,9 +52,25 @@ namespace Booking.Application.UseCases
         {
             List<AccommodationReservation> _guestsReservations = GetGeustsReservatonst(SignedGuest);
 
-            _guestsReservations = _guestsReservations.OrderBy(r => r.DepartureDay.AddYears(1).Year > DateTime.Now.Year).ThenBy(r => r.DepartureDay.Date).ToList();
+            /*_guestsReservations = _guestsReservations
+                .OrderBy(r => r.DepartureDay.AddYears(1).Year > DateTime.Now.Year && r.DepartureDay.Date <= DateTime.Today)
+                .ThenBy(r => r.DepartureDay.Date)
+                .ToList();*/
 
-            return _guestsReservations[10].DepartureDay; 
+            List<AccommodationReservation> copyReservations = new List<AccommodationReservation>();
+
+            foreach(var r in _guestsReservations)
+            {
+                if(r.DepartureDay.AddYears(1).Year > DateTime.Now.Year && r.DepartureDay.Date <= DateTime.Today)
+                {
+                    copyReservations.Add(r);
+                }
+            }
+
+            copyReservations = copyReservations.OrderBy(r => r.DepartureDay).ToList();
+
+            return copyReservations[9].DepartureDay;
+ 
         }
 
         public void CreateSuperGuest(User signedGuest, int numberOfReservations)
@@ -71,23 +87,30 @@ namespace Booking.Application.UseCases
             _repository.Add(superGuest);
         }
 
-        public void CheckNumberOfReservations(User SignedGuest)
+        public int CalculateReservationsForLastYear(User SignedGuest)
         {
             List<AccommodationReservation> _guestsReservations = GetGeustsReservatonst(SignedGuest);
 
             int countNumberOfReservations = 0;
 
-            foreach(var reservation in _guestsReservations)
+            foreach (var reservation in _guestsReservations)
             {
-                if(reservation.DepartureDay.AddYears(1).Year > DateTime.Now.Year)
+                if (reservation.DepartureDay.AddYears(1).Year > DateTime.Now.Year && reservation.DepartureDay.Date < DateTime.Today)
                 {
                     countNumberOfReservations++;
                 }
             }
+            return countNumberOfReservations;
+        }
 
-            if(countNumberOfReservations >= 10)
+        public void CheckNumberOfReservations(User SignedGuest)
+        {
+         
+            int numberOfReservations = CalculateReservationsForLastYear(SignedGuest);
+
+            if (numberOfReservations >= 10)
             {
-                CreateSuperGuest(SignedGuest, countNumberOfReservations);
+                CreateSuperGuest(SignedGuest, numberOfReservations);
             }
         }
 
@@ -98,15 +121,37 @@ namespace Booking.Application.UseCases
             _userRepository.Update(signedGuest);
         }
 
+        public void UpdateSuperGuest(User SignedGuest, int numReservatios)
+        {
+            SuperGuest superGuest = _repository.GetSuperBySignedGuestId(SignedGuest.Id);
+            superGuest.BonusPoints = 5;
+            superGuest.ActivationDate = SetActivationDate(SignedGuest);
+            _repository.Update(superGuest);
+        }
+
+        public void CheckSuperAgain(User SignedGuest)
+        {
+            int numberOfReservations = CalculateReservationsForLastYear(SignedGuest);
+            SuperGuest superGuest = _repository.GetSuperBySignedGuestId(SignedGuest.Id);
+
+            if (numberOfReservations >= 10)
+            {
+                UpdateSuperGuest(SignedGuest, numberOfReservations);
+            }
+            else
+            {
+                SetOrdinaryGuest(superGuest, SignedGuest);
+            }
+        }
+
         public void CheckActivationDate(User SignedGuest)
         {
-            SuperGuest superGuest = _repository.GetById(SignedGuest.Id);
+            SuperGuest superGuest = _repository.GetSuperBySignedGuestId(SignedGuest.Id);
 
-            if(superGuest.ActivationDate.AddYears(1) > DateTime.Now)
+            if (superGuest.ActivationDate.AddYears(1) <= DateTime.Now)
             {
-                CheckNumberOfReservations(SignedGuest);
+                CheckSuperAgain(SignedGuest);
             }
-            SetOrdinaryGuest(superGuest, SignedGuest);
         }
 
         public void CheckSuperGuest()
@@ -117,9 +162,30 @@ namespace Booking.Application.UseCases
             {
                 CheckNumberOfReservations(SignedGuest);
             }
-
-            CheckActivationDate(SignedGuest);
+            else
+            {
+                CheckActivationDate(SignedGuest);
+            }
         }
 
+        public void ReduceBonusPoints()
+        {
+            User SignedGuest = _userRepository.GetById(AccommodationReservationService.SignedFirstGuestId);
+            
+            if(SignedGuest.Super == 1)
+            {
+                SuperGuest SuperGuest = _repository.GetSuperBySignedGuestId(SignedGuest.Id);
+                if (SuperGuest.BonusPoints != 0)
+                {
+                    SuperGuest.BonusPoints -= 1;
+                    _repository.Update(SuperGuest);
+                }
+            }
+        }
+
+        public SuperGuest GetSuperBySignedGuestId(int id)
+        {
+           return _repository.GetSuperBySignedGuestId(id);
+        }
     }
 }

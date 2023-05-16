@@ -71,5 +71,10 @@ namespace Booking.Service
 		{
 			_observers.Remove(observer);
 		}
+
+		public User GetById(int id)
+		{
+			return _userRepository.GetById(id);
+		}
 	}
 }

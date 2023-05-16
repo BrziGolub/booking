@@ -29,10 +29,18 @@ namespace Booking.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public SuperGuest GetById(int id)
+        public SuperGuest GetSuperBySignedGuestId(int id)
         {
-            return _superGuests.Find(a => a.Id == id);
+            foreach(var sg in _superGuests)
+            {
+                if(sg.Guest.Id == id)
+                {
+                    return sg;
+                }
+            }
+            return null;
         }
+
 
         public int NextId()
         {
@@ -67,5 +75,16 @@ namespace Booking.Repository
             _serializer.ToCSV(FilePath, _superGuests);
         }
 
+        public void Update(SuperGuest updateGuest)
+        {
+            int index = _superGuests.FindIndex(u => u.Id == updateGuest.Id);
+            _superGuests[index] = updateGuest;
+            _serializer.ToCSV(FilePath, _superGuests);
+        }
+
+        public SuperGuest GetById(int id)
+        {
+            throw new NotImplementedException(); //ne treba za sad 
+        }
     }
 }
