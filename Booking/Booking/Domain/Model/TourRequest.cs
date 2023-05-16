@@ -14,7 +14,7 @@ namespace Booking.Domain.Model
     public class TourRequest : ISerializable
     {
         public int Id { get; set; }
-        public DateTime CreatedDate { get; set; } // ovo ti je kada je kreiran pri kreiranju samo stavi za njega DateTime.Now;
+        public DateTime CreatedDate { get; set; } 
         public Location Location { get; set; }
         public string Description { get;set; }
         public string Language { get; set; }

@@ -6,6 +6,7 @@ using Booking.Model;
 using Booking.Observer;
 using Booking.Service;
 using Booking.Util;
+using Booking.WPF.Views.Guide;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,12 +31,10 @@ namespace Booking.WPF.ViewModels.Guide
         public RelayCommand Accept { get; set; }
         
         public ICommand FillCityCommand { get; set; }
-        
 
+        public ITourService tourService { get; set; }
         public ITourRequestService tourRequestService { get; set; }
         public ILocationService locationService { get; set; }
-        //public string SelectedCountry { get; set; } //= string.Empty;
-
         public string _selectedCountry;
         public string SelectedCountry
         {
@@ -50,7 +49,7 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
 
-        //public string SelectedCity { get; set; } //= string.Empty;
+
         public string _selectedCity;
         public string SelectedCity
         {
@@ -65,7 +64,6 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
 
-        //public string SelectedNumberOfGuests { get; set; } //= string.Empty;
         public string _selectedNumberOfGuests;
         public string SelectedNumberOfGuests
         {
@@ -79,7 +77,7 @@ namespace Booking.WPF.ViewModels.Guide
                 }
             }
         }
-        //public string SelectedLanguage { get; set;} //= string.Empty;
+
         public string _selectedLanguage;
         public string SelectedLanguage
         {
@@ -144,10 +142,11 @@ namespace Booking.WPF.ViewModels.Guide
         {
             _window = window;
 
+            tourService = InjectorService.CreateInstance<ITourService>();
             tourRequestService = InjectorService.CreateInstance<ITourRequestService>();
             locationService = InjectorService.CreateInstance<ILocationService>();
 
-            TourRequests = new ObservableCollection<TourRequest>(tourRequestService.GetAll());
+            TourRequests = new ObservableCollection<TourRequest>(tourRequestService.GetAllOnHold());
 
             CityCollection = new ObservableCollection<string>();
             CountryCollection = new ObservableCollection<string>();
@@ -196,10 +195,6 @@ namespace Booking.WPF.ViewModels.Guide
             {
                 CityComboboxEnabled = false;
             }
-            /*if (SelectedCountry == "All")
-            {
-                CityComboboxEnabled = false;
-            }*/ // TREBA DA NAPRAVIM 
 
         }
 
@@ -245,9 +240,38 @@ namespace Booking.WPF.ViewModels.Guide
             StartDate = null;
             EndDate = null;
         }
+
+
+
+        public bool IsGuideAvailable(int guideId)
+        {
+            List<Tour> tours = tourService.GetGuideTours();
+
+            foreach (Tour tour in tours)
+            {
+                DateTime tourEndTime = tour.StartTime + TimeSpan.FromDays(tour.Duration * 24);
+                bool isOverlapping = SelectedTourRequest.StartTime < tourEndTime && SelectedTourRequest.EndTime > tour.StartTime;
+
+                if (isOverlapping)
+                {
+                    return false; 
+                }
+            }
+
+            return true;
+        }
         private void ButtonAccept(object param)
         {
-            MessageBox.Show("Accept");
+            if (IsGuideAvailable(TourService.SignedGuideId))
+            {
+                GuideCreateTourBasedOnTourRequestViewModel2.SelectedTourRequest = SelectedTourRequest;
+                GuideCreateTourBasedOnTourRequest2 guideCreateTourBasedOnTourRequest2 = new GuideCreateTourBasedOnTourRequest2();
+                guideCreateTourBasedOnTourRequest2.Show();
+            }
+            else
+            {
+                MessageBox.Show("You already have a tour planned in that time period!");
+            }
         }
         private void CloseWindow()
         {
@@ -256,10 +280,11 @@ namespace Booking.WPF.ViewModels.Guide
         public void Update()
         {
             TourRequests.Clear();
-            foreach(TourRequest request in tourRequestService.GetAll()) 
+            foreach(TourRequest request in tourRequestService.GetAllOnHold()) 
             {
             TourRequests.Add(request);
             }
+
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

@@ -18,5 +18,6 @@ namespace Booking.Repository
         int GetMostPopularLocationIdInLastYear();
         List<TourRequest> GetByLocationId(int id);
         List<TourRequest> GetByLanguage(string language);
+        TourRequest Update(TourRequest tourRequest);
     }
 }

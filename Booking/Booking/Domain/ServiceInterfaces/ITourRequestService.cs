@@ -14,6 +14,7 @@ namespace Booking.Domain.ServiceInterfaces
         string GetMostPopularLanguageInLastYear();
         int GetMostPopularLocationIdInLastYear();
         List<TourRequest> GetAll();
+        List<TourRequest> GetAllOnHold();
         void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language, DateTime? startDate, DateTime? endDate);
         void ShowAll(ObservableCollection<TourRequest> observe);
         List<YearlyRequests> GetRequestsByYearAndLocation(int locationId);
@@ -22,5 +23,7 @@ namespace Booking.Domain.ServiceInterfaces
         List<MonthlyRequests> GetRequestsByMonthAndLanguage(string language, int year);
         TourRequest AddTourRequest(TourRequest tourRequest);
         List<TourRequest> GetRequestsByUserId(int id);
-	}
+        TourRequest ChangeStatus(TourRequest tourRequest);
+
+    }
 }

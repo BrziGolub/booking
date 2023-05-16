@@ -22,7 +22,7 @@
             <Label Margin="-8 15 0 0" FontSize="15">Country:</Label>
             <ComboBox Width="120" Height="25" Margin="-445 -25 0 0" FontSize="15"
                 SelectedItem="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding Path=CountryCollection}">
+                ItemsSource="{Binding Path=CountryCollection}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged" >
                     <i:InvokeCommandAction Command="{Binding FillCityCommand}"/>
@@ -32,7 +32,7 @@
 
             <Label Margin="-8 25 0 0" FontSize="15">City:</Label>
             <ComboBox Width="120" Height="25" Margin="-445 -25 0 0" FontSize="15" 
-                      IsEnabled="{Binding CityComboboxEnabled, UpdateSourceTrigger=PropertyChanged}" 
+                      IsEnabled="{Binding CityComboboxEnabled,UpdateSourceTrigger=PropertyChanged}" 
                       ItemsSource="{Binding Path=CityCollection}" 
                       SelectedItem="{Binding Path=SelectedCity, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
         </StackPanel>

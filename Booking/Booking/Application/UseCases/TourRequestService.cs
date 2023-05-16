@@ -47,7 +47,23 @@ namespace Booking.Application.UseCases
 			return tourRequests;
 		}
 
-		public void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language, DateTime? startDate, DateTime? endDate)
+        public List<TourRequest> GetAllOnHold()
+        {
+            List<TourRequest> tourRequests = new List<TourRequest>();
+
+            foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+            {
+				if (tourRequest.Status == "On hold")
+				{
+                    tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
+                    tourRequests.Add(tourRequest);
+                }
+            }
+
+            return tourRequests;
+        }
+
+        public void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language, DateTime? startDate, DateTime? endDate)
 		{
 			observe.Clear();
 
@@ -251,6 +267,16 @@ namespace Booking.Application.UseCases
 			}
 
 			return result;
+		}
+
+		public TourRequest ChangeStatus(TourRequest tourRequest)
+		{
+			TourRequest oldTourRequest = _tourRequestRepository.GetById(tourRequest.Id);
+			if (oldTourRequest == null) return null;
+
+			oldTourRequest.Status = tourRequest.Status;
+
+			return _tourRequestRepository.Update(tourRequest);
 		}
 	}
 }

@@ -189,6 +189,7 @@
     <Compile Include="WPF\ViewModels\Guide\GuideAcceptingTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel1.cs" />
+    <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel2.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideRequestsStatisticViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\ShowDescriptionViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\GradingWindowViewModel.cs" />
@@ -258,6 +259,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guide\GuideCreateTourBasedOnTourRequest1.xaml.cs">
       <DependentUpon>GuideCreateTourBasedOnTourRequest1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guide\GuideCreateTourBasedOnTourRequest2.xaml.cs">
+      <DependentUpon>GuideCreateTourBasedOnTourRequest2.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guide\GuideRequestsStatistic.xaml.cs">
       <DependentUpon>GuideRequestsStatistic.xaml</DependentUpon>
@@ -442,6 +446,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guide\GuideCreateTourBasedOnTourRequest1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guide\GuideCreateTourBasedOnTourRequest2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
