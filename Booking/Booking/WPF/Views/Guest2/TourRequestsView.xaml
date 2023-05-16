@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Booking.WPF.Views.Guest2"
         mc:Ignorable="d"
         Title="TourRequestsView"
-		Height="450" Width="800"
+		Height="600" Width="1000"
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="NoResize"
 		Background="#BBC1D1">
@@ -65,7 +65,7 @@
 			</Grid.RowDefinitions>
 
 			<StackPanel Grid.Row="0" Margin="0 0 0 8" Orientation="Horizontal">
-				<Image Source="/Resources/Images/images128.png" Height="40"/>
+				<Image Source="/Resources/Images/global128.png" Height="40"/>
 				<Label Content="My requests" FontSize="24" Margin="8 0 0 0"/>
 			</StackPanel>
 
@@ -74,18 +74,29 @@
 					  IsReadOnly="True"
 					  SelectionMode="Single"
 					  FontSize="14"
-					  ItemsSource="{Binding TourRequests}">
+					  ItemsSource="{Binding TourRequests}"
+					  RowHeight="50"
+					  CanUserResizeColumns="False"
+					  CanUserAddRows="False"
+					  CanUserDeleteRows="False"
+					  CanUserResizeRows="False">
 				
 				<DataGrid.Columns>
-					<DataGridTextColumn Header="State" Width="*" Binding="{Binding Location.State}"/>
-					<DataGridTextColumn Header="City" Width="*" Binding="{Binding Location.City}"/>
-					<DataGridTextColumn Header="Language" Width="*" Binding="{Binding Language}"/>
-					<DataGridTextColumn Header="Visitors" Width="*" Binding="{Binding GuestsNumber}"/>
-					<DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}"/>
-					<DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}"/>
-					<DataGridTextColumn Header="End Date" Width="*" Binding="{Binding EndTime, StringFormat={}{0:dd/MM/yyyy}}"/>
-					<DataGridTextColumn Header="Departure" Width="*" Binding="{Binding CreatedDate, StringFormat={}{0:dd/MM/yyyy}}"/>
-					<DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status}"/>
+					<DataGridTextColumn Header="State" Width="3*" Binding="{Binding Location.State}"/>
+					<DataGridTextColumn Header="City" Width="3*" Binding="{Binding Location.City}"/>
+					<DataGridTextColumn Header="Language" Width="3*" Binding="{Binding Language}"/>
+					<DataGridTextColumn Header="Visitors" Width="2*" Binding="{Binding GuestsNumber}"/>
+					<DataGridTextColumn Header="Description" Width="4*" Binding="{Binding Description}">
+						<DataGridTextColumn.ElementStyle>
+							<Style>
+								<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+							</Style>
+						</DataGridTextColumn.ElementStyle>
+					</DataGridTextColumn>
+					<DataGridTextColumn Header="Start Date" Width="3*" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}"/>
+					<DataGridTextColumn Header="End Date" Width="3*" Binding="{Binding EndTime, StringFormat={}{0:dd/MM/yyyy}}"/>
+					<DataGridTextColumn Header="Departure" Width="3*" Binding="{Binding CreatedDate, StringFormat={}{0:dd/MM/yyyy}}"/>
+					<DataGridTextColumn Header="Status" Width="3*" Binding="{Binding Status}"/>
 				</DataGrid.Columns>
 			</DataGrid>
 

@@ -3,14 +3,8 @@ using Booking.Domain.Model;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Service;
 using Booking.Util;
-using Booking.View;
 using Booking.WPF.Views.Guest2;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Booking.WPF.ViewModels.Guest2
@@ -30,8 +24,9 @@ namespace Booking.WPF.ViewModels.Guest2
 			_window = window;
 			_tourRequestService = InjectorService.CreateInstance<ITourRequestService>();
 
-			TourRequests = new ObservableCollection<TourRequest>(_tourRequestService.GetRequestsByUserId(TourService.SignedGuideId));
+			TourRequests = new ObservableCollection<TourRequest>();
 
+			LoadList();
 			InitializeCommands();
 		}
 
@@ -39,6 +34,16 @@ namespace Booking.WPF.ViewModels.Guest2
 		{
 			Button_Click_Close = new RelayCommand(ButtonClose);
 			Button_Click_Request = new RelayCommand(ButtonRequest);
+		}
+
+		private void LoadList()
+		{
+			TourRequests.Clear();
+			var list = _tourRequestService.GetRequestsByUserId(TourService.SignedGuideId);
+			foreach (var request in list)
+			{
+				TourRequests.Add(request);
+			}
 		}
 
 		private void ButtonClose(object param)
@@ -50,6 +55,7 @@ namespace Booking.WPF.ViewModels.Guest2
 		{
 			CreateTourRequestView view = new CreateTourRequestView();
 			view.ShowDialog();
+			LoadList();
 		}
 	}
 }
