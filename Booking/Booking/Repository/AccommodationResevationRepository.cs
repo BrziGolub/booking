@@ -31,7 +31,15 @@ namespace Booking.Repository
 
         public List<AccommodationReservation> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+            foreach (AccommodationReservation ar in _serializer.FromCSV(FilePath)) 
+            {
+                if (ar.Deleted != 1)
+                {
+                    reservations.Add(ar);
+                }
+            }
+            return reservations;
         }
 
 		public AccommodationReservation GetById(int id)
@@ -58,8 +66,13 @@ namespace Booking.Repository
             _reservations.Clear();
            foreach(var reservation in _reservationsCopy)
            {
-                if(reservation.Id != selectedReservation.Id)
+                if (reservation.Id != selectedReservation.Id)
                 {
+                    _reservations.Add(reservation);
+                }
+                else 
+                {
+                    reservation.Deleted = 1;
                     _reservations.Add(reservation);
                 }
            }

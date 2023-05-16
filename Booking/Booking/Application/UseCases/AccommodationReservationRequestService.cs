@@ -124,15 +124,19 @@ namespace Booking.Service
             _repository.Save(accommodationReservationRequestAll);
             List<AccommodationReservation> allReservations = new List<AccommodationReservation>();
             allReservations = _reservationRepository.GetAll();
+            AccommodationReservation accommodationReservation = new AccommodationReservation();
             foreach (var reservation in allReservations)
             {
                 if (reservation.Id == request.AccommodationReservation.Id)
                 {
-                    reservation.ArrivalDay = request.NewArrivalDay;
-                    reservation.DepartureDay = request.NewDeparuteDay;
+                    accommodationReservation.ArrivalDay = request.NewArrivalDay;
+                    accommodationReservation.DepartureDay = request.NewDeparuteDay;
+                    accommodationReservation.Accommodation.Id = reservation.Accommodation.Id;
+                    accommodationReservation.Guest.Id = reservation.Guest.Id;
+                    _reservationRepository.Add(accommodationReservation);
+                    _reservationRepository.Delete(reservation);
                 }
             }
-            _reservationRepository.Save(allReservations);
         }
 
             public void DeleteRequest(AccommodationReservation selectedReservation)
