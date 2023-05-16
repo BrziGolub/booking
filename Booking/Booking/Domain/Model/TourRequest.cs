@@ -14,30 +14,40 @@ namespace Booking.Domain.Model
     public class TourRequest : ISerializable
     {
         public int Id { get; set; }
-        public DateTime CreatedDate { get; set; } // ovo ti je kada je kreiran pri kreiranju samo stavi za njega DateTime.Now;
+        public DateTime CreatedDate { get; set; } 
         public Location Location { get; set; }
         public string Description { get;set; }
         public string Language { get; set; }
         public int GuestsNumber{ get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        public User User { get; set; }
+        public string Status { get; set; }
+        public bool Notify { get; set; }
+        public DateTime TourReservedStartTime { get; set; }
 
         public TourRequest()
         {
             Location = new Location();
+            User = new User();
+            Notify = false;
         }
 
         public string[] ToCSV()
         {
             string[] csvValues = {
-                Id.ToString(),                          //0
-                CreatedDate.ToString("dd/MM/yyyy"),     //1
-                Location.Id.ToString(),                 //2
-                Description,                            //3
-                Language,                               //4
-                GuestsNumber.ToString(),			    //5
-                StartTime.ToString("dd/MM/yyyy"),		//6
-                EndTime.ToString("dd/MM/yyyy")          //7
+                Id.ToString(),                                  //0
+                CreatedDate.ToString("dd/MM/yyyy"),             //1
+                Location.Id.ToString(),                         //2
+                Description,                                    //3
+                Language,                                       //4
+                GuestsNumber.ToString(),			            //5
+                StartTime.ToString("dd/MM/yyyy"),		        //6
+                EndTime.ToString("dd/MM/yyyy"),                 //7
+                User.Id.ToString(),                             //8
+                Status,                                         //9
+                Notify.ToString(),                              //10
+                TourReservedStartTime.ToString("dd/MM/yyyy")    //11
             };
             return csvValues;
         }
@@ -52,6 +62,10 @@ namespace Booking.Domain.Model
             GuestsNumber = Convert.ToInt32(values[5]);
             StartTime = DateTime.Parse(values[6]);
             EndTime = DateTime.Parse(values[7]);
+            User.Id = Convert.ToInt32(values[8]);
+            Status = values[9];
+            Notify = Convert.ToBoolean(values[10]);
+            TourReservedStartTime = DateTime.Parse(values[11]);
         }
     }
 }

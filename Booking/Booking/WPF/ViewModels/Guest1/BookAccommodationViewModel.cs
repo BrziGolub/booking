@@ -1,4 +1,5 @@
-﻿using Booking.Commands;
+﻿using Booking.Application.UseCases;
+using Booking.Commands;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Service;
@@ -25,6 +26,7 @@ namespace Booking.WPF.ViewModels.Guest1
     public class BookAccommodationViewModel:INotifyPropertyChanged , IDataErrorInfo 
     {
         public IAccommodationReservationService AccommodationReservationService { get; set; }
+        public ISuperGuestService SuperGuestService { get; set; }
 
         public String AccommodationLabel { get; set; } = String.Empty;
 
@@ -135,6 +137,7 @@ namespace Booking.WPF.ViewModels.Guest1
             DepartureDay = DateTime.Now;
             ArrivalDay = DateTime.Now;
             AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
+            SuperGuestService = InjectorService.CreateInstance<ISuperGuestService>();
             NavigationService = navigationService;
             NumberOfGuests = String.Empty;
         }
@@ -177,7 +180,7 @@ namespace Booking.WPF.ViewModels.Guest1
 
                 if (IsReserved)
                 {
-
+                    SuperGuestService.ReduceBonusPoints();
                     NotificationContent content = new NotificationContent { Title = "Congratulations!", Message = "You succesfuly reserve your accommodation for: " + ArrivalDay.ToString("dd/MM/yyyy") + " - " + DepartureDay.ToString("dd/MM/yyyy") + " !", Type = NotificationType.Success };
                     notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
                     NavigationService.Navigate(new FirstGuestAllReservations(NavigationService));
@@ -189,6 +192,8 @@ namespace Booking.WPF.ViewModels.Guest1
                     ShowAvailableDatesDialog(suggestedDateRanges, SelectedAccommodation);
                 }
             }
+
+           
         }
 
         public void CancleButton(object param)

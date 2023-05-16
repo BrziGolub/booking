@@ -15,12 +15,12 @@ using System.Windows.Shapes;
 
 namespace Booking.WPF.Views.Guide
 {
-    public partial class GuideCreateTourBasedOnTourRequest1 : Window
+    public partial class GuideCreateTourBasedOnTourRequest2 : Window
     {
-        public GuideCreateTourBasedOnTourRequest1()
+        public GuideCreateTourBasedOnTourRequest2()
         {
             InitializeComponent();
-            this.DataContext = new GuideCreateTourBasedOnTourRequestViewModel1(this);
+            this.DataContext = new GuideCreateTourBasedOnTourRequestViewModel2(this);
         }
     }
 }

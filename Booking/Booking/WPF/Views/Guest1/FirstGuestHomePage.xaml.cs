@@ -59,5 +59,10 @@ namespace Booking.View
             signInForm.Show();
             this.Close();
         }
+
+        private void MenuItem_Click_MyProfile(object sender, RoutedEventArgs e)
+        {
+            FrameHomePage.Content = new FirstGuestProfile();
+        }
     }
 }

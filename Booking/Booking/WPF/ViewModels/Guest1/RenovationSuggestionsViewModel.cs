@@ -100,6 +100,7 @@ namespace Booking.WPF.ViewModels.Guest1
             else if (ThirdSelectedUrgencyLevel)
             {
                 renovationRecommodation.UrgencyLevel = 3;
+
             }else if (FourthSelectedUrgencyLevel)
             {
                 renovationRecommodation.UrgencyLevel = 4;

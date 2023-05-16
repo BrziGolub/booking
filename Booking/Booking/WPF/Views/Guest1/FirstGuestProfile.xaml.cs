@@ -1,4 +1,4 @@
-﻿using Booking.WPF.ViewModels.Guide;
+﻿using Booking.WPF.ViewModels.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +11,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Booking.WPF.Views.Guide
+namespace Booking.WPF.Views.Guest1
 {
-    public partial class GuideCreateTourBasedOnTourRequest1 : Window
+    public partial class FirstGuestProfile : Page
     {
-        public GuideCreateTourBasedOnTourRequest1()
+        public FirstGuestProfile()
         {
             InitializeComponent();
-            this.DataContext = new GuideCreateTourBasedOnTourRequestViewModel1(this);
+            this.DataContext = new FirstGuestProfileViewModel();
         }
     }
 }

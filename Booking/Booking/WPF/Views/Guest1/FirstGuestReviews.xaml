@@ -21,7 +21,7 @@
             <Label FontWeight="Bold" FontSize="17" >My reviews</Label>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="80,20,80,40" ItemsSource="{Binding Path = Grades}" x:Name="ReservationsDataGrid"
+        <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="80,20,80,200" ItemsSource="{Binding Path = Grades}" x:Name="ReservationsDataGrid"
                    SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Accommodation name" Width="*" Binding="{Binding Accommodation.Accommodation.Name}">
@@ -37,6 +37,11 @@
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Rule following" Width="*" Binding="{Binding RuleFollowing}">
                     <DataGridTextColumn.HeaderStyle>
@@ -44,6 +49,11 @@
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Communication" Width="*" Binding="{Binding Communication}">
                     <DataGridTextColumn.HeaderStyle>
@@ -51,6 +61,11 @@
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Lateness" Width="*" Binding="{Binding Lateness}" >
                     <DataGridTextColumn.HeaderStyle>
@@ -58,6 +73,11 @@
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Owner" Width="*" Binding="{Binding Accommodation.Accommodation.Owner.Username}" >
                     <DataGridTextColumn.HeaderStyle>

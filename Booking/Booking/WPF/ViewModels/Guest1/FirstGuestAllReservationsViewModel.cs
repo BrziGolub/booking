@@ -110,6 +110,7 @@ namespace Booking.WPF.ViewModels.Guest1
         public void Update()
         {
             Reservations.Clear();
+            //ovde logicko brisanje
             foreach (var reservation in _accommodationReservationService.GetGeustsReservatonst())
             {
                 Reservations.Add(reservation);

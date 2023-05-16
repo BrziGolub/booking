@@ -1,131 +1,158 @@
-﻿using Booking.Domain.DTO;
-using Booking.Domain.Model;
+﻿using Booking.Domain.Model;
+using Booking.Model;
 using Booking.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Booking.Repository
 {
-    public class TourRequestRepository : ITourRequestRepository
-    {
-        private const string FilePath = "../../Resources/Data/tourRequests.csv";
-        private readonly Serializer<TourRequest> _serializer;
-        private List<TourRequest> _tourRequests;
+	public class TourRequestRepository : ITourRequestRepository
+	{
+		private const string FilePath = "../../Resources/Data/tourRequests.csv";
+		private readonly Serializer<TourRequest> _serializer;
+		private List<TourRequest> _tourRequests;
 
-        public TourRequestRepository()
-        {
-            _serializer = new Serializer<TourRequest>();
-            _tourRequests = _serializer.FromCSV(FilePath);
-        }
-        public List<TourRequest> GetAll()
-        {
-            return _serializer.FromCSV(FilePath);
-        }
+		public TourRequestRepository()
+		{
+			_serializer = new Serializer<TourRequest>();
+			_tourRequests = _serializer.FromCSV(FilePath);
+		}
 
-        public TourRequest GetById(int id)
-        {
-            return _tourRequests.Find(tr => tr.Id == id);
-        }
+		public List<TourRequest> GetAll()
+		{
+			return _serializer.FromCSV(FilePath);
+		}
 
-        public string GetMostPopularLanguageInLastYear()
-        {
-            DateTime startDate = DateTime.Now.AddYears(-1);
-            DateTime endDate = DateTime.Now;
+		public TourRequest GetById(int id)
+		{
+			return _tourRequests.Find(tr => tr.Id == id);
+		}
 
-            var tourRequestsInRange = _tourRequests.Where(tr => tr.CreatedDate >= startDate && tr.CreatedDate <= endDate);
+		public int NextId()
+		{
+			if (_tourRequests.Count == 0)
+			{
+				return 1;
+			}
+			else
+			{
+				return _tourRequests.Max(t => t.Id) + 1;
+			}
+		}
 
-            string mostPopularLanguage = null;
-            int maxCount = 0;
+		public TourRequest Add(TourRequest tourRequest)
+		{
+			tourRequest.Id = NextId();
+			_tourRequests.Add(tourRequest);
+			_serializer.ToCSV(FilePath, _tourRequests);
+			return tourRequest;
+		}
 
-            foreach (var tourRequest in tourRequestsInRange)
-            {
-                string language = tourRequest.Language;
+		public string GetMostPopularLanguageInLastYear()
+		{
+			DateTime startDate = DateTime.Now.AddYears(-1);
+			DateTime endDate = DateTime.Now;
 
-                int languageCount = 0;
+			var tourRequestsInRange = _tourRequests.Where(tr => tr.CreatedDate >= startDate && tr.CreatedDate <= endDate);
 
-                foreach (var otherTourRequest in tourRequestsInRange)
-                {
-                    if (otherTourRequest.Language == language)
-                    {
-                        languageCount++;
-                    }
-                }
+			string mostPopularLanguage = null;
+			int maxCount = 0;
 
-                if (languageCount > maxCount)
-                {
-                    maxCount = languageCount;
-                    mostPopularLanguage = language;
-                }
-            }
+			foreach (var tourRequest in tourRequestsInRange)
+			{
+				string language = tourRequest.Language;
 
-            return mostPopularLanguage;
-        }
+				int languageCount = 0;
 
-        public int GetMostPopularLocationIdInLastYear()
-        {
-            DateTime startDate = DateTime.Now.AddYears(-1);
-            DateTime endDate = DateTime.Now;
+				foreach (var otherTourRequest in tourRequestsInRange)
+				{
+					if (otherTourRequest.Language == language)
+					{
+						languageCount++;
+					}
+				}
 
-            var tourRequestsInRange = _tourRequests.Where(tr => tr.CreatedDate >= startDate && tr.CreatedDate <= endDate);
+				if (languageCount > maxCount)
+				{
+					maxCount = languageCount;
+					mostPopularLanguage = language;
+				}
+			}
 
-            int? mostPopularLocationId = null;
-            int maxCount = 0;
+			return mostPopularLanguage;
+		}
 
-            foreach (var tourRequest in tourRequestsInRange)
-            {
-                int locationId = tourRequest.Location.Id;
+		public int GetMostPopularLocationIdInLastYear()
+		{
+			DateTime startDate = DateTime.Now.AddYears(-1);
+			DateTime endDate = DateTime.Now;
 
-                int locationCount = 0;
+			var tourRequestsInRange = _tourRequests.Where(tr => tr.CreatedDate >= startDate && tr.CreatedDate <= endDate);
 
-                foreach (var otherTourRequest in tourRequestsInRange)
-                {
-                    if (otherTourRequest.Location.Id == locationId)
-                    {
-                        locationCount++;
-                    }
-                }
+			int? mostPopularLocationId = null;
+			int maxCount = 0;
 
-                if (locationCount > maxCount)
-                {
-                    maxCount = locationCount;
-                    mostPopularLocationId = locationId;
-                }
-            }
+			foreach (var tourRequest in tourRequestsInRange)
+			{
+				int locationId = tourRequest.Location.Id;
 
-            return mostPopularLocationId ?? -1;
-        }
+				int locationCount = 0;
 
-        public List<TourRequest> GetByLocationId(int id)
-        {
-            List<TourRequest > list = new List<TourRequest>();
+				foreach (var otherTourRequest in tourRequestsInRange)
+				{
+					if (otherTourRequest.Location.Id == locationId)
+					{
+						locationCount++;
+					}
+				}
 
-            foreach(TourRequest tourRequest in _tourRequests)
-            {
-                if(tourRequest.Location.Id == id)
-                {
-                    list.Add(tourRequest);
-                }
-            }
+				if (locationCount > maxCount)
+				{
+					maxCount = locationCount;
+					mostPopularLocationId = locationId;
+				}
+			}
 
-            return list;
-        }
+			return mostPopularLocationId ?? -1;
+		}
 
-        public List<TourRequest> GetByLanguage(string language)
-        {
-            List<TourRequest> list = new List<TourRequest>();
+		public List<TourRequest> GetByLocationId(int id)
+		{
+			List<TourRequest> list = new List<TourRequest>();
 
-            foreach (TourRequest tourRequest in _tourRequests)
-            {
-                if (tourRequest.Language.ToLower() == language.ToLower())
-                {
-                    list.Add(tourRequest);
-                }
-            }
+			foreach (TourRequest tourRequest in _tourRequests)
+			{
+				if (tourRequest.Location.Id == id)
+				{
+					list.Add(tourRequest);
+				}
+			}
 
-            return list;
-        }
-    }
+			return list;
+		}
+
+		public List<TourRequest> GetByLanguage(string language)
+		{
+			List<TourRequest> list = new List<TourRequest>();
+
+			foreach (TourRequest tourRequest in _tourRequests)
+			{
+				if (tourRequest.Language.ToLower() == language.ToLower())
+				{
+					list.Add(tourRequest);
+				}
+			}
+
+			return list;
+		}
+
+		public TourRequest Update(TourRequest tourRequest)
+		{
+			TourRequest founded =  _tourRequests.Find(tr => tr.Id == tourRequest.Id);
+			founded = tourRequest;
+			_serializer.ToCSV(FilePath, _tourRequests);
+			return founded;
+		}
+	}
 }

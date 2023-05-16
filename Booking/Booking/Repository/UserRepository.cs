@@ -42,5 +42,12 @@ namespace Booking.Repository
         {
             _serializer.ToCSV(FilePath, users);
         }
-    }
+
+		public void Update(User updatedUser)
+		{
+            int index = _users.FindIndex(u => u.Id == updatedUser.Id);
+            _users[index] = updatedUser;
+            _serializer.ToCSV(FilePath, _users);
+        }
+	}
 }

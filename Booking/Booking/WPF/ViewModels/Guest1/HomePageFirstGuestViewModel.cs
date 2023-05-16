@@ -1,4 +1,5 @@
-﻿using Booking.Commands;
+﻿using Booking.Application.UseCases;
+using Booking.Commands;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Util;
@@ -32,6 +33,7 @@ namespace Booking.WPF.ViewModels.Guest1
         public List<string> accommodationTypes;
         public IAccommodationService AccommodationService { get; set; }
         public ILocationService LocationService { get; set; }
+        public ISuperGuestService SuperGuestService { get; set; }
 
         public Boolean IsCheckedApartment { get; set; } = false;
         public Boolean IsCheckedCottage { get; set; } = false;
@@ -143,6 +145,7 @@ namespace Booking.WPF.ViewModels.Guest1
 
             LocationService = InjectorService.CreateInstance<ILocationService>();
             AccommodationService = InjectorService.CreateInstance<IAccommodationService>();
+            SuperGuestService = InjectorService.CreateInstance<ISuperGuestService>();
 
             Accommodations = new ObservableCollection<Accommodation>(AccommodationService.GetAllSuper().OrderByDescending(a => a.Owner.Super));
 
@@ -153,6 +156,7 @@ namespace Booking.WPF.ViewModels.Guest1
             accommodationTypes = new List<string>();
             SetCommands();
             FillComboBox();
+            SuperGuestService.CheckSuperGuest();
         }
 
 
@@ -256,12 +260,10 @@ namespace Booking.WPF.ViewModels.Guest1
 
         private void ButtonShowImages(object sender)
         {
-            if(SelectedAccommodation == null)
+            if(SelectedAccommodation != null)
             {
-
+                NavigationService.Navigate(new ShowAccommodationImages(SelectedAccommodation));
             }
-            NavigationService.Navigate(new ShowAccommodationImages(SelectedAccommodation));
-
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

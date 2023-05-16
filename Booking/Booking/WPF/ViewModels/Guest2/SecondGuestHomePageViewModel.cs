@@ -14,7 +14,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Booking.WPF.ViewModels.Guest2
 {
@@ -93,6 +92,7 @@ namespace Booking.WPF.ViewModels.Guest2
 		public RelayCommand Selection_Changed { get; set; }
 		public RelayCommand Button_Click_NumericUp { get; set; }
 		public RelayCommand Button_Click_NumericDown { get; set; }
+		public RelayCommand Button_Click_TourRequest { get; set; }
 
 		public SecondGuestHomePageViewModel(Window window)
 		{
@@ -132,6 +132,7 @@ namespace Booking.WPF.ViewModels.Guest2
 			Selection_Changed = new RelayCommand(ComboBoxStateSelectionChanged);
 			Button_Click_NumericUp = new RelayCommand(NumericUp);
 			Button_Click_NumericDown = new RelayCommand(NumericDown);
+			Button_Click_TourRequest = new RelayCommand(ButtonTourRequests);
 		}
 
 		public void TourSearch(string state, string city, string duration, string lang, string passengers)
@@ -307,6 +308,12 @@ namespace Booking.WPF.ViewModels.Guest2
 		{
 			if (SearchVisitors > 1)
 				SearchVisitors--;
+		}
+
+		private void ButtonTourRequests(object param)
+		{
+			TourRequestsView view = new TourRequestsView();
+			view.ShowDialog();
 		}
 
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
