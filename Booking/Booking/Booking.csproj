@@ -86,6 +86,7 @@
     <Compile Include="Domain\Model\TourGrade.cs" />
     <Compile Include="Domain\Model\TourGuests.cs" />
     <Compile Include="Domain\Model\TourKeyPoint.cs" />
+    <Compile Include="Domain\Model\TourNotification.cs" />
     <Compile Include="Domain\Model\TourRequest.cs" />
     <Compile Include="Domain\Model\TourReservation.cs" />
     <Compile Include="Domain\Model\User.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Domain\RepositoryInterfaces\ITourGuestsRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourImageRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourKeyPointRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourNotificationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourReservationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IUserRepository.cs" />
@@ -151,6 +153,7 @@
     <Compile Include="Repository\TourGuestsRepository.cs" />
     <Compile Include="Repository\TourImageRepository.cs" />
     <Compile Include="Repository\TourKeyPointRepository.cs" />
+    <Compile Include="Repository\TourNotificationRepository.cs" />
     <Compile Include="Repository\TourRepository.cs" />
     <Compile Include="Repository\TourRequestRepository.cs" />
     <Compile Include="Repository\TourReservationRepository.cs" />
@@ -654,6 +657,7 @@
     <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />
     <None Include="Resources\Data\tourKeyPoints.csv" />
+    <None Include="Resources\Data\tourNotifications.csv" />
     <None Include="Resources\Data\tourRequests.csv" />
     <None Include="Resources\Data\tourReservations.csv" />
     <None Include="Resources\Data\tours.csv" />

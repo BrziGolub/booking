@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace Booking.Application.UseCases
 {
@@ -22,6 +23,8 @@ namespace Booking.Application.UseCases
 		{
 			_tourRequestRepository = InjectorRepository.CreateInstance<ITourRequestRepository>();
 			_locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
+
+			CheckRequestDate();
 		}
 
 		public string GetMostPopularLanguageInLastYear()
@@ -426,6 +429,18 @@ namespace Booking.Application.UseCases
 			}
 
 			return size > 0 ? Math.Round(visitors / size, 2) : visitors;
+		}
+
+		private void CheckRequestDate()
+		{
+			foreach (TourRequest tr in GetAllOnHold())
+			{
+				if (tr.StartTime < DateTime.Now.AddHours(48))
+				{
+					tr.Status = "Invalid";
+					ChangeStatus(tr);
+				}
+			}
 		}
 	}
 }
