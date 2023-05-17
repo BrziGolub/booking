@@ -89,13 +89,13 @@
 					<DataGridTextColumn Header="Description" Width="4*" Binding="{Binding Description}">
 						<DataGridTextColumn.ElementStyle>
 							<Style>
-								<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+								<Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
 							</Style>
 						</DataGridTextColumn.ElementStyle>
 					</DataGridTextColumn>
 					<DataGridTextColumn Header="Start Date" Width="3*" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}"/>
 					<DataGridTextColumn Header="End Date" Width="3*" Binding="{Binding EndTime, StringFormat={}{0:dd/MM/yyyy}}"/>
-					<DataGridTextColumn Header="Departure" Width="3*" Binding="{Binding CreatedDate, StringFormat={}{0:dd/MM/yyyy}}"/>
+					<DataGridTextColumn Header="Departure" Width="3*" Binding="{Binding TourReservedStartTime, StringFormat={}{0:dd/MM/yyyy}}"/>
 					<DataGridTextColumn Header="Status" Width="3*" Binding="{Binding Status}"/>
 				</DataGrid.Columns>
 			</DataGrid>

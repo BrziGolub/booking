@@ -47,23 +47,23 @@ namespace Booking.Application.UseCases
 			return tourRequests;
 		}
 
-        public List<TourRequest> GetAllOnHold()
-        {
-            List<TourRequest> tourRequests = new List<TourRequest>();
+		public List<TourRequest> GetAllOnHold()
+		{
+			List<TourRequest> tourRequests = new List<TourRequest>();
 
-            foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
-            {
+			foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+			{
 				if (tourRequest.Status == "On hold")
 				{
-                    tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
-                    tourRequests.Add(tourRequest);
-                }
-            }
+					tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
+					tourRequests.Add(tourRequest);
+				}
+			}
 
-            return tourRequests;
-        }
+			return tourRequests;
+		}
 
-        public void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language, DateTime? startDate, DateTime? endDate)
+		public void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language, DateTime? startDate, DateTime? endDate)
 		{
 			observe.Clear();
 
@@ -269,6 +269,117 @@ namespace Booking.Application.UseCases
 			return result;
 		}
 
+		public int GetNumberOfRequestsByUserId(int id, string year)
+		{
+			return ((year.Equals("All")) ? GetRequestsByUserId(id).Count() : GetRequestsByUserId(id).Where(tr => tr.CreatedDate.Year.ToString().Equals(year)).Count()) - GetNumberOfAcceptedRequestsByUserId(id, year);
+		}
+
+		public int GetNumberOfAcceptedRequestsByUserId(int id, string year)
+		{
+			return (year.Equals("All")) ? GetRequestsByUserId(id).Where(tr => tr.Status.Equals("Accepted")).Count() : GetRequestsByUserId(id).Where(tr => tr.Status.Equals("Accepted")).Where(tr => tr.CreatedDate.Year.ToString().Equals(year)).Count();
+		}
+
+		public List<string> GetLanguagesByUserId(int id, string year)
+		{
+			List<string> result = new List<string>();
+			if (year.Equals("All"))
+			{
+				foreach (var tr in GetRequestsByUserId(id))
+				{
+					if (!result.Contains(tr.Language))
+					{
+						result.Add(tr.Language);
+					}
+				}
+			}
+			else
+			{
+				foreach (var tr in GetRequestsByUserId(id))
+				{
+					if (!result.Contains(tr.Language) && tr.CreatedDate.Year.ToString().Equals(year))
+					{
+						result.Add(tr.Language);
+					}
+				}
+			}
+			return result;
+		}
+
+		public int GetNumberOfRequestsByLang(int id, string lang, string year)
+		{
+			return (year.Equals("All")) ? GetRequestsByUserId(id).Where(tr => tr.Language.Equals(lang)).Count() : GetRequestsByUserId(id).Where(tr => tr.CreatedDate.Year.ToString().Equals(year)).Where(tr => tr.Language.Equals(lang)).Count();
+		}
+
+		public List<string> GetYearsByUserId(int id)
+		{
+			List<string> result = new List<string>() { "All" };
+			foreach (var tr in GetRequestsByUserId(id))
+			{
+				if (!result.Contains(tr.CreatedDate.Year.ToString()))
+				{
+					result.Add(tr.CreatedDate.Year.ToString());
+				}
+			}
+			return result;
+		}
+
+		public List<string> GetStatesByUserId(int id, string year)
+		{
+			List<string> result = new List<string>();
+			if (year.Equals("All"))
+			{
+				foreach (var tr in GetRequestsByUserId(id))
+				{
+					if (!result.Contains(tr.Location.State))
+					{
+						result.Add(tr.Location.State);
+					}
+				}
+			}
+			else
+			{
+				foreach (var tr in GetRequestsByUserId(id))
+				{
+					if (!result.Contains(tr.Location.State) && tr.CreatedDate.Year.ToString().Equals(year))
+					{
+						result.Add(tr.Location.State);
+					}
+				}
+			}
+			return result;
+		}
+
+		public int GetNumberOfRequestsByState(int id, string state, string year)
+		{
+			return (year.Equals("All")) ? GetRequestsByUserId(id).Where(tr => tr.Location.State.Equals(state)).Count() : GetRequestsByUserId(id).Where(tr => tr.CreatedDate.Year.ToString().Equals(year)).Where(tr => tr.Location.State.Equals(state)).Count();
+		}
+
+		public List<string> GetCitiesByUserId(int id, string year)
+		{
+			List<string> result = new List<string>();
+			if (year.Equals("All"))
+			{
+				foreach (var tr in GetRequestsByUserId(id))
+				{
+					if (!result.Contains(tr.Location.City))
+					{
+						result.Add(tr.Location.City);
+					}
+				}
+			}
+			else
+			{
+				foreach (var tr in GetRequestsByUserId(id))
+				{
+					if (!result.Contains(tr.Location.City) && tr.CreatedDate.Year.ToString().Equals(year))
+					{
+						result.Add(tr.Location.City);
+					}
+				}
+			}
+			return result;
+		}
+
 		public TourRequest ChangeStatus(TourRequest tourRequest)
 		{
 			TourRequest oldTourRequest = _tourRequestRepository.GetById(tourRequest.Id);
@@ -279,6 +390,42 @@ namespace Booking.Application.UseCases
 			oldTourRequest.TourReservedStartTime = tourRequest.TourReservedStartTime;
 
 			return _tourRequestRepository.Update(tourRequest);
+		}
+
+		public int GetNumberOfRequestsByCity(int id, string city, string year)
+		{
+			return (year.Equals("All")) ? GetRequestsByUserId(id).Where(tr => tr.Location.City.Equals(city)).Count() : GetRequestsByUserId(id).Where(tr => tr.CreatedDate.Year.ToString().Equals(year)).Where(tr => tr.Location.City.Equals(city)).Count();
+		}
+
+		public double GetAverageVisitorsByUserId(int id, string year)
+		{
+			double visitors = 0;
+			int size = 0;
+
+			if (year.Equals("All"))
+			{
+				foreach (var tr in GetRequestsByUserId(id))
+				{
+					if (tr.Status.Equals("Accepted"))
+					{
+						size++;
+						visitors += tr.GuestsNumber;
+					}
+				}
+			}
+			else
+			{
+				foreach (var tr in GetRequestsByUserId(id))
+				{
+					if (tr.Status.Equals("Accepted") && tr.CreatedDate.Year.ToString().Equals(year))
+					{
+						size++;
+						visitors += tr.GuestsNumber;
+					}
+				}
+			}
+
+			return size > 0 ? Math.Round(visitors / size, 2) : visitors;
 		}
 	}
 }
