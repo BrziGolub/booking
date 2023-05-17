@@ -29,6 +29,10 @@ namespace Booking.Repository
             _serializer.ToCSV(FilePath, _reservations);
         }
 
+        public List<AccommodationReservation> GetAllWithDeleted()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
         public List<AccommodationReservation> GetAll()
         {
             List<AccommodationReservation> reservations = new List<AccommodationReservation>();

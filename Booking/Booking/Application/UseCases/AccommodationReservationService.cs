@@ -25,6 +25,7 @@ namespace Booking.Service
         private readonly IUserRepository _userRepository;
         private readonly IAccommodationReservationRequestsRepostiory _accommodationReservationRequestRepository;
         private readonly IAccommodationGradeRepository _accommodationGradeRepository;
+        private readonly IRenovationRecommodationRepository _renovationRecommedationRepository;
         public static int SignedFirstGuestId;
 		public AccommodationReservationService()
         {
@@ -35,6 +36,7 @@ namespace Booking.Service
             _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
             _accommodationReservationRequestRepository = InjectorRepository.CreateInstance<IAccommodationReservationRequestsRepostiory>();
             _accommodationGradeRepository = InjectorRepository.CreateInstance<IAccommodationGradeRepository>();
+            _renovationRecommedationRepository = InjectorRepository.CreateInstance<IRenovationRecommodationRepository>();
         }
 
         public int GetSignedInFirstGuest()
@@ -80,10 +82,152 @@ namespace Booking.Service
         {
             _repository.Add(reservation);
         }
-        //public List<OwnerYearStatistic> GetYearStatistics(Accommodation selectedAccommodation)
-        //{
-            
-        //}
+        public int CalculateBestYear(List<OwnerYearStatistic> statistics)
+        {
+            int bestYear = statistics[0].Year;
+            double bestStatistic = (Convert.ToDouble(statistics[0].NumberOfReservations)) / 365;
+            foreach (var s in statistics) 
+            {
+                if ((Convert.ToDouble(s.NumberOfReservations / 365)) > bestStatistic) 
+                {
+                    bestYear = s.Year;
+                    bestStatistic = (Convert.ToDouble(s.NumberOfReservations)) / 365;
+                }
+            }
+            return bestYear;
+        }
+        public List<OwnerYearStatistic> GetYearStatistics(Accommodation selectedAccommodation)
+        {
+            DateTime FirstReservation = GetFirstReservation(selectedAccommodation);
+            DateTime LastReservation = GetLastReservation(selectedAccommodation);
+            List<OwnerYearStatistic> result = new List<OwnerYearStatistic>();
+            List<AccommodationReservation> reservationList = new List<AccommodationReservation>();
+            foreach (var r in _repository.GetAllWithDeleted())
+            {
+                if (r.Accommodation.Id == selectedAccommodation.Id)
+                {
+                    reservationList.Add(r);
+                }
+            }
+            int FirstYear = FirstReservation.Year;
+            int LastYear = LastReservation.Year;
+            result = FillResult(FirstYear,LastYear);
+            foreach (var r in reservationList) 
+            {
+                foreach (var s in result)
+                {
+                    if (s.Year == r.ArrivalDay.Year) 
+                    {
+                        s.NumberOfReservations++;
+                        if (r.Deleted == 1) 
+                        {
+                            s.NumberOfCancelations++;
+                        }
+                    }
+
+                }
+            }
+            List<AccommodationReservationRequests> requests = new List<AccommodationReservationRequests>();
+            requests = FillRequests(selectedAccommodation);
+            foreach (var r in requests) 
+            {
+                foreach (var s in result) 
+                {
+                    if (s.Year == r.NewArrivalDay.Year) 
+                    {
+                        s.NumberOfReservations--;
+                    }
+                    if (s.Year == r.AccommodationReservation.ArrivalDay.Year) 
+                    {
+                        s.NumberOfCancelations--;
+                        s.NumberOfReschedulings++;
+                    }
+                }
+            }
+            List<RenovationRecommodation> recommodations = new List<RenovationRecommodation>();
+            recommodations = FillRecommodations(selectedAccommodation);
+            foreach (var r in recommodations)
+            {
+                foreach (var s in result)
+                {
+                    if (s.Year == r.AccommodationReservation.ArrivalDay.Year)
+                    {
+                        s.NumberOfSuggestions++;
+                    }
+                }
+            }
+            return result;
+        }
+        public List<AccommodationReservationRequests> FillRequests(Accommodation selectedAccommodation)
+        {
+            List<AccommodationReservationRequests> requests = new List<AccommodationReservationRequests>();
+            foreach (var request in _accommodationReservationRequestRepository.GetAll())
+            {
+                request.AccommodationReservation = _repository.GetById(request.AccommodationReservation.Id);
+                if (request.AccommodationReservation.Accommodation.Id == selectedAccommodation.Id && request.Status==Model.Enums.RequestStatus.ACCEPTED) 
+                {
+                    requests.Add(request);
+                }
+            }
+            return requests;
+        }
+        public List<RenovationRecommodation> FillRecommodations(Accommodation selectedAccommodation)
+        {
+            List<RenovationRecommodation> recommodations = new List<RenovationRecommodation>();
+            foreach (var recommodation in _renovationRecommedationRepository.GetAll())
+            {
+                recommodation.AccommodationReservation = _repository.GetById(recommodation.AccommodationReservation.Id);
+                if (recommodation.AccommodationReservation.Accommodation.Id == selectedAccommodation.Id)
+                {
+                    recommodations.Add(recommodation);
+                }
+            }
+            return recommodations;
+        }
+        public List<OwnerYearStatistic> FillResult(int FirstYear,int LastYear) 
+        {
+            List<OwnerYearStatistic> result = new List<OwnerYearStatistic>();
+            for (int i = FirstYear; i <= LastYear; i++)
+            {
+                OwnerYearStatistic ownerYearStatistic = new OwnerYearStatistic();
+                ownerYearStatistic.Year = i;
+                ownerYearStatistic.NumberOfReschedulings = 0;
+                ownerYearStatistic.NumberOfReservations = 0;
+                ownerYearStatistic.NumberOfCancelations = 0;
+                ownerYearStatistic.NumberOfSuggestions = 0;
+                result.Add(ownerYearStatistic);
+            }
+            return result;
+        }
+        public DateTime GetLastReservation(Accommodation selectedAccommodation)
+        {
+            List<AccommodationReservation> reservationList = new List<AccommodationReservation>();
+            reservationList = _repository.GetAllWithDeleted();
+            DateTime dateTime = reservationList[0].ArrivalDay;
+            foreach (var r in reservationList)
+            {
+                if (r.ArrivalDay > dateTime && r.Accommodation.Id == selectedAccommodation.Id)
+                {
+                    dateTime = r.ArrivalDay;
+                }
+            }
+            return dateTime;
+        }
+
+        public DateTime GetFirstReservation(Accommodation selectedAccommodation)
+        {
+            List<AccommodationReservation> reservationList = new List<AccommodationReservation>();
+            reservationList = _repository.GetAllWithDeleted();
+            DateTime dateTime = reservationList[0].ArrivalDay;
+            foreach (var r in reservationList) 
+            {
+                if (r.ArrivalDay < dateTime && r.Accommodation.Id == selectedAccommodation.Id) 
+                {
+                    dateTime = r.ArrivalDay;
+                }
+            }
+            return dateTime;
+        }
 
         public void Delete(AccommodationReservation selectedReservation)
         {

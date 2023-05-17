@@ -25,6 +25,7 @@ namespace Booking.WPF.ViewModels.Owner
         public String AccommodationLabel { get; set; } = String.Empty;
         public RelayCommand Detail { get; set; }
         public RelayCommand Close { get; set; }
+        public string BestYearLabel { get; set; }
         private readonly Window _window;
 
         public AccommodationStatisticsByYearsViewModel(Accommodation SelectedAccommodation, Window window)
@@ -33,9 +34,12 @@ namespace Booking.WPF.ViewModels.Owner
             selectedAccommodation = SelectedAccommodation;
             AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
             AccommodationLabel = SetAccommodationLabel(SelectedAccommodation);
-            //yearStatistics = new ObservableCollection<OwnerYearStatistic>(AccommodationReservationService.GetYearStatistics(selectedAccommodation));
+            yearStatistics = new ObservableCollection<OwnerYearStatistic>(AccommodationReservationService.GetYearStatistics(selectedAccommodation));
             Detail = new RelayCommand(DetailForYear);
             Close = new RelayCommand(CloseWindow);
+            List<OwnerYearStatistic> BestYearStatistics = AccommodationReservationService.GetYearStatistics(selectedAccommodation);
+            int bestYear = AccommodationReservationService.CalculateBestYear(BestYearStatistics);
+            BestYearLabel = bestYear.ToString();
         }
         private void CloseWindow(object param)
         {
@@ -45,10 +49,10 @@ namespace Booking.WPF.ViewModels.Owner
         {
             yearStatistics.Clear();
 
-            //foreach (OwnerYearStatistic s in AccommodationReservationService.GetYearStatistics(selectedAccommodation))
-            //{
-             //   yearStatistics.Add(s);
-            //}
+            foreach (OwnerYearStatistic s in AccommodationReservationService.GetYearStatistics(selectedAccommodation))
+            {
+                yearStatistics.Add(s);
+            }
         }
         private void DetailForYear(object param)
         {

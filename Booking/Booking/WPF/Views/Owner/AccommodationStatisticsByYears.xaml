@@ -31,7 +31,7 @@
             SelectedItem="{Binding SelectedYearStatistic}"
             SelectionMode="Single"
             CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserReorderColumns="False"
-            ItemsSource="{Binding Path=YearStatistics, UpdateSourceTrigger=PropertyChanged}" >
+            ItemsSource="{Binding Path=yearStatistics, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Width="60" Header="Year" Binding="{Binding Year}"/>
                 <DataGridTextColumn Width="*" Header="Number of reservations" Binding="{Binding NumberOfReservations}"/>

@@ -13,5 +13,6 @@ namespace Booking.Domain.RepositoryInterfaces
 		void Add(AccommodationReservation reservation);
 		void Delete(AccommodationReservation selectedReservation);
 		void Save(List<AccommodationReservation> list);
+		List<AccommodationReservation> GetAllWithDeleted();
 	}
 }
