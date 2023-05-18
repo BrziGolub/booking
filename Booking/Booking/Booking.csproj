@@ -62,6 +62,7 @@
     <Compile Include="Application\UseCases\RenovationRecommodationService.cs" />
     <Compile Include="Application\UseCases\SuperGuestService.cs" />
     <Compile Include="Application\UseCases\TourImageService.cs" />
+    <Compile Include="Application\UseCases\TourNotificationService.cs" />
     <Compile Include="Application\UseCases\TourRequestService.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Domain\DTO\MonthlyRequests.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Domain\ServiceInterfaces\ITourGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourImageService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourNotificationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourRequestService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourReservationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourService.cs" />
@@ -196,6 +198,7 @@
     <Compile Include="WPF\ViewModels\Guest2\ShowVouchersViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowRequestCommentViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\StatisticsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest2\TourNotificationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\TourRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideAcceptingTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel.cs" />
@@ -262,6 +265,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guest2\StatisticsView.xaml.cs">
       <DependentUpon>StatisticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest2\TourNotificationView.xaml.cs">
+      <DependentUpon>TourNotificationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guest2\TourRequestsView.xaml.cs">
       <DependentUpon>TourRequestsView.xaml</DependentUpon>
@@ -455,6 +461,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest2\StatisticsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest2\TourNotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -789,6 +799,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\statistic128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\notifications128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

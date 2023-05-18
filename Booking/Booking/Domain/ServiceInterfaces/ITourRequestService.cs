@@ -1,5 +1,6 @@
 ﻿using Booking.Domain.DTO;
 using Booking.Domain.Model;
+using Booking.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,5 +35,7 @@ namespace Booking.Domain.ServiceInterfaces
         List<string> GetCitiesByUserId(int id, string year);
         int GetNumberOfRequestsByCity(int id, string city, string year);
         double GetAverageVisitorsByUserId(int id, string year);
+        List<TourRequest> GetAllNotAccepted();
+		List<User> CheckUnfulfilledRequest(string lang, Location loc);
 	}
 }

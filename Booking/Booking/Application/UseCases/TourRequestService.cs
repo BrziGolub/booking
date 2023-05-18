@@ -2,6 +2,7 @@
 using Booking.Domain.Model;
 using Booking.Domain.RepositoryInterfaces;
 using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Repository;
 using Booking.Service;
 using Booking.Util;
@@ -441,6 +442,37 @@ namespace Booking.Application.UseCases
 					ChangeStatus(tr);
 				}
 			}
+		}
+
+		public List<TourRequest> GetAllNotAccepted()
+		{
+			List<TourRequest> tourRequests = new List<TourRequest>();
+
+			foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+			{
+				if (tourRequest.Status.Equals("On hold") || tourRequest.Status.Equals("Invalid"))
+				{
+					tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
+					tourRequests.Add(tourRequest);
+				}
+			}
+
+			return tourRequests;
+		}
+
+		public List<User> CheckUnfulfilledRequest(string lang, Location loc)
+		{
+			List<User> users = new List<User>();
+			foreach (TourRequest tr in GetAllNotAccepted())
+			{
+				bool isLoc = tr.Location.State.Equals(loc.State) || tr.Location.City.Equals(loc.City);
+				bool isLang = tr.Language.Equals(lang);
+				if (isLang || isLoc)
+				{
+					users.Add(tr.User);
+				}
+			}
+			return users;
 		}
 	}
 }
