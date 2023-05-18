@@ -81,7 +81,14 @@
 					  SelectedItem="{Binding SelectedNotification}">
 
 				<DataGrid.Columns>
-					<DataGridTextColumn Header="Message" Width="4*" Binding="{Binding Message}"/>
+					<DataGridTextColumn Header="Message" Width="5*" Binding="{Binding Message}">
+						<DataGridTextColumn.ElementStyle>
+							<Style>
+								<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+							</Style>
+						</DataGridTextColumn.ElementStyle>
+					</DataGridTextColumn>
+					<DataGridTextColumn Header="Date" Width="2*" Binding="{Binding CreatedTime, StringFormat={}{0:dd/MM/yyyy}}"/>
 					<DataGridTemplateColumn Header="Tour" Width="*">
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>

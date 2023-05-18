@@ -1,5 +1,6 @@
 ﻿using Booking.Model;
 using Booking.Serializer;
+using System;
 
 namespace Booking.Domain.Model
 {
@@ -10,6 +11,7 @@ namespace Booking.Domain.Model
 		public string Message { get; set; }
 		public bool IsRead { get; set; }
 		public Tour Tour { get; set; }
+		public DateTime CreatedTime { get; set; }
 
 		public TourNotification()
 		{
@@ -24,6 +26,7 @@ namespace Booking.Domain.Model
 			Message = values[2];
 			IsRead = bool.Parse(values[3]);
 			Tour.Id = int.Parse(values[4]);
+			CreatedTime = DateTime.Parse(values[5]);
 		}
 
 		public string[] ToCSV()
@@ -35,6 +38,7 @@ namespace Booking.Domain.Model
 				Message,
 				IsRead.ToString(),
 				Tour.Id.ToString(),
+				CreatedTime.ToString("dd/MM/yyyy")
 			};
 			return csvValues;
 		}

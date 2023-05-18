@@ -71,7 +71,7 @@ namespace Booking.Application.UseCases
 		{
 			observe.Clear();
 
-			foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+			foreach (TourRequest tourRequest in GetAllOnHold())
 			{
 				tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
 
@@ -145,7 +145,7 @@ namespace Booking.Application.UseCases
 		public void ShowAll(ObservableCollection<TourRequest> observe)
 		{
 			observe.Clear();
-			foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+			foreach (TourRequest tourRequest in GetAllOnHold())
 			{
 				tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
 				observe.Add(tourRequest);
@@ -467,12 +467,22 @@ namespace Booking.Application.UseCases
 			{
 				bool isLoc = tr.Location.State.Equals(loc.State) || tr.Location.City.Equals(loc.City);
 				bool isLang = tr.Language.Equals(lang);
-				if (isLang || isLoc)
+				if ((isLang || isLoc) && !IsUserContained(users, tr.User))
 				{
 					users.Add(tr.User);
 				}
 			}
 			return users;
+		}
+
+		private bool IsUserContained(List<User> users, User u)
+		{
+			foreach (User user in users)
+			{
+				if(user.Id == u.Id)
+					return true;
+			}
+			return false;
 		}
 	}
 }

@@ -1,13 +1,9 @@
 ﻿using Booking.Domain.Model;
 using Booking.Domain.RepositoryInterfaces;
 using Booking.Domain.ServiceInterfaces;
-using Booking.Model;
 using Booking.Util;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Booking.Application.UseCases
 {
@@ -39,6 +35,7 @@ namespace Booking.Application.UseCases
 		public List<TourNotification> GetByUserId(int id)
 		{
 			List<TourNotification> tourNotifications = new List<TourNotification>();
+
 			foreach (var tn in GetAll())
 			{
 				if (tn.User.Id == id)
@@ -46,6 +43,9 @@ namespace Booking.Application.UseCases
 					tourNotifications.Add(tn);
 				}
 			}
+
+			tourNotifications.Reverse();
+
 			return tourNotifications;
 		}
 
@@ -54,6 +54,7 @@ namespace Booking.Application.UseCases
 			tn.Id = _tourNotificationRepository.NextId();
 			tn.Message = "New tour created by request";
 			tn.IsRead = false;
+			tn.CreatedTime = DateTime.Now;
 			return _tourNotificationRepository.Add(tn);
 		}
 	}
