@@ -62,6 +62,7 @@
     <Compile Include="Application\UseCases\RenovationRecommodationService.cs" />
     <Compile Include="Application\UseCases\SuperGuestService.cs" />
     <Compile Include="Application\UseCases\TourImageService.cs" />
+    <Compile Include="Application\UseCases\TourNotificationService.cs" />
     <Compile Include="Application\UseCases\TourRequestService.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Domain\DTO\MonthlyRequests.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Domain\Model\TourGrade.cs" />
     <Compile Include="Domain\Model\TourGuests.cs" />
     <Compile Include="Domain\Model\TourKeyPoint.cs" />
+    <Compile Include="Domain\Model\TourNotification.cs" />
     <Compile Include="Domain\Model\TourRequest.cs" />
     <Compile Include="Domain\Model\TourReservation.cs" />
     <Compile Include="Domain\Model\User.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Domain\RepositoryInterfaces\ITourGuestsRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourImageRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourKeyPointRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourNotificationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourReservationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IUserRepository.cs" />
@@ -127,6 +130,7 @@
     <Compile Include="Domain\ServiceInterfaces\ITourGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourImageService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourNotificationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourRequestService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourReservationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourService.cs" />
@@ -151,6 +155,7 @@
     <Compile Include="Repository\TourGuestsRepository.cs" />
     <Compile Include="Repository\TourImageRepository.cs" />
     <Compile Include="Repository\TourKeyPointRepository.cs" />
+    <Compile Include="Repository\TourNotificationRepository.cs" />
     <Compile Include="Repository\TourRepository.cs" />
     <Compile Include="Repository\TourRequestRepository.cs" />
     <Compile Include="Repository\TourReservationRepository.cs" />
@@ -193,6 +198,7 @@
     <Compile Include="WPF\ViewModels\Guest2\ShowVouchersViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowRequestCommentViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\StatisticsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest2\TourNotificationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\TourRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideAcceptingTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel.cs" />
@@ -259,6 +265,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guest2\StatisticsView.xaml.cs">
       <DependentUpon>StatisticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest2\TourNotificationView.xaml.cs">
+      <DependentUpon>TourNotificationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guest2\TourRequestsView.xaml.cs">
       <DependentUpon>TourRequestsView.xaml</DependentUpon>
@@ -452,6 +461,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest2\StatisticsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest2\TourNotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -654,6 +667,7 @@
     <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />
     <None Include="Resources\Data\tourKeyPoints.csv" />
+    <None Include="Resources\Data\tourNotifications.csv" />
     <None Include="Resources\Data\tourRequests.csv" />
     <None Include="Resources\Data\tourReservations.csv" />
     <None Include="Resources\Data\tours.csv" />
@@ -785,6 +799,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\statistic128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\notifications128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

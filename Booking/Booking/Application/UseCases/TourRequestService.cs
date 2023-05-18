@@ -2,6 +2,7 @@
 using Booking.Domain.Model;
 using Booking.Domain.RepositoryInterfaces;
 using Booking.Domain.ServiceInterfaces;
+using Booking.Model;
 using Booking.Repository;
 using Booking.Service;
 using Booking.Util;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace Booking.Application.UseCases
 {
@@ -22,6 +24,8 @@ namespace Booking.Application.UseCases
 		{
 			_tourRequestRepository = InjectorRepository.CreateInstance<ITourRequestRepository>();
 			_locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
+
+			CheckRequestDate();
 		}
 
 		public string GetMostPopularLanguageInLastYear()
@@ -67,7 +71,7 @@ namespace Booking.Application.UseCases
 		{
 			observe.Clear();
 
-			foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+			foreach (TourRequest tourRequest in GetAllOnHold())
 			{
 				tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
 
@@ -141,7 +145,7 @@ namespace Booking.Application.UseCases
 		public void ShowAll(ObservableCollection<TourRequest> observe)
 		{
 			observe.Clear();
-			foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+			foreach (TourRequest tourRequest in GetAllOnHold())
 			{
 				tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
 				observe.Add(tourRequest);
@@ -426,6 +430,59 @@ namespace Booking.Application.UseCases
 			}
 
 			return size > 0 ? Math.Round(visitors / size, 2) : visitors;
+		}
+
+		private void CheckRequestDate()
+		{
+			foreach (TourRequest tr in GetAllOnHold())
+			{
+				if (tr.StartTime < DateTime.Now.AddHours(48))
+				{
+					tr.Status = "Invalid";
+					ChangeStatus(tr);
+				}
+			}
+		}
+
+		public List<TourRequest> GetAllNotAccepted()
+		{
+			List<TourRequest> tourRequests = new List<TourRequest>();
+
+			foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+			{
+				if (tourRequest.Status.Equals("On hold") || tourRequest.Status.Equals("Invalid"))
+				{
+					tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
+					tourRequests.Add(tourRequest);
+				}
+			}
+
+			return tourRequests;
+		}
+
+		public List<User> CheckUnfulfilledRequest(string lang, Location loc)
+		{
+			List<User> users = new List<User>();
+			foreach (TourRequest tr in GetAllNotAccepted())
+			{
+				bool isLoc = tr.Location.State.Equals(loc.State) || tr.Location.City.Equals(loc.City);
+				bool isLang = tr.Language.Equals(lang);
+				if ((isLang || isLoc) && !IsUserContained(users, tr.User))
+				{
+					users.Add(tr.User);
+				}
+			}
+			return users;
+		}
+
+		private bool IsUserContained(List<User> users, User u)
+		{
+			foreach (User user in users)
+			{
+				if(user.Id == u.Id)
+					return true;
+			}
+			return false;
 		}
 	}
 }

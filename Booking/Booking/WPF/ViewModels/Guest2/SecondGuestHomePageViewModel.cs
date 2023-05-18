@@ -94,6 +94,7 @@ namespace Booking.WPF.ViewModels.Guest2
 		public RelayCommand Button_Click_NumericDown { get; set; }
 		public RelayCommand Button_Click_TourRequest { get; set; }
 		public RelayCommand Button_Click_Statistics { get; set; }
+		public RelayCommand Button_Click_Notifications { get; set; }
 
 		public SecondGuestHomePageViewModel(Window window)
 		{
@@ -135,6 +136,7 @@ namespace Booking.WPF.ViewModels.Guest2
 			Button_Click_NumericDown = new RelayCommand(NumericDown);
 			Button_Click_TourRequest = new RelayCommand(ButtonTourRequests);
 			Button_Click_Statistics = new RelayCommand(ButtonStatistics);
+			Button_Click_Notifications = new RelayCommand(ButtonNotifications);
 		}
 
 		public void TourSearch(string state, string city, string duration, string lang, string passengers)
@@ -321,6 +323,12 @@ namespace Booking.WPF.ViewModels.Guest2
 		private void ButtonStatistics(object param)
 		{
 			StatisticsView view = new StatisticsView();
+			view.ShowDialog();
+		}
+
+		private void ButtonNotifications(object param)
+		{
+			TourNotificationView view = new TourNotificationView();
 			view.ShowDialog();
 		}
 

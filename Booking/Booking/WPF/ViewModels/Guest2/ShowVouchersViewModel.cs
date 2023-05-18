@@ -19,6 +19,7 @@ namespace Booking.WPF.ViewModels.Guest2
 		private readonly IVoucherService _voucherService;
 
 		public ObservableCollection<Voucher> Vouchers { get; set; }
+
 		public RelayCommand Button_Click_Close { get; set; }
 		public RelayCommand Button_Click_GenerateReport { get; set; }
 

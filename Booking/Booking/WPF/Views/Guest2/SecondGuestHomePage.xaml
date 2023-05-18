@@ -84,6 +84,7 @@
             <MenuItem Header="_Vouchers" FontSize="14" Command="{Binding Button_Click_ShowVouchers}"/>
 			<MenuItem Header="_Statistics" FontSize="14" Command="{Binding Button_Click_Statistics}"/>
 			<MenuItem Header="_Tutorial" FontSize="14"/>
+			<MenuItem Header="_Notifications" FontSize="14" Command="{Binding Button_Click_Notifications}"/>
             <MenuItem Header="_Log out" FontSize="14" Command="{Binding Button_Click_SignOff}"/>
         </Menu>
 
