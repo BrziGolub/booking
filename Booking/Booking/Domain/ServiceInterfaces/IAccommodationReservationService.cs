@@ -35,5 +35,12 @@ namespace Booking.Domain.ServiceInterfaces
         DateTime GetLastReservation(Accommodation selectedAccommodation);
         int CalculateBestYear(List<OwnerYearStatistic> statistics,Accommodation selectedAccommodation);
         int GetDaysSpan(AccommodationReservation reservation);
+        List<OwnerMonthStatistic> GetMonthStatistics(Accommodation selectedAccommodation, int year);
+        List<OwnerMonthStatistic> FillResultMonth();
+        List<OwnerMonthStatistic> ChangeToMonths(List<OwnerMonthStatistic> result);
+        List<AccommodationReservation> FillReservationsForMonthStatistics(Accommodation selectedAccommodation, int year);
+        List<OwnerMonthStatistic> ChangeToNumbers(List<OwnerMonthStatistic> result);
+        string CalculateBestMonth(List<OwnerMonthStatistic> BestMonthStatistics, Accommodation selectedAccommodation, int year);
+        bool CheckMonthDuration(OwnerMonthStatistic statistic);
     }
 }
