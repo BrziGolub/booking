@@ -33,6 +33,7 @@ namespace Booking.Domain.ServiceInterfaces
         DateTime GetFirstReservation(Accommodation selectedAccommodation);
         List<AccommodationReservationRequests> FillRequests(Accommodation selectedAccommodation);
         DateTime GetLastReservation(Accommodation selectedAccommodation);
-        int CalculateBestYear(List<OwnerYearStatistic> statistics);
+        int CalculateBestYear(List<OwnerYearStatistic> statistics,Accommodation selectedAccommodation);
+        int GetDaysSpan(AccommodationReservation reservation);
     }
 }

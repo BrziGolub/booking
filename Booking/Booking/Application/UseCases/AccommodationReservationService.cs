@@ -82,8 +82,32 @@ namespace Booking.Service
         {
             _repository.Add(reservation);
         }
-        public int CalculateBestYear(List<OwnerYearStatistic> statistics)
+        public int GetDaysSpan(AccommodationReservation reservation) 
         {
+            int days=0;
+            for (DateTime date = reservation.ArrivalDay; date < reservation.DepartureDay; date=date.AddDays(1))
+            {
+                days++;
+            }
+            return days;
+        }
+        public int CalculateBestYear(List<OwnerYearStatistic> statistics,Accommodation selectedAccommodation)
+        {
+            List<AccommodationReservation> reservationList = new List<AccommodationReservation>();
+            foreach (var s in statistics) 
+            {
+                s.NumberOfReservations = 0;
+            }
+            foreach (var r in _repository.GetAll())
+            {
+                foreach (var s in statistics)
+                {
+                    if (r.ArrivalDay.Year == s.Year && r.Accommodation.Id == selectedAccommodation.Id && r.ArrivalDay<=DateTime.Now) 
+                    {
+                        s.NumberOfReservations = s.NumberOfReservations + GetDaysSpan(r);
+                    }
+                }
+            }
             int bestYear = statistics[0].Year;
             double bestStatistic = (Convert.ToDouble(statistics[0].NumberOfReservations)) / 365;
             foreach (var s in statistics) 

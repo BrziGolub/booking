@@ -3,6 +3,7 @@ using Booking.Domain.DTO;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Util;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,7 +39,7 @@ namespace Booking.WPF.ViewModels.Owner
             Detail = new RelayCommand(DetailForYear);
             Close = new RelayCommand(CloseWindow);
             List<OwnerYearStatistic> BestYearStatistics = AccommodationReservationService.GetYearStatistics(selectedAccommodation);
-            int bestYear = AccommodationReservationService.CalculateBestYear(BestYearStatistics);
+            int bestYear = AccommodationReservationService.CalculateBestYear(BestYearStatistics,selectedAccommodation);
             BestYearLabel = bestYear.ToString();
         }
         private void CloseWindow(object param)
@@ -56,7 +57,16 @@ namespace Booking.WPF.ViewModels.Owner
         }
         private void DetailForYear(object param)
         {
-            _window.Close();
+            if (SelectedYearStatistic == null)
+            {
+                MessageBox.Show("Select a year for details please");
+                return;
+            }
+            else
+            {
+                AccommodationStatisticsByMonths accommodationStatisticsByMonths = new AccommodationStatisticsByMonths(selectedAccommodation, SelectedYearStatistic);
+                accommodationStatisticsByMonths.Show();
+            }
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

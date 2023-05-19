@@ -66,6 +66,7 @@
     <Compile Include="Application\UseCases\TourRequestService.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Domain\DTO\MonthlyRequests.cs" />
+    <Compile Include="Domain\DTO\OwnerMonthStatistic.cs" />
     <Compile Include="Domain\DTO\OwnerYearStatistic.cs" />
     <Compile Include="Domain\DTO\YearlyRequests.cs" />
     <Compile Include="Domain\Model\AccommodationAndOwnerGrade.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel2.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideRequestsStatisticViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\ShowDescriptionViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\AccommodationStatisticsByMonthsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\AccommodationStatisticsByYearsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\GradingWindowViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerDateMoveViewModel.cs" />
@@ -292,6 +294,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guide\ShowDescription.xaml.cs">
       <DependentUpon>ShowDescription.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Owner\AccommodationStatisticsByMonths.xaml.cs">
+      <DependentUpon>AccommodationStatisticsByMonths.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Owner\AccommodationStatisticsByYears.xaml.cs">
       <DependentUpon>AccommodationStatisticsByYears.xaml</DependentUpon>
@@ -497,6 +502,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guide\ShowDescription.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Owner\AccommodationStatisticsByMonths.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
