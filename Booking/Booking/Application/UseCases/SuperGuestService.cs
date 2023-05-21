@@ -52,16 +52,11 @@ namespace Booking.Application.UseCases
         {
             List<AccommodationReservation> _guestsReservations = GetGeustsReservatonst(SignedGuest);
 
-            /*_guestsReservations = _guestsReservations
-                .OrderBy(r => r.DepartureDay.AddYears(1).Year > DateTime.Now.Year && r.DepartureDay.Date <= DateTime.Today)
-                .ThenBy(r => r.DepartureDay.Date)
-                .ToList();*/
-
             List<AccommodationReservation> copyReservations = new List<AccommodationReservation>();
 
             foreach(var r in _guestsReservations)
             {
-                if(r.DepartureDay.AddYears(1).Year > DateTime.Now.Year && r.DepartureDay.Date <= DateTime.Today)
+                if(r.DepartureDay.AddYears(1) > DateTime.Now && r.DepartureDay.Date <= DateTime.Now)
                 {
                     copyReservations.Add(r);
                 }
@@ -95,7 +90,7 @@ namespace Booking.Application.UseCases
 
             foreach (var reservation in _guestsReservations)
             {
-                if (reservation.DepartureDay.AddYears(1).Year > DateTime.Now.Year && reservation.DepartureDay.Date < DateTime.Today)
+                if (reservation.DepartureDay.AddYears(1) > DateTime.Now && reservation.DepartureDay.Date < DateTime.Now)
                 {
                     countNumberOfReservations++;
                 }
@@ -175,7 +170,7 @@ namespace Booking.Application.UseCases
             if(SignedGuest.Super == 1)
             {
                 SuperGuest SuperGuest = _repository.GetSuperBySignedGuestId(SignedGuest.Id);
-                if (SuperGuest.BonusPoints != 0)
+                if (SuperGuest.BonusPoints > 0)
                 {
                     SuperGuest.BonusPoints -= 1;
                     _repository.Update(SuperGuest);
