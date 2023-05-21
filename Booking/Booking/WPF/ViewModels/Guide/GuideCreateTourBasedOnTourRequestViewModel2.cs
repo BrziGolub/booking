@@ -26,8 +26,9 @@ namespace Booking.WPF.ViewModels.Guide
         public ILocationService locationService { get; set; }
         public ITourImageService tourImageService { get; set; }
         public ITourRequestService tourRequestService { get; set; }
+		public ITourNotificationService tourNotificationService { get; set; }
 
-        private TourKeyPoint _selectedTourKeyPoint;
+		private TourKeyPoint _selectedTourKeyPoint;
         public TourKeyPoint SelectedTourKeyPoint
         {
             get { return _selectedTourKeyPoint; }
@@ -285,8 +286,9 @@ namespace Booking.WPF.ViewModels.Guide
             locationService = InjectorService.CreateInstance<ILocationService>();
             tourImageService = InjectorService.CreateInstance<ITourImageService>();
             tourRequestService = InjectorService.CreateInstance<ITourRequestService>();
+			tourNotificationService = InjectorService.CreateInstance<ITourNotificationService>();
 
-            CityCollection = new ObservableCollection<string>();
+			CityCollection = new ObservableCollection<string>();
             CountryCollection = new ObservableCollection<string>();
             KeyPointsCollection = new ObservableCollection<string>();
 
@@ -438,48 +440,59 @@ namespace Booking.WPF.ViewModels.Guide
         private void SaveTour()
         {
             if (CanSaveTour())
-            {
-                Location location = new Location
-                {
-                    State = Country,
-                    City = City
-                };
-                int LocationID = locationService.GetIdByCountryAndCity(Country, City);
-                tour.Location.Id = LocationID;
-                tour.Location = locationService.GetById(LocationID);
-                tour.Name = TourName;
-                tour.Description = Description;
-                tour.Language = TourLanguage;
-                tour.MaxVisitors = MaxGuestNumber;
-                tour.StartTime = DateTime.Parse(StartTime);
-                tour.Duration = Duration;
-                SelectedTourRequest.Status = "Accepted";
-                SelectedTourRequest.Notify = true;
-                SelectedTourRequest.TourReservedStartTime = DateTime.Parse(StartTime);
+			{
+				Location location = new Location
+				{
+					State = Country,
+					City = City
+				};
+				int LocationID = locationService.GetIdByCountryAndCity(Country, City);
+				tour.Location.Id = LocationID;
+				tour.Location = locationService.GetById(LocationID);
+				tour.Name = TourName;
+				tour.Description = Description;
+				tour.Language = TourLanguage;
+				tour.MaxVisitors = MaxGuestNumber;
+				tour.StartTime = DateTime.Parse(StartTime);
+				tour.Duration = Duration;
+				SelectedTourRequest.Status = "Accepted";
+				SelectedTourRequest.Notify = true;
+				SelectedTourRequest.TourReservedStartTime = DateTime.Parse(StartTime);
 
-                if (tour.Destinations.Count < 2)
-                {
-                    MessageBox.Show("Tour need to have 2 'KEY POINTS' at least");
-                    return;
-                }
-                if (tour.Images.Count < 1)
-                {
-                    MessageBox.Show("Tour need to have 1 'IMAGE' at least");
-                    return;
-                }
+				if (tour.Destinations.Count < 2)
+				{
+					MessageBox.Show("Tour need to have 2 'KEY POINTS' at least");
+					return;
+				}
+				if (tour.Images.Count < 1)
+				{
+					MessageBox.Show("Tour need to have 1 'IMAGE' at least");
+					return;
+				}
 
-                tourService.Create(tour);
-                tourRequestService.ChangeStatus(SelectedTourRequest);
-                MessageBox.Show("Tour successfully created");
-                CloseWindow();
-            }
-            else
+				tourService.Create(tour);
+				tourRequestService.ChangeStatus(SelectedTourRequest);
+
+				CreateNotification();
+
+				MessageBox.Show("Tour successfully created");
+				CloseWindow();
+			}
+			else
             {
                 MessageBox.Show("Please fill in all required fields.");
             }
         }
 
-        private void ButtonAddPicture(object param)
+		private void CreateNotification()
+		{
+			TourNotification tn = new TourNotification();
+			tn.Tour = tour;
+			tn.User = SelectedTourRequest.User;
+			tourNotificationService.Add(tn);
+		}
+
+		private void ButtonAddPicture(object param)
         {
             System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
             dialog.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";

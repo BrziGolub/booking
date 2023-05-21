@@ -7,7 +7,7 @@
 		xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="CreateTourRequestView"
-		Height="400" Width="450"
+		Height="420" Width="450"
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="NoResize"
 		Background="#BBC1D1">

@@ -153,6 +153,7 @@ namespace Booking.WPF.ViewModels.Guest2
 				tourRequest.StartTime = StartDate;
 				tourRequest.EndTime = EndDate;
 				tourRequest.Description = Description;
+				tourRequest.TourReservedStartTime = DateTime.Today;
 
 				_tourRequestService.AddTourRequest(tourRequest);
 				CloseWindow();

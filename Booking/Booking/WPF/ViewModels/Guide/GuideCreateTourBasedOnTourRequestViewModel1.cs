@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using Booking.Domain.Model;
 
 namespace Booking.WPF.ViewModels.Guide
 {
@@ -25,8 +26,9 @@ namespace Booking.WPF.ViewModels.Guide
         public ILocationService locationService { get; set; }
         public ITourImageService tourImageService { get; set; }
         public ITourRequestService tourRequestService { get; set; }
+		public ITourNotificationService tourNotificationService { get; set; }
 
-        private TourKeyPoint _selectedTourKeyPoint;
+		private TourKeyPoint _selectedTourKeyPoint;
         public TourKeyPoint SelectedTourKeyPoint
         {
             get { return _selectedTourKeyPoint; }
@@ -282,8 +284,9 @@ namespace Booking.WPF.ViewModels.Guide
             locationService = InjectorService.CreateInstance<ILocationService>();
             tourImageService = InjectorService.CreateInstance<ITourImageService>();
             tourRequestService = InjectorService.CreateInstance<ITourRequestService>();
+			tourNotificationService = InjectorService.CreateInstance<ITourNotificationService>();
 
-            CityCollection = new ObservableCollection<string>();
+			CityCollection = new ObservableCollection<string>();
             CountryCollection = new ObservableCollection<string>();
             KeyPointsCollection = new ObservableCollection<string>();
 
@@ -535,7 +538,10 @@ namespace Booking.WPF.ViewModels.Guide
                 }
 
                 tourService.Create(tour);
-                MessageBox.Show("Tour successfully created");
+
+				CreateNotifications();
+
+				MessageBox.Show("Tour successfully created");
                 CloseWindow();
             }
             else
@@ -544,7 +550,20 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
 
-        private void ButtonAddPicture(object param)
+		private void CreateNotifications()
+		{
+			List<User> users = tourRequestService.CheckUnfulfilledRequest(tour.Language, tour.Location);
+
+			foreach (var u in users)
+			{
+				TourNotification tn = new TourNotification();
+				tn.Tour = tour;
+				tn.User = u;
+				tourNotificationService.Add(tn);
+			}
+		}
+
+		private void ButtonAddPicture(object param)
         {
             System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
             dialog.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";

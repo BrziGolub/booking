@@ -1,4 +1,5 @@
-﻿using Booking.Domain.RepositoryInterfaces;
+﻿using Booking.Domain.Model;
+using Booking.Domain.RepositoryInterfaces;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Model.Enums;
@@ -23,6 +24,7 @@ namespace Booking.Service
         private readonly ILocationRepository _locationRepository;
         private readonly IUserRepository _userRepository;
         private readonly IAccommodationImagesRepository _accommodationImagesRepository;
+        private readonly IAccommodationRenovationRepository _accommodationRenovationRepository;
         public static int SignedOwnerId;
 
         public AccommodationService()
@@ -31,6 +33,7 @@ namespace Booking.Service
             _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
             _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
             _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
+            _accommodationRenovationRepository = InjectorRepository.CreateInstance<IAccommodationRenovationRepository>();
 
             _accommodationImagesRepository = InjectorRepository.CreateInstance<IAccommodationImagesRepository>();
         }
@@ -61,6 +64,12 @@ namespace Booking.Service
         {
             List<Accommodation> accommodationList = new List<Accommodation>();
             accommodationList = _accommodationRepository.GetAll();
+            List<AccommodationRenovation> renovationList = new List<AccommodationRenovation>();
+            renovationList = _accommodationRenovationRepository.GetAll();
+            foreach (var r in renovationList)
+            {
+                r.Accommodation = _accommodationRepository.GetById(r.Accommodation.Id);
+            }
             foreach (var a in accommodationList)
             {
                 a.Location = _locationRepository.GetById(a.Location.Id);
@@ -75,6 +84,13 @@ namespace Booking.Service
                 if (a.Owner.Super == 1) 
                 {
                     a.Name = a.Name + "*";
+                }
+                foreach (var r in renovationList) 
+                {
+                    if (!a.Name.Contains("(renovated)") && a.Id == r.Accommodation.Id && r.EndDay.AddYears(1) > DateTime.Now && r.EndDay < DateTime.Now)
+                    {
+                        a.Name = a.Name + "(renovated)";
+                    }
                 }
             }
             return accommodationList;
