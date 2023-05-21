@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="SuperOwner" Height="768" Width="1024">
+        Title="SuperOwner" Height="768" Width="1024"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock Margin="10,6,0,0" FontWeight="Bold" FontSize="42" Text="Super owner" Foreground="#FFFFF200" >
             <TextBlock.Effect>
@@ -16,8 +17,10 @@
         <Separator Margin="0,-120,0,480" Width="1024" HorizontalAlignment="Center" />
         <Label Content="Number of grades" FontSize="20" Margin="-650,-275,50,0" Width="200" Height="100" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
         <TextBlock x:Name="NumberOfGrades"
+                   Text="{Binding NumberOfGradesText}"
                    Margin="200,-310,20,0"                  
                    FontSize="50"
+                   ToolTip="This is the number of grades you have"
                    FontStyle="Italic"
                    FontWeight="SemiBold"
                    Foreground="Black"
@@ -26,8 +29,10 @@
 
         <Label Content="Average grade" FontSize="20" Margin="-670,170,0,0" Width="200" Height="100" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"></Label>
         <TextBlock x:Name="AverageGrade"
+                   Text="{Binding AverageGradeText}"
                    Margin="200,135,0,0"                    
                    FontSize="50"
+                   ToolTip="This is your average grade"
                    FontStyle="Italic"
                    FontWeight="SemiBold"
                    Foreground="Black"
@@ -35,6 +40,7 @@
                    Height="100" Width="600"></TextBlock>
 
         <TextBlock x:Name="IsSuper"
+                   Text="{Binding IsSuperText}"
                    Margin="0,400,0,0"                    
                    FontSize="23"
                    FontStyle="Italic"
@@ -81,7 +87,7 @@
             </Rectangle>
         </Canvas>
         <WrapPanel FlowDirection="LeftToRight" Margin="500,650,0,0">
-            <Button Margin="20 0 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Click="Close" >CLOSE</Button>
+            <Button Margin="20 -10 0 0"  VerticalAlignment="Center" ToolTip="Press to close this window" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Command="{Binding CloseSuper}" >CLOSE</Button>
         </WrapPanel>
         
     </Grid>

@@ -12,5 +12,7 @@ namespace Booking.Domain.RepositoryInterfaces
 		Tour GetByName(string name);
 		Tour Update(Tour tour);
 		List<Tour> GetValidTours();
-	}
+		Tour GetStartedTour();
+
+    }
 }

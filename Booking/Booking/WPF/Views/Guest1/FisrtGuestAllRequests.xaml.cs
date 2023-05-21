@@ -4,6 +4,7 @@ using Booking.Observer;
 using Booking.Repository;
 using Booking.Service;
 using Booking.Util;
+using Booking.WPF.ViewModels.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,52 +23,19 @@ using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for FisrtGuestAllRequests.xaml
-    /// </summary>
-    public partial class FisrtGuestAllRequests : Page, IObserver
+
+    public partial class FisrtGuestAllRequests : Page
     {
 
-        public ObservableCollection<AccommodationReservationRequests> _requests;
-        //public AccommodationReservationRequestService _requestsService { get; set; }
-        public IAccommodationReservationRequestService _requestsService { get; set; }
-
-
-        public FisrtGuestAllRequests()
+        public FisrtGuestAllRequests(NavigationService navigationService)
         {
             InitializeComponent();
-            this.DataContext = this;
-            
-            //var app = Application.Current as App;
-            //_requestsService = app.AccommodationReservationRequestService;
-            _requestsService = InjectorService.CreateInstance<IAccommodationReservationRequestService>();
-            
-            _requestsService.Subscribe(this);
-            _requests = new ObservableCollection<AccommodationReservationRequests>(_requestsService.GetAll());
-            RequestsDataGrid.ItemsSource = _requests;
-            setWidthForReservationsDataGrid();
+            this.DataContext = new FirstGuestAllRequestsViewModel(navigationService);
+             
+           
         }
 
-        public void setWidthForReservationsDataGrid()
-        {
-            double totalWidth = 0;
-            foreach (DataGridColumn column in RequestsDataGrid.Columns)
-            {
-                if (column.ActualWidth > 0)
-                {
-                    totalWidth += column.ActualWidth;
-                }
-            }
-            RequestsDataGrid.Width = totalWidth;
-        }
+   
 
-        public void Update()
-        {
-            _requests.Clear();
-            foreach(var request in _requestsService.GetAll())
-            {
-                _requests.Add(request);
-            }
-        }
     }
 }

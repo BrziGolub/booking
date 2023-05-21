@@ -3,6 +3,7 @@ using Booking.Model;
 using Booking.Observer;
 using Booking.Service;
 using Booking.Util;
+using Booking.WPF.ViewModels.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,37 +24,12 @@ namespace Booking.View
     /// <summary>
     /// Interaction logic for OwnerViewReviews.xaml
     /// </summary>
-    public partial class OwnerViewReviews : Window, IObserver
+    public partial class OwnerViewReviews : Window
     {
-        public ObservableCollection<AccommodationAndOwnerGrade> Grades { get; set; }
-        public IAccommodationAndOwnerGradeService AccommodationAndOwnerGradeService { get; set; }
-        public AccommodationAndOwnerGrade SelectedGrade { get; set; }
         public OwnerViewReviews()
         {
             InitializeComponent();
-            this.DataContext = this;
-
-            AccommodationAndOwnerGradeService = InjectorService.CreateInstance<IAccommodationAndOwnerGradeService>();
-
-            AccommodationAndOwnerGradeService.Subscribe(this);
-            Grades = new ObservableCollection<AccommodationAndOwnerGrade>(AccommodationAndOwnerGradeService.GetSeeableGrades());
-        }
-        public void Update()
-        {
-            Grades.Clear();
-            foreach (AccommodationAndOwnerGrade g in AccommodationAndOwnerGradeService.GetSeeableGrades())
-            {
-                Grades.Add(g);
-            }
-        }
-        private void Close(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-        private void ShowImages(object sender, RoutedEventArgs e)
-        {
-            ShowGradeImages view = new ShowGradeImages(SelectedGrade.Images);
-            view.ShowDialog();
+            this.DataContext = new OwnerViewReviewsViewModel(this);
         }
     }
 }

@@ -7,32 +7,87 @@
         mc:Ignorable="d"
         Title="ShowTourDestinations" Height="400" Width="450"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
-    <Grid Margin="16">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-			<RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+        ResizeMode="NoResize"
+		Background="#BBC1D1">
 
-		<Label Grid.Row="0" Content="Checkpoints" FontSize="24" Margin="0 0 0 8"/>
+	<Window.Resources>
+		<SolidColorBrush x:Key="PrimaryBlueColor" Color="#348EF6"/>
+		<SolidColorBrush x:Key="SecondaryBlueColor" Color="#EFF2FF"/>
 
-		<DataGrid Grid.Row="1"
+		<SolidColorBrush x:Key="CardBackgroundColor" Color="#FFF"/>
+		<SolidColorBrush x:Key="BlackTextColor" Color="#000"/>
+
+		<SolidColorBrush x:Key="PrimaryGrayColor" Color="#BBC1D1"/>
+
+		<Style TargetType="Label">
+			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
+			<Setter Property="FontFamily" Value="Calibri"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+
+		<Style TargetType="TextBlock">
+			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
+			<Setter Property="FontFamily" Value="Calibri"/>
+		</Style>
+
+		<Style TargetType="DataGrid">
+			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
+			<Setter Property="FontFamily" Value="Calibri"/>
+		</Style>
+
+		<Style x:Key="ButtonStyle" TargetType="Button">
+			<Setter Property="Foreground" Value="{StaticResource BlackTextColor}"/>
+			<Setter Property="FontFamily" Value="Calibri"/>
+			<Style.Resources>
+				<Style TargetType="Border">
+					<Setter Property="CornerRadius" Value="6"/>
+				</Style>
+			</Style.Resources>
+		</Style>
+
+		<Style x:Key="CardHolder" TargetType="Border">
+			<Setter Property="Background" Value="{StaticResource CardBackgroundColor}"/>
+			<Setter Property="CornerRadius" Value="6"/>
+			<Setter Property="Padding" Value="8"/>
+		</Style>
+	</Window.Resources>
+
+	<Border Margin="8" Style="{StaticResource CardHolder}">
+		<Grid Margin="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+
+			<StackPanel Grid.Row="0"  Margin="0 0 0 8" Orientation="Horizontal">
+				<Image Source="/Resources/Images/flag128.png" Width="40"/>
+				<Label Content="Checkpoints" FontSize="24" Margin="8 0 0 0"/>
+			</StackPanel>
+
+			<StackPanel Grid.Row="1" Margin="8" Orientation="Vertical">
+				<TextBlock Text="{Binding Location}"/>
+				<TextBlock Text="{Binding Tour.StartTime, StringFormat={}{0:dd/MM/yyyy}}"/>
+			</StackPanel>
+
+			<DataGrid Grid.Row="2"
                   Margin="0 8 0 8"
-                  x:Name="DataGridDestinations"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   SelectionMode="Single"
-				  FontSize="14">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="State" Width="*" Binding="{Binding Location.State}"/>
-                <DataGridTextColumn Header="City" Width="*" Binding="{Binding Location.City}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+				  FontSize="14"
+				  ItemsSource="{Binding Destinations}">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="State" Width="*" Binding="{Binding Location.State}"/>
+					<DataGridTextColumn Header="City" Width="*" Binding="{Binding Location.City}"/>
+				</DataGrid.Columns>
+			</DataGrid>
 
-        <Button Grid.Row="2" Content="Close(F5)" Width="100" Height="27" Margin="0 8 0 0" Click="ButtonClose" HorizontalAlignment="Right" FontSize="14"/>
-    </Grid>
+			<Button Grid.Row="3" Content="Close(F5)" Width="100" Height="27" Margin="0 8 0 0" Command="{Binding Button_Click_Close}" HorizontalAlignment="Right" FontSize="14" Style="{StaticResource ButtonStyle}"/>
+		</Grid>
+	</Border>
 </Window>

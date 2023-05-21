@@ -18,5 +18,6 @@ namespace Booking.Domain.ServiceInterfaces
         int GetNumberOfGrades();
         double GetAverageGrade();
         string SuperWindowText();
+        AccommodationAndOwnerGrade GetById(int id);
     }
 }

@@ -64,6 +64,17 @@ namespace Booking.Repository
 			return _tours.Find(t => t.Name == name);
 		}
 
+		public Tour GetStartedTour()
+		{
+			Tour pomtour = new Tour();
+			foreach(Tour tour in _tours)
+			{
+				if(tour.IsStarted)
+					pomtour = tour;
+			}
+			return pomtour;
+		}
+
 		public Tour Update(Tour tour)
 		{
 			Tour founded = _tours.Find(t => t.Id == tour.Id);

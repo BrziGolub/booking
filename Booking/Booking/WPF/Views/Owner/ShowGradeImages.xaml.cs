@@ -1,4 +1,6 @@
 ﻿using Booking.Domain.Model.Images;
+using Booking.Model;
+using Booking.WPF.ViewModels.Owner;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,16 +22,10 @@ namespace Booking.View
     /// </summary>
     public partial class ShowGradeImages : Window
     {
-        public ShowGradeImages(List<GuestsAccommodationImages> gradeImages)
+        public ShowGradeImages(AccommodationAndOwnerGrade SelectedGrade)
         {
             InitializeComponent();
-            DataContext = this;
-
-            ListBoxImages.ItemsSource = gradeImages;
-        }
-        private void ButtonClose(object sender, RoutedEventArgs e)
-        {
-            Close();
+            this.DataContext = new ShowGradeImagesViewModel(SelectedGrade, this);
         }
     }
 }

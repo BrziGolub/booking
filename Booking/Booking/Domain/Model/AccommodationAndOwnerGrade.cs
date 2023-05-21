@@ -40,7 +40,7 @@ namespace Booking.Model
                 AccommodationReservation.Id.ToString(),
                 Cleaness.ToString(),
                 OwnersCourtesy.ToString(),
-                Comment
+                Comment,
             };
             return csvValues;
         }

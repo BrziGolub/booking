@@ -38,8 +38,6 @@ namespace Booking.Model
         {
             Id = int.Parse(values[0]);
             AccommodationReservation.Id = int.Parse(values[1]);
-            //NewArrivalDay = DateConversion.StringToDate(values[2]);
-            //NewDeparuteDay = DateConversion.StringToDate(values[3]);
             NewArrivalDay = DateTime.Parse(values[2]);
             NewDeparuteDay = DateTime.Parse(values[3]);
             RequestStatus status;

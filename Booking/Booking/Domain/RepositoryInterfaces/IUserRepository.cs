@@ -11,5 +11,6 @@ namespace Booking.Domain.RepositoryInterfaces
 	{
 		User GetByUsername(string username);
 		void Save(List<User> users); // mozda malo drugaciji save
+		void Update(User updatedUser);
 	}
 }

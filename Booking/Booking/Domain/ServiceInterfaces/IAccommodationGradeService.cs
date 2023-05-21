@@ -12,5 +12,6 @@ namespace Booking.Domain.ServiceInterfaces
     {
         AccommodationGrade Create(AccommodationGrade accommodationGrade);
         bool IsReservationGraded(int accommodationReservationId);
+        List<AccommodationGrade> GetSeeableGrades();
     }
 }

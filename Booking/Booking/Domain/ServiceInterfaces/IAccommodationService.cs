@@ -23,5 +23,6 @@ namespace Booking.Domain.ServiceInterfaces
         List<Accommodation> GetOwnerAccommodations();
         List<Accommodation> GetAll();
         List<Accommodation> GetAllSuper();
+        int GetSignedInOwner();
     }
 }

@@ -5,13 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
         mc:Ignorable="d"
-        Title="OwnerViewReviews" Height="768" Width="1024">
+        Title="OwnerViewReviews" Height="768" Width="1024"
+        WindowStartupLocation="CenterScreen">
     <Grid>
+        <TextBlock Margin="10,6,0,0" FontWeight="Bold" FontSize="32" Text="View reviews" Foreground="#FFFFF200" >
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="4" Color="#303841" BlurRadius="5" />
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <Separator Margin="0,-150,0,480" Width="1024" HorizontalAlignment="Center" />
+        
         <DataGrid 
             x:Name="dataGrid" 
             IsReadOnly="True" 
-            Margin="72 50 72 92" 
-            RowHeight="50"
+            Margin="12 50 12 92" 
+            RowHeight="40"
+            FontSize="15"
+            Height="550"
             AutoGenerateColumns="False"
             SelectedItem="{Binding SelectedGrade}"
             SelectionMode="Single"
@@ -21,13 +32,19 @@
                 <DataGridTextColumn Width="*" Header="Accommodation name" Binding="{Binding AccommodationReservation.Accommodation.Name}"></DataGridTextColumn>
                 <DataGridTextColumn Width="*" Header="Cleanliness" Binding="{Binding Cleaness}"/>
                 <DataGridTextColumn Header="Owner courtasy" Width="*" Binding="{Binding OwnersCourtesy}"/>
-                <DataGridTextColumn Width="*" Header="Comment" Binding="{Binding Comment}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Comment" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Show" ToolTip="Press to see the comment that the guest wrote for this review" Command="{Binding DataContext.ShowComment, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Width="*" Header="Guest" Binding="{Binding AccommodationReservation.Guest.Username}"></DataGridTextColumn>
 
                 <DataGridTemplateColumn Header="Images" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Show" Click="ShowImages"/>
+                            <Button Content="Show" ToolTip="Press to see the pictures that the guest uploaded for this review" Command="{Binding DataContext.ShowPictures, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -35,7 +52,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel FlowDirection="LeftToRight" Margin="500,650,0,0">
-            <Button Margin="20 0 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Click="Close" >CLOSE</Button>
+            <Button Margin="20 -10 0 0"  VerticalAlignment="Center" ToolTip="Press to close this window" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Command="{Binding CloseWindow}" >CLOSE</Button>
         </WrapPanel>
     </Grid>
 </Window>

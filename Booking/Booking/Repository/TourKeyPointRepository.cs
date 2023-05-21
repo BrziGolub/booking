@@ -80,5 +80,11 @@ namespace Booking.Repository
 			_tourKeyPoints.RemoveAll(TourKeyPoint => TourKeyPoint.Tour.Id == id);
 			_serializer.ToCSV(FilePath, _tourKeyPoints);
 		}
-	}
+
+        public void DeleteById(int id)
+        {
+            _tourKeyPoints.RemoveAll(tourKeyPoint => tourKeyPoint.Id == id);
+            _serializer.ToCSV(FilePath, _tourKeyPoints);
+        }
+    }
 }

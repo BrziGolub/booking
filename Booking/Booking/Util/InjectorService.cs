@@ -1,4 +1,5 @@
-﻿using Booking.Domain.ServiceInterfaces;
+﻿using Booking.Application.UseCases;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Service;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,13 @@ namespace Booking.Util
             { typeof(IGuestsAccommodationImagesService), new GuestsAccommodationImagesService() },
             { typeof(ILocationService), new LocationService() },
             { typeof(ITourGradeService), new TourGradeService() },
-            { typeof(INotificationService), new NotificationService() }
-
+            { typeof(INotificationService), new NotificationService() },
+            { typeof(ITourImageService), new TourImageService() },
+            { typeof(ITourRequestService), new TourRequestService() },
+            { typeof(IRenovationRecommodationService), new RenovationRecommodationService() },
+            { typeof(ISuperGuestService), new SuperGuestService() },
+            { typeof(IAccommodationRenovationService), new AccommodationRenovationService() },
+            { typeof(ITourNotificationService), new TourNotificationService() }
         };
 
         public static T CreateInstance<T>()

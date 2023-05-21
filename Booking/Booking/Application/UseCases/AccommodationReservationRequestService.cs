@@ -24,6 +24,7 @@ namespace Booking.Service
         private readonly IAccommodationResevationRepository _reservationRepository;
         private readonly IAccommodationRepository _accommodationRepository;
         private readonly ILocationRepository _locationRepository;
+        private readonly IUserRepository _userRepository;
 
         public AccommodationReservationRequestService()
         {
@@ -33,6 +34,7 @@ namespace Booking.Service
             _reservationRepository = InjectorRepository.CreateInstance<IAccommodationResevationRepository>();
             _accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
             _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
+            _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
         }
         public List<AccommodationReservationRequests> GetAll()
         {
@@ -52,6 +54,7 @@ namespace Booking.Service
             {
                 arr.AccommodationReservation.Accommodation = _accommodationRepository.GetById(arr.AccommodationReservation.Accommodation.Id);
                 arr.AccommodationReservation.Accommodation.Location = _locationRepository.GetById(arr.AccommodationReservation.Accommodation.Location.Id);
+                arr.AccommodationReservation.Accommodation.Owner = _userRepository.GetById(arr.AccommodationReservation.Accommodation.Owner.Id);
             }
             return accommodationReservationRequestList;
         }
@@ -121,15 +124,19 @@ namespace Booking.Service
             _repository.Save(accommodationReservationRequestAll);
             List<AccommodationReservation> allReservations = new List<AccommodationReservation>();
             allReservations = _reservationRepository.GetAll();
+            AccommodationReservation accommodationReservation = new AccommodationReservation();
             foreach (var reservation in allReservations)
             {
                 if (reservation.Id == request.AccommodationReservation.Id)
                 {
-                    reservation.ArrivalDay = request.NewArrivalDay;
-                    reservation.DepartureDay = request.NewDeparuteDay;
+                    accommodationReservation.ArrivalDay = request.NewArrivalDay;
+                    accommodationReservation.DepartureDay = request.NewDeparuteDay;
+                    accommodationReservation.Accommodation.Id = reservation.Accommodation.Id;
+                    accommodationReservation.Guest.Id = reservation.Guest.Id;
+                    _reservationRepository.Add(accommodationReservation);
+                    _reservationRepository.Delete(reservation);
                 }
             }
-            _reservationRepository.Save(allReservations);
         }
 
             public void DeleteRequest(AccommodationReservation selectedReservation)

@@ -1,6 +1,7 @@
 ﻿using Booking.Model;
 using Booking.Model.Enums;
 using Booking.Service;
+using Booking.WPF.Views.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,37 +18,39 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Booking.View
 {
-    /// <summary>
-    /// Interaction logic for FirstGuestHomePage.xaml
-    /// </summary>
     public partial class FirstGuestHomePage : Window
     {
-  
-
         public FirstGuestHomePage()
         {
             InitializeComponent();
             this.DataContext = this;
-          
+            FrameHomePage.Content = new HomePageFirstGuest(this.FrameHomePage.NavigationService);
         }
-      
+
         private void MenuItem_Click_HomePage(object sender, RoutedEventArgs e)
         {
-            FrameHomePage.Content = new HomePageFirstGuest();
+            FrameHomePage.Content = new HomePageFirstGuest(this.FrameHomePage.NavigationService);
         }
 
         private void MenuItem_Click_MyReservations(object sender, RoutedEventArgs e)
         {
-            FrameHomePage.Content = new FirstGuestAllReservations();
+            FrameHomePage.Content = new FirstGuestAllReservations(this.FrameHomePage.NavigationService);
+           
         }
 
         private void MenuItem_Click_ResheduleRequests(object sender, RoutedEventArgs e)
         {
-            FrameHomePage.Content = new FisrtGuestAllRequests();
+            FrameHomePage.Content = new FisrtGuestAllRequests(this.FrameHomePage.NavigationService);
+        }
+
+        private void MenuItem_Click_Reviews(object sender, RoutedEventArgs e)
+        {
+            FrameHomePage.Content = new FirstGuestReviews();
         }
 
         private void MenuItem_Click_LogOut(object sender, RoutedEventArgs e)
@@ -55,6 +58,11 @@ namespace Booking.View
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             this.Close();
+        }
+
+        private void MenuItem_Click_MyProfile(object sender, RoutedEventArgs e)
+        {
+            FrameHomePage.Content = new FirstGuestProfile();
         }
     }
 }

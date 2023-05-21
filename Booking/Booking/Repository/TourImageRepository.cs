@@ -5,8 +5,10 @@ using Booking.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace Booking.Repository
 {
@@ -56,21 +58,36 @@ namespace Booking.Repository
 
 		public List<TourImage> GetTourImagesByTourId(int id)
 		{
-			List<TourImage> list = new List<TourImage>();
-			foreach (TourImage image in _tourImages)
-			{
-				if (image.Tour.Id == id)
-				{
-					list.Add(image);
-				}
-			}
-			return list;
+                List<TourImage> list = new List<TourImage>();
+                foreach (TourImage image in _tourImages)
+                {
+                    if (image.Tour.Id == id)
+                    {
+                        list.Add(image);
+                    }
+                }
+                return list;
 		}
 
-		public void DeleteByTourId(int id)
+
+
+        public void DeleteByTourId(int id)
 		{
 			_tourImages.RemoveAll(TourKeyPoint => TourKeyPoint.Tour.Id == id);
 			_serializer.ToCSV(FilePath, _tourImages);
+        }
+
+		public TourImage GetByUrl(string url)
+		{
+			return _tourImages.Find(p => p.Url == url);
 		}
-	}
+
+        public void Delete(TourImage tourImage)
+        {
+            TourImage founded = _tourImages.Find(t => t.Id == tourImage.Id);
+            _tourImages.Remove(founded);
+            _serializer.ToCSV(FilePath, _tourImages);
+        }
+
+    }
 }

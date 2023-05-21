@@ -3,19 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Booking.View.Guide"
-        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Booking.View.Guide.GuideViewReviews"
+    x:Class="Booking.View.Guide.GuideViewReviews"
         mc:Ignorable="d"
         Background="#D6E6F2"
-        Title="GuideViewReviews" Height="580" Width="930" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Reviews of tours" Height="580" Width="883" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
     <Grid>
-        <TextBlock Margin="24,6,0,0" FontWeight="Bold" FontSize="32" Text="Reviews of tours" Foreground="#FFFFF200" >
+        <TextBlock Margin="17,4,0,0" FontWeight="Bold" FontSize="32" Text="Reviews of tours" Foreground="#FFFFF200" >
             <TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="4" Color="#303841" BlurRadius="5" />
             </TextBlock.Effect>
         </TextBlock>
 
-        <Separator Margin="0,0,0,440" Width="890" HorizontalAlignment="Center" />
+        <Separator Margin="0,0,0,440" Width="843" HorizontalAlignment="Center" />
 
         <DataGrid      
         x:Name="reviewsDataGrid"
@@ -23,10 +23,12 @@
         SelectionMode="Single"
         IsReadOnly="True" 
         Margin="0,0,0,0" 
-        Width="890" Height="400"
+        Width="843" Height="400"
         RowHeight="35"
+        AlternationCount="2"
         AutoGenerateColumns="False"             
         CanUserResizeColumns="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserReorderColumns="False"
+            Background="#D6E6F2"
         SelectedItem="{Binding SelectedTourGrade}"
         ItemsSource="{Binding Path=TourGrades, UpdateSourceTrigger=PropertyChanged}">
          >
@@ -41,7 +43,8 @@
                 <DataGridTemplateColumn Header="Review text">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="ShowReviewText" Content="Show" FontSize="11" Width="65" Height="30" FontStyle="Oblique">
+                            <Button Content="Show" FontSize="11" Width="65" Height="30" FontStyle="Oblique"
+                                    Command="{Binding DataContext.ShowReviewText, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -52,7 +55,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridCheckBoxColumn Width="92" Header="Status" Binding="{Binding Valid}">
+                <DataGridCheckBoxColumn Width="45" Header="Status" Binding="{Binding Valid}">
                     <DataGridCheckBoxColumn.CellStyle>
                         <Style TargetType="{x:Type DataGridCell}">
                             <Setter Property="Content" Value="No" />
@@ -66,8 +69,8 @@
                 </DataGridCheckBoxColumn>
             </DataGrid.Columns>
             <DataGrid.RowStyle>
-                <Style TargetType="{x:Type DataGridRow}">
-                    <Setter Property="Background" Value="#D6E6F2"/>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="#ADBAC4"/>
                     <Style.Triggers>
                         <Trigger Property="ItemsControl.AlternationIndex" Value="0">
                             <Setter Property="Background" Value="#F5F5F5"/>
@@ -78,10 +81,22 @@
         </DataGrid>
 
         <WrapPanel Margin="0 480 0 0" Width="160" Height="50">
-            <Button Width="70" Height="40" Content="Report" Margin="0 0 0 0" Click="Report"></Button>
+            <Button Width="70" Height="40" Content="Report" Margin="0 0 0 0" FontSize="15" FontWeight="Bold" Command="{Binding Report}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
 
 
-            <Button Width="70" Height="40" Content="Close" Margin="20 0 0 0" Click="Close"></Button>
+            <Button Width="70" Height="40" Content="Close" Margin="20 0 0 0" FontSize="15" FontWeight="Bold" Command="{Binding Close}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </WrapPanel>
 
     </Grid>

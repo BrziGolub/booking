@@ -4,6 +4,8 @@ using Booking.Model;
 using Booking.Observer;
 using Booking.Service;
 using Booking.Util;
+using Notifications.Wpf.Controls;
+using Notifications.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,90 +21,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Booking.WPF.ViewModels.Guest1;
 
 namespace Booking.View
 {
-    public partial class FirstGuestAllReservations : Page, IObserver
+    public partial class FirstGuestAllReservations : Page
     {
-        public ObservableCollection<AccommodationReservation> _reservations;
-        
-        public IAccommodationReservationService _accommodationReservationService;
-
-        public INotificationService _notificationService;
-
-        public IAccommodationAndOwnerGradeService accommodationAndOwnerGradeService;
-        public AccommodationReservation SelectedReservation { get; set; }
-
-        public FirstGuestAllReservations()
+       
+        public FirstGuestAllReservations(NavigationService navigationService)
         {
             InitializeComponent();
-            this.DataContext = this;
-            SelectedReservation = new AccommodationReservation();
-            accommodationAndOwnerGradeService = InjectorService.CreateInstance<IAccommodationAndOwnerGradeService>();
-            _accommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
-            _notificationService = InjectorService.CreateInstance<INotificationService>();
-
-            _reservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetGeustsReservatonst());
-
-            _accommodationReservationService.Subscribe(this);
-            ReservationsDataGrid.ItemsSource = _reservations;
-
-            SetWidthForReservationsDataGrid();
+            this.DataContext = new FirstGuestAllReservationsViewModel(navigationService);
 
         }
-        public void SetWidthForReservationsDataGrid()
-        {
-            double totalWidth = 0;
-            foreach (DataGridColumn column in ReservationsDataGrid.Columns)
-            {
-                if (column.ActualWidth > 0)
-                {
-                    totalWidth += column.ActualWidth;
-                }
-            }
-            ReservationsDataGrid.Width = totalWidth;
-        }
 
-        private void Button_Click_RateAccommodationAndOwner(object sender, RoutedEventArgs e)
-        {
-            if (accommodationAndOwnerGradeService.PermissionForRating(SelectedReservation))
-            {
-                MessageBox.Show("You are unable to rate you accomodation and owner");
-            }
-            else
-            {
-                NavigationService.Navigate(new RateAccommodationAndOwner(SelectedReservation));
-            }
-        }
-
-        private void Button_Click_ResheduleAccommodationReservation(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ReshaduleAccommodationReservation(SelectedReservation));
-        }
-
-        private void Button_Click_CancleReservation(object sender, RoutedEventArgs e)
-        {
-            bool cancel = _accommodationReservationService.IsAbleToCancleResrvation(SelectedReservation);
-
-            if (cancel)
-            {
-                _notificationService.MakeCancellationNotification(SelectedReservation);
-                _accommodationReservationService.Delete(SelectedReservation);
-
-                MessageBox.Show("Your reservation is cancelled!");
-            }
-            else
-            {
-                MessageBox.Show("You are unable to cancle reservation!");
-            }
-        }
-        public void Update()
-        {
-            _reservations.Clear();
-            foreach(var reservation in _accommodationReservationService.GetGeustsReservatonst())
-            {
-                _reservations.Add(reservation);
-            }
-        }
+    
     }
 }

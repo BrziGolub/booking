@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Booking.Service
 {
@@ -40,9 +41,24 @@ namespace Booking.Service
         {
             return _repository.NextId();
         }
+        public AccommodationAndOwnerGrade GetById(int id)
+        {
+            AccommodationAndOwnerGrade grade = _repository.GetById(id);
+            grade.AccommodationReservation = _reservationRepository.GetById(grade.AccommodationReservation.Id);
+            grade.AccommodationReservation.Accommodation = _accommodationRepository.GetById(grade.AccommodationReservation.Accommodation.Id);
+            grade.AccommodationReservation.Guest = _userRepository.GetById(grade.AccommodationReservation.Guest.Id);
+            return grade;
+        }
+
 
         public void SaveGrade(AccommodationAndOwnerGrade grade) 
         {
+            foreach (var picture in grade.Images)
+            {
+                picture.Grade = grade;
+                picture.Guest = grade.AccommodationReservation.Guest;
+                _gradeImageRepository.Add(picture);
+            }
             _repository.Add(grade);
         }
         public void Subscribe(IObserver observer)
@@ -180,7 +196,7 @@ namespace Booking.Service
                     GradeSum = GradeSum + ((Convert.ToDouble(ocena.OwnersCourtesy) + Convert.ToDouble(ocena.Cleaness)) / 2);
                 }
             }
-            return GradeSum/Counter;
+            return Math.Round(GradeSum / Counter,2);
         }
 
         public List<AccommodationAndOwnerGrade> GetAll()
