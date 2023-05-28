@@ -25,10 +25,24 @@ namespace Booking.View
 {
     public partial class FirstGuestHomePage : Window
     {
+        private App app;
+        private string currentLanguage;
+        public string CurrentLanguage
+        {
+            get { return currentLanguage; }
+            set
+            {
+                currentLanguage = value;
+            }
+        }
+
         public FirstGuestHomePage()
         {
             InitializeComponent();
             this.DataContext = this;
+            this.app = System.Windows.Application.Current as App;
+            this.app = (App)System.Windows.Application.Current;
+            this.CurrentLanguage = "en-US";
             FrameHomePage.Content = new HomePageFirstGuest(this.FrameHomePage.NavigationService);
         }
 
@@ -63,6 +77,18 @@ namespace Booking.View
         private void MenuItem_Click_MyProfile(object sender, RoutedEventArgs e)
         {
             FrameHomePage.Content = new FirstGuestProfile();
+        }
+
+        private void MenuItem_Click_ENG(object sender, RoutedEventArgs e)
+        {
+            CurrentLanguage = "en-US";
+            app.ChangeLanguage(CurrentLanguage);
+        }
+
+        private void MenuItem_Click_SRB(object sender, RoutedEventArgs e)
+        {
+            CurrentLanguage = "sr-LATN";
+            app.ChangeLanguage(CurrentLanguage);
         }
     }
 }

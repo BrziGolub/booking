@@ -5,6 +5,7 @@
         xmlns:notifications="clr-namespace:Notifications.Wpf.Controls;assembly=Notifications.Wpf"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.View"
+        xmlns:ns="clr-namespace:Booking.Localization"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="GuestBOOKING" Height="635" Width="1100" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
@@ -16,7 +17,7 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Menu Height="Auto" Width="1100" Background="Beige">
-                <MenuItem Header="HomePage" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage"/>
+                <MenuItem Header="{ns:Loc HomePage}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage"/>
                 <MenuItem Header="Quick search" FontWeight="Bold" HorizontalAlignment="Right"/>
                 <MenuItem Header="My reservations" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"/>
                 <MenuItem Header="Reschedule requests" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ResheduleRequests"/>
@@ -24,8 +25,8 @@
                 <MenuItem Header="Forums" FontWeight="Bold" HorizontalAlignment="Right"/>
                 <MenuItem Header="Notfications" FontWeight="Bold" HorizontalAlignment="Right"/>
                 <MenuItem Header="Language"  FontWeight="Bold" HorizontalAlignment="Right">
-                    <MenuItem Header="ENG"/>
-                    <MenuItem Header="SRB"/>
+                    <MenuItem Header="ENG" Click="MenuItem_Click_ENG"/>
+                    <MenuItem Header="SRB" Click="MenuItem_Click_SRB"/>
                 </MenuItem>
                 <Separator Width="230"  Background="Beige"/>
                 <MenuItem Header="Log out" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1" Margin="3" Click="MenuItem_Click_LogOut">
@@ -42,9 +43,13 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Margin="0,0,0,-573">
             <Grid>
-                <Frame x:Name="FrameHomePage" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto"/>
-                <notifications:NotificationArea x:Name="WindowArea" Panel.ZIndex="1000" HorizontalAlignment="Right"
-                                                Position="TopRight" Width="Auto" Height="525" Margin="20" VerticalAlignment="Top"></notifications:NotificationArea>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="611*"/>
+                    <ColumnDefinition Width="489*"/>
+                </Grid.ColumnDefinitions>
+                <Frame x:Name="FrameHomePage" Height="Auto" Grid.ColumnSpan="2"/>
+                <notifications:NotificationArea x:Name="WindowArea" Panel.ZIndex="1000" HorizontalAlignment="Left"
+                                                Position="TopRight" Width="Auto" Height="525" Margin="469,0,0,0" VerticalAlignment="Center" Grid.Column="1"></notifications:NotificationArea>
             </Grid>
         </StackPanel>
     </Grid>

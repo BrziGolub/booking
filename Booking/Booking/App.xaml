@@ -9,6 +9,8 @@
                 <ResourceDictionary Source="pack://application:,,,/VirtualKeyboard.Wpf;component/ResourceDictionaries/DefaultStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+       
+
     </Application.Resources>
 </Application>
 

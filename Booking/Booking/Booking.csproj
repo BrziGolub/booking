@@ -176,6 +176,7 @@
     <Compile Include="Application\UseCases\TourGuestsService.cs" />
     <Compile Include="Application\UseCases\UserService.cs" />
     <Compile Include="Application\UseCases\VoucherService.cs" />
+    <Compile Include="Localization\TranslationSource.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
     <Compile Include="WPF\ViewModels\Guest1\AccommodationDateSuggestionsViewModel.cs" />
@@ -656,6 +657,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.sr-LATN.resx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
