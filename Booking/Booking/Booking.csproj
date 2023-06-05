@@ -177,6 +177,9 @@
     <Compile Include="Application\UseCases\UserService.cs" />
     <Compile Include="Application\UseCases\VoucherService.cs" />
     <Compile Include="Localization\TranslationSource.cs" />
+    <Compile Include="Styles\ChangeModeMessage .cs" />
+    <Compile Include="Styles\MessagingService.cs" />
+    <Compile Include="Styles\StyleManager.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
     <Compile Include="WPF\ViewModels\Guest1\AccommodationDateSuggestionsViewModel.cs" />
@@ -414,6 +417,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Styles\DarkStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\LightStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPF\Views\Guest1\AccommodationDateSugestions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -737,6 +748,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
       <Version>1.1.39</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmLightLibs">
+      <Version>5.4.1.1</Version>
     </PackageReference>
     <PackageReference Include="Notifications.Wpf">
       <Version>0.1.1</Version>

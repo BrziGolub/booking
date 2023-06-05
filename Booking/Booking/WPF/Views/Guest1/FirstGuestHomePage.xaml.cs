@@ -1,6 +1,7 @@
 ﻿using Booking.Model;
 using Booking.Model.Enums;
 using Booking.Service;
+using Booking.Styles;
 using Booking.WPF.Views.Guest1;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Messaging;
+
 
 namespace Booking.View
 {
@@ -34,6 +37,47 @@ namespace Booking.View
             {
                 currentLanguage = value;
             }
+        }
+
+        private bool _isLightMode;
+
+        private bool _isDarkMode;
+        public bool IsDarkMode
+        {
+            get { return _isDarkMode; }
+            set
+            {
+                if (_isDarkMode != value)
+                {
+                    _isDarkMode = value;
+                    OnPropertyChanged(nameof(IsDarkMode));
+
+                    if (_isDarkMode)
+                    {
+                        StyleManager.ApplyDarkStyle();
+                    }
+                    else
+                    {
+                        StyleManager.ApplyLightStyle();
+                    }
+
+                    // Send a message to other windows to update their styles
+                    Messenger.Default.Send(new ChangeModeMessage(_isDarkMode));
+                }
+            }
+        }
+
+        private void OnModeChangeMessageReceived(ChangeModeMessage message)
+        {
+            // Update the IsDarkMode property based on the received message
+            IsDarkMode = message.IsDarkMode;
+        }
+
+        // INotifyPropertyChanged implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public FirstGuestHomePage()
@@ -89,6 +133,19 @@ namespace Booking.View
         {
             CurrentLanguage = "sr-LATN";
             app.ChangeLanguage(CurrentLanguage);
+        }
+
+        
+        private void MenuItem_Click_Light(object sender, RoutedEventArgs e)
+        {
+          
+        }
+
+        private void MenuItem_Click_Dark(object sender, RoutedEventArgs e)
+        {
+            StyleManager.ApplyDarkStyle();
+            IsDarkMode = !IsDarkMode;
+            App.MessagingService.PublishModeChange(IsDarkMode);
         }
     }
 }

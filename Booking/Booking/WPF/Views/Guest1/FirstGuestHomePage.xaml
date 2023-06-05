@@ -28,7 +28,11 @@
                     <MenuItem Header="ENG" Click="MenuItem_Click_ENG"/>
                     <MenuItem Header="SRB" Click="MenuItem_Click_SRB"/>
                 </MenuItem>
-                <Separator Width="230"  Background="Beige"/>
+                <MenuItem Header="Mode"  FontWeight="Bold" HorizontalAlignment="Right">
+                    <MenuItem Header="Light" Click="MenuItem_Click_Light"/>
+                    <MenuItem Header="Dark" Click="MenuItem_Click_Dark"/>
+                </MenuItem>
+                <Separator Width="120"  Background="Beige"/>
                 <MenuItem Header="Log out" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1" Margin="3" Click="MenuItem_Click_LogOut">
                     <MenuItem.Icon>
                         <Image  Source="/Resources/Images/logOut.png" Width="30" Height="17"/>

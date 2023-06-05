@@ -6,7 +6,8 @@
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="800"
-      Title="HomePageFirstGuest">
+      Title="HomePageFirstGuest"
+      Style="{DynamicResource MyWindowStyle}">
     <Page.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
             <StackPanel >
@@ -18,9 +19,6 @@
     </Page.Resources>
 
     <Grid >
-        <Grid.Background>
-            <ImageBrush ImageSource="/Resources/Images/blue.jpg"></ImageBrush>
-        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="60"/>

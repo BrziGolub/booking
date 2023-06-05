@@ -1,6 +1,7 @@
 ﻿using Booking.Localization;
 using Booking.Model;
 using Booking.Service;
+using Booking.Styles;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,7 +15,8 @@ using VirtualKeyboard.Wpf;
 namespace Booking
 {
     public partial class App : System.Windows.Application
-    { 
+    {
+        public static MessagingService MessagingService { get; } = new MessagingService();
         public void ChangeLanguage(string currLang)
         {
             if (currLang.Equals("en-US"))

@@ -5,8 +5,10 @@
              StartupUri="WPF/Views/SignInForm.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <Style x:Key="MyWindowStyle" TargetType="Page" BasedOn="{StaticResource LightStyle}" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/VirtualKeyboard.Wpf;component/ResourceDictionaries/DefaultStyles.xaml"/>
+                <ResourceDictionary Source="Styles/LightStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
        
