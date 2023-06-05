@@ -48,8 +48,8 @@
                     <ColumnDefinition Width="489*"/>
                 </Grid.ColumnDefinitions>
                 <Frame x:Name="FrameHomePage" Height="Auto" Grid.ColumnSpan="2"/>
-                <notifications:NotificationArea x:Name="WindowArea" Panel.ZIndex="1000" HorizontalAlignment="Left"
-                                                Position="TopRight" Width="Auto" Height="525" Margin="469,0,0,0" VerticalAlignment="Center" Grid.Column="1"></notifications:NotificationArea>
+                <notifications:NotificationArea x:Name="WindowArea" Panel.ZIndex="1000" HorizontalAlignment="Right"
+                                                Position="TopRight" Width="Auto" Height="525" Margin="20" VerticalAlignment="Center" Grid.Column="1"></notifications:NotificationArea>
             </Grid>
         </StackPanel>
     </Grid>
