@@ -18,26 +18,24 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Menu Height="Auto" Width="1100" Background="Beige">
                 <MenuItem Header="{ns:Loc HomePage}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage"/>
-                <MenuItem Header="Quick search" FontWeight="Bold" HorizontalAlignment="Right"/>
-                <MenuItem Header="My reservations" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"/>
-                <MenuItem Header="Reschedule requests" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ResheduleRequests"/>
-                <MenuItem Header="Reviews" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_Reviews"/>
-                <MenuItem Header="Forums" FontWeight="Bold" HorizontalAlignment="Right"/>
-                <MenuItem Header="Language"  FontWeight="Bold" HorizontalAlignment="Right">
+                <MenuItem Header="{ns:Loc QuickSearch}" FontWeight="Bold" HorizontalAlignment="Right"/>
+                <MenuItem Header="{ns:Loc MyReservations}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"/>
+                <MenuItem Header="{ns:Loc RescheduleRequests}"  FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ResheduleRequests"/>
+                <MenuItem Header="{ns:Loc Reviews}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_Reviews"/>
+                <MenuItem Header="{ns:Loc Forums}" FontWeight="Bold" HorizontalAlignment="Right"/>
+                <MenuItem Header="{ns:Loc Language}"  FontWeight="Bold" HorizontalAlignment="Right">
                     <MenuItem Header="ENG" Click="MenuItem_Click_ENG"/>
                     <MenuItem Header="SRB" Click="MenuItem_Click_SRB"/>
                 </MenuItem>
-                <MenuItem Header="Mode"  FontWeight="Bold" HorizontalAlignment="Right">
-                    <MenuItem Header="Light" Click="MenuItem_Click_Light"/>
-                    <MenuItem Header="Dark" Click="MenuItem_Click_Dark"/>
-                </MenuItem>
-                <Separator Width="240"  Background="Beige"/>
-                <MenuItem Header="Log out" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1" Margin="3" Click="MenuItem_Click_LogOut">
+                <MenuItem Header="{ns:Loc ChangeTheme}"  FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_Dark"></MenuItem>
+
+                <Separator Width="307"  Background="Beige"/>
+                <MenuItem Header="{ns:Loc LogOut}" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1" Margin="3" Click="MenuItem_Click_LogOut">
                     <MenuItem.Icon>
                         <Image  Source="/Resources/Images/logOut.png" Width="30" Height="17"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="My Profile" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3" Click="MenuItem_Click_MyProfile">
+                <MenuItem Header="{ns:Loc MyProfile}" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="3" Click="MenuItem_Click_MyProfile">
                     <MenuItem.Icon>
                         <Image Source="/Resources/Images/user.png"></Image>
                     </MenuItem.Icon>

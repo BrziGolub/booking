@@ -117,7 +117,97 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccommodationName" xml:space="preserve">
+    <value>Naziv smestaja:</value>
+  </data>
+  <data name="ApartmentType" xml:space="preserve">
+    <value>APARTMAN</value>
+  </data>
+  <data name="BookButton" xml:space="preserve">
+    <value>REZERVISI</value>
+  </data>
+  <data name="CancelationPeriodDataGrid" xml:space="preserve">
+    <value>Period otkazivanja</value>
+  </data>
+  <data name="CapacityDataGrid" xml:space="preserve">
+    <value>Kapacitet</value>
+  </data>
+  <data name="ChangeTheme" xml:space="preserve">
+    <value>Primeni temu</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Grad:</value>
+  </data>
+  <data name="CityDataGrid" xml:space="preserve">
+    <value>Grad</value>
+  </data>
+  <data name="CottageType" xml:space="preserve">
+    <value>KOLIBA</value>
+  </data>
+  <data name="Forums" xml:space="preserve">
+    <value>Forumi</value>
+  </data>
   <data name="HomePage" xml:space="preserve">
     <value>PocetnaStrana</value>
+  </data>
+  <data name="HomePageTitle" xml:space="preserve">
+    <value>Koja je tvoja sledeca destinacija?</value>
+  </data>
+  <data name="HouseType" xml:space="preserve">
+    <value>KUCA</value>
+  </data>
+  <data name="ImageDataGrid" xml:space="preserve">
+    <value>Slika</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Jezik</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Odjavi se</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>Moj profil</value>
+  </data>
+  <data name="MyReservations" xml:space="preserve">
+    <value>Rezervacije</value>
+  </data>
+  <data name="NameDataGrid" xml:space="preserve">
+    <value>Naziv</value>
+  </data>
+  <data name="NumberOgGuests" xml:space="preserve">
+    <value>Broj gostiju:</value>
+  </data>
+  <data name="QuickSearch" xml:space="preserve">
+    <value>Brza pretraga</value>
+  </data>
+  <data name="RescheduleRequests" xml:space="preserve">
+    <value>Zahtevi</value>
+  </data>
+  <data name="ReservationRestricitonsDataGrid" xml:space="preserve">
+    <value>Ogranicenja rezervacije</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Recenzije</value>
+  </data>
+  <data name="SearchButton" xml:space="preserve">
+    <value>PRETRAGA</value>
+  </data>
+  <data name="ShowAllButton" xml:space="preserve">
+    <value>PRIKAZ SVIH</value>
+  </data>
+  <data name="ShowImagesButton" xml:space="preserve">
+    <value>PRIKAZI SLIKE</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Drzava</value>
+  </data>
+  <data name="StateDataGrid" xml:space="preserve">
+    <value>Drzava</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tip:</value>
+  </data>
+  <data name="TypeDataGrid" xml:space="preserve">
+    <value>Tip</value>
   </data>
 </root>

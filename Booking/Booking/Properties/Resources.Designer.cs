@@ -61,11 +61,290 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accommodation name:.
+        /// </summary>
+        internal static string AccommodationName {
+            get {
+                return ResourceManager.GetString("AccommodationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to APATRMENT.
+        /// </summary>
+        internal static string ApartmentType {
+            get {
+                return ResourceManager.GetString("ApartmentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BOOK.
+        /// </summary>
+        internal static string BookButton {
+            get {
+                return ResourceManager.GetString("BookButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancelation period.
+        /// </summary>
+        internal static string CancelationPeriodDataGrid {
+            get {
+                return ResourceManager.GetString("CancelationPeriodDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Capacity.
+        /// </summary>
+        internal static string CapacityDataGrid {
+            get {
+                return ResourceManager.GetString("CapacityDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change theme.
+        /// </summary>
+        internal static string ChangeTheme {
+            get {
+                return ResourceManager.GetString("ChangeTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City:.
+        /// </summary>
+        internal static string City {
+            get {
+                return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        internal static string CityDataGrid {
+            get {
+                return ResourceManager.GetString("CityDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to COTTAGE.
+        /// </summary>
+        internal static string CottageType {
+            get {
+                return ResourceManager.GetString("CottageType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forums.
+        /// </summary>
+        internal static string Forums {
+            get {
+                return ResourceManager.GetString("Forums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HomePage.
         /// </summary>
         internal static string HomePage {
             get {
                 return ResourceManager.GetString("HomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What&apos;s your next destination?.
+        /// </summary>
+        internal static string HomePageTitle {
+            get {
+                return ResourceManager.GetString("HomePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HOUSE.
+        /// </summary>
+        internal static string HouseType {
+            get {
+                return ResourceManager.GetString("HouseType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image.
+        /// </summary>
+        internal static string ImageDataGrid {
+            get {
+                return ResourceManager.GetString("ImageDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log out.
+        /// </summary>
+        internal static string LogOut {
+            get {
+                return ResourceManager.GetString("LogOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My profile.
+        /// </summary>
+        internal static string MyProfile {
+            get {
+                return ResourceManager.GetString("MyProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reservations.
+        /// </summary>
+        internal static string MyReservations {
+            get {
+                return ResourceManager.GetString("MyReservations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string NameDataGrid {
+            get {
+                return ResourceManager.GetString("NameDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of guests:.
+        /// </summary>
+        internal static string NumberOgGuests {
+            get {
+                return ResourceManager.GetString("NumberOgGuests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick search.
+        /// </summary>
+        internal static string QuickSearch {
+            get {
+                return ResourceManager.GetString("QuickSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requests.
+        /// </summary>
+        internal static string RescheduleRequests {
+            get {
+                return ResourceManager.GetString("RescheduleRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advance reservation restrictions.
+        /// </summary>
+        internal static string ReservationRestricitonsDataGrid {
+            get {
+                return ResourceManager.GetString("ReservationRestricitonsDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reviews.
+        /// </summary>
+        internal static string Reviews {
+            get {
+                return ResourceManager.GetString("Reviews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SEARCH.
+        /// </summary>
+        internal static string SearchButton {
+            get {
+                return ResourceManager.GetString("SearchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SHOW ALL.
+        /// </summary>
+        internal static string ShowAllButton {
+            get {
+                return ResourceManager.GetString("ShowAllButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SHOW IMAGES.
+        /// </summary>
+        internal static string ShowImagesButton {
+            get {
+                return ResourceManager.GetString("ShowImagesButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State:.
+        /// </summary>
+        internal static string State {
+            get {
+                return ResourceManager.GetString("State", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State.
+        /// </summary>
+        internal static string StateDataGrid {
+            get {
+                return ResourceManager.GetString("StateDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Staying days:.
+        /// </summary>
+        internal static string StayingDays {
+            get {
+                return ResourceManager.GetString("StayingDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type:.
+        /// </summary>
+        internal static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        internal static string TypeDataGrid {
+            get {
+                return ResourceManager.GetString("TypeDataGrid", resourceCulture);
             }
         }
     }

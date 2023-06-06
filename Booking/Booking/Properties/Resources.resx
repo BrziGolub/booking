@@ -117,7 +117,100 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccommodationName" xml:space="preserve">
+    <value>Accommodation name:</value>
+  </data>
+  <data name="ApartmentType" xml:space="preserve">
+    <value>APATRMENT</value>
+  </data>
+  <data name="BookButton" xml:space="preserve">
+    <value>BOOK</value>
+  </data>
+  <data name="CancelationPeriodDataGrid" xml:space="preserve">
+    <value>Cancelation period</value>
+  </data>
+  <data name="CapacityDataGrid" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
+  <data name="ChangeTheme" xml:space="preserve">
+    <value>Change theme</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City:</value>
+  </data>
+  <data name="CityDataGrid" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="CottageType" xml:space="preserve">
+    <value>COTTAGE</value>
+  </data>
+  <data name="Forums" xml:space="preserve">
+    <value>Forums</value>
+  </data>
   <data name="HomePage" xml:space="preserve">
     <value>HomePage</value>
+  </data>
+  <data name="HomePageTitle" xml:space="preserve">
+    <value>What's your next destination?</value>
+  </data>
+  <data name="HouseType" xml:space="preserve">
+    <value>HOUSE</value>
+  </data>
+  <data name="ImageDataGrid" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>My profile</value>
+  </data>
+  <data name="MyReservations" xml:space="preserve">
+    <value>Reservations</value>
+  </data>
+  <data name="NameDataGrid" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NumberOgGuests" xml:space="preserve">
+    <value>Number of guests:</value>
+  </data>
+  <data name="QuickSearch" xml:space="preserve">
+    <value>Quick search</value>
+  </data>
+  <data name="RescheduleRequests" xml:space="preserve">
+    <value>Requests</value>
+  </data>
+  <data name="ReservationRestricitonsDataGrid" xml:space="preserve">
+    <value>Advance reservation restrictions</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+  <data name="SearchButton" xml:space="preserve">
+    <value>SEARCH</value>
+  </data>
+  <data name="ShowAllButton" xml:space="preserve">
+    <value>SHOW ALL</value>
+  </data>
+  <data name="ShowImagesButton" xml:space="preserve">
+    <value>SHOW IMAGES</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>State:</value>
+  </data>
+  <data name="StateDataGrid" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="StayingDays" xml:space="preserve">
+    <value>Staying days:</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="TypeDataGrid" xml:space="preserve">
+    <value>Type</value>
   </data>
 </root>
