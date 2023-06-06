@@ -126,6 +126,12 @@
   <data name="AccommodationName" xml:space="preserve">
     <value>Accommodation name:</value>
   </data>
+  <data name="AddCommnet" xml:space="preserve">
+    <value>Add comment:</value>
+  </data>
+  <data name="AddPicture" xml:space="preserve">
+    <value>Add picture:</value>
+  </data>
   <data name="ApartmentType" xml:space="preserve">
     <value>APATRMENT</value>
   </data>
@@ -219,11 +225,17 @@
   <data name="NameDataGrid" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="NumberOfResevations" xml:space="preserve">
     <value>Number of reservations:</value>
   </data>
   <data name="NumberOgGuests" xml:space="preserve">
     <value>Number of guests:</value>
+  </data>
+  <data name="OwnerLabel" xml:space="preserve">
+    <value>Owner:</value>
   </data>
   <data name="OwnerUsername" xml:space="preserve">
     <value>Owner</value>
@@ -231,8 +243,20 @@
   <data name="QuickSearch" xml:space="preserve">
     <value>Quick search</value>
   </data>
+  <data name="RateAccommodationAccAndOwnerTitle" xml:space="preserve">
+    <value>Rate Accommodation and Owner!</value>
+  </data>
   <data name="RateButton" xml:space="preserve">
     <value>RATE</value>
+  </data>
+  <data name="RateCleanliness" xml:space="preserve">
+    <value>Rate cleanliness:</value>
+  </data>
+  <data name="RateOwnerCourtesy" xml:space="preserve">
+    <value>Rate courtesy of the owner:</value>
+  </data>
+  <data name="RenovationApproval" xml:space="preserve">
+    <value>Do you want to add recommodaion for renorvation?</value>
   </data>
   <data name="ReschaduleButton" xml:space="preserve">
     <value>RESCHADULE</value>
@@ -276,6 +300,9 @@
   <data name="StayingDays" xml:space="preserve">
     <value>Staying days:</value>
   </data>
+  <data name="SubmitButton" xml:space="preserve">
+    <value>SUBMITT</value>
+  </data>
   <data name="Type" xml:space="preserve">
     <value>Type:</value>
   </data>
@@ -284,6 +311,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username:</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
   <data name="YourTitle" xml:space="preserve">
     <value>Your title:</value>

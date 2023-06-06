@@ -88,6 +88,24 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add comment:.
+        /// </summary>
+        internal static string AddCommnet {
+            get {
+                return ResourceManager.GetString("AddCommnet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add picture:.
+        /// </summary>
+        internal static string AddPicture {
+            get {
+                return ResourceManager.GetString("AddPicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to APATRMENT.
         /// </summary>
         internal static string ApartmentType {
@@ -367,6 +385,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number of reservations:.
         /// </summary>
         internal static string NumberOfResevations {
@@ -381,6 +408,15 @@ namespace Booking.Properties {
         internal static string NumberOgGuests {
             get {
                 return ResourceManager.GetString("NumberOgGuests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner:.
+        /// </summary>
+        internal static string OwnerLabel {
+            get {
+                return ResourceManager.GetString("OwnerLabel", resourceCulture);
             }
         }
         
@@ -403,11 +439,47 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rate Accommodation and Owner!.
+        /// </summary>
+        internal static string RateAccommodationAccAndOwnerTitle {
+            get {
+                return ResourceManager.GetString("RateAccommodationAccAndOwnerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RATE.
         /// </summary>
         internal static string RateButton {
             get {
                 return ResourceManager.GetString("RateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rate cleanliness:.
+        /// </summary>
+        internal static string RateCleanliness {
+            get {
+                return ResourceManager.GetString("RateCleanliness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rate courtesy of the owner:.
+        /// </summary>
+        internal static string RateOwnerCourtesy {
+            get {
+                return ResourceManager.GetString("RateOwnerCourtesy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to add recommodaion for renorvation?.
+        /// </summary>
+        internal static string RenovationApproval {
+            get {
+                return ResourceManager.GetString("RenovationApproval", resourceCulture);
             }
         }
         
@@ -538,6 +610,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SUBMITT.
+        /// </summary>
+        internal static string SubmitButton {
+            get {
+                return ResourceManager.GetString("SubmitButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type:.
         /// </summary>
         internal static string Type {
@@ -561,6 +642,15 @@ namespace Booking.Properties {
         internal static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
         
