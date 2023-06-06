@@ -62,9 +62,9 @@
             </ComboBox>
 
             <Label Grid.Column="4" Grid.Row="0">Type:</Label>
-            <CheckBox Grid.Column="5" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedApartment}">APARTMNET</CheckBox>
-            <CheckBox Grid.Column="6" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedCottage}">COTTAGE</CheckBox>
-            <CheckBox Grid.Column="7" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedHouse}">HOUSE</CheckBox>
+            <CheckBox Grid.Column="5" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedApartment}" Content="APARTMNET"></CheckBox>
+            <CheckBox Grid.Column="6" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedCottage}" Content="COTTAGE"></CheckBox>
+            <CheckBox Grid.Column="7" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedHouse}" Content="HOUSE"></CheckBox>
 
             <Label Grid.Column="0"  Grid.Row="1">Staying days:</Label>
             <TextBox Grid.Column="1"  Grid.Row="1" Margin="3" Text="{Binding Path=SearchReservationDays, UpdateSourceTrigger=PropertyChanged,
@@ -80,85 +80,21 @@
         <Button Grid.Row ="2" HorizontalAlignment="Right" Width="120" FontWeight="Bold" Margin="20,15,20,5" Command="{Binding Button_Click_Search}" >SEARCH</Button>
 
         <StackPanel Grid.Row="3" Margin="20,0,20,0" >
-            <DataGrid x:Name="AccommodationDataGrid"  
+            <DataGrid x:Name="AccommodationDataGrid" 
                       SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
                       IsReadOnly="True" AutoGenerateColumns="False" Height="350" HeadersVisibility="Column" FontSize="13"  ItemsSource="{Binding Path = Accommodations}" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Width="120" Binding="{Binding Name}">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="TextWrapping" Value="Wrap" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="State" Width="100" Binding="{Binding Location.State}">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                       
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="City" Width="100" Binding="{Binding Location.City}">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                        
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Type" Width="80"  Binding="{Binding Type}">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                        
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Capacity" Width="80"  Binding="{Binding Capacity}">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                     
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Advance reservation restrictions" Binding="{Binding MinNumberOfDays}">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                        
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="CancelationPeriod" Binding="{Binding CancelationPeriod}">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                       
-                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Name" Width="120" Binding="{Binding Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="State" Width="100" Binding="{Binding Location.State}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="City" Width="100" Binding="{Binding Location.City}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Type" Width="80"  Binding="{Binding Type}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Capacity" Width="80"  Binding="{Binding Capacity}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Advance reservation restrictions" Binding="{Binding MinNumberOfDays}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="CancelationPeriod" Binding="{Binding CancelationPeriod}"></DataGridTextColumn>
                     <DataGridTemplateColumn Header="Images" Width="*">
-                        <DataGridTemplateColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Style>
-                        </DataGridTemplateColumn.HeaderStyle>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ItemsControl ItemsSource="{Binding Images}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Image Source="{Binding Url}" Width="140" Height="120" Margin="5"/>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                <Image Source="{Binding Images[0].Url}" Width="140" Height="120" Margin="2"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
