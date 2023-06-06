@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccommodationLabel" xml:space="preserve">
+    <value>Accommodation:</value>
+  </data>
   <data name="AccommodationName" xml:space="preserve">
     <value>Accommodation name:</value>
   </data>
   <data name="ApartmentType" xml:space="preserve">
     <value>APATRMENT</value>
+  </data>
+  <data name="BookAccTitle" xml:space="preserve">
+    <value>Book your accommodation!</value>
   </data>
   <data name="BookButton" xml:space="preserve">
     <value>BOOK</value>
@@ -129,11 +135,20 @@
   <data name="CancelationPeriodDataGrid" xml:space="preserve">
     <value>Cancelation period</value>
   </data>
+  <data name="CancleButton" xml:space="preserve">
+    <value>CANCLE</value>
+  </data>
   <data name="CapacityDataGrid" xml:space="preserve">
     <value>Capacity</value>
   </data>
   <data name="ChangeTheme" xml:space="preserve">
     <value>Change theme</value>
+  </data>
+  <data name="ChooseArrivalDay" xml:space="preserve">
+    <value>Choose arrival day:</value>
+  </data>
+  <data name="ChooseDepartureDay" xml:space="preserve">
+    <value>Choose departure day:</value>
   </data>
   <data name="City" xml:space="preserve">
     <value>City:</value>
@@ -185,6 +200,9 @@
   </data>
   <data name="ReservationRestricitonsDataGrid" xml:space="preserve">
     <value>Advance reservation restrictions</value>
+  </data>
+  <data name="ReserveButton" xml:space="preserve">
+    <value>RESERVE</value>
   </data>
   <data name="Reviews" xml:space="preserve">
     <value>Reviews</value>
