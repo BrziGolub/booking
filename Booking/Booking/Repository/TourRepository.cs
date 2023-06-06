@@ -95,5 +95,34 @@ namespace Booking.Repository
 			}
 			return list;
 		}
-	}
+
+        public List<int> GetAllGuidesId()
+        {
+            List<int> list = new List<int>();
+            foreach (Tour tour in _tours)
+            {
+				if (tour.GuideId == 3) // treba da bude signed guide id
+				{
+					list.Add(tour.GuideId);
+				}
+				}
+            return list;
+        }
+
+        public List<Tour> GetToursByGuideAndYearAndLanguage(int guideId, int year, string language)
+        {
+            List<Tour> toursByGuideAndYearAndLanguage = new List<Tour>();
+
+            foreach (Tour tour in _tours)
+            {
+                if (tour.GuideId == guideId && tour.StartTime.Year == year && tour.Language == language)
+                {
+                    toursByGuideAndYearAndLanguage.Add(tour);
+                }
+            }
+
+            return toursByGuideAndYearAndLanguage;
+        }
+
+    }
 }

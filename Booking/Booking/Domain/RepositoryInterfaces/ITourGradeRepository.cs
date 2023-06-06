@@ -13,5 +13,7 @@ namespace Booking.Domain.RepositoryInterfaces
         TourGrade Update(TourGrade tourGrade);
         TourGrade Add(TourGrade tourGrade);
         List<TourGrade> GetAllByGuestId(int id);
-	}
+        TourGrade GetByTourId(int id);
+
+    }
 }

@@ -61,6 +61,7 @@
     <Compile Include="Application\UseCases\AccommodationRenovationService.cs" />
     <Compile Include="Application\UseCases\RenovationRecommodationService.cs" />
     <Compile Include="Application\UseCases\SuperGuestService.cs" />
+    <Compile Include="Application\UseCases\SuperGuideService.cs" />
     <Compile Include="Application\UseCases\TourImageService.cs" />
     <Compile Include="Application\UseCases\TourNotificationService.cs" />
     <Compile Include="Application\UseCases\TourRequestService.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Domain\Model\Notification.cs" />
     <Compile Include="Domain\Model\RenovationRecommodation.cs" />
     <Compile Include="Domain\Model\SuperGuest.cs" />
+    <Compile Include="Domain\Model\SuperGuide.cs" />
     <Compile Include="Domain\Model\Tour.cs" />
     <Compile Include="Domain\Model\TourGrade.cs" />
     <Compile Include="Domain\Model\TourGuests.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Domain\RepositoryInterfaces\IRenovationRecommodationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ISuperGuestRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ISuperGuideRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourGradeRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourGuestsRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourImageRepository.cs" />
@@ -128,6 +131,7 @@
     <Compile Include="Domain\ServiceInterfaces\IRenovationRecommodationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ISuperGuestService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ISuperGuideService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourImageService.cs" />
@@ -152,6 +156,7 @@
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\RenovationRecommodationRepository.cs" />
     <Compile Include="Repository\SuperGuestRepository.cs" />
+    <Compile Include="Repository\SuperGuideRepository.cs" />
     <Compile Include="Repository\TourGradeRepository.cs" />
     <Compile Include="Repository\TourGuestsRepository.cs" />
     <Compile Include="Repository\TourImageRepository.cs" />
@@ -680,6 +685,7 @@
     <None Include="Resources\Data\notifications.csv" />
     <None Include="Resources\Data\renovationRecommodations.csv" />
     <None Include="Resources\Data\superGuest.csv" />
+    <None Include="Resources\Data\superGuide.csv" />
     <None Include="Resources\Data\tourGrades.csv" />
     <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />

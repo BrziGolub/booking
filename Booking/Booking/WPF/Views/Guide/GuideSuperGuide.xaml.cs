@@ -23,5 +23,6 @@ namespace Booking.WPF.Views.Guide
             InitializeComponent();
             this.DataContext = new GuideSuperGuideViewModel(this);
         }
+
     }
 }
