@@ -61,6 +61,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accommodation images.
+        /// </summary>
+        internal static string AccImgesTitle {
+            get {
+                return ResourceManager.GetString("AccImgesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accommodation name.
         /// </summary>
         internal static string AccNameDataGrid {
@@ -111,6 +120,15 @@ namespace Booking.Properties {
         internal static string ApartmentType {
             get {
                 return ResourceManager.GetString("ApartmentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arrival day.
+        /// </summary>
+        internal static string ArrivalDayDataGrid {
+            get {
+                return ResourceManager.GetString("ArrivalDayDataGrid", resourceCulture);
             }
         }
         
@@ -241,6 +259,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Departure day.
+        /// </summary>
+        internal static string DepartureDayDataGrid {
+            get {
+                return ResourceManager.GetString("DepartureDayDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End date.
         /// </summary>
         internal static string EndDateDataGrid {
@@ -313,6 +340,51 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Level 1 - Nice to have.
+        /// </summary>
+        internal static string Level1NiceToHave {
+            get {
+                return ResourceManager.GetString("Level1NiceToHave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level2 - Minor complaints.
+        /// </summary>
+        internal static string Level2MinorComplaints {
+            get {
+                return ResourceManager.GetString("Level2MinorComplaints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level3 - Really bothersome.
+        /// </summary>
+        internal static string Level3ReallyBothersome {
+            get {
+                return ResourceManager.GetString("Level3ReallyBothersome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level4 - Really necessary.
+        /// </summary>
+        internal static string Level4ReallyNecessary {
+            get {
+                return ResourceManager.GetString("Level4ReallyNecessary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level5 - Very bad condition.
+        /// </summary>
+        internal static string Level5VeryBadCondition {
+            get {
+                return ResourceManager.GetString("Level5VeryBadCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log out.
         /// </summary>
         internal static string LogOut {
@@ -331,7 +403,7 @@ namespace Booking.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moj profil.
+        ///   Looks up a localized string similar to My profile.
         /// </summary>
         internal static string MyProfileTitle {
             get {
@@ -385,6 +457,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NEXT.
+        /// </summary>
+        internal static string NextButton {
+            get {
+                return ResourceManager.GetString("NextButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         internal static string No {
@@ -421,11 +502,29 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Owner&apos;s comment:.
+        /// </summary>
+        internal static string OwnersComment {
+            get {
+                return ResourceManager.GetString("OwnersComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Owner.
         /// </summary>
         internal static string OwnerUsername {
             get {
                 return ResourceManager.GetString("OwnerUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PREVOIUS.
+        /// </summary>
+        internal static string PreviousButton {
+            get {
+                return ResourceManager.GetString("PreviousButton", resourceCulture);
             }
         }
         
@@ -475,11 +574,47 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recommendation for renovation.
+        /// </summary>
+        internal static string RecommodationTitle {
+            get {
+                return ResourceManager.GetString("RecommodationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to add recommodaion for renorvation?.
         /// </summary>
         internal static string RenovationApproval {
             get {
                 return ResourceManager.GetString("RenovationApproval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Urgency for renovation:.
+        /// </summary>
+        internal static string RenovationUrgency {
+            get {
+                return ResourceManager.GetString("RenovationUrgency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area that needs renovation:.
+        /// </summary>
+        internal static string RenvationArea {
+            get {
+                return ResourceManager.GetString("RenvationArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request details.
+        /// </summary>
+        internal static string RequestDetailsTitle {
+            get {
+                return ResourceManager.GetString("RequestDetailsTitle", resourceCulture);
             }
         }
         
@@ -493,11 +628,38 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reschadule reservation request.
+        /// </summary>
+        internal static string ReschduleResrvationTitle {
+            get {
+                return ResourceManager.GetString("ReschduleResrvationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requests.
         /// </summary>
         internal static string RescheduleRequests {
             get {
                 return ResourceManager.GetString("RescheduleRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reserved dates:.
+        /// </summary>
+        internal static string ReservationDays {
+            get {
+                return ResourceManager.GetString("ReservationDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request dates:.
+        /// </summary>
+        internal static string ReservationRequestDates {
+            get {
+                return ResourceManager.GetString("ReservationRequestDates", resourceCulture);
             }
         }
         
@@ -543,6 +705,15 @@ namespace Booking.Properties {
         internal static string SearchButton {
             get {
                 return ResourceManager.GetString("SearchButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SEND REQUEST.
+        /// </summary>
+        internal static string SendRequestButton {
+            get {
+                return ResourceManager.GetString("SendRequestButton", resourceCulture);
             }
         }
         
@@ -601,6 +772,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Request&apos;s status:.
+        /// </summary>
+        internal static string StatusRequest {
+            get {
+                return ResourceManager.GetString("StatusRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Staying days:.
         /// </summary>
         internal static string StayingDays {
@@ -615,6 +795,15 @@ namespace Booking.Properties {
         internal static string SubmitButton {
             get {
                 return ResourceManager.GetString("SubmitButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free dates suggestions.
+        /// </summary>
+        internal static string SuggestedDatesTitle {
+            get {
+                return ResourceManager.GetString("SuggestedDatesTitle", resourceCulture);
             }
         }
         

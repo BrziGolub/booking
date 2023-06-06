@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccImgesTitle" xml:space="preserve">
+    <value>Slike smestaja</value>
+  </data>
   <data name="AccNameDataGrid" xml:space="preserve">
     <value>Naziv smestaja</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="ApartmentType" xml:space="preserve">
     <value>APARTMAN</value>
+  </data>
+  <data name="ArrivalDayDataGrid" xml:space="preserve">
+    <value>Dan dolaska</value>
   </data>
   <data name="BonusPoints" xml:space="preserve">
     <value>Bonus poeni:</value>
@@ -154,13 +160,13 @@
     <value>Kapacitet</value>
   </data>
   <data name="ChangeTheme" xml:space="preserve">
-    <value>Primeni temu</value>
+    <value>Promena teme</value>
   </data>
   <data name="ChooseArrivalDay" xml:space="preserve">
     <value>Izaberite dan dolaska:</value>
   </data>
   <data name="ChooseDepartureDay" xml:space="preserve">
-    <value>Izabeite dan odlaska:</value>
+    <value>Izaberite dan odlaska:</value>
   </data>
   <data name="City" xml:space="preserve">
     <value>Grad:</value>
@@ -176,6 +182,9 @@
   </data>
   <data name="CottageType" xml:space="preserve">
     <value>KOLIBA</value>
+  </data>
+  <data name="DepartureDayDataGrid" xml:space="preserve">
+    <value>Dan odlaska</value>
   </data>
   <data name="EndDateDataGrid" xml:space="preserve">
     <value>Krajnji datum</value>
@@ -201,6 +210,21 @@
   <data name="LatenessDataGrid" xml:space="preserve">
     <value>Kasnjenje</value>
   </data>
+  <data name="Level1NiceToHave" xml:space="preserve">
+    <value>Level1  - Pozeljno</value>
+  </data>
+  <data name="Level2MinorComplaints" xml:space="preserve">
+    <value>Level2 - Manje primedbe</value>
+  </data>
+  <data name="Level3ReallyBothersome" xml:space="preserve">
+    <value>Level3 - Veoma uznemiravajuce</value>
+  </data>
+  <data name="Level4ReallyNecessary" xml:space="preserve">
+    <value>Level4 - Jako nepohodno</value>
+  </data>
+  <data name="Level5VeryBadCondition" xml:space="preserve">
+    <value>Level5 - Preterano lose stanje</value>
+  </data>
   <data name="LogOut" xml:space="preserve">
     <value>Odjavi se</value>
   </data>
@@ -225,6 +249,9 @@
   <data name="NameDataGrid" xml:space="preserve">
     <value>Naziv</value>
   </data>
+  <data name="NextButton" xml:space="preserve">
+    <value>SLEDECA</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>Ne</value>
   </data>
@@ -237,8 +264,14 @@
   <data name="OwnerLabel" xml:space="preserve">
     <value>Vlasnik:</value>
   </data>
+  <data name="OwnersComment" xml:space="preserve">
+    <value>Komentar vlasnika:</value>
+  </data>
   <data name="OwnerUsername" xml:space="preserve">
     <value>Vlasnik</value>
+  </data>
+  <data name="PreviousButton" xml:space="preserve">
+    <value>PRETHODNA</value>
   </data>
   <data name="QuickSearch" xml:space="preserve">
     <value>Brza pretraga</value>
@@ -255,14 +288,35 @@
   <data name="RateOwnerCourtesy" xml:space="preserve">
     <value>Oceni usluge vlasnika:</value>
   </data>
+  <data name="RecommodationTitle" xml:space="preserve">
+    <value>Prepouka za renoviranje</value>
+  </data>
   <data name="RenovationApproval" xml:space="preserve">
     <value>Da li zelite da date predlog za renoviranje?</value>
+  </data>
+  <data name="RenovationUrgency" xml:space="preserve">
+    <value>Hitnost za renoviranjem:</value>
+  </data>
+  <data name="RenvationArea" xml:space="preserve">
+    <value>Oblast za renoviranje:</value>
+  </data>
+  <data name="RequestDetailsTitle" xml:space="preserve">
+    <value>Detaljniji prikaz zahteva</value>
   </data>
   <data name="ReschaduleButton" xml:space="preserve">
     <value>POMERI</value>
   </data>
+  <data name="ReschduleResrvationTitle" xml:space="preserve">
+    <value>Zahtev za pomeranje rezervacije</value>
+  </data>
   <data name="RescheduleRequests" xml:space="preserve">
     <value>Zahtevi</value>
+  </data>
+  <data name="ReservationDays" xml:space="preserve">
+    <value>Rezervisani datumi:</value>
+  </data>
+  <data name="ReservationRequestDates" xml:space="preserve">
+    <value>Datum zahteva:</value>
   </data>
   <data name="ReservationRestricitonsDataGrid" xml:space="preserve">
     <value>Ogranicenja rezervacije</value>
@@ -278,6 +332,9 @@
   </data>
   <data name="SearchButton" xml:space="preserve">
     <value>PRETRAGA</value>
+  </data>
+  <data name="SendRequestButton" xml:space="preserve">
+    <value>POSALJI ZAHTEV</value>
   </data>
   <data name="ShowAllButton" xml:space="preserve">
     <value>PRIKAZ SVIH</value>
@@ -297,8 +354,14 @@
   <data name="StateDataGrid" xml:space="preserve">
     <value>Drzava</value>
   </data>
+  <data name="StatusRequest" xml:space="preserve">
+    <value>Status zahteva:</value>
+  </data>
   <data name="SubmitButton" xml:space="preserve">
     <value>POTVRDI</value>
+  </data>
+  <data name="SuggestedDatesTitle" xml:space="preserve">
+    <value>Predlog sobodnih datuma</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Tip:</value>
