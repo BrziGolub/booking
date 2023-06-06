@@ -59,7 +59,7 @@
                             <Setter Property="FontWeight" Value="Bold" />
                             <Setter Property="Margin" Value="10" />
                             <Setter Property="HorizontalAlignment" Value="Center" />
-                            <Setter Property="Foreground" Value="{StaticResource ButtonBackgroundBrush}"  />
+                            <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}"  />
                             <Setter Property="Background" Value="{StaticResource TextBoxForegroundBrush}"  />
                        
                         </Style>
@@ -79,7 +79,7 @@
                 <Setter Property="Background" Value="#B85C38" />
                 <Style.Resources>
                     <Style TargetType="ComboBoxItem">
-                        <Setter Property="Background" Value="#B85C38" />
+                        <Setter Property="Background" Value="{StaticResource TextBoxForegroundBrush}"/>
                         <!-- Set the desired background color for each row -->
                     </Style>
                 </Style.Resources>
