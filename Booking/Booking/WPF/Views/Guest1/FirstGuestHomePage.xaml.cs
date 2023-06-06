@@ -39,7 +39,7 @@ namespace Booking.View
             }
         }
 
-        private bool _isLightMode;
+       // private bool _isLightMode;
 
         private bool _isDarkMode;
         public bool IsDarkMode
@@ -67,13 +67,12 @@ namespace Booking.View
             }
         }
 
-        private void OnModeChangeMessageReceived(ChangeModeMessage message)
+       /* private void OnModeChangeMessageReceived(ChangeModeMessage message)
         {
             // Update the IsDarkMode property based on the received message
             IsDarkMode = message.IsDarkMode;
         }
-
-        // INotifyPropertyChanged implementation
+       */
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -87,6 +86,7 @@ namespace Booking.View
             this.app = System.Windows.Application.Current as App;
             this.app = (App)System.Windows.Application.Current;
             this.CurrentLanguage = "en-US";
+           // MenuBackgroundColor = new SolidColorBrush(Colors.Beige);
             FrameHomePage.Content = new HomePageFirstGuest(this.FrameHomePage.NavigationService);
         }
 
@@ -141,8 +141,30 @@ namespace Booking.View
           
         }
 
+        /* private SolidColorBrush _menuBackgroundColor;
+
+         public SolidColorBrush MenuBackgroundColor
+         {
+             get { return _menuBackgroundColor; }
+             set
+             {
+                 _menuBackgroundColor = value;
+                 OnPropertyChanged(nameof(MenuBackgroundColor));
+             }
+         }*/
+
+        //Background="{Binding MenuBackgroundColor}"
         private void MenuItem_Click_Dark(object sender, RoutedEventArgs e)
         {
+            //ovo ne radi
+           /* if (IsDarkMode)
+            {
+                MenuBackgroundColor = new SolidColorBrush(Colors.Beige);
+            }
+            else
+            {
+                MenuBackgroundColor = new SolidColorBrush(Colors.Black);
+            }*/
             StyleManager.ApplyDarkStyle();
             IsDarkMode = !IsDarkMode;
             App.MessagingService.PublishModeChange(IsDarkMode);

@@ -44,6 +44,7 @@
                             <Style.Triggers>
                                 <Trigger Property="Validation.HasError" Value="True">
                                     <Setter Property="BorderBrush" Value="Red" />
+                                    <Setter Property="Background"  Value="Beige"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -58,15 +59,15 @@
                 <Label  HorizontalAlignment="Left"  FontSize="17">Urgency for renovation:</Label>
                 <StackPanel Margin="0,10,10,0">
                     <RadioButton GroupName="Levels" Content="Level 1 - Nice to have" Margin="3" FontSize="16"
-                 IsChecked="{Binding FirstSelectedUrgencyLevel}" />
+                 IsChecked="{Binding FirstSelectedUrgencyLevel}" Background="Beige"/>
                     <RadioButton GroupName="Levels" Content="Level 2 - Minor complaints" Margin="3" FontSize="16"
-                 IsChecked="{Binding SecondSelectedUrgencyLevel}" />
+                 IsChecked="{Binding SecondSelectedUrgencyLevel}" Background="Beige"/>
                     <RadioButton GroupName="Levels" Content="Level 3 - Really bothersome" Margin="3" FontSize="16"
-                 IsChecked="{Binding ThirdSelectedUrgencyLevel}" />
+                 IsChecked="{Binding ThirdSelectedUrgencyLevel}" Background="Beige"/>
                     <RadioButton GroupName="Levels" Content="Level 4 - Really necessary" Margin="3" FontSize="16"
-                 IsChecked="{Binding FourthSelectedUrgencyLevel}" />
+                 IsChecked="{Binding FourthSelectedUrgencyLevel}" Background="Beige"/>
                     <RadioButton GroupName="Levels" Content="Level 5 - Very bad condition" Margin="3" FontSize="16"
-                 IsChecked="{Binding FifthSelectedUrgencyLevel}" />
+                 IsChecked="{Binding FifthSelectedUrgencyLevel}" Background="Beige"/>
                 </StackPanel>
 
             </StackPanel>

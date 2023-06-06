@@ -19,52 +19,15 @@
             <Label FontWeight="Bold" FontSize="16" >My reservations</Label>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="80,20,80,100" ItemsSource="{Binding Path = Reservations}" x:Name="ReservationsDataGrid"
+        <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="80,20,80,20" ItemsSource="{Binding Path = Reservations}" x:Name="ReservationsDataGrid"
                    SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Accommodation name" Width="*" Binding="{Binding Accommodation.Name}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="State" Width="*" Binding="{Binding Accommodation.Location.State}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="City" Width="*" Binding="{Binding Accommodation.Location.City}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Start date" Width="*" Binding="{Binding ArrivalDay, StringFormat='{}{0:dd/MM/yyyy}'}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="End date" Width="*" Binding="{Binding DepartureDay,  StringFormat='{}{0:dd/MM/yyyy}'}" >
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Owners username" Width="*" Binding="{Binding Accommodation.Owner.Username}" >
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-
+                <DataGridTextColumn Header="Accommodation name" Width="*" Binding="{Binding Accommodation.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="State" Width="*" Binding="{Binding Accommodation.Location.State}"></DataGridTextColumn>
+                <DataGridTextColumn Header="City" Width="*" Binding="{Binding Accommodation.Location.City}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Start date" Width="*" Binding="{Binding ArrivalDay, StringFormat='{}{0:dd/MM/yyyy}'}"></DataGridTextColumn>
+                <DataGridTextColumn Header="End date" Width="*" Binding="{Binding DepartureDay,  StringFormat='{}{0:dd/MM/yyyy}'}" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Owners username" Width="*" Binding="{Binding Accommodation.Owner.Username}" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

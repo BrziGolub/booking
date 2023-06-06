@@ -23,7 +23,7 @@
             <Image Source="/Resources/Images/user.png" Height="30"></Image>
             <Label Content="My profile" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center"></Label>
         </StackPanel>
-        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black"  BorderThickness="1" CornerRadius="10" HorizontalAlignment="Left" Margin="0,55, 0,190" Background="#FFFFEFD5">
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black"  BorderThickness="1" CornerRadius="10" HorizontalAlignment="Left" Margin="0,55, 0,190" Background="Beige">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
 
                 <Grid.RowDefinitions>

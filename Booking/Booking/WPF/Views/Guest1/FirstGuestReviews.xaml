@@ -19,70 +19,14 @@
         </StackPanel>
 
         <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="80,20,80,200" ItemsSource="{Binding Path = Grades}" x:Name="ReservationsDataGrid"
-                   SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2">
+                  Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Accommodation name" Width="*" Binding="{Binding Accommodation.Accommodation.Name}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Cleanliness" Width="*" Binding="{Binding Cleanliness}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Rule following" Width="*" Binding="{Binding RuleFollowing}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Communication" Width="*" Binding="{Binding Communication}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Lateness" Width="*" Binding="{Binding Lateness}" >
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Owner" Width="*" Binding="{Binding Accommodation.Accommodation.Owner.Username}" >
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
+                <DataGridTextColumn Header="Accommodation name" Width="*" Binding="{Binding Accommodation.Accommodation.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cleanliness" Width="*" Binding="{Binding Cleanliness}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Rule following" Width="*" Binding="{Binding RuleFollowing}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Communication" Width="*" Binding="{Binding Communication}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Lateness" Width="*" Binding="{Binding Lateness}" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Owner" Width="*" Binding="{Binding Accommodation.Accommodation.Owner.Username}" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

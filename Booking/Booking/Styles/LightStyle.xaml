@@ -16,7 +16,7 @@
             </Style>
 
             <Style TargetType="Label">
-                <Setter Property="Foreground" Value="GhostWhite" />
+                <Setter Property="Foreground" Value="Goldenrod"  />
             </Style>
 
             <Style TargetType="TextBox">
@@ -30,6 +30,38 @@
             <Style TargetType="Border">
                 <Setter Property="BorderBrush" Value="DarkGoldenrod" />
             </Style>
+
+            <Style TargetType="DataGrid">
+                <Setter Property="ColumnHeaderStyle">
+                    <Setter.Value>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="Margin" Value="7" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Foreground"  Value="DarkGoldenrod" />
+                            <Setter Property="Background"   Value="GhostWhite" />
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="VerticalGridLinesBrush"   Value="DarkGoldenrod" />
+                <Setter Property="HorizontalGridLinesBrush"  Value="DarkGoldenrod" />
+            </Style>
+
+            <Style TargetType="CheckBox">
+                <Setter Property="Background" Value="DarkGoldenrod"/>
+                <Setter Property="Foreground" Value="DarkGoldenrod"/>
+            </Style>
+
+            <Style TargetType="ComboBox">
+                <Setter Property="Background" Value="DarkGoldenrod" />
+                <Style.Resources>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Background" Value="DarkGoldenrod"/>
+                        <!-- Set the desired background color for each row -->
+                    </Style>
+                </Style.Resources>
+            </Style>
+
         </Style.Resources>
     </Style>
 </ResourceDictionary>
