@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace Booking.Application.UseCases
 {
@@ -253,6 +252,7 @@ namespace Booking.Application.UseCases
 		{
 			tourRequest.User.Id = TourService.SignedGuideId;
 			tourRequest.Status = "On hold";
+			tourRequest.PartOfComplexRequest.Id = -1;
 
 			_tourRequestRepository.Add(tourRequest);
 
@@ -267,7 +267,10 @@ namespace Booking.Application.UseCases
 			var res = list.Where(tr => tr.User.Id == id);
 			foreach (var tr in res)
 			{
-				result.Add(tr);
+				if (tr.PartOfComplexRequest.Id == -1)
+				{
+					result.Add(tr);
+				}
 			}
 
 			return result;
@@ -479,10 +482,23 @@ namespace Booking.Application.UseCases
 		{
 			foreach (User user in users)
 			{
-				if(user.Id == u.Id)
+				if (user.Id == u.Id)
 					return true;
 			}
 			return false;
+		}
+
+		public List<TourRequest> GetByComplexRequestId(int id)
+		{
+			List<TourRequest> tourRequests = new List<TourRequest>();
+			foreach (TourRequest tr in GetAll())
+			{
+				if (tr.PartOfComplexRequest.Id == id)
+				{
+					tourRequests.Add(tr);
+				}
+			}
+			return tourRequests;
 		}
 	}
 }

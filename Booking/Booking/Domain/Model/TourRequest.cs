@@ -25,12 +25,14 @@ namespace Booking.Domain.Model
         public string Status { get; set; }
         public bool Notify { get; set; }
         public DateTime TourReservedStartTime { get; set; }
+        public TourComplexRequest PartOfComplexRequest { get; set; }
 
         public TourRequest()
         {
             Location = new Location();
             User = new User();
             Notify = false;
+            PartOfComplexRequest = new TourComplexRequest();
         }
 
         public string[] ToCSV()
@@ -47,7 +49,8 @@ namespace Booking.Domain.Model
                 User.Id.ToString(),                             //8
                 Status,                                         //9
                 Notify.ToString(),                              //10
-                TourReservedStartTime.ToString("dd/MM/yyyy")    //11
+                TourReservedStartTime.ToString("dd/MM/yyyy"),   //11
+                PartOfComplexRequest.Id.ToString()              //12
             };
             return csvValues;
         }
@@ -66,6 +69,7 @@ namespace Booking.Domain.Model
             Status = values[9];
             Notify = Convert.ToBoolean(values[10]);
             TourReservedStartTime = DateTime.Parse(values[11]);
+            PartOfComplexRequest.Id = Convert.ToInt32(values[12]);
         }
     }
 }

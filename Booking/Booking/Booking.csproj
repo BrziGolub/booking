@@ -62,6 +62,7 @@
     <Compile Include="Application\UseCases\RenovationRecommodationService.cs" />
     <Compile Include="Application\UseCases\SuperGuestService.cs" />
     <Compile Include="Application\UseCases\SuperGuideService.cs" />
+    <Compile Include="Application\UseCases\TourComplexRequestService.cs" />
     <Compile Include="Application\UseCases\TourImageService.cs" />
     <Compile Include="Application\UseCases\TourNotificationService.cs" />
     <Compile Include="Application\UseCases\TourRequestService.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Domain\Model\SuperGuest.cs" />
     <Compile Include="Domain\Model\SuperGuide.cs" />
     <Compile Include="Domain\Model\Tour.cs" />
+    <Compile Include="Domain\Model\TourComplexRequest.cs" />
     <Compile Include="Domain\Model\TourGrade.cs" />
     <Compile Include="Domain\Model\TourGuests.cs" />
     <Compile Include="Domain\Model\TourKeyPoint.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Domain\RepositoryInterfaces\IRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ISuperGuestRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ISuperGuideRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\ITourComplexRequestRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourGradeRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourGuestsRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ITourImageRepository.cs" />
@@ -132,6 +135,7 @@
     <Compile Include="Domain\ServiceInterfaces\IService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ISuperGuestService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ISuperGuideService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\ITourComplexRequestService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGradeService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourGuestsService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ITourImageService.cs" />
@@ -157,6 +161,7 @@
     <Compile Include="Repository\RenovationRecommodationRepository.cs" />
     <Compile Include="Repository\SuperGuestRepository.cs" />
     <Compile Include="Repository\SuperGuideRepository.cs" />
+    <Compile Include="Repository\TourComplexRequestRepository.cs" />
     <Compile Include="Repository\TourGradeRepository.cs" />
     <Compile Include="Repository\TourGuestsRepository.cs" />
     <Compile Include="Repository\TourImageRepository.cs" />
@@ -195,6 +200,7 @@
     <Compile Include="WPF\ViewModels\Guest1\RenovationSuggestionsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest2\CreateTourComplexRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\CreateTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\RateTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\ReserveTourViewModel.cs" />
@@ -204,6 +210,7 @@
     <Compile Include="WPF\ViewModels\Guest2\ShowVouchersViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowRequestCommentViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\StatisticsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest2\TourComplexRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\TourNotificationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\TourRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideAcceptingTourRequestViewModel.cs" />
@@ -265,6 +272,9 @@
     <Compile Include="WPF\Views\Guest1\ShowRequestComment.xaml.cs">
       <DependentUpon>ShowRequestComment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\Views\Guest2\CreateTourComplexRequestView.xaml.cs">
+      <DependentUpon>CreateTourComplexRequestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Guest2\CreateTourRequestView.xaml.cs">
       <DependentUpon>CreateTourRequestView.xaml</DependentUpon>
     </Compile>
@@ -273,6 +283,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guest2\StatisticsView.xaml.cs">
       <DependentUpon>StatisticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest2\TourComplexRequestsView.xaml.cs">
+      <DependentUpon>TourComplexRequestsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guest2\TourNotificationView.xaml.cs">
       <DependentUpon>TourNotificationView.xaml</DependentUpon>
@@ -466,6 +479,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WPF\Views\Guest2\CreateTourComplexRequestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPF\Views\Guest2\CreateTourRequestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -475,6 +492,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest2\StatisticsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest2\TourComplexRequestsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -686,6 +707,7 @@
     <None Include="Resources\Data\renovationRecommodations.csv" />
     <None Include="Resources\Data\superGuest.csv" />
     <None Include="Resources\Data\superGuide.csv" />
+    <None Include="Resources\Data\tourComplexRequests.csv" />
     <None Include="Resources\Data\tourGrades.csv" />
     <None Include="Resources\Data\tourGuests.csv" />
     <None Include="Resources\Data\tourImages.csv" />
