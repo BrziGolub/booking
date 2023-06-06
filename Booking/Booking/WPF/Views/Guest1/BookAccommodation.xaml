@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Booking.WPF.Views.Guest1"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="BookAccommodation">
+      Title="BookAccommodation"  Style="{DynamicResource MyWindowStyle}">
     <Page.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
             <StackPanel>
@@ -17,9 +17,6 @@
         </ControlTemplate>
     </Page.Resources>
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Resources/Images/blue1.jpg"></ImageBrush>
-        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition/>

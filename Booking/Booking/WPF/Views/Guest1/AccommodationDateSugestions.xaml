@@ -6,12 +6,9 @@
       xmlns:local="clr-namespace:Booking.WPF.Views.Guest1"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AccommodationDateSugestions">
+      Title="AccommodationDateSugestions"  Style="{DynamicResource MyWindowStyle}">
 
     <Grid >
-        <Grid.Background>
-            <ImageBrush ImageSource="/Resources/Images/blue1.jpg"/>
-        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="40"/>

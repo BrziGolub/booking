@@ -6,12 +6,9 @@
       xmlns:local="clr-namespace:Booking.WPF.Views.Guest1"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ShowAccommodationImages">
+      Title="ShowAccommodationImages"  Style="{DynamicResource MyWindowStyle}">
 
     <Grid >
-        <Grid.Background>
-            <ImageBrush ImageSource="/Resources/Images/blue1.jpg"></ImageBrush>
-        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="30"/>
@@ -34,7 +31,7 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
-            <Image Grid.Row="0" Margin="10" Width="500" Source="{Binding CurrentImageUrl,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+            <Image Grid.Row="0" Margin="10" Width="500" Source="{Binding CurrentImageUrl,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Button x:Name="NextButton"  Margin="10" Height="30" Width="80" Command="{Binding NextButton_Click}" IsEnabled="{Binding IsNextEnabled,UpdateSourceTrigger=PropertyChanged}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
