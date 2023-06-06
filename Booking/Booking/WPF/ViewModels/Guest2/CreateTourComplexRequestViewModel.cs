@@ -2,6 +2,7 @@
 using Booking.Domain.Model;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
+using Booking.Service;
 using Booking.Util;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,18 @@ using System.Windows;
 
 namespace Booking.WPF.ViewModels.Guest2
 {
-	public class CreateTourRequestViewModel : INotifyPropertyChanged
+	public class CreateTourComplexRequestViewModel : INotifyPropertyChanged
 	{
 		private readonly Window _window;
 		private ILocationService _locationService;
 		private ITourRequestService _tourRequestService;
+		private ITourComplexRequestService _tourComplexRequestService;
 
 		public event PropertyChangedEventHandler PropertyChanged;
+
+		public ObservableCollection<TourRequest> TourRequests { get; set; }
+
+		public TourRequest SelectedRequest { get; set; }
 
 		public List<string> States { get; set; }
 		public ObservableCollection<string> Cities { get; set; }
@@ -77,14 +83,18 @@ namespace Booking.WPF.ViewModels.Guest2
 		public RelayCommand Selection_Changed { get; set; }
 		public RelayCommand Button_Click_NumericUp { get; set; }
 		public RelayCommand Button_Click_NumericDown { get; set; }
+		public RelayCommand Button_Click_AddRequest { get; set; }
+		public RelayCommand Button_Click_RemoveRequest { get; set; }
 
-		public CreateTourRequestViewModel(Window window)
+		public CreateTourComplexRequestViewModel(Window window)
 		{
 			_window = window;
+			TourRequests = new ObservableCollection<TourRequest>();
 			NumberOfPassengers = 1;
 
 			_locationService = InjectorService.CreateInstance<ILocationService>();
 			_tourRequestService = InjectorService.CreateInstance<ITourRequestService>();
+			_tourComplexRequestService = InjectorService.CreateInstance<ITourComplexRequestService>();
 
 			States = _locationService.GetAllStates();
 			Cities = new ObservableCollection<string>();
@@ -103,6 +113,8 @@ namespace Booking.WPF.ViewModels.Guest2
 			Selection_Changed = new RelayCommand(ComboBoxStateSelectionChanged);
 			Button_Click_NumericUp = new RelayCommand(NumericUp);
 			Button_Click_NumericDown = new RelayCommand(NumericDown);
+			Button_Click_AddRequest = new RelayCommand(AddRequest);
+			Button_Click_RemoveRequest = new RelayCommand(RemoveRequest);
 		}
 
 		private void ComboBoxStateSelectionChanged(object param)
@@ -137,6 +149,40 @@ namespace Booking.WPF.ViewModels.Guest2
 
 		private void ButtonRequest(object param)
 		{
+			if (TourRequests.Count > 0)
+			{
+				TourComplexRequest tourComplexRequest = new TourComplexRequest();
+
+				tourComplexRequest.User.Id = TourService.SignedGuideId;
+				tourComplexRequest.CreatedDate = DateTime.Now;
+
+				foreach (var v in TourRequests)
+				{
+					tourComplexRequest.Requests.Add(_tourRequestService.AddTourRequest(v));
+				}
+
+				_tourComplexRequestService.AddTourRequest(tourComplexRequest);
+				CloseWindow();
+			}
+			else
+			{
+				MessageBox.Show("You need to add at least one tour!");
+			}
+		}
+
+		private void NumericUp(object param)
+		{
+			NumberOfPassengers++;
+		}
+
+		private void NumericDown(object param)
+		{
+			if (NumberOfPassengers > 1)
+				NumberOfPassengers--;
+		}
+
+		private void AddRequest(object param)
+		{
 			if (true)//uslov za validaciju
 			{
 				TourRequest tourRequest = new TourRequest();
@@ -155,20 +201,24 @@ namespace Booking.WPF.ViewModels.Guest2
 				tourRequest.Description = Description;
 				tourRequest.TourReservedStartTime = DateTime.Today;
 
-				_tourRequestService.AddTourRequest(tourRequest);
-				CloseWindow();
+				TourRequests.Add(tourRequest);
+			}
+			else
+			{
+				//poruka greske
 			}
 		}
 
-		private void NumericUp(object param)
+		private void RemoveRequest(object param)
 		{
-			NumberOfPassengers++;
-		}
-
-		private void NumericDown(object param)
-		{
-			if (NumberOfPassengers > 1)
-				NumberOfPassengers--;
+			if (SelectedRequest != null)
+			{
+				TourRequests.Remove(SelectedRequest);
+			}
+			else
+			{
+				MessageBox.Show("No selected item for removal!");
+			}
 		}
 
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

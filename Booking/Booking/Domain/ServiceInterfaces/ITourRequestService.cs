@@ -37,5 +37,6 @@ namespace Booking.Domain.ServiceInterfaces
         double GetAverageVisitorsByUserId(int id, string year);
         List<TourRequest> GetAllNotAccepted();
 		List<User> CheckUnfulfilledRequest(string lang, Location loc);
+        List<TourRequest> GetByComplexRequestId(int id);
 	}
 }

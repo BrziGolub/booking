@@ -79,7 +79,7 @@
         <Menu>
             <MenuItem Header="_Request" FontSize="14">
 				<MenuItem Header="Simple tour" FontSize="14" Command="{Binding Button_Click_TourRequest}"/>
-                <MenuItem Header="Complex tour" FontSize="14"/>
+				<MenuItem Header="Complex tour" FontSize="14" Command="{Binding Button_Click_TourComplexRequest}"/>
             </MenuItem>
             <MenuItem Header="_Vouchers" FontSize="14" Command="{Binding Button_Click_ShowVouchers}"/>
 			<MenuItem Header="_Statistics" FontSize="14" Command="{Binding Button_Click_Statistics}"/>
