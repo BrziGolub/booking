@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccNameDataGrid" xml:space="preserve">
+    <value>Naziv smestaja</value>
+  </data>
   <data name="AccommodationLabel" xml:space="preserve">
     <value>Smestaj:</value>
   </data>
@@ -125,6 +128,9 @@
   </data>
   <data name="ApartmentType" xml:space="preserve">
     <value>APARTMAN</value>
+  </data>
+  <data name="BonusPoints" xml:space="preserve">
+    <value>Bonus poeni:</value>
   </data>
   <data name="BookAccTitle" xml:space="preserve">
     <value>Rezervisite svoj smestaj!</value>
@@ -156,8 +162,17 @@
   <data name="CityDataGrid" xml:space="preserve">
     <value>Grad</value>
   </data>
+  <data name="CleanlinessDataGrid" xml:space="preserve">
+    <value>Cistoca</value>
+  </data>
+  <data name="CommunicationDataGrid" xml:space="preserve">
+    <value>Komunikacija</value>
+  </data>
   <data name="CottageType" xml:space="preserve">
     <value>KOLIBA</value>
+  </data>
+  <data name="EndDateDataGrid" xml:space="preserve">
+    <value>Krajnji datum</value>
   </data>
   <data name="Forums" xml:space="preserve">
     <value>Forumi</value>
@@ -177,23 +192,50 @@
   <data name="Language" xml:space="preserve">
     <value>Jezik</value>
   </data>
+  <data name="LatenessDataGrid" xml:space="preserve">
+    <value>Kasnjenje</value>
+  </data>
   <data name="LogOut" xml:space="preserve">
     <value>Odjavi se</value>
   </data>
   <data name="MyProfile" xml:space="preserve">
     <value>Moj profil</value>
   </data>
+  <data name="MyProfileTitle" xml:space="preserve">
+    <value>Moj profil</value>
+  </data>
+  <data name="MyReschaduleRequestsTitle" xml:space="preserve">
+    <value>Moji zahtevi za pomeranje</value>
+  </data>
   <data name="MyReservations" xml:space="preserve">
     <value>Rezervacije</value>
+  </data>
+  <data name="MyReservationsTitle" xml:space="preserve">
+    <value>Moje rezervacije</value>
+  </data>
+  <data name="MyReviewsTitle" xml:space="preserve">
+    <value>Moje recenzije</value>
   </data>
   <data name="NameDataGrid" xml:space="preserve">
     <value>Naziv</value>
   </data>
+  <data name="NumberOfResevations" xml:space="preserve">
+    <value>Broj rezervacija:</value>
+  </data>
   <data name="NumberOgGuests" xml:space="preserve">
     <value>Broj gostiju:</value>
   </data>
+  <data name="OwnerUsername" xml:space="preserve">
+    <value>Vlasnik</value>
+  </data>
   <data name="QuickSearch" xml:space="preserve">
     <value>Brza pretraga</value>
+  </data>
+  <data name="RateButton" xml:space="preserve">
+    <value>OCENI</value>
+  </data>
+  <data name="ReschaduleButton" xml:space="preserve">
+    <value>POMERI</value>
   </data>
   <data name="RescheduleRequests" xml:space="preserve">
     <value>Zahtevi</value>
@@ -207,6 +249,9 @@
   <data name="Reviews" xml:space="preserve">
     <value>Recenzije</value>
   </data>
+  <data name="RuleFollowingDataGrid" xml:space="preserve">
+    <value>Postovanje pravila</value>
+  </data>
   <data name="SearchButton" xml:space="preserve">
     <value>PRETRAGA</value>
   </data>
@@ -215,6 +260,12 @@
   </data>
   <data name="ShowImagesButton" xml:space="preserve">
     <value>PRIKAZI SLIKE</value>
+  </data>
+  <data name="ShowMoreDetailsButton" xml:space="preserve">
+    <value>DETALJNIJI PRIKAZ</value>
+  </data>
+  <data name="StartDateDataGrid" xml:space="preserve">
+    <value>Pocetni datum</value>
   </data>
   <data name="State" xml:space="preserve">
     <value>Drzava</value>
@@ -227,5 +278,11 @@
   </data>
   <data name="TypeDataGrid" xml:space="preserve">
     <value>Tip</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Korisnicko ime:</value>
+  </data>
+  <data name="YourTitle" xml:space="preserve">
+    <value>Tvoja titula:</value>
   </data>
 </root>

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Booking.WPF.Views.Guest1"
+      xmlns:ns="clr-namespace:Booking.Localization"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FirstGuestReviews" Style="{DynamicResource MyWindowStyle}">
@@ -15,18 +16,18 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,0,0" Grid.ColumnSpan="2"  HorizontalAlignment="Center">
             <Image Source="/Resources/Images/review.png" Height="35" Width="40" ></Image>
-            <Label FontWeight="Bold" FontSize="17" >My reviews</Label>
+            <Label FontWeight="Bold" FontSize="17" Content="{ns:Loc MyReviewsTitle}" ></Label>
         </StackPanel>
 
         <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="80,20,80,200" ItemsSource="{Binding Path = Grades}" x:Name="ReservationsDataGrid"
                   Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Accommodation name" Width="*" Binding="{Binding Accommodation.Accommodation.Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Cleanliness" Width="*" Binding="{Binding Cleanliness}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Rule following" Width="*" Binding="{Binding RuleFollowing}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Communication" Width="*" Binding="{Binding Communication}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Lateness" Width="*" Binding="{Binding Lateness}" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Owner" Width="*" Binding="{Binding Accommodation.Accommodation.Owner.Username}" ></DataGridTextColumn>
+                <DataGridTextColumn  Header="{ns:Loc AccNameDataGrid}" Width="*" Binding="{Binding Accommodation.Accommodation.Name}"></DataGridTextColumn>
+                <DataGridTextColumn  Header="{ns:Loc CleanlinessDataGrid}" Width="*" Binding="{Binding Cleanliness}"></DataGridTextColumn>
+                <DataGridTextColumn  Header="{ns:Loc RuleFollowingDataGrid}" Width="*" Binding="{Binding RuleFollowing}"></DataGridTextColumn>
+                <DataGridTextColumn Header="{ns:Loc CommunicationDataGrid}" Width="*" Binding="{Binding Communication}"></DataGridTextColumn>
+                <DataGridTextColumn Header="{ns:Loc LatenessDataGrid}" Width="*" Binding="{Binding Lateness}" ></DataGridTextColumn>
+                <DataGridTextColumn Header="{ns:Loc OwnerUsername}"  Width="*" Binding="{Binding Accommodation.Accommodation.Owner.Username}" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

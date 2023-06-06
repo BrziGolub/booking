@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccNameDataGrid" xml:space="preserve">
+    <value>Accommodation name</value>
+  </data>
   <data name="AccommodationLabel" xml:space="preserve">
     <value>Accommodation:</value>
   </data>
@@ -125,6 +128,9 @@
   </data>
   <data name="ApartmentType" xml:space="preserve">
     <value>APATRMENT</value>
+  </data>
+  <data name="BonusPoints" xml:space="preserve">
+    <value>Bonus points:</value>
   </data>
   <data name="BookAccTitle" xml:space="preserve">
     <value>Book your accommodation!</value>
@@ -156,8 +162,17 @@
   <data name="CityDataGrid" xml:space="preserve">
     <value>City</value>
   </data>
+  <data name="CleanlinessDataGrid" xml:space="preserve">
+    <value>Cleanliness</value>
+  </data>
+  <data name="CommunicationDataGrid" xml:space="preserve">
+    <value>Communication</value>
+  </data>
   <data name="CottageType" xml:space="preserve">
     <value>COTTAGE</value>
+  </data>
+  <data name="EndDateDataGrid" xml:space="preserve">
+    <value>End date</value>
   </data>
   <data name="Forums" xml:space="preserve">
     <value>Forums</value>
@@ -177,23 +192,50 @@
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="LatenessDataGrid" xml:space="preserve">
+    <value>Lateness</value>
+  </data>
   <data name="LogOut" xml:space="preserve">
     <value>Log out</value>
   </data>
   <data name="MyProfile" xml:space="preserve">
     <value>My profile</value>
   </data>
+  <data name="MyProfileTitle" xml:space="preserve">
+    <value>Moj profil</value>
+  </data>
+  <data name="MyReschaduleRequestsTitle" xml:space="preserve">
+    <value>My reschadule requests</value>
+  </data>
   <data name="MyReservations" xml:space="preserve">
     <value>Reservations</value>
+  </data>
+  <data name="MyReservationsTitle" xml:space="preserve">
+    <value> My reservations</value>
+  </data>
+  <data name="MyReviewsTitle" xml:space="preserve">
+    <value>My reviews</value>
   </data>
   <data name="NameDataGrid" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NumberOfResevations" xml:space="preserve">
+    <value>Number of reservations:</value>
+  </data>
   <data name="NumberOgGuests" xml:space="preserve">
     <value>Number of guests:</value>
   </data>
+  <data name="OwnerUsername" xml:space="preserve">
+    <value>Owner</value>
+  </data>
   <data name="QuickSearch" xml:space="preserve">
     <value>Quick search</value>
+  </data>
+  <data name="RateButton" xml:space="preserve">
+    <value>RATE</value>
+  </data>
+  <data name="ReschaduleButton" xml:space="preserve">
+    <value>RESCHADULE</value>
   </data>
   <data name="RescheduleRequests" xml:space="preserve">
     <value>Requests</value>
@@ -207,6 +249,9 @@
   <data name="Reviews" xml:space="preserve">
     <value>Reviews</value>
   </data>
+  <data name="RuleFollowingDataGrid" xml:space="preserve">
+    <value>Rule following</value>
+  </data>
   <data name="SearchButton" xml:space="preserve">
     <value>SEARCH</value>
   </data>
@@ -215,6 +260,12 @@
   </data>
   <data name="ShowImagesButton" xml:space="preserve">
     <value>SHOW IMAGES</value>
+  </data>
+  <data name="ShowMoreDetailsButton" xml:space="preserve">
+    <value>MORE DETAILS</value>
+  </data>
+  <data name="StartDateDataGrid" xml:space="preserve">
+    <value>Start date</value>
   </data>
   <data name="State" xml:space="preserve">
     <value>State:</value>
@@ -230,5 +281,11 @@
   </data>
   <data name="TypeDataGrid" xml:space="preserve">
     <value>Type</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username:</value>
+  </data>
+  <data name="YourTitle" xml:space="preserve">
+    <value>Your title:</value>
   </data>
 </root>
