@@ -18,6 +18,8 @@ namespace Booking.Application.UseCases
 		private readonly IForumCommentRepository _forumCommentRepository;
 		private readonly ILocationRepository _locationRepository;
 		private readonly IUserRepository _userRepository;
+		private readonly IAccommodationRepository _accommodationRepository;
+		private readonly INotificationRepository _notificationRepository;
 		private readonly List<IObserver> _observers;
 
 		public ForumService()
@@ -26,6 +28,8 @@ namespace Booking.Application.UseCases
             _forumCommentRepository = InjectorRepository.CreateInstance<IForumCommentRepository>();
 			_locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
 			_userRepository = InjectorRepository.CreateInstance<IUserRepository>();
+			_accommodationRepository = InjectorRepository.CreateInstance<IAccommodationRepository>();
+			_notificationRepository = InjectorRepository.CreateInstance<INotificationRepository>();
 			_observers = new List<IObserver>();
 		}
 
@@ -57,6 +61,24 @@ namespace Booking.Application.UseCases
 				comment.Reports = 0;
 				_forumCommentRepository.Add(comment);
             }
+			List<int> Ids = new List<int>();
+			foreach (var a in _accommodationRepository.GetAll()) 
+			{
+				if (a.Location.Id == newForum.Location.Id) 
+				{
+					Ids.Add(a.Owner.Id);
+				}
+			}
+			Ids = Ids.Distinct().ToList();
+			foreach (var id in Ids) 
+			{
+				Notification notification = new Notification();
+				notification.User.Id = id;
+				notification.Message = "A new forum has been opened for location "+ newForum.Location.State+"/" +newForum.Location.City;
+				notification.IsRead = false;
+				notification.Title = "titleOwner";
+				_notificationRepository.Add(notification);
+			}
 		}
 
 		public void Subscribe(IObserver observer)
