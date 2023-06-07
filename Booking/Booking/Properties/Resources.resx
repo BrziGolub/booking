@@ -198,6 +198,9 @@
   <data name="EndDateDataGrid" xml:space="preserve">
     <value>End date</value>
   </data>
+  <data name="ForumCommentsTitle" xml:space="preserve">
+    <value>Forum comments</value>
+  </data>
   <data name="Forums" xml:space="preserve">
     <value>Forums</value>
   </data>
@@ -218,6 +221,9 @@
   </data>
   <data name="LatenessDataGrid" xml:space="preserve">
     <value>Lateness</value>
+  </data>
+  <data name="LeaveCommentButton" xml:space="preserve">
+    <value>Leave comment</value>
   </data>
   <data name="Level1NiceToHave" xml:space="preserve">
     <value>Level 1 - Nice to have</value>
@@ -395,6 +401,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username:</value>
+  </data>
+  <data name="VeryHelpful" xml:space="preserve">
+    <value>Very helpful</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

@@ -216,6 +216,7 @@
     <Compile Include="WPF\ViewModels\Guest1\RenovationSuggestionsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\ShowAllForumCommentsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAllForumsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\CreateTourComplexRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\CreateTourRequestViewModel.cs" />
@@ -293,9 +294,6 @@
     </Compile>
     <Compile Include="WPF\Views\Guest1\ShowAllForums.xaml.cs">
       <DependentUpon>ShowAllForums.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WPF\Views\Guest1\ShowForumCommentsxaml.xaml.cs">
-      <DependentUpon>ShowForumCommentsxaml.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guest1\ShowRequestComment.xaml.cs">
       <DependentUpon>ShowRequestComment.xaml</DependentUpon>
@@ -451,6 +449,9 @@
     <Compile Include="WPF\Views\Owner\SiteProposals.xaml.cs">
       <DependentUpon>SiteProposals.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\Views\Guest1\ShowAllForumComments.xaml.cs">
+      <DependentUpon>ShowAllForumComments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
     </Compile>
@@ -522,10 +523,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest1\ShowAllForums.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WPF\Views\Guest1\ShowForumCommentsxaml.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -722,6 +719,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Owner\SiteProposals.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\ShowAllForumComments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

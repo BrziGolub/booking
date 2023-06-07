@@ -198,6 +198,9 @@
   <data name="EndDateDataGrid" xml:space="preserve">
     <value>Krajnji datum</value>
   </data>
+  <data name="ForumCommentsTitle" xml:space="preserve">
+    <value>Komentari na forumu</value>
+  </data>
   <data name="Forums" xml:space="preserve">
     <value>Forumi</value>
   </data>
@@ -218,6 +221,9 @@
   </data>
   <data name="LatenessDataGrid" xml:space="preserve">
     <value>Kasnjenje</value>
+  </data>
+  <data name="LeaveCommentButton" xml:space="preserve">
+    <value>Ostavi komentar</value>
   </data>
   <data name="Level1NiceToHave" xml:space="preserve">
     <value>Level1  - Pozeljno</value>
@@ -392,6 +398,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Korisnicko ime:</value>
+  </data>
+  <data name="VeryHelpful" xml:space="preserve">
+    <value>Veoma korisno</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Da</value>

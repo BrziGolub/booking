@@ -26,11 +26,12 @@
                      <DataGridTextColumn Header="{ns:Loc CityDataGrid}" Width="*"  Binding="{Binding Location.City}"></DataGridTextColumn>
                      <DataGridTextColumn Header="{ns:Loc OwnerUsernameDataGrid}" Width="*" Binding="{Binding User.Username}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Status" Width="*"  Binding="{Binding Status}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{ns:Loc VeryHelpful}" Width="*"  Binding="{Binding Helpful}"></DataGridTextColumn>
             </DataGrid.Columns>
 
             </DataGrid>
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button  Content="{ns:Loc ShowForumComments}" FontWeight="Bold" Width="140" Margin="10"  Command="{Binding ShowForumComments}"></Button>
+            <Button  Content="{ns:Loc ShowForumComments}" FontWeight="Bold" Width="140" Margin="10"  Command="{Binding Show_Comments_Button}"></Button>
                 <Button  Content="{ns:Loc OpenForumButton}" FontWeight="Bold" Width="140" Margin="10"  Command="{Binding Create_Forum_Button}"></Button>
                 <Button  Content="{ns:Loc CloseForumButton}" FontWeight="Bold" Width="140" Margin="10"  Command="{Binding Close_Forum_Button}"></Button>
         </StackPanel>

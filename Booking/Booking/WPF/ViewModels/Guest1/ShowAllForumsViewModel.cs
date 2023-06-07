@@ -4,6 +4,7 @@ using Booking.Domain.Model;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Observer;
 using Booking.Util;
+using Booking.WPF.Views;
 using Booking.WPF.Views.Guest1;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace Booking.WPF.ViewModels.Guest1
         public RelayCommand Show_Comments_Button { get; set; }
         public RelayCommand Create_Forum_Button { get; set; }
         public RelayCommand Close_Forum_Button { get; set; }
+
         public NavigationService navigationService;
 
         public ShowAllForumsViewModel(NavigationService navigation)
@@ -49,7 +51,7 @@ namespace Booking.WPF.ViewModels.Guest1
 
         public void ShowForumComments(object param)
         {
-            
+            navigationService.Navigate(new ShowAllForumComments());
         }
         public void Update()
         {

@@ -2,6 +2,7 @@
 using Booking.Domain.RepositoryInterfaces;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Observer;
+using Booking.Repository;
 using Booking.Util;
 using System;
 using System.Collections.Generic;
@@ -13,18 +14,32 @@ namespace Booking.Application.UseCases
 {
     public class ForumCommentService : ISubject, IForumCommentService
     {
-		private readonly IForumCommentRepository _forumCommentRepository;
-		private readonly List<IObserver> _observers;
+        private readonly IForumRepository _forumRepository;
+        private readonly IForumCommentRepository _forumCommentRepository;
+        private readonly ILocationRepository _locationRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly List<IObserver> _observers;
 
 		public ForumCommentService()
 		{
 			_forumCommentRepository = InjectorRepository.CreateInstance<IForumCommentRepository>();
-			_observers = new List<IObserver>();
+            _forumRepository = InjectorRepository.CreateInstance<IForumRepository>();
+            _locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
+            _userRepository = InjectorRepository.CreateInstance<IUserRepository>();
+            _observers = new List<IObserver>();
 		}
 
 		public List<ForumComment> GetAll()
 		{
-			return _forumCommentRepository.GetAll();
+			List<ForumComment> list = new List<ForumComment>();
+			list = _forumCommentRepository.GetAll();
+			foreach(var c in list)
+			{
+				c.Forum = _forumRepository.GetById(c.Forum.Id);
+				c.Forum.Location = _locationRepository.GetById(c.Forum.Location.Id); 
+				c.User = _userRepository.GetById(c.User.Id);
+			}
+            return list;
 		}
 
 		public ForumComment GetById(int id)

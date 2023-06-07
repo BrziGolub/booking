@@ -304,6 +304,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forum comments.
+        /// </summary>
+        internal static string ForumCommentsTitle {
+            get {
+                return ResourceManager.GetString("ForumCommentsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forums.
         /// </summary>
         internal static string Forums {
@@ -363,6 +372,15 @@ namespace Booking.Properties {
         internal static string LatenessDataGrid {
             get {
                 return ResourceManager.GetString("LatenessDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leave comment.
+        /// </summary>
+        internal static string LeaveCommentButton {
+            get {
+                return ResourceManager.GetString("LeaveCommentButton", resourceCulture);
             }
         }
         
@@ -894,6 +912,15 @@ namespace Booking.Properties {
         internal static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Very helpful.
+        /// </summary>
+        internal static string VeryHelpful {
+            get {
+                return ResourceManager.GetString("VeryHelpful", resourceCulture);
             }
         }
         
