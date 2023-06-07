@@ -11,5 +11,6 @@ namespace Booking.Domain.ServiceInterfaces
     {
         List<Forum> GetAll();
         Forum GetById(int id);
+        void Create(Forum forum);
     }
 }

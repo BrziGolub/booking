@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Booking.WPF.ViewModels.Guest1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,12 @@ using System.Windows.Shapes;
 
 namespace Booking.WPF.Views.Guest1
 {
-    /// <summary>
-    /// Interaction logic for CreateForum.xaml
-    /// </summary>
     public partial class CreateForum : Page
     {
-        public CreateForum()
+        public CreateForum(NavigationService navigate)
         {
             InitializeComponent();
+            this.DataContext = new CreateForumViewModel(navigate);
         }
     }
 }

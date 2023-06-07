@@ -205,6 +205,7 @@
     <Compile Include="Util\InjectorService.cs" />
     <Compile Include="WPF\ViewModels\Guest1\AccommodationDateSuggestionsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\BookAccommodationViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\CreateForumViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestAllRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestAllReservationsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestProfileViewModel.cs" />

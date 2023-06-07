@@ -42,5 +42,7 @@ namespace Booking.Domain.ServiceInterfaces
         List<OwnerMonthStatistic> ChangeToNumbers(List<OwnerMonthStatistic> result);
         string CalculateBestMonth(List<OwnerMonthStatistic> BestMonthStatistics, Accommodation selectedAccommodation, int year);
         bool CheckMonthDuration(OwnerMonthStatistic statistic);
+
+        string IsLocationVisited(Location location);
     }
 }
