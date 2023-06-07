@@ -183,6 +183,9 @@
   <data name="CottageType" xml:space="preserve">
     <value>COTTAGE</value>
   </data>
+  <data name="CreateForumTitle" xml:space="preserve">
+    <value>Create forum</value>
+  </data>
   <data name="DepartureDayDataGrid" xml:space="preserve">
     <value>Departure day</value>
   </data>
@@ -261,6 +264,9 @@
   <data name="NumberOgGuests" xml:space="preserve">
     <value>Number of guests:</value>
   </data>
+  <data name="OpenForumButton" xml:space="preserve">
+    <value>OPEN FORUM</value>
+  </data>
   <data name="OwnerLabel" xml:space="preserve">
     <value>Owner:</value>
   </data>
@@ -268,6 +274,9 @@
     <value>Owner's comment:</value>
   </data>
   <data name="OwnerUsername" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="OwnerUsernameDataGrid" xml:space="preserve">
     <value>Owner</value>
   </data>
   <data name="PreviousButton" xml:space="preserve">
@@ -338,6 +347,12 @@
   </data>
   <data name="ShowAllButton" xml:space="preserve">
     <value>SHOW ALL</value>
+  </data>
+  <data name="ShowAllForumsTitle" xml:space="preserve">
+    <value>Forums</value>
+  </data>
+  <data name="ShowForumComments" xml:space="preserve">
+    <value>SEE COMMENTS</value>
   </data>
   <data name="ShowImagesButton" xml:space="preserve">
     <value>SHOW IMAGES</value>

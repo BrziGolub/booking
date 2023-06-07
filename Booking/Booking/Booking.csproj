@@ -194,6 +194,7 @@
     <Compile Include="WPF\ViewModels\Guest1\RenovationSuggestionsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\ShowAllForumsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\CreateTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\RateTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\ReserveTourViewModel.cs" />
@@ -236,6 +237,9 @@
     <Compile Include="WPF\Views\Guest1\BookAccommodation.xaml.cs">
       <DependentUpon>BookAccommodation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\Views\Guest1\CreateForum.xaml.cs">
+      <DependentUpon>CreateForum.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Guest1\FirstGuestAllReservations.xaml.cs">
       <DependentUpon>FirstGuestAllReservations.xaml</DependentUpon>
     </Compile>
@@ -259,6 +263,12 @@
     </Compile>
     <Compile Include="WPF\Views\Guest1\ShowAccommodationImages.xaml.cs">
       <DependentUpon>ShowAccommodationImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest1\ShowAllForums.xaml.cs">
+      <DependentUpon>ShowAllForums.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest1\ShowForumCommentsxaml.xaml.cs">
+      <DependentUpon>ShowForumCommentsxaml.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guest1\ShowRequestComment.xaml.cs">
       <DependentUpon>ShowRequestComment.xaml</DependentUpon>
@@ -433,6 +443,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="WPF\Views\Guest1\CreateForum.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPF\Views\Guest1\FirstGuestAllReservations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -462,6 +476,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest1\ShowAccommodationImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\ShowAllForums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\ShowForumCommentsxaml.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -827,6 +849,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\notifications128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\conversation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\forum.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

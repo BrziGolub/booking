@@ -259,6 +259,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create forum.
+        /// </summary>
+        internal static string CreateForumTitle {
+            get {
+                return ResourceManager.GetString("CreateForumTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Departure day.
         /// </summary>
         internal static string DepartureDayDataGrid {
@@ -493,6 +502,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OPEN FORUM.
+        /// </summary>
+        internal static string OpenForumButton {
+            get {
+                return ResourceManager.GetString("OpenForumButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Owner:.
         /// </summary>
         internal static string OwnerLabel {
@@ -516,6 +534,15 @@ namespace Booking.Properties {
         internal static string OwnerUsername {
             get {
                 return ResourceManager.GetString("OwnerUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner.
+        /// </summary>
+        internal static string OwnerUsernameDataGrid {
+            get {
+                return ResourceManager.GetString("OwnerUsernameDataGrid", resourceCulture);
             }
         }
         
@@ -723,6 +750,24 @@ namespace Booking.Properties {
         internal static string ShowAllButton {
             get {
                 return ResourceManager.GetString("ShowAllButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forums.
+        /// </summary>
+        internal static string ShowAllForumsTitle {
+            get {
+                return ResourceManager.GetString("ShowAllForumsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SEE COMMENTS.
+        /// </summary>
+        internal static string ShowForumComments {
+            get {
+                return ResourceManager.GetString("ShowForumComments", resourceCulture);
             }
         }
         

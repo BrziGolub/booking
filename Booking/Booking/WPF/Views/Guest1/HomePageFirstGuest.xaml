@@ -74,8 +74,8 @@
             <ComboBox  Grid.Column="3"  Grid.Row="1" Margin="3" IsEnabled="{Binding CityComboboxEnabled, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=CityCollection}" SelectedItem="{Binding Path=SearchCity, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
             <Label Grid.Column="4"  Grid.Row="1" Content="{ns:Loc NumberOgGuests}"></Label>
 
-            <TextBox Grid.Column="5"  Grid.Row="1" Margin="3" Text="{Binding Path=SerachGuests, UpdateSourceTrigger=PropertyChanged,
-                ValidatesOnDataErrors=True}"  Validation.ErrorTemplate="{StaticResource ValidationTemplate}"></TextBox>
+            <TextBox Grid.Column="5"  Grid.Row="1" Margin="3,3,3,0" Text="{Binding Path=SerachGuests, UpdateSourceTrigger=PropertyChanged,
+                ValidatesOnDataErrors=True}"  Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="24" VerticalAlignment="Top"></TextBox>
         </Grid>
 
         <Button Grid.Row ="2" HorizontalAlignment="Right" Width="120" FontWeight="Bold" Margin="20,15,20,5" Command="{Binding Button_Click_Search}" Content="{ns:Loc SearchButton}" ></Button>

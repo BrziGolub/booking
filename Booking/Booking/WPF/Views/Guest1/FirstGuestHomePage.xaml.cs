@@ -28,6 +28,7 @@ namespace Booking.View
 {
     public partial class FirstGuestHomePage : Window
     {
+        public static bool isTranslated;
         private App app;
         private string currentLanguage;
         public string CurrentLanguage
@@ -86,6 +87,7 @@ namespace Booking.View
             this.app = System.Windows.Application.Current as App;
             this.app = (App)System.Windows.Application.Current;
             this.CurrentLanguage = "en-US";
+            isTranslated = false;
            // MenuBackgroundColor = new SolidColorBrush(Colors.Beige);
             FrameHomePage.Content = new HomePageFirstGuest(this.FrameHomePage.NavigationService);
         }
@@ -125,12 +127,14 @@ namespace Booking.View
 
         private void MenuItem_Click_ENG(object sender, RoutedEventArgs e)
         {
+            isTranslated = false;
             CurrentLanguage = "en-US";
             app.ChangeLanguage(CurrentLanguage);
         }
 
         private void MenuItem_Click_SRB(object sender, RoutedEventArgs e)
         {
+            isTranslated = true;
             CurrentLanguage = "sr-LATN";
             app.ChangeLanguage(CurrentLanguage);
         }
@@ -138,7 +142,7 @@ namespace Booking.View
         
         private void MenuItem_Click_Light(object sender, RoutedEventArgs e)
         {
-          
+            
         }
 
         /* private SolidColorBrush _menuBackgroundColor;
@@ -168,6 +172,11 @@ namespace Booking.View
             StyleManager.ApplyDarkStyle();
             IsDarkMode = !IsDarkMode;
             App.MessagingService.PublishModeChange(IsDarkMode);
+        }
+
+        private void MenuItem_Click_Forums(object sender, RoutedEventArgs e)
+        {
+            FrameHomePage.Content = new ShowAllForums(this.FrameHomePage.NavigationService);
         }
     }
 }

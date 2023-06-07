@@ -183,6 +183,9 @@
   <data name="CottageType" xml:space="preserve">
     <value>KOLIBA</value>
   </data>
+  <data name="CreateForumTitle" xml:space="preserve">
+    <value>Kreiraj forum</value>
+  </data>
   <data name="DepartureDayDataGrid" xml:space="preserve">
     <value>Dan odlaska</value>
   </data>
@@ -261,6 +264,9 @@
   <data name="NumberOgGuests" xml:space="preserve">
     <value>Broj gostiju:</value>
   </data>
+  <data name="OpenForumButton" xml:space="preserve">
+    <value>OTVORI FORUM</value>
+  </data>
   <data name="OwnerLabel" xml:space="preserve">
     <value>Vlasnik:</value>
   </data>
@@ -269,6 +275,9 @@
   </data>
   <data name="OwnerUsername" xml:space="preserve">
     <value>Vlasnik</value>
+  </data>
+  <data name="OwnerUsernameDataGrid" xml:space="preserve">
+    <value>Owner</value>
   </data>
   <data name="PreviousButton" xml:space="preserve">
     <value>PRETHODNA</value>
@@ -338,6 +347,12 @@
   </data>
   <data name="ShowAllButton" xml:space="preserve">
     <value>PRIKAZ SVIH</value>
+  </data>
+  <data name="ShowAllForumsTitle" xml:space="preserve">
+    <value>Forumi</value>
+  </data>
+  <data name="ShowForumComments" xml:space="preserve">
+    <value>PRIKAZ KOMENTARA</value>
   </data>
   <data name="ShowImagesButton" xml:space="preserve">
     <value>PRIKAZI SLIKE</value>

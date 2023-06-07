@@ -22,7 +22,7 @@
                 <MenuItem Header="{ns:Loc MyReservations}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"/>
                 <MenuItem Header="{ns:Loc RescheduleRequests}"  FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ResheduleRequests"/>
                 <MenuItem Header="{ns:Loc Reviews}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_Reviews"/>
-                <MenuItem Header="{ns:Loc Forums}" FontWeight="Bold" HorizontalAlignment="Right"/>
+                <MenuItem Header="{ns:Loc Forums}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_Forums"/>
                 <MenuItem Header="{ns:Loc Language}"  FontWeight="Bold" HorizontalAlignment="Right">
                     <MenuItem Header="ENG" Click="MenuItem_Click_ENG"/>
                     <MenuItem Header="SRB" Click="MenuItem_Click_SRB"/>

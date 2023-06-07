@@ -54,7 +54,7 @@
             </StackPanel>
             <TextBox Grid.Row="3" Grid.Column="1" Width="80" Height="30"
                  Text="{Binding Path=NumberOfGuests, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                 Validation.ErrorTemplate="{StaticResource ValidationTemplate}" HorizontalAlignment="Left" Margin="0,10,0,10" >
+                 Validation.ErrorTemplate="{StaticResource ValidationTemplate}" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" >
                 <TextBox.Style>
                     <Style TargetType="{x:Type TextBox}">
                         <Style.Triggers>
