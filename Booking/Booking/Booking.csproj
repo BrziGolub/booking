@@ -69,6 +69,7 @@
     <Compile Include="Domain\DTO\MonthlyRequests.cs" />
     <Compile Include="Domain\DTO\OwnerMonthStatistic.cs" />
     <Compile Include="Domain\DTO\OwnerYearStatistic.cs" />
+    <Compile Include="Domain\DTO\Suggestion.cs" />
     <Compile Include="Domain\DTO\YearlyRequests.cs" />
     <Compile Include="Domain\Model\AccommodationAndOwnerGrade.cs" />
     <Compile Include="Domain\Model\AccommodationGrade.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="WPF\ViewModels\Owner\ShowGradeImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowOwnerAccommodationImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowRenovationsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\SiteProposalsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\SuperOwnerViewModel.cs" />
     <Compile Include="Application\UseCases\LocationService.cs" />
     <Compile Include="Application\UseCases\TourReservationService.cs" />
@@ -403,6 +405,9 @@
     </Compile>
     <Compile Include="WPF\Views\Owner\ShowRenovations.xaml.cs">
       <DependentUpon>ShowRenovations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Owner\SiteProposals.xaml.cs">
+      <DependentUpon>SiteProposals.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
@@ -639,6 +644,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Owner\ShowRenovations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Owner\SiteProposals.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
