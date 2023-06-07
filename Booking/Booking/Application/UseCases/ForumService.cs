@@ -16,18 +16,29 @@ namespace Booking.Application.UseCases
 	{
 		private readonly IForumRepository _forumRepository;
 		private readonly IForumCommentRepository _forumCommentRepository;
+		private readonly ILocationRepository _locationRepository;
+		private readonly IUserRepository _userRepository;
 		private readonly List<IObserver> _observers;
 
 		public ForumService()
 		{
 			_forumRepository = InjectorRepository.CreateInstance<IForumRepository>();
-            _forumCommentRepository = InjectorRepository.CreateInstance<IForumCommentRepository>();	
-            _observers = new List<IObserver>();
+            _forumCommentRepository = InjectorRepository.CreateInstance<IForumCommentRepository>();
+			_locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
+			_userRepository = InjectorRepository.CreateInstance<IUserRepository>();
+			_observers = new List<IObserver>();
 		}
 
 		public List<Forum> GetAll()
 		{
-			return _forumRepository.GetAll();
+			List<Forum> list = new List<Forum>();
+			list = _forumRepository.GetAll();
+			foreach (var f in list)
+			{ 
+				f.Location = _locationRepository.GetById(f.Location.Id);
+				f.User = _userRepository.GetById(f.User.Id);
+			}
+			return list;
 		}
 
 		public Forum GetById(int id)
