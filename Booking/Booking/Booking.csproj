@@ -240,6 +240,7 @@
     <Compile Include="WPF\ViewModels\Owner\AccommodationStatisticsByMonthsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\AccommodationStatisticsByYearsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\GradingWindowViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\OwnerAllForumsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerDateMoveViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerGradingGuestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerHomePageViewModel.cs" />
@@ -389,6 +390,9 @@
     </Compile>
     <Compile Include="WPF\Views\Owner\KeyBoardCustom.xaml.cs">
       <DependentUpon>KeyBoardCustom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Owner\OwnerAllForums.xaml.cs">
+      <DependentUpon>OwnerAllForums.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Owner\OwnerDateMove.xaml.cs">
       <DependentUpon>OwnerDateMove.xaml</DependentUpon>
@@ -638,6 +642,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Owner\KeyBoardCustom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Owner\OwnerAllForums.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
