@@ -59,6 +59,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Application\UseCases\AccommodationRenovationService.cs" />
+    <Compile Include="Application\UseCases\ForumCommentService.cs" />
+    <Compile Include="Application\UseCases\ForumService.cs" />
     <Compile Include="Application\UseCases\RenovationRecommodationService.cs" />
     <Compile Include="Application\UseCases\SuperGuestService.cs" />
     <Compile Include="Application\UseCases\SuperGuideService.cs" />
@@ -80,6 +82,8 @@
     <Compile Include="Domain\Model\AccommodationReservationRequests.cs" />
     <Compile Include="Domain\Model\Enums\AccommodationType.cs" />
     <Compile Include="Domain\Model\Enums\RequestStatus.cs" />
+    <Compile Include="Domain\Model\Forum.cs" />
+    <Compile Include="Domain\Model\ForumComment.cs" />
     <Compile Include="Domain\Model\Images\AccommodationImage.cs" />
     <Compile Include="Domain\Model\Images\GuestsAccommodationImages.cs" />
     <Compile Include="Domain\Model\Images\TourImage.cs" />
@@ -105,6 +109,8 @@
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationReservationRequestsRepostiory.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationResevationRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IForumCommentRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IForumRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IGuestsAccommodationImagesRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ILocationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\INotificationRepository.cs" />
@@ -129,6 +135,8 @@
     <Compile Include="Domain\ServiceInterfaces\IAccommodationReservationRequestService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IAccommodationReservationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IAccommodationService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IForumCommentService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IForumService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IGuestsAccommodationImagesService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ILocationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\INotificationService.cs" />
@@ -155,6 +163,8 @@
     <Compile Include="Observer\ISubject.cs" />
     <Compile Include="Repository\AccommodationReservationRequestsRepostiory.cs" />
     <Compile Include="Repository\AccommodationResevationRepository.cs" />
+    <Compile Include="Repository\ForumCommentRepository.cs" />
+    <Compile Include="Repository\ForumRepository.cs" />
     <Compile Include="Repository\GuestsAccommodationImagesRepository.cs" />
     <Compile Include="Repository\ITourRequestRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
@@ -710,6 +720,8 @@
     <None Include="Resources\Data\accommodationsRenovations.csv" />
     <None Include="Resources\Data\accommodationsReservations.csv" />
     <None Include="Resources\Data\accommodationsReservationsRequests.csv" />
+    <None Include="Resources\Data\forumComments.csv" />
+    <None Include="Resources\Data\forums.csv" />
     <None Include="Resources\Data\guestsAccommodationImages.csv" />
     <None Include="Resources\Data\locations.csv" />
     <None Include="Resources\Data\notifications.csv" />
