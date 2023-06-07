@@ -33,6 +33,7 @@
                 <DataGridTextColumn Width="*" Header="City" Binding="{Binding Location.City}"/>
                 <DataGridTextColumn Header="Creator" Width="*" Binding="{Binding User.Username}"/>
                 <DataGridTextColumn Width="*" Header="Status" Binding="{Binding Status}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Very helpful" Binding="{Binding Helpful}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel FlowDirection="LeftToRight" Margin="200,620,0,0">

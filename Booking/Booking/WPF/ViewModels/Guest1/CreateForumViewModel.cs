@@ -148,6 +148,7 @@ namespace Booking.WPF.ViewModels.Guest1
             newComment.Visited = _AccommodationReservationService.IsLocationVisited(newForum.Location);
             newForum.Comments.Add(newComment);
             newForum.Status = "OPENED";
+            newForum.Helpful = "NO";
             ForumService.Create(newForum);
             return newForum;
         }

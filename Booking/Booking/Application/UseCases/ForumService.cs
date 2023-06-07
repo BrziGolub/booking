@@ -42,6 +42,32 @@ namespace Booking.Application.UseCases
 				f.Location = _locationRepository.GetById(f.Location.Id);
 				f.User = _userRepository.GetById(f.User.Id);
 			}
+			list = CheckVeryHelpful(list);
+			return list;
+		}
+		public List<Forum> CheckVeryHelpful(List<Forum> list) 
+		{
+			foreach (var f in list) 
+			{
+				int ownerComments = 0;
+				int guestComments = 0;
+				foreach (var com in _forumCommentRepository.GetAll()) 
+				{
+					com.User = _userRepository.GetById(com.User.Id);
+					if (com.Forum.Id == f.Id && com.User.Role == 1)
+					{
+						ownerComments++;
+					}
+					else if (com.Forum.Id == f.Id && com.User.Role == 3 && com.Visited.Equals("YES")) 
+					{
+						guestComments++;
+					}
+				}
+				if (ownerComments >= 10 && guestComments >= 20) 
+				{
+					f.Helpful = "YES";
+				}
+			}
 			return list;
 		}
 
