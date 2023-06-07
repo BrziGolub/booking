@@ -20,7 +20,7 @@
             </StackPanel.Background>
             <Button Content=" Register accommodation" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" ToolTip="Press to add new accommodation" Margin="1 20 10 0" Command="{Binding OpenRegisterAccommodation}" HorizontalContentAlignment="Left" />
             <Button Content=" Accomodation stats" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" Command="{Binding OpenAccommodationStatistics}" />
-            <Button Content=" Site proposal" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" />
+            <Button Content=" Site proposal" FontSize="18" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" HorizontalContentAlignment="Left" Command="{Binding OpenSiteProposals}"/>
             <Button Content=" Handling date changes" FontSize="18" ToolTip="Press to see requests for date changes" Width="250" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Command="{Binding OpenDateMove}" HorizontalContentAlignment="Left" />
             <Button Content=" Gradeing guests" FontSize="18" Width="250" ToolTip="Press to see reservations that you can grade" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Command="{Binding OpenGradingGuests}" HorizontalContentAlignment="Left" />
             <Button Content=" View reviews" FontSize="18" Width="250" ToolTip="Press to see grades that you got from guests" Height="65" HorizontalAlignment="Left" Margin="1 5 10 0" Command="{Binding OpenViewReviews}" HorizontalContentAlignment="Left" />
