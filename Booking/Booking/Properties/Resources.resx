@@ -129,6 +129,9 @@
   <data name="AccommodationName" xml:space="preserve">
     <value>Accommodation name:</value>
   </data>
+  <data name="AddComment" xml:space="preserve">
+    <value>Add first comment:</value>
+  </data>
   <data name="AddCommnet" xml:space="preserve">
     <value>Add comment:</value>
   </data>

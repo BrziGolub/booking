@@ -22,7 +22,6 @@ namespace Booking.WPF.Views.Guest1
         {
             InitializeComponent();
             this.DataContext = new ShowAllForumsViewModel(navigation);
-
         }
     }
 }

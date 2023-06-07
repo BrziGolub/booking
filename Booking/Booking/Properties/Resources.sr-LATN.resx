@@ -129,6 +129,9 @@
   <data name="AccommodationName" xml:space="preserve">
     <value>Naziv smestaja:</value>
   </data>
+  <data name="AddComment" xml:space="preserve">
+    <value>Dodaj prvi komentar:</value>
+  </data>
   <data name="AddCommnet" xml:space="preserve">
     <value>Dodaj komentar:</value>
   </data>

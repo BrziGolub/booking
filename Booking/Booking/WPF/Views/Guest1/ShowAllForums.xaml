@@ -19,19 +19,19 @@
                 <Image Source="/Resources/Images/forum.png" Height="30" Width="30"></Image>
                 <Label FontWeight="Bold" FontSize="17" Content="{ns:Loc ShowAllForumsTitle}"></Label>
             </StackPanel>
-            <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Path=Forums}"
+            <DataGrid Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Path = Forums}"
                   Name="RequestsDataGrid" HorizontalAlignment="Center" Margin="150,20,100,150" SelectedItem="{Binding SelectedForum}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{ns:Loc StateDataGrid}"  Width="*" Binding="{Binding Forum.Location.State}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="{ns:Loc CityDataGrid}" Width="*"  Binding="{Binding Forum.Location.City}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="{ns:Loc OwnerUsernameDataGrid}" Width="*"  Binding="{Binding Forum.User.Username}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Status" Width="*"  Binding="{Binding Forum.Status}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{ns:Loc StateDataGrid}"  Width="*" Binding="{Binding Location.State}"></DataGridTextColumn>
+                     <DataGridTextColumn Header="{ns:Loc CityDataGrid}" Width="*"  Binding="{Binding Location.City}"></DataGridTextColumn>
+                     <DataGridTextColumn Header="{ns:Loc OwnerUsernameDataGrid}" Width="*" Binding="{Binding User.Username}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Status" Width="*"  Binding="{Binding Status}"></DataGridTextColumn>
             </DataGrid.Columns>
 
             </DataGrid>
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button  Content="{ns:Loc ShowForumComments}" FontWeight="Bold" Width="140" Margin="10"  Command="{Binding ShowForumComments}"></Button>
-                <Button  Content="{ns:Loc OpenForumButton}" FontWeight="Bold" Width="140" Margin="10"  Command="{Binding ShowForumComments}"></Button>
+                <Button  Content="{ns:Loc OpenForumButton}" FontWeight="Bold" Width="140" Margin="10"  Command="{Binding Create_Forum_Button}"></Button>
         </StackPanel>
         </Grid>
 </Page>

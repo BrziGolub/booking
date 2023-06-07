@@ -95,6 +95,7 @@ namespace Booking.WPF.ViewModels.Guest1
             _AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
             CityCollection = new ObservableCollection<string>();
             CountrycomboBox = new ObservableCollection<string>();
+            FillCityCommand = new RelayCommand(FillCity);
             Open_Forum_Button = new RelayCommand(OpenForumButton);
             FillComboBox();
         }
