@@ -24,8 +24,8 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="{ns:Loc StateDataGrid}"  Width="*" Binding="{Binding Forum.Location.State}"></DataGridTextColumn>
                     <DataGridTextColumn Header="{ns:Loc CityDataGrid}" Width="*"  Binding="{Binding Forum.Location.City}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="{ns:Loc OwnerUsernameDataGrid}" Width="*"  Binding="{Binding Forum.Location.City}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Status" Width="*"  Binding="{Binding Forum.Location.City}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="{ns:Loc OwnerUsernameDataGrid}" Width="*"  Binding="{Binding Forum.User.Username}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Status" Width="*"  Binding="{Binding Forum.Status}"></DataGridTextColumn>
             </DataGrid.Columns>
 
             </DataGrid>
