@@ -93,6 +93,7 @@ namespace Booking.WPF.ViewModels.Guest2
 		public RelayCommand Button_Click_NumericUp { get; set; }
 		public RelayCommand Button_Click_NumericDown { get; set; }
 		public RelayCommand Button_Click_TourRequest { get; set; }
+		public RelayCommand Button_Click_TourComplexRequest { get; set; }
 		public RelayCommand Button_Click_Statistics { get; set; }
 		public RelayCommand Button_Click_Notifications { get; set; }
 
@@ -135,6 +136,7 @@ namespace Booking.WPF.ViewModels.Guest2
 			Button_Click_NumericUp = new RelayCommand(NumericUp);
 			Button_Click_NumericDown = new RelayCommand(NumericDown);
 			Button_Click_TourRequest = new RelayCommand(ButtonTourRequests);
+			Button_Click_TourComplexRequest = new RelayCommand(ButtonTourComplexRequests);
 			Button_Click_Statistics = new RelayCommand(ButtonStatistics);
 			Button_Click_Notifications = new RelayCommand(ButtonNotifications);
 		}
@@ -317,6 +319,12 @@ namespace Booking.WPF.ViewModels.Guest2
 		private void ButtonTourRequests(object param)
 		{
 			TourRequestsView view = new TourRequestsView();
+			view.ShowDialog();
+		}
+
+		private void ButtonTourComplexRequests(object param)
+		{
+			TourComplexRequestsView view = new TourComplexRequestsView();
 			view.ShowDialog();
 		}
 

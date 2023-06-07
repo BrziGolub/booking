@@ -8,7 +8,7 @@
          Title="GuideCreateTourBasedOnTourRequest" Height="750" Width="830" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#D6E6F2">
     <Grid>
 
-        <TextBlock Margin="38 8 0 0" FontWeight="Bold" FontSize="32" Text="All tours" Foreground="#FFFFF200" >
+        <TextBlock Margin="38 8 0 0" FontWeight="Bold" FontSize="32" Text="Create tour" Foreground="#FFFFF200" >
             <TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="4" Color="#303841" BlurRadius="5" />
             </TextBlock.Effect>

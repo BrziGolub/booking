@@ -13,6 +13,8 @@ namespace Booking.Domain.RepositoryInterfaces
 		Tour Update(Tour tour);
 		List<Tour> GetValidTours();
 		Tour GetStartedTour();
+		List<int> GetAllGuidesId();
+		List<Tour> GetToursByGuideAndYearAndLanguage(int guideId, int year, string language);
 
     }
 }

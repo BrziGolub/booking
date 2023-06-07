@@ -1,5 +1,4 @@
 ﻿using Booking.Domain.Model;
-using Booking.Model;
 using Booking.Serializer;
 using System;
 using System.Collections.Generic;

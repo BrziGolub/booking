@@ -137,7 +137,7 @@ namespace Booking.WPF.ViewModels.Guest2
 
 		private void ButtonRequest(object param)
 		{
-			if (true)
+			if (true)//uslov za validaciju
 			{
 				TourRequest tourRequest = new TourRequest();
 				Location location = new Location();

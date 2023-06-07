@@ -62,5 +62,17 @@ namespace Booking.Repository
         {
             return _tourGrades.FindAll(t => t.Guest.Id == id);
         }
+
+        public TourGrade GetByTourId(int id)
+        {
+            foreach (TourGrade grade in _tourGrades)
+            {
+                if (grade.Tour.Id == id)
+                {
+                    return grade;
+                }
+            }
+            return null;
+        }
     }
 }
