@@ -56,5 +56,12 @@ namespace Booking.Repository
 			updatedUser.Super = 1;
             _serializer.ToCSV(FilePath, _users);
         }
+
+		public void Delete(User user)
+		{
+			User founded = _users.Find(u => u.Id == user.Id);
+			_users.Remove(founded);
+			_serializer.ToCSV(FilePath, _users);
+		}
     }
 }

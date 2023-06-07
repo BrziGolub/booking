@@ -13,6 +13,7 @@ namespace Booking.Domain.RepositoryInterfaces
 		void Save(List<User> users); // mozda malo drugaciji save
 		void Update(User updatedUser);
 		void UpdateSuper(User updatedUser);
+		void Delete(User user);
 
     }
 }
