@@ -370,23 +370,20 @@ namespace Booking.Service
 				}
 			}
 		}
-		private void CheckVoucher1(int idTour)
-		{
-			foreach (TourGuests tg in _tourGuestsRepository.GetAll())
-			{
-				User pomGuest = _userRepository.GetById(tg.User.Id);
 
-				if (tg.Tour.Id == idTour)
-				{
-					voucher.User.Id = pomGuest.Id;
-					voucher.ValidTime = DateTime.Now.AddYears(1);
-					voucher.IsActive = true;
-					_voucherRepository.Add(voucher);
-				}
-			}
+		public void RemoveGuideTours(int idGuide)
+		{
+			foreach(Tour t in  _tourRepository.GetAll())
+			{
+				if(t.GuideId == idGuide)
+                {
+                    removeTour(t.Id);
+                    return;
+                }
+            }
 		}
 
-		public bool checkTourGuests(int tourId, int userId)
+        public bool checkTourGuests(int tourId, int userId)
 		{
 			if (_tourGuestsRepository.GetAll().Any(u => u.Tour.Id == tourId && u.User.Id == userId))
 			{

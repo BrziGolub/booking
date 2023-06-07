@@ -192,9 +192,9 @@ namespace Booking.WPF.ViewModels.Guide
 
             if (result == MessageBoxResult.Yes)
             {
-                //MessageBox.Show("TREBA DA NAPRAVIM DA SE DA OTKAZ");
                 _userService.removeUser(TourService.SignedGuideId);
-                
+                _tourService.RemoveGuideTours(TourService.SignedGuideId);
+
                 SignInForm signInForm = new SignInForm();
                 signInForm.Show();
                 CloseWindow();
