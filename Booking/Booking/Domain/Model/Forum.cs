@@ -15,6 +15,7 @@ namespace Booking.Domain.Model
         public User User { get; set; }
         public string Status { get; set; }
         public List<ForumComment> Comments { get; set; }
+        public string Helpful { get; set; }
 
         public Forum() 
         {
@@ -23,16 +24,17 @@ namespace Booking.Domain.Model
             User = new User();
         }
 
-        public Forum(Location location, int userId, string status) 
+        public Forum(Location location, int userId, string status, string helpful)
         {
             Location = location;
             User.Id = userId;
             Status = status;
             Comments = new List<ForumComment>();
+            Helpful = helpful;
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Location.Id.ToString(), User.Id.ToString(), Status };
+            string[] csvValues = { Id.ToString(), Location.Id.ToString(), User.Id.ToString(), Status, Helpful };
             return csvValues;
         }
         public void FromCSV(string[] values)
@@ -41,6 +43,7 @@ namespace Booking.Domain.Model
             Location.Id = Convert.ToInt32(values[1]);
             User.Id = Convert.ToInt32(values[2]);
             Status = values[3];
+            Helpful = values[4];
         }
 
     }

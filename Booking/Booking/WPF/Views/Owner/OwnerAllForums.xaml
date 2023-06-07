@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.WPF.Views.Owner"
         mc:Ignorable="d"
-        Title="OwnerAllForums" Height="768" Width="1024">
+        Title="OwnerAllForums" Height="768" Width="1024"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock Margin="10,6,0,0" FontWeight="Bold" FontSize="42" Text="Forums" Foreground="#FFFFF200" >
             <TextBlock.Effect>
@@ -32,6 +33,7 @@
                 <DataGridTextColumn Width="*" Header="City" Binding="{Binding Location.City}"/>
                 <DataGridTextColumn Header="Creator" Width="*" Binding="{Binding User.Username}"/>
                 <DataGridTextColumn Width="*" Header="Status" Binding="{Binding Status}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Very helpful" Binding="{Binding Helpful}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel FlowDirection="LeftToRight" Margin="200,620,0,0">
