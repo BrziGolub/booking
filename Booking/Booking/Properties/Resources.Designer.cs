@@ -250,6 +250,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CLOSE FORUM.
+        /// </summary>
+        internal static string CloseForumButton {
+            get {
+                return ResourceManager.GetString("CloseForumButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Communication.
         /// </summary>
         internal static string CommunicationDataGrid {

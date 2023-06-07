@@ -48,5 +48,28 @@ namespace Booking.Repository
             _serializer.ToCSV(FilePath, _forums);
             return forum;
         }
+
+        public void Update(Forum forum)
+        {
+            /* List<Forum> forumsCopy = new List<Forum>();
+             foreach(var f in _forums)
+             {
+                 if(f.Id == forum.Id)
+                 {
+                     forumsCopy.Add(forum);
+                 }
+                 else
+                 {
+                     forumsCopy.Add(f);
+                 }
+             }
+             _serializer.ToCSV(FilePath, forumsCopy);*/
+            int index = _forums.FindIndex(f => f.Id == forum.Id);
+            if (index != -1)
+            {
+                _forums[index] = forum;
+                _serializer.ToCSV(FilePath, _forums);
+            }
+        }
     }
 }

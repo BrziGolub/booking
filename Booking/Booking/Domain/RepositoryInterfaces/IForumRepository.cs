@@ -11,5 +11,6 @@ namespace Booking.Domain.RepositoryInterfaces
     {
         int NextId();
         Forum Add(Forum forum);
+        void Update(Forum forum);  
     }
 }

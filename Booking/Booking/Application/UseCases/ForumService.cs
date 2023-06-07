@@ -59,6 +59,12 @@ namespace Booking.Application.UseCases
             }
 		}
 
+		public void UpdateForum(Forum forum)
+		{
+			_forumRepository.Update(forum);
+			NotifyObservers();
+		}
+
 		public void Subscribe(IObserver observer)
 		{
 			_observers.Add(observer);

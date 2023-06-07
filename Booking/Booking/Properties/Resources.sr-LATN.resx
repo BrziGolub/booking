@@ -180,6 +180,9 @@
   <data name="CleanlinessDataGrid" xml:space="preserve">
     <value>Cistoca</value>
   </data>
+  <data name="CloseForumButton" xml:space="preserve">
+    <value>ZATVORI FORUM</value>
+  </data>
   <data name="CommunicationDataGrid" xml:space="preserve">
     <value>Komunikacija</value>
   </data>
