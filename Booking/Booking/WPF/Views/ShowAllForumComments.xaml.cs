@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Booking.WPF.ViewModels.Guest1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,16 +15,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Booking.WPF.Views.Guest1
+namespace Booking.WPF.Views
 {
-    /// <summary>
-    /// Interaction logic for ShowForumCommentsxaml.xaml
-    /// </summary>
-    public partial class ShowForumCommentsxaml : Page
+    public partial class ShowAllForumComments : Page
     {
-        public ShowForumCommentsxaml()
+        public ShowAllForumComments()
         {
             InitializeComponent();
+            this.DataContext = new ShowAllForumCommentsViewModel();
         }
     }
 }
