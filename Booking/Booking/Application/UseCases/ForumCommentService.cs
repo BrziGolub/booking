@@ -42,7 +42,24 @@ namespace Booking.Application.UseCases
             return list;
 		}
 
-		public ForumComment GetById(int id)
+		public List<ForumComment> GetForumComments(Forum selectedForum)
+		{
+            List<ForumComment> list = new List<ForumComment>();
+            foreach (var c in _forumCommentRepository.GetAll())
+            {
+                c.Forum = _forumRepository.GetById(c.Forum.Id);
+                c.Forum.Location = _locationRepository.GetById(c.Forum.Location.Id);
+                c.User = _userRepository.GetById(c.User.Id);
+
+				if(selectedForum.Location.State.Equals(c.Forum.Location.State) && selectedForum.Location.City.Equals(c.Forum.Location.City))
+				{
+					list.Add(c);
+				}
+            }
+            return list;
+        }
+
+        public ForumComment GetById(int id)
 		{
 			return _forumCommentRepository.GetById(id);
 		}

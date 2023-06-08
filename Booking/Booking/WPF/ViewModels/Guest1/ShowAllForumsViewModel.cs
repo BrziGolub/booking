@@ -51,7 +51,7 @@ namespace Booking.WPF.ViewModels.Guest1
 
         public void ShowForumComments(object param)
         {
-            navigationService.Navigate(new ShowAllForumComments());
+            navigationService.Navigate(new ShowAllForumComments(SelectedForum));
         }
         public void Update()
         {

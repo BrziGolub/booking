@@ -1,4 +1,5 @@
-﻿using Booking.WPF.ViewModels.Guest1;
+﻿using Booking.Domain.Model;
+using Booking.WPF.ViewModels.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +20,10 @@ namespace Booking.WPF.Views
 {
     public partial class ShowAllForumComments : Page
     {
-        public ShowAllForumComments()
+        public ShowAllForumComments(Forum SelectedForum)
         {
             InitializeComponent();
-            this.DataContext = new ShowAllForumCommentsViewModel();
+            this.DataContext = new ShowAllForumCommentsViewModel(SelectedForum);
         }
     }
 }
