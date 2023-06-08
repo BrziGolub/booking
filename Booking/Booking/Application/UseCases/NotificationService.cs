@@ -32,8 +32,8 @@ namespace Booking.Service
         {
             List<Notification> ownerNotifications = new List<Notification>();
 
-            //if (user != null)
-            //{
+            if (user != null)
+            {
                 foreach (var notification in _repository.GetAll())
                 {
                     if (notification.User.Id == user.Id)
@@ -42,8 +42,8 @@ namespace Booking.Service
                     }
                 }
                 return ownerNotifications;
-            //}
-            //else { return null; }
+            }
+            else { return null; }
         }
 
         public void ChangeNotificationState(Notification notification)
