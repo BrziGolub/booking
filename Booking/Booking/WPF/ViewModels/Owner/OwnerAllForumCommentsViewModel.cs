@@ -22,6 +22,7 @@ namespace Booking.WPF.ViewModels.Owner
         public event PropertyChangedEventHandler PropertyChanged;
         public IForumCommentService ForumCommentService;
         public ILocationService LocationService;
+        public String ForumLabel { get; set; } = String.Empty;
 
         public Forum SelectedForum;
         public ForumComment SelectedComment { get; set; } //nez hoce trebati ovo neka stoji :)
@@ -35,6 +36,7 @@ namespace Booking.WPF.ViewModels.Owner
             ForumCommentService = InjectorService.CreateInstance<IForumCommentService>();
             LocationService = InjectorService.CreateInstance<ILocationService>();
             SelectedForum = selectedForum;
+            ForumLabel = SetForumLabel(SelectedForum);
             ForumCommentService.Subscribe(this);
             ForumComments = new ObservableCollection<ForumComment>(ForumCommentService.GetForumComments(selectedForum));
             LeaveComment = new RelayCommand(LeaveCommentButton);
@@ -70,6 +72,11 @@ namespace Booking.WPF.ViewModels.Owner
 
         public void LeaveCommentButton(object sender)
         {
+            if (SelectedForum.Status.Equals("CLOSED"))
+            {
+                MessageBox.Show("The forum is closed");
+                return;
+            }
             if (!LocationService.DoesOwnerHaveLocation(SelectedForum.Location.Id))
             {
                 MessageBox.Show("You can not comment on this forum");
@@ -84,6 +91,10 @@ namespace Booking.WPF.ViewModels.Owner
             ForumCommentService.Create(newForumComment);
             ForumCommentService.NotifyObservers();
             MessageBox.Show("Comment succesfully added");
+        }
+        private String SetForumLabel(Forum forum)
+        {
+            return forum.User.Username + " for location:" + forum.Location.State + "-" + forum.Location.City;
         }
         private void CloseWindow(object param)
         {
