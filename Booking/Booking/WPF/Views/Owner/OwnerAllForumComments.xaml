@@ -1,0 +1,24 @@
+﻿<Window x:Class="Booking.WPF.Views.Owner.OwnerAllForumComments"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Booking.WPF.Views.Owner"
+        mc:Ignorable="d"
+        Title="OwnerAllForumComments" Height="768" Width="1024">
+    <Grid>
+        <TextBlock Margin="10,6,0,0" FontWeight="Bold" FontSize="42" Text="Forum comments" Foreground="#FFFFF200" >
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="4" Color="#303841" BlurRadius="5" />
+                </TextBlock.Effect>
+            </TextBlock>
+
+            <Separator Margin="0,-120,0,480" Width="1024" HorizontalAlignment="Center" />
+
+        <StackPanel Grid.Row="1" Margin="10,90,20,0" Orientation="Horizontal">
+            <Label FontSize="17" FontWeight="Bold">Forum:</Label>
+            <Label FontSize="17" Content="{Binding ForumLabel}" Width="930"></Label>
+        </StackPanel>
+
+    </Grid>
+</Window>
