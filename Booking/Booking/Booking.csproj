@@ -238,6 +238,7 @@
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel2.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideRequestsStatisticViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideSuperGuideViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\WizardViewModel.cs" />
     <Compile Include="WPF\Views\Guide\SelectDateForComplexTour.xaml.cs">
       <DependentUpon>SelectDateForComplexTour.xaml</DependentUpon>
     </Compile>
@@ -463,6 +464,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guest1\ShowAllForumComments.xaml.cs">
       <DependentUpon>ShowAllForumComments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Owner\Wizard.xaml.cs">
+      <DependentUpon>Wizard.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
@@ -747,6 +751,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest1\ShowAllForumComments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Owner\Wizard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
