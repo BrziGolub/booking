@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Booking.Domain.Model;
+using Booking.WPF.ViewModels.Owner;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,10 @@ namespace Booking.WPF.Views.Owner
     /// </summary>
     public partial class OwnerAllForumComments : Window
     {
-        public OwnerAllForumComments()
+        public OwnerAllForumComments(Forum SelectedForum)
         {
             InitializeComponent();
+            this.DataContext = new OwnerAllForumCommentsViewModel(SelectedForum,this);
         }
     }
 }

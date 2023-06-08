@@ -241,6 +241,7 @@
     <Compile Include="WPF\ViewModels\Owner\AccommodationStatisticsByMonthsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\AccommodationStatisticsByYearsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\GradingWindowViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\OwnerAllForumCommentsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerAllForumsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerDateMoveViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerGradingGuestsViewModel.cs" />

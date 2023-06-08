@@ -115,6 +115,17 @@ namespace Booking.Service
 			bestSuggestions.Add(bestSuggestion2);
 			return bestSuggestions;
 		}
+		public bool DoesOwnerHaveLocation(int locationId) 
+		{
+			foreach (var a in _accommodationRepository.GetAll()) 
+			{
+				if (a.Owner.Id == AccommodationService.SignedOwnerId && a.Location.Id == locationId) 
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 		public List<Suggestion> GetWorstLocations()
 		{
 			List<Suggestion> suggestions = new List<Suggestion>();

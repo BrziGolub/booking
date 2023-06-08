@@ -58,8 +58,13 @@ namespace Booking.Application.UseCases
             }
             return list;
         }
+		public ForumComment Create(ForumComment forumComment)
+		{
+			ForumComment newForumComment = _forumCommentRepository.Add(forumComment);
+			return newForumComment;
+		}
 
-        public ForumComment GetById(int id)
+		public ForumComment GetById(int id)
 		{
 			return _forumCommentRepository.GetById(id);
 		}
