@@ -36,6 +36,11 @@ namespace Booking.WPF.ViewModels.Owner
         }
         private void ShowForumComments(object param)
         {
+            if (SelectedForum == null)
+            {
+                MessageBox.Show("Please select a forum");
+                return;
+            }
             OwnerAllForumComments ownerAllForumComments = new OwnerAllForumComments(SelectedForum);
             ownerAllForumComments.Show();
         }

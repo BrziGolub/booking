@@ -41,6 +41,11 @@ namespace Booking.Application.UseCases
 			}
             return list;
 		}
+		public void UpdateForumComment(ForumComment forumComment)
+		{
+			_forumCommentRepository.Update(forumComment);
+			NotifyObservers();
+		}
 
 		public List<ForumComment> GetForumComments(Forum selectedForum)
 		{

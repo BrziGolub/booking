@@ -27,6 +27,7 @@ namespace Booking.WPF.ViewModels.Owner
         public Forum SelectedForum;
         public ForumComment SelectedComment { get; set; } //nez hoce trebati ovo neka stoji :)
         public RelayCommand LeaveComment { get; set; }
+        public RelayCommand Report { get; set; }
         public RelayCommand Close { get; set; }
         private readonly Window _window;
 
@@ -40,6 +41,7 @@ namespace Booking.WPF.ViewModels.Owner
             ForumCommentService.Subscribe(this);
             ForumComments = new ObservableCollection<ForumComment>(ForumCommentService.GetForumComments(selectedForum));
             LeaveComment = new RelayCommand(LeaveCommentButton);
+            Report = new RelayCommand(ReportComment);
             Close = new RelayCommand(CloseWindow);
             OwnerComment = "";
         }
@@ -69,9 +71,40 @@ namespace Booking.WPF.ViewModels.Owner
                 ForumComments.Add(forumComment);
             }
         }
+        public void ReportComment(object sender) 
+        {
+            if (SelectedComment == null) 
+            {
+                MessageBox.Show("Please select a comment");
+                return;
+            }
+            if (SelectedForum.Status.Equals("CLOSED"))
+            {
+                MessageBox.Show("The forum is closed");
+                return;
+            }
+            if (!LocationService.DoesOwnerHaveLocation(SelectedForum.Location.Id))
+            {
+                MessageBox.Show("You can not report on this forum");
+                return;
+            }
+            if (SelectedComment.Visited.Equals("YES")) 
+            {
+                MessageBox.Show("He was on the location");
+                return;
+            }
+            SelectedComment.Reports++;
+            ForumCommentService.UpdateForumComment(SelectedComment);
+            ForumCommentService.NotifyObservers();
+        }
 
         public void LeaveCommentButton(object sender)
         {
+            if (SelectedComment == null)
+            {
+                MessageBox.Show("Please select a comment");
+                return;
+            }
             if (SelectedForum.Status.Equals("CLOSED"))
             {
                 MessageBox.Show("The forum is closed");

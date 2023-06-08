@@ -14,5 +14,6 @@ namespace Booking.Domain.ServiceInterfaces
         ForumComment GetById(int id);
         List<ForumComment> GetForumComments(Forum selectedForum);
         ForumComment Create(ForumComment forumComment);
+        void UpdateForumComment(ForumComment forumComment);
     }
 }
