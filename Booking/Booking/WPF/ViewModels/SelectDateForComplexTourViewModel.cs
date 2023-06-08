@@ -43,6 +43,7 @@ namespace Booking.WPF.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public SelectDateForComplexTourViewModel(Window window)
         {
+            _window = window;
             tourService = InjectorService.CreateInstance<ITourService>();
             DeadLine = new ObservableCollection<DateTime[]>();
             Apply = new RelayCommand(ButtonApply);
@@ -76,8 +77,17 @@ namespace Booking.WPF.ViewModels
 
         private void ButtonApply(object param)
         {
-            //MessageBox.Show(SelectedDeadLine[0].ToString());
-            //MessageBox.Show(SelectedDeadLine[1].ToString());
+            if (SelectedDeadLine != null)
+            { 
+            GuideAcceptingPartOfTourViewModel.forwardedStartDate = SelectedDeadLine[0];
+            GuideAcceptingPartOfTourViewModel.forwardedEndDate = SelectedDeadLine[1];
+            System.Windows.MessageBox.Show("Date successfully picked!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            CloseWindow();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("First you need to pick dates!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         public bool IsGuideAvailable(int guideId, DateTime startDate, DateTime endDate)
         {
@@ -97,7 +107,10 @@ namespace Booking.WPF.ViewModels
             return true;
         }
 
-
+        private void CloseWindow()
+        {
+            _window.Close();
+        }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -280,7 +280,7 @@ namespace Booking.WPF.ViewModels.Guide
         public void Update()
         {
             TourRequests.Clear();
-            foreach(TourRequest request in tourRequestService.GetAllOnHold()) 
+            foreach(TourRequest request in tourRequestService.GetAllOnHoldPartOfComplex()) 
             {
             TourRequests.Add(request);
             }

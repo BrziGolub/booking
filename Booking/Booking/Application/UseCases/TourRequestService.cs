@@ -3,6 +3,7 @@ using Booking.Domain.Model;
 using Booking.Domain.RepositoryInterfaces;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
+using Booking.Observer;
 using Booking.Repository;
 using Booking.Service;
 using Booking.Util;
@@ -20,13 +21,16 @@ namespace Booking.Application.UseCases
 		private readonly ILocationRepository _locationRepository;
 		private readonly ITourComplexRequestRepository _tourComplexRequestRepository;
 
-		public TourRequestService()
+        private readonly List<IObserver> _observers;
+        public TourRequestService()
 		{
 			_tourRequestRepository = InjectorRepository.CreateInstance<ITourRequestRepository>();
 			_locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
 			_tourComplexRequestRepository = InjectorRepository.CreateInstance<ITourComplexRequestRepository>();
 
-			CheckRequestDate();
+            _observers = new List<IObserver>();
+
+            CheckRequestDate();
 		}
 
 		public string GetMostPopularLanguageInLastYear()
@@ -419,7 +423,23 @@ namespace Booking.Application.UseCases
 			return _tourRequestRepository.Update(tourRequest);
 		}
 
-		public int GetNumberOfRequestsByCity(int id, string city, string year)
+        public TourRequest UpdateTourRequest(TourRequest tourRequest)
+        {
+            TourRequest oldTourRequest = _tourRequestRepository.GetById(tourRequest.Id);
+            if (oldTourRequest == null) return null;
+
+            oldTourRequest.Status = tourRequest.Status;
+            oldTourRequest.Notify = tourRequest.Notify;
+            oldTourRequest.TourReservedStartTime = tourRequest.TourReservedStartTime;
+			oldTourRequest.StartTime = tourRequest.StartTime;
+			oldTourRequest.EndTime = tourRequest.EndTime;
+
+			NotifyObservers();
+
+            return _tourRequestRepository.Update(tourRequest);
+        }
+
+        public int GetNumberOfRequestsByCity(int id, string city, string year)
 		{
 			return (year.Equals("All")) ? GetRequestsByUserId(id).Where(tr => tr.Location.City.Equals(city)).Count() : GetRequestsByUserId(id).Where(tr => tr.CreatedDate.Year.ToString().Equals(year)).Where(tr => tr.Location.City.Equals(city)).Count();
 		}
@@ -520,5 +540,23 @@ namespace Booking.Application.UseCases
 			}
 			return tourRequests;
 		}
-	}
+
+        public void NotifyObservers()
+        {
+            foreach (var observer in _observers)
+            {
+                observer.Update();
+            }
+        }
+
+        public void Subscribe(IObserver observer)
+        {
+            _observers.Add(observer);
+        }
+
+        public void Unsubscribe(IObserver observer)
+        {
+            _observers.Remove(observer);
+        }
+    }
 }

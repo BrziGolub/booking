@@ -29,6 +29,9 @@ namespace Booking.WPF.ViewModels
         public ITourRequestService tourRequestService { get; set; }
         public ITourService tourService { get; set; }
 
+        public static DateTime forwardedStartDate { get; set; } = DateTime.MinValue;
+        public static DateTime forwardedEndDate { get; set; } = DateTime.MinValue;
+
         private TourRequest _selectedTourRequest;
         public TourRequest SelectedTourRequest
         {
@@ -75,25 +78,39 @@ namespace Booking.WPF.ViewModels
 
         private void ButtonAcceptPartOfTour(object param)
         {
-            if(IsGuideAvailable(TourService.SignedGuideId))
+            if (_selectedTourRequest != null)
             {
-                SelectDateForComplexTourViewModel.GuestStartDate = SelectedTourRequest.StartTime;
-                SelectDateForComplexTourViewModel.GuestEndDate = SelectedTourRequest.EndTime;
+                if (IsGuideAvailable(TourService.SignedGuideId))
+                {
 
-                SelectDateForComplexTour selectDateForComplexTour = new SelectDateForComplexTour();
-                selectDateForComplexTour.ShowDialog();
 
-                //SelectedTourRequest.Status = "AcceptedComplex";
-                //SelectedTourRequest.Notify = true;
-                //SelectedTourRequest.TourReservedStartTime = DateTime.Parse(StartTime); // treba ga samo izjednaciti sa odabranim start timeom
-                //SelectedTourRequest.StartTime = ; // uzeti iz novog prozora iz kog samo biram datum
-                //SelectedTourRequest.EndTime =  ;  // uzeti iz novog prozora iz kog samo biram datum
+                    SelectDateForComplexTourViewModel.GuestStartDate = SelectedTourRequest.StartTime;
+                    SelectDateForComplexTourViewModel.GuestEndDate = SelectedTourRequest.EndTime;
 
-                //tourRequestService.ChangeStatus(SelectedTourRequest);
+                    SelectDateForComplexTour selectDateForComplexTour = new SelectDateForComplexTour();
+                    selectDateForComplexTour.ShowDialog();
+                    if (forwardedStartDate != DateTime.MinValue && forwardedEndDate != DateTime.MinValue)
+                    {
+                        SelectedTourRequest.Status = "AcceptedComplex";
+                        SelectedTourRequest.Notify = true;
+                        SelectedTourRequest.TourReservedStartTime = forwardedStartDate;
+                        SelectedTourRequest.StartTime = forwardedStartDate;
+                        SelectedTourRequest.EndTime = forwardedEndDate;
+
+                        tourRequestService.UpdateTourRequest(SelectedTourRequest);
+
+                        System.Windows.MessageBox.Show("Part of tour successfully accepted!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Update();
+                    }
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("You already have a tour planned in that time period!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                }
             }
             else
             {
-                System.Windows.MessageBox.Show("You already have a tour planned in that time period!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("First you need to select part of tour!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
         
@@ -113,17 +130,18 @@ namespace Booking.WPF.ViewModels
             List<Tour> tours = tourService.GetGuideTours();
 
             foreach (Tour tour in tours)
-            {
-                DateTime tourEndTime = tour.StartTime + TimeSpan.FromDays(tour.Duration * 24);
-                bool isOverlapping = SelectedTourRequest.StartTime < tourEndTime && SelectedTourRequest.EndTime > tour.StartTime;
+            {                            
+                    DateTime tourEndTime = tour.StartTime + TimeSpan.FromDays(tour.Duration * 24);
+                    bool isOverlapping = SelectedTourRequest.StartTime < tourEndTime && SelectedTourRequest.EndTime > tour.StartTime;
 
-                if (isOverlapping)
-                {
-                    return false;
-                }
+                    if (isOverlapping)
+                    {
+                        return false;
+                    }                
             }
 
             return true;
+            
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

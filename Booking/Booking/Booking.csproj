@@ -238,7 +238,7 @@
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel2.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideRequestsStatisticViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideSuperGuideViewModel.cs" />
-    <Compile Include="WPF\ViewModels\Guide\SelectDateForComplexTour.xaml.cs">
+    <Compile Include="WPF\Views\Guide\SelectDateForComplexTour.xaml.cs">
       <DependentUpon>SelectDateForComplexTour.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\ViewModels\Guide\ShowDescriptionViewModel.cs" />
@@ -486,7 +486,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WPF\ViewModels\Guide\SelectDateForComplexTour.xaml">
+    <Page Include="WPF\Views\Guide\SelectDateForComplexTour.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
