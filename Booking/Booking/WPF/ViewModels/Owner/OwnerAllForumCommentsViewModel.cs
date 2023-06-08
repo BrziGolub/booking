@@ -100,11 +100,6 @@ namespace Booking.WPF.ViewModels.Owner
 
         public void LeaveCommentButton(object sender)
         {
-            if (SelectedComment == null)
-            {
-                MessageBox.Show("Please select a comment");
-                return;
-            }
             if (SelectedForum.Status.Equals("CLOSED"))
             {
                 MessageBox.Show("The forum is closed");
