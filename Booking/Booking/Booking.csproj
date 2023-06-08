@@ -231,12 +231,16 @@
     <Compile Include="WPF\ViewModels\Guest2\TourComplexRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\TourNotificationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\TourRequestsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\GuideAcceptingPartOfTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideAcceptingTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel1.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel2.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideRequestsStatisticViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideSuperGuideViewModel.cs" />
+    <Compile Include="WPF\Views\Guide\SelectDateForComplexTour.xaml.cs">
+      <DependentUpon>SelectDateForComplexTour.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\ViewModels\Guide\ShowDescriptionViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\AccommodationStatisticsByMonthsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\AccommodationStatisticsByYearsViewModel.cs" />
@@ -260,6 +264,7 @@
     <Compile Include="Application\UseCases\LocationService.cs" />
     <Compile Include="Application\UseCases\TourReservationService.cs" />
     <Compile Include="Application\UseCases\TourService.cs" />
+    <Compile Include="WPF\ViewModels\SelectDateForComplexTourViewModel.cs" />
     <Compile Include="WPF\Views\Guest1\AccommodationDateSugestions.xaml.cs">
       <DependentUpon>AccommodationDateSugestions.xaml</DependentUpon>
     </Compile>
@@ -322,6 +327,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guide\CustomMessageBox.xaml.cs">
       <DependentUpon>CustomMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guide\GuideAcceptingPartOfTour.xaml.cs">
+      <DependentUpon>GuideAcceptingPartOfTour.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guide\GuideAcceptingTourRequest.xaml.cs">
       <DependentUpon>GuideAcceptingTourRequest.xaml</DependentUpon>
@@ -482,6 +490,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WPF\Views\Guide\SelectDateForComplexTour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPF\Views\Guest1\AccommodationDateSugestions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -563,6 +575,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guide\CustomMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guide\GuideAcceptingPartOfTour.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

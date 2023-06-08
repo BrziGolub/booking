@@ -5,6 +5,7 @@ using Booking.Model;
 using Booking.Repository;
 using Booking.Service;
 using Booking.Util;
+using HarfBuzzSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,74 +32,115 @@ namespace Booking.Application.UseCases
 
         public void UpdateSuperGuideStatus(string language)
         {
-                int SignedGuideId = TourService.SignedGuideId;
-                // Get the tours of the guide from the tour repository for the last year
-                List<Tour> guideTours = _tourRepository.GetToursByGuideAndYearAndLanguage(SignedGuideId, DateTime.Now.Year - 1, language);
+            int SignedGuideId = TourService.SignedGuideId;
 
-                int tourCount = guideTours.Count;
+            DateTime oneYearAgo = DateTime.Now.AddYears(-1);
+            List<Tour> guideTours = _tourRepository.GetToursByGuideAndDateRangeAndLanguage(SignedGuideId, oneYearAgo, DateTime.Now, language);
 
-                // Check if the guide meets the criteria for becoming a super-guide
-                if (tourCount < 20)
+
+            int tourCount = guideTours.Count;
+
+            if (tourCount < 20)
+            {
+                MessageBox.Show($"You don't have at least 20 tours in {language} in the last year.", "Insufficient Tours", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            double averageGrade = CalculateAverageGrade(guideTours);
+
+            if (averageGrade >= 4.0)
+            {
+
+                SuperGuide superGuide = _repository.GetSuperBySignedGuideId(SignedGuideId);
+                if (superGuide == null)
                 {
-                    MessageBox.Show($"You don't have at least 20 tours in {language} in the last year.", "Insufficient Tours", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return; // maybe return;
-                }
-
-                double averageGrade = 0;
-                int totalGrades = 0;
-
-                foreach (Tour tour in guideTours)
-                {
-                    TourGrade grade = _tourGradeRepository.GetByTourId(tour.Id);
-                    if (grade != null)
+                    superGuide = new SuperGuide
                     {
-                        int sumGrades = grade.KnowledgeGuideGrade + grade.LanguageGuideGrade + grade.InterestOfTourGrade;
-                        averageGrade += (double)sumGrades / 3;
-                        totalGrades++;
-                    }
-                }
-
-                averageGrade /= totalGrades;
-                // Check if the average grade is above 4.0 // ALL GOOD TO THIS
-
-                if (averageGrade > 4.0)
-                {
-                    // Set the super-guide status for the guide
-                    SuperGuide superGuide = _repository.GetSuperBySignedGuideId(SignedGuideId); // signed
-                    if (superGuide == null)
-                    {
-                        superGuide = new SuperGuide
-                        {
-                            Guide = _userRepository.GetById(SignedGuideId), // signed guide
-                            Language = language,
-                            AverageGrade = averageGrade,
-                            NumberOfTours = tourCount
-                        };
-                        _repository.Add(superGuide);
+                        Guide = _userRepository.GetById(SignedGuideId),
+                        Language = language,
+                        AverageGrade = averageGrade,
+                        NumberOfTours = tourCount
+                    };
+                    _repository.Add(superGuide);
                     _userRepository.UpdateSuper(_userRepository.GetById(SignedGuideId));
                     MessageBox.Show("Congratulations, you have become super-guide! ");
-                    }
-                    else
-                    {
-                        superGuide.Language = language;
-                        superGuide.AverageGrade = averageGrade;
-                        superGuide.NumberOfTours = tourCount;
-                        _repository.Update(superGuide);
+                }
+                else
+                {
+                    superGuide.Language = language;
+                    superGuide.AverageGrade = averageGrade;
+                    superGuide.NumberOfTours = tourCount;
+                    _repository.Update(superGuide);
                     MessageBox.Show("You are already super-guide on this language! ");
                 }
-                }
-               
-                /*else
-                {
-                    // Remove the super-guide status for the guide
-                    SuperGuide superGuide = _repository.GetSuperBySignedGuideId(SignedGuideId);
-                    if (superGuide != null)
-                    {
-                        _repository.Delete(superGuide);
-                    }
-                }*/
+            }
+            else
+            {
+                MessageBox.Show("You need average grade greater than 4.0 to become super-guide! ");
+            }
 
-            
+            /*else
+            {
+                // Remove the super-guide status for the guide
+                SuperGuide superGuide = _repository.GetSuperBySignedGuideId(SignedGuideId);
+                if (superGuide != null)
+                {
+                    _repository.Delete(superGuide);
+                }
+            }*/
+        }
+
+        private double CalculateAverageGrade(List<Tour> guideTours)
+        {
+            double averageGrade = 0;
+            int totalGrades = 0;
+
+            foreach (Tour tour in guideTours)
+            {
+                TourGrade grade = _tourGradeRepository.GetByTourId(tour.Id);
+                if (grade != null)
+                {
+                    int sumGrades = grade.KnowledgeGuideGrade + grade.LanguageGuideGrade + grade.InterestOfTourGrade;
+                    averageGrade += (double)sumGrades / 3;
+                    totalGrades++;
+                }
+            }
+
+            averageGrade /= totalGrades;
+            return averageGrade;
+        }
+
+        public int CountGuideTours(string language)
+        {
+            int SignedGuideId = TourService.SignedGuideId;
+            DateTime oneYearAgo = DateTime.Now.AddYears(-1);
+            List<Tour> guideTours = _tourRepository.GetToursByGuideAndDateRangeAndLanguage(SignedGuideId, oneYearAgo, DateTime.Now, language);
+
+            int tourCount = guideTours.Count;
+            return tourCount;
+        }
+
+        public double GuideAverageGrade(string language)
+        {
+            int SignedGuideId = TourService.SignedGuideId;
+            DateTime oneYearAgo = DateTime.Now.AddYears(-1);
+            List<Tour> guideTours = _tourRepository.GetToursByGuideAndDateRangeAndLanguage(SignedGuideId, oneYearAgo, DateTime.Now, language);
+            double averageGrade = 0;
+            int totalGrades = 0;
+
+            foreach (Tour tour in guideTours)
+            {
+                TourGrade grade = _tourGradeRepository.GetByTourId(tour.Id);
+                if (grade != null)
+                {
+                    int sumGrades = grade.KnowledgeGuideGrade + grade.LanguageGuideGrade + grade.InterestOfTourGrade;
+                    averageGrade += (double)sumGrades / 3;
+                    totalGrades++;
+                }
+            }
+
+            averageGrade /= totalGrades;
+            return averageGrade;
         }
     }
 }

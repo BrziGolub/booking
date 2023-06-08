@@ -270,7 +270,7 @@ namespace Booking.WPF.ViewModels.Guide
             }
             else
             {
-                MessageBox.Show("You already have a tour planned in that time period!");
+                System.Windows.MessageBox.Show("You already have a tour planned in that time period!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
         private void CloseWindow()
@@ -280,7 +280,7 @@ namespace Booking.WPF.ViewModels.Guide
         public void Update()
         {
             TourRequests.Clear();
-            foreach(TourRequest request in tourRequestService.GetAllOnHold()) 
+            foreach(TourRequest request in tourRequestService.GetAllOnHoldPartOfComplex()) 
             {
             TourRequests.Add(request);
             }

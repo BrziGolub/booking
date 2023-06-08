@@ -1,6 +1,7 @@
 ﻿using Booking.Domain.DTO;
 using Booking.Domain.Model;
 using Booking.Model;
+using Booking.Observer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.ServiceInterfaces
 {
-    public interface ITourRequestService : IService<TourRequest>
+    public interface ITourRequestService : IService<TourRequest>, ISubject
     {
         string GetMostPopularLanguageInLastYear();
         int GetMostPopularLocationIdInLastYear();
@@ -38,5 +39,8 @@ namespace Booking.Domain.ServiceInterfaces
         List<TourRequest> GetAllNotAccepted();
 		List<User> CheckUnfulfilledRequest(string lang, Location loc);
         List<TourRequest> GetByComplexRequestId(int id);
-	}
+        List<TourRequest> GetAllOnHoldPartOfComplex();
+        TourRequest UpdateTourRequest(TourRequest tourRequest);
+
+    }
 }
