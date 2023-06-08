@@ -11,5 +11,6 @@ namespace Booking.Domain.ServiceInterfaces
     {
         List<ForumComment> GetAll();
         ForumComment GetById(int id);
+        List<ForumComment> GetForumComments(Forum selectedForum);
     }
 }
