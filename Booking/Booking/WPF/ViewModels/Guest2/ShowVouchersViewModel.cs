@@ -45,70 +45,87 @@ namespace Booking.WPF.ViewModels.Guest2
             _window.Close();
         }
 
+        private bool canPrint()
+        {
+            return Vouchers.Count > 0;
+        }
+
         private void ButtonGenerateReport(object param)
         {
-            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "PDF file|*.pdf", FileName = "Vouchers_Report", ValidateNames = true, InitialDirectory = GetDownloadsPath() })
+            if (canPrint())
             {
-                if (sfd.ShowDialog() == DialogResult.OK)
+                using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "PDF file|*.pdf", FileName = "Vouchers_Report", ValidateNames = true, InitialDirectory = GetDownloadsPath() })
                 {
-                    Document doc = new Document(PageSize.A4);
-                    try
+                    if (sfd.ShowDialog() == DialogResult.OK)
                     {
-                        PdfWriter.GetInstance(doc, new FileStream(sfd.FileName, FileMode.Create));
-                        doc.Open();
-
-                        Paragraph para1 = new Paragraph("All currently valid vouchers", new Font(Font.FontFamily.HELVETICA, 20));
-                        para1.Alignment = Element.ALIGN_CENTER;
-                        para1.SpacingAfter = 10;
-                        doc.Add(para1);
-
-                        PdfPTable table = new PdfPTable(2);
-
-                        PdfPCell cell1 = new PdfPCell(new Phrase("Voucher No.", new Font(Font.FontFamily.HELVETICA, 10)));
-                        cell1.BackgroundColor = BaseColor.LIGHT_GRAY;
-                        cell1.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-                        cell1.BorderWidthBottom = 1f;
-                        cell1.BorderWidthTop = 1f;
-                        cell1.BorderWidthLeft = 1f;
-                        cell1.BorderWidthRight = 1f;
-                        cell1.HorizontalAlignment = Element.ALIGN_CENTER;
-                        cell1.VerticalAlignment = Element.ALIGN_CENTER;
-                        table.AddCell(cell1);
-
-                        PdfPCell cell2 = new PdfPCell(new Phrase("Expiration date", new Font(Font.FontFamily.HELVETICA, 10)));
-                        cell2.BackgroundColor = BaseColor.LIGHT_GRAY;
-                        cell2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-                        cell2.BorderWidthBottom = 1f;
-                        cell2.BorderWidthTop = 1f;
-                        cell2.BorderWidthLeft = 1f;
-                        cell2.BorderWidthRight = 1f;
-                        cell2.HorizontalAlignment = Element.ALIGN_CENTER;
-                        cell2.VerticalAlignment = Element.ALIGN_CENTER;
-                        table.AddCell(cell2);
-
-                        foreach (var v in Vouchers)
+                        Document doc = new Document(PageSize.A4);
+                        try
                         {
-                            PdfPCell cellNo = new PdfPCell(new Phrase(v.Id.ToString(), new Font(Font.FontFamily.HELVETICA, 10)));
-                            PdfPCell cellDate = new PdfPCell(new Phrase(v.ValidTime.ToString("dd.MM.yyyy."), new Font(Font.FontFamily.HELVETICA, 10)));
+                            PdfWriter.GetInstance(doc, new FileStream(sfd.FileName, FileMode.Create));
+                            doc.Open();
 
-                            cellNo.HorizontalAlignment = Element.ALIGN_CENTER;
-                            cellDate.HorizontalAlignment = Element.ALIGN_CENTER;
+                            Paragraph para1 = new Paragraph("All currently valid vouchers", new Font(Font.FontFamily.HELVETICA, 20));
+                            para1.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(para1);
 
-                            table.AddCell(cellNo);
-                            table.AddCell(cellDate);
+                            String paragraph = "Date: " + DateTime.Now.ToString("dd.MM.yyyy. HH:mm");
+                            Paragraph para2 = new Paragraph(paragraph, new Font(Font.FontFamily.HELVETICA, 12));
+                            para2.Alignment = Element.ALIGN_CENTER;
+                            para2.SpacingAfter = 10;
+                            doc.Add(para2);
+
+                            PdfPTable table = new PdfPTable(2); // 2 - broj kolona
+
+                            PdfPCell cell1 = new PdfPCell(new Phrase("Voucher No.", new Font(Font.FontFamily.HELVETICA, 10)));
+                            cell1.BackgroundColor = BaseColor.LIGHT_GRAY;
+                            cell1.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
+                            cell1.BorderWidthBottom = 1f;
+                            cell1.BorderWidthTop = 1f;
+                            cell1.BorderWidthLeft = 1f;
+                            cell1.BorderWidthRight = 1f;
+                            cell1.HorizontalAlignment = Element.ALIGN_CENTER;
+                            cell1.VerticalAlignment = Element.ALIGN_CENTER;
+                            table.AddCell(cell1);
+
+                            PdfPCell cell2 = new PdfPCell(new Phrase("Expiration date", new Font(Font.FontFamily.HELVETICA, 10)));
+                            cell2.BackgroundColor = BaseColor.LIGHT_GRAY;
+                            cell2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
+                            cell2.BorderWidthBottom = 1f;
+                            cell2.BorderWidthTop = 1f;
+                            cell2.BorderWidthLeft = 1f;
+                            cell2.BorderWidthRight = 1f;
+                            cell2.HorizontalAlignment = Element.ALIGN_CENTER;
+                            cell2.VerticalAlignment = Element.ALIGN_CENTER;
+                            table.AddCell(cell2);
+
+                            foreach (var v in Vouchers)
+                            {
+                                PdfPCell cellNo = new PdfPCell(new Phrase(v.Id.ToString(), new Font(Font.FontFamily.HELVETICA, 10)));
+                                PdfPCell cellDate = new PdfPCell(new Phrase(v.ValidTime.ToString("dd.MM.yyyy."), new Font(Font.FontFamily.HELVETICA, 10)));
+
+                                cellNo.HorizontalAlignment = Element.ALIGN_CENTER;
+                                cellDate.HorizontalAlignment = Element.ALIGN_CENTER;
+
+                                table.AddCell(cellNo);
+                                table.AddCell(cellDate);
+                            }
+
+                            doc.Add(table);
                         }
-
-                        doc.Add(table);
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Windows.MessageBox.Show(ex.Message, "Message", MessageBoxButton.OK, (MessageBoxImage)MessageBoxIcon.Error);
-                    }
-                    finally
-                    {
-                        doc.Close();
+                        catch (Exception ex)
+                        {
+                            System.Windows.MessageBox.Show(ex.Message, "Message", MessageBoxButton.OK, (MessageBoxImage)MessageBoxIcon.Error);
+                        }
+                        finally
+                        {
+                            doc.Close();
+                        }
                     }
                 }
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Not enough data to generate pdf!");
             }
         }
 
