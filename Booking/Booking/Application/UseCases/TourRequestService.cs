@@ -18,11 +18,13 @@ namespace Booking.Application.UseCases
 	{
 		private readonly ITourRequestRepository _tourRequestRepository;
 		private readonly ILocationRepository _locationRepository;
+		private readonly ITourComplexRequestRepository _tourComplexRequestRepository;
 
 		public TourRequestService()
 		{
 			_tourRequestRepository = InjectorRepository.CreateInstance<ITourRequestRepository>();
 			_locationRepository = InjectorRepository.CreateInstance<ILocationRepository>();
+			_tourComplexRequestRepository = InjectorRepository.CreateInstance<ITourComplexRequestRepository>();
 
 			CheckRequestDate();
 		}
@@ -66,7 +68,25 @@ namespace Booking.Application.UseCases
 			return tourRequests;
 		}
 
-		public void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language, DateTime? startDate, DateTime? endDate)
+        public List<TourRequest> GetAllOnHoldPartOfComplex()
+        {
+            List<TourRequest> tourRequests = new List<TourRequest>();
+
+            foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+            {
+                tourRequest.PartOfComplexRequest = _tourComplexRequestRepository.GetById(tourRequest.PartOfComplexRequest.Id);
+
+                if (tourRequest.Status == "On hold" && tourRequest.PartOfComplexRequest != null)
+                {
+                    tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
+                    tourRequests.Add(tourRequest);
+                }
+            }
+
+            return tourRequests;
+        }
+
+        public void Search(ObservableCollection<TourRequest> observe, string city, string country, string numberOfGuests, string language, DateTime? startDate, DateTime? endDate)
 		{
 			observe.Clear();
 

@@ -183,7 +183,8 @@ namespace Booking.WPF.ViewModels.Guide
 
         private void ButtonOpenAcceptPartTour(object param)
         {
-            MessageBox.Show("open");
+            GuideAcceptingPartOfTour guideAcceptingPartOfTour = new GuideAcceptingPartOfTour();
+            guideAcceptingPartOfTour.Show();
         }
 
         private void ButtonDismissal(object param)

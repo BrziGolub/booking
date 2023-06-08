@@ -38,5 +38,6 @@ namespace Booking.Domain.ServiceInterfaces
         TourImage FindImageByUrl(string url);
         List<TourKeyPoint> GetTourKeyPoints();
         TourKeyPoint removeKeyPoint(int idKeyPoint);
+        Tour removeTour1(int idTour);
     }
 }

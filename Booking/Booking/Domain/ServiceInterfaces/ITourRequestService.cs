@@ -38,5 +38,7 @@ namespace Booking.Domain.ServiceInterfaces
         List<TourRequest> GetAllNotAccepted();
 		List<User> CheckUnfulfilledRequest(string lang, Location loc);
         List<TourRequest> GetByComplexRequestId(int id);
-	}
+        List<TourRequest> GetAllOnHoldPartOfComplex();
+
+    }
 }

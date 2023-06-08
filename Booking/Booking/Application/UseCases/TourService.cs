@@ -377,11 +377,33 @@ namespace Booking.Service
 			{
 				if(t.GuideId == idGuide)
                 {
-                    removeTour(t.Id);
+                    removeTour1(t.Id);
                     return;
                 }
             }
 		}
+
+        public Tour removeTour1(int idTour)
+        {
+            Tour tour = _tourRepository.GetById(idTour);
+            if (tour == null) return null;
+
+            if (tour.IsCancelable())
+            {
+                CheckVoucher(idTour);
+                _tourKeyPointsRepository.DeleteByTourId(idTour);
+                _tourImagesRepository.DeleteByTourId(idTour);
+                _tourGuestsRepository.DeleteByTourId(idTour);
+                _tourReservationRepository.DeleteByTourId(idTour);
+                _tourRepository.Delete(tour);
+                NotifyObservers();
+                return tour;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         public bool checkTourGuests(int tourId, int userId)
 		{
