@@ -1,4 +1,5 @@
 ﻿using Booking.Model;
+using System;
 using System.Collections.Generic;
 using System.Windows.Documents;
 
@@ -14,7 +15,7 @@ namespace Booking.Domain.RepositoryInterfaces
 		List<Tour> GetValidTours();
 		Tour GetStartedTour();
 		List<int> GetAllGuidesId();
-		List<Tour> GetToursByGuideAndYearAndLanguage(int guideId, int year, string language);
+		List<Tour> GetToursByGuideAndDateRangeAndLanguage(int guideId, DateTime startDate, DateTime endDate, string language);
 
     }
 }

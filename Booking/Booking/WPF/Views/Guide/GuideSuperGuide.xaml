@@ -79,22 +79,22 @@
         <Label Content="in selected" Margin="-125,135,0,0" Width="95" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
         <Label Content="language" Margin="-135,165,0,0" Width="75" Height="30" Panel.ZIndex="1" Foreground="#FFF200" FontWeight="ExtraBold"/>
 
-        <TextBlock Margin="100,-40,0,0"                  
-            FontSize="15"
+        <TextBlock Margin="200,20,0,0"                  
+            FontSize="20"
             FontStyle="Italic"
             FontWeight="SemiBold"
             Foreground="Black"
             Panel.ZIndex="1"
             Height="21" Width="144"
-            Text="{Binding Path=aa, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBlock Margin="100,65,0,0"                    
-            FontSize="15"
+            Text="{Binding Path=CountToursTB, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Margin="200,120,0,0"                    
+            FontSize="20"
             FontStyle="Italic"
             FontWeight="SemiBold"
             Foreground="Black"
             Panel.ZIndex="1"
             Height="21" Width="144"
-            Text="{Binding Path=aa, UpdateSourceTrigger=PropertyChanged}"/>
+            Text="{Binding Path=AverageGradeTB, UpdateSourceTrigger=PropertyChanged}"/>
 
 
         <WrapPanel Margin="70 295 0 0" Width="250" Height="50">

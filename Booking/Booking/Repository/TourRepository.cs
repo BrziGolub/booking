@@ -109,19 +109,19 @@ namespace Booking.Repository
             return list;
         }
 
-        public List<Tour> GetToursByGuideAndYearAndLanguage(int guideId, int year, string language)
+        public List<Tour> GetToursByGuideAndDateRangeAndLanguage(int guideId, DateTime startDate, DateTime endDate, string language)
         {
-            List<Tour> toursByGuideAndYearAndLanguage = new List<Tour>();
+            List<Tour> toursByGuideAndDateRangeAndLanguage = new List<Tour>();
 
             foreach (Tour tour in _tours)
             {
-                if (tour.GuideId == guideId && tour.StartTime.Year == year && tour.Language == language)
+                if (tour.GuideId == guideId && tour.StartTime >= startDate && tour.StartTime <= endDate && tour.Language == language)
                 {
-                    toursByGuideAndYearAndLanguage.Add(tour);
+                    toursByGuideAndDateRangeAndLanguage.Add(tour);
                 }
             }
 
-            return toursByGuideAndYearAndLanguage;
+            return toursByGuideAndDateRangeAndLanguage;
         }
 
     }

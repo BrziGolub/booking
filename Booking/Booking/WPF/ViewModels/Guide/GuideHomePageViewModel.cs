@@ -9,7 +9,7 @@ using Booking.View;
 using System.ComponentModel;
 using Booking.Commands;
 using Booking.WPF.Views.Guide;
-
+using Booking.Service;
 
 namespace Booking.WPF.ViewModels.Guide
 {
@@ -17,6 +17,7 @@ namespace Booking.WPF.ViewModels.Guide
     {
         public ObservableCollection<Tour> Tours { get; set; }
         public ITourService _tourService { get; set; }
+        public IUserService _userService { get; set; }
 
         public Tour SelectedTour { get; set; }
         public User user { get; set; }
@@ -50,7 +51,7 @@ namespace Booking.WPF.ViewModels.Guide
         public RelayCommand OpenTourRequestStatistic { get; set; }
         public RelayCommand OpenSuperGuide { get; set; }
         public RelayCommand OpenAcceptPartTour { get; set; }
-        
+        public RelayCommand Dismissal { get; set; }
 
 
 
@@ -60,6 +61,7 @@ namespace Booking.WPF.ViewModels.Guide
         {
             _window = window;
             _tourService = InjectorService.CreateInstance<ITourService>();
+            _userService = InjectorService.CreateInstance<IUserService>();
 
             _tourService.Subscribe(this);
 
@@ -86,6 +88,7 @@ namespace Booking.WPF.ViewModels.Guide
             OpenTourRequestStatistic = new RelayCommand(ButtonOpenTourRequestStatistic);
             OpenSuperGuide = new RelayCommand(ButtonOpenSuperGuide);
             OpenAcceptPartTour = new RelayCommand(ButtonOpenAcceptPartTour);
+            Dismissal = new RelayCommand(ButtonDismissal);
         }
 
         private void ButtonCreateTour(object param)
@@ -180,7 +183,36 @@ namespace Booking.WPF.ViewModels.Guide
 
         private void ButtonOpenAcceptPartTour(object param)
         {
-            MessageBox.Show("open");
+            GuideAcceptingPartOfTour guideAcceptingPartOfTour = new GuideAcceptingPartOfTour();
+            guideAcceptingPartOfTour.Show();
+        }
+
+        private void ButtonDismissal(object param)
+        {
+            MessageBoxResult result = ConfirmDismissal();
+
+            if (result == MessageBoxResult.Yes)
+            {
+                _userService.removeUser(TourService.SignedGuideId);
+                _tourService.RemoveGuideTours(TourService.SignedGuideId);
+
+                SignInForm signInForm = new SignInForm();
+                signInForm.Show();
+                CloseWindow();
+            }
+        }
+
+        private MessageBoxResult ConfirmDismissal()
+        {
+            string sMessageBoxText = $"\"Are you sure to give dismissal?\"";
+            string sCaption = "Confirmation of dismissal";
+
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+            return result;
         }
 
         public void Update()

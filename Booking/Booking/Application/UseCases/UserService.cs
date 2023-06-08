@@ -54,6 +54,16 @@ namespace Booking.Service
 			return _userRepository.GetByUsername(username);
 		}
 
+		public User removeUser(int idUser)
+		{
+			User user = _userRepository.GetById(idUser);
+			if (user == null) return null;
+
+			_userRepository.Delete(user);
+            NotifyObservers();
+            return user;
+        }
+
 		public void NotifyObservers()
 		{
 			foreach (var observer in _observers)
