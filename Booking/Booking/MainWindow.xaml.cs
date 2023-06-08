@@ -23,6 +23,7 @@ namespace Booking
 		public MainWindow()
 		{
 			InitializeComponent();
-		}
+            
+        }
 	}
 }

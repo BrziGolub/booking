@@ -4,9 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Booking.WPF.Views.Guest1"
+      xmlns:ns="clr-namespace:Booking.Localization"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="RenovationSuggestions">
+      Title="RenovationSuggestions"  Style="{DynamicResource MyWindowStyle}">
 
     <Page.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
@@ -18,9 +19,7 @@
     </Page.Resources>
 
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Resources/Images/blue2.jpeg"></ImageBrush>
-        </Grid.Background>
+        
 
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -38,7 +37,7 @@
 
             
             <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20" HorizontalAlignment="Right">
-                <Label   HorizontalAlignment="Left"  FontSize="17" >Areas that needs renovation:</Label>
+                <Label   HorizontalAlignment="Left"  FontSize="17" Content="{ns:Loc RenvationArea}"></Label>
                 <TextBox  Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Path= RenovationArea, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  Validation.ErrorTemplate="{StaticResource ValidationTemplate}" AcceptsReturn="True" TextWrapping="Wrap" Width="240" Height="70" Margin="5">
                     <TextBox.Style>
@@ -46,6 +45,7 @@
                             <Style.Triggers>
                                 <Trigger Property="Validation.HasError" Value="True">
                                     <Setter Property="BorderBrush" Value="Red" />
+                                    <Setter Property="Background"  Value="Beige"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -54,24 +54,29 @@
             </StackPanel>
 
             <GridSplitter  Width="0.7" HorizontalAlignment="Right" VerticalAlignment="Stretch" Background="Gray" />
-           
+
 
             <StackPanel Grid.Column="1" Margin="20">
-                <Label  HorizontalAlignment="Left"  FontSize="17">Urgency for renovation:</Label>
+                <Label HorizontalAlignment="Left" FontSize="17" Content="{ns:Loc RenovationUrgency}"></Label>
                 <StackPanel Margin="0,10,10,0">
-                    <RadioButton GroupName="Levels" Content="Level 1 - Nice to have" Margin="3" FontSize="16"
-                 IsChecked="{Binding FirstSelectedUrgencyLevel}" />
-                    <RadioButton GroupName="Levels" Content="Level 2 - Minor complaints" Margin="3" FontSize="16"
-                 IsChecked="{Binding SecondSelectedUrgencyLevel}" />
-                    <RadioButton GroupName="Levels" Content="Level 3 - Really bothersome" Margin="3" FontSize="16"
-                 IsChecked="{Binding ThirdSelectedUrgencyLevel}" />
-                    <RadioButton GroupName="Levels" Content="Level 4 - Really necessary" Margin="3" FontSize="16"
-                 IsChecked="{Binding FourthSelectedUrgencyLevel}" />
-                    <RadioButton GroupName="Levels" Content="Level 5 - Very bad condition" Margin="3" FontSize="16"
-                 IsChecked="{Binding FifthSelectedUrgencyLevel}" />
+                    <RadioButton GroupName="Levels" Margin="3" FontSize="16" Background="Beige"
+                     Content="{ns:Loc Level1NiceToHave}"
+                     IsChecked="{Binding FirstSelectedUrgencyLevel}"/>
+                    <RadioButton GroupName="Levels" Margin="3" FontSize="16" Background="Beige"
+                     Content="{ns:Loc Level2MinorComplaints}"
+                     IsChecked="{Binding SecondSelectedUrgencyLevel}"/>
+                    <RadioButton GroupName="Levels" Margin="3" FontSize="16" Background="Beige"
+                     Content="{ns:Loc Level3ReallyBothersome}"
+                     IsChecked="{Binding ThirdSelectedUrgencyLevel}"/>
+                    <RadioButton GroupName="Levels" Margin="3" FontSize="16" Background="Beige"
+                     Content="{ns:Loc Level4ReallyNecessary}"
+                     IsChecked="{Binding FourthSelectedUrgencyLevel}"/>
+                    <RadioButton GroupName="Levels" Margin="3" FontSize="16" Background="Beige"
+                     Content="{ns:Loc Level5VeryBadCondition}"
+                     IsChecked="{Binding FifthSelectedUrgencyLevel}"/>
                 </StackPanel>
-
             </StackPanel>
+
 
         </Grid>
 
@@ -79,12 +84,12 @@
 
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
             <Image Source="/Resources/Images/renovation.png" Width="50" Height="45"></Image>
-            <Label FontWeight="Bold" FontSize="17" VerticalAlignment="Center">Recommendation for renovation!</Label>
+            <Label FontWeight="Bold" FontSize="17" VerticalAlignment="Center"  Content="{ns:Loc RecommodationTitle}"></Label>
         </StackPanel>
 
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button FontWeight="Bold" Margin="5" Width="100" Command="{Binding ButtonClickSubmmit}" Height="30" Background="LightGoldenrodYellow">SUBBMIT</Button>
+            <Button FontWeight="Bold" Margin="5" Width="100" Command="{Binding ButtonClickSubmmit}" Height="30"  Content="{ns:Loc SubmitButton}" ></Button>
         </StackPanel>
 
     </Grid>

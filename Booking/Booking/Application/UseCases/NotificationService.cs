@@ -32,14 +32,18 @@ namespace Booking.Service
         {
             List<Notification> ownerNotifications = new List<Notification>();
 
-            foreach (var notification in _repository.GetAll())
+            if (user != null)
             {
-                if (notification.User.Id == user.Id)
+                foreach (var notification in _repository.GetAll())
                 {
-                    ownerNotifications.Add(notification);
+                    if (notification.User.Id == user.Id)
+                    {
+                        ownerNotifications.Add(notification);
+                    }
                 }
+                return ownerNotifications;
             }
-            return ownerNotifications;
+            else { return null; }
         }
 
         public void ChangeNotificationState(Notification notification)

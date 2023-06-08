@@ -26,6 +26,7 @@ namespace Booking.WPF.ViewModels.Owner
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         public IAccommodationService _accommodationService { get; set; }
         public RelayCommand OpenRegisterAccommodation { get; set; }
+        public RelayCommand OpenSiteProposals { get; set; }
         public RelayCommand OpenDateMove { get; set; }
         public RelayCommand OpenGradingGuests { get; set; }
         public RelayCommand OpenViewReviews { get; set; }
@@ -34,6 +35,7 @@ namespace Booking.WPF.ViewModels.Owner
         public RelayCommand OpenAccommodationStatistics { get; set; }
         public RelayCommand OpenSchedulingRenovations { get; set; }
         public RelayCommand OpenShowRenovations { get; set; }
+        public RelayCommand OpenForums { get; set; }
         public RelayCommand ShowPictures { get; set; }
 
         private readonly Window _window;
@@ -57,6 +59,7 @@ namespace Booking.WPF.ViewModels.Owner
         public void SetCommands()
         {
             OpenRegisterAccommodation = new RelayCommand(RegisterAccomodation);
+            OpenSiteProposals = new RelayCommand(SiteProposal);
             OpenDateMove = new RelayCommand(DateMove);
             OpenGradingGuests = new RelayCommand(GradingGuests);
             OpenViewReviews = new RelayCommand(ViewReviews);
@@ -66,6 +69,7 @@ namespace Booking.WPF.ViewModels.Owner
             OpenSchedulingRenovations = new RelayCommand(SchedulingRenovation);
             OpenShowRenovations = new RelayCommand(ShowRenovation);
             OpenAccommodationStatistics = new RelayCommand(AccommodationStatistics);
+            OpenForums = new RelayCommand(ForumsOwner);
         }
 
 
@@ -73,6 +77,16 @@ namespace Booking.WPF.ViewModels.Owner
         {
             OwnerRegisterAccommodation ownerRegisterAccommodation = new OwnerRegisterAccommodation();
             ownerRegisterAccommodation.Show();
+        }
+        private void ForumsOwner(object param)
+        {
+            OwnerAllForums ownerAllForums = new OwnerAllForums();
+            ownerAllForums.Show();
+        }
+        private void SiteProposal(object param)
+        {
+            SiteProposals siteProposals = new SiteProposals();
+            siteProposals.Show();
         }
         private void ViewReviews(object param)
         {

@@ -3,9 +3,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:ns="clr-namespace:Booking.Localization"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="900"
-      Title="RateAccommodationAndOwner">
+      Title="RateAccommodationAndOwner"  Style="{DynamicResource MyWindowStyle}">
 
     <Page.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
@@ -17,9 +18,7 @@
         </ControlTemplate>
     </Page.Resources>
     <Grid >
-        <Grid.Background>
-            <ImageBrush ImageSource="/Resources/Images/blue1.jpg"></ImageBrush>
-        </Grid.Background>
+        
 
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -33,16 +32,16 @@
 
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
             <Image Source="/Resources/Images/medal.png" Width="50" Height="45"></Image>
-            <Label FontWeight="Bold" FontSize="17" VerticalAlignment="Center">Rate your accommodation and owner!</Label>
+            <Label FontWeight="Bold" FontSize="17" VerticalAlignment="Center" Content="{ns:Loc RateAccommodationAccAndOwnerTitle}"></Label>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0">
-            <Label Content="Accommodation: " FontWeight="Bold" Width="200" FontSize="15"></Label>
+            <Label Content="{ns:Loc AccommodationLabel}" FontWeight="Bold" Width="200" FontSize="15"></Label>
             <Label Content="{Binding AccommodationLabel}" Width="400" FontSize="15" FontWeight="Bold"></Label>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal"   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,0,0,0">
-            <Label Content="Owner: " FontWeight="Bold" Width="200" FontSize="15"></Label>
+            <Label Content="{ns:Loc OwnerLabel}" FontWeight="Bold" Width="200" FontSize="15"></Label>
             <Label Content="{Binding OwnerLabel}" Width="400" FontSize="15" FontWeight="Bold"></Label>
         </StackPanel>
 
@@ -60,7 +59,7 @@
                 <ColumnDefinition Width="240"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  FontSize="15" >Rate cleaness:</Label>
+            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  FontSize="15"  Content="{ns:Loc RateCleanliness}" ></Label>
             <ComboBox x:Name="comboBoxCleaness"  ItemsSource="{Binding Path= comboBoxCleaness}" SelectedItem="{Binding Path=Cleaness, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
                        Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Top" Height="30" >
                 <ComboBox.Style>
@@ -74,7 +73,7 @@
                 </ComboBox.Style>
             </ComboBox>
 
-            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" FontSize="14" >Rate courtesy of the owner:</Label>
+            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" FontSize="14" Content="{ns:Loc RateOwnerCourtesy}"></Label>
             <ComboBox  x:Name="comboBoxCourtesy"  ItemsSource="{Binding Path= comboBoxCourtesy}"  SelectedItem="{Binding Path=Courtesy, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                         Grid.Row="1" Grid.Column="1"  VerticalAlignment="Top" Margin="5" Height="30">
@@ -89,7 +88,7 @@
                 </ComboBox.Style>
             </ComboBox>
 
-            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"  FontSize="14" >Add comment:</Label>
+            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"  FontSize="14" Content="{ns:Loc AddCommnet}"></Label>
             <TextBox Grid.Row ="2" Grid.Column="1" Height="60" Margin="5" VerticalAlignment="Top" Text="{Binding Path= Comment, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                  Validation.ErrorTemplate="{StaticResource ValidationTemplate}" AcceptsReturn="True" TextWrapping="Wrap">
                 <TextBox.Style>
@@ -103,7 +102,7 @@
                 </TextBox.Style>
             </TextBox>
 
-            <Label Grid.Row="0" Grid.Column="2"  HorizontalAlignment="Right" FontSize="14" >Add picture:</Label>
+            <Label Grid.Row="0" Grid.Column="2"  HorizontalAlignment="Right" FontSize="14" Content="{ns:Loc AddPicture}"></Label>
             <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" >
                 <Button  Height="30" Width="30" FontSize="14" FontWeight="Black"  Command="{Binding RemovePicture}" Background="LightGoldenrodYellow">
                     <Button.Content>
@@ -142,7 +141,7 @@
         </Grid>
 
         <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button FontWeight="Bold" Margin="5" Width="100" Command="{Binding Button_Click_Subbmit}" Height="30" Background="LightGoldenrodYellow">SUBBMIT</Button>
+            <Button  Content="{ns:Loc SubmitButton}"  FontWeight="Bold" Margin="5" Width="100" Command="{Binding Button_Click_Subbmit}" Height="30" ></Button>
         </StackPanel>
 
         <ContentControl Content="{Binding CurrentPage}" Grid.Row="4" Margin="280,5,280,5">

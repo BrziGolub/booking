@@ -59,6 +59,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Application\UseCases\AccommodationRenovationService.cs" />
+    <Compile Include="Application\UseCases\ForumCommentService.cs" />
+    <Compile Include="Application\UseCases\ForumService.cs" />
     <Compile Include="Application\UseCases\RenovationRecommodationService.cs" />
     <Compile Include="Application\UseCases\SuperGuestService.cs" />
     <Compile Include="Application\UseCases\SuperGuideService.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Domain\DTO\MonthlyRequests.cs" />
     <Compile Include="Domain\DTO\OwnerMonthStatistic.cs" />
     <Compile Include="Domain\DTO\OwnerYearStatistic.cs" />
+    <Compile Include="Domain\DTO\Suggestion.cs" />
     <Compile Include="Domain\DTO\YearlyRequests.cs" />
     <Compile Include="Domain\Model\AccommodationAndOwnerGrade.cs" />
     <Compile Include="Domain\Model\AccommodationGrade.cs" />
@@ -79,6 +82,8 @@
     <Compile Include="Domain\Model\AccommodationReservationRequests.cs" />
     <Compile Include="Domain\Model\Enums\AccommodationType.cs" />
     <Compile Include="Domain\Model\Enums\RequestStatus.cs" />
+    <Compile Include="Domain\Model\Forum.cs" />
+    <Compile Include="Domain\Model\ForumComment.cs" />
     <Compile Include="Domain\Model\Images\AccommodationImage.cs" />
     <Compile Include="Domain\Model\Images\GuestsAccommodationImages.cs" />
     <Compile Include="Domain\Model\Images\TourImage.cs" />
@@ -104,6 +109,8 @@
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationReservationRequestsRepostiory.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IAccommodationResevationRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IForumCommentRepository.cs" />
+    <Compile Include="Domain\RepositoryInterfaces\IForumRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\IGuestsAccommodationImagesRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\ILocationRepository.cs" />
     <Compile Include="Domain\RepositoryInterfaces\INotificationRepository.cs" />
@@ -128,6 +135,8 @@
     <Compile Include="Domain\ServiceInterfaces\IAccommodationReservationRequestService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IAccommodationReservationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IAccommodationService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IForumCommentService.cs" />
+    <Compile Include="Domain\ServiceInterfaces\IForumService.cs" />
     <Compile Include="Domain\ServiceInterfaces\IGuestsAccommodationImagesService.cs" />
     <Compile Include="Domain\ServiceInterfaces\ILocationService.cs" />
     <Compile Include="Domain\ServiceInterfaces\INotificationService.cs" />
@@ -154,6 +163,8 @@
     <Compile Include="Observer\ISubject.cs" />
     <Compile Include="Repository\AccommodationReservationRequestsRepostiory.cs" />
     <Compile Include="Repository\AccommodationResevationRepository.cs" />
+    <Compile Include="Repository\ForumCommentRepository.cs" />
+    <Compile Include="Repository\ForumRepository.cs" />
     <Compile Include="Repository\GuestsAccommodationImagesRepository.cs" />
     <Compile Include="Repository\ITourRequestRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
@@ -186,10 +197,15 @@
     <Compile Include="Application\UseCases\TourGuestsService.cs" />
     <Compile Include="Application\UseCases\UserService.cs" />
     <Compile Include="Application\UseCases\VoucherService.cs" />
+    <Compile Include="Localization\TranslationSource.cs" />
+    <Compile Include="Styles\ChangeModeMessage .cs" />
+    <Compile Include="Styles\MessagingService.cs" />
+    <Compile Include="Styles\StyleManager.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
     <Compile Include="WPF\ViewModels\Guest1\AccommodationDateSuggestionsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\BookAccommodationViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\CreateForumViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestAllRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestAllReservationsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestProfileViewModel.cs" />
@@ -200,6 +216,8 @@
     <Compile Include="WPF\ViewModels\Guest1\RenovationSuggestionsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\ShowAllForumCommentsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\ShowAllForumsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\CreateTourComplexRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\CreateTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\RateTourViewModel.cs" />
@@ -223,6 +241,7 @@
     <Compile Include="WPF\ViewModels\Owner\AccommodationStatisticsByMonthsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\AccommodationStatisticsByYearsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\GradingWindowViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\OwnerAllForumsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerDateMoveViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerGradingGuestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\OwnerHomePageViewModel.cs" />
@@ -235,6 +254,7 @@
     <Compile Include="WPF\ViewModels\Owner\ShowGradeImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowOwnerAccommodationImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\ShowRenovationsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Owner\SiteProposalsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\SuperOwnerViewModel.cs" />
     <Compile Include="Application\UseCases\LocationService.cs" />
     <Compile Include="Application\UseCases\TourReservationService.cs" />
@@ -244,6 +264,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guest1\BookAccommodation.xaml.cs">
       <DependentUpon>BookAccommodation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest1\CreateForum.xaml.cs">
+      <DependentUpon>CreateForum.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guest1\FirstGuestAllReservations.xaml.cs">
       <DependentUpon>FirstGuestAllReservations.xaml</DependentUpon>
@@ -268,6 +291,9 @@
     </Compile>
     <Compile Include="WPF\Views\Guest1\ShowAccommodationImages.xaml.cs">
       <DependentUpon>ShowAccommodationImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest1\ShowAllForums.xaml.cs">
+      <DependentUpon>ShowAllForums.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guest1\ShowRequestComment.xaml.cs">
       <DependentUpon>ShowRequestComment.xaml</DependentUpon>
@@ -363,6 +389,9 @@
     <Compile Include="WPF\Views\Owner\KeyBoardCustom.xaml.cs">
       <DependentUpon>KeyBoardCustom.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\Views\Owner\OwnerAllForums.xaml.cs">
+      <DependentUpon>OwnerAllForums.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Owner\OwnerDateMove.xaml.cs">
       <DependentUpon>OwnerDateMove.xaml</DependentUpon>
     </Compile>
@@ -417,6 +446,12 @@
     <Compile Include="WPF\Views\Owner\ShowRenovations.xaml.cs">
       <DependentUpon>ShowRenovations.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\Views\Owner\SiteProposals.xaml.cs">
+      <DependentUpon>SiteProposals.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest1\ShowAllForumComments.xaml.cs">
+      <DependentUpon>ShowAllForumComments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
     </Compile>
@@ -435,6 +470,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Styles\DarkStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\LightStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPF\Views\Guest1\AccommodationDateSugestions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -442,6 +485,10 @@
     <Page Include="WPF\Views\Guest1\BookAccommodation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Views\Guest1\CreateForum.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest1\FirstGuestAllReservations.xaml">
       <SubType>Designer</SubType>
@@ -472,6 +519,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest1\ShowAccommodationImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\ShowAllForums.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -591,6 +642,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WPF\Views\Owner\OwnerAllForums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPF\Views\Owner\OwnerDateMove.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -663,6 +718,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WPF\Views\Owner\SiteProposals.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\ShowAllForumComments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPF\Views\SignInForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -690,6 +753,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.sr-LATN.resx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -701,6 +765,8 @@
     <None Include="Resources\Data\accommodationsRenovations.csv" />
     <None Include="Resources\Data\accommodationsReservations.csv" />
     <None Include="Resources\Data\accommodationsReservationsRequests.csv" />
+    <None Include="Resources\Data\forumComments.csv" />
+    <None Include="Resources\Data\forums.csv" />
     <None Include="Resources\Data\guestsAccommodationImages.csv" />
     <None Include="Resources\Data\locations.csv" />
     <None Include="Resources\Data\notifications.csv" />
@@ -771,6 +837,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
       <Version>1.1.39</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmLightLibs">
+      <Version>5.4.1.1</Version>
     </PackageReference>
     <PackageReference Include="Notifications.Wpf">
       <Version>0.1.1</Version>
@@ -847,6 +916,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\notifications128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\conversation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\forum.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -638,6 +638,24 @@ namespace Booking.Service
             }
             return rangeOfDates;
         }
+
+
+        public string IsLocationVisited(Location location)
+        {
+            
+            foreach(var reservation in _repository.GetAll())
+            {
+                reservation.Accommodation = _accommodationRepository.GetById(reservation.Accommodation.Id);
+                reservation.Accommodation.Location = _locationRepository.GetById(reservation.Accommodation.Location.Id);
+                reservation.Accommodation.Owner = _userRepository.GetById(reservation.Accommodation.Owner.Id);
+                reservation.Guest = _userRepository.GetById(SignedFirstGuestId);
+                if(reservation.Accommodation.Location.Id == location.Id && reservation.Guest.Id == AccommodationReservationService.SignedFirstGuestId && reservation.ArrivalDay <= DateTime.Now)
+                {
+                    return "YES";
+                }
+            }
+            return "NO";
+        }
         
     }
 }

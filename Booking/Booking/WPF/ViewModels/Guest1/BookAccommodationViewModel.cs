@@ -6,6 +6,7 @@ using Booking.Service;
 using Booking.Util;
 using Booking.View;
 using Booking.WPF.Views.Guest1;
+using GalaSoft.MvvmLight.Messaging;
 using Notifications.Wpf;
 using System;
 using System.Collections.Generic;
@@ -87,6 +88,8 @@ namespace Booking.WPF.ViewModels.Guest1
         public string Error => null;
         private Regex _numberOfGuestsRegex = new Regex("^[1-9][0-9]?$");
 
+       
+
         public string this[string columnName]
         {
             get
@@ -95,7 +98,10 @@ namespace Booking.WPF.ViewModels.Guest1
                 {
                    if(NumberOfGuests == String.Empty)
                    {
-                       
+                        if (FirstGuestHomePage.isTranslated) //ovo zbog translate 
+                        {
+                            return "Ovo polje je obavezno!";
+                        }
                         return "This filed is required!";
                    }
                    else
@@ -103,6 +109,10 @@ namespace Booking.WPF.ViewModels.Guest1
                         Match match = _numberOfGuestsRegex.Match(NumberOfGuests);
                         if (!match.Success)
                         {
+                            if (FirstGuestHomePage.isTranslated)
+                            {
+                                return "Broj gostiju nije u pravilnom formatu!";
+                            }
                             return "Number of guests is not in correct format!";
                         }
                    }
@@ -140,6 +150,7 @@ namespace Booking.WPF.ViewModels.Guest1
             SuperGuestService = InjectorService.CreateInstance<ISuperGuestService>();
             NavigationService = navigationService;
             NumberOfGuests = String.Empty;
+            
         }
 
         public void SetAccommodationLabel()
