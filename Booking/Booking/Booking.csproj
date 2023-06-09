@@ -832,6 +832,9 @@
     <Resource Include="Resources\Images\prevoius.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="iTextSharp">
+      <Version>5.5.13.3</Version>
+    </PackageReference>
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF">
       <Version>2.0.0-beta.710</Version>
     </PackageReference>
@@ -922,6 +925,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\forum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\pdfPicture.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
