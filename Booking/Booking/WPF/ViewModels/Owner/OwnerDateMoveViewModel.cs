@@ -3,6 +3,7 @@ using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Observer;
 using Booking.Util;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,6 +26,7 @@ namespace Booking.WPF.ViewModels.Owner
         public RelayCommand Accept { get; set; }
         public RelayCommand Reject { get; set; }
         public RelayCommand Close { get; set; }
+        public RelayCommand Wizard { get; set; }
 
         private readonly Window _window;
         public OwnerDateMoveViewModel(Window window)
@@ -43,7 +45,13 @@ namespace Booking.WPF.ViewModels.Owner
             Accept = new RelayCommand(Button_Click_Accept);
             Reject = new RelayCommand(Button_Click_Reject);
             Close = new RelayCommand(Button_Click_Close);
+            Wizard = new RelayCommand(OpenWizard);
 
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(5);
+            wizard.Show();
         }
 
         public string _ownerComment;

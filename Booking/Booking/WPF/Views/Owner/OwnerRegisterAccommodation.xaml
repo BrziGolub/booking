@@ -165,7 +165,7 @@
             </StackPanel>
         </Border>
         <WrapPanel FlowDirection="LeftToRight" Margin="785,10,0,671">
-            <Button Margin ="18 5 0 0 " HorizontalAlignment="Left" ToolTip="Press to open wizard" Width="80" Height="30" FontWeight="Bold" FontSize="15" Command="{Binding Wizard}" >Wizard</Button>
+            <Button Margin ="118 5 0 0 " HorizontalAlignment="Left" ToolTip="Press to open wizard" Width="80" Height="30" FontWeight="Bold" FontSize="15" Command="{Binding Wizard}" >Wizard</Button>
         </WrapPanel>
 
     </Grid>

@@ -26,6 +26,7 @@ namespace Booking.WPF.ViewModels.Owner
         public String AccommodationLabel { get; set; } = String.Empty;
         public RelayCommand Detail { get; set; }
         public RelayCommand Close { get; set; }
+        public RelayCommand Wizard { get; set; }
         public string BestYearLabel { get; set; }
         private readonly Window _window;
 
@@ -38,6 +39,7 @@ namespace Booking.WPF.ViewModels.Owner
             yearStatistics = new ObservableCollection<OwnerYearStatistic>(AccommodationReservationService.GetYearStatistics(selectedAccommodation));
             Detail = new RelayCommand(DetailForYear);
             Close = new RelayCommand(CloseWindow);
+            Wizard = new RelayCommand(OpenWizard);
             List<OwnerYearStatistic> BestYearStatistics = AccommodationReservationService.GetYearStatistics(selectedAccommodation);
             int bestYear = AccommodationReservationService.CalculateBestYear(BestYearStatistics,selectedAccommodation);
             BestYearLabel = bestYear.ToString();
@@ -45,6 +47,11 @@ namespace Booking.WPF.ViewModels.Owner
         private void CloseWindow(object param)
         {
             _window.Close();
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(2);
+            wizard.Show();
         }
         public void Update()
         {

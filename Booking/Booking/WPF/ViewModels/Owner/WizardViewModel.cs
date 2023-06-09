@@ -121,17 +121,46 @@ namespace Booking.WPF.ViewModels.Owner
         }
         public void setTexts()
         {
-            string text0 = "Home page";
+            string text0 = "Here you can see all your registered accommodations, note of you add a new one it will also be displayed." +
+                " On the left side you have buttons that when you press them will take you to a sepereate window which will fullfil that task." +
+                " For some tasks you will first have to select an accommodation which will be used for that task." +
+                " On the upper right side you have 3 buttons LogOut(change user),Wizard(help) and PDF(save a pdf file on your tablet).";
             pageTexts.Add(text0);
-            string text1 = "Register accommodation";
+            string text1 = "This is the window for registering new accommodations you must eneter all the fields, to select the country and city" +
+                " press the boxes and choose one of the offered choices same goes for the TYPE field. The buttons + and - are used to " +
+                "increase or decrease the value of that field by 1. To add a picture press the + next to the pictures field and choose a " +
+                "picture from your tablet, it will appear below it with 2 buttons. To delete a picture using the buttons find the picture you " +
+                "want to delete and press the - button next to the pictures field. On the bottom you have 2 buttons CREATE(add the accommodation) " +
+                "and CLOSE(close the window)";
             pageTexts.Add(text1);
-            /*
-            foreach (var image in selectedAccommodation.Images)
-            {
-                pictureUrls.Add(image.Url);
-            }
-            SetCurrentImage();
-            */
+            string text2 = "Here you can see the stats for the selected accommodation by year. Below that you can see the best year that the accommodation had. " +
+                " Below that you have 2 buttons DETAIL(it will take you to another window for the selected year) and CLOSE(this will close the window).";
+            pageTexts.Add(text2);
+            string text3 = "Here you can see the stats for the selected accommodation and selected year by months. Below that you can " +
+                "see the best month. Below that you have a CLOSE button(this will close the window).";
+            pageTexts.Add(text3);
+            string text4 = "Here you can see all the best locations where you have accommodations and the worst. " +
+                "We reccomment you look in to seeing if it is worth oppening another accommodation on the good locations and" +
+                " closing the ones on the bad ones. Below you have a CLOSE button(this will close the window).";
+            pageTexts.Add(text4);
+            string text5 = "Here you can see all the date move request you have pending you can choose one of them and decite to accept or decline it. " +
+                "To accept choose the date move request and press the ACCEPT button, to decline choose the date move request enter a reason why you declined " +
+                "and press the DECLINE button. You also have a CLOSE button(this will close the window).";
+            pageTexts.Add(text5);
+            string text6 = "Here you can see all the guests that you can grade, when you select a guest and then press the GRADE button " +
+                "you will be taken to the next window where you can finish the grading. You also have a CLOSE button(this will close the window).";
+            pageTexts.Add(text6);
+            string text7 = "Here you can enter the values from 1 to 5 by clicking the box next to the required field. You can finish the grading " +
+                "by pressing the GRADE button, note the comment is required. You also have a CLOSE button(this will close the window).";
+            pageTexts.Add(text7);
+            string text8 = "Here you can see all the rewievs you have got by pressing on the Show button in the collumn Comment you will " +
+                "see the comment that that guest left and if you press the Show button in the Images collumn you will see the pictures that that " +
+                "guest left. You also have a CLOSE button(this will close the window).";
+            pageTexts.Add(text8);
+            string text9 = "Here you can see the number of grades you have and the average grade note that you need at least 50 grades with " +
+                "an average score of 4.5 to become a super-owner, that message will be displayed below that. You also have a CLOSE button(this will close the window).";
+            pageTexts.Add(text9);
+
             SetCurrentPage();
         }
         private String SetPageLabel(int gottenPageNumber)
@@ -140,10 +169,43 @@ namespace Booking.WPF.ViewModels.Owner
             {
                 return "Home page";
             }
-            else 
+            if (gottenPageNumber == 1) 
             {
                 return "Register accommodation";
             }
+            if (gottenPageNumber == 2) 
+            {
+                return "Accommodation statistics by year";
+            }
+            if (gottenPageNumber == 3) 
+            {
+                return "Accommodation statistics by month";
+            }
+            if (gottenPageNumber == 4) 
+            {
+                return "Site proposals";
+            }
+            if (gottenPageNumber == 5)
+            {
+                return "Date move requests";
+            }
+            if (gottenPageNumber == 6)
+            {
+                return "Grading guests";
+            }
+            if (gottenPageNumber == 7)
+            {
+                return "Grading guests second window";
+            }
+            if (gottenPageNumber == 8)
+            {
+                return "View reviews";
+            }
+            if (gottenPageNumber == 9)
+            {
+                return "Super owner";
+            }
+            return "";
             //return accommodation.Name + "-" + accommodation.Location.State + "-" + accommodation.Location.City + "-" + accommodation.Type;
         }
         private void PreviousButton(object param)
