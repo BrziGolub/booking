@@ -64,7 +64,7 @@ namespace Booking.Service
 		public TourReservation GetActiveTour(int id)
 		{
 			List<TourReservation> list = _repository.GetReservationsByGuestId(id);
-			TourReservation tourReservation = new TourReservation();
+			TourReservation tourReservation = null;
 
 			foreach (TourReservation res in list)
 			{
@@ -75,6 +75,11 @@ namespace Booking.Service
 				{
 					tourReservation = res;
 				}
+			}
+
+			if(tourReservation == null)
+			{
+				return null;
 			}
 
 			foreach (TourKeyPoint kp in tourReservation.Tour.Destinations)

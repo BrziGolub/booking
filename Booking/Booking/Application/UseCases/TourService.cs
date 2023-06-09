@@ -291,7 +291,7 @@ namespace Booking.Service
 			{
 				if (tour.StartTime == DateTime.Today && tour.GuideId == SignedGuideId)
 				{
-					tour.Location = _locationRepository.GetById(tour.Id);
+					tour.Location = _locationRepository.GetById(tour.Location.Id);
 					foreach (var p in _tourImagesRepository.GetAll())
 					{
 						if (p.Tour.Id == tour.Id)

@@ -7,6 +7,7 @@ using Booking.Util;
 using Booking.View;
 using Booking.View.Guest2;
 using Booking.WPF.Views.Guest2;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -25,6 +26,7 @@ namespace Booking.WPF.ViewModels.Guest2
 		private ITourReservationService _tourReservationService;
 		private ITourGuestsService _tourGuestsService;
 		private ITourGradeService _tourGradeService;
+		private	IVoucherService _voucherService;
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -82,7 +84,35 @@ namespace Booking.WPF.ViewModels.Guest2
 			}
 		}
 
-		public RelayCommand Button_Click_Search { get; set; }
+		private string _labelVisibility;
+		public string LabelVisibility
+		{
+			get => _labelVisibility;
+			set
+			{
+				if( _labelVisibility != value)
+				{
+					_labelVisibility = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+
+        private string _dataGridVisibility;
+        public string DataGridVisibility
+        {
+            get => _dataGridVisibility;
+            set
+            {
+                if (_dataGridVisibility != value)
+                {
+                    _dataGridVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public RelayCommand Button_Click_Search { get; set; }
 		public RelayCommand Button_Click_ShowAll { get; set; }
 		public RelayCommand Button_Click_Reserve { get; set; }
 		public RelayCommand Button_Click_SignOff { get; set; }
@@ -105,9 +135,12 @@ namespace Booking.WPF.ViewModels.Guest2
 			_tourReservationService = InjectorService.CreateInstance<ITourReservationService>();
 			_tourGuestsService = InjectorService.CreateInstance<ITourGuestsService>();
 			_tourGradeService = InjectorService.CreateInstance<ITourGradeService>();
+			_voucherService = InjectorService.CreateInstance<IVoucherService>();
 
-			Tours = new ObservableCollection<Tour>(_tourService.GetValidTours());
-			ActiveTour = new ObservableCollection<TourReservation> { _tourReservationService.GetActiveTour(TourService.SignedGuideId) };
+            Tours = new ObservableCollection<Tour>(_tourService.GetValidTours());
+			ActiveTour = new ObservableCollection<TourReservation>();
+
+			CheckActiveTour();
 
 			SearchState = _locationService.GetAllStates();
 			SearchCity = new ObservableCollection<string>();
@@ -141,7 +174,22 @@ namespace Booking.WPF.ViewModels.Guest2
 			Button_Click_Notifications = new RelayCommand(ButtonNotifications);
 		}
 
-		public void TourSearch(string state, string city, string duration, string lang, string passengers)
+        private void CheckActiveTour()
+		{
+			if(_tourReservationService.GetActiveTour(TourService.SignedGuideId) == null)
+			{
+                LabelVisibility = "Visible";
+                DataGridVisibility = "Hidden";
+            }
+			else
+			{
+				ActiveTour.Add(_tourReservationService.GetActiveTour(TourService.SignedGuideId));
+                LabelVisibility = "Hidden";
+                DataGridVisibility = "Visible";
+            }
+		}
+
+        public void TourSearch(string state, string city, string duration, string lang, string passengers)
 		{
 			Tours = _tourService.Search(Tours, state, city, duration, lang, passengers);
 		}
@@ -257,9 +305,30 @@ namespace Booking.WPF.ViewModels.Guest2
 				{
 					tourGuest.IsPresent = true;
 					_tourGuestsService.UpdateTourGuest(tourGuest);
+					awardVoucher();
 				}
 			}
 		}
+
+		private void awardVoucher()
+		{
+            List<TourReservation> tourReservations = _tourReservationService.GetReservationsByGuestId(TourService.SignedGuideId);
+			int reservations = 0;
+
+			foreach (TourReservation tr in tourReservations)
+			{
+				if(tr.Tour.IsEnded && tr.Tour.StartTime.Year == DateTime.Now.Year) reservations++;
+			}
+
+			if(reservations == 4)
+			{
+				Voucher voucher = new Voucher();
+				voucher.User.Id = TourService.SignedGuideId;
+				voucher.IsActive = true;
+				voucher.ValidTime = DateTime.Now.AddMonths(6);
+				_voucherService.AddVoucher(voucher);
+			}
+        }
 
 		private MessageBoxResult PresenceOnTourResponse(string name)
 		{

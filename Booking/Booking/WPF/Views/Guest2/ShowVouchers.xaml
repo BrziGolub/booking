@@ -52,7 +52,12 @@
 		</Style>
 	</Window.Resources>
 
-	<Border Margin="8" Style="{StaticResource CardHolder}">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Button_Click_Close}" Key="F5"/>
+        <KeyBinding Command="{Binding Button_Click_GenerateReport}" Modifiers="Ctrl" Key="P"/>
+    </Window.InputBindings>
+
+    <Border Margin="8" Style="{StaticResource CardHolder}">
 		<Grid>
 
 			<Grid.ColumnDefinitions>
