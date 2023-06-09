@@ -283,13 +283,13 @@ namespace Booking.WPF.ViewModels.Guide
                
                 if (RequestsByYearCollection.Count == 0)
                 {
-                    MessageBox.Show("On location " + Country + ", " + City + " you don't have tour requests!");
+                    System.Windows.MessageBox.Show("On location " + Country + ", " + City + " you don't have tour requests!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 }
 
             }
             else 
             {
-                MessageBox.Show("First you need to select location");
+                System.Windows.MessageBox.Show("First you need to select location", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 
@@ -303,12 +303,12 @@ namespace Booking.WPF.ViewModels.Guide
                 RequestsByYearCollection = observableYearlyRequestsList;
                 if (RequestsByYearCollection.Count == 0)
                 {
-                    MessageBox.Show("On language " + LanguageTB + " you don't have tour requests!");
+                    System.Windows.MessageBox.Show("On language " + LanguageTB + " you don't have tour requests!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 }
             }
             else
             {
-                MessageBox.Show("First you need to input language!");
+                System.Windows.MessageBox.Show("First you need to input language!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
         public void SetCommands()
@@ -394,13 +394,13 @@ namespace Booking.WPF.ViewModels.Guide
 
                 if (RequestsByMonthCollection.Count == 0)
                 {
-                    MessageBox.Show("On location " + Country + ", " + City + " you don't have tour requests!");
+                    System.Windows.MessageBox.Show("On location " + Country + ", " + City + " you don't have tour requests!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 }
 
             }
             else
             {
-                MessageBox.Show("First you need to select location and year");
+                System.Windows.MessageBox.Show("First you need to select location and year", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 
@@ -414,12 +414,12 @@ namespace Booking.WPF.ViewModels.Guide
                 RequestsByMonthCollection = observableMonthlyRequestsList;
                 if (RequestsByMonthCollection.Count == 0)
                 {
-                    MessageBox.Show("On language " + LanguageTB + " you don't have tour requests!");
+                    System.Windows.MessageBox.Show("On language " + LanguageTB + " you don't have tour requests!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 }
             }
             else
             {
-                MessageBox.Show("First you need to input language and year!");
+                System.Windows.MessageBox.Show("First you need to input language and year!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
 
         }

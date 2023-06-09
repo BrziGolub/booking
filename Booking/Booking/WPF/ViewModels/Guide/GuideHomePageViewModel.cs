@@ -110,7 +110,7 @@ namespace Booking.WPF.ViewModels.Guide
             if (guideFollowTourLiveViewModel.Tours.Count > 0)
                 guideFollowTourLive.Show();
             else
-                MessageBox.Show("Today you don't have tours!");
+                System.Windows.MessageBox.Show("Today you don't have tours!", "Warning", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
         }
 
         private void ButtonViewReviews(object param)
@@ -120,11 +120,28 @@ namespace Booking.WPF.ViewModels.Guide
         }
         private void ButtonLogOut(object param)
         {
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
-            CloseWindow();     
+            MessageBoxResult result = ConfirmLogOut();
+
+            if (result == MessageBoxResult.Yes)
+            {
+                SignInForm signInForm = new SignInForm();
+                signInForm.Show();
+                CloseWindow();
+            }
         }
 
+        private MessageBoxResult ConfirmLogOut()
+        {
+            string sMessageBoxText = $"Are you sure to log out?";
+            string sCaption = "Confirmation of log out";
+
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+            return result;
+        }
         private void ButtonCancelTour(object param)
         {
             if (SelectedTour != null)
@@ -138,7 +155,7 @@ namespace Booking.WPF.ViewModels.Guide
             }
             else
             {
-                MessageBox.Show("You need to select tour if you want to cancel it!");
+                System.Windows.MessageBox.Show("You need to select tour if you want to cancel it!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
         private void ButtonOpenCreateTourBasedOnRequests(object param)

@@ -40,8 +40,6 @@ namespace Booking.WPF.ViewModels.Guide
 
             _tourGradeService.Subscribe(this);
 
-            //reviewsDataGrid.Items.Clear();
-
             TourGrades = new ObservableCollection<TourGrade>(_tourGradeService.GetGuideGrades());
 
             SetCommands();
