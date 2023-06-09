@@ -37,7 +37,9 @@ namespace Booking.Domain.ServiceInterfaces
         int GetNumberOfRequestsByCity(int id, string city, string year);
         double GetAverageVisitorsByUserId(int id, string year);
         List<TourRequest> GetAllNotAccepted();
-		List<User> CheckUnfulfilledRequest(string lang, Location loc);
+        List<TourRequest> GetAllAccepted();
+
+        List<User> CheckUnfulfilledRequest(string lang, Location loc);
         List<TourRequest> GetByComplexRequestId(int id);
         List<TourRequest> GetAllOnHoldPartOfComplex();
         TourRequest UpdateTourRequest(TourRequest tourRequest);
