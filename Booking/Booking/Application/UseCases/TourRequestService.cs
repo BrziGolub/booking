@@ -503,7 +503,23 @@ namespace Booking.Application.UseCases
 			return tourRequests;
 		}
 
-		public List<User> CheckUnfulfilledRequest(string lang, Location loc)
+        public List<TourRequest> GetAllAccepted()
+        {
+            List<TourRequest> tourRequests = new List<TourRequest>();
+
+            foreach (TourRequest tourRequest in _tourRequestRepository.GetAll())
+            {
+                if (tourRequest.Status.Equals("Accepted"))
+                {
+                    tourRequest.Location = _locationRepository.GetById(tourRequest.Location.Id);
+                    tourRequests.Add(tourRequest);
+                }
+            }
+
+            return tourRequests;
+        }
+
+        public List<User> CheckUnfulfilledRequest(string lang, Location loc)
 		{
 			List<User> users = new List<User>();
 			foreach (TourRequest tr in GetAllNotAccepted())
