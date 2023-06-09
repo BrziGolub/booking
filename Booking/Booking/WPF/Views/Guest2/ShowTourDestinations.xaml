@@ -52,6 +52,10 @@
 		</Style>
 	</Window.Resources>
 
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Button_Click_Close}" Key="F5"/>
+    </Window.InputBindings>
+    
 	<Border Margin="8" Style="{StaticResource CardHolder}">
 		<Grid Margin="0">
 			<Grid.ColumnDefinitions>

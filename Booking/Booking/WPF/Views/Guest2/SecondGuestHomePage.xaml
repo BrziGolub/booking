@@ -64,6 +64,14 @@
 		</Style>
 	</Window.Resources>
 
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Button_Click_Search}" Key="F1"/>
+        <KeyBinding Command="{Binding Button_Click_ShowAll}" Key="F2"/>
+        <KeyBinding Command="{Binding Button_Click_ShowDestinations}" Key="F3"/>
+        <KeyBinding Command="{Binding Button_Click_ShowImages}" Key="F4"/>
+        <KeyBinding Command="{Binding Button_Click_Reserve}" Key="F5"/>
+    </Window.InputBindings>
+    
 	<Grid>
 
 		<Grid.ColumnDefinitions>
@@ -105,7 +113,8 @@
 					<Label Content="Active tour" FontSize="24" Margin="8 0 0 0" VerticalContentAlignment="Center"/>
 				</StackPanel>
 
-				<DataGrid Grid.Row="1"
+                <Label Grid.Row="1" Content="There is no active tour" Visibility="{Binding LabelVisibility}" FontSize="14" HorizontalAlignment="Center"/>
+                <DataGrid Grid.Row="1"
 						  AutoGenerateColumns="False"
 						  SelectionMode="Single"
 						  IsReadOnly="True"
@@ -116,7 +125,8 @@
 						  CanUserDeleteRows="False"
 						  CanUserResizeRows="False"
 						  CanUserSortColumns="False"
-						  CanUserReorderColumns="False">
+						  CanUserReorderColumns="False"
+                          Visibility="{Binding DataGridVisibility}">
 
 					<DataGrid.RowStyle>
 						<Style TargetType="DataGridRow">
