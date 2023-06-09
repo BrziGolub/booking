@@ -7,7 +7,7 @@
       xmlns:ns="clr-namespace:Booking.Localization"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ShowAllForumComments">
+      Title="ShowAllForumComments" Style="{DynamicResource MyWindowStyle}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -17,10 +17,10 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,20,10,5" HorizontalAlignment="Center">
             <Image Source="/Resources/Images/conversation.png" Height="30" Width="30"></Image>
-            <Label FontWeight="Bold" FontSize="17" Content="{ns:Loc ForumCommentsTitle}"></Label>
+            <Label FontWeight="Bold" FontSize="22" Content="{ns:Loc ForumCommentsTitle}"></Label>
         </StackPanel>
         <Grid Grid.Row="1">
-            <ListView Height="300" Width="350"  SelectionMode="Single" SelectedItem="{Binding SelectedComment}" ItemsSource="{Binding ForumComments}" Margin="100,20,100,20">
+            <ListView Height="300" Width="550"  SelectionMode="Single" SelectedItem="{Binding SelectedComment}" ItemsSource="{Binding ForumComments}" Margin="10" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -32,15 +32,15 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="80" />
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" Text="{Binding Forum.Location.State}" FontWeight="Bold" />
                             <TextBlock Grid.Row="0" Grid.Column="1" FontSize="20" Text="{Binding Forum.Location.City}" FontWeight="Bold" />
 
                             <StackPanel Grid.Row="1" Grid.Column="0">
-                                <TextBlock FontSize="15" Text="{Binding Comment}" />
+                                <TextBlock FontSize="15" Text="{Binding Comment}" TextWrapping="Wrap"/>
                             </StackPanel>
 
                             <TextBlock Grid.Row="2" Grid.Column="0" FontSize="15" Text="User: " />
@@ -57,14 +57,11 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBox FontSize="15" Width="400" Margin="10" TextWrapping="Wrap" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <TextBox FontSize="15" Width="300" Margin="4" TextWrapping="Wrap" />
             <Button Padding="3" FontSize="12" FontWeight="Bold" Margin="20" Width="120" Content="{ns:Loc LeaveCommentButton}" />
         </StackPanel>
    
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBox  FontSize="15" Width="400" Margin="10" TextWrapping="Wrap"/>
-            <Button Padding="3" FontSize="12" FontWeight="Bold"  Margin="20"  Width="120" Content="{ns:Loc LeaveCommentButton}" />
-        </StackPanel>
+        
     </Grid>
 </Page>

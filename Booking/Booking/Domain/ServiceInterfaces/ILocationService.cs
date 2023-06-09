@@ -21,5 +21,6 @@ namespace Booking.Domain.ServiceInterfaces
         List<Suggestion> GetLocationsForSuggestions();
         List<Suggestion> GetBestLocations();
         List<Suggestion> GetWorstLocations();
+        bool DoesOwnerHaveLocation(int locationId);
     }
 }

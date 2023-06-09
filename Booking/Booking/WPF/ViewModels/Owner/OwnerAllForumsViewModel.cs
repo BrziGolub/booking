@@ -2,6 +2,7 @@
 using Booking.Domain.Model;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Util;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,7 +36,13 @@ namespace Booking.WPF.ViewModels.Owner
         }
         private void ShowForumComments(object param)
         {
-            _window.Close();
+            if (SelectedForum == null)
+            {
+                MessageBox.Show("Please select a forum");
+                return;
+            }
+            OwnerAllForumComments ownerAllForumComments = new OwnerAllForumComments(SelectedForum);
+            ownerAllForumComments.Show();
         }
     }
 }

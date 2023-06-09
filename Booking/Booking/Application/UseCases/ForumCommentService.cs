@@ -41,6 +41,33 @@ namespace Booking.Application.UseCases
 			}
             return list;
 		}
+		public void UpdateForumComment(ForumComment forumComment)
+		{
+			_forumCommentRepository.Update(forumComment);
+			NotifyObservers();
+		}
+
+		public List<ForumComment> GetForumComments(Forum selectedForum)
+		{
+            List<ForumComment> list = new List<ForumComment>();
+            foreach (var c in _forumCommentRepository.GetAll())
+            {
+                c.Forum = _forumRepository.GetById(c.Forum.Id);
+                c.Forum.Location = _locationRepository.GetById(c.Forum.Location.Id);
+                c.User = _userRepository.GetById(c.User.Id);
+
+				if(selectedForum.Location.State.Equals(c.Forum.Location.State) && selectedForum.Location.City.Equals(c.Forum.Location.City))
+				{
+					list.Add(c);
+				}
+            }
+            return list;
+        }
+		public ForumComment Create(ForumComment forumComment)
+		{
+			ForumComment newForumComment = _forumCommentRepository.Add(forumComment);
+			return newForumComment;
+		}
 
 		public ForumComment GetById(int id)
 		{
