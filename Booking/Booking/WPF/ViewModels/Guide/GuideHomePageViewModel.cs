@@ -110,7 +110,7 @@ namespace Booking.WPF.ViewModels.Guide
             if (guideFollowTourLiveViewModel.Tours.Count > 0)
                 guideFollowTourLive.Show();
             else
-                MessageBox.Show("Today you don't have tours!");
+                System.Windows.MessageBox.Show("Today you don't have tours!", "Warning", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
         }
 
         private void ButtonViewReviews(object param)
@@ -138,7 +138,7 @@ namespace Booking.WPF.ViewModels.Guide
             }
             else
             {
-                MessageBox.Show("You need to select tour if you want to cancel it!");
+                System.Windows.MessageBox.Show("You need to select tour if you want to cancel it!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
         private void ButtonOpenCreateTourBasedOnRequests(object param)

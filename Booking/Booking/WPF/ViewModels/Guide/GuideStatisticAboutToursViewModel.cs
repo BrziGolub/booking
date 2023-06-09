@@ -228,7 +228,7 @@ namespace Booking.WPF.ViewModels.Guide
 
             if (MostVisitedTourGenerraly.Count() == 0)
             {
-                MessageBox.Show("You don't have tours with guests!");
+                System.Windows.MessageBox.Show("You don't have tours with guests!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 
@@ -241,7 +241,7 @@ namespace Booking.WPF.ViewModels.Guide
 
             if (MostVisitedTourThisYear.Count() == 0)
             {
-                MessageBox.Show("You don't have tours with guests in this year!");
+                System.Windows.MessageBox.Show("You don't have tours with guests in this year!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 
@@ -266,7 +266,7 @@ namespace Booking.WPF.ViewModels.Guide
             }
             else
             {
-                MessageBox.Show("In order to show statistics, you first need to select some tour!");
+                System.Windows.MessageBox.Show("In order to show statistics, you first need to select some tour!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 

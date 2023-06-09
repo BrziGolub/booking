@@ -123,7 +123,7 @@ namespace Booking.WPF.ViewModels.Guide
             }
             else
             {
-                MessageBox.Show("You can start maximum 1 tour in same time!");
+                System.Windows.MessageBox.Show("You can start maximum 1 tour in same time!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 
@@ -135,14 +135,12 @@ namespace Booking.WPF.ViewModels.Guide
                 SelectedTour.IsStarted = false;
                 SelectedTour.IsEnded = true;
                 TourService.UpdateTour(SelectedTour);
-                MessageBox.Show(SelectedTour.Name.ToString() + " is ended!");
+                System.Windows.MessageBox.Show(SelectedTour.Name.ToString() + " is ended!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 TourService.NotifyObservers();
-
-
             }
             else
             {
-                MessageBox.Show("In order to end the tour, you first need to select started tour!");
+                System.Windows.MessageBox.Show("In order to end the tour, you first need to select started tour!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 
@@ -166,7 +164,7 @@ namespace Booking.WPF.ViewModels.Guide
             }
             else
             {
-                MessageBox.Show("You don't have ongoing tour!");
+                System.Windows.MessageBox.Show("You don't have ongoing tour!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 
@@ -178,13 +176,13 @@ namespace Booking.WPF.ViewModels.Guide
                 Pomid = SelectedTour.Id;
                 if (SelectedTour.IsEnded)
                 {
-                    MessageBox.Show("You cant start ended tour!");
+                    System.Windows.MessageBox.Show("You cant start ended tour!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 }
                 else
                 {
                     SelectedTour.IsStarted = true;
                     TourService.UpdateTour(SelectedTour);
-                    MessageBox.Show(SelectedTour.Name.ToString() + " is started!");
+                    System.Windows.MessageBox.Show(SelectedTour.Name.ToString() + " is started!", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                     TourService.NotifyObservers();
 
                     guideKeyPointsCheck.ShowDialog();
@@ -192,7 +190,7 @@ namespace Booking.WPF.ViewModels.Guide
             }
             else
             {
-                MessageBox.Show("In order to start the tour, you first need to select it!");
+                System.Windows.MessageBox.Show("In order to start the tour, you first need to select it!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 

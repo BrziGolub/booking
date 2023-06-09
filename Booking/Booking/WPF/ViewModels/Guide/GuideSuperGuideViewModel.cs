@@ -138,7 +138,6 @@ namespace Booking.WPF.ViewModels.Guide
 
         private void ButtonApplyForRank(object param)
         {
-            //MessageBox.Show("Apply for rank");
             superGuideService.UpdateSuperGuideStatus(SelectedLanguage);
             SetTB();
         }
@@ -166,7 +165,7 @@ namespace Booking.WPF.ViewModels.Guide
             }
             else
             {
-                MessageBox.Show("You first need to select language!");
+                System.Windows.MessageBox.Show("You first need to select language!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 
