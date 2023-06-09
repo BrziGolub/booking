@@ -45,6 +45,34 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
 
+        public string _countToursTB;
+        public string CountToursTB
+        {
+            get => _countToursTB;
+            set
+            {
+                if (_countToursTB != value)
+                {
+                    _countToursTB = value;
+                    OnPropertyChanged(nameof(CountToursTB));
+                }
+            }
+        }
+        
+        public string _averageGradeTB;
+        public string AverageGradeTB
+        {
+            get => _averageGradeTB;
+            set
+            {
+                if (_averageGradeTB != value)
+                {
+                    _averageGradeTB = value;
+                    OnPropertyChanged(nameof(AverageGradeTB));
+                }
+            }
+        }
+
         public ObservableCollection<string> LanguageCollection { get; set; }
 
         private void FillLocationsComboBox()
@@ -110,23 +138,36 @@ namespace Booking.WPF.ViewModels.Guide
 
         private void ButtonApplyForRank(object param)
         {
-            //MessageBox.Show("Apply for rank");
             superGuideService.UpdateSuperGuideStatus(SelectedLanguage);
-
+            SetTB();
         }
 
         private void ButtonSetLanguage(object param)
         {
-            if(SelectedLanguage != null) 
+            SetTB();
+        }
+
+        private void SetTB()
+        {
+            if (SelectedLanguage != null)
             {
-                MessageBox.Show(SelectedLanguage);
+                CountToursTB = superGuideService.CountGuideTours(SelectedLanguage).ToString();
+                double pom = superGuideService.GuideAverageGrade(SelectedLanguage);
+                if (double.IsNaN(pom))
+                {
+                    AverageGradeTB = "0";
+                }
+                else
+                {
+                    AverageGradeTB = pom.ToString();
+                }
+
             }
-           else
+            else
             {
-                MessageBox.Show("You first need to select language!");
+                System.Windows.MessageBox.Show("You first need to select language!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
-        
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

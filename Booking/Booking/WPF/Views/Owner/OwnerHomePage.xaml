@@ -96,7 +96,8 @@
             </ScrollViewer>
         </StackPanel>
         <WrapPanel FlowDirection="LeftToRight" Margin="785,10,0,671">
-            <Button Margin ="118 0 0 0 " HorizontalAlignment="Left" ToolTip="Press to change user" Width="80" Height="30" FontWeight="Bold" FontSize="15" Command="{Binding OwnerLogOut}" >LOG OUT</Button>
+            <Button Margin ="118 0 0 0" HorizontalAlignment="Left" ToolTip="Press to open wizard" Width="80" Height="30" FontWeight="Bold" FontSize="15" Command="{Binding Wizard}" >Wizard</Button>
+            <Button Margin ="18 -30 0 0 " HorizontalAlignment="Left" ToolTip="Press to change user" Width="80" Height="30" FontWeight="Bold" FontSize="15" Command="{Binding OwnerLogOut}" >LOG OUT</Button>
         </WrapPanel>
     </Grid>
 </Window>

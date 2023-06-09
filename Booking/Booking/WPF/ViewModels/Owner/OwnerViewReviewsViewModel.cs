@@ -23,6 +23,7 @@ namespace Booking.WPF.ViewModels.Owner
         public RelayCommand CloseWindow { get; set; }
         public RelayCommand ShowPictures { get; set; }
         public RelayCommand ShowComment { get; set; }
+        public RelayCommand Wizard { get; set; }
         private readonly Window _window;
         public OwnerViewReviewsViewModel(Window window)
         {
@@ -38,7 +39,7 @@ namespace Booking.WPF.ViewModels.Owner
             CloseWindow = new RelayCommand(Close);
             ShowPictures = new RelayCommand(ShowImages);
             ShowComment = new RelayCommand(ShowCommentWindow);
-
+            Wizard = new RelayCommand(OpenWizard);
         }
         public void Update()
         {
@@ -47,6 +48,11 @@ namespace Booking.WPF.ViewModels.Owner
             {
                 Grades.Add(g);
             }
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(8);
+            wizard.Show();
         }
         private void Close(object param)
         {

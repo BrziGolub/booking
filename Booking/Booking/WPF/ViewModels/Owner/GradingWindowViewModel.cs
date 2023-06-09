@@ -3,6 +3,7 @@ using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Observer;
 using Booking.Util;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,6 +31,7 @@ namespace Booking.WPF.ViewModels.Owner
         public ObservableCollection<int> comboBoxLateness { get; set; }
         public RelayCommand Grade { get; set; }
         public RelayCommand Close { get; set; }
+        public RelayCommand Wizard { get; set; }
 
         private readonly Window _window;
 
@@ -106,12 +108,17 @@ namespace Booking.WPF.ViewModels.Owner
         {
             Grade = new RelayCommand(Button_Click_Grade);
             Close = new RelayCommand(Button_Click_Close);
-
+            Wizard = new RelayCommand(OpenWizard);
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(7);
+            wizard.Show();
         }
 
         private int _cleanliness;

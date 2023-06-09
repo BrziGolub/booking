@@ -5,6 +5,7 @@ using Booking.Model.Enums;
 using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Util;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,6 +44,7 @@ namespace Booking.WPF.ViewModels.Owner
         public RelayCommand DecreaseMaxGuests { get; set; }
         public RelayCommand IncreaseMinDays { get; set; }
         public RelayCommand DecreaseMinDays { get; set; }
+        public RelayCommand Wizard { get; set; }
         public RelayCommand IncreaseCancelationPeriod { get; set; }
         public RelayCommand DecreaseCancelationPeriod { get; set; }
         public ICommand FillCityCommand { get; set; }
@@ -272,6 +274,7 @@ namespace Booking.WPF.ViewModels.Owner
             DecreaseMinDays = new RelayCommand(ButtonDecreaseMinDays);
             IncreaseCancelationPeriod = new RelayCommand(ButtonIncreaseCancelationPeriod);
             DecreaseCancelationPeriod = new RelayCommand(ButtonDecreaseCancelationPeriod);
+            Wizard = new RelayCommand(OpenWizard);
 
             FillCityCommand = new RelayCommand(FillCity);
         }
@@ -317,6 +320,11 @@ namespace Booking.WPF.ViewModels.Owner
 
                 return null;
             }
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(1);
+            wizard.Show();
         }
 
         public void FillCity(object param)

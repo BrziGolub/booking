@@ -48,5 +48,14 @@ namespace Booking.Repository
             _serializer.ToCSV(FilePath, _forumComments);
             return forumComment;
         }
+        public void Update(ForumComment forumComment)
+        {
+            int index = _forumComments.FindIndex(f => f.Id == forumComment.Id);
+            if (index != -1)
+            {
+                _forumComments[index] = forumComment;
+                _serializer.ToCSV(FilePath, _forumComments);
+            }
+        }
     }
 }

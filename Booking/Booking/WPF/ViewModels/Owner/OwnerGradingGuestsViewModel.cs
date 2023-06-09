@@ -4,6 +4,7 @@ using Booking.Model;
 using Booking.Observer;
 using Booking.Util;
 using Booking.View;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +23,7 @@ namespace Booking.WPF.ViewModels.Owner
         public AccommodationReservation SelectedReservation { get; set; }
         public RelayCommand Grade { get; set; }
         public RelayCommand Close { get; set; }
+        public RelayCommand Wizard { get; set; }
 
         private readonly Window _window;
 
@@ -38,7 +40,13 @@ namespace Booking.WPF.ViewModels.Owner
         {
             Grade = new RelayCommand(Button_Click_Grade);
             Close = new RelayCommand(Button_Click_Close);
+            Wizard = new RelayCommand(OpenWizard);
 
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(6);
+            wizard.Show();
         }
         private void Button_Click_Close(object param)
         {

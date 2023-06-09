@@ -41,6 +41,11 @@ namespace Booking.Application.UseCases
 			}
             return list;
 		}
+		public void UpdateForumComment(ForumComment forumComment)
+		{
+			_forumCommentRepository.Update(forumComment);
+			NotifyObservers();
+		}
 
 		public List<ForumComment> GetForumComments(Forum selectedForum)
 		{
@@ -58,8 +63,13 @@ namespace Booking.Application.UseCases
             }
             return list;
         }
+		public ForumComment Create(ForumComment forumComment)
+		{
+			ForumComment newForumComment = _forumCommentRepository.Add(forumComment);
+			return newForumComment;
+		}
 
-        public ForumComment GetById(int id)
+		public ForumComment GetById(int id)
 		{
 			return _forumCommentRepository.GetById(id);
 		}

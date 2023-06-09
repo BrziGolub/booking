@@ -421,7 +421,7 @@ namespace Booking.WPF.ViewModels.Guide
             }
             else
             {
-                MessageBox.Show("You need to select keypoint if you want to remove it!");
+                System.Windows.MessageBox.Show("You need to select keypoint if you want to remove it!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
 
         }
@@ -489,47 +489,47 @@ namespace Booking.WPF.ViewModels.Guide
 
                 if (tour.Destinations.Count < 2)
                 {
-                    MessageBox.Show("Tour need to have 2 'KEY POINTS' at least");
+                    System.Windows.MessageBox.Show("Tour need to have 2 'KEY POINTS' at least", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                     return;
                 }
                 if (tour.Images.Count == 0)
                 {
-                    MessageBox.Show("Tour need to have 1 'PICTURE' at least");
+                    System.Windows.MessageBox.Show("Tour need to have 1 'PICTURE' at least", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                     return;
                 }
                 if (string.IsNullOrEmpty(SelectedCountry))
                 {
-                    MessageBox.Show("'COUNTRY' not entered");
+                    System.Windows.MessageBox.Show("'COUNTRY' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                     return;
                 }
                 if (string.IsNullOrEmpty(tour.Location.City))
                 {
-                    MessageBox.Show("'CITY' not entered");
+                    System.Windows.MessageBox.Show("'CITY' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                     return;
                 }
                 if (tour.MaxVisitors < 1)
                 {
-                    MessageBox.Show("'MAX GUESTS NUMBER' should be greater than 0");
+                    System.Windows.MessageBox.Show("'MAX GUESTS NUMBER' should be greater than 0", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                     return;
                 }
                 if (tour.Duration < 1)
                 {
-                    MessageBox.Show("'DURATION' should be greater than 0");
+                    System.Windows.MessageBox.Show("'DURATION' should be greater than 0", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                     return;
                 }
                 if(tour.Images.Count < 1)
                 {
-                    MessageBox.Show("Tour need to have 1 'IMAGE' at least");
+                    System.Windows.MessageBox.Show("Tour need to have 1 'IMAGE' at least", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                     return;
                 }
 
                 tourService.Create(tour);
-                MessageBox.Show("Tour successfully created");
+                System.Windows.MessageBox.Show("Tour successfully created", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 CloseWindow();
             }
             else
             {
-                MessageBox.Show("Please fill in all required fields.");
+                System.Windows.MessageBox.Show("Please fill in all required fields.", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 

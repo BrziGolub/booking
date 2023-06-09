@@ -3,6 +3,7 @@ using Booking.Domain.DTO;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Util;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,6 +25,7 @@ namespace Booking.WPF.ViewModels.Owner
         public OwnerYearStatistic selectedYearStatistic { get; set; }
         public String AccommodationLabel { get; set; } = String.Empty;
         public RelayCommand Close { get; set; }
+        public RelayCommand Wizard { get; set; }
         public string BestMonthLabel { get; set; }
         private readonly Window _window;
         public AccommodationStatisticsByMonthsViewModel(Accommodation SelectedAccommodation, OwnerYearStatistic SelectedYearStatistics, Window window)
@@ -35,6 +37,7 @@ namespace Booking.WPF.ViewModels.Owner
             AccommodationLabel = SetAccommodationLabel(SelectedAccommodation);
             monthStatistics = new ObservableCollection<OwnerMonthStatistic>(AccommodationReservationService.GetMonthStatistics(selectedAccommodation,selectedYearStatistic.Year));
             Close = new RelayCommand(CloseWindow);
+            Wizard = new RelayCommand(OpenWizard);
             List<OwnerMonthStatistic> BestMonthStatistics = AccommodationReservationService.GetMonthStatistics(selectedAccommodation,selectedYearStatistic.Year);
             string bestMonth = AccommodationReservationService.CalculateBestMonth(BestMonthStatistics, selectedAccommodation, selectedYearStatistic.Year);
             BestMonthLabel = bestMonth;
@@ -46,6 +49,11 @@ namespace Booking.WPF.ViewModels.Owner
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(3);
+            wizard.Show();
         }
         private String SetAccommodationLabel(Accommodation accommodation)
         {

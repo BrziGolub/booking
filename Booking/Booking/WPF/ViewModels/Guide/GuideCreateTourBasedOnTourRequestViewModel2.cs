@@ -393,7 +393,7 @@ namespace Booking.WPF.ViewModels.Guide
             }
             else
             {
-                MessageBox.Show("You need to select keypoint if you want to remove it!");
+                System.Windows.MessageBox.Show("You need to select keypoint if you want to remove it!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
 
         }
@@ -461,12 +461,12 @@ namespace Booking.WPF.ViewModels.Guide
 
 				if (tour.Destinations.Count < 2)
 				{
-					MessageBox.Show("Tour need to have 2 'KEY POINTS' at least");
+					System.Windows.MessageBox.Show("Tour need to have 2 'KEY POINTS' at least", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
 					return;
 				}
 				if (tour.Images.Count < 1)
 				{
-					MessageBox.Show("Tour need to have 1 'IMAGE' at least");
+					System.Windows.MessageBox.Show("Tour need to have 1 'IMAGE' at least", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
 					return;
 				}
 
@@ -475,12 +475,12 @@ namespace Booking.WPF.ViewModels.Guide
 
 				CreateNotification();
 
-				MessageBox.Show("Tour successfully created");
+				System.Windows.MessageBox.Show("Tour successfully created", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
 				CloseWindow();
 			}
 			else
             {
-                MessageBox.Show("Please fill in all required fields.");
+                System.Windows.MessageBox.Show("Please fill in all required fields.", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 
@@ -515,7 +515,7 @@ namespace Booking.WPF.ViewModels.Guide
             }
             else
             {
-                MessageBox.Show("Photo URL can't be empty!");
+                System.Windows.MessageBox.Show("Photo URL can't be empty!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 

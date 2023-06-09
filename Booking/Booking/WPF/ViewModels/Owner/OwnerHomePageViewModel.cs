@@ -36,6 +36,7 @@ namespace Booking.WPF.ViewModels.Owner
         public RelayCommand OpenSchedulingRenovations { get; set; }
         public RelayCommand OpenShowRenovations { get; set; }
         public RelayCommand OpenForums { get; set; }
+        public RelayCommand Wizard { get; set; }
         public RelayCommand ShowPictures { get; set; }
 
         private readonly Window _window;
@@ -69,6 +70,7 @@ namespace Booking.WPF.ViewModels.Owner
             OpenSchedulingRenovations = new RelayCommand(SchedulingRenovation);
             OpenShowRenovations = new RelayCommand(ShowRenovation);
             OpenAccommodationStatistics = new RelayCommand(AccommodationStatistics);
+            Wizard = new RelayCommand(OpenWizard);
             OpenForums = new RelayCommand(ForumsOwner);
         }
 
@@ -155,6 +157,11 @@ namespace Booking.WPF.ViewModels.Owner
         {
             ShowOwnerAccommodationImages showOwnerAccommodationImages = new ShowOwnerAccommodationImages(SelectedAccommodation);
             showOwnerAccommodationImages.Show();
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(0);
+            wizard.Show();
         }
         private void LogOut(object param)
         {

@@ -24,6 +24,7 @@ namespace Booking.WPF.ViewModels.Owner
         public RelayCommand Close { get; set; }
         public RelayCommand Delete { get; set; }
         public RelayCommand ShowDescription { get; set; }
+        public RelayCommand Wizard { get; set; }
         private readonly Window _window;
         public ShowRenovationsViewModel(Window window)
         {
@@ -40,6 +41,7 @@ namespace Booking.WPF.ViewModels.Owner
             Close = new RelayCommand(CloseWindow);
             Delete = new RelayCommand(DeleteRenovation);
             ShowDescription = new RelayCommand(ShowDescriptionWindow);
+            Wizard = new RelayCommand(OpenWizard);
 
         }
         public void Update()
@@ -49,6 +51,11 @@ namespace Booking.WPF.ViewModels.Owner
             {
                 Renovations.Add(r);
             }
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(12);
+            wizard.Show();
         }
         private void CloseWindow(object param)
         {

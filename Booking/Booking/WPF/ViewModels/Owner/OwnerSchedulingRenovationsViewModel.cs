@@ -4,6 +4,7 @@ using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Util;
 using Booking.WPF.ViewModels.Guest1;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,6 +30,7 @@ namespace Booking.WPF.ViewModels.Owner
         public IAccommodationService AccommodationService { get; set; }
         public RelayCommand Schedule { get; set; }
         public RelayCommand Close { get; set; }
+        public RelayCommand Wizard { get; set; }
         private readonly Window _window;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -61,6 +63,12 @@ namespace Booking.WPF.ViewModels.Owner
             Ranges = new ObservableCollection<Range>(suggestedDateRanges.Select(s => new Range { StartDate = s.Item1, EndDate = s.Item2 }).ToList());
             Schedule = new RelayCommand(ScheduleRenovation);
             Close = new RelayCommand(CloseWindow);
+            Wizard = new RelayCommand(OpenWizard);
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(11);
+            wizard.Show();
         }
         private void CloseWindow(object param)
         {

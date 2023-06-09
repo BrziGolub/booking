@@ -32,10 +32,12 @@ namespace Booking.Domain.ServiceInterfaces
         int numberOfEighteenToFiftyGuests(int selectedTourID);
         int numberOfFiftyPlusGuests(int selectedTourID);
         Tour UpdateTour(Tour tour);
+        void RemoveGuideTours(int idGuide);
         int numberWithVouchersGuests(int selectedTourID);
         int numberWithOutVouchersGuests(int selectedTourID);
         TourImage FindImageByUrl(string url);
         List<TourKeyPoint> GetTourKeyPoints();
         TourKeyPoint removeKeyPoint(int idKeyPoint);
+        Tour removeTour1(int idTour);
     }
 }

@@ -95,13 +95,13 @@ namespace Booking.WPF.ViewModels.Guide
             {
                 SelectedTourKeyPoint.Achieved = true;
                 TourService.UpdateKeyPoint(SelectedTourKeyPoint);
-                MessageBox.Show(SelectedTourKeyPoint.Location.State.ToString() + " " + SelectedTourKeyPoint.Location.City.ToString() + " is achieved!");
+                System.Windows.MessageBox.Show(SelectedTourKeyPoint.Location.State.ToString() + " " + SelectedTourKeyPoint.Location.City.ToString() + " is achieved!", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 TourService.NotifyObservers();
                 EndTour();
             }
             else
             {
-                MessageBox.Show("You must first mark the keypoint that has been achieved!");
+                System.Windows.MessageBox.Show("You must first mark the keypoint that has been achieved!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
         private void EndTour()
@@ -111,7 +111,7 @@ namespace Booking.WPF.ViewModels.Guide
                 SelectedTour.IsStarted = false;
                 SelectedTour.IsEnded = true;
                 TourService.UpdateTour(SelectedTour);
-                MessageBox.Show("Tour ended, you achieved last keypoint!");
+                System.Windows.MessageBox.Show("Tour ended, you achieved last keypoint!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 TourService.NotifyObservers();
 
                 CloseWindow();
@@ -140,17 +140,16 @@ namespace Booking.WPF.ViewModels.Guide
                     {
                         VoucherService.Update(v);
                     }
-
-                    MessageBox.Show("Guest '" + SelectedGuest.Username.ToString() + "' is added to keypoint '" + SelectedTourKeyPoint.Location.State.ToString() + ", " + SelectedTourKeyPoint.Location.City.ToString() + "'");
+                    System.Windows.MessageBox.Show("Guest '" + SelectedGuest.Username.ToString() + "' is added to keypoint '" + SelectedTourKeyPoint.Location.State.ToString() + ", " + SelectedTourKeyPoint.Location.City.ToString() + "'", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Guest is already added to this tour");
+                    System.Windows.MessageBox.Show("Guest is already added to this tour", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 }
             }
             else
             {
-                MessageBox.Show("You must first mark the guest and checkpoint who you want to add and where!");
+                System.Windows.MessageBox.Show("You must first mark the guest and checkpoint who you want to add and where!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
 
         }
@@ -168,7 +167,7 @@ namespace Booking.WPF.ViewModels.Guide
                     {
                         tourGuests.Voucher = true;
                         pomVoucher.IsActive = false;
-                        MessageBox.Show("Guest " + SelectedGuest.Username.ToString() + " used voucher");
+                        System.Windows.MessageBox.Show("Guest " + SelectedGuest.Username.ToString() + " used voucher", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                         pomVouchers.Add(pomVoucher);
                     }
                 }

@@ -1,6 +1,7 @@
 ﻿using Booking.Commands;
 using Booking.Domain.ServiceInterfaces;
 using Booking.Util;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Booking.WPF.ViewModels.Owner
     {
         public IAccommodationAndOwnerGradeService _gradeService { get; set; }
         public RelayCommand CloseSuper { get; set; }
+        public RelayCommand Wizard { get; set; }
         private readonly Window _window;
         public string NumberOfGradesText { get; set; } 
         public string AverageGradeText { get; set; }
@@ -29,10 +31,16 @@ namespace Booking.WPF.ViewModels.Owner
             //AverageGrade.Text = _gradeService.GetAverageGrade().ToString();
             //IsSuper.Text = _gradeService.SuperWindowText();
             CloseSuper = new RelayCommand(Close);
+            Wizard = new RelayCommand(OpenWizard);
         }
         private void Close(object param)
         {
             _window.Close();
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(9);
+            wizard.Show();
         }
     }
 }
