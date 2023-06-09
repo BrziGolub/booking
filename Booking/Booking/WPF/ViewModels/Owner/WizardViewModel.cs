@@ -160,6 +160,27 @@ namespace Booking.WPF.ViewModels.Owner
             string text9 = "Here you can see the number of grades you have and the average grade note that you need at least 50 grades with " +
                 "an average score of 4.5 to become a super-owner, that message will be displayed below that. You also have a CLOSE button(this will close the window).";
             pageTexts.Add(text9);
+            string text10 = "Press the little calendar and choose a date, do that for start date and end date then enter the " +
+                "duration of the renovation and press the button FIND. Then you will be redirected to a new window where you will " +
+                "get the options for schedulig a renovation. You also have a CLOSE button(this will close the window).";
+            pageTexts.Add(text10);
+            string text11 = "Here you can choose a date for your planed renovation and enter the required description, when you " +
+                "have done that press the Schedule button and your renovation will be scheduled. Note that guest will not be able to " +
+                "schedule reservations in this period. You also have a CLOSE button(this will close the window).";
+            pageTexts.Add(text11);
+            string text12 = "Here you can see all the done and scheduled renovations, if you want to see the description of the " +
+                "renovation press the Show button. If you want to cancel the renovation select the renovation and then press the " +
+                "Delete button. You also have a CLOSE button(this will close the window).";
+            pageTexts.Add(text12);
+            string text13 = "Here you can see all the forums which guests opened for specific locations if you want to see the " +
+                "comments on the forum, select a forum and press the SEE button. You also have a CLOSE button(this will close the window).";
+            pageTexts.Add(text13);
+            string text14 = "Here you can see all the comments for a specific forum. If you want to leave a comment enter it in the comment " +
+                "zone and press the COMMENT button, note you can only comment if the forum is still open and if you have a accommodation" +
+                " on that location.You can also report a comment if that person never " +
+                "visited that location and is giving false information " +
+                "by selectiong that comment and pressing the REPORT button. You also have a CLOSE button(this will close the window).";
+            pageTexts.Add(text14);
 
             SetCurrentPage();
         }
@@ -205,8 +226,27 @@ namespace Booking.WPF.ViewModels.Owner
             {
                 return "Super owner";
             }
+            if (gottenPageNumber == 10)
+            {
+                return "Scheduling renovations";
+            }
+            if (gottenPageNumber == 11)
+            {
+                return "Choose date for renovation";
+            }
+            if (gottenPageNumber == 12)
+            {
+                return "Show renovations";
+            }
+            if (gottenPageNumber == 13)
+            {
+                return "Forums";
+            }
+            if (gottenPageNumber == 14)
+            {
+                return "Forum comments";
+            }
             return "";
-            //return accommodation.Name + "-" + accommodation.Location.State + "-" + accommodation.Location.City + "-" + accommodation.Type;
         }
         private void PreviousButton(object param)
         {

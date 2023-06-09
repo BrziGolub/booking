@@ -20,6 +20,7 @@ namespace Booking.WPF.ViewModels.Owner
         public String AccommodationLabel { get; set; } = String.Empty;
         public RelayCommand Find { get; set; }
         public RelayCommand Close { get; set; }
+        public RelayCommand Wizard { get; set; }
         private readonly Window _window;
         public DateTime _startDay;
         public DateTime StartDay
@@ -68,9 +69,15 @@ namespace Booking.WPF.ViewModels.Owner
             SetAccommodationLabel();
             Find = new RelayCommand(FindDate);
             Close = new RelayCommand(CloseWindow);
+            Wizard = new RelayCommand(OpenWizard);
             StartDay = DateTime.Now;
             EndDay = DateTime.Now;
             Duration = 0;
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(10);
+            wizard.Show();
         }
         public void SetAccommodationLabel()
         {
