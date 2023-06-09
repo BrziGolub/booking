@@ -4,6 +4,7 @@ using Booking.Domain.ServiceInterfaces;
 using Booking.Observer;
 using Booking.Service;
 using Booking.Util;
+using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,6 +30,7 @@ namespace Booking.WPF.ViewModels.Owner
         public RelayCommand LeaveComment { get; set; }
         public RelayCommand Report { get; set; }
         public RelayCommand Close { get; set; }
+        public RelayCommand Wizard { get; set; }
         private readonly Window _window;
 
         public OwnerAllForumCommentsViewModel(Forum selectedForum, Window window)
@@ -43,6 +45,7 @@ namespace Booking.WPF.ViewModels.Owner
             LeaveComment = new RelayCommand(LeaveCommentButton);
             Report = new RelayCommand(ReportComment);
             Close = new RelayCommand(CloseWindow);
+            Wizard = new RelayCommand(OpenWizard);
             OwnerComment = "";
         }
         public string _ownerComment;
@@ -57,6 +60,11 @@ namespace Booking.WPF.ViewModels.Owner
                     OnPropertyChanged();
                 }
             }
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(14);
+            wizard.Show();
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
