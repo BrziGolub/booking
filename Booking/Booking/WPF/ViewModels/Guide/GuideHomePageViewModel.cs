@@ -120,11 +120,28 @@ namespace Booking.WPF.ViewModels.Guide
         }
         private void ButtonLogOut(object param)
         {
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
-            CloseWindow();     
+            MessageBoxResult result = ConfirmLogOut();
+
+            if (result == MessageBoxResult.Yes)
+            {
+                SignInForm signInForm = new SignInForm();
+                signInForm.Show();
+                CloseWindow();
+            }
         }
 
+        private MessageBoxResult ConfirmLogOut()
+        {
+            string sMessageBoxText = $"Are you sure to log out?";
+            string sCaption = "Confirmation of log out";
+
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+            return result;
+        }
         private void ButtonCancelTour(object param)
         {
             if (SelectedTour != null)

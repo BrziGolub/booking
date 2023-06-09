@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="GuideHomePage" Height="538" Width="955" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="GuideHomePage" Height="538" Width="985" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.InputBindings>
         <KeyBinding Key="D1" Modifiers="Control" Command="{Binding OpenCreateTour}"/>
         <KeyBinding Key="D2" Modifiers="Control" Command="{Binding OpenCreateTourBasedOnRequests}"/>
@@ -204,9 +204,9 @@
             </Button>
 
 
-            <Image Margin="-170 15 10 10" Height="45" Width="45" Source="/Resources/Images/user.png"/>
-            <TextBlock Margin="-85 -85 0 0" FontSize="17" FontStyle="Italic" FontWeight="Bold" Foreground="#FF303841" Height="21" Width="50">Guide</TextBlock>
-            <TextBlock x:Name="usernameTextBlock" Margin="9 -45 0 0" FontSize="15" FontStyle="Italic" FontWeight="SemiBold" Foreground="#D6E6F2" Height="21" Width="144" Text="{Binding Username}"></TextBlock>
+            <Image Margin="-195 15 10 10" Height="45" Width="45" Source="/Resources/Images/user.png"/>
+            <TextBlock Margin="-105 -85 0 0" FontSize="17" FontStyle="Italic" FontWeight="Bold" Foreground="#FF303841" Height="21" Width="50">Guide</TextBlock>
+            <TextBlock x:Name="usernameTextBlock" Margin="-8 -45 0 0" FontSize="15" FontStyle="Italic" FontWeight="SemiBold" Foreground="#D6E6F2" Height="21" Width="144" Text="{Binding Username}"></TextBlock>
 
             <Button  FontWeight="SemiBold" Width="200" Height="30" HorizontalAlignment="Left" Margin="1 0 15 0" HorizontalContentAlignment="Left" Command="{Binding Dismissal}">
                 <Button.Content>

@@ -91,7 +91,7 @@ namespace Booking.WPF.ViewModels
                     selectDateForComplexTour.ShowDialog();
                     if (forwardedStartDate != DateTime.MinValue && forwardedEndDate != DateTime.MinValue)
                     {
-                        SelectedTourRequest.Status = "AcceptedComplex";
+                        SelectedTourRequest.Status = "Accepted";
                         SelectedTourRequest.Notify = true;
                         SelectedTourRequest.TourReservedStartTime = forwardedStartDate;
                         SelectedTourRequest.StartTime = forwardedStartDate;

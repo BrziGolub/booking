@@ -231,7 +231,7 @@
     <Compile Include="WPF\ViewModels\Guest2\TourComplexRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\TourNotificationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\TourRequestsViewModel.cs" />
-    <Compile Include="WPF\ViewModels\GuideAcceptingPartOfTourViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\GuideAcceptingPartOfTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideAcceptingTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel1.cs" />
@@ -265,7 +265,7 @@
     <Compile Include="Application\UseCases\LocationService.cs" />
     <Compile Include="Application\UseCases\TourReservationService.cs" />
     <Compile Include="Application\UseCases\TourService.cs" />
-    <Compile Include="WPF\ViewModels\SelectDateForComplexTourViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guide\SelectDateForComplexTourViewModel.cs" />
     <Compile Include="WPF\Views\Guest1\AccommodationDateSugestions.xaml.cs">
       <DependentUpon>AccommodationDateSugestions.xaml</DependentUpon>
     </Compile>
