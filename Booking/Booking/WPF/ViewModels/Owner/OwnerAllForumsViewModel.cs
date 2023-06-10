@@ -45,7 +45,7 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (SelectedForum == null)
             {
-                MessageBox.Show("Please select a forum");
+                System.Windows.MessageBox.Show("Please select a forum", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);               
                 return;
             }
             OwnerAllForumComments ownerAllForumComments = new OwnerAllForumComments(SelectedForum);

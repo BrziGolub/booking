@@ -131,7 +131,7 @@ namespace Booking.WPF.ViewModels.Owner
                 "increase or decrease the value of that field by 1. To add a picture press the + next to the pictures field and choose a " +
                 "picture from your tablet, it will appear below it with 2 buttons. To delete a picture using the buttons find the picture you " +
                 "want to delete and press the - button next to the pictures field. On the bottom you have 2 buttons CREATE(add the accommodation) " +
-                "and CLOSE(close the window)";
+                "and CLOSE(close the window).";
             pageTexts.Add(text1);
             string text2 = "Here you can see the stats for the selected accommodation by year. Below that you can see the best year that the accommodation had. " +
                 " Below that you have 2 buttons DETAIL(it will take you to another window for the selected year) and CLOSE(this will close the window).";

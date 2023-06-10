@@ -83,22 +83,22 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (SelectedComment == null) 
             {
-                MessageBox.Show("Please select a comment");
+                System.Windows.MessageBox.Show("Please select a comment", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 return;
             }
             if (SelectedForum.Status.Equals("CLOSED"))
             {
-                MessageBox.Show("The forum is closed");
+                System.Windows.MessageBox.Show("You can not report a comment on a closed forum", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);                
                 return;
             }
             if (!LocationService.DoesOwnerHaveLocation(SelectedForum.Location.Id))
             {
-                MessageBox.Show("You can not report on this forum");
+                System.Windows.MessageBox.Show("You can not report on this forum", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);               
                 return;
             }
             if (SelectedComment.Visited.Equals("YES")) 
             {
-                MessageBox.Show("He was on the location");
+                System.Windows.MessageBox.Show("He was on the location", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
                 return;
             }
             SelectedComment.Reports++;
@@ -110,12 +110,12 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (SelectedForum.Status.Equals("CLOSED"))
             {
-                MessageBox.Show("The forum is closed");
+                System.Windows.MessageBox.Show("You can not comment on a closed forum", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);                
                 return;
             }
             if (!LocationService.DoesOwnerHaveLocation(SelectedForum.Location.Id))
             {
-                MessageBox.Show("You can not comment on this forum");
+                System.Windows.MessageBox.Show("You can not comment on this forum", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);                
                 return;
             }
             ForumComment newForumComment = new ForumComment();
@@ -126,7 +126,7 @@ namespace Booking.WPF.ViewModels.Owner
             newForumComment.Visited = "OWNER";
             ForumCommentService.Create(newForumComment);
             ForumCommentService.NotifyObservers();
-            MessageBox.Show("Comment succesfully added");
+            System.Windows.MessageBox.Show("Comment succesfully added", "Success", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
         }
         private String SetForumLabel(Forum forum)
         {

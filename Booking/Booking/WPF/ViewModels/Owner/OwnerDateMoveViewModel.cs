@@ -89,12 +89,12 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (OwnerComment.Equals(""))
             {
-                MessageBox.Show("'REASONING' not entered");
+                System.Windows.MessageBox.Show("'REASONING' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
                 return;
             } 
             else if (SelectedAccommodationReservationRequest==null) 
             {
-                MessageBox.Show("Choose a move request");
+                System.Windows.MessageBox.Show("Choose a move request", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
                 return;
             }
             else
@@ -110,7 +110,7 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (SelectedAccommodationReservationRequest == null)
             {
-                MessageBox.Show("Choose a move request");
+                System.Windows.MessageBox.Show("Choose a move request", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
                 return;
             }
             else 
