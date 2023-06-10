@@ -57,8 +57,6 @@ namespace Booking.WPF.ViewModels.Guide
         public RelayCommand IncreaseDuration { get; set; }
         public RelayCommand DecreaseDuration { get; set; }
 
-        public RelayCommand pom { get; set; }
-
         public ICommand FillCityCommand { get; set; }
         private ICommand _saveTourCommand;
 
@@ -345,11 +343,10 @@ namespace Booking.WPF.ViewModels.Guide
             FillComboBox();
             NextPreviousPhotoButtonsVisibility();
 
-            /*if(demoPom)//if (IsDemoMode)
+            if(demoPom)
             {
-                MessageBox.Show("brao majstore");
                 RunDemoMode();
-            }*/
+            }
 
         }
         public void SetCommands()
@@ -368,8 +365,6 @@ namespace Booking.WPF.ViewModels.Guide
             DecreaseDuration = new RelayCommand(ButtonDecreaseDuration);
 
             FillCityCommand = new RelayCommand(FillCity);
-
-            pom = new RelayCommand(bPom);
         }
         public void FillCity(object param)
         {
@@ -450,11 +445,6 @@ namespace Booking.WPF.ViewModels.Guide
         private void ButtonClose(object param)
         {
             CloseWindow();
-        }
-
-        private void bPom(object param)
-        {
-            RunDemoMode();
         }
         private void ButtonAddTourKeyPoint(object param)
         {
@@ -634,9 +624,9 @@ namespace Booking.WPF.ViewModels.Guide
         private void ButtonDemoAddPicture(object param)
         {
             string folderPath = "../../Resources/Images/ToursPhotos";
-            string[] imageFiles = Directory.GetFiles(folderPath, "*.jpg")
+            string[] imageFiles = Directory.GetFiles(folderPath, "*.png")
                                            .Concat(Directory.GetFiles(folderPath, "*.jpeg"))
-                                           .Concat(Directory.GetFiles(folderPath, "*.png"))
+                                           .Concat(Directory.GetFiles(folderPath, "*.jpg"))
                                            .ToArray();
 
 
