@@ -22,6 +22,7 @@ namespace Booking.WPF.ViewModels.Owner
         public ObservableCollection<ForumComment> ForumComments { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public IForumCommentService ForumCommentService;
+        public IForumService ForumService;
         public ILocationService LocationService;
         public String ForumLabel { get; set; } = String.Empty;
 
@@ -37,6 +38,7 @@ namespace Booking.WPF.ViewModels.Owner
         {
             _window = window;
             ForumCommentService = InjectorService.CreateInstance<IForumCommentService>();
+            ForumService = InjectorService.CreateInstance<IForumService>();
             LocationService = InjectorService.CreateInstance<ILocationService>();
             SelectedForum = selectedForum;
             ForumLabel = SetForumLabel(SelectedForum);
@@ -101,6 +103,11 @@ namespace Booking.WPF.ViewModels.Owner
                 System.Windows.MessageBox.Show("He was on the location", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);                
                 return;
             }
+            if (SelectedComment.Visited.Equals("OWNER"))
+            {
+                System.Windows.MessageBox.Show("He is a owner", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                return;
+            }
             SelectedComment.Reports++;
             ForumCommentService.UpdateForumComment(SelectedComment);
             ForumCommentService.NotifyObservers();
@@ -126,6 +133,7 @@ namespace Booking.WPF.ViewModels.Owner
             newForumComment.Visited = "OWNER";
             ForumCommentService.Create(newForumComment);
             ForumCommentService.NotifyObservers();
+            ForumService.NotifyObservers();
             System.Windows.MessageBox.Show("Comment succesfully added", "Success", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
         }
         private String SetForumLabel(Forum forum)

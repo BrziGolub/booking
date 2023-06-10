@@ -2,6 +2,7 @@
 using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Observer;
+using Booking.Service;
 using Booking.Util;
 using Booking.View;
 using Booking.WPF.Views.Owner;
@@ -25,6 +26,7 @@ namespace Booking.WPF.ViewModels.Owner
         public Accommodation SelectedAccommodation { get; set; }
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         public IAccommodationService _accommodationService { get; set; }
+        public IUserService _userService { get; set; }
         public RelayCommand OpenRegisterAccommodation { get; set; }
         public RelayCommand OpenSiteProposals { get; set; }
         public RelayCommand OpenDateMove { get; set; }
@@ -46,14 +48,23 @@ namespace Booking.WPF.ViewModels.Owner
             VKeyboard.Config(typeof(KeyBoardCustom));
             _window = window;
             _accommodationService = InjectorService.CreateInstance<IAccommodationService>();
+            _userService = InjectorService.CreateInstance<IUserService>();
             AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
             _accommodationService.Subscribe(this);
-
+            User user1 = new User();
+            user1 = _userService.GetById(AccommodationService.SignedOwnerId);
             Reservations = new ObservableCollection<AccommodationReservation>(AccommodationReservationService.GetAllUngradedReservations());
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetOwnerAccommodations());
             if (Reservations.Count != 0)
             {
                 System.Windows.MessageBox.Show("Number of guests to grade: " + Reservations.Count.ToString(), "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+            }
+            if (user1.Wizard == 0) 
+            {
+                user1.Wizard = 1;
+                _userService.SaveWizard(user1);
+                Wizard wizard = new Wizard(0);
+                wizard.Show();
             }
             SetCommands();
         }

@@ -15,5 +15,6 @@ namespace Booking.Domain.ServiceInterfaces
         List<User> GetReservedGuests(int tourId);
         User GetById(int id);
         User removeUser(int idUser);
+        void SaveWizard(User user1);
     }
 }
