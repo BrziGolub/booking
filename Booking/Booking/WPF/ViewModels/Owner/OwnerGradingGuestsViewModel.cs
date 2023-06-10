@@ -57,7 +57,7 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (SelectedReservation == null)
             {
-                MessageBox.Show("Choose a reservation to grade");
+                System.Windows.MessageBox.Show("Choose a reservation to grade", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 return;
             }
             else 

@@ -70,12 +70,12 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (SelectedRenovation == null)
             {
-                MessageBox.Show("Select a renovation to delete");
+                System.Windows.MessageBox.Show("Select a renovation to delete", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);               
                 return;
             }
             else if (SelectedRenovation.StartDay.AddDays(5) > DateTime.Now) 
             {
-                MessageBox.Show("You can only delete renovation which will happen in more than 5 days");
+                System.Windows.MessageBox.Show("You can only delete renovation which will happen in more than 5 days", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 return;
             }
             else

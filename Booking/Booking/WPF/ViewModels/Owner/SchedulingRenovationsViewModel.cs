@@ -95,17 +95,17 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (StartDay > EndDay)
             {
-                MessageBox.Show("Starting day can not be after end day");
+                System.Windows.MessageBox.Show("Starting day can not be after end day", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
                 return;
             }
             else if (Duration == 0)
             {
-                MessageBox.Show("Choose a duration of the renovations");
+                System.Windows.MessageBox.Show("Choose a duration of the renovations", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
                 return;
             }
             else if (StartDay < DateTime.Now)
             {
-                MessageBox.Show("Start date can not be a date that has passed");
+                System.Windows.MessageBox.Show("Start date can not be a date that has passed", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
                 return;
             }
             else

@@ -206,28 +206,29 @@ namespace Booking.WPF.ViewModels.Owner
             accommodationGrade.Accommodation = AccommodationReservationService.GetById(accommodationReservationId);
             if (accommodationGrade.Cleanliness == -1)
             {
-                MessageBox.Show("'CLEANLINESS' not entered");
+                System.Windows.MessageBox.Show("'CLEANLINESS' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                
             }
             else if (accommodationGrade.RuleFollowing == -1)
             {
-                MessageBox.Show("'RULEFOLLOWING' not entered");
+                System.Windows.MessageBox.Show("'RULE FOLLOWING' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
             else if (accommodationGrade.Communication == -1)
             {
-                MessageBox.Show("'Communication' not entered");
+                System.Windows.MessageBox.Show("'Communication' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
             else if (accommodationGrade.Comment.Equals(""))
             {
-                MessageBox.Show("'Comment' not entered");
+                System.Windows.MessageBox.Show("'Comment' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
             else if (accommodationGrade.Lateness == -1)
             {
-                MessageBox.Show("'LATENESS' not entered");
+                System.Windows.MessageBox.Show("'LATENESS' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
             else
             {
                 AccommodationGradeService.Create(accommodationGrade);
-                MessageBox.Show("Grade successfully created");
+                System.Windows.MessageBox.Show("Grade successfully created", "Success", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 AccommodationReservationService.NotifyObservers();
                 _window.Close();
             }
