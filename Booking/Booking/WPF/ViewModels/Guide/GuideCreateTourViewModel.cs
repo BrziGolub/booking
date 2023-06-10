@@ -18,10 +18,12 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Booking.Application;
+using HarfBuzzSharp;
 
 namespace Booking.WPF.ViewModels.Guide
 {
-    public class GuideCreateTourViewModel : IObserver, INotifyPropertyChanged
+    public class GuideCreateTourViewModel : IObserver, INotifyPropertyChanged, IDataErrorInfo
     {
         public ITourService tourService { get; set; }
         public ILocationService locationService { get; set; }
@@ -56,8 +58,6 @@ namespace Booking.WPF.ViewModels.Guide
         public RelayCommand DecreaseMaxGuests { get; set; }
         public RelayCommand IncreaseDuration { get; set; }
         public RelayCommand DecreaseDuration { get; set; }
-
-        public RelayCommand pom { get; set; }
 
         public ICommand FillCityCommand { get; set; }
         private ICommand _saveTourCommand;
@@ -324,6 +324,40 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
 
+        private bool _isCountryComboBoxOpen;
+        public bool IsCountryComboBoxOpen
+        {
+            get { return _isCountryComboBoxOpen; }
+            set
+            {
+                _isCountryComboBoxOpen = value;
+                OnPropertyChanged(nameof(IsCountryComboBoxOpen));
+            }
+        }
+
+        private bool _isCityComboBoxOpen;
+        public bool IsCityComboBoxOpen
+        {
+            get { return _isCityComboBoxOpen; }
+            set
+            {
+                _isCityComboBoxOpen = value;
+                OnPropertyChanged(nameof(IsCityComboBoxOpen));
+            }
+        }
+
+        private bool _isKeyPointsComboBoxOpen;
+        public bool IsKeyPointsComboBoxOpen
+        {
+            get { return _isKeyPointsComboBoxOpen; }
+            set
+            {
+                _isKeyPointsComboBoxOpen = value;
+                OnPropertyChanged(nameof(IsKeyPointsComboBoxOpen));
+            }
+        }
+
+
         public static bool demoPom = false;
 
         private readonly Window _window;
@@ -341,15 +375,24 @@ namespace Booking.WPF.ViewModels.Guide
 
             tourKeyPoints1 = new ObservableCollection<TourKeyPoint>(tourService.GetTourKeyPoints());
 
+            TourName = "";
+            Description = "";
+            MaxGuestNumber = 0;
+            StartTime = "";
+            Duration = 0;
+            SelectedCountry = "";
+            SelectedCity = "";
+            TourLanguage = "";
+            TbPictures = "";
+
             SetCommands();
             FillComboBox();
             NextPreviousPhotoButtonsVisibility();
 
-            /*if(demoPom)//if (IsDemoMode)
+            if(demoPom)
             {
-                MessageBox.Show("brao majstore");
                 RunDemoMode();
-            }*/
+            }
 
         }
         public void SetCommands()
@@ -368,8 +411,6 @@ namespace Booking.WPF.ViewModels.Guide
             DecreaseDuration = new RelayCommand(ButtonDecreaseDuration);
 
             FillCityCommand = new RelayCommand(FillCity);
-
-            pom = new RelayCommand(bPom);
         }
         public void FillCity(object param)
         {
@@ -447,14 +488,88 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
 
+        public string Error => null;
+        private readonly string[] _validatedProperties = { "TourName" };
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "TourName")
+                {
+                    if (TourName == String.Empty)
+                    {
+
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "Description")
+                {
+                    if (Description == String.Empty)
+                    {
+
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "MaxGuestNumber")
+                {
+                    if (MaxGuestNumber <= 0)
+                    {
+
+                        return "Max guest number should be > 0";
+                    }
+                }
+                else if (columnName == "StartTime")
+                {
+                    if (StartTime == String.Empty)
+                    {
+
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "Duration")
+                {
+                    if (Duration <= 0)
+                    {
+
+                        return "Duration should be > 0";
+                    }
+                }
+                else if (columnName == "SelectedCountry")
+                {
+                    if (SelectedCountry == "")
+                    {
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "SelectedCity")
+                {
+                    if (SelectedCity == "")
+                    {
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "TourLanguage")
+                {
+                    if (TourLanguage == "")
+                    {
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "TbPictures")
+                {
+                    if (TbPictures == "")
+                    {
+                        return "This filed is required!";
+                    }
+                }
+
+                return null;
+            }
+        }
+
         private void ButtonClose(object param)
         {
             CloseWindow();
-        }
-
-        private void bPom(object param)
-        {
-            RunDemoMode();
         }
         private void ButtonAddTourKeyPoint(object param)
         {
@@ -591,6 +706,7 @@ namespace Booking.WPF.ViewModels.Guide
 
                 tourService.Create(tour);
                 System.Windows.MessageBox.Show("Tour successfully created", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+
                 CloseWindow();
             }
             else
@@ -634,9 +750,9 @@ namespace Booking.WPF.ViewModels.Guide
         private void ButtonDemoAddPicture(object param)
         {
             string folderPath = "../../Resources/Images/ToursPhotos";
-            string[] imageFiles = Directory.GetFiles(folderPath, "*.jpg")
+            string[] imageFiles = Directory.GetFiles(folderPath, "*.png")
                                            .Concat(Directory.GetFiles(folderPath, "*.jpeg"))
-                                           .Concat(Directory.GetFiles(folderPath, "*.png"))
+                                           .Concat(Directory.GetFiles(folderPath, "*.jpg"))
                                            .ToArray();
 
 
@@ -775,6 +891,7 @@ namespace Booking.WPF.ViewModels.Guide
 
         public async void RunDemoMode()
         {
+            await Task.Delay(350);
             const string tourName = "Demo Tour";
             foreach (char c in tourName)
             {
@@ -806,12 +923,17 @@ namespace Booking.WPF.ViewModels.Guide
             ButtonIncreaseDuration(this); await Task.Delay(500); ButtonIncreaseDuration(this); await Task.Delay(500); ButtonIncreaseDuration(this);
 
             await Task.Delay(1000);
-            
+
+            IsCountryComboBoxOpen = true;
+            await Task.Delay(400);
             SelectedCountry = CountryCollection[0];
-            
+            IsCountryComboBoxOpen = false;
             await Task.Delay(1000);
             
+            IsCityComboBoxOpen = true;
+            await Task.Delay(400);
             SelectedCity = CityCollection[0];
+            IsCityComboBoxOpen= false;
 
             await Task.Delay(1000);
 
@@ -828,19 +950,28 @@ namespace Booking.WPF.ViewModels.Guide
 
             await Task.Delay(2000);
 
+            IsKeyPointsComboBoxOpen = true;
+            await Task.Delay(400);
             SelectedKeyPoint = KeyPointsCollection[0];
+            IsKeyPointsComboBoxOpen= false;
+
             await Task.Delay(500);
             ButtonAddTourKeyPoint(this);
 
             await Task.Delay(1000);
 
+            IsKeyPointsComboBoxOpen = true;
+            await Task.Delay(400);
             SelectedKeyPoint = KeyPointsCollection[1];
+            IsKeyPointsComboBoxOpen= false;
+
             await Task.Delay(500);
             ButtonAddTourKeyPoint(this);
 
-            await Task.Delay(2500);
+            await Task.Delay(2000);
 
             SaveTour();
+            System.Windows.MessageBox.Show("Now Demo Mode will cancel demo tour!", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
         }
 
         public void Update()

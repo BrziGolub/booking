@@ -498,7 +498,7 @@ namespace Booking.WPF.ViewModels.Guide
                             Paragraph spacing = new Paragraph("\n\n");
                             doc.Add(spacing);
 
-                            PdfPTable table = new PdfPTable(2); // 2 - broj kolona
+                            PdfPTable table = new PdfPTable(2);
                             
 
                             PdfPCell cell1 = new PdfPCell(new Phrase("Accepted", new Font(Font.FontFamily.HELVETICA, 14)));
@@ -564,7 +564,7 @@ namespace Booking.WPF.ViewModels.Guide
                             Paragraph spacing2 = new Paragraph("\n");
                             doc.Add(spacing2);
 
-                            PdfPTable table1 = new PdfPTable(4); // 4 - broj kolona
+                            PdfPTable table1 = new PdfPTable(4); 
 
                             PdfPCell cell11 = new PdfPCell(new Phrase("Request No.", new Font(Font.FontFamily.HELVETICA, 10)));
                             cell11.BackgroundColor = BaseColor.LIGHT_GRAY;
@@ -647,7 +647,7 @@ namespace Booking.WPF.ViewModels.Guide
                             Paragraph spacing3 = new Paragraph("\n");
                             doc.Add(spacing3);
 
-                            PdfPTable table2 = new PdfPTable(4); // 4 - broj kolona
+                            PdfPTable table2 = new PdfPTable(4); 
 
                             PdfPCell cell111 = new PdfPCell(new Phrase("Request No.", new Font(Font.FontFamily.HELVETICA, 10)));
                             cell111.BackgroundColor = BaseColor.LIGHT_GRAY;
