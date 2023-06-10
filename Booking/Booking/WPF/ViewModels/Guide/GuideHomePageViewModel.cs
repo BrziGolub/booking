@@ -72,12 +72,14 @@ namespace Booking.WPF.ViewModels.Guide
         public RelayCommand Dismissal { get; set; }
         public RelayCommand DemoMode { get; set; }
 
+        public static bool isDemoCreatedTour;
 
+        public static bool pom;
 
 
         private readonly Window _window;
 
-        public GuideHomePageViewModel(Window window) 
+        public GuideHomePageViewModel(Window window)
         {
             _window = window;
             _tourService = InjectorService.CreateInstance<ITourService>();
@@ -88,9 +90,24 @@ namespace Booking.WPF.ViewModels.Guide
             Tours = new ObservableCollection<Tour>(_tourService.GetGuideTours());
 
             SetCommands();
+            
         }
 
-        private void CloseWindow()
+      /*  public static void promeni()
+        {
+            if (isDemoCreatedTour)
+            {
+                DemoModeCancelTour();
+            }
+        }*/
+
+        public void DemoModeCancelTour()
+        {
+            SelectedTour = Tours[Tours.Count - 1];
+            ButtonCancelTour(this);
+        }
+
+            private void CloseWindow()
         { 
             _window.Close();
         }
@@ -257,8 +274,6 @@ namespace Booking.WPF.ViewModels.Guide
         {
             GuideCreateTourViewModel.demoPom = true;
             GuideCreateTour guideCreateTour = new GuideCreateTour();
-            //GuideCreateTourViewModel guideCreateTourViewModel = new GuideCreateTourViewModel(guideCreateTour);
-            //guideCreateTourViewModel.IsDemoMode = true;
             guideCreateTour.ShowDialog();
         }
         private void ButtonDemoMode(object param)

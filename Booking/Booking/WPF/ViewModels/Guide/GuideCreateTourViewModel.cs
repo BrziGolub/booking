@@ -18,6 +18,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Booking.Application;
+
 
 namespace Booking.WPF.ViewModels.Guide
 {
@@ -322,6 +324,18 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
 
+       /* private bool isDemoTourCreated;
+        public bool IsDemoTourCreated
+        {
+            get { return isDemoTourCreated; }
+            set
+            {
+                isDemoTourCreated = value;
+                if (isDemoTourCreated)
+                    DemoModeCancelTour();
+            }
+        }*/
+
         public static bool demoPom = false;
 
         private readonly Window _window;
@@ -581,6 +595,7 @@ namespace Booking.WPF.ViewModels.Guide
 
                 tourService.Create(tour);
                 System.Windows.MessageBox.Show("Tour successfully created", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+
                 CloseWindow();
             }
             else
@@ -831,6 +846,9 @@ namespace Booking.WPF.ViewModels.Guide
             await Task.Delay(2500);
 
             SaveTour();
+            System.Windows.MessageBox.Show("Now Demo Mode will cancel demo tour!", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+            //GuideHomePageViewModel.promeni();
+            // IsDemoTourCreated = true;
         }
 
         public void Update()
