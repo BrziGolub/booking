@@ -566,7 +566,7 @@ namespace Booking.WPF.ViewModels.Guide
 
                             PdfPTable table1 = new PdfPTable(4); // 4 - broj kolona
 
-                            PdfPCell cell11 = new PdfPCell(new Phrase("Voucher No.", new Font(Font.FontFamily.HELVETICA, 10)));
+                            PdfPCell cell11 = new PdfPCell(new Phrase("Request No.", new Font(Font.FontFamily.HELVETICA, 10)));
                             cell11.BackgroundColor = BaseColor.LIGHT_GRAY;
                             cell11.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                             cell11.BorderWidthBottom = 1f;
@@ -649,7 +649,7 @@ namespace Booking.WPF.ViewModels.Guide
 
                             PdfPTable table2 = new PdfPTable(4); // 4 - broj kolona
 
-                            PdfPCell cell111 = new PdfPCell(new Phrase("Voucher No.", new Font(Font.FontFamily.HELVETICA, 10)));
+                            PdfPCell cell111 = new PdfPCell(new Phrase("Request No.", new Font(Font.FontFamily.HELVETICA, 10)));
                             cell111.BackgroundColor = BaseColor.LIGHT_GRAY;
                             cell111.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                             cell111.BorderWidthBottom = 1f;

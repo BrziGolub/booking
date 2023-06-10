@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -271,7 +272,17 @@ namespace Booking.WPF.ViewModels.Guide
             set { _buttonPreviousVisibility = value; OnPropertyChanged(); }
         }
 
-        
+        private bool _isDemoMode;
+        public bool IsDemoMode
+        {
+            get { return _isDemoMode; }
+            set
+            {
+                _isDemoMode = value;
+                OnPropertyChanged(nameof(IsDemoMode));
+            }
+        }
+
         private readonly Window _window;
         public GuideCreateTourViewModel(Window window)
         {
@@ -289,6 +300,11 @@ namespace Booking.WPF.ViewModels.Guide
             SetCommands();
             FillComboBox();
             NextPreviousPhotoButtonsVisibility();
+
+            if (IsDemoMode)
+            {
+                RunDemoMode();
+            }
 
         }
         public void SetCommands()
@@ -664,6 +680,31 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
 
+        public void RunDemoMode()
+        {
+            // Simulate automatic typing for the tour name
+            const string tourName = "Demo Tour";
+            foreach (char c in tourName)
+            {
+                TourName += c.ToString();
+                Thread.Sleep(100); // Delay between each character (adjust as needed)
+            }
+
+            // Simulate automatic typing for the description
+            const string description = "This is a demo tour";
+            foreach (char c in description)
+            {
+                Description += c.ToString();
+                Thread.Sleep(100); // Delay between each character (adjust as needed)
+            }
+
+            // Simulate selecting a country and city
+            SelectedCountry = CountryCollection[0];// Set the desired country in code
+            Thread.Sleep(500); // Delay to allow the UI to update
+            SelectedCity = CityCollection[0];// Set the desired city in code
+
+        // Simulate setting other properties and performing actions as needed
+    }
 
         public void Update()
         {
