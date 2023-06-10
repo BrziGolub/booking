@@ -98,7 +98,7 @@ namespace Booking.WPF.ViewModels.Owner
             }
             if (SelectedComment.Visited.Equals("YES")) 
             {
-                System.Windows.MessageBox.Show("He was on the location", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
+                System.Windows.MessageBox.Show("He was on the location", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);                
                 return;
             }
             SelectedComment.Reports++;
