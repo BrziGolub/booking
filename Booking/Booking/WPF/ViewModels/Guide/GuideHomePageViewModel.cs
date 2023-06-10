@@ -92,15 +92,6 @@ namespace Booking.WPF.ViewModels.Guide
             SetCommands();
             
         }
-
-      /*  public static void promeni()
-        {
-            if (isDemoCreatedTour)
-            {
-                DemoModeCancelTour();
-            }
-        }*/
-
         public void DemoModeCancelTour()
         {
             SelectedTour = Tours[Tours.Count - 1];
@@ -276,7 +267,7 @@ namespace Booking.WPF.ViewModels.Guide
             GuideCreateTour guideCreateTour = new GuideCreateTour();
             guideCreateTour.ShowDialog();
         }
-        private void ButtonDemoMode(object param)
+        private async void ButtonDemoMode(object param)
         {
             MessageBoxResult result = ConfirmDemoMode();
 
@@ -285,6 +276,8 @@ namespace Booking.WPF.ViewModels.Guide
                 IsDemoMode = true;
                 System.Windows.MessageBox.Show("Demo mode enabled", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 RunDemo();
+                await Task.Delay(750);
+                DemoModeCancelTour();
             }
         }
 

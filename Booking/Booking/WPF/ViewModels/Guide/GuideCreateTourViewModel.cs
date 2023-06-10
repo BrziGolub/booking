@@ -324,18 +324,6 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
 
-       /* private bool isDemoTourCreated;
-        public bool IsDemoTourCreated
-        {
-            get { return isDemoTourCreated; }
-            set
-            {
-                isDemoTourCreated = value;
-                if (isDemoTourCreated)
-                    DemoModeCancelTour();
-            }
-        }*/
-
         public static bool demoPom = false;
 
         private readonly Window _window;
@@ -847,8 +835,6 @@ namespace Booking.WPF.ViewModels.Guide
 
             SaveTour();
             System.Windows.MessageBox.Show("Now Demo Mode will cancel demo tour!", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-            //GuideHomePageViewModel.promeni();
-            // IsDemoTourCreated = true;
         }
 
         public void Update()
