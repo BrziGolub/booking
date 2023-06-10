@@ -135,6 +135,9 @@
   <data name="AddCommnet" xml:space="preserve">
     <value>Dodaj komentar:</value>
   </data>
+  <data name="AddForumComment" xml:space="preserve">
+    <value>Dodaj komentar na forumu:</value>
+  </data>
   <data name="AddPicture" xml:space="preserve">
     <value>Dodaj sliku:</value>
   </data>
@@ -197,6 +200,9 @@
   </data>
   <data name="DepartureDayDataGrid" xml:space="preserve">
     <value>Dan odlaska</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Krajnji datum:</value>
   </data>
   <data name="EndDateDataGrid" xml:space="preserve">
     <value>Krajnji datum</value>
@@ -306,6 +312,9 @@
   <data name="QuickSearch" xml:space="preserve">
     <value>Brza pretraga</value>
   </data>
+  <data name="QuickSearchTitle" xml:space="preserve">
+    <value>Bilo kada - bilo gde</value>
+  </data>
   <data name="RateAccommodationAccAndOwnerTitle" xml:space="preserve">
     <value>Oceni smestaj i vlasnika!</value>
   </data>
@@ -380,6 +389,9 @@
   </data>
   <data name="ShowMoreDetailsButton" xml:space="preserve">
     <value>DETALJNIJI PRIKAZ</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Pocetni datum:</value>
   </data>
   <data name="StartDateDataGrid" xml:space="preserve">
     <value>Pocetni datum</value>

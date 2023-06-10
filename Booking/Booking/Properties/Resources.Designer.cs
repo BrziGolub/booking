@@ -115,6 +115,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add comment on forum:.
+        /// </summary>
+        internal static string AddForumComment {
+            get {
+                return ResourceManager.GetString("AddForumComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add picture:.
         /// </summary>
         internal static string AddPicture {
@@ -300,6 +309,15 @@ namespace Booking.Properties {
         internal static string DepartureDayDataGrid {
             get {
                 return ResourceManager.GetString("DepartureDayDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date:.
+        /// </summary>
+        internal static string EndDate {
+            get {
+                return ResourceManager.GetString("EndDate", resourceCulture);
             }
         }
         
@@ -628,6 +646,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anywhere-Anytime.
+        /// </summary>
+        internal static string QuickSearchTitle {
+            get {
+                return ResourceManager.GetString("QuickSearchTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rate Accommodation and Owner!.
         /// </summary>
         internal static string RateAccommodationAccAndOwnerTitle {
@@ -849,6 +876,15 @@ namespace Booking.Properties {
         internal static string ShowMoreDetailsButton {
             get {
                 return ResourceManager.GetString("ShowMoreDetailsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date:.
+        /// </summary>
+        internal static string StartDate {
+            get {
+                return ResourceManager.GetString("StartDate", resourceCulture);
             }
         }
         

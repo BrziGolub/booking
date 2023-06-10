@@ -68,12 +68,6 @@ namespace Booking.View
             }
         }
 
-       /* private void OnModeChangeMessageReceived(ChangeModeMessage message)
-        {
-            // Update the IsDarkMode property based on the received message
-            IsDarkMode = message.IsDarkMode;
-        }
-       */
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -88,7 +82,6 @@ namespace Booking.View
             this.app = (App)System.Windows.Application.Current;
             this.CurrentLanguage = "en-US";
             isTranslated = false;
-           // MenuBackgroundColor = new SolidColorBrush(Colors.Beige);
             FrameHomePage.Content = new HomePageFirstGuest(this.FrameHomePage.NavigationService);
         }
 
@@ -102,6 +95,8 @@ namespace Booking.View
             FrameHomePage.Content = new FirstGuestAllReservations(this.FrameHomePage.NavigationService);
            
         }
+
+     
 
         private void MenuItem_Click_ResheduleRequests(object sender, RoutedEventArgs e)
         {
@@ -206,6 +201,11 @@ namespace Booking.View
         private void MenuItem_Click_Forums(object sender, RoutedEventArgs e)
         {
             FrameHomePage.Content = new ShowAllForums(this.FrameHomePage.NavigationService);
+        }
+
+        private void MenuItem_Click_QuickSerach(object sender, RoutedEventArgs e)
+        {
+            FrameHomePage.Content = new QuickSearch(this.FrameHomePage.NavigationService);
         }
     }
 }
