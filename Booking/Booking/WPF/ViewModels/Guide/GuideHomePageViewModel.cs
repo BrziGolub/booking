@@ -11,6 +11,9 @@ using Booking.Commands;
 using Booking.WPF.Views.Guide;
 using Booking.Service;
 using SkiaSharp;
+using System;
+using System.Windows.Threading;
+using System.Threading.Tasks;
 
 namespace Booking.WPF.ViewModels.Guide
 {
@@ -252,7 +255,10 @@ namespace Booking.WPF.ViewModels.Guide
 
         public void RunDemo()
         {
+            GuideCreateTourViewModel.demoPom = true;
             GuideCreateTour guideCreateTour = new GuideCreateTour();
+            //GuideCreateTourViewModel guideCreateTourViewModel = new GuideCreateTourViewModel(guideCreateTour);
+            //guideCreateTourViewModel.IsDemoMode = true;
             guideCreateTour.ShowDialog();
         }
         private void ButtonDemoMode(object param)
@@ -262,10 +268,11 @@ namespace Booking.WPF.ViewModels.Guide
             if (result == MessageBoxResult.Yes)
             {
                 IsDemoMode = true;
-                MessageBox.Show("Demo mode enabled");
+                System.Windows.MessageBox.Show("Demo mode enabled", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 RunDemo();
             }
         }
+
 
         private MessageBoxResult ConfirmDemoMode()
         {

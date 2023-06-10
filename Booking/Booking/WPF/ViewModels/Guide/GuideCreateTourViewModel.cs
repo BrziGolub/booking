@@ -12,10 +12,12 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace Booking.WPF.ViewModels.Guide
 {
@@ -54,14 +56,53 @@ namespace Booking.WPF.ViewModels.Guide
         public RelayCommand DecreaseMaxGuests { get; set; }
         public RelayCommand IncreaseDuration { get; set; }
         public RelayCommand DecreaseDuration { get; set; }
-        
+
+        public RelayCommand pom { get; set; }
+
         public ICommand FillCityCommand { get; set; }
         private ICommand _saveTourCommand;
 
-        public string SelectedCountry { get; set; }
-        public string SelectedCity { get; set; }
-        public string SelectedKeyPoint { get; set; }
+        private string _selectedCountry;
+        public string SelectedCountry
+        {
+            get { return _selectedCountry; }
+            set
+            {
+                if (_selectedCountry != value)
+                {
+                    _selectedCountry = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
+        private string _selectedCity;
+        public string SelectedCity
+        {
+            get { return _selectedCity; }
+            set
+            {
+                if (_selectedCity != value)
+                {
+                    _selectedCity = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _selectedKeyPoint;
+        public string SelectedKeyPoint
+        {
+            get { return _selectedKeyPoint; }
+            set
+            {
+                if (_selectedKeyPoint != value)
+                {
+                    _selectedKeyPoint = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public ObservableCollection<string> CityCollection { get; set; }
         public ObservableCollection<string> CountryCollection { get; set; }
         public ObservableCollection<string> KeyPointsCollection { get; set; }
@@ -283,7 +324,10 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
 
+        public static bool demoPom = false;
+
         private readonly Window _window;
+
         public GuideCreateTourViewModel(Window window)
         {
             _window = window;
@@ -301,10 +345,11 @@ namespace Booking.WPF.ViewModels.Guide
             FillComboBox();
             NextPreviousPhotoButtonsVisibility();
 
-            if (IsDemoMode)
+            /*if(demoPom)//if (IsDemoMode)
             {
+                MessageBox.Show("brao majstore");
                 RunDemoMode();
-            }
+            }*/
 
         }
         public void SetCommands()
@@ -323,6 +368,8 @@ namespace Booking.WPF.ViewModels.Guide
             DecreaseDuration = new RelayCommand(ButtonDecreaseDuration);
 
             FillCityCommand = new RelayCommand(FillCity);
+
+            pom = new RelayCommand(bPom);
         }
         public void FillCity(object param)
         {
@@ -405,6 +452,10 @@ namespace Booking.WPF.ViewModels.Guide
             CloseWindow();
         }
 
+        private void bPom(object param)
+        {
+            RunDemoMode();
+        }
         private void ButtonAddTourKeyPoint(object param)
         {
 
@@ -431,7 +482,6 @@ namespace Booking.WPF.ViewModels.Guide
         {
             if(SelectedTourKeyPoint != null) 
             {
-                //TourKeyPoint pom = SelectedTourKeyPoint;
                 tour.Destinations.RemoveAll(d => d.Location.City == SelectedTourKeyPoint.Location.City && d.Location.State == SelectedTourKeyPoint.Location.State);
                 tourKeyPoints1.Remove(SelectedTourKeyPoint);
             }
@@ -551,8 +601,13 @@ namespace Booking.WPF.ViewModels.Guide
 
         private void ButtonAddPicture(object param)
         {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string folderPath = Path.GetFullPath(Path.Combine(currentDirectory, "../../Resources/Images/ToursPhotos"));
+
             System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
             dialog.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
+            dialog.InitialDirectory = folderPath;
+
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -573,6 +628,44 @@ namespace Booking.WPF.ViewModels.Guide
             else
             {
                 MessageBox.Show("Photo URL can't be empty!");
+            }
+        }
+
+        private void ButtonDemoAddPicture(object param)
+        {
+            string folderPath = "../../Resources/Images/ToursPhotos";
+            string[] imageFiles = Directory.GetFiles(folderPath, "*.jpg")
+                                           .Concat(Directory.GetFiles(folderPath, "*.jpeg"))
+                                           .Concat(Directory.GetFiles(folderPath, "*.png"))
+                                           .ToArray();
+
+
+            if (imageFiles.Length > 0)
+            {
+                string imagePath = imageFiles[0];
+                imagePaths.Add(imagePath);
+                currentImageIndex = imagePaths.Count - 1;
+
+                if (!Path.IsPathRooted(imagePath))
+                {       
+                    string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                    imagePath = Path.Combine(baseDirectory, imagePath);
+                }
+
+                ImageSlideshowSource = new BitmapImage(new Uri(imagePath));
+                TbPictures = imagePath;
+
+                if (TbPictures != "")
+                {
+                    TourImage Images = new TourImage();
+                    Images.Url = TbPictures;
+                    tour.Images.Add(Images);
+                    NextPreviousPhotoButtonsVisibility();
+                }
+                else
+                {
+                    MessageBox.Show("Photo URL can't be empty!");
+                }
             }
         }
 
@@ -680,31 +773,75 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
 
-        public void RunDemoMode()
+        public async void RunDemoMode()
         {
-            // Simulate automatic typing for the tour name
             const string tourName = "Demo Tour";
             foreach (char c in tourName)
             {
                 TourName += c.ToString();
-                Thread.Sleep(100); // Delay between each character (adjust as needed)
+                await Task.Delay(10);
             }
 
-            // Simulate automatic typing for the description
-            const string description = "This is a demo tour";
+            await Task.Delay(1000); 
+
+
+            const string description = "This is a demo tour description. This tour will be automatically removed after demo mode.";
             foreach (char c in description)
             {
                 Description += c.ToString();
-                Thread.Sleep(100); // Delay between each character (adjust as needed)
+                await Task.Delay(10);
             }
 
-            // Simulate selecting a country and city
-            SelectedCountry = CountryCollection[0];// Set the desired country in code
-            Thread.Sleep(500); // Delay to allow the UI to update
-            SelectedCity = CityCollection[0];// Set the desired city in code
+            await Task.Delay(1000);
 
-        // Simulate setting other properties and performing actions as needed
-    }
+            ButtonIncreaseMaxGuests(this); await Task.Delay(500); ButtonIncreaseMaxGuests(this); await Task.Delay(500); ButtonIncreaseMaxGuests(this);
+
+            await Task.Delay(1000);
+
+            DateTime demoDate = DateTime.Now.AddDays(10); 
+            StartTime = demoDate.ToString();
+
+            await Task.Delay(1000);
+            
+            ButtonIncreaseDuration(this); await Task.Delay(500); ButtonIncreaseDuration(this); await Task.Delay(500); ButtonIncreaseDuration(this);
+
+            await Task.Delay(1000);
+            
+            SelectedCountry = CountryCollection[0];
+            
+            await Task.Delay(1000);
+            
+            SelectedCity = CityCollection[0];
+
+            await Task.Delay(1000);
+
+            const string language = "Serbian";
+            foreach (char c in language)
+            {
+                TourLanguage += c.ToString();
+                await Task.Delay(10);
+            }
+
+            await Task.Delay(1000);
+            
+            ButtonDemoAddPicture(this);
+
+            await Task.Delay(2000);
+
+            SelectedKeyPoint = KeyPointsCollection[0];
+            await Task.Delay(500);
+            ButtonAddTourKeyPoint(this);
+
+            await Task.Delay(1000);
+
+            SelectedKeyPoint = KeyPointsCollection[1];
+            await Task.Delay(500);
+            ButtonAddTourKeyPoint(this);
+
+            await Task.Delay(2500);
+
+            SaveTour();
+        }
 
         public void Update()
         {

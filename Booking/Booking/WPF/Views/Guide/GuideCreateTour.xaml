@@ -139,6 +139,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
+            <Button Command="{Binding pom}">demo</Button>
         </WrapPanel>
 
     </Grid>
