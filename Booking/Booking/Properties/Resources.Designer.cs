@@ -286,6 +286,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DARK.
+        /// </summary>
+        internal static string darkTheme {
+            get {
+                return ResourceManager.GetString("darkTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Departure day.
         /// </summary>
         internal static string DepartureDayDataGrid {
@@ -435,6 +444,15 @@ namespace Booking.Properties {
         internal static string Level5VeryBadCondition {
             get {
                 return ResourceManager.GetString("Level5VeryBadCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LIGHT.
+        /// </summary>
+        internal static string lightTheme {
+            get {
+                return ResourceManager.GetString("lightTheme", resourceCulture);
             }
         }
         

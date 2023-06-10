@@ -171,33 +171,36 @@ namespace Booking.View
             
         }
 
-        /* private SolidColorBrush _menuBackgroundColor;
+        
+        private bool themeIsChecked;
 
-         public SolidColorBrush MenuBackgroundColor
-         {
-             get { return _menuBackgroundColor; }
-             set
-             {
-                 _menuBackgroundColor = value;
-                 OnPropertyChanged(nameof(MenuBackgroundColor));
-             }
-         }*/
+        public bool ButtonIsChecked
+        {
+            get
+            {
+                themeIsChecked = Properties.Settings.Default.theme;
+                return themeIsChecked;
+            }
+            set
+            {
+                Properties.Settings.Default.theme = value;
+                Properties.Settings.Default.Save();
+                themeIsChecked = value;
+                OnPropertyChanged("ThemeIsChecked");
+                //ThemeChanged();
+                StyleManager.ApplyDarkStyle();
+                IsDarkMode = !IsDarkMode;
+                App.MessagingService.PublishModeChange(IsDarkMode);
+            }
+        }
 
-        //Background="{Binding MenuBackgroundColor}"
+
+
+
         private void MenuItem_Click_Dark(object sender, RoutedEventArgs e)
         {
-            //ovo ne radi
-           /* if (IsDarkMode)
-            {
-                MenuBackgroundColor = new SolidColorBrush(Colors.Beige);
-            }
-            else
-            {
-                MenuBackgroundColor = new SolidColorBrush(Colors.Black);
-            }*/
-            StyleManager.ApplyDarkStyle();
-            IsDarkMode = !IsDarkMode;
-            App.MessagingService.PublishModeChange(IsDarkMode);
+           
+            
         }
 
         private void MenuItem_Click_Forums(object sender, RoutedEventArgs e)

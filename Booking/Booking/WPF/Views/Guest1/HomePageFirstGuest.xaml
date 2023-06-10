@@ -50,9 +50,9 @@
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" Grid.Row="0" Content="{ns:Loc AccommodationName}"></Label>
+            <Label Grid.Column="0" Grid.Row="0" Content="{ns:Loc AccommodationName}" HorizontalAlignment="Left"></Label>
             <TextBox Grid.Column="1" Grid.Row="0" Margin="3" Text="{Binding Path=SearchName}"></TextBox>
-            <Label Grid.Column="2" Grid.Row="0" Content="{ns:Loc State}"></Label>
+            <Label Grid.Column="2" Grid.Row="0" Content="{ns:Loc State}" HorizontalAlignment="Right" Margin="0,0,4,0"></Label>
             <ComboBox Grid.Column="3" ItemsSource="{Binding Path=CountrycomboBox}" Margin="3" 
                  SelectedItem="{Binding Path=SearchState, UpdateSourceTrigger=PropertyChanged}">
                 <i:Interaction.Triggers>
@@ -62,17 +62,17 @@
                 </i:Interaction.Triggers>
             </ComboBox>
 
-            <Label Grid.Column="4" Grid.Row="0" Content="{ns:Loc Type}"></Label>
+            <Label Grid.Column="4" Grid.Row="0" Content="{ns:Loc Type}" HorizontalAlignment="Left"></Label>
             <CheckBox Grid.Column="5" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedApartment}" Content="{ns:Loc ApartmentType}"></CheckBox>
             <CheckBox Grid.Column="6" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedCottage}" Content="{ns:Loc CottageType}"></CheckBox>
             <CheckBox Grid.Column="7" Grid.Row="0" Margin="5" IsChecked="{Binding Path=IsCheckedHouse}" Content="{ns:Loc HouseType}"></CheckBox>
 
-            <Label Grid.Column="0"  Grid.Row="1"  Content="{ns:Loc StayingDays}"></Label>
+            <Label Grid.Column="0"  Grid.Row="1"  Content="{ns:Loc StayingDays}" HorizontalAlignment="Left"></Label>
             <TextBox Grid.Column="1"  Grid.Row="1" Margin="3" Text="{Binding Path=SearchReservationDays, UpdateSourceTrigger=PropertyChanged,
-                ValidatesOnDataErrors=True}"  Validation.ErrorTemplate="{StaticResource ValidationTemplate}"></TextBox>
-            <Label Grid.Column="2"  Grid.Row="1" Content="{ns:Loc City}"></Label>
+                ValidatesOnDataErrors=True}"  Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ></TextBox>
+            <Label Grid.Column="2"  Grid.Row="1" Content="{ns:Loc City}" HorizontalAlignment="Right" Margin="0,0,10,0"></Label>
             <ComboBox  Grid.Column="3"  Grid.Row="1" Margin="3" IsEnabled="{Binding CityComboboxEnabled, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=CityCollection}" SelectedItem="{Binding Path=SearchCity, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
-            <Label Grid.Column="4"  Grid.Row="1" Content="{ns:Loc NumberOgGuests}"></Label>
+            <Label Grid.Column="4"  Grid.Row="1" Content="{ns:Loc NumberOgGuests}" HorizontalAlignment="Left"></Label>
 
             <TextBox Grid.Column="5"  Grid.Row="1" Margin="3,3,3,0" Text="{Binding Path=SerachGuests, UpdateSourceTrigger=PropertyChanged,
                 ValidatesOnDataErrors=True}"  Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="24" VerticalAlignment="Top"></TextBox>

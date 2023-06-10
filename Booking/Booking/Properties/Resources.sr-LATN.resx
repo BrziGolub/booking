@@ -192,6 +192,9 @@
   <data name="CreateForumTitle" xml:space="preserve">
     <value>Kreiraj forum</value>
   </data>
+  <data name="darkTheme" xml:space="preserve">
+    <value>TAMNO</value>
+  </data>
   <data name="DepartureDayDataGrid" xml:space="preserve">
     <value>Dan odlaska</value>
   </data>
@@ -242,6 +245,9 @@
   </data>
   <data name="Level5VeryBadCondition" xml:space="preserve">
     <value>Level5 - Preterano lose stanje</value>
+  </data>
+  <data name="lightTheme" xml:space="preserve">
+    <value>SVETLO</value>
   </data>
   <data name="LogOut" xml:space="preserve">
     <value>Odjavi se</value>
