@@ -11,7 +11,7 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         
         mc:Ignorable="d"
-        Title="GuestBOOKING" Height="650" Width="1100" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
+        Title="GuestBOOKING" Height="635" Width="1100" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
