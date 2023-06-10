@@ -37,6 +37,7 @@
             <Button  Margin="5" Height="30" Width="50" FontWeight="Bold" Content="{ns:Loc RateButton}" Command="{Binding Button_Click_RateAccommodationAndOwner}"></Button>
             <Button  Margin="5" Height="30" Width="80"  FontWeight="Bold"  Content="{ns:Loc ReschaduleButton}"  Command="{Binding Button_Click_ResheduleAccommodationReservation}"></Button>
             <Button  Margin="5" Height="30" Width="50"  FontWeight="Bold" Content="{ns:Loc CancleButton}"   Command="{Binding Button_Click_CancleReservation}" ></Button>
+            <Button  Margin="5" Height="30" Width="100"  FontWeight="Bold" Content="{ns:Loc GeneratePDFButton}"   Command="{Binding Button_Click_GeneratePDF}" ></Button>
         </StackPanel>
     </Grid>
 </Page>

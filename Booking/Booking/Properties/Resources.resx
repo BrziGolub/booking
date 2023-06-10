@@ -213,6 +213,9 @@
   <data name="Forums" xml:space="preserve">
     <value>Forums</value>
   </data>
+  <data name="GeneratePDFButton" xml:space="preserve">
+    <value>Generate PDF</value>
+  </data>
   <data name="GeneratePdfQuestion" xml:space="preserve">
     <value>Do you want to generate pdf reservation report?</value>
   </data>
