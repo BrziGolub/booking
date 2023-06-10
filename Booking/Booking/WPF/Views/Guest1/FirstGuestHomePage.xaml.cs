@@ -22,7 +22,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Messaging;
-
+using LiveChartsCore.SkiaSharpView.Painting.ImageFilters;
 
 namespace Booking.View
 {
@@ -125,8 +125,34 @@ namespace Booking.View
             FrameHomePage.Content = new FirstGuestProfile();
         }
 
+        private bool isSRBSelected = false;
+        private bool isENGSelected = false;
+
+        public bool IsENGSelected
+        {
+            get { return isENGSelected; }
+            set
+            {
+                isSRBSelected = value;
+                OnPropertyChanged(nameof(isENGSelected));
+            }
+        }
+
+        public bool IsSRBSelected
+        {
+            get { return isSRBSelected; }
+            set
+            {
+                isSRBSelected = value;
+                OnPropertyChanged(nameof(IsSRBSelected));
+            }
+        }
         private void MenuItem_Click_ENG(object sender, RoutedEventArgs e)
         {
+            //SRBMenuItem.IsSelected = true;
+            //ENGMenuItem.IsSelected = false;
+            IsSRBSelected = true;
+            isENGSelected = false;
             isTranslated = false;
             CurrentLanguage = "en-US";
             app.ChangeLanguage(CurrentLanguage);

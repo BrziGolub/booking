@@ -85,6 +85,13 @@
                       SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}"
                       IsReadOnly="True" AutoGenerateColumns="False" Height="350" HeadersVisibility="Column" FontSize="13"  ItemsSource="{Binding Path = Accommodations}" >
                 <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="{ns:Loc ImageDataGrid}" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Images[0].Url}" Width="160" Height="150" Margin="2"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn Header="{ns:Loc NameDataGrid}" Width="120" Binding="{Binding Name}"></DataGridTextColumn>
                     <DataGridTextColumn Header="{ns:Loc StateDataGrid}" Width="100" Binding="{Binding Location.State}"></DataGridTextColumn>
                     <DataGridTextColumn Header="{ns:Loc CityDataGrid}" Width="100" Binding="{Binding Location.City}"></DataGridTextColumn>
@@ -92,13 +99,6 @@
                     <DataGridTextColumn Header="{ns:Loc CapacityDataGrid}"  Width="80"  Binding="{Binding Capacity}"></DataGridTextColumn>
                     <DataGridTextColumn Header="{ns:Loc ReservationRestricitonsDataGrid}" Binding="{Binding MinNumberOfDays}"></DataGridTextColumn>
                     <DataGridTextColumn Header="{ns:Loc CancelationPeriodDataGrid}" Binding="{Binding CancelationPeriod}"></DataGridTextColumn>
-                    <DataGridTemplateColumn Header="{ns:Loc ImageDataGrid}" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding Images[0].Url}" Width="140" Height="120" Margin="2"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

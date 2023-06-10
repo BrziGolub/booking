@@ -228,15 +228,15 @@ namespace Booking.WPF.ViewModels.Guest1
 
                 // Add the information paragraph
                 Paragraph info = new Paragraph("Arrival Day: " + ArrivalDay.ToString("dd/MM/yyyy") + "\n" +
-                               "Departure Day: " + DepartureDay.ToString("dd/MM/yyyy") + "\n" +
-                               "Accommodation Name: " + SelectedAccommodation.Name + "\n" +
-                               "Location: " + SelectedAccommodation.Location.City + ", " + SelectedAccommodation.Location.State + "\n" +
-                               "Type: " + SelectedAccommodation.Type.ToString() + "\n" +
-                               "Cancellation Period: " + SelectedAccommodation.CancelationPeriod + "\n" +
-                               "Owner: " + SelectedAccommodation.Owner.Username +  "Petrovic" + "\n" +
-                               "Number of guests: " + NumberOfGuests + "\n" +
-                               "Guest: " + "Kristina Zelic",
-                               new Font(Font.FontFamily.HELVETICA, 12));
+                                 "Departure Day: " + DepartureDay.ToString("dd/MM/yyyy") + "\n" +
+                                 "Accommodation Name: " + SelectedAccommodation.Name + "\n" +
+                                 "Location: " + SelectedAccommodation.Location.City + ", " + SelectedAccommodation.Location.State + "\n" +
+                                 "Type: " + SelectedAccommodation.Type.ToString() + "\n" +
+                                 "Cancellation Period: " + SelectedAccommodation.CancelationPeriod + "\n" +
+                                 "Owner: " + SelectedAccommodation.Owner.Username + "Petrovic" + "\n" +
+                                 "Number of guests: " + NumberOfGuests + "\n" +
+                                 "Guest: " + "Kristina Zelic",
+                                 new Font(Font.FontFamily.HELVETICA, 12));
                 info.SpacingBefore = 20f;
                 info.Alignment = Element.ALIGN_LEFT;
                 document.Add(info);
@@ -283,7 +283,7 @@ namespace Booking.WPF.ViewModels.Guest1
 
                 // Add spacing between line separator and footer
                 document.Add(new Paragraph(" ")); // Add an empty paragraph for spacing
-               
+
                 // Add centered paragraph below the image
                 Paragraph thankYouParagraph = new Paragraph();
                 thankYouParagraph.Alignment = Element.ALIGN_CENTER;
@@ -292,11 +292,11 @@ namespace Booking.WPF.ViewModels.Guest1
                 thankYouParagraph.Add(new Chunk("hope to see you soon!", new Font(Font.FontFamily.HELVETICA, 12, Font.ITALIC | Font.BOLD)));
                 document.Add(thankYouParagraph);
 
-               
+
                 // Add spacing between line separator and footer
                 document.Add(new Paragraph(" ")); // Add an empty paragraph for spacing
-                // Add spacing between paragraph and image
-             
+                                                  // Add spacing between paragraph and image
+
                 // Add the line separator
                 LineSeparator line = new LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, -1);
                 document.Add(line);
@@ -327,6 +327,22 @@ namespace Booking.WPF.ViewModels.Guest1
 
                 // Open the generated PDF file
                 Process.Start(filePath);
+            }
+
+        }
+
+        private object _currentPage;
+
+        public object CurrentPage
+        {
+            get { return _currentPage; }
+            set
+            {
+                if (_currentPage != value)
+                {
+                    _currentPage = value;
+                    OnPropertyChanged(nameof(CurrentPage));
+                }
             }
         }
 

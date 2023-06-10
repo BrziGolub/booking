@@ -204,6 +204,9 @@
   <data name="Forums" xml:space="preserve">
     <value>Forumi</value>
   </data>
+  <data name="GeneratePdfQuestion" xml:space="preserve">
+    <value>Da li zelite pdf izvestaj o reservaciji?</value>
+  </data>
   <data name="HomePage" xml:space="preserve">
     <value>PocetnaStrana</value>
   </data>

@@ -322,6 +322,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to generate pdf reservation report?.
+        /// </summary>
+        internal static string GeneratePdfQuestion {
+            get {
+                return ResourceManager.GetString("GeneratePdfQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HomePage.
         /// </summary>
         internal static string HomePage {

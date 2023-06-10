@@ -3,49 +3,38 @@
     <Style x:Key="DarkStyle" TargetType="Page">
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="#2D2424" />
+                <SolidColorBrush Color="Black" />
             </Setter.Value>
         </Setter>
-        
-        <Style.Resources>
-            <Color x:Key="BackgroundColor">#2D2424</Color>
-            <Color x:Key="ButtonBackground">#5C3D2E</Color>
-            <Color x:Key="ButtonForeground">#B85C38</Color>
-            <Color x:Key="TextBoxForeground">#E0C097</Color>
-            <Color x:Key="LabelForeground">#E0C097</Color>
 
-            <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
-            <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{StaticResource ButtonBackground}" />
-            <SolidColorBrush x:Key="ButtonForegroundBrush" Color="{StaticResource ButtonForeground}" />
-            <SolidColorBrush x:Key="TextBoxForegroundBrush" Color="{StaticResource TextBoxForeground}" />
-            <SolidColorBrush x:Key="LabelForegroundBrush" Color="{StaticResource LabelForeground}" />
+        <Style.Resources>
 
             <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
-                <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}" />
-                <Setter Property="BorderBrush" Value="Black" />
-                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Background" Value="Gray" />
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="BorderBrush" Value="DarkGray" />
+                <Setter Property="BorderThickness" Value="2" />
             </Style>
 
             <Style TargetType="Label">
-                <Setter Property="Foreground" Value="{StaticResource LabelForegroundBrush}" />
+                <Setter Property="Foreground" Value="Gray" />
             </Style>
 
             <Style TargetType="TextBox">
-                <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}" />
-                <Setter Property="Background" Value="{StaticResource LabelForegroundBrush}" />
+                <Setter Property="Foreground" Value="Gray" />
+                <Setter Property="Background" Value="LightGray" />
             </Style>
 
             <Style TargetType="Rectangle">
-                <Setter Property="Stroke" Value="{StaticResource ButtonForegroundBrush}" />
+                <Setter Property="Stroke" Value="DarkGray" />
             </Style>
 
             <Style TargetType="Border">
-                <Setter Property="BorderBrush" Value="{StaticResource ButtonForegroundBrush}" />
+                <Setter Property="BorderBrush" Value="Gray" />
             </Style>
 
             <Style TargetType="DataGrid">
-                <Setter Property="Background" Value="{StaticResource TextBoxForegroundBrush}" />
+                <Setter Property="Background" Value="DarkGray" />
                 <Setter Property="CellStyle">
                     <Setter.Value>
                         <Style TargetType="DataGridCell">
@@ -59,15 +48,15 @@
                             <Setter Property="FontWeight" Value="Bold" />
                             <Setter Property="Margin" Value="10" />
                             <Setter Property="HorizontalAlignment" Value="Center" />
-                            <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}"  />
-                            <Setter Property="Background" Value="{StaticResource TextBoxForegroundBrush}"  />
+                            <Setter Property="Foreground" Value="Black"  />
+                            <Setter Property="Background" Value="DarkGray"  />
                        
                         </Style>
                     </Setter.Value>
                 </Setter>
-                <Setter Property="RowBackground" Value="#E0C097"/>
-                <Setter Property="VerticalGridLinesBrush"  Value="{StaticResource ButtonBackgroundBrush}" />
-                <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource ButtonBackgroundBrush}" />
+                <Setter Property="RowBackground" Value="DarkGray"/>
+                <Setter Property="VerticalGridLinesBrush"  Value="Black" />
+                <Setter Property="HorizontalGridLinesBrush" Value="Black" />
             </Style>
 
             <Style TargetType="ListView">
@@ -77,14 +66,14 @@
                             <Setter Property="HorizontalAlignment" Value="Stretch" />
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                             <Setter Property="VerticalContentAlignment" Value="Center" />
-                            <Setter Property="BorderBrush" Value="{StaticResource ButtonForegroundBrush}" />
+                            <Setter Property="BorderBrush" Value="Gray" />
                             <Setter Property="BorderThickness" Value="1" />
-                            <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}" />
+                            <Setter Property="Foreground" Value="Black" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="ListViewItem">
                                         <Border x:Name="Border"
-                                    BorderBrush="{StaticResource ButtonForegroundBrush}"
+                                    BorderBrush="Gray"
                                     BorderThickness="1"
                                     Margin="2"
                                     CornerRadius="5"
@@ -93,7 +82,7 @@
                                         </Border>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsSelected" Value="True">
-                                                <Setter TargetName="Border" Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
+                                                <Setter TargetName="Border" Property="Background" Value="Gray" />
                                             </Trigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
@@ -105,15 +94,15 @@
             </Style>
 
             <Style TargetType="CheckBox">
-                <Setter Property="Background" Value="{StaticResource TextBoxForegroundBrush}" />
-                <Setter Property="Foreground" Value="{StaticResource TextBoxForegroundBrush}"/>
+                <Setter Property="Background" Value="Gray" />
+                <Setter Property="Foreground" Value="Gray"/>
             </Style>
 
             <Style TargetType="ComboBox">
-                <Setter Property="Background" Value="#B85C38" />
+                <Setter Property="Background" Value="DarkGray" />
                 <Style.Resources>
                     <Style TargetType="ComboBoxItem">
-                        <Setter Property="Background" Value="{StaticResource TextBoxForegroundBrush}"/>
+                        <Setter Property="Background" Value="DarkGray"/>
                         <!-- Set the desired background color for each row -->
                     </Style>
                 </Style.Resources>

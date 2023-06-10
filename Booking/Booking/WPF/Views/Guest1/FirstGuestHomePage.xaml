@@ -7,8 +7,11 @@
         xmlns:local="clr-namespace:Booking.View"
         xmlns:ns="clr-namespace:Booking.Localization"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        
         mc:Ignorable="d"
-        Title="GuestBOOKING" Height="635" Width="1100" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
+        Title="GuestBOOKING" Height="650" Width="1100" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
@@ -16,20 +19,55 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Menu Height="Auto" Width="1100" Background="Beige">
-                <MenuItem Header="{ns:Loc HomePage}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage"/>
-                <MenuItem Header="{ns:Loc QuickSearch}" FontWeight="Bold" HorizontalAlignment="Right"/>
+            <Menu Height="Auto" Width="1100" Background="LightGray">
+                <MenuItem Header="{ns:Loc HomePage}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage" />
+                <MenuItem Header="{ns:Loc QuickSearch}" FontWeight="Bold" HorizontalAlignment="Right" />
                 <MenuItem Header="{ns:Loc MyReservations}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"/>
                 <MenuItem Header="{ns:Loc RescheduleRequests}"  FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ResheduleRequests"/>
                 <MenuItem Header="{ns:Loc Reviews}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_Reviews"/>
                 <MenuItem Header="{ns:Loc Forums}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_Forums"/>
-                <MenuItem Header="{ns:Loc Language}"  FontWeight="Bold" HorizontalAlignment="Right">
-                    <MenuItem Header="ENG" Click="MenuItem_Click_ENG"/>
-                    <MenuItem Header="SRB" Click="MenuItem_Click_SRB"/>
-                </MenuItem>
                 <MenuItem Header="{ns:Loc ChangeTheme}"  FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_Dark"></MenuItem>
 
-                <Separator Width="307"  Background="Beige"/>
+              
+
+                <Separator Width="215"  Background="LightGray"/>
+                <MenuItem Header="SRB" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_SRB" BorderBrush="Gray" BorderThickness="1" Margin="2" >
+                    <MenuItem.Icon>
+                        <Image  Source="/Resources/Images/flag.png" Margin="-6,-2,-16,0" Width="30"/>
+                    </MenuItem.Icon>
+                    <MenuItem.Style>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="FontSize" Value="14" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsSRBSelected}" Value="True">
+                                    <Setter Property="FontSize" Value="23" />
+                                </DataTrigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="FontSize" Value="18" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                </MenuItem>
+                <MenuItem Header="ENG" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ENG" BorderBrush="Gray" BorderThickness="1" Margin="2">
+                    <MenuItem.Icon>
+                        <Image  Source="/Resources/Images/flag1.png" Margin="-7,0,-14,0"  VerticalAlignment="Bottom" Height="20"/>
+                    </MenuItem.Icon>
+                    <MenuItem.Style>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="FontSize" Value="14" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsENGSelected}" Value="True">
+                                    <Setter Property="FontSize" Value="23" />
+                                    <Setter Property="Background" Value="BlueViolet" />
+                                </DataTrigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="FontSize" Value="18" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                </MenuItem>
                 <MenuItem Header="{ns:Loc LogOut}" FontWeight="Bold" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="1" Margin="3" Click="MenuItem_Click_LogOut">
                     <MenuItem.Icon>
                         <Image  Source="/Resources/Images/logOut.png" Width="30" Height="17"/>
