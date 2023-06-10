@@ -100,6 +100,8 @@
             <Button Margin ="118 10 0 0 " HorizontalAlignment="Left" ToolTip="Press to grade the guest" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Grade}" >GRADE</Button>
             <Button Margin="60 10 0 0"  VerticalAlignment="Center" HorizontalAlignment="Left" ToolTip="Press to close this window" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Close}" >CLOSE</Button>
         </WrapPanel>
-
+        <WrapPanel FlowDirection="LeftToRight" Margin="785,10,0,671">
+            <Button Margin ="118 5 0 0 " HorizontalAlignment="Left" ToolTip="Press to open wizard" Width="80" Height="30" FontWeight="Bold" FontSize="15" Command="{Binding Wizard}" >Wizard</Button>
+        </WrapPanel>
     </Grid>
 </Window>

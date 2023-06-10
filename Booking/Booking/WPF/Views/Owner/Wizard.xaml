@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="3">
-            <Image Source="/Resources/Images/imageIcon.png" Height="30" Width="30"></Image>
+            <Image Source="/Resources/Images/wizard.png" Height="30" Width="30"></Image>
             <Label FontWeight="Bold" FontSize="17" >Wizard</Label>
         </StackPanel>
         <StackPanel Grid.Row="1" Margin="10,0,20,0" Height="35" Orientation="Horizontal">
@@ -33,9 +33,9 @@
             <TextBlock x:Name="Help"
                    Grid.Row="0"
                    Text="{Binding CurrentPageText,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
-                   Margin="0,-80,0,0"                    
-                   FontSize="18"
-                   ToolTip="This is the instructions for the page"
+                   Margin="0,-80,0,0" 
+                   TextWrapping="Wrap"
+                   FontSize="30"
                    FontWeight="SemiBold"
                    Height="550" Width="750"></TextBlock>
             <Button x:Name="NextButton"  Margin="10" Height="30" ToolTip="Press to see the next page" Width="80" Command="{Binding NextButton_Click}" IsEnabled="{Binding IsNextEnabled,UpdateSourceTrigger=PropertyChanged}" >
@@ -48,7 +48,7 @@
             </Button>
         </StackPanel>
         <WrapPanel FlowDirection="LeftToRight" Margin="500,740,0,0">
-            <Button Margin="70 -100 0 0"  VerticalAlignment="Center" ToolTip="Press to close this window" HorizontalAlignment="Left" Width="120" Height="60" FontWeight="Bold" FontSize="32" Command="{Binding CloseWindow}" >CLOSE</Button>
+            <Button Margin="70 -130 0 0"  VerticalAlignment="Center" ToolTip="Press to close this window" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="32" Command="{Binding CloseWindow}" >CLOSE</Button>
         </WrapPanel>
     </Grid>
 </Window>

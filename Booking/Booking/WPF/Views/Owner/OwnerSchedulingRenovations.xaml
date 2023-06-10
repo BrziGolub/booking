@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="OwnerSchedulingRenovations" Height="768" Width="1024"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <StackPanel>
+                <!-- Placeholder for the TextBox itself -->
+                <AdornedElementPlaceholder x:Name="NameTextBox" />
+                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" />
+            </StackPanel>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
         <TextBlock Margin="10,6,0,0" FontWeight="Bold" FontSize="32" Text="Scheduling renovations" Foreground="#FFFFF200" >
             <TextBlock.Effect>
@@ -27,10 +36,13 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Description*" HorizontalAlignment="Left" Margin="750,70,0,0" FontWeight="ExtraBold" VerticalAlignment="Top" FontSize="32" />
-        <TextBox HorizontalAlignment="Left" ToolTip="Press to enter a reason why you declined the date move request" Margin="690,125,0,0" TextWrapping="Wrap" Height="470" VerticalAlignment="Top" Width="310" FontSize="15" Text="{Binding Path=OwnerDescription, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox HorizontalAlignment="Left" ToolTip="Press to enter a reason why you declined the date move request" Margin="690,125,0,0" TextWrapping="Wrap" Height="470" VerticalAlignment="Top" Width="310" FontSize="15" Text="{Binding Path=OwnerDescription, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"/>
         <WrapPanel FlowDirection="LeftToRight" Margin="180,640,0,0">
             <Button Margin ="118 -10 0 0 " HorizontalAlignment="Left" ToolTip="Choose a request and then press this to accept the date move request and change it" Width="150" Height="75" FontWeight="Bold" FontSize="34" Command="{Binding Schedule}" >Schedule</Button>
             <Button Margin="60 -10 0 0"  VerticalAlignment="Center" ToolTip="Press to close this window" HorizontalAlignment="Left" Width="150" Height="75" FontWeight="Bold" FontSize="35" Command="{Binding Close}" >CLOSE</Button>
+        </WrapPanel>
+        <WrapPanel FlowDirection="LeftToRight" Margin="785,10,0,671">
+            <Button Margin ="118 5 0 0 " HorizontalAlignment="Left" ToolTip="Press to open wizard" Width="80" Height="30" FontWeight="Bold" FontSize="15" Command="{Binding Wizard}" >Wizard</Button>
         </WrapPanel>
     </Grid>
 </Window>

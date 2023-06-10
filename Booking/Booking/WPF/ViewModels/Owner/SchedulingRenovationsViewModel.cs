@@ -20,6 +20,7 @@ namespace Booking.WPF.ViewModels.Owner
         public String AccommodationLabel { get; set; } = String.Empty;
         public RelayCommand Find { get; set; }
         public RelayCommand Close { get; set; }
+        public RelayCommand Wizard { get; set; }
         private readonly Window _window;
         public DateTime _startDay;
         public DateTime StartDay
@@ -68,9 +69,15 @@ namespace Booking.WPF.ViewModels.Owner
             SetAccommodationLabel();
             Find = new RelayCommand(FindDate);
             Close = new RelayCommand(CloseWindow);
+            Wizard = new RelayCommand(OpenWizard);
             StartDay = DateTime.Now;
             EndDay = DateTime.Now;
             Duration = 0;
+        }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(10);
+            wizard.Show();
         }
         public void SetAccommodationLabel()
         {
@@ -88,17 +95,17 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (StartDay > EndDay)
             {
-                MessageBox.Show("Starting day can not be after end day");
+                System.Windows.MessageBox.Show("Starting day can not be after end day", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
                 return;
             }
             else if (Duration == 0)
             {
-                MessageBox.Show("Choose a duration of the renovations");
+                System.Windows.MessageBox.Show("Choose a duration of the renovations", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
                 return;
             }
             else if (StartDay < DateTime.Now)
             {
-                MessageBox.Show("Start date can not be a date that has passed");
+                System.Windows.MessageBox.Show("Start date can not be a date that has passed", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
                 return;
             }
             else

@@ -21,7 +21,7 @@
         </StackPanel>
 
         <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Margin="90,10,20,60"  CornerRadius="10" 
-                HorizontalAlignment="Center" VerticalAlignment="Top" Background="Beige">
+                HorizontalAlignment="Center" VerticalAlignment="Top" Background="AliceBlue">
             <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>

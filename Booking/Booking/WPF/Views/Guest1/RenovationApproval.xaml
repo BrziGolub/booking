@@ -10,7 +10,7 @@
       Title="RenovationApproval">
     
     <Grid >
-        <Border  BorderThickness="1" BorderBrush="Black" CornerRadius="10" Background="Beige">
+        <Border  BorderThickness="1" BorderBrush="Black" CornerRadius="10" Background="LightBlue">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
                 <Label Content="{ns:Loc RenovationApproval}" FontSize="15" FontWeight="Bold"></Label>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

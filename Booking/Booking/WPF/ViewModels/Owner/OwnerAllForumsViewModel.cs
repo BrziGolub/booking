@@ -20,6 +20,7 @@ namespace Booking.WPF.ViewModels.Owner
         public Forum SelectedForum { get; set; }
         public RelayCommand ShowComments { get; set; }
         public RelayCommand Close { get; set; }
+        public RelayCommand Wizard { get; set; }
         private readonly Window _window;
 
         public OwnerAllForumsViewModel(Window window)
@@ -29,16 +30,22 @@ namespace Booking.WPF.ViewModels.Owner
             Forums = new ObservableCollection<Forum>(ForumService.GetAll());
             ShowComments = new RelayCommand(ShowForumComments);
             Close = new RelayCommand(CloseWindow);
+            Wizard = new RelayCommand(OpenWizard);
         }
         private void CloseWindow(object param)
         {
             _window.Close();
         }
+        private void OpenWizard(object param)
+        {
+            Wizard wizard = new Wizard(13);
+            wizard.Show();
+        }
         private void ShowForumComments(object param)
         {
             if (SelectedForum == null)
             {
-                MessageBox.Show("Please select a forum");
+                System.Windows.MessageBox.Show("Please select a forum", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);               
                 return;
             }
             OwnerAllForumComments ownerAllForumComments = new OwnerAllForumComments(SelectedForum);

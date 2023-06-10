@@ -203,6 +203,7 @@
     <Compile Include="Styles\StyleManager.cs" />
     <Compile Include="Util\InjectorRepository.cs" />
     <Compile Include="Util\InjectorService.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\GeneratePdfViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\AccommodationDateSuggestionsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\BookAccommodationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\CreateForumViewModel.cs" />
@@ -239,6 +240,9 @@
     <Compile Include="WPF\ViewModels\Guide\GuideRequestsStatisticViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideSuperGuideViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\WizardViewModel.cs" />
+    <Compile Include="WPF\Views\Guest1\GeneratePdf.xaml.cs">
+      <DependentUpon>GeneratePdf.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Guide\SelectDateForComplexTour.xaml.cs">
       <DependentUpon>SelectDateForComplexTour.xaml</DependentUpon>
     </Compile>
@@ -491,6 +495,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\LightStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\GeneratePdf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -864,11 +872,17 @@
     <Resource Include="Resources\Images\prevoius.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit">
+      <Version>4.5.0</Version>
+    </PackageReference>
     <PackageReference Include="iTextSharp">
       <Version>5.5.13.3</Version>
     </PackageReference>
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF">
       <Version>2.0.0-beta.710</Version>
+    </PackageReference>
+    <PackageReference Include="MahApps.Metro">
+      <Version>2.4.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
       <Version>1.1.39</Version>
@@ -957,6 +971,22 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\forum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\pdfPicture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\proba2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\united-kingdom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\flag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\flag1.png" />
+    <Resource Include="Resources\Images\wizard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
