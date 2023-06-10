@@ -48,8 +48,22 @@ namespace Booking.Service
             }
             return users;
         }
+		public void SaveWizard(User user1) 
+		{
+			List<User> AllUsers = new List<User>();
+			AllUsers = _userRepository.GetAll();
+			foreach (var user in AllUsers)
+			{
+				if (user.Id == user1.Id) 
+				{
+					user.Wizard = 1;
+				}
+			}
+			_userRepository.Save(AllUsers);
+		}
 
-        public User GetByUsername(string username)
+
+		public User GetByUsername(string username)
 		{
 			return _userRepository.GetByUsername(username);
 		}

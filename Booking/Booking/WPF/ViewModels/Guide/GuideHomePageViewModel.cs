@@ -10,6 +10,10 @@ using System.ComponentModel;
 using Booking.Commands;
 using Booking.WPF.Views.Guide;
 using Booking.Service;
+using SkiaSharp;
+using System;
+using System.Windows.Threading;
+using System.Threading.Tasks;
 
 namespace Booking.WPF.ViewModels.Guide
 {
@@ -37,6 +41,20 @@ namespace Booking.WPF.ViewModels.Guide
             }
         }
 
+        private bool _isDemoMode;
+        public bool IsDemoMode
+        {
+            get { return _isDemoMode; }
+            set
+            {
+                if (_isDemoMode != value)
+                {
+                    _isDemoMode = value;
+                    OnPropertyChanged(nameof(IsDemoMode));
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public RelayCommand OpenCreateTour { get; set; }
@@ -52,12 +70,16 @@ namespace Booking.WPF.ViewModels.Guide
         public RelayCommand OpenSuperGuide { get; set; }
         public RelayCommand OpenAcceptPartTour { get; set; }
         public RelayCommand Dismissal { get; set; }
+        public RelayCommand DemoMode { get; set; }
 
+        public static bool isDemoCreatedTour;
+
+        public static bool pom;
 
 
         private readonly Window _window;
 
-        public GuideHomePageViewModel(Window window) 
+        public GuideHomePageViewModel(Window window)
         {
             _window = window;
             _tourService = InjectorService.CreateInstance<ITourService>();
@@ -68,9 +90,15 @@ namespace Booking.WPF.ViewModels.Guide
             Tours = new ObservableCollection<Tour>(_tourService.GetGuideTours());
 
             SetCommands();
+            
+        }
+        public void DemoModeCancelTour()
+        {
+            SelectedTour = Tours[Tours.Count - 1];
+            ButtonCancelTour(this);
         }
 
-        private void CloseWindow()
+            private void CloseWindow()
         { 
             _window.Close();
         }
@@ -89,12 +117,13 @@ namespace Booking.WPF.ViewModels.Guide
             OpenSuperGuide = new RelayCommand(ButtonOpenSuperGuide);
             OpenAcceptPartTour = new RelayCommand(ButtonOpenAcceptPartTour);
             Dismissal = new RelayCommand(ButtonDismissal);
+            DemoMode = new RelayCommand(ButtonDemoMode);
         }
 
         private void ButtonCreateTour(object param)
         {
-            GuideCreateTour guideCreateTour = new GuideCreateTour();
-            guideCreateTour.ShowDialog();
+              GuideCreateTour guideCreateTour = new GuideCreateTour();
+              guideCreateTour.ShowDialog();
         }
 
         private void ButtonStatisticAboutTour(object param)
@@ -232,6 +261,39 @@ namespace Booking.WPF.ViewModels.Guide
             return result;
         }
 
+        public void RunDemo()
+        {
+            GuideCreateTourViewModel.demoPom = true;
+            GuideCreateTour guideCreateTour = new GuideCreateTour();
+            guideCreateTour.ShowDialog();
+        }
+        private async void ButtonDemoMode(object param)
+        {
+            MessageBoxResult result = ConfirmDemoMode();
+
+            if (result == MessageBoxResult.Yes)
+            {
+                IsDemoMode = true;
+                System.Windows.MessageBox.Show("Demo mode enabled", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                RunDemo();
+                await Task.Delay(750);
+                DemoModeCancelTour();
+            }
+        }
+
+
+        private MessageBoxResult ConfirmDemoMode()
+        {
+            string sMessageBoxText = $"Are you sure to start demo mode?";
+            string sCaption = "Confirmation of Demo Mode";
+
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+            return result;
+        }
         public void Update()
         {
             Tours.Clear();

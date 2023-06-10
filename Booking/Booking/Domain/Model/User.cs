@@ -15,6 +15,7 @@ namespace Booking.Model
 		public int Role { get; set; }
 		public int Years { get; set; }
 		public int Super { get; set; }
+		public int Wizard { get; set; }
 
 		public User() { }
 
@@ -34,7 +35,8 @@ namespace Booking.Model
 				Password,
 				Role.ToString(),
 				Years.ToString(),
-				Super.ToString()
+				Super.ToString(),
+				Wizard.ToString()
 			};
 			return csvValues;
 		}
@@ -47,6 +49,7 @@ namespace Booking.Model
 			Role = Convert.ToInt32(values[3]);
 			Years = Convert.ToInt32(values[4]);
 			Super = Convert.ToInt32(values[5]);
+			Wizard = Convert.ToInt32(values[6]);
 		}
 	}
 }

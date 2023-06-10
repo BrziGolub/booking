@@ -1,11 +1,13 @@
 ﻿using Booking.Commands;
 using Booking.Domain.Model;
 using Booking.Domain.ServiceInterfaces;
+using Booking.Observer;
 using Booking.Util;
 using Booking.WPF.Views.Owner;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +15,7 @@ using System.Windows;
 
 namespace Booking.WPF.ViewModels.Owner
 {
-    public class OwnerAllForumsViewModel
+    public class OwnerAllForumsViewModel : IObserver
     {
         public ObservableCollection<Forum> Forums { get; set; }
         public IForumService ForumService { get; set; }
@@ -40,6 +42,15 @@ namespace Booking.WPF.ViewModels.Owner
         {
             Wizard wizard = new Wizard(13);
             wizard.Show();
+        }
+        public void Update()
+        {
+            Forums.Clear();
+
+            foreach (Forum forum in ForumService.GetAll())
+            {
+                Forums.Add(forum);
+            }
         }
         private void ShowForumComments(object param)
         {
