@@ -22,6 +22,7 @@ namespace Booking.WPF.ViewModels.Guest1
         public ObservableCollection<ForumComment> ForumComments { get; set; }
 
         public IForumCommentService ForumCommentService;
+        public IForumService ForumService;
 
         public Forum SelectedForum;
         public ForumComment SelectedComment { get; set; }
@@ -36,6 +37,7 @@ namespace Booking.WPF.ViewModels.Guest1
             ForumCommentService  = InjectorService.CreateInstance<IForumCommentService>();
             _AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
             UserService = InjectorService.CreateInstance<IUserService>();
+            ForumService = InjectorService.CreateInstance<IForumService>();
             SelectedForum = selectedForum;
             ForumCommentService.Subscribe(this);
             ForumComments = new ObservableCollection<ForumComment>(ForumCommentService.GetForumComments(selectedForum));
@@ -44,7 +46,9 @@ namespace Booking.WPF.ViewModels.Guest1
 
         public void LeaveComment(object sender)
         {
-            if(SelectedForum.Status.Equals("OPENED"))
+            var notificationManager = new NotificationManager();
+
+            if (SelectedForum.Status.Equals("OPENED"))
             {
                 ForumComment newForumComment = new ForumComment();
                 newForumComment.Comment = NewComment;
@@ -53,10 +57,12 @@ namespace Booking.WPF.ViewModels.Guest1
                 newForumComment.Reports = 0;
                 newForumComment.Visited = _AccommodationReservationService.IsLocationVisited(SelectedForum.Location);
                 ForumCommentService.Create(newForumComment);
+                ForumService.SetVeryHelpful(SelectedForum);
+                NotificationContent content = new NotificationContent { Title = "Permission denied!", Message = "Your comment is POSTED, thank you!", Type = NotificationType.Success };
+                notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
             }
             else
             {
-                var notificationManager = new NotificationManager();
                 NotificationContent content = new NotificationContent { Title = "Permission denied!", Message = "This forum is CLOSED, try comment on other forums!", Type = NotificationType.Error };
                 notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
             }
