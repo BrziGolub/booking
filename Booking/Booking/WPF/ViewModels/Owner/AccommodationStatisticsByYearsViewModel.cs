@@ -66,7 +66,7 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (SelectedYearStatistic == null)
             {
-                MessageBox.Show("Select a year for details please");
+                System.Windows.MessageBox.Show("Select a year for detail please", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 return;
             }
             else

@@ -47,7 +47,13 @@
 		</Style>
     </Window.Resources>
 
-	<Border Margin="8" Style="{StaticResource CardHolder}">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Button_Click_Prev}" Key="F1"/>
+        <KeyBinding Command="{Binding Button_Click_Next}" Key="F2"/>
+        <KeyBinding Command="{Binding Button_Click_Close}" Key="F5"/>
+    </Window.InputBindings>
+
+    <Border Margin="8" Style="{StaticResource CardHolder}">
 		<Grid>
 
 			<Grid.RowDefinitions>

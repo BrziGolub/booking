@@ -28,7 +28,8 @@ namespace Booking.Model
 
 		public string[] ToCSV()
 		{
-			string[] csvValues = { Id.ToString(),
+			string[] csvValues = {
+				Id.ToString(),
 				Username,
 				Password,
 				Role.ToString(),

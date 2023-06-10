@@ -34,7 +34,7 @@
         <Label Content="Renovation duration in days*" HorizontalAlignment="Left" Margin="50,450,0,0" VerticalAlignment="Top" FontSize="25" />
         <DatePicker Width="350" Margin="150,-400,0,0" ToolTip="Press to enter a date" Height="40" SelectedDate="{Binding StartDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}"  SelectedDateFormat="Short"/>
         <DatePicker Width="350" Margin="150,-100,0,0" Height="40" ToolTip="Press to enter a date" SelectedDate="{Binding EndDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:dd/MM/yyyy}'}"  SelectedDateFormat="Short"/>
-        <TextBox HorizontalAlignment="Left" Margin="413,455,0,0" TextWrapping="Wrap" ToolTip="Press to enter how long the renovation will be" VerticalAlignment="Top" Height="40" Width="350" FontSize="25" Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}" >
+        <TextBox HorizontalAlignment="Left" Margin="413,455,0,0" TextWrapping="Wrap" ToolTip="Press to enter how long the renovation will be" VerticalAlignment="Top" Height="40" Width="350" FontSize="25" Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" >
             <TextBox.Style>
                 <Style TargetType="{x:Type TextBox}">
                     <Style.Triggers>

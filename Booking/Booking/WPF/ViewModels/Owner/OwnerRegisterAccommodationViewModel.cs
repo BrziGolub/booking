@@ -444,61 +444,61 @@ namespace Booking.WPF.ViewModels.Owner
 
                 if (accommodation.Name.Equals(""))
                 {
-                    MessageBox.Show("'NAME' not entered");
+                    System.Windows.MessageBox.Show("'NAME' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                    
                     return;
                 }
                 if (accommodation.Location.City == null)
                 {
-                    MessageBox.Show("'CITY' not entered");
+                    System.Windows.MessageBox.Show("'CITY' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                    
                     return;
                 }
                 if (accommodation.Location.State == null)
                 {
-                    MessageBox.Show("'COUNTRY' not entered");
+                    System.Windows.MessageBox.Show("'COUNTRY' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                    
                     return;
                 }
                 if (accommodation.Type.Equals(""))
                 {
-                    MessageBox.Show("'TYPE' not entered");
+                    System.Windows.MessageBox.Show("'TYPE' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                    
                     return;
                 }
                 if (accommodation.Capacity == 0)
                 {
-                    MessageBox.Show("'CAPACITY' not entered");
+                    System.Windows.MessageBox.Show("'CAPACITY' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                    
                     return;
                 }
                 if (accommodation.Capacity < 0)
                 {
-                    MessageBox.Show("'CAPACITY' should be greater than 0");
+                    System.Windows.MessageBox.Show("'CAPACITY' should be greater than 0", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                    
                     return;
                 }
                 if (accommodation.MinNumberOfDays == 0)
                 {
-                    MessageBox.Show("'MIN NUMBER OF DAYS' not entered");
+                    System.Windows.MessageBox.Show("'MIN NUMBER OF DAYS' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                    
                     return;
                 }
                 if (accommodation.MinNumberOfDays < 0)
                 {
-                    MessageBox.Show("'MIN NUMBER OF DAYS' should be greater than 0");
+                    System.Windows.MessageBox.Show("'MIN NUMBER OF DAYS' should be greater than 0", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                    
                     return;
                 }
                 if (accommodation.CancelationPeriod < 0)
                 {
-                    MessageBox.Show("'CANCELATION PERIOD' should be greater or equal than 0");
+                    System.Windows.MessageBox.Show("'CANCELATION PERIOD' should be greater or equal than 0", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                    
                     return;
                 }
                 if (accommodation.Images.Count == 0)
                 {
-                    MessageBox.Show("'PICTURES URL' not entered");
+                    System.Windows.MessageBox.Show("'PICTURES URL' not entered", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                    
                     return;
                 }
                 AccommodationService.AddAccommodation(accommodation);
-                MessageBox.Show("Accommodation successfully created");
+                System.Windows.MessageBox.Show("Accommodation successfully created", "Success", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);                
                 _window.Close();
             }
             else
             {
-                MessageBox.Show("Please fill in all required fields.");
+                System.Windows.MessageBox.Show("Please fill in all required fields.", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
             }
         }
 
@@ -525,7 +525,7 @@ namespace Booking.WPF.ViewModels.Owner
             }
             else
             {
-                MessageBox.Show("Photo url can not be empty");
+                System.Windows.MessageBox.Show("Photo url can not be empty", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
             }
         }
         private void ButtonRemovePicture(object param)

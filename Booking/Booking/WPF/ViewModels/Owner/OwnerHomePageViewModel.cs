@@ -53,7 +53,7 @@ namespace Booking.WPF.ViewModels.Owner
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetOwnerAccommodations());
             if (Reservations.Count != 0)
             {
-                MessageBox.Show("Number of guests to grade: " + Reservations.Count.ToString());
+                System.Windows.MessageBox.Show("Number of guests to grade: " + Reservations.Count.ToString(), "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
             }
             SetCommands();
         }
@@ -104,7 +104,7 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (SelectedAccommodation == null)
             {
-                MessageBox.Show("Select a accommodation for renovation please");
+                System.Windows.MessageBox.Show("Select a accommodation for renovation please", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);                
                 return;
             }
             else
@@ -117,7 +117,7 @@ namespace Booking.WPF.ViewModels.Owner
         {
             if (SelectedAccommodation == null)
             {
-                MessageBox.Show("Select a accommodation please");
+                System.Windows.MessageBox.Show("Select a accommodation please", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);               
                 return;
             }
             else
