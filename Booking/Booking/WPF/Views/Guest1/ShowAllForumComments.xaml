@@ -58,8 +58,8 @@
             </ListView>
         </Grid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-            <TextBox FontSize="15" Width="300" Margin="4" TextWrapping="Wrap" />
-            <Button Padding="3" FontSize="12" FontWeight="Bold" Margin="20" Width="120" Content="{ns:Loc LeaveCommentButton}" />
+            <TextBox FontSize="15" Width="300" Margin="4" TextWrapping="Wrap"  Text="{Binding NewComment}"/>
+            <Button Padding="3" FontSize="12" FontWeight="Bold" Margin="20" Width="120" Content="{ns:Loc LeaveCommentButton}" Command="{Binding LeaveCommentButton}"/>
         </StackPanel>
    
         

@@ -66,7 +66,8 @@ namespace Booking.Application.UseCases
 		public ForumComment Create(ForumComment forumComment)
 		{
 			ForumComment newForumComment = _forumCommentRepository.Add(forumComment);
-			return newForumComment;
+			NotifyObservers();
+            return newForumComment;
 		}
 
 		public ForumComment GetById(int id)
