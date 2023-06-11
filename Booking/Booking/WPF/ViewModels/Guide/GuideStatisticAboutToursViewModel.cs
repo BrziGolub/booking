@@ -254,7 +254,7 @@ namespace Booking.WPF.ViewModels.Guide
 
         private void ButtonShowStatistic(object param)
         {
-            if (TourCB != "")
+            if (TourCB != null)
             {
                 Tour turapom = _tourService.GetByName(TourCB);
 

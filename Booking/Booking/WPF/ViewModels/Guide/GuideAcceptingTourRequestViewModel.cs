@@ -262,15 +262,22 @@ namespace Booking.WPF.ViewModels.Guide
         }
         private void ButtonAccept(object param)
         {
-            if (IsGuideAvailable(TourService.SignedGuideId))
+            if (SelectedTourRequest != null)
             {
-                GuideCreateTourBasedOnTourRequestViewModel2.SelectedTourRequest = SelectedTourRequest;
-                GuideCreateTourBasedOnTourRequest2 guideCreateTourBasedOnTourRequest2 = new GuideCreateTourBasedOnTourRequest2();
-                guideCreateTourBasedOnTourRequest2.Show();
+                if (IsGuideAvailable(TourService.SignedGuideId))
+                {
+                    GuideCreateTourBasedOnTourRequestViewModel2.SelectedTourRequest = SelectedTourRequest;
+                    GuideCreateTourBasedOnTourRequest2 guideCreateTourBasedOnTourRequest2 = new GuideCreateTourBasedOnTourRequest2();
+                    guideCreateTourBasedOnTourRequest2.Show();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("You already have a tour planned in that time period!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                }
             }
             else
             {
-                System.Windows.MessageBox.Show("You already have a tour planned in that time period!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("First you need to select tour request!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
         private void CloseWindow()
