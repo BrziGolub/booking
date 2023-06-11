@@ -22,7 +22,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" >
             <Label Height="80" FontSize="25" FontWeight="Bold" Foreground="DarkGreen" Content="Available dates" Margin="200 50 0 0"/>
         </StackPanel>
-        <DataGrid HorizontalAlignment="Left" Margin="183,10,0,190" Grid.ColumnSpan="2" ItemsSource="{Binding Ranges}" AutoGenerateColumns="False" CanUserAddRows="False" Width="556" Height="300" SelectionMode="Single" SelectedItem="{Binding selectedDates, Mode=TwoWay}" Grid.RowSpan="2" Grid.Column="1" Grid.Row="1">
+        <DataGrid HorizontalAlignment="Left" Margin="102,10,0,190" Grid.ColumnSpan="2" ItemsSource="{Binding Ranges}" AutoGenerateColumns="False" CanUserAddRows="False" Width="556" Height="300" SelectionMode="Single" SelectedItem="{Binding selectedDates, Mode=TwoWay}" Grid.RowSpan="2" Grid.Column="1" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Start Date" Binding="{Binding InitialDate, StringFormat={}{0:dd/MM/yyyy}}" Width="*" />
                 <DataGridTextColumn Header="End Date" Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}" Width="*" />

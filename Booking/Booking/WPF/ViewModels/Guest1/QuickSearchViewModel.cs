@@ -128,9 +128,7 @@ namespace Booking.WPF.ViewModels.Guest1
                         accommodationDTOs.Add(dto);
                     }
                 }
-                //var suggestions = new QuickSearchSuggestionsView(accommodationDTOs);
-                //suggestions.Show();
-                //CloseWindow();
+               
                 navigationService.Navigate(new QuickSearchSuggestionsView(accommodationDTOs, navigationService));
             }
             else
@@ -154,8 +152,7 @@ namespace Booking.WPF.ViewModels.Guest1
                         accommodationDTOs.Add(dto);
                     }
                 }
-                // var suggestions = new QuickSearchSuggestionsView(accommodationDTOs);
-                //suggestions.Show();
+               
                 navigationService.Navigate(new QuickSearchSuggestionsView(accommodationDTOs, navigationService));
             }
         }

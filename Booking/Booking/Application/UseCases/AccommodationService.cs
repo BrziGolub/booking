@@ -282,7 +282,7 @@ namespace Booking.Service
         {
             List<AccommodationReservation> allReservations = new List<AccommodationReservation>(GetReservationsForAccommodation(accommodation));
             List<AccommodationReservation> sortedReservations = allReservations.OrderBy(r => r.ArrivalDay).ToList();
-            List<AccommodationReservation> filteredReservations = sortedReservations.Where(r => r.ArrivalDay > DateTime.Today).ToList();
+            List<AccommodationReservation> filteredReservations = sortedReservations.Where(r => r.ArrivalDay > DateTime.Today || r.DepartureDay > DateTime.Today).ToList();
             return filteredReservations;
         }
 
