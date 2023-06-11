@@ -70,6 +70,7 @@
         <KeyBinding Command="{Binding Button_Click_Request}" Key="F2"/>
         <KeyBinding Command="{Binding Button_Click_AddRequest}" Key="F3"/>
         <KeyBinding Command="{Binding Button_Click_RemoveRequest}" Key="F4"/>
+        <KeyBinding Command="{Binding Button_Click_Tutorial}" Modifiers="Ctrl" Key="T"/>
     </Window.InputBindings>
 
     <Border Margin="8" Style="{StaticResource CardHolder}">
@@ -85,12 +86,26 @@
 				<RowDefinition Height="auto"/>
 			</Grid.RowDefinitions>
 
-			<StackPanel Grid.Row="0" Margin="0 0 0 8" Orientation="Horizontal">
-				<Image Source="/Resources/Images/edit128.png" Height="40"/>
-				<Label Content="Make a request" FontSize="24" Margin="8 0 0 0"/>
-			</StackPanel>
+            <Grid Grid.Row="0" Margin="0 0 0 8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-			<Grid Grid.Row="1" Margin="0 8">
+                <Image Source="/Resources/Images/edit128.png" Height="40"/>
+                <Label Grid.Column="1" Content="Make a request" FontSize="24" Margin="8 0 0 0"/>
+                <Button Grid.Column="2" Width="40" Margin="4" Command="{Binding Button_Click_Tutorial}" Style="{StaticResource ButtonStyle}">
+                    <StackPanel>
+                        <Image Source="/Resources/Images/videoTutorial128.png"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="0 8">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="2*"/>
 					<ColumnDefinition Width="3*"/>
@@ -110,16 +125,16 @@
 				<Label Grid.Column="0" Grid.Row="4" Content="Description:" VerticalContentAlignment="Top" Margin="0 8 0 0"/>
 
 				<StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 8">
-					<ComboBox ItemsSource="{Binding States}" SelectedItem="{Binding SelectedState, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Margin="0 0 8 0" Width="100" MaxDropDownHeight="200">
+                    <ComboBox ItemsSource="{Binding States}" SelectedItem="{Binding SelectedState, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalContentAlignment="Center" Margin="0 0 8 0" Width="100" MaxDropDownHeight="200">
 						<i:Interaction.Triggers>
 							<i:EventTrigger EventName="SelectionChanged">
 								<i:InvokeCommandAction Command="{Binding Selection_Changed}"/>
 							</i:EventTrigger>
 						</i:Interaction.Triggers>
 					</ComboBox>
-					<ComboBox ItemsSource="{Binding Cities, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding CityComboBoxSelectedIndex, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCity}" IsEnabled="{Binding CityComboBoxIsEnabled, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Margin="8 0 0 0" Width="100" MaxDropDownHeight="200"/>
+                    <ComboBox ItemsSource="{Binding Cities, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="{Binding CityComboBoxSelectedIndex, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCity, ValidatesOnDataErrors=True}" IsEnabled="{Binding CityComboBoxIsEnabled, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Margin="8 0 0 0" Width="100" MaxDropDownHeight="200"/>
 				</StackPanel>
-				<TextBox Grid.Column="1" Grid.Row="1" Margin="0 8" Text="{Binding Language, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="100"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Margin="0 8" Text="{Binding Language, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="100"/>
 				<StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="0 8" Height="30">
 					<TextBox Text="{Binding NumberOfPassengers, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="36"/>
 					<Grid Grid.Column="1" Width="20">
@@ -140,8 +155,8 @@
 					</Grid>
 				</StackPanel>
 				<StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" Margin="0 8">
-					<DatePicker Margin="0 0 8 0" SelectedDate="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
-					<DatePicker Margin="8 0 0 0" SelectedDate="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                    <DatePicker Margin="0 0 8 0" SelectedDate="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" IsTodayHighlighted="False" DisplayDateStart="{Binding StartTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                    <DatePicker Margin="8 0 0 0" SelectedDate="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Width="100" IsTodayHighlighted="False" DisplayDateStart="{Binding StartTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 				</StackPanel>
 				<TextBox Grid.Column="1" Grid.Row="4" Margin="0 8 0 0" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"/>
 			</Grid>

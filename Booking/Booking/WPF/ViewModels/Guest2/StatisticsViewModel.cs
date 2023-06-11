@@ -2,6 +2,7 @@
 using Booking.Domain.ServiceInterfaces;
 using Booking.Service;
 using Booking.Util;
+using Booking.WPF.Views.Guest2;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
@@ -55,8 +56,9 @@ namespace Booking.WPF.ViewModels.Guest2
 
 		public RelayCommand Button_Click_Close { get; set; }
 		public RelayCommand Selection_Changed { get; set; }
+        public RelayCommand Button_Click_Tutorial { get; set; }
 
-		public StatisticsViewModel(Window window)
+        public StatisticsViewModel(Window window)
 		{
 			_window = window;
 
@@ -76,9 +78,16 @@ namespace Booking.WPF.ViewModels.Guest2
 		{
 			Button_Click_Close = new RelayCommand(ButtonClose);
 			Selection_Changed = new RelayCommand(ComboBoxStateSelectionChanged);
-		}
+            Button_Click_Tutorial = new RelayCommand(ShowTutorial);
+        }
 
-		private void ButtonClose(object param)
+        private void ShowTutorial(object param)
+        {
+            TutorialView view = new TutorialView();//dodati putanju videa
+            view.ShowDialog();
+        }
+
+        private void ButtonClose(object param)
 		{
 			_window.Close();
 		}
