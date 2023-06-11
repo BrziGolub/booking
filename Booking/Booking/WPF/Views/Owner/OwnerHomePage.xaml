@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="OwnerHomePage" Height="768" Width="1024"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <StackPanel>
+                <!-- Placeholder for the TextBox itself -->
+                <AdornedElementPlaceholder x:Name="NameTextBox" />
+                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" />
+            </StackPanel>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
 
 
@@ -39,7 +48,7 @@
 
         <StackPanel Margin="260,0,5,0" Background="#D6E6F2">
 
-            <TextBlock Margin="8 0 0 0" FontWeight="Bold" FontSize="32" Text="All owner accommodations" Foreground="#FFFFF200" >
+            <TextBlock Margin="8 0 0 0" FontWeight="Bold" FontSize="32" Text="Home page" Foreground="#FFFFF200" >
                 <TextBlock.Effect>
                     <DropShadowEffect ShadowDepth="4" Color="#303841" BlurRadius="5" />
                 </TextBlock.Effect>
@@ -98,6 +107,21 @@
         <WrapPanel FlowDirection="LeftToRight" Margin="785,10,0,671">
             <Button Margin ="118 0 0 0" HorizontalAlignment="Left" ToolTip="Press to open wizard" Width="80" Height="30" FontWeight="Bold" FontSize="15" Command="{Binding Wizard}" >Wizard</Button>
             <Button Margin ="18 -30 0 0 " HorizontalAlignment="Left" ToolTip="Press to change user" Width="80" Height="30" FontWeight="Bold" FontSize="15" Command="{Binding OwnerLogOut}" >LOG OUT</Button>
+        </WrapPanel>
+        <WrapPanel FlowDirection="LeftToRight" Margin="535,7,0,671">
+            <Label Content="Year:" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" FontSize="20" />
+            <TextBox HorizontalAlignment="Left" Margin="0,5,0,0" ToolTip="Press to enter year for PDF" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="100" FontSize="20" Text="{Binding Path=PDFYear, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="BorderBrush" Value="Red" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Button Margin ="20 0 0 0" HorizontalAlignment="Left" ToolTip="Press to create pdf" Width="80" Height="30" FontWeight="Bold" FontSize="15" Command="{Binding PDF}" >PDF</Button>
         </WrapPanel>
     </Grid>
 </Window>

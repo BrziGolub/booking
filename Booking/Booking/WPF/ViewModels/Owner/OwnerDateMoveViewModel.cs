@@ -102,6 +102,7 @@ namespace Booking.WPF.ViewModels.Owner
                 SelectedAccommodationReservationRequest.Comment = OwnerComment;
                 AccommodationReservationRequestService.SaveRejected(SelectedAccommodationReservationRequest);
                 NotificationService.MakeReject(SelectedAccommodationReservationRequest);
+                OwnerComment = "";
                 AccommodationReservationRequestService.NotifyObservers();
             }
             
