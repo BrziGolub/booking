@@ -2,6 +2,7 @@
 using Booking.Domain.Model;
 using Booking.Model;
 using Booking.Observer;
+using Booking.WPF.ViewModels.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,5 +47,6 @@ namespace Booking.Domain.ServiceInterfaces
         string IsLocationVisited(Location location);
 
         bool BookAccommodation(DateTime arrivalDay, DateTime departureDay, Accommodation selectedAccommodation);
+
     }
 }

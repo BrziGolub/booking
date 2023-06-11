@@ -4,32 +4,36 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Booking.WPF.Views.Guest1"
+      xmlns:ns="clr-namespace:Booking.Localization"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SuggestedDatesQuickSearch">
+      
+      Title="SuggestedDatesQuickSearch" Style="{DynamicResource MyWindowStyle}">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="300"></RowDefinition>
-            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"></ColumnDefinition>
-            <ColumnDefinition Width="500"></ColumnDefinition>
-            <ColumnDefinition Width="200"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" >
-            <Label Height="80" FontSize="25" FontWeight="Bold" Foreground="DarkGreen" Content="Available dates" Margin="200 50 0 0"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3">
+            <Image Source="/Resources/Images/question.png" Height="40"></Image>
+            <Label Grid.Row="0" FontSize="17"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Content="{ns:Loc SuggestedDatesTitle}"></Label>
         </StackPanel>
-        <DataGrid HorizontalAlignment="Left" Margin="102,10,0,190" Grid.ColumnSpan="2" ItemsSource="{Binding Ranges}" AutoGenerateColumns="False" CanUserAddRows="False" Width="556" Height="300" SelectionMode="Single" SelectedItem="{Binding selectedDates, Mode=TwoWay}" Grid.RowSpan="2" Grid.Column="1" Grid.Row="1">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Label Content="{ns:Loc AccommodationLabel}" FontWeight="Bold" FontSize="15"></Label>
+            <Label Width="370" Content="{Binding AccommodationLabel}" FontWeight="Bold" FontSize="17"></Label>
+        </StackPanel>
+        <DataGrid  Grid.Row="2" ItemsSource="{Binding Ranges}" SelectedItem="{Binding selectedDates, Mode=TwoWay}" AutoGenerateColumns="False" CanUserAddRows="False" Width="500" Height="300">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Start Date" Binding="{Binding InitialDate, StringFormat={}{0:dd/MM/yyyy}}" Width="*" />
+                <DataGridTextColumn Header="Start Date" Binding="{Binding InitialDate, StringFormat={}{0:dd/MM/yyyy}}" Width="*"/>
                 <DataGridTextColumn Header="End Date" Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
 
-
-        <Button Width="100" Padding="5" FontSize="15" Foreground="DarkGreen" FontWeight="Bold" Background="Honeydew" BorderBrush="DarkGreen" Grid.Column="1" Margin="360,54,40,116" Command="{Binding BookCommand}" Content="Book" Grid.Row="2"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3">
+            <Button Width="80" Height="30"  Margin="3" FontWeight="Bold"  Command="{Binding BookCommand}" Content="{ns:Loc ReserveButtonClick}"></Button>
+        </StackPanel>
     </Grid>
 </Page>

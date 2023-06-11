@@ -1,5 +1,6 @@
 ﻿using Booking.Model;
 using Booking.Observer;
+using Booking.WPF.ViewModels.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,6 +35,9 @@ namespace Booking.Domain.ServiceInterfaces
         bool CheckGuestsNumber(Accommodation accommodation, int numberOfGuests);
         bool AccommodationIsAvailable(Accommodation accommodation, int daysToStay);
         bool AccommodationIsAvailableInRange(Accommodation accommodation, int daysToStay, DateTime initialDate, DateTime endDate);
+
+
+        List<AccommodationDTO> GetAllDTO();
 
     }
 }

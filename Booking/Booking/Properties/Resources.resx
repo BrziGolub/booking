@@ -381,6 +381,9 @@
   <data name="ReserveButton" xml:space="preserve">
     <value>RESERVE</value>
   </data>
+  <data name="ReserveButtonClick" xml:space="preserve">
+    <value>RESERVE</value>
+  </data>
   <data name="ResrevedBy" xml:space="preserve">
     <value>Resrved by:</value>
   </data>

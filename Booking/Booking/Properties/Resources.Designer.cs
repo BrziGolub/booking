@@ -853,6 +853,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RESERVE.
+        /// </summary>
+        internal static string ReserveButtonClick {
+            get {
+                return ResourceManager.GetString("ReserveButtonClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resrved by:.
         /// </summary>
         internal static string ResrevedBy {

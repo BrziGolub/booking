@@ -17,7 +17,6 @@ namespace Booking.WPF.ViewModels.Guest1
 {
     public class SuggestedDatesQuickSearchViewModel : INotifyPropertyChanged
     {
-        // : INotifyPropertyChanged
          public ObservableCollection<DatesDTO> Ranges { get; set; }
 
          public event PropertyChangedEventHandler PropertyChanged;
@@ -29,13 +28,16 @@ namespace Booking.WPF.ViewModels.Guest1
          public DatesDTO selectedDates { get; set; }
          public RelayCommand BookCommand { get; set; }
 
+         public String AccommodationLabel { get; set; }
+
          public SuggestedDatesQuickSearchViewModel(AccommodationDTO dto)
          {
              Ranges = new ObservableCollection<DatesDTO>(dto.dates);
              DTO = dto;
             _accResService = InjectorService.CreateInstance<IAccommodationReservationService>();
             BookCommand = new RelayCommand(Button_Click_Book);
-         }
+            AccommodationLabel = dto.accommodation.Name + "-" + dto.accommodation.Location.State + "-" + dto.accommodation.Location.City + dto.accommodation.Location.State;
+        }
 
          protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
          {
@@ -44,13 +46,6 @@ namespace Booking.WPF.ViewModels.Guest1
 
          private void Button_Click_Book(object param)
          {
-            //   User user = userController.GetLoggedUser();
-            //  accommodationReservationController.BookAccommodation(selectedDates.InitialDate, selectedDates.EndDate, DTO.accommodation);
-            //  MessageBox.Show("Successfully reserved accommodation!");
-            //var homepage = new Guest1HomepageView();
-            // homepage.Show();
-            // CloseWindow();
-         
             bool IsReserved = _accResService.BookAccommodation(selectedDates.InitialDate, selectedDates.EndDate, DTO.accommodation);
         }
 

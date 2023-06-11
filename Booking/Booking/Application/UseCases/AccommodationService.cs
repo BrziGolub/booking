@@ -7,6 +7,7 @@ using Booking.Model.Images;
 using Booking.Observer;
 using Booking.Repository;
 using Booking.Util;
+using Booking.WPF.ViewModels.Guest1;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -63,6 +64,33 @@ namespace Booking.Service
                 }
             }
             return accommodationList;
+        }
+
+        public List<AccommodationDTO> GetAllDTO()
+        {
+            List<AccommodationDTO> accommodationListDTO = new List<AccommodationDTO>();
+
+            List<Accommodation> accommodationList = new List<Accommodation>();
+            accommodationList = _accommodationRepository.GetAll();
+            foreach (var a in accommodationList)
+            {
+                a.Location = _locationRepository.GetById(a.Location.Id);
+                a.Owner = _userRepository.GetById(a.Owner.Id);
+                foreach (var p in _accommodationImagesRepository.GetAll())
+                {
+                    if (p.Accomodation.Id == a.Id)
+                    {
+                        a.Images.Add(p);
+                    }
+                }
+            }
+            foreach(var a in accommodationList)
+            {
+                AccommodationDTO accommodationDTO = new AccommodationDTO();
+                accommodationDTO.accommodation = a;
+                accommodationListDTO.Add(accommodationDTO);
+            }
+            return accommodationListDTO;
         }
         public List<Accommodation> GetAllSuper()
         {
