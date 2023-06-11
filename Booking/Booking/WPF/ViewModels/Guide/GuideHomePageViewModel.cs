@@ -278,6 +278,8 @@ namespace Booking.WPF.ViewModels.Guide
                 RunDemo();
                 await Task.Delay(750);
                 DemoModeCancelTour();
+                IsDemoMode = false;
+                GuideCreateTourViewModel.demoPom = false;
             }
         }
 

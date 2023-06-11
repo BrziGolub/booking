@@ -204,10 +204,22 @@
         <StackPanel Margin="0,0,-105,0">
             <ComboBox Margin="360,365,0,0" Width="180" Height="21"  BorderBrush="Black" Background="Black" 
                       ItemsSource="{Binding Path=KeyPointsCollection}" 
-                      SelectedItem="{Binding Path=SelectedKeyPoint, UpdateSourceTrigger=PropertyChanged}"
                       SelectedIndex="{Binding SelectedIndexKeyPoint}"
                       IsDropDownOpen="{Binding IsKeyPointsComboBoxOpen}"
-                      />
+                      SelectedItem="{Binding Path=SelectedKeyPoint, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" >
+                <ComboBox.Style>
+                    <Style TargetType="{x:Type ComboBox}">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="BorderBrush" Value="Red" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Style>
+                
+                
+            </ComboBox>
+                      
             <Button Panel.ZIndex="1" Margin="577 -20 0 0" Height="22" Width="22" Content="+" FontSize="14" FontWeight="Bold" Command="{Binding AddTourKeyPoint}" />
             <Button Panel.ZIndex="1" Margin="638 -25 0 0" Height="22" Width="22" Content="-" FontSize="14" FontWeight="Bold" Command="{Binding RemoveTourKeyPoint}"  />
         </StackPanel>
