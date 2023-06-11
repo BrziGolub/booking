@@ -65,6 +65,21 @@ namespace Booking.WPF.ViewModels.Guest1
             }
         }
 
+        public bool _ownerlabel;
+
+        public bool OwnerNameLabel
+        {
+            get => _ownerlabel;
+            set
+            {
+                if (_ownerlabel != value)
+                {
+                    _ownerlabel = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public RelayCommand PreviousButton_Click { get; set; }
         public RelayCommand NextButton_Click { get; set; }
 

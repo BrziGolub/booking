@@ -26,6 +26,7 @@ namespace Booking.Service
         private readonly IAccommodationReservationRequestsRepostiory _accommodationReservationRequestRepository;
         private readonly IAccommodationGradeRepository _accommodationGradeRepository;
         private readonly IRenovationRecommodationRepository _renovationRecommedationRepository;
+        private readonly IAccommodationImagesRepository _accommodationImagesRepository;
         public static int SignedFirstGuestId;
 		public AccommodationReservationService()
         {
@@ -37,6 +38,7 @@ namespace Booking.Service
             _accommodationReservationRequestRepository = InjectorRepository.CreateInstance<IAccommodationReservationRequestsRepostiory>();
             _accommodationGradeRepository = InjectorRepository.CreateInstance<IAccommodationGradeRepository>();
             _renovationRecommedationRepository = InjectorRepository.CreateInstance<IRenovationRecommodationRepository>();
+            _accommodationImagesRepository = InjectorRepository.CreateInstance<IAccommodationImagesRepository>(); ;
         }
 
         public int GetSignedInFirstGuest()
@@ -73,6 +75,13 @@ namespace Booking.Service
                     reservation.Accommodation.Location = _locationRepository.GetById(reservation.Accommodation.Location.Id);
                     reservation.Accommodation.Owner = _userRepository.GetById(reservation.Accommodation.Owner.Id);
                     reservation.Guest = _userRepository.GetById(SignedFirstGuestId);
+                    foreach (var p in _accommodationImagesRepository.GetAll())
+                    {
+                        if (p.Accomodation.Id == reservation.Accommodation.Id)
+                        {
+                            reservation.Accommodation.Images.Add(p);
+                        }
+                    }
                     _guestsReservations.Add(reservation);
                 }
             }

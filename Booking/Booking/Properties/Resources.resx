@@ -123,6 +123,9 @@
   <data name="AccNameDataGrid" xml:space="preserve">
     <value>Accommodation name</value>
   </data>
+  <data name="AccommodationImage" xml:space="preserve">
+    <value>Accommodation image:</value>
+  </data>
   <data name="AccommodationLabel" xml:space="preserve">
     <value>Accommodation:</value>
   </data>
@@ -135,6 +138,9 @@
   <data name="AddCommnet" xml:space="preserve">
     <value>Add comment:</value>
   </data>
+  <data name="AddForumComment" xml:space="preserve">
+    <value>Add comment on forum:</value>
+  </data>
   <data name="AddPicture" xml:space="preserve">
     <value>Add picture:</value>
   </data>
@@ -143,6 +149,9 @@
   </data>
   <data name="ArrivalDayDataGrid" xml:space="preserve">
     <value>Arrival day</value>
+  </data>
+  <data name="ArrivalDayDetails" xml:space="preserve">
+    <value>Arrival day:</value>
   </data>
   <data name="BonusPoints" xml:space="preserve">
     <value>Bonus points:</value>
@@ -164,6 +173,9 @@
   </data>
   <data name="ChangeTheme" xml:space="preserve">
     <value>Change theme</value>
+  </data>
+  <data name="ChcekInCheckOut" xml:space="preserve">
+    <value>Check in - check out:</value>
   </data>
   <data name="ChooseArrivalDay" xml:space="preserve">
     <value>Choose arrival day:</value>
@@ -198,6 +210,12 @@
   <data name="DepartureDayDataGrid" xml:space="preserve">
     <value>Departure day</value>
   </data>
+  <data name="DeparuteDayDetails" xml:space="preserve">
+    <value>Departure day:</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End date:</value>
+  </data>
   <data name="EndDateDataGrid" xml:space="preserve">
     <value>End date</value>
   </data>
@@ -206,6 +224,9 @@
   </data>
   <data name="Forums" xml:space="preserve">
     <value>Forums</value>
+  </data>
+  <data name="GeneratePDFButton" xml:space="preserve">
+    <value>Generate PDF</value>
   </data>
   <data name="GeneratePdfQuestion" xml:space="preserve">
     <value>Do you want to generate pdf reservation report?</value>
@@ -306,6 +327,9 @@
   <data name="QuickSearch" xml:space="preserve">
     <value>Quick search</value>
   </data>
+  <data name="QuickSearchTitle" xml:space="preserve">
+    <value>Anywhere-Anytime</value>
+  </data>
   <data name="RateAccommodationAccAndOwnerTitle" xml:space="preserve">
     <value>Rate Accommodation and Owner!</value>
   </data>
@@ -345,6 +369,9 @@
   <data name="ReservationDays" xml:space="preserve">
     <value>Reserved dates:</value>
   </data>
+  <data name="ReservationDetailsTitle" xml:space="preserve">
+    <value>Reservation details</value>
+  </data>
   <data name="ReservationRequestDates" xml:space="preserve">
     <value>Request dates:</value>
   </data>
@@ -353,6 +380,9 @@
   </data>
   <data name="ReserveButton" xml:space="preserve">
     <value>RESERVE</value>
+  </data>
+  <data name="ResrevedBy" xml:space="preserve">
+    <value>Resrved by:</value>
   </data>
   <data name="Reviews" xml:space="preserve">
     <value>Reviews</value>
@@ -380,6 +410,9 @@
   </data>
   <data name="ShowMoreDetailsButton" xml:space="preserve">
     <value>MORE DETAILS</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start date:</value>
   </data>
   <data name="StartDateDataGrid" xml:space="preserve">
     <value>Start date</value>

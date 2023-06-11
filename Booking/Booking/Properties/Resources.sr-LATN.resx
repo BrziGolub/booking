@@ -123,6 +123,9 @@
   <data name="AccNameDataGrid" xml:space="preserve">
     <value>Naziv smestaja</value>
   </data>
+  <data name="AccommodationImage" xml:space="preserve">
+    <value>Slika smestaja:</value>
+  </data>
   <data name="AccommodationLabel" xml:space="preserve">
     <value>Smestaj:</value>
   </data>
@@ -135,6 +138,9 @@
   <data name="AddCommnet" xml:space="preserve">
     <value>Dodaj komentar:</value>
   </data>
+  <data name="AddForumComment" xml:space="preserve">
+    <value>Dodaj komentar na forumu:</value>
+  </data>
   <data name="AddPicture" xml:space="preserve">
     <value>Dodaj sliku:</value>
   </data>
@@ -143,6 +149,9 @@
   </data>
   <data name="ArrivalDayDataGrid" xml:space="preserve">
     <value>Dan dolaska</value>
+  </data>
+  <data name="ArrivalDayDetails" xml:space="preserve">
+    <value>Dan dolaska:</value>
   </data>
   <data name="BonusPoints" xml:space="preserve">
     <value>Bonus poeni:</value>
@@ -164,6 +173,9 @@
   </data>
   <data name="ChangeTheme" xml:space="preserve">
     <value>Promena teme</value>
+  </data>
+  <data name="ChcekInCheckOut" xml:space="preserve">
+    <value>Vreme dolaska - vreme odlaska:</value>
   </data>
   <data name="ChooseArrivalDay" xml:space="preserve">
     <value>Izaberite dan dolaska:</value>
@@ -198,6 +210,12 @@
   <data name="DepartureDayDataGrid" xml:space="preserve">
     <value>Dan odlaska</value>
   </data>
+  <data name="DeparuteDayDetails" xml:space="preserve">
+    <value>Dan odlaska:</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Krajnji datum:</value>
+  </data>
   <data name="EndDateDataGrid" xml:space="preserve">
     <value>Krajnji datum</value>
   </data>
@@ -206,6 +224,9 @@
   </data>
   <data name="Forums" xml:space="preserve">
     <value>Forumi</value>
+  </data>
+  <data name="GeneratePDFButton" xml:space="preserve">
+    <value>Generisi pdf</value>
   </data>
   <data name="GeneratePdfQuestion" xml:space="preserve">
     <value>Da li zelite pdf izvestaj o reservaciji?</value>
@@ -306,6 +327,9 @@
   <data name="QuickSearch" xml:space="preserve">
     <value>Brza pretraga</value>
   </data>
+  <data name="QuickSearchTitle" xml:space="preserve">
+    <value>Bilo kada - bilo gde</value>
+  </data>
   <data name="RateAccommodationAccAndOwnerTitle" xml:space="preserve">
     <value>Oceni smestaj i vlasnika!</value>
   </data>
@@ -345,6 +369,9 @@
   <data name="ReservationDays" xml:space="preserve">
     <value>Rezervisani datumi:</value>
   </data>
+  <data name="ReservationDetailsTitle" xml:space="preserve">
+    <value>Detalji rezervacije</value>
+  </data>
   <data name="ReservationRequestDates" xml:space="preserve">
     <value>Datum zahteva:</value>
   </data>
@@ -353,6 +380,9 @@
   </data>
   <data name="ReserveButton" xml:space="preserve">
     <value>REZERVISI</value>
+  </data>
+  <data name="ResrevedBy" xml:space="preserve">
+    <value>Reservisao/la:</value>
   </data>
   <data name="Reviews" xml:space="preserve">
     <value>Recenzije</value>
@@ -380,6 +410,9 @@
   </data>
   <data name="ShowMoreDetailsButton" xml:space="preserve">
     <value>DETALJNIJI PRIKAZ</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Pocetni datum:</value>
   </data>
   <data name="StartDateDataGrid" xml:space="preserve">
     <value>Pocetni datum</value>

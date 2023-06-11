@@ -21,7 +21,7 @@
             </Style>
 
             <Style TargetType="TextBox">
-                <Setter Property="Foreground" Value="Gray" />
+                <Setter Property="Foreground" Value="Black" />
                 <Setter Property="Background" Value="LightGray" />
             </Style>
 

@@ -212,10 +212,12 @@
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestProfileViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestReviewsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\HomePageFirstGuestViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\QuickSearchViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\RateAccommodationAndOwnerViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\RenovationApprovalViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\RenovationSuggestionsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ReschaduleAccommodationReservationViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\ReservationDetailsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAllForumCommentsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAllForumsViewModel.cs" />
@@ -242,6 +244,12 @@
     <Compile Include="WPF\ViewModels\Owner\WizardViewModel.cs" />
     <Compile Include="WPF\Views\Guest1\GeneratePdf.xaml.cs">
       <DependentUpon>GeneratePdf.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest1\QuickSearch.xaml.cs">
+      <DependentUpon>QuickSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest1\ReservationDetails.xaml.cs">
+      <DependentUpon>ReservationDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guide\SelectDateForComplexTour.xaml.cs">
       <DependentUpon>SelectDateForComplexTour.xaml</DependentUpon>
@@ -499,6 +507,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WPF\Views\Guest1\GeneratePdf.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\QuickSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\ReservationDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -135,7 +135,7 @@ namespace Booking.WPF.ViewModels.Guide
                 SelectedTour.IsStarted = false;
                 SelectedTour.IsEnded = true;
                 TourService.UpdateTour(SelectedTour);
-                System.Windows.MessageBox.Show(SelectedTour.Name.ToString() + " is ended!", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                System.Windows.MessageBox.Show(SelectedTour.Name.ToString() + " is ended!", "Information", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 TourService.NotifyObservers();
             }
             else

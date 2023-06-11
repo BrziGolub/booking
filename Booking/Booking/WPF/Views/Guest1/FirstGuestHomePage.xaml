@@ -98,15 +98,15 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Menu Height="Auto" Width="1100"  Background="LightGray">
                 <MenuItem Header="{ns:Loc HomePage}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_HomePage" />
-                <MenuItem Header="{ns:Loc QuickSearch}" FontWeight="Bold" HorizontalAlignment="Right" />
+                <MenuItem Header="{ns:Loc QuickSearch}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_QuickSerach"/>
                 <MenuItem Header="{ns:Loc MyReservations}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_MyReservations"/>
                 <MenuItem Header="{ns:Loc RescheduleRequests}"  FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_ResheduleRequests"/>
                 <MenuItem Header="{ns:Loc Reviews}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_Reviews"/>
                 <MenuItem Header="{ns:Loc Forums}" FontWeight="Bold" HorizontalAlignment="Right" Click="MenuItem_Click_Forums"/>
-                <Separator Width="90" Background="LightGray"/>
+                <Separator Width="120" Background="LightGray"/>
 
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="1" Width="200" Height="34">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="1" Width="180" Height="34">
                     <Label  Content="{ns:Loc darkTheme}" Foreground="Black" Style="{DynamicResource Label}" HorizontalContentAlignment="Right" Width="60" Margin="0,0,0,4"/>
                     <CheckBox  x:Name="themeCheckBox" Style="{DynamicResource CheckBoxStyle1}" IsChecked="{Binding ButtonIsChecked}" Width="60" Height="33"  />
                     <Label Content="{ns:Loc lightTheme}" Foreground="Black" Style="{DynamicResource Label}" Width="60" Margin="0,0,0,4"/>

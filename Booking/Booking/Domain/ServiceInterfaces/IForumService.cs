@@ -14,5 +14,6 @@ namespace Booking.Domain.ServiceInterfaces
         Forum GetById(int id);
         void Create(Forum forum);
         void UpdateForum(Forum forum);
+        void SetVeryHelpful(Forum forum);
     }
 }

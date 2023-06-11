@@ -79,6 +79,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accommodation image:.
+        /// </summary>
+        internal static string AccommodationImage {
+            get {
+                return ResourceManager.GetString("AccommodationImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accommodation:.
         /// </summary>
         internal static string AccommodationLabel {
@@ -115,6 +124,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add comment on forum:.
+        /// </summary>
+        internal static string AddForumComment {
+            get {
+                return ResourceManager.GetString("AddForumComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add picture:.
         /// </summary>
         internal static string AddPicture {
@@ -138,6 +156,15 @@ namespace Booking.Properties {
         internal static string ArrivalDayDataGrid {
             get {
                 return ResourceManager.GetString("ArrivalDayDataGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arrival day:.
+        /// </summary>
+        internal static string ArrivalDayDetails {
+            get {
+                return ResourceManager.GetString("ArrivalDayDetails", resourceCulture);
             }
         }
         
@@ -201,6 +228,15 @@ namespace Booking.Properties {
         internal static string ChangeTheme {
             get {
                 return ResourceManager.GetString("ChangeTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check in - check out:.
+        /// </summary>
+        internal static string ChcekInCheckOut {
+            get {
+                return ResourceManager.GetString("ChcekInCheckOut", resourceCulture);
             }
         }
         
@@ -304,6 +340,24 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Departure day:.
+        /// </summary>
+        internal static string DeparuteDayDetails {
+            get {
+                return ResourceManager.GetString("DeparuteDayDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date:.
+        /// </summary>
+        internal static string EndDate {
+            get {
+                return ResourceManager.GetString("EndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End date.
         /// </summary>
         internal static string EndDateDataGrid {
@@ -327,6 +381,15 @@ namespace Booking.Properties {
         internal static string Forums {
             get {
                 return ResourceManager.GetString("Forums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate PDF.
+        /// </summary>
+        internal static string GeneratePDFButton {
+            get {
+                return ResourceManager.GetString("GeneratePDFButton", resourceCulture);
             }
         }
         
@@ -628,6 +691,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anywhere-Anytime.
+        /// </summary>
+        internal static string QuickSearchTitle {
+            get {
+                return ResourceManager.GetString("QuickSearchTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rate Accommodation and Owner!.
         /// </summary>
         internal static string RateAccommodationAccAndOwnerTitle {
@@ -745,6 +817,15 @@ namespace Booking.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reservation details.
+        /// </summary>
+        internal static string ReservationDetailsTitle {
+            get {
+                return ResourceManager.GetString("ReservationDetailsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Request dates:.
         /// </summary>
         internal static string ReservationRequestDates {
@@ -768,6 +849,15 @@ namespace Booking.Properties {
         internal static string ReserveButton {
             get {
                 return ResourceManager.GetString("ReserveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resrved by:.
+        /// </summary>
+        internal static string ResrevedBy {
+            get {
+                return ResourceManager.GetString("ResrevedBy", resourceCulture);
             }
         }
         
@@ -849,6 +939,15 @@ namespace Booking.Properties {
         internal static string ShowMoreDetailsButton {
             get {
                 return ResourceManager.GetString("ShowMoreDetailsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date:.
+        /// </summary>
+        internal static string StartDate {
+            get {
+                return ResourceManager.GetString("StartDate", resourceCulture);
             }
         }
         

@@ -71,6 +71,34 @@ namespace Booking.Application.UseCases
 			return list;
 		}
 
+		public void SetVeryHelpful(Forum forum)
+		{
+			bool isVeryHelpful = false;
+            int ownerComments = 0;
+            int guestComments = 0;
+            foreach (var com in _forumCommentRepository.GetAll())
+			{ 
+                com.User = _userRepository.GetById(com.User.Id);
+                if (com.Forum.Id == forum.Id && com.User.Role == 1) //vlasnik ima smestaj na toj lokaciji
+                {
+                    ownerComments++;
+                }
+                else if (com.Forum.Id == forum.Id && com.User.Role == 3 && com.Visited.Equals("YES")) //gost mora da je posetio lokaciju
+                {
+                    guestComments++;
+                }
+            }
+            if (ownerComments >= 10 && guestComments >= 20)
+            {
+				isVeryHelpful = true;
+                forum.Helpful = "YES";
+            }
+			if (isVeryHelpful)
+			{
+                UpdateForum(forum);
+            }
+        }
+
 		public Forum GetById(int id)
 		{
 			return _forumRepository.GetById(id);

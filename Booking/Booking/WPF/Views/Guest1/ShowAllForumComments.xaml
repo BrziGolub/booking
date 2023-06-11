@@ -13,7 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="170"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,20,10,5" HorizontalAlignment="Center">
             <Image Source="/Resources/Images/conversation.png" Height="30" Width="30"></Image>
@@ -57,10 +57,12 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-            <TextBox FontSize="15" Width="300" Margin="4" TextWrapping="Wrap" />
-            <Button Padding="3" FontSize="12" FontWeight="Bold" Margin="20" Width="120" Content="{ns:Loc LeaveCommentButton}" />
+        <StackPanel Orientation="Vertical" Grid.Row="2"  Margin="130,0,130,0" HorizontalAlignment="Center">
+            <Label Content="{ns:Loc AddForumComment}" Height="29"  FontSize="15"></Label>
+            <TextBox FontSize="15"  TextWrapping="Wrap"  Text="{Binding NewComment}" HorizontalAlignment="Left" Width="350" Height="90"/>
+            <Button Padding="3" FontSize="12" FontWeight="Bold"  Content="{ns:Loc LeaveCommentButton}" Command="{Binding LeaveCommentButton}" HorizontalAlignment="Left" Margin="0,3,0,0"/>
         </StackPanel>
+        
    
         
     </Grid>
