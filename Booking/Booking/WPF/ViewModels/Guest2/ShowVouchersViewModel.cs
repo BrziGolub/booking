@@ -3,6 +3,7 @@ using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
 using Booking.Service;
 using Booking.Util;
+using Booking.WPF.Views.Guest2;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
@@ -25,6 +26,7 @@ namespace Booking.WPF.ViewModels.Guest2
 
         public RelayCommand Button_Click_Close { get; set; }
         public RelayCommand Button_Click_GenerateReport { get; set; }
+        public RelayCommand Button_Click_Tutorial { get; set; }
 
         public ShowVouchersViewModel(Window window)
         {
@@ -41,11 +43,18 @@ namespace Booking.WPF.ViewModels.Guest2
         {
             Button_Click_Close = new RelayCommand(ButtonClose);
             Button_Click_GenerateReport = new RelayCommand(ButtonGenerateReport);
+            Button_Click_Tutorial = new RelayCommand(ShowTutorial);
         }
 
         private void ButtonClose(object param)
         {
             _window.Close();
+        }
+
+        private void ShowTutorial(object param)
+        {
+            TutorialView view = new TutorialView();//dodati putanju videa
+            view.ShowDialog();
         }
 
         private bool canPrint()
@@ -79,7 +88,7 @@ namespace Booking.WPF.ViewModels.Guest2
 
                             Paragraph para1 = new Paragraph("All currently valid vouchers", new Font(Font.FontFamily.HELVETICA, 20));
                             para1.Alignment = Element.ALIGN_CENTER;
-                            para1.SpacingAfter = 10;
+                            para1.SpacingAfter = 20;
                             doc.Add(para1);        
 
                             PdfPTable table = new PdfPTable(2);

@@ -56,6 +56,7 @@
     <Window.InputBindings>
         <KeyBinding Command="{Binding Button_Click_Request}" Key="F1"/>
         <KeyBinding Command="{Binding Button_Click_Close}" Key="F5"/>
+        <KeyBinding Command="{Binding Button_Click_Tutorial}" Modifiers="Ctrl" Key="T"/>
     </Window.InputBindings>
 
     <Border Margin="8" Style="{StaticResource CardHolder}">
@@ -69,12 +70,26 @@
 				<RowDefinition Height="auto"/>
 			</Grid.RowDefinitions>
 
-			<StackPanel Grid.Row="0" Margin="0 0 0 8" Orientation="Horizontal">
-				<Image Source="/Resources/Images/global128.png" Height="40"/>
-				<Label Content="My requests" FontSize="24" Margin="8 0 0 0"/>
-			</StackPanel>
+            <Grid Grid.Row="0" Margin="0 0 0 8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-			<DataGrid Grid.Row="1" Margin="0 8"
+                <Image Source="/Resources/Images/global128.png" Height="40"/>
+                <Label Grid.Column="1" Content="My requests" FontSize="24" Margin="8 0 0 0"/>
+                <Button Grid.Column="2" Width="40" Margin="4" Command="{Binding Button_Click_Tutorial}" Style="{StaticResource ButtonStyle}">
+                    <StackPanel>
+                        <Image Source="/Resources/Images/videoTutorial128.png"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <DataGrid Grid.Row="1" Margin="0 8"
 					  AutoGenerateColumns="False"
 					  IsReadOnly="True"
 					  SelectionMode="Single"

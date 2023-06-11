@@ -1,6 +1,4 @@
 ﻿using Booking.Commands;
-using Booking.Model;
-using Booking.Model.Images;
 using Booking.WPF.Views.Guest2;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,15 +7,13 @@ using System.Windows;
 
 namespace Booking.WPF.ViewModels.Guest2
 {
-    public class ShowTourImagesViewModel : INotifyPropertyChanged
+    public class RateTourImagesViewModel : INotifyPropertyChanged
     {
         private readonly Window _window;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public List<TourImage> Images { get; set; }
-        public Tour Tour { get; set; }
-        public string Location { get; set; }
+        public List<string> Images { get; set; }
 
         private int _index;
         private int _listSize;
@@ -53,14 +49,14 @@ namespace Booking.WPF.ViewModels.Guest2
         public RelayCommand Button_Click_Close { get; set; }
         public RelayCommand Button_Click_Next { get; set; }
         public RelayCommand Button_Click_Prev { get; set; }
+        public RelayCommand Button_Click_Remove { get; set; }
         public RelayCommand Button_Click_Tutorial { get; set; }
 
-        public ShowTourImagesViewModel(Window window, Tour tour)
+        public RateTourImagesViewModel(Window window, List<string> imgs)
         {
             _window = window;
-            Tour = tour;
-            Location = tour.Location.State + ", " + tour.Location.City;
-            Images = tour.Images;
+
+            Images = imgs;
 
             _index = 0;
             _listSize = Images.Count;
@@ -74,6 +70,7 @@ namespace Booking.WPF.ViewModels.Guest2
             Button_Click_Close = new RelayCommand(ButtonClose);
             Button_Click_Next = new RelayCommand(ButtonNext);
             Button_Click_Prev = new RelayCommand(ButtonPrev);
+            Button_Click_Remove = new RelayCommand(RemoveImg);
             Button_Click_Tutorial = new RelayCommand(ShowTutorial);
         }
 
@@ -84,6 +81,11 @@ namespace Booking.WPF.ViewModels.Guest2
         }
 
         private void ButtonClose(object param)
+        {
+            CloseWindow();
+        }
+
+        private void CloseWindow()
         {
             _window.Close();
         }
@@ -102,8 +104,26 @@ namespace Booking.WPF.ViewModels.Guest2
 
         private void UpdateImage()
         {
-            ImageSource = Images[_index].Url;
+            ImageSource = Images[_index];
             Text = _index + 1 + "/" + _listSize;
+        }
+
+        private void RemoveImg(object param)
+        {
+            Images.Remove(Images[_index]);
+            if(_index > 0)
+            {
+                _index -= 1;
+            }
+            _listSize -= 1;
+            if (_listSize == 0)
+            {
+                CloseWindow();
+            }
+            else
+            {
+                UpdateImage();
+            }
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
