@@ -47,7 +47,7 @@ namespace Booking.WPF.ViewModels.Guest1
         public Accommodation SelectedAccommodation;
 
         
-        public RelayCommand Pdf_button { get; set; }
+       // public RelayCommand Pdf_button { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -159,7 +159,7 @@ namespace Booking.WPF.ViewModels.Guest1
             SetAccommodationLabel();
             Reserve_Button_Click = new RelayCommand(ReserveButton);
             Cancle_Button_Click = new RelayCommand(CancleButton);
-            Pdf_button = new RelayCommand(PdfButton);
+           // Pdf_button = new RelayCommand(PdfButton);
             DepartureDay = DateTime.Now;
             ArrivalDay = DateTime.Now;
             AccommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();

@@ -70,7 +70,6 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="{ns:Loc ReserveButton}" Margin="9" FontWeight="Bold" Command="{Binding Reserve_Button_Click}" Width="70"></Button>
             <Button Content="{ns:Loc CancleButton}" Margin="9" FontWeight="Bold" Command="{Binding Cancle_Button_Click}" Width="60"></Button>
-            <Button Content="PDF" Margin="9" FontWeight="Bold" Command="{Binding Pdf_button}" Width="70"></Button>
         </StackPanel>
     </Grid>
 </Page>
