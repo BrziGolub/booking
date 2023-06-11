@@ -129,7 +129,7 @@ namespace Booking.WPF.ViewModels.Guide
         private void ButtonStatisticAboutTour(object param)
         {
             GuideStatisticAboutTours statistics = new GuideStatisticAboutTours();
-            statistics.Show();
+            statistics.ShowDialog();
         }
 
         private void ButtonFollowTourLive(object param)
@@ -137,7 +137,7 @@ namespace Booking.WPF.ViewModels.Guide
             GuideFollowTourLive guideFollowTourLive = new GuideFollowTourLive();
             GuideFollowTourLiveViewModel guideFollowTourLiveViewModel = new GuideFollowTourLiveViewModel(guideFollowTourLive);
             if (guideFollowTourLiveViewModel.Tours.Count > 0)
-                guideFollowTourLive.Show();
+                guideFollowTourLive.ShowDialog();
             else
                 System.Windows.MessageBox.Show("Today you don't have tours!", "Warning", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
         }
@@ -145,7 +145,7 @@ namespace Booking.WPF.ViewModels.Guide
         private void ButtonViewReviews(object param)
         {
             GuideViewReviews reviews = new GuideViewReviews();
-            reviews.Show();
+            reviews.ShowDialog();
         }
         private void ButtonLogOut(object param)
         {
@@ -213,12 +213,12 @@ namespace Booking.WPF.ViewModels.Guide
         private void ButtonOpenAcceptTourRequest(object param)
         {
             GuideAcceptingTourRequest guideAcceptingTourRequest = new GuideAcceptingTourRequest();
-            guideAcceptingTourRequest.Show();
+            guideAcceptingTourRequest.ShowDialog();
         }
         private void ButtonOpenTourRequestStatistic(object param)
         {
             GuideRequestsStatistic guideRequestsStatistic = new GuideRequestsStatistic();
-            guideRequestsStatistic.Show();
+            guideRequestsStatistic.ShowDialog();
         }
 
         private void ButtonOpenSuperGuide(object param)
@@ -230,7 +230,7 @@ namespace Booking.WPF.ViewModels.Guide
         private void ButtonOpenAcceptPartTour(object param)
         {
             GuideAcceptingPartOfTour guideAcceptingPartOfTour = new GuideAcceptingPartOfTour();
-            guideAcceptingPartOfTour.Show();
+            guideAcceptingPartOfTour.ShowDialog();
         }
 
         private void ButtonDismissal(object param)
