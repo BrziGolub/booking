@@ -18,8 +18,9 @@ namespace Booking.WPF.ViewModels.Guest2
 
 		public RelayCommand Button_Click_Close { get; set; }
 		public RelayCommand Button_Click_Request { get; set; }
+        public RelayCommand Button_Click_Tutorial { get; set; }
 
-		public TourRequestsViewModel(Window window)
+        public TourRequestsViewModel(Window window)
 		{
 			_window = window;
 			_tourRequestService = InjectorService.CreateInstance<ITourRequestService>();
@@ -34,7 +35,8 @@ namespace Booking.WPF.ViewModels.Guest2
 		{
 			Button_Click_Close = new RelayCommand(ButtonClose);
 			Button_Click_Request = new RelayCommand(ButtonRequest);
-		}
+            Button_Click_Tutorial = new RelayCommand(ShowTutorial);
+        }
 
 		private void LoadList()
 		{
@@ -46,7 +48,13 @@ namespace Booking.WPF.ViewModels.Guest2
 			}
 		}
 
-		private void ButtonClose(object param)
+        private void ShowTutorial(object param)
+        {
+            TutorialView view = new TutorialView("../../Resources/Videos/SimpleRequest.mp4");
+            view.ShowDialog();
+        }
+
+        private void ButtonClose(object param)
 		{
 			_window.Close();
 		}

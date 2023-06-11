@@ -54,6 +54,7 @@
     <Window.InputBindings>
         <KeyBinding Command="{Binding Button_Click_Close}" Key="F1"/>
         <KeyBinding Command="{Binding Button_Click_Reserve}" Key="F2"/>
+        <KeyBinding Command="{Binding Button_Click_Tutorial}" Modifiers="Ctrl" Key="T"/>
     </Window.InputBindings>
 
     <Border Margin="8" Style="{StaticResource CardHolder}">
@@ -70,12 +71,26 @@
 				<RowDefinition Height="auto"/>
 			</Grid.RowDefinitions>
 
-			<StackPanel Grid.Row="0" Margin="0 0 0 8" Orientation="Horizontal">
-				<Image Source="/Resources/Images/calendar128.png" Width="40"/>
-				<Label Content="Reserve a tour" FontSize="24" Margin="8 0 0 0"/>
-			</StackPanel>
+            <Grid Grid.Row="0" Margin="0 0 0 8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-			<StackPanel Grid.Row="1" Margin="8">
+                <Image Source="/Resources/Images/calendar128.png" Height="40"/>
+                <Label Grid.Column="1" Content="Reserve a tour" FontSize="24" Margin="8 0 0 0"/>
+                <Button Grid.Column="2" Width="40" Margin="4" Command="{Binding Button_Click_Tutorial}" Style="{StaticResource ButtonStyle}">
+                    <StackPanel>
+                        <Image Source="/Resources/Images/videoTutorial128.png"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <StackPanel Grid.Row="1" Margin="8">
 				<TextBlock Text="{Binding Location}" VerticalAlignment="Center"/>
 				<TextBlock Text="{Binding Tour.StartTime, StringFormat={}{0:dd/MM/yyyy}}" VerticalAlignment="Center"/>
 			</StackPanel>

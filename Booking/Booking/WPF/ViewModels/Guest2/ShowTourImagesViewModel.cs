@@ -1,6 +1,7 @@
 ﻿using Booking.Commands;
 using Booking.Model;
 using Booking.Model.Images;
+using Booking.WPF.Views.Guest2;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -52,6 +53,7 @@ namespace Booking.WPF.ViewModels.Guest2
         public RelayCommand Button_Click_Close { get; set; }
         public RelayCommand Button_Click_Next { get; set; }
         public RelayCommand Button_Click_Prev { get; set; }
+        public RelayCommand Button_Click_Tutorial { get; set; }
 
         public ShowTourImagesViewModel(Window window, Tour tour)
         {
@@ -72,6 +74,13 @@ namespace Booking.WPF.ViewModels.Guest2
             Button_Click_Close = new RelayCommand(ButtonClose);
             Button_Click_Next = new RelayCommand(ButtonNext);
             Button_Click_Prev = new RelayCommand(ButtonPrev);
+            Button_Click_Tutorial = new RelayCommand(ShowTutorial);
+        }
+
+        private void ShowTutorial(object param)
+        {
+            TutorialView view = new TutorialView("../../Resources/Videos/TourImages.mp4");
+            view.ShowDialog();
         }
 
         private void ButtonClose(object param)

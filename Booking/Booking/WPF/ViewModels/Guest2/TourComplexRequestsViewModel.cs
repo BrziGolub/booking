@@ -43,8 +43,9 @@ namespace Booking.WPF.ViewModels.Guest2
 		public RelayCommand Button_Click_Close { get; set; }
 		public RelayCommand Button_Click_Request { get; set; }
 		public RelayCommand Selection_Changed { get; set; }
+        public RelayCommand Button_Click_Tutorial { get; set; }
 
-		public TourComplexRequestsViewModel(Window window)
+        public TourComplexRequestsViewModel(Window window)
 		{
 			_window = window;
 			_tourRequestService = InjectorService.CreateInstance<ITourComplexRequestService>();
@@ -63,9 +64,16 @@ namespace Booking.WPF.ViewModels.Guest2
 			Button_Click_Close = new RelayCommand(ButtonClose);
 			Button_Click_Request = new RelayCommand(ButtonRequest);
 			Selection_Changed = new RelayCommand(LoadRequests_Command);
-		}
+            Button_Click_Tutorial = new RelayCommand(ShowTutorial);
+        }
 
-		private void LoadList()
+        private void ShowTutorial(object param)
+        {
+            TutorialView view = new TutorialView("../../Resources/Videos/ComplexRequest.mp4");
+            view.ShowDialog();
+        }
+
+        private void LoadList()
 		{
 			TourComplexRequests.Clear();
 			var list = _tourRequestService.GetRequestsByUserId(TourService.SignedGuideId);

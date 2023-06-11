@@ -62,6 +62,7 @@
 
     <Window.InputBindings>
         <KeyBinding Command="{Binding Button_Click_Close}" Key="F5"/>
+        <KeyBinding Command="{Binding Button_Click_Tutorial}" Modifiers="Ctrl" Key="T"/>
     </Window.InputBindings>
 
     <Border Margin="8" Style="{StaticResource CardHolder}">
@@ -75,12 +76,26 @@
 				<RowDefinition Height="auto"/>
 			</Grid.RowDefinitions>
 
-			<StackPanel Grid.Row="0" Margin="0 0 0 8" Orientation="Horizontal">
-				<Image Source="/Resources/Images/statistic128.png" Height="40"/>
-				<Label Content="Statistics" FontSize="24" Margin="8 0 0 0"/>
-			</StackPanel>
+            <Grid Grid.Row="0" Margin="0 0 0 8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-			<Grid Grid.Row="1" Margin="0 8">
+                <Image Source="/Resources/Images/statistic128.png" Height="40"/>
+                <Label Grid.Column="1" Content="Statistics" FontSize="24" Margin="8 0 0 0"/>
+                <Button Grid.Column="2" Width="40" Margin="4" Command="{Binding Button_Click_Tutorial}" Style="{StaticResource ButtonStyle}">
+                    <StackPanel>
+                        <Image Source="/Resources/Images/videoTutorial128.png"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="0 8">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="*"/>
@@ -111,11 +126,11 @@
 							<RowDefinition Height="auto"/>
 						</Grid.RowDefinitions>
 
-						<lvc:PieChart Grid.Row="0"
-							  Series="{Binding PieSeries, UpdateSourceTrigger=PropertyChanged}"/>
-						<!--="{Binding PieTitle}"-->
+                        <lvc:PieChart Grid.Row="0"
+                                      Series="{Binding PieSeries, UpdateSourceTrigger=PropertyChanged}"
+                                      LegendPosition="Right"/>
 
-						<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
 							<Label Content="Average number of visitors(Accepted only):" Margin="0 0 4 0"/>
 							<TextBlock Text="{Binding Visitors}" Margin="4 0 0 0"/>
 						</StackPanel>

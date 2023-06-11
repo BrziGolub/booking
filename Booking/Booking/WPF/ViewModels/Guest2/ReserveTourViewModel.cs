@@ -4,6 +4,7 @@ using Booking.Model;
 using Booking.Service;
 using Booking.Util;
 using Booking.View;
+using Booking.WPF.Views.Guest2;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -55,8 +56,9 @@ namespace Booking.WPF.ViewModels.Guest2
 		public RelayCommand Button_Click_Close { get; set; }
 		public RelayCommand Button_Click_NumericUp { get; set; }
 		public RelayCommand Button_Click_NumericDown { get; set; }
+        public RelayCommand Button_Click_Tutorial { get; set; }
 
-		public ReserveTourViewModel(Window window, Tour tour, SecondGuestHomePageViewModel mrk)
+        public ReserveTourViewModel(Window window, Tour tour, SecondGuestHomePageViewModel mrk)
 		{
 			_window = window;
 			Tour = tour;
@@ -83,9 +85,16 @@ namespace Booking.WPF.ViewModels.Guest2
 			Button_Click_Close = new RelayCommand(Cancel);
 			Button_Click_NumericUp = new RelayCommand(NumericUp);
 			Button_Click_NumericDown = new RelayCommand(NumericDown);
-		}
+            Button_Click_Tutorial = new RelayCommand(ShowTutorial);
+        }
 
-		private void Reserve(object param)
+        private void ShowTutorial(object param)
+        {
+            TutorialView view = new TutorialView("../../Resources/Videos/ReserveATour.mp4");
+            view.ShowDialog();
+        }
+
+        private void Reserve(object param)
 		{
 			if (IsValid)
 			{
@@ -104,7 +113,11 @@ namespace Booking.WPF.ViewModels.Guest2
 					}
 					else
 					{
-						ReserveATour();
+                        MessageBoxResult dialogResult = IsAnswerYes();
+						if (dialogResult == MessageBoxResult.Yes)
+						{
+                            ReserveATour();
+                        }
 					}
 				}
 				else if (_availability < NumberOfPassengers && _availability > 0)
@@ -127,8 +140,20 @@ namespace Booking.WPF.ViewModels.Guest2
 			MessageBox.Show("Tour reserved");
 			CloseWindow();
 		}
+        private MessageBoxResult IsAnswerYes()
+        {
+            string sMessageBoxText = $"Do you want to reserve a tour?";
+            string sCaption = "Tour Reservation";
 
-		private void ReserveATourWithVoucher()
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Question;
+
+            MessageBoxResult result = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+            return result;
+        }
+
+
+        private void ReserveATourWithVoucher()
 		{
 			_voucherService.RedeemVoucher(SelectedVoucher);
 			ReserveATour();

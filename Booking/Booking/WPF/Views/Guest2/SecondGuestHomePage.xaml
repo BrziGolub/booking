@@ -55,8 +55,8 @@
 		<Style x:Key="CardHolder" TargetType="Border">
 			<Setter Property="Background" Value="{StaticResource CardBackgroundColor}"/>
 			<Setter Property="CornerRadius" Value="6"/>
-			<Setter Property="Padding" Value="8"/>
-		</Style>
+            <Setter Property="Padding" Value="8"/>
+        </Style>
 
 		<Style x:Key="NumericUpDownStyle" TargetType="Button">
 			<Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -70,6 +70,8 @@
         <KeyBinding Command="{Binding Button_Click_ShowDestinations}" Key="F3"/>
         <KeyBinding Command="{Binding Button_Click_ShowImages}" Key="F4"/>
         <KeyBinding Command="{Binding Button_Click_Reserve}" Key="F5"/>
+        <KeyBinding Command="{Binding Button_Click_TourRequest}" Key="S" Modifiers="Ctrl"/>
+        <KeyBinding Command="{Binding Button_Click_TourComplexRequest}" Key="C" Modifiers="Ctrl"/>
     </Window.InputBindings>
     
 	<Grid>
@@ -84,19 +86,24 @@
 			<RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Menu>
-            <MenuItem Header="_Request" FontSize="14">
-				<MenuItem Header="Simple tour" FontSize="14" Command="{Binding Button_Click_TourRequest}"/>
-				<MenuItem Header="Complex tour" FontSize="14" Command="{Binding Button_Click_TourComplexRequest}"/>
+        <Menu Height="30">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="_Request" FontSize="14" Height="30">
+                <MenuItem Header="_Simple tour" FontSize="14" Command="{Binding Button_Click_TourRequest}" InputGestureText="Ctrl+S"/>
+                <MenuItem Header="_Complex tour" FontSize="14" Command="{Binding Button_Click_TourComplexRequest}" InputGestureText="Ctrl+C"/>
             </MenuItem>
             <MenuItem Header="_Vouchers" FontSize="14" Command="{Binding Button_Click_ShowVouchers}"/>
-			<MenuItem Header="_Statistics" FontSize="14" Command="{Binding Button_Click_Statistics}"/>
-			<MenuItem Header="_Tutorial" FontSize="14"/>
-			<MenuItem Header="_Notifications" FontSize="14" Command="{Binding Button_Click_Notifications}"/>
-            <MenuItem Header="_Log out" FontSize="14" Command="{Binding Button_Click_SignOff}"/>
+            <MenuItem Header="_Statistics" FontSize="14" Command="{Binding Button_Click_Statistics}"/>
+            <MenuItem Header="_Tutorial" FontSize="14" Command="{Binding Button_Click_Tutorial}"/>
+            <MenuItem Header="_Notifications" FontSize="14" Command="{Binding Button_Click_Notifications}" HorizontalAlignment="Right"/>
+            <MenuItem Header="_Log out" FontSize="14" Command="{Binding Button_Click_SignOff}" HorizontalAlignment="Right"/>
         </Menu>
 
-		<Border Grid.Row="1" Margin="8 8 8 4" Style="{StaticResource CardHolder}">
+        <Border Grid.Row="1" Margin="8 8 8 4" Style="{StaticResource CardHolder}">
 			<Grid>
 
 				<Grid.ColumnDefinitions>

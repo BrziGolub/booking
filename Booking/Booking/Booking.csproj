@@ -223,6 +223,7 @@
     <Compile Include="WPF\ViewModels\Guest1\ShowAllForumsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\CreateTourComplexRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\CreateTourRequestViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest2\RateTourImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\RateTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\ReserveTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\SecondGuestHomePageViewModel.cs" />
@@ -234,6 +235,7 @@
     <Compile Include="WPF\ViewModels\Guest2\TourComplexRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\TourNotificationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\TourRequestsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest2\TutorialViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideAcceptingPartOfTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideAcceptingTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel.cs" />
@@ -242,6 +244,12 @@
     <Compile Include="WPF\ViewModels\Guide\GuideRequestsStatisticViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideSuperGuideViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\WizardViewModel.cs" />
+    <Compile Include="WPF\Views\Guest2\RateTourImagesView.xaml.cs">
+      <DependentUpon>RateTourImagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest2\TutorialView.xaml.cs">
+      <DependentUpon>TutorialView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Guest1\GeneratePdf.xaml.cs">
       <DependentUpon>GeneratePdf.xaml</DependentUpon>
     </Compile>
@@ -503,6 +511,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\LightStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest2\RateTourImagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest2\TutorialView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -989,6 +1005,12 @@
     <Resource Include="Resources\Images\forum.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\starRate128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\videoTutorial128.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\Images\pdfPicture.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1003,6 +1025,18 @@
   <ItemGroup>
     <Resource Include="Resources\Images\flag1.png" />
     <Resource Include="Resources\Images\wizard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Videos\ComplexRequest.mp4" />
+    <Content Include="Resources\Videos\HomePage.mp4" />
+    <Content Include="Resources\Videos\Notifications.mp4" />
+    <Content Include="Resources\Videos\RateATour.mp4" />
+    <Content Include="Resources\Videos\RateATourImages.mp4" />
+    <Content Include="Resources\Videos\ReserveATour.mp4" />
+    <Content Include="Resources\Videos\SimpleRequest.mp4" />
+    <Content Include="Resources\Videos\Statistics.mp4" />
+    <Content Include="Resources\Videos\TourImages.mp4" />
+    <Content Include="Resources\Videos\Vouchers.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
