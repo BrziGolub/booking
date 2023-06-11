@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Booking.WPF.Views.Guest2"
         mc:Ignorable="d"
-        Title="RateTour" Height="400" Width="450"
+        Title="RateTour" Height="420" Width="450"
 		WindowStartupLocation="CenterScreen"
 		ResizeMode="NoResize"
 		Background="#BBC1D1">
@@ -52,7 +52,14 @@
 		</Style>
 	</Window.Resources>
 
-	<Border Margin="8" Style="{StaticResource CardHolder}">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Button_Click_AddImages}" Key="F1"/>
+        <KeyBinding Command="{Binding Button_Click_ShowImages}" Key="F2"/>
+        <KeyBinding Command="{Binding Button_Click_Rate}" Key="F3"/>
+        <KeyBinding Command="{Binding Button_Click_Tutorial}" Modifiers="Ctrl" Key="T"/>
+    </Window.InputBindings>
+
+    <Border Margin="8" Style="{StaticResource CardHolder}">
 		<Grid>
 
 			<Grid.ColumnDefinitions>
@@ -63,38 +70,153 @@
 				<RowDefinition Height="auto"/>
 				<RowDefinition Height="auto"/>
 				<RowDefinition Height="auto"/>
-				<RowDefinition Height="auto"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
 			</Grid.RowDefinitions>
 
-			<Label Grid.Row="0" Content="Rate a tour" FontSize="24" VerticalContentAlignment="Center" Margin="0 0 0 8"/>
+            <Grid Grid.Row="0" Margin="0 0 0 8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-			<StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 8">
-				<Label Content="Guide's knowledge:" FontSize="14"/>
-				<TextBox Width="100" Text="{Binding GuidesKnowledge}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14"/>
-			</StackPanel>
+                <Image Source="/Resources/Images/starRate128.png" Height="40"/>
+                <Label Grid.Column="1" Content="Rate a tour" FontSize="24" Margin="8 0 0 0"/>
+                <Button Grid.Column="2" Width="40" Margin="4" Command="{Binding Button_Click_Tutorial}" Style="{StaticResource ButtonStyle}">
+                    <StackPanel>
+                        <Image Source="/Resources/Images/videoTutorial128.png"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
 
-			<StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 8">
-				<Label Content="Guide's language:" FontSize="14"/>
-				<TextBox Width="100" Text="{Binding GuidesLanguage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14"/>
-			</StackPanel>
+            <StackPanel Grid.Row="1" Margin="8">
+                <TextBlock Text="{Binding Location}" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Tour.StartTime, StringFormat={}{0:dd/MM/yyyy}}" VerticalAlignment="Center"/>
+            </StackPanel>
 
-			<StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0 8">
-				<Label Content="Amusement:" FontSize="14"/>
-				<TextBox Width="100" Text="{Binding Amusement}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14"/>
-			</StackPanel>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
 
-			<StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0 8">
-				<Label Content="Comment:" FontSize="14" VerticalContentAlignment="Top"/>
-				<TextBox Width="340" Text="{Binding Comment}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
-			</StackPanel>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
 
-			<StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0 8 0 0" HorizontalAlignment="Right">
-				<Button Content="Add images" Width="100" Height="27" FontSize="14" Margin="0 0 8 0" Style="{StaticResource ButtonStyle}"/>
-				<Button Content="View images" Width="100" Height="27" FontSize="14" Margin="8 0" Style="{StaticResource ButtonStyle}"/>
-				<Button Content="Rate" Width="100" Height="27" FontSize="14" Margin="8 0 0 0" Command="{Binding Button_Click_Rate}" Style="{StaticResource ButtonStyle}"/>
-			</StackPanel>
-		</Grid>
+                <Label Grid.Row="0" Grid.Column="0" Content="Guide's knowledge:" FontSize="14" Margin="0 8"/>
+                <Grid Grid.Row="0" Grid.Column="1" Height="30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Grid.Column="0" Text="{Binding GuidesKnowledge, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" Width="36" IsReadOnly="True"/>
+                    <Grid Grid.Column="1" Width="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="0" Style="{StaticResource NumericUpDownStyle}" Command="{Binding Button_Click_NumericUp1}">
+                            <Image Source="/Resources/Images/keyboard-arrow-up32.png"/>
+                        </Button>
+                        <Button Grid.Row="1" Style="{StaticResource NumericUpDownStyle}" Command="{Binding Button_Click_NumericDown1}">
+                            <Image Source="/Resources/Images/keyboard-arrow-down32.png"/>
+                        </Button>
+                    </Grid>
+                </Grid>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Guide's language:" FontSize="14" Margin="0 8"/>
+                <Grid Grid.Row="1" Grid.Column="1" Height="30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Grid.Column="0" Text="{Binding GuidesLanguage, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" Width="36" IsReadOnly="True"/>
+                    <Grid Grid.Column="1" Width="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="0" Style="{StaticResource NumericUpDownStyle}" Command="{Binding Button_Click_NumericUp2}">
+                            <Image Source="/Resources/Images/keyboard-arrow-up32.png"/>
+                        </Button>
+                        <Button Grid.Row="1" Style="{StaticResource NumericUpDownStyle}" Command="{Binding Button_Click_NumericDown2}">
+                            <Image Source="/Resources/Images/keyboard-arrow-down32.png"/>
+                        </Button>
+                    </Grid>
+                </Grid>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Amusement:" FontSize="14" Margin="0 8"/>
+                <Grid Grid.Row="2" Grid.Column="1" Height="30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Grid.Column="0" Text="{Binding Amusement, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" Width="36" IsReadOnly="True"/>
+                    <Grid Grid.Column="1" Width="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="0" Style="{StaticResource NumericUpDownStyle}" Command="{Binding Button_Click_NumericUp3}">
+                            <Image Source="/Resources/Images/keyboard-arrow-up32.png"/>
+                        </Button>
+                        <Button Grid.Row="1" Style="{StaticResource NumericUpDownStyle}" Command="{Binding Button_Click_NumericDown3}">
+                            <Image Source="/Resources/Images/keyboard-arrow-down32.png"/>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="0 8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Content="Comment:" FontSize="14" VerticalContentAlignment="Top"/>
+                <TextBox Grid.Column="1" Text="{Binding Comment}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+            </Grid>
+
+            <Grid Grid.Row="4" Margin="0 8 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Button Content="Add image(F1)" Width="110" Height="27" FontSize="14" Margin="0 0 8 0" Command="{Binding Button_Click_AddImages}" Style="{StaticResource ButtonStyle}"/>
+                    <Button Content="View images(F2)" Width="110" Height="27" FontSize="14" Margin="8 0" Command="{Binding Button_Click_ShowImages}" Style="{StaticResource ButtonStyle}"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="Rate(F3)" Width="100" Height="27" FontSize="14" Command="{Binding Button_Click_Rate}" Style="{StaticResource ButtonStyle}"/>
+            </Grid>
+        </Grid>
 	</Border>
 </Window>

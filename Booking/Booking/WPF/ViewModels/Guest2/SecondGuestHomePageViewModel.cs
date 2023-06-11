@@ -126,6 +126,7 @@ namespace Booking.WPF.ViewModels.Guest2
 		public RelayCommand Button_Click_TourComplexRequest { get; set; }
 		public RelayCommand Button_Click_Statistics { get; set; }
 		public RelayCommand Button_Click_Notifications { get; set; }
+		public RelayCommand Button_Click_Tutorial { get; set; }
 
 		public SecondGuestHomePageViewModel(Window window)
 		{
@@ -172,7 +173,9 @@ namespace Booking.WPF.ViewModels.Guest2
 			Button_Click_TourComplexRequest = new RelayCommand(ButtonTourComplexRequests);
 			Button_Click_Statistics = new RelayCommand(ButtonStatistics);
 			Button_Click_Notifications = new RelayCommand(ButtonNotifications);
-		}
+			Button_Click_Tutorial = new RelayCommand(ButtonTutorial);
+
+        }
 
         private void CheckActiveTour()
 		{
@@ -356,7 +359,7 @@ namespace Booking.WPF.ViewModels.Guest2
 					if (dialogResult == MessageBoxResult.Yes)
 					{
 						RateTour view = new RateTour(tourReservation.Tour);
-						view.Show();
+						view.ShowDialog();
 					}
 				}
 			}
@@ -409,7 +412,14 @@ namespace Booking.WPF.ViewModels.Guest2
 			view.ShowDialog();
 		}
 
-		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		private void ButtonTutorial(object param)
+		{
+			TutorialView view = new TutorialView();
+			view.ShowDialog();
+		}
+
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}

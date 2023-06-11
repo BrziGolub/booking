@@ -220,6 +220,7 @@
     <Compile Include="WPF\ViewModels\Guest1\ShowAllForumsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\CreateTourComplexRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\CreateTourRequestViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest2\RateTourImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\RateTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\ReserveTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\SecondGuestHomePageViewModel.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="WPF\ViewModels\Guest2\TourComplexRequestsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\TourNotificationViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\TourRequestsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest2\TutorialViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideAcceptingPartOfTourViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideAcceptingTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideCreateTourBasedOnTourRequestViewModel.cs" />
@@ -239,6 +241,12 @@
     <Compile Include="WPF\ViewModels\Guide\GuideRequestsStatisticViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guide\GuideSuperGuideViewModel.cs" />
     <Compile Include="WPF\ViewModels\Owner\WizardViewModel.cs" />
+    <Compile Include="WPF\Views\Guest2\RateTourImagesView.xaml.cs">
+      <DependentUpon>RateTourImagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest2\TutorialView.xaml.cs">
+      <DependentUpon>TutorialView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Guide\SelectDateForComplexTour.xaml.cs">
       <DependentUpon>SelectDateForComplexTour.xaml</DependentUpon>
     </Compile>
@@ -491,6 +499,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\LightStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest2\RateTourImagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest2\TutorialView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -957,6 +973,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\forum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\starRate128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\videoTutorial128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
