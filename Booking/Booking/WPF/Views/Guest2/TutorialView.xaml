@@ -89,7 +89,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <MediaElement Grid.Row="0">
+                <MediaElement Grid.Row="0" Source="{Binding Url}">
                     
                 </MediaElement>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">

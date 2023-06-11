@@ -152,7 +152,7 @@ namespace Booking.WPF.ViewModels.Guest2
 
         private void ShowTutorial(object param)
         {
-            TutorialView view = new TutorialView();//dodati putanju videa
+            TutorialView view = new TutorialView("../../Resources/Videos/ComplexRequest.mp4");
             view.ShowDialog();
         }
 

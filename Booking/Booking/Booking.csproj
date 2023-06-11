@@ -1026,5 +1026,17 @@
     <Resource Include="Resources\Images\flag1.png" />
     <Resource Include="Resources\Images\wizard.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Videos\ComplexRequest.mp4" />
+    <Content Include="Resources\Videos\HomePage.mp4" />
+    <Content Include="Resources\Videos\Notifications.mp4" />
+    <Content Include="Resources\Videos\RateATour.mp4" />
+    <Content Include="Resources\Videos\RateATourImages.mp4" />
+    <Content Include="Resources\Videos\ReserveATour.mp4" />
+    <Content Include="Resources\Videos\SimpleRequest.mp4" />
+    <Content Include="Resources\Videos\Statistics.mp4" />
+    <Content Include="Resources\Videos\TourImages.mp4" />
+    <Content Include="Resources\Videos\Vouchers.mp4" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

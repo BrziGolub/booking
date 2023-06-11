@@ -5,10 +5,10 @@ namespace Booking.WPF.Views.Guest2
 {
     public partial class TutorialView : Window
     {
-        public TutorialView()
+        public TutorialView(string url)
         {
             InitializeComponent();
-            DataContext = new TutorialViewModel(this);
+            DataContext = new TutorialViewModel(this, url);
         }
     }
 }

@@ -419,7 +419,7 @@ namespace Booking.WPF.ViewModels.Guest2
 
 		private void ButtonTutorial(object param)
 		{
-			TutorialView view = new TutorialView();
+			TutorialView view = new TutorialView("../../Resources/Videos/HomePage.mp4");
 			view.ShowDialog();
 		}
 

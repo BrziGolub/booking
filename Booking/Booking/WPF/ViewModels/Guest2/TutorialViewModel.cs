@@ -8,15 +8,15 @@ namespace Booking.WPF.ViewModels.Guest2
         private readonly Window _window;
         private bool _playOrPause;
 
-        public string url { get; set; }
+        public string Url { get; set; }
 
         public RelayCommand Button_Click_Close { get; set; }
         public RelayCommand Button_Click_PlayPause { get; set; }
 
-        public TutorialViewModel(Window window) // dodati parametar za link
-        {
+        public TutorialViewModel(Window window, string url)        {
             _window = window;
 
+            Url = url;
             _playOrPause = true;
 
             InitializeCommands();
