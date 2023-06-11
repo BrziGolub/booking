@@ -384,7 +384,7 @@ namespace Booking.WPF.ViewModels.Guide
             SelectedCity = "";
             TourLanguage = "";
             TbPictures = "";
-            SelectedKeyPoint = "";
+            //SelectedKeyPoint = "";
 
             SetCommands();
             FillComboBox();

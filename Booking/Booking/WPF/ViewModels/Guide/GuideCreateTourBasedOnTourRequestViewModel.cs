@@ -300,7 +300,7 @@ namespace Booking.WPF.ViewModels.Guide
             //SelectedCity = "";
             TourLanguage = "";
             TbPictures = "";
-            SelectedKeyPoint = "";
+            //SelectedKeyPoint = "";
 
             tourKeyPoints1 = new ObservableCollection<TourKeyPoint>(tourService.GetTourKeyPoints());
 

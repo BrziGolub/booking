@@ -303,7 +303,7 @@ namespace Booking.WPF.ViewModels.Guide
            // SelectedCity = "";
            // TourLanguage = "";
             TbPictures = "";
-            SelectedKeyPoint = "";
+            //SelectedKeyPoint = "";
 
             FillMostPopular();
             SetCommands();
