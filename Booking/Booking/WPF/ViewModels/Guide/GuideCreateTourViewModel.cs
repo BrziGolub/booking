@@ -384,6 +384,7 @@ namespace Booking.WPF.ViewModels.Guide
             SelectedCity = "";
             TourLanguage = "";
             TbPictures = "";
+            SelectedKeyPoint = "";
 
             SetCommands();
             FillComboBox();
@@ -558,6 +559,13 @@ namespace Booking.WPF.ViewModels.Guide
                 else if (columnName == "TbPictures")
                 {
                     if (TbPictures == "")
+                    {
+                        return "This filed is required!";
+                    }
+                }
+                else if (columnName == "SelectedKeyPoint")
+                {
+                    if (SelectedKeyPoint == "")
                     {
                         return "This filed is required!";
                     }
