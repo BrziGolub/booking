@@ -504,8 +504,12 @@ namespace Booking.WPF.ViewModels.Owner
 
         private void ButtonAddPicture(object param)
         {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string folderPath = Path.GetFullPath(Path.Combine(currentDirectory, "../../Resources/Images/AccommodationPhotos"));
+
             System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
             dialog.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
+            dialog.InitialDirectory = folderPath;
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
