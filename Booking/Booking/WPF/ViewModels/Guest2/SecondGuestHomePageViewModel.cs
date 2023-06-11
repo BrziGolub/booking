@@ -308,12 +308,12 @@ namespace Booking.WPF.ViewModels.Guest2
 				{
 					tourGuest.IsPresent = true;
 					_tourGuestsService.UpdateTourGuest(tourGuest);
-					awardVoucher();
+					AwardVoucher();
 				}
 			}
 		}
 
-		private void awardVoucher()
+		private void AwardVoucher()
 		{
             List<TourReservation> tourReservations = _tourReservationService.GetReservationsByGuestId(TourService.SignedGuideId);
 			int reservations = 0;
@@ -324,16 +324,21 @@ namespace Booking.WPF.ViewModels.Guest2
 			}
 
 			if(reservations == 4)
-			{
-				Voucher voucher = new Voucher();
-				voucher.User.Id = TourService.SignedGuideId;
-				voucher.IsActive = true;
-				voucher.ValidTime = DateTime.Now.AddMonths(6);
-				_voucherService.AddVoucher(voucher);
-			}
+            {
+                CreateVoucher();
+            }
         }
 
-		private MessageBoxResult PresenceOnTourResponse(string name)
+        private void CreateVoucher()
+        {
+            Voucher voucher = new Voucher();
+            voucher.User.Id = TourService.SignedGuideId;
+            voucher.IsActive = true;
+            voucher.ValidTime = DateTime.Now.AddMonths(6);
+            _voucherService.AddVoucher(voucher);
+        }
+
+        private MessageBoxResult PresenceOnTourResponse(string name)
 		{
 			string sMessageBoxText = $"Are you present on tour \n{name}?";
 			string sCaption = "Presence on tour";

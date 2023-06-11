@@ -8,6 +8,7 @@ using Booking.WPF.Views.Guest2;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -188,8 +189,12 @@ namespace Booking.WPF.ViewModels.Guest2
 
         private void AddImages(object param)
         {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string folderPath = Path.GetFullPath(Path.Combine(currentDirectory, "../../Resources/Images"));
+
             System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
             dialog.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
+            dialog.InitialDirectory = folderPath;
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
