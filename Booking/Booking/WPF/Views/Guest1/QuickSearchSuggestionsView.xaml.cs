@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,13 +16,16 @@ using System.Windows.Shapes;
 
 namespace Booking.WPF.Views.Guest1
 {
-    public partial class QuickSearch : Page
-    { 
-        public QuickSearch(NavigationService navigate)
+    /// <summary>
+    /// Interaction logic for QuickSearchSuggestionsView.xaml
+    /// </summary>
+    public partial class QuickSearchSuggestionsView : Page
+    {
+        public QuickSearchSuggestionsView(List<AccommodationDTO> dto, NavigationService navigate)
         {
+            //List<AccommodationDTO> dto,NavigationService navigate parametar
             InitializeComponent();
-            this.DataContext = new QuickSearchViewModel(navigate);
-            
+            this.DataContext = new QuickSearchSuggestionsViewModel(dto,navigate);
         }
     }
 }

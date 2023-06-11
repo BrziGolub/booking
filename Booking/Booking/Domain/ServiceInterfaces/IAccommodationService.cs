@@ -24,5 +24,16 @@ namespace Booking.Domain.ServiceInterfaces
         List<Accommodation> GetAll();
         List<Accommodation> GetAllSuper();
         int GetSignedInOwner();
+
+        //quick serach
+        List<AccommodationReservation> GetReservationsForAccommodation(Accommodation accommodation);
+        List<AccommodationReservation> FindAcceptableReservations(Accommodation accommodation);
+        List<(DateTime, DateTime)> FindAvailableDatesQuick(Accommodation accommodation, int daysToStay);
+        List<(DateTime, DateTime)> FindAvailableDatesQuickRanges(Accommodation accommodation, int daysToStay, DateTime initialDate, DateTime endDate);
+        bool IsDateAvailable(DateTime date, int daysToStay, List<AccommodationReservation> reservations);
+        bool CheckGuestsNumber(Accommodation accommodation, int numberOfGuests);
+        bool AccommodationIsAvailable(Accommodation accommodation, int daysToStay);
+        bool AccommodationIsAvailableInRange(Accommodation accommodation, int daysToStay, DateTime initialDate, DateTime endDate);
+
     }
 }

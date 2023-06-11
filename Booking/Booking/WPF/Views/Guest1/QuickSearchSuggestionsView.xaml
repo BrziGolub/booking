@@ -1,0 +1,39 @@
+﻿<Page x:Class="Booking.WPF.Views.Guest1.QuickSearchSuggestionsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Booking.WPF.Views.Guest1"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="QuickSearchSuggestionsView" >
+
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="300 10 30 0" Height="80" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="DarkGreen">Our suggestions</Label>
+            </StackPanel>
+            <ListView SelectionMode="Single" SelectedItem="{Binding SelectedDTO}" ItemsSource="{Binding DTOs}" Height="300" Width="754">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="1" Orientation="Vertical">
+                                <TextBlock FontWeight="Bold" FontSize="25" Foreground="DarkGreen" Margin="10 10 5 10"><Run Text="{Binding accommodation.Name}" /></TextBlock>
+
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+            <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <Button Padding="5" FontSize="15" Foreground="DarkGreen" FontWeight="Bold" Background="Honeydew" BorderBrush="DarkGreen" Width="200" IsDefault="True" Margin="20 15 15 15" Command="{Binding ViewAvailableDatesCommand}">View available dates</Button>
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</Page>

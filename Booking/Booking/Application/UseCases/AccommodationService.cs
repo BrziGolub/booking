@@ -25,6 +25,9 @@ namespace Booking.Service
         private readonly IUserRepository _userRepository;
         private readonly IAccommodationImagesRepository _accommodationImagesRepository;
         private readonly IAccommodationRenovationRepository _accommodationRenovationRepository;
+        
+        //dodala 
+        private readonly IAccommodationResevationRepository _accommodationReservationRepository;
         public static int SignedOwnerId;
 
         public AccommodationService()
@@ -36,6 +39,7 @@ namespace Booking.Service
             _accommodationRenovationRepository = InjectorRepository.CreateInstance<IAccommodationRenovationRepository>();
 
             _accommodationImagesRepository = InjectorRepository.CreateInstance<IAccommodationImagesRepository>();
+            _accommodationReservationRepository = InjectorRepository.CreateInstance<IAccommodationResevationRepository>();
         }
         public int GetSignedInOwner()
         {
@@ -236,5 +240,159 @@ namespace Booking.Service
             return _ownerAccommodations;
         }
 
+
+        //Quick serach:
+
+      public List<AccommodationReservation> GetReservationsForAccommodation(Accommodation accommodation)
+        {
+            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+            List<AccommodationReservation> _guestsReservations = new List<AccommodationReservation>();
+
+            foreach (var reservation in _accommodationReservationRepository.GetAll())
+            {
+                if (reservation.Guest.Id == AccommodationReservationService.SignedFirstGuestId)
+                {
+                    reservation.Accommodation = _accommodationRepository.GetById(reservation.Accommodation.Id);
+                    reservation.Accommodation.Location = _locationRepository.GetById(reservation.Accommodation.Location.Id);
+                    reservation.Accommodation.Owner = _userRepository.GetById(reservation.Accommodation.Owner.Id);
+                    reservation.Guest = _userRepository.GetById(AccommodationReservationService.SignedFirstGuestId);
+                    foreach (var p in _accommodationImagesRepository.GetAll())
+                    {
+                        if (p.Accomodation.Id == reservation.Accommodation.Id)
+                        {
+                            reservation.Accommodation.Images.Add(p);
+                        }
+                    }
+                    _guestsReservations.Add(reservation);
+                }
+            }
+
+            foreach (AccommodationReservation reservation in _guestsReservations) 
+            {
+
+                if (reservation.Accommodation.Id == accommodation.Id)
+                {
+                    reservations.Add(reservation);
+                }
+            }
+            return reservations;
+        }
+
+        public List<AccommodationReservation> FindAcceptableReservations(Accommodation accommodation)
+        {
+            List<AccommodationReservation> allReservations = new List<AccommodationReservation>(GetReservationsForAccommodation(accommodation));
+            List<AccommodationReservation> sortedReservations = allReservations.OrderBy(r => r.ArrivalDay).ToList();
+            List<AccommodationReservation> filteredReservations = sortedReservations.Where(r => r.ArrivalDay > DateTime.Today).ToList();
+            return filteredReservations;
+        }
+
+        public List<(DateTime, DateTime)> FindAvailableDatesQuick(Accommodation accommodation, int daysToStay)
+        {
+            List<AccommodationReservation> allReservations = FindAcceptableReservations(accommodation);
+            List<(DateTime, DateTime)> freeDateRanges = new List<(DateTime, DateTime)>();
+            int count = 0;
+
+            for (int i = 0; i < allReservations.Count - 1; i++)
+            {
+                DateTime currentEndDate = allReservations[i].DepartureDay;
+                DateTime nextStartDate = allReservations[i + 1].ArrivalDay;
+
+                if ((nextStartDate - currentEndDate).Days >= daysToStay)
+                {
+                    freeDateRanges.Add((currentEndDate.AddDays(1), currentEndDate.AddDays(daysToStay)));
+                    count++;
+
+                    if (count == 3)
+                        break;
+                }
+            }
+
+            if (allReservations.Count == 0)
+            {
+                DateTime today = DateTime.Now.AddHours(0).AddMinutes(0).AddSeconds(0);
+                freeDateRanges.Add((today.AddDays(1), today.AddDays(daysToStay)));
+                freeDateRanges.Add((today.AddDays(daysToStay + 1), today.AddDays(daysToStay * 2 + 1)));
+                freeDateRanges.Add((today.AddDays(daysToStay * 2 + 2), today.AddDays(daysToStay * 3 + 2)));
+            }
+
+            return freeDateRanges;
+        }
+
+        public List<(DateTime, DateTime)> FindAvailableDatesQuickRanges(Accommodation accommodation, int daysToStay, DateTime initialDate, DateTime endDate)
+        {
+            List<AccommodationReservation> allReservations = FindAcceptableReservations(accommodation);
+
+            List<(DateTime, DateTime)> availableRanges = new List<(DateTime, DateTime)>();
+
+            DateTime currentDate = initialDate;
+            while (currentDate <= endDate)
+            {
+                bool isAvailable = IsDateAvailable(currentDate, daysToStay, allReservations);
+                if (isAvailable)
+                {
+                    DateTime rangeEndDate = currentDate.AddDays(daysToStay - 1);
+                    if (rangeEndDate <= endDate)
+                    {
+                        availableRanges.Add((currentDate, rangeEndDate));
+                    }
+                }
+
+                currentDate = currentDate.AddDays(1);
+            }
+
+            return availableRanges;
+        }
+
+        public bool IsDateAvailable(DateTime date, int daysToStay, List<AccommodationReservation> reservations)
+        {
+            foreach (var reservation in reservations)
+            {
+                if (date >= reservation.ArrivalDay && date <= reservation.DepartureDay)
+                {
+                    return false;
+                }
+
+                for (int i = 1; i < daysToStay; i++)
+                {
+                    DateTime currentDate = date.AddDays(i);
+                    if (currentDate >= reservation.ArrivalDay && currentDate <= reservation.DepartureDay)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public bool CheckGuestsNumber(Accommodation accommodation, int numberOfGuests)
+        {
+            return accommodation.Capacity >= numberOfGuests;
+        }
+
+        public bool AccommodationIsAvailable(Accommodation accommodation, int daysToStay)
+        {
+            if (FindAvailableDatesQuick(accommodation, daysToStay).Count != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool AccommodationIsAvailableInRange(Accommodation accommodation, int daysToStay, DateTime initialDate, DateTime endDate)
+        {
+            if (FindAvailableDatesQuickRanges(accommodation, daysToStay, initialDate, endDate).Count != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
     }
 }

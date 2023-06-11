@@ -212,6 +212,7 @@
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestProfileViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\FirstGuestReviewsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\HomePageFirstGuestViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\QuickSearchSuggestionsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\QuickSearchViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\RateAccommodationAndOwnerViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\RenovationApprovalViewModel.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="WPF\ViewModels\Guest1\ShowAccommodationImagesViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAllForumCommentsViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest1\ShowAllForumsViewModel.cs" />
+    <Compile Include="WPF\ViewModels\Guest1\SuggestedDatesQuickSearchViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\CreateTourComplexRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\CreateTourRequestViewModel.cs" />
     <Compile Include="WPF\ViewModels\Guest2\RateTourViewModel.cs" />
@@ -248,8 +250,14 @@
     <Compile Include="WPF\Views\Guest1\QuickSearch.xaml.cs">
       <DependentUpon>QuickSearch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WPF\Views\Guest1\QuickSearchSuggestionsView.xaml.cs">
+      <DependentUpon>QuickSearchSuggestionsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Views\Guest1\ReservationDetails.xaml.cs">
       <DependentUpon>ReservationDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF\Views\Guest1\SuggestedDatesQuickSearch.xaml.cs">
+      <DependentUpon>SuggestedDatesQuickSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="WPF\Views\Guide\SelectDateForComplexTour.xaml.cs">
       <DependentUpon>SelectDateForComplexTour.xaml</DependentUpon>
@@ -514,7 +522,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WPF\Views\Guest1\QuickSearchSuggestionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPF\Views\Guest1\ReservationDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF\Views\Guest1\SuggestedDatesQuickSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
