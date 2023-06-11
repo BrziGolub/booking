@@ -1,5 +1,8 @@
 ﻿using Booking.Commands;
+using Booking.Domain.ServiceInterfaces;
 using Booking.Model;
+using Booking.Service;
+using Booking.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +22,8 @@ namespace Booking.WPF.ViewModels.Guest1
 
          public event PropertyChangedEventHandler PropertyChanged;
 
+        public IAccommodationReservationService _accResService;
+
          public AccommodationDTO DTO;
 
          public DatesDTO selectedDates { get; set; }
@@ -26,9 +31,10 @@ namespace Booking.WPF.ViewModels.Guest1
 
          public SuggestedDatesQuickSearchViewModel(AccommodationDTO dto)
          {
-            Ranges = new ObservableCollection<DatesDTO>(dto.dates);
+             Ranges = new ObservableCollection<DatesDTO>(dto.dates);
              DTO = dto;
-             BookCommand = new RelayCommand(Button_Click_Book);
+            _accResService = InjectorService.CreateInstance<IAccommodationReservationService>();
+            BookCommand = new RelayCommand(Button_Click_Book);
          }
 
          protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -38,13 +44,15 @@ namespace Booking.WPF.ViewModels.Guest1
 
          private void Button_Click_Book(object param)
          {
-          //   User user = userController.GetLoggedUser();
-           //  accommodationReservationController.BookAccommodation(selectedDates.InitialDate, selectedDates.EndDate, DTO.accommodation);
-           //  MessageBox.Show("Successfully reserved accommodation!");
-             //var homepage = new Guest1HomepageView();
+            //   User user = userController.GetLoggedUser();
+            //  accommodationReservationController.BookAccommodation(selectedDates.InitialDate, selectedDates.EndDate, DTO.accommodation);
+            //  MessageBox.Show("Successfully reserved accommodation!");
+            //var homepage = new Guest1HomepageView();
             // homepage.Show();
             // CloseWindow();
-         }
+         
+            bool IsReserved = _accResService.BookAccommodation(selectedDates.InitialDate, selectedDates.EndDate, DTO.accommodation);
+        }
 
     }
 }

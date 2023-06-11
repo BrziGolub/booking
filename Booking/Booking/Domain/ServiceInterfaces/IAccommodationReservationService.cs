@@ -44,5 +44,7 @@ namespace Booking.Domain.ServiceInterfaces
         bool CheckMonthDuration(OwnerMonthStatistic statistic);
 
         string IsLocationVisited(Location location);
+
+        bool BookAccommodation(DateTime arrivalDay, DateTime departureDay, Accommodation selectedAccommodation);
     }
 }

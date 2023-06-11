@@ -27,6 +27,7 @@ namespace Booking.Service
         private readonly IAccommodationGradeRepository _accommodationGradeRepository;
         private readonly IRenovationRecommodationRepository _renovationRecommedationRepository;
         private readonly IAccommodationImagesRepository _accommodationImagesRepository;
+
         public static int SignedFirstGuestId;
 		public AccommodationReservationService()
         {
@@ -486,6 +487,19 @@ namespace Booking.Service
             }
             return true;
         }
+
+        public bool BookAccommodation(DateTime arrivalDay, DateTime departureDay, Accommodation selectedAccommodation)
+        {
+            AccommodationReservation accommodationReservation = new AccommodationReservation();
+            accommodationReservation.Accommodation = selectedAccommodation;
+            accommodationReservation.ArrivalDay = arrivalDay;
+            accommodationReservation.DepartureDay = departureDay;
+            accommodationReservation.Guest.Id = AccommodationReservationService.SignedFirstGuestId;
+            accommodationReservation.Deleted = 0;
+            _repository.Add(accommodationReservation);
+            return true;
+        }
+
         public bool Reserve(DateTime arrivalDay, DateTime departureDay, Accommodation selectedAccommodation)
         {
             List<DateTime> reservedDatesEntered = MakeListOfReservedDates(arrivalDay, departureDay);
