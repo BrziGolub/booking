@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition />
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,0,0" Grid.ColumnSpan="2"  HorizontalAlignment="Center">
             <Image Source="/Resources/Images/booking.png" Height="30" Width="30" ></Image>
@@ -33,11 +33,12 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1"  Height="50">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1"  Height="50" Margin="2">
             <Button  Margin="5" Height="30" Width="50" FontWeight="Bold" Content="{ns:Loc RateButton}" Command="{Binding Button_Click_RateAccommodationAndOwner}"></Button>
-            <Button  Margin="5" Height="30" Width="80"  FontWeight="Bold"  Content="{ns:Loc ReschaduleButton}"  Command="{Binding Button_Click_ResheduleAccommodationReservation}"></Button>
-            <Button  Margin="5" Height="30" Width="50"  FontWeight="Bold" Content="{ns:Loc CancleButton}"   Command="{Binding Button_Click_CancleReservation}" ></Button>
-            <Button  Margin="5" Height="30" Width="100"  FontWeight="Bold" Content="{ns:Loc GeneratePDFButton}"   Command="{Binding Button_Click_GeneratePDF}" ></Button>
+            <Button  Margin="5" Height="30" Width="100"  FontWeight="Bold"  Content="{ns:Loc ReschaduleButton}"  Command="{Binding Button_Click_ResheduleAccommodationReservation}"></Button>
+            <Button  Margin="5" Height="30" Width="70"  FontWeight="Bold" Content="{ns:Loc CancleButton}"   Command="{Binding Button_Click_CancleReservation}" ></Button>
+            <Button  Margin="5" Height="30" Width="60"  FontWeight="Bold" Content="PDF"   Command="{Binding Button_Click_GeneratePDF}" ></Button>
+            <Button  Margin="5" Height="30" Width="110"  FontWeight="Bold" Content="{ns:Loc ShowMoreDetailsButton}"   Command="{Binding Show_Details_button}" ></Button>
         </StackPanel>
     </Grid>
 </Page>

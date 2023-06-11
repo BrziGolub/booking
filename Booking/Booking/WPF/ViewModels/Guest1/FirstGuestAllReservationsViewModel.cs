@@ -20,6 +20,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Navigation;
+using Booking.WPF.Views.Guest1;
 
 namespace Booking.WPF.ViewModels.Guest1
 {
@@ -40,6 +41,8 @@ namespace Booking.WPF.ViewModels.Guest1
         public RelayCommand Button_Click_CancleReservation { get; set; }
         public RelayCommand Button_Click_GeneratePDF { get; set; }
 
+        public RelayCommand Show_Details_button { get; set; }
+
         public FirstGuestAllReservationsViewModel(NavigationService navigationService)
         {
             SelectedReservation = new AccommodationReservation();
@@ -57,7 +60,23 @@ namespace Booking.WPF.ViewModels.Guest1
             this.Button_Click_ResheduleAccommodationReservation = new RelayCommand(ButtonResheduleAccommodationReservation);
             this.Button_Click_CancleReservation = new RelayCommand(ButtonCancleReservation);
             this.Button_Click_GeneratePDF = new RelayCommand(GeneratePdf);
+            this.Show_Details_button = new RelayCommand(ShowDetails);
         }
+        public void ShowDetails(object sender)
+        {
+            if (SelectedReservation == null)
+            {
+                var notificationManager = new NotificationManager();
+                NotificationContent content = new NotificationContent { Title = "Permission denied!", Message = "Please select your reservation!", Type = NotificationType.Error };
+                notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
+                return;
+            }
+            else
+            {
+                NavigationService.Navigate(new ReservationDetails(SelectedReservation));
+            }
+        }
+
 
         public void GeneratePdf(object sender)
         {
