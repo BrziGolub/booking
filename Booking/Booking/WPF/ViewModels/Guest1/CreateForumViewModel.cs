@@ -137,13 +137,14 @@ namespace Booking.WPF.ViewModels.Guest1
             }
         }
 
-        private Forum AddForum()
+       /* private Forum AddForum()
         {
             var notificationManager = new NotificationManager();
-            if (SearchState.Equals(String.Empty) && SearchCity.Equals(String.Empty))
+            if (SearchState.Equals(String.Empty) || SearchCity.Equals(String.Empty) || String.IsNullOrEmpty(Comment))
             {
                 NotificationContent nesto = new NotificationContent { Title = "Worning!", Message = "All fileds are required!", Type = NotificationType.Warning };
                 notificationManager.Show(nesto, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
+                return null;
             }
             Forum newForum = new Forum();
             newForum.Location.State = SearchState;
@@ -161,11 +162,31 @@ namespace Booking.WPF.ViewModels.Guest1
             notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
             
             return newForum;
-        }
+        }*/
 
         public void OpenForumButton(object sender)
         {
-            AddForum();
+            var notificationManager = new NotificationManager();
+            if (SearchState.Equals(String.Empty) || SearchCity.Equals(String.Empty) || String.IsNullOrEmpty(Comment))
+            {
+                NotificationContent nesto = new NotificationContent { Title = "Worning!", Message = "All fileds are required!", Type = NotificationType.Warning };
+                notificationManager.Show(nesto, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
+                return;
+            }
+            Forum newForum = new Forum();
+            newForum.Location.State = SearchState;
+            newForum.Location.City = SearchCity;
+            newForum.Location.Id = LocationService.GetIdByCountryAndCity(SearchState, SearchCity);
+            newForum.User.Id = AccommodationReservationService.SignedFirstGuestId;
+            ForumComment newComment = new ForumComment();
+            newComment.Comment = Comment;
+            newComment.Visited = _AccommodationReservationService.IsLocationVisited(newForum.Location);
+            newForum.Comments.Add(newComment);
+            newForum.Status = "OPENED";
+            newForum.Helpful = "NO";
+            ForumService.Create(newForum);
+            NotificationContent content = new NotificationContent { Title = "Congratulations!", Message = "You sucessfuly create FORUM!", Type = NotificationType.Success };
+            notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
             navigationService.Navigate(new ShowAllForums(this.navigationService));
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

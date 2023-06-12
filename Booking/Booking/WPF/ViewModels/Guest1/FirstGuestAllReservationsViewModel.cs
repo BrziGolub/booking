@@ -44,8 +44,7 @@ namespace Booking.WPF.ViewModels.Guest1
         public RelayCommand Show_Details_button { get; set; }
 
         public FirstGuestAllReservationsViewModel(NavigationService navigationService)
-        {
-            SelectedReservation = new AccommodationReservation();
+        { 
             accommodationAndOwnerGradeService = InjectorService.CreateInstance<IAccommodationAndOwnerGradeService>();
             _accommodationReservationService = InjectorService.CreateInstance<IAccommodationReservationService>();
             _notificationService = InjectorService.CreateInstance<INotificationService>();

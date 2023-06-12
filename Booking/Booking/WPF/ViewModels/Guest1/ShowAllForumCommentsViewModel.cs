@@ -58,7 +58,7 @@ namespace Booking.WPF.ViewModels.Guest1
                 newForumComment.Visited = _AccommodationReservationService.IsLocationVisited(SelectedForum.Location);
                 ForumCommentService.Create(newForumComment);
                 ForumService.SetVeryHelpful(SelectedForum);
-                NotificationContent content = new NotificationContent { Title = "Permission denied!", Message = "Your comment is POSTED, thank you!", Type = NotificationType.Success };
+                NotificationContent content = new NotificationContent { Title = "Success!", Message = "Your comment is POSTED, thank you!", Type = NotificationType.Success };
                 notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
             }
             else
