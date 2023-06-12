@@ -5,6 +5,7 @@ using Booking.Model;
 using Booking.Service;
 using Booking.Util;
 using Booking.WPF.Views.Guest1;
+using Notifications.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -138,6 +139,12 @@ namespace Booking.WPF.ViewModels.Guest1
 
         private Forum AddForum()
         {
+            var notificationManager = new NotificationManager();
+            if (SearchState.Equals(String.Empty) && SearchCity.Equals(String.Empty))
+            {
+                NotificationContent nesto = new NotificationContent { Title = "Worning!", Message = "All fileds are required!", Type = NotificationType.Warning };
+                notificationManager.Show(nesto, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
+            }
             Forum newForum = new Forum();
             newForum.Location.State = SearchState;
             newForum.Location.City = SearchCity;
@@ -150,6 +157,9 @@ namespace Booking.WPF.ViewModels.Guest1
             newForum.Status = "OPENED";
             newForum.Helpful = "NO";
             ForumService.Create(newForum);
+            NotificationContent content = new NotificationContent { Title = "Congratulations!", Message = "You sucessfuly create FORUM!", Type = NotificationType.Success };
+            notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
+            
             return newForum;
         }
 

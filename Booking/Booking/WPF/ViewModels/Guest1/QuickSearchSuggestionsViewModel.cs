@@ -1,6 +1,7 @@
 ﻿
 using Booking.Commands;
 using Booking.WPF.Views.Guest1;
+using Notifications.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,16 +35,19 @@ namespace Booking.WPF.ViewModels.Guest1
         {
             DTOs = new ObservableCollection<AccommodationDTO>(dtos);
             ViewAvailableDatesCommand = new RelayCommand(Button_Click_ViewAvailableDates);
-
             nagivation = navigate;
 
         }
 
         private void Button_Click_ViewAvailableDates(object param)
         {
-            // var availableDates = new ShowSuggestionsDatesView(SelectedDTO);
-            // availableDates.Show();
-            // CloseWindow();
+            var notificationManager = new NotificationManager();
+            NotificationContent content = new NotificationContent { Title = "Unable!", Message = "Select accommodatio first!", Type = NotificationType.Error };
+            ;
+            if(SelectedDTO == null)
+            {
+                notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
+            }
             nagivation.Navigate(new SuggestedDatesQuickSearch(SelectedDTO));
         }
 

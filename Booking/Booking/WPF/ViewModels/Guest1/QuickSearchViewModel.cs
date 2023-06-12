@@ -6,6 +6,7 @@ using Booking.Service;
 using Booking.Util;
 using Booking.WPF.Views.Guest1;
 using MahApps.Metro.Controls;
+using Notifications.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,12 +15,13 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.RightsManagement;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
 
 namespace Booking.WPF.ViewModels.Guest1
 {
-    public class QuickSearchViewModel: INotifyPropertyChanged
+    public class QuickSearchViewModel: INotifyPropertyChanged, IDataErrorInfo
     {
         //, IObserver
         NavigationService navigationService;
@@ -98,6 +100,64 @@ namespace Booking.WPF.ViewModels.Guest1
             }
         }
 
+        public string Error => null;
+
+
+        private Regex _searchReservationDaysRegex = new Regex("[1-9]{1,2}");
+        private Regex _searchGuestRegex = new Regex("^[1-9][0-9]?$");
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "SerachGuests")
+                {
+                    if (NumberOfGuests != String.Empty)
+                    {
+                        Match match = _searchGuestRegex.Match(NumberOfGuests);
+                        if (!match.Success)
+                            return "Number of guests is not in correct format!";
+                    }
+                    else
+                    {
+                        return "Required filed!";
+                    }
+                }
+
+                if (columnName == "SearchReservationDays")
+                {
+                    if (DaysToStay != String.Empty)
+                    {
+                        Match match = _searchReservationDaysRegex.Match(DaysToStay);
+                        if (!match.Success)
+                            return "Staying days is not in correct format!";
+                    }
+                    else
+                    {
+                        return "Required filed!";
+                    }
+                }
+
+                return null;
+            }
+        }
+
+        private readonly string[] _validatedProperties = { "DaysToStay", "NumberOfGuests" };
+
+        public bool IsValid
+        {
+            get
+            {
+                foreach (var property in _validatedProperties)
+                {
+                    if (this[property] != null)
+                        return false;
+                }
+
+                return true;
+            }
+        }
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -112,6 +172,8 @@ namespace Booking.WPF.ViewModels.Guest1
             AccommodationsDTO = new ObservableCollection<AccommodationDTO>(_accommodationService.GetAllDTO());
             _accDTO = new List<AccommodationDTO>();
             //_accommodationService.Subscribe(this);
+            //NumberOfGuests = "";
+            //DaysToStay = "";
             navigationService = navigate;
             ArrivalDay = DateTime.Now;
             DepartureDay = DateTime.Now;
@@ -122,7 +184,16 @@ namespace Booking.WPF.ViewModels.Guest1
 
         public void Show_Images(object s)
         {
-            navigationService.Navigate(new ShowAccommodationImages(SelectedDTO.accommodation));
+            var notificationManager = new NotificationManager();
+            if (SelectedDTO == null)
+            {
+                NotificationContent content = new NotificationContent { Title = "Permission denied!", Message = "Select accommodation first!!!!", Type = NotificationType.Error };
+                notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(5));
+            }
+            else
+            {
+                navigationService.Navigate(new ShowAccommodationImages(SelectedDTO.accommodation));
+            }
         }
 
         public void SearchButton(object sender)
@@ -158,6 +229,7 @@ namespace Booking.WPF.ViewModels.Guest1
                 //AccommodationsDTO = new ObservableCollection<AccommodationDTO>(accommodationDTOs);
 
                 //_accommodationService.NotifyObservers();
+
             }
             else
             {

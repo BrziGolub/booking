@@ -252,6 +252,7 @@ namespace Booking.WPF.ViewModels.Guest1
             NotificationContent content = new NotificationContent { Title = "Permission denied!", Message = "You are unable to rate you accomodation and owner", Type = NotificationType.Error };
 
 
+
             if (accommodationAndOwnerGradeService.PermissionForRating(SelectedReservation))
             {
                 notificationManager.Show(content, areaName: "WindowArea", expirationTime: TimeSpan.FromSeconds(30));
